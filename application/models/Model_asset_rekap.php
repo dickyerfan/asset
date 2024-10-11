@@ -137,11 +137,39 @@ class Model_asset_rekap extends CI_Model
         $this->db->where('kode_sr', 1);
         return $this->db->get()->result();
     }
+    public function get_sr_baru_rekap()
+    {
+        $this->db->select(
+            '*,
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 1) AS total_rupiah,
+        (SELECT SUM(jumlah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 1) AS total_jumlah'
+        );
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('daftar_asset.grand_id', 226);
+        $this->db->where('kode_sr', 1);
+        return $this->db->get()->result();
+    }
     public function get_ganti_wm()
     {
         $this->db->select(
             '*,
         (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 2) AS total_rupiah'
+        );
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('daftar_asset.grand_id', 226);
+        $this->db->where('kode_sr', 2);
+        return $this->db->get()->result();
+    }
+    public function get_ganti_wm_rekap()
+    {
+        $this->db->select(
+            '*,
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 2) AS total_rupiah,
+        (SELECT SUM(jumlah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 2) AS total_jumlah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');

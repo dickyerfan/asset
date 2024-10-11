@@ -61,6 +61,7 @@ class Model_asset extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('bagian_upk');
+        $this->db->where('status', 1);
         return $this->db->get()->result();
     }
 

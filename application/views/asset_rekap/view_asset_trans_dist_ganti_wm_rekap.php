@@ -23,6 +23,9 @@
                     <div class="navbar-nav ms-2">
                         <a href="<?= base_url('asset_rekap/trans_dist') ?>"><button class="float-end neumorphic-button"><i class="fas fa-file"></i> Total</button></a>
                     </div>
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('asset_rekap/ganti_wm_rekap') ?>"><button class="float-end neumorphic-button"><i class="fas fa-file"></i> Rekap Ganti WM</button></a>
+                    </div>
                     <div class="navbar-nav ms-auto">
                         <a href="<?= base_url('asset_rekap/cetak_tanah') ?>"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
                     </div>
@@ -40,13 +43,8 @@
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
-                                <th>No Per</th>
-                                <th>Nama Per</th>
-                                <th>Nama Asset</th>
                                 <th>Lokasi</th>
-                                <th>Tanggal</th>
-                                <th>No Bkt Gdg</th>
-                                <th>No Bkt Vch</th>
+                                <th>Jumlah</th>
                                 <th>Rupiah</th>
                                 <th>Ket</th>
                             </tr>
@@ -55,59 +53,27 @@
                             <?php
                             $no = 1;
                             $total_rupiah = 0;
-                            foreach ($lainnya as $row) :
+                            $total_jumlah = 0;
+                            $jumlah_total = 0;
+                            foreach ($ganti_wm as $row) :
                                 $total_rupiah = $row->total_rupiah;
+                                $total_jumlah = $row->total_jumlah;
+                                $jumlah_total = $total_jumlah++;
                             ?>
                                 <tr>
                                     <td class="text-center"><?= $no++; ?></td>
-                                    <td><?= $row->kode; ?></td>
-                                    <td>
-                                        <?php
-                                        $nama_perkiraan = $row->name;
-                                        if (strlen($nama_perkiraan) > 35) {
-                                            $nama_perkiraan = substr($nama_perkiraan, 0, 35) . '...';
-                                        }
-                                        ?>
-                                        <?= $nama_perkiraan; ?>
-                                    </td>
-                                    <td>
-                                        <?php
-                                        // Memotong nama_asset jika lebih dari 60 karakter
-                                        $nama_asset = $row->nama_asset;
-                                        if (strlen($nama_asset) > 55) {
-                                            $nama_asset = substr($nama_asset, 0, 55) . '...'; // Potong dan tambahkan "..."
-                                        }
-                                        ?>
-                                        <?php if ($row->kode_sr == 1) : ?>
-                                            <?= $nama_asset; ?> <?= $row->jumlah; ?> di <?= $row->nama_bagian; ?>
-                                        <?php else : ?>
-                                            <?= $nama_asset; ?>
-                                        <?php endif; ?>
-                                    </td>
-
                                     <td><?= $row->nama_bagian; ?></td>
-                                    <td class="text-center"><?= $row->tanggal; ?></td>
-                                    <td><?= $row->no_bukti_gd; ?></td>
-                                    <td><?= $row->no_bukti_vch; ?></td>
+                                    <td class="text-center"><?= number_format($row->jumlah, 0, ',', '.'); ?></td>
                                     <td class="text-right"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>
                                     <td></td>
-                                    <!-- <td class="text-center">
-                                        <a href="<?= base_url(); ?>asset/edit/<?= $row->id_asset; ?>"><span class="badge badge-primary"><i class="fas fa-fw fa-edit"></i></span></a>
-                                        <a href="<?= base_url(); ?>asset/hapus/<?= $row->id_asset; ?>" class="badge badge-danger"><i class="fas fa-fw fa-trash"></i></a>
-                                    </td> -->
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
                         <tfoot>
                             <tr class="text-center bg-light">
                                 <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
                                 <th>Jumlah</th>
+                                <th class="text-center"><?= number_format($jumlah_total, 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($total_rupiah, 0, ',', '.'); ?></th>
                                 <th></th>
                             </tr>

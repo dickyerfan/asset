@@ -23,8 +23,11 @@
                     <div class="navbar-nav ms-2">
                         <a href="<?= base_url('asset_rekap/trans_dist') ?>"><button class="float-end neumorphic-button"><i class="fas fa-file"></i> Total</button></a>
                     </div>
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('asset_rekap/sr_baru_rekap') ?>"><button class="float-end neumorphic-button"><i class="fas fa-file"></i> Rekap SR Baru</button></a>
+                    </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('asset_rekap/cetak_tanah') ?>"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
+                        <a href="<?= base_url('asset_rekap/cetak_sr_baru') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
                     </div>
                 </nav>
             </div>
@@ -90,10 +93,11 @@
                                     <td><?= $row->no_bukti_gd; ?></td>
                                     <td><?= $row->no_bukti_vch; ?></td>
                                     <td class="text-right"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>
-                                    <td class="text-center">
+                                    <td></td>
+                                    <!-- <td class="text-center">
                                         <a href="<?= base_url(); ?>asset/edit/<?= $row->id_asset; ?>"><span class="badge badge-primary"><i class="fas fa-fw fa-edit"></i></span></a>
                                         <a href="<?= base_url(); ?>asset/hapus/<?= $row->id_asset; ?>" class="badge badge-danger"><i class="fas fa-fw fa-trash"></i></a>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
