@@ -36,7 +36,16 @@
                     <a href="<?= base_url('asset') ?>" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Asset
+                            Penambahan Asset
+                            <!-- <span class="right badge badge-danger">New</span> -->
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('asset_kurang') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Pengurangan Asset
                             <!-- <span class="right badge badge-danger">New</span> -->
                         </p>
                     </a>
@@ -223,7 +232,7 @@
                     </a>
                 </li> -->
                 <li class="nav-item">
-                    <a href="<?= base_url('backup') ?>" class="nav-link">
+                    <a href="<?= base_url('penyusutan') ?>" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
                             Penyusutan

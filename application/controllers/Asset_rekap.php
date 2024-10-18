@@ -265,7 +265,7 @@ class Asset_rekap extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'INSTALASI TRANSMISI DAN DISTRIBUSI';
+        $data['title'] = 'BANGUNAN';
         $data['bangunan'] = $this->Model_asset_rekap->get_bangunan();
 
         $this->load->view('templates/header', $data);
@@ -362,6 +362,7 @@ class Asset_rekap extends CI_Controller
         $this->load->view('asset_rekap/view_asset_penyusutan', $data);
         $this->load->view('templates/footer');
     }
+
 
     // public function upload()
     // {

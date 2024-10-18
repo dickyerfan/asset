@@ -1,22 +1,58 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Model_asset extends CI_Model
+class Model_penyusutan extends CI_Model
 {
 
-    public function get_all($bulan, $tahun)
+    // public function get_all()
+    // {
+    //     // $this->db->select('*');
+    //     $this->db->select(
+    //         '*'
+    //     );
+    //     $this->db->from('penyusutan');
+    //     $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
+    //     // $this->db->where('YEAR(tanggal)', $tahun);
+    //     $this->db->order_by('tanggal', 'ASC');
+    //     return $this->db->get()->result();
+    // }
+
+    public function get_all($tahun_lap)
     {
-        // $this->db->select('*');
-        $this->db->select(
-            '*,
-        (SELECT SUM(rupiah) FROM daftar_asset WHERE MONTH(daftar_asset.tanggal) = "' . $bulan . '" AND YEAR(daftar_asset.tanggal) = "' . $tahun . '" ) AS total_rupiah'
-        );
-        $this->db->from('daftar_asset');
-        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
-        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
-        $this->db->where('MONTH(tanggal)', $bulan);
-        $this->db->where('YEAR(tanggal)', $tahun);
-        return $this->db->get()->result();
+        $this->db->select('*');
+        $this->db->from('penyusutan');
+        $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
+        // $this->db->where('YEAR(daftar_asset.tanggal)', $tahun);
+        $this->db->where('penyusutan.tahun <=', $tahun_lap);
+        $this->db->order_by('tanggal', 'ASC');
+
+        $query = $this->db->get();
+        $results = $query->result();
+
+        $tahun = $tahun_lap;
+        if (empty($tahun)) {
+            $tahun = date('Y');
+        }
+        foreach ($results as &$row) {
+            $row->penambahan_penyusutan = ($row->persen_susut / 100) * $row->rupiah;
+            $umur_tahun = $tahun - $row->tahun;
+            // $umur_tahun_lalu = $tahun - $row->tahun;
+            if ($umur_tahun > $row->umur) {
+                $row->akm_thn_ini = $row->umur * $row->penambahan_penyusutan;
+            } else {
+                $row->akm_thn_ini = ($tahun - $row->tahun) * $row->penambahan_penyusutan;
+            }
+
+            if ($row->tahun == $tahun) {
+                $row->akm_thn_lalu = 0;
+            } else {
+                $row->akm_thn_lalu =  (($tahun - $row->tahun) * $row->penambahan_penyusutan) - $row->penambahan_penyusutan;
+                // $row->akm_thn_lalu = $tahun - $row->tahun;
+            }
+            // $row->akm_thn_ini = ($tahun - $row->tahun);
+            $row->nilai_buku = $row->rupiah - $row->akm_thn_ini;
+        }
+        return $results;
     }
 
     public function tambah_asset()
@@ -61,13 +97,13 @@ class Model_asset extends CI_Model
         $id_asset = $this->db->insert_id();
 
         // Tahun berjalan (tahun perolehan aset)
-        $tanggal_input = $this->input->post('tanggal', true);
-        $tahun_asset = date('Y', strtotime($tanggal_input));
+        $tahun_ini = date('Y');
 
         // Masukkan data ke tabel penyusutan_asset
         $data_penyusutan = [
             'id_asset' => $id_asset,
-            'tahun' => $tahun_asset,
+            'tahun' => $tahun_ini,
+            // 'persen_susut' => $this->input->post('persen_susut'),
             'penambahan' => $this->input->post('rupiah'),  // Penambahan adalah nilai perolehan aset
             'penyusutan_tahun_ini' => 0,  // Tidak ada penyusutan di tahun pertama
             'akumulasi_penyusutan' => 0,  // Tidak ada akumulasi penyusutan di tahun pertama
@@ -96,20 +132,4 @@ class Model_asset extends CI_Model
         $this->db->order_by('kode', 'ASC');
         return $this->db->get()->result();
     }
-
-    // public function updateData()
-    // {
-
-    //     $data = [
-    //         "nama_jabatan" => $this->input->post('nama_jabatan', true),
-    //     ];
-    //     $this->db->where('id_jabatan', $this->input->post('id'));
-    //     $this->db->update('jabatan', $data);
-    // }
-
-    // public function hapusData($id)
-    // {
-    //     $this->db->where('id_jabatan', $id);
-    //     $this->db->delete('jabatan');
-    // }
 }

@@ -49,6 +49,16 @@
                                 </select>
                                 <small class="form-text text-danger pl-3"><?= form_error('kode_sr'); ?></small>
                             </div>
+                            <div class="form-group">
+                                <label for="id_bagian">Bagian/UPK :</label>
+                                <select name="id_bagian" id="id_bagian" class="form-control select2">
+                                    <option value="">Pilih Bagian/UPK</option>
+                                    <?php foreach ($bagian as $row) :  ?>
+                                        <option value="<?= $row->id_bagian ?>"><?= $row->nama_bagian; ?></option>
+                                    <?php endforeach;  ?>
+                                </select>
+                                <small class="form-text text-danger pl-3"><?= form_error('id_bagian'); ?></small>
+                            </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
@@ -62,16 +72,6 @@
                                 <small class="form-text text-danger pl-3"><?= form_error('id_no_per'); ?></small>
                             </div>
                             <div class="form-group">
-                                <label for="id_bagian">Bagian/UPK :</label>
-                                <select name="id_bagian" id="id_bagian" class="form-control select2">
-                                    <option value="">Pilih Bagian/UPK</option>
-                                    <?php foreach ($bagian as $row) :  ?>
-                                        <option value="<?= $row->id_bagian ?>"><?= $row->nama_bagian; ?></option>
-                                    <?php endforeach;  ?>
-                                </select>
-                                <small class="form-text text-danger pl-3"><?= form_error('id_bagian'); ?></small>
-                            </div>
-                            <div class="form-group">
                                 <div class="form-group">
                                     <label for="no_bukti_gd">No Bukti Gudang :</label>
                                     <input type="text" class="form-control" id="no_bukti_gd" name="no_bukti_gd" placeholder="Masukan No bukti Gudang " value="<?= set_value('no_bukti_gd'); ?>">
@@ -83,6 +83,20 @@
                                     <label for="no_bukti_vch">No Bukti Voucher :</label>
                                     <input type="text" class="form-control" id="no_bukti_vch" name="no_bukti_vch" placeholder="Masukan No Bukti Voucher " value="<?= set_value('no_bukti_vch'); ?>">
                                     <small class="form-text text-danger pl-3"><?= form_error('no_bukti_vch'); ?></small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="umur">Umur Buku :</label>
+                                    <input type="text" class="form-control" id="umur" name="umur" placeholder="Masukan No Bukti Voucher " value="<?= set_value('umur'); ?>">
+                                    <small class="form-text text-danger pl-3"><?= form_error('umur'); ?></small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="persen_susut">Persentase Penyusutan :</label>
+                                    <input type="text" class="form-control" id="persen_susut" name="persen_susut" placeholder="Masukan No Bukti Voucher " value="<?= set_value('persen_susut'); ?>">
+                                    <small class="form-text text-danger pl-3"><?= form_error('persen_susut'); ?></small>
                                 </div>
                             </div>
                         </div>
