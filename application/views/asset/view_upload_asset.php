@@ -87,15 +87,15 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label for="umur">Umur Buku :</label>
-                                    <input type="text" class="form-control" id="umur" name="umur" placeholder="Masukan No Bukti Voucher " value="<?= set_value('umur'); ?>">
+                                    <label for="umur">Umur Asset :</label>
+                                    <input type="text" class="form-control" id="umur" name="umur" placeholder="Masukan Umur Asset " value="<?= set_value('umur'); ?>">
                                     <small class="form-text text-danger pl-3"><?= form_error('umur'); ?></small>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="persen_susut">Persentase Penyusutan :</label>
-                                    <input type="text" class="form-control" id="persen_susut" name="persen_susut" placeholder="Masukan No Bukti Voucher " value="<?= set_value('persen_susut'); ?>">
+                                    <input type="text" class="form-control" id="persen_susut" name="persen_susut" placeholder="Masukan Persentase Penyusutan " value="<?= set_value('persen_susut'); ?>">
                                     <small class="form-text text-danger pl-3"><?= form_error('persen_susut'); ?></small>
                                 </div>
                             </div>

@@ -4,25 +4,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Model_penyusutan extends CI_Model
 {
 
-    // public function get_all()
-    // {
-    //     // $this->db->select('*');
-    //     $this->db->select(
-    //         '*'
-    //     );
-    //     $this->db->from('penyusutan');
-    //     $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
-    //     // $this->db->where('YEAR(tanggal)', $tahun);
-    //     $this->db->order_by('tanggal', 'ASC');
-    //     return $this->db->get()->result();
-    // }
-
     public function get_all($tahun_lap)
     {
         $this->db->select('*');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
-        // $this->db->where('YEAR(daftar_asset.tanggal)', $tahun);
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
         $this->db->order_by('tanggal', 'ASC');
 
@@ -36,21 +22,35 @@ class Model_penyusutan extends CI_Model
         foreach ($results as &$row) {
             $row->penambahan_penyusutan = ($row->persen_susut / 100) * $row->rupiah;
             $umur_tahun = $tahun - $row->tahun;
-            // $umur_tahun_lalu = $tahun - $row->tahun;
+
             if ($umur_tahun > $row->umur) {
                 $row->akm_thn_ini = $row->umur * $row->penambahan_penyusutan;
+                $row->akm_thn_lalu = $row->rupiah;
+                $row->nilai_buku_lalu = $row->nilai_buku;
             } else {
                 $row->akm_thn_ini = ($tahun - $row->tahun) * $row->penambahan_penyusutan;
+                $row->akm_thn_lalu =  (($tahun - $row->tahun) * $row->penambahan_penyusutan) - $row->penambahan_penyusutan;
+                $row->nilai_buku_lalu = $row->nilai_buku - $row->akm_thn_lalu;
             }
 
             if ($row->tahun == $tahun) {
                 $row->akm_thn_lalu = 0;
+                $row->nilai_buku = 0;
+                $row->penambahan_penyusutan = 0;
+                $row->nilai_buku_lalu = $row->nilai_buku;
             } else {
-                $row->akm_thn_lalu =  (($tahun - $row->tahun) * $row->penambahan_penyusutan) - $row->penambahan_penyusutan;
-                // $row->akm_thn_lalu = $tahun - $row->tahun;
+                $row->penambahan = 0;
             }
-            // $row->akm_thn_ini = ($tahun - $row->tahun);
-            $row->nilai_buku = $row->rupiah - $row->akm_thn_ini;
+            // $row->nilai_buku_lalu = $row->rupiah - $row->akm_thn_lalu;
+            $row->nilai_buku_final = $row->rupiah - $row->akm_thn_ini;
+
+            if ($row->nilai_buku_final == 0) {
+                $row->nilai_buku_final = 1;
+            }
+            if ($row->grand_id == 218) {
+                $row->akm_thn_lalu = 0;
+                $row->nilai_buku_lalu = $row->nilai_buku;
+            }
         }
         return $results;
     }

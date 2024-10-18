@@ -56,6 +56,14 @@
     });
 </script>
 <script>
+    $(document).ready(function() {
+        $('#tahun').change(function() {
+            $('#form_tahun').submit();
+        });
+    });
+</script>
+
+<script>
     window.setTimeout(function() {
         $(".alert").animate({
             left: "0",

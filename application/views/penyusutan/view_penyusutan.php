@@ -5,15 +5,23 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <form id="form_tanggal" action="<?= base_url('penyusutan'); ?>" method="get">
+                    <form id="form_tahun" action="<?= base_url('penyusutan'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <input type="submit" value="Pilih Tahun" class="neumorphic-button">
-                            <input type="date" id="tanggal" name="tanggal" class="form-control" style="margin-left: 10px;">
+                            <!-- <input type="date" id="tahun" name="tahun" class="form-control" style="margin-left: 10px;"> -->
+                            <select id="tahun" name="tahun" class="form-control" style="margin-left: 15px;">
+                                <?php
+                                $currentYear = date('Y');
+                                $selectedYear = isset($_GET['tahun']) ? $_GET['tahun'] : $currentYear; // Memeriksa apakah ada tahun yang dipilih
+                                for ($year = 1989; $year <= $currentYear; $year++) {
+                                    $selected = ($year == $selectedYear) ? 'selected' : ''; // Menandai tahun yang dipilih
+                                    echo "<option value='$year' $selected>$year</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                     </form>
-                    <!-- <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('penyusutan/upload') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input pengurangan Asset</button></a>
-                    </div> -->
+                    <a href="<?= base_url('penyusutan') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Tahun ini</button></a>
                 </nav>
             </div>
 
@@ -26,27 +34,8 @@
                             // $bulan_lap = date('m');
                             $tahun_lap = date('Y');
                         }
-
-                        // $bulan = [
-                        //     '01' => 'Januari',
-                        //     '02' => 'Februari',
-                        //     '03' => 'Maret',
-                        //     '04' => 'April',
-                        //     '05' => 'Mei',
-                        //     '06' => 'Juni',
-                        //     '07' => 'Juli',
-                        //     '08' => 'Agustus',
-                        //     '09' => 'September',
-                        //     '10' => 'Oktober',
-                        //     '11' => 'November',
-                        //     '12' => 'Desember',
-                        // ];
-
-                        // $bulan_lap = strtr($bulan_lap, $bulan);
-
                         ?>
                         <h5><?= strtoupper($title) . ' ' . $tahun_lap; ?></h5>
-                        <!-- <h5>Bulan : <?= $bulan_lap; ?></h5> -->
                     </div>
                 </div>
                 <!-- <div>
@@ -63,16 +52,17 @@
                                 <th>No</th>
                                 <th>Nama Asset</th>
                                 <th>Tgl perolehan</th>
+                                <th>Umur</th>
+                                <th>Prsen</th>
                                 <th>Harga Perolehan</th>
                                 <th>Penambahan</th>
                                 <th>Pengurangan</th>
-                                <th>Umur</th>
-                                <th>Prsen</th>
                                 <th>Akm Thn Lalu</th>
-                                <th>Penambahan</th>
-                                <th>Pengurangan</th>
+                                <th>Nilai Buku Thn Lalu</th>
+                                <th>Penyusutan</th>
+                                <!-- <th>Pengurangan</th> -->
                                 <th>Akm Thn Ini</th>
-                                <th>Nilai Buku</th>
+                                <th>Nilai Buku Thn Ini</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -99,22 +89,27 @@
                                         <?php endif; ?>
                                     </td>
                                     <td class="text-center"><?= $row->tanggal; ?></td>
-                                    <td class="text-right"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?= number_format($row->penambahan, 0, ',', '.'); ?></td>
-                                    <td class="text-center"><?= $row->pengurangan; ?></td>
                                     <td class="text-center"><?= $row->umur; ?></td>
                                     <td class="text-center"><?= $row->persen_susut; ?></td>
-                                    <td class="text-center"><?= number_format($row->akm_thn_lalu, 0, ',', '.'); ?></td>
-                                    <!-- <td class="text-center"></td> -->
-                                    <td class="text-center"><?= number_format($row->penambahan_penyusutan, 0, ',', '.'); ?></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"><?= number_format($row->akm_thn_ini, 0, ',', '.'); ?></td>
                                     <td class="text-right"><?= number_format($row->nilai_buku, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->penambahan, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= $row->pengurangan; ?></td>
+                                    <td class="text-right"><?= number_format($row->akm_thn_lalu, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->nilai_buku_lalu, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->penambahan_penyusutan, 0, ',', '.'); ?></td>
+                                    <!-- <td class="text-right">-</td> -->
+                                    <td class="text-right"><?= number_format($row->akm_thn_ini, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->nilai_buku_final, 0, ',', '.'); ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
-                        <!-- <tfoot>
+                        <tfoot>
                             <tr class="text-center bg-light">
+                                <!-- <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th> -->
+                                <th colspan="5">Total</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -122,11 +117,9 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th>Jumlah</th>
-                                <th class="text-right"><?= number_format($total_rupiah, 0, ',', '.'); ?></th>
                                 <th></th>
                             </tr>
-                        </tfoot> -->
+                        </tfoot>
                     </table>
                 </div>
             </div>

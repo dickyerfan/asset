@@ -12,7 +12,7 @@ class Penyusutan extends CI_Controller
     }
     public function index()
     {
-        $tanggal = $this->input->get('tanggal');
+        $tanggal = $this->input->get('tahun');
         $tahun = substr($tanggal, 0, 4);
 
         if (empty($tanggal)) {
