@@ -9,6 +9,26 @@ class Asset extends CI_Controller
 		parent::__construct();
 		$this->load->model('Model_asset');
 		$this->load->library('form_validation');
+		if (!$this->session->userdata('nama_pengguna')) {
+			$this->session->set_flashdata(
+				'info',
+				'<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Maaf,</strong> Anda harus login untuk akses halaman ini...
+                      </div>'
+			);
+			redirect('auth');
+		}
+
+		$level_pengguna = $this->session->userdata('level');
+		if ($level_pengguna != 'Admin') {
+			$this->session->set_flashdata(
+				'info',
+				'<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Maaf,</strong> Anda tidak memiliki hak akses untuk halaman ini...
+                  </div>'
+			);
+			redirect('auth');
+		}
 	}
 	public function index()
 	{
@@ -46,8 +66,8 @@ class Asset extends CI_Controller
 		$this->form_validation->set_rules('id_bagian', 'Bagian/UPK', 'required|trim');
 		$this->form_validation->set_rules('jumlah', 'Jumlah', 'trim|numeric');
 		$this->form_validation->set_rules('rupiah', 'Rupiah', 'required|trim|numeric');
-		$this->form_validation->set_rules('umur', 'Umur Asset', 'trim|numeric');
-		$this->form_validation->set_rules('persen_susut', 'Persen Penyusutan', 'trim|numeric');
+		$this->form_validation->set_rules('umur', 'Umur Asset', 'required|trim|numeric');
+		$this->form_validation->set_rules('persen_susut', 'Persen Penyusutan', 'required|trim|numeric');
 		$this->form_validation->set_message('required', '%s masih kosong');
 		$this->form_validation->set_message('numeric', '%s harus berupa angka');
 

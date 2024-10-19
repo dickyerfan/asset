@@ -9,6 +9,26 @@ class Asset_rekap extends CI_Controller
         parent::__construct();
         $this->load->model('Model_asset_rekap');
         $this->load->library('form_validation');
+        if (!$this->session->userdata('nama_pengguna')) {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Maaf,</strong> Anda harus login untuk akses halaman ini...
+                      </div>'
+            );
+            redirect('auth');
+        }
+
+        $level_pengguna = $this->session->userdata('level');
+        if ($level_pengguna != 'Admin') {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Maaf,</strong> Anda tidak memiliki hak akses untuk halaman ini...
+                  </div>'
+            );
+            redirect('auth');
+        }
     }
     public function index()
     {

@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <form id="form_tahun" action="<?= base_url('penyusutan'); ?>" method="get">
+                    <form id="form_tahun" action="<?= base_url('penyusutan/sumber'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <input type="submit" value="Pilih Tahun" class="neumorphic-button">
                             <!-- <input type="date" id="tahun" name="tahun" class="form-control" style="margin-left: 10px;"> -->
@@ -21,7 +21,7 @@
                             </select>
                         </div>
                     </form>
-                    <a href="<?= base_url('penyusutan') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Tahun ini</button></a>
+                    <a href="<?= base_url('penyusutan/sumber') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Tahun ini</button></a>
                 </nav>
             </div>
 

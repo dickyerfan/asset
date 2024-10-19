@@ -67,29 +67,29 @@ class Auth extends CI_Controller
         }
     }
 
-    public function registrasi()
-    {
-        if ($this->session->userdata('nama_pengguna')) {
-            redirect('dashboard');
-        }
-        $this->form_validation->set_rules('nama_pengguna', 'Nama Pengguna', 'required|trim|min_length[5]|is_unique[user.nama_pengguna]');
-        $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required|trim');
-        $this->form_validation->set_rules('email', 'email', 'required|trim|valid_email');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[5]');
+    // public function registrasi()
+    // {
+    //     if ($this->session->userdata('nama_pengguna')) {
+    //         redirect('dashboard');
+    //     }
+    //     $this->form_validation->set_rules('nama_pengguna', 'Nama Pengguna', 'required|trim|min_length[5]|is_unique[user.nama_pengguna]');
+    //     $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required|trim');
+    //     $this->form_validation->set_rules('email', 'email', 'required|trim|valid_email');
+    //     $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[5]');
 
-        $this->form_validation->set_message('required', '%s masih kosong');
-        $this->form_validation->set_message('valid_email', '%s Harus Valid');
-        $this->form_validation->set_message('is_unique', '%s Sudah terdaftar, Ganti yang lain');
-        $this->form_validation->set_message('min_length', '%s Minimal 5 karakter');
+    //     $this->form_validation->set_message('required', '%s masih kosong');
+    //     $this->form_validation->set_message('valid_email', '%s Harus Valid');
+    //     $this->form_validation->set_message('is_unique', '%s Sudah terdaftar, Ganti yang lain');
+    //     $this->form_validation->set_message('min_length', '%s Minimal 5 karakter');
 
-        if ($this->form_validation->run() == false) {
-            $data['title'] = 'Registrasi';
-            $this->load->view('auth/view_registrasi', $data);
-        } else {
-            $this->model_auth->registrasi();
-            redirect('auth');
-        }
-    }
+    //     if ($this->form_validation->run() == false) {
+    //         $data['title'] = 'Registrasi';
+    //         $this->load->view('auth/view_registrasi', $data);
+    //     } else {
+    //         $this->model_auth->registrasi();
+    //         redirect('auth');
+    //     }
+    // }
 
     public function logout()
     {

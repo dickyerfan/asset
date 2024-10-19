@@ -9,22 +9,44 @@ class Penyusutan extends CI_Controller
         parent::__construct();
         $this->load->model('Model_penyusutan');
         $this->load->library('form_validation');
+        if (!$this->session->userdata('nama_pengguna')) {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Maaf,</strong> Anda harus login untuk akses halaman ini...
+                      </div>'
+            );
+            redirect('auth');
+        }
+
+        $level_pengguna = $this->session->userdata('level');
+        if ($level_pengguna != 'Admin') {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Maaf,</strong> Anda tidak memiliki hak akses untuk halaman ini...
+                  </div>'
+            );
+            redirect('auth');
+        }
     }
+
     public function index()
     {
-        $tanggal = $this->input->get('tahun');
-        $tahun = substr($tanggal, 0, 4);
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
 
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
+        if (empty($get_tahun)) {
             $tahun = date('Y');
         } else {
-            $this->session->set_userdata('tanggal', $tanggal);
+            $this->session->set_userdata('tahun_session', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'Daftar Penyusutan Asset';
-        $data['susut'] = $this->Model_penyusutan->get_all($tahun);
+        $penyusutan_data = $this->Model_penyusutan->get_all($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -33,43 +55,219 @@ class Penyusutan extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    // public function upload()
-    // {
-    //     $tanggal = $this->session->userdata('tanggal');
-    //     $this->form_validation->set_rules('nama_asset', 'Nama Asset', 'required|trim');
-    //     $this->form_validation->set_rules('tanggal', 'Tanggal', 'required|trim');
-    //     $this->form_validation->set_rules('id_no_per', 'No Perkiraan', 'required|trim');
-    //     $this->form_validation->set_rules('id_bagian', 'Bagian/UPK', 'required|trim');
-    //     $this->form_validation->set_rules('jumlah', 'Jumlah', 'trim|numeric');
-    //     $this->form_validation->set_rules('rupiah', 'Rupiah', 'required|trim|numeric');
-    //     $this->form_validation->set_rules('umur', 'Umur Asset', 'trim|numeric');
-    //     $this->form_validation->set_rules('persen_susut', 'Persen Penyusutan', 'trim|numeric');
-    //     $this->form_validation->set_message('required', '%s masih kosong');
-    //     $this->form_validation->set_message('numeric', '%s harus berupa angka');
+    public function tanah()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
 
-    //     if ($this->form_validation->run() == false) {
-    //         $data['title'] = 'Upload Asset Baru';
-    //         $data['bagian'] = $this->Model_asset->get_bagian();
-    //         $data['perkiraan'] = $this->Model_asset->get_perkiraan();
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_tanah', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
 
-    //         $this->load->view('templates/header', $data);
-    //         $this->load->view('templates/navbar');
-    //         $this->load->view('templates/sidebar');
-    //         $this->load->view('asset/view_upload_asset', $data);
-    //         $this->load->view('templates/footer');
-    //     } else {
-    //         $data['asset'] = $this->Model_asset->tambah_asset();
-    //         $this->session->set_flashdata(
-    //             'info',
-    //             '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-    //                     <strong>Sukses,</strong> Data Asset baru berhasil di tambah
-    //                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-    //                     </button>
-    //                   </div>'
-    //         );
-    //         $alamat = 'asset?tanggal=' . $tanggal;
-    //         redirect($alamat);
-    //         // redirect('asset');
-    //     }
-    // }
+        $data['title'] = 'Daftar Penyusutan Tanah';
+        $penyusutan_data = $this->Model_penyusutan->get_tanah($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_tanah', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function sumber()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_sumber', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'Daftar Penyusutan Sumber';
+        $penyusutan_data = $this->Model_penyusutan->get_sumber($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_sumber', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function pompa()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_pompa', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'Daftar Penyusutan Pompa';
+        $penyusutan_data = $this->Model_penyusutan->get_pompa($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_pompa', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function olah_air()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_olah_air', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'Daftar Penyusutan Pengolahan Air';
+        $penyusutan_data = $this->Model_penyusutan->get_olah_air($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_olah_air', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function trans_dist()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_trans_dist', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'Daftar Penyusutan Transmisi & Distibusi';
+        $penyusutan_data = $this->Model_penyusutan->get_trans_dist($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_trans_dist', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function bangunan()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_bangunan', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'Daftar Penyusutan Bangunan';
+        $penyusutan_data = $this->Model_penyusutan->get_bangunan($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_bangunan', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function peralatan()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_peralatan', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'Daftar Penyusutan Peralatan';
+        $penyusutan_data = $this->Model_penyusutan->get_peralatan($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_peralatan', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function kendaraan()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_kendaraan', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'Daftar Penyusutan Kendaraan';
+        $penyusutan_data = $this->Model_penyusutan->get_kendaraan($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_kendaraan', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function inventaris()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_inventaris', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'Daftar Penyusutan Inventaris';
+        $penyusutan_data = $this->Model_penyusutan->get_inventaris($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_inventaris', $data);
+        $this->load->view('templates/footer');
+    }
 }

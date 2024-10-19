@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="kode_sr">Kode SR : di isi jika kode meter air yang terpasang</label>
+                                <label for="kode_sr">Kode SR : di isi jika kode <span class="text-primary">"meter air yang terpasang"</span></label>
                                 <select name="kode_sr" id="kode_sr" class="form-control select2">
                                     <option value="">Pilih Jenis Meter Air</option>
                                     <option value="1">Pemasangan SR Baru</option>
@@ -87,14 +87,14 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label for="umur">Umur Asset :</label>
+                                    <label for="umur">Umur Asset : <span class="text-primary">"Untuk Asset Tanah di isi angka 0"</span></label>
                                     <input type="text" class="form-control" id="umur" name="umur" placeholder="Masukan Umur Asset " value="<?= set_value('umur'); ?>">
                                     <small class="form-text text-danger pl-3"><?= form_error('umur'); ?></small>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label for="persen_susut">Persentase Penyusutan :</label>
+                                    <label for="persen_susut">Persentase Penyusutan : <span class="text-primary">"Untuk Asset Tanah di isi angka 0"</span></label>
                                     <input type="text" class="form-control" id="persen_susut" name="persen_susut" placeholder="Masukan Persentase Penyusutan " value="<?= set_value('persen_susut'); ?>">
                                     <small class="form-text text-danger pl-3"><?= form_error('persen_susut'); ?></small>
                                 </div>

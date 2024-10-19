@@ -6,11 +6,28 @@ class Backup extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if ($this->session->userdata('level') != 'Admin') {
-            redirect('dashboard', 'resfresh');
-        }
-        date_default_timezone_set('Asia/Jakarta');
         $this->load->model('model_backup');
+        date_default_timezone_set('Asia/Jakarta');
+        if (!$this->session->userdata('nama_pengguna')) {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Maaf,</strong> Anda harus login untuk akses halaman ini...
+                      </div>'
+            );
+            redirect('auth');
+        }
+
+        $level_pengguna = $this->session->userdata('level');
+        if ($level_pengguna != 'Admin') {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Maaf,</strong> Anda tidak memiliki hak akses untuk halaman ini...
+                  </div>'
+            );
+            redirect('auth');
+        }
     }
 
     public function index()
