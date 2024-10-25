@@ -5,10 +5,21 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <form id="form_tanggal" action="<?= base_url('asset'); ?>" method="get">
+                    <a href="<?= base_url('asset_rekap/sr_baru_rekap') ?>"><button class="neumorphic-button">Tahun ini</button></a>
+                    <form id="form_tahun" action="<?= base_url('asset_rekap/sr_baru_rekap'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
-                            <input type="submit" value="Pilih Tahun" class="neumorphic-button">
-                            <input type="date" id="tanggal" name="tanggal" class="form-control" style="margin-left: 10px;">
+                            <!-- <input type="submit" value="Pilih Tahun" class="neumorphic-button"> -->
+                            <!-- <input type="date" id="tanggal" name="tanggal" class="form-control" style="margin-left: 10px;"> -->
+                            <select id="tahun" name="tahun" class="form-control" style="margin-left: 15px;">
+                                <?php
+                                $currentYear = date('Y');
+                                $selectedYear = isset($_GET['tahun']) ? $_GET['tahun'] : $currentYear; // Memeriksa apakah ada tahun yang dipilih
+                                for ($year = 1989; $year <= $currentYear; $year++) {
+                                    $selected = ($year == $selectedYear) ? 'selected' : ''; // Menandai tahun yang dipilih
+                                    echo "<option value='$year' $selected>$year</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                     </form>
                     <div class="navbar-nav ms-2">
@@ -27,7 +38,7 @@
                         <a href="<?= base_url('asset_rekap/sr_baru_rekap') ?>"><button class="float-end neumorphic-button"><i class="fas fa-file"></i> Rekap SR Baru</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('asset_rekap/cetak_tanah') ?>"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
+                        <a href="<?= base_url('asset_rekap/cetak_sr_baru_rekap') ?>"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
                     </div>
                 </nav>
             </div>

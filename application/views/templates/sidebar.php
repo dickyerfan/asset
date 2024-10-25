@@ -113,12 +113,12 @@
                                 <p>Inventaris</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="<?= base_url('asset_rekap/penyusutan') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Akm Penyusutan</p>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
 

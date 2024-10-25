@@ -77,7 +77,7 @@
                                     </td>
 
                                     <td><?= $row->nama_bagian; ?></td>
-                                    <td class="text-center"><?= $row->tanggal; ?></td>
+                                    <td class="text-center"><?= date('d-m-Y', strtotime($row->tanggal)); ?></td>
                                     <td><?= $row->no_bukti_gd; ?></td>
                                     <td><?= $row->no_bukti_vch; ?></td>
                                     <td class="text-right"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>

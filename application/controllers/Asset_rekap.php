@@ -32,19 +32,18 @@ class Asset_rekap extends CI_Controller
     }
     public function index()
     {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
 
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
+        if (empty($get_tahun)) {
             $tahun = date('Y');
         } else {
-            $this->session->set_userdata('tanggal', $tanggal);
+            $this->session->set_userdata('tahun_session', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'TANAH DAN PENYEMPURNAAN TANAH';
-        $data['tanah'] = $this->Model_asset_rekap->get_tanah();
+        $data['title'] = 'REKAP PENAMBAHAN TANAH DAN PENYEMPURNAAN TANAH';
+        $data['tanah'] = $this->Model_asset_rekap->get_tanah($tahun);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -52,21 +51,21 @@ class Asset_rekap extends CI_Controller
         $this->load->view('asset_rekap/view_asset_tanah', $data);
         $this->load->view('templates/footer');
     }
+
     public function sumber()
     {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
 
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
+        if (empty($get_tahun)) {
             $tahun = date('Y');
         } else {
-            $this->session->set_userdata('tanggal', $tanggal);
+            $this->session->set_userdata('tahun_session', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'INSTALASI SUMBER';
-        $data['sumber'] = $this->Model_asset_rekap->get_sumber();
+        $data['title'] = 'REKAP PENAMBAHAN INSTALASI SUMBER';
+        $data['sumber'] = $this->Model_asset_rekap->get_sumber($tahun);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -74,21 +73,43 @@ class Asset_rekap extends CI_Controller
         $this->load->view('asset_rekap/view_asset_sumber', $data);
         $this->load->view('templates/footer');
     }
-    public function pompa()
-    {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
 
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
+    public function sumber_kurang()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
             $tahun = date('Y');
         } else {
-            $this->session->set_userdata('tanggal', $tanggal);
+            $this->session->set_userdata('tahun_session_kurang', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'INSTALASI POMPA';
-        $data['pompa'] = $this->Model_asset_rekap->get_pompa();
+        $data['title'] = 'REKAP PENGURANGAN INSTALASI SUMBER';
+        $data['sumber'] = $this->Model_asset_rekap->get_sumber_kurang($tahun);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('asset_rekap/view_asset_sumber_kurang', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function pompa()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'REKAP PENAMBAHAN INSTALASI POMPA';
+        $data['pompa'] = $this->Model_asset_rekap->get_pompa($tahun);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -96,21 +117,43 @@ class Asset_rekap extends CI_Controller
         $this->load->view('asset_rekap/view_asset_pompa', $data);
         $this->load->view('templates/footer');
     }
-    public function olah_air()
-    {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
 
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
+    public function pompa_kurang()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
             $tahun = date('Y');
         } else {
-            $this->session->set_userdata('tanggal', $tanggal);
+            $this->session->set_userdata('tahun_session_kurang', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'INSTALASI PENGOLAHAN AIR';
-        $data['olah_air'] = $this->Model_asset_rekap->get_olah_air();
+        $data['title'] = 'REKAP PENGURANGAN INSTALASI POMPA';
+        $data['pompa'] = $this->Model_asset_rekap->get_pompa_kurang($tahun);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('asset_rekap/view_asset_pompa_kurang', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function olah_air()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'REKAP PENAMBAHAN INSTALASI PENGOLAHAN AIR';
+        $data['olah_air'] = $this->Model_asset_rekap->get_olah_air($tahun);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -118,175 +161,43 @@ class Asset_rekap extends CI_Controller
         $this->load->view('asset_rekap/view_asset_olah_air', $data);
         $this->load->view('templates/footer');
     }
-    public function trans_dist()
-    {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
 
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
+    public function olah_air_kurang()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
             $tahun = date('Y');
         } else {
-            $this->session->set_userdata('tanggal', $tanggal);
+            $this->session->set_userdata('tahun_session', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'INSTALASI TRANSMISI DAN DISTRIBUSI';
-        $data['trans_dist'] = $this->Model_asset_rekap->get_trans_dist();
+        $data['title'] = 'REKAP PENGURANGAN INSTALASI PENGOLAHAN AIR';
+        $data['olah_air'] = $this->Model_asset_rekap->get_olah_air_kurang($tahun);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('templates/sidebar');
-        $this->load->view('asset_rekap/view_asset_trans_dist', $data);
+        $this->load->view('asset_rekap/view_asset_olah_air_kurang', $data);
         $this->load->view('templates/footer');
     }
-    public function sr_baru()
-    {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
 
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
-            $tahun = date('Y');
-        } else {
-            $this->session->set_userdata('tanggal_sr_baru', $tanggal);
-        }
-        $data['tahun_lap'] = $tahun;
-
-        $data['title'] = 'PEMASANGAN SR BARU';
-        $data['sr_baru'] = $this->Model_asset_rekap->get_sr_baru();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('asset_rekap/view_asset_trans_dist_sr_baru', $data);
-        $this->load->view('templates/footer');
-    }
-    public function cetak_sr_baru()
-    {
-
-        $tanggal = $this->session->userdata('tanggal_sr_baru');
-        $tahun = substr($tanggal, 0, 4);
-
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
-            $tahun = date('Y');
-        }
-
-        $data['tahun_lap'] = $tahun;
-
-        $data['title'] = 'PEMASANGAN SR BARU';
-        $data['sr_baru'] = $this->Model_asset_rekap->get_sr_baru();
-
-        // Set paper size and orientation
-        $this->pdf->setPaper('folio', 'portrait');
-
-        $this->pdf->filename = "sr_baru-{$tahun}.pdf";
-        $this->pdf->generate('cetakan/sr_baru_pdf', $data);
-    }
-    public function sr_baru_rekap()
-    {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
-
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
-            $tahun = date('Y');
-        } else {
-            $this->session->set_userdata('tanggal', $tanggal);
-        }
-        $data['tahun_lap'] = $tahun;
-
-        $data['title'] = 'REKAP SR BARU PER UPK';
-        $data['sr_baru'] = $this->Model_asset_rekap->get_sr_baru_rekap();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('asset_rekap/view_asset_trans_dist_sr_baru_rekap', $data);
-        $this->load->view('templates/footer');
-    }
-    public function ganti_wm()
-    {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
-
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
-            $tahun = date('Y');
-        } else {
-            $this->session->set_userdata('tanggal', $tanggal);
-        }
-        $data['tahun_lap'] = $tahun;
-
-        $data['title'] = 'PENGGANTIAN WATER METER';
-        $data['ganti_wm'] = $this->Model_asset_rekap->get_ganti_wm();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('asset_rekap/view_asset_trans_dist_ganti_wm', $data);
-        $this->load->view('templates/footer');
-    }
-    public function ganti_wm_rekap()
-    {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
-
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
-            $tahun = date('Y');
-        } else {
-            $this->session->set_userdata('tanggal', $tanggal);
-        }
-        $data['tahun_lap'] = $tahun;
-
-        $data['title'] = 'REKAP PENGGANTIAN WATER METER PER UPK';
-        $data['ganti_wm'] = $this->Model_asset_rekap->get_ganti_wm_rekap();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('asset_rekap/view_asset_trans_dist_ganti_wm_rekap', $data);
-        $this->load->view('templates/footer');
-    }
-    public function lainnya()
-    {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
-
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
-            $tahun = date('Y');
-        } else {
-            $this->session->set_userdata('tanggal', $tanggal);
-        }
-        $data['tahun_lap'] = $tahun;
-
-        $data['title'] = 'INSTALASI TRANSMISI & DISTRIBUSI LAINNYA';
-        $data['lainnya'] = $this->Model_asset_rekap->get_lainnya();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('asset_rekap/view_asset_trans_dist_lainnya', $data);
-        $this->load->view('templates/footer');
-    }
     public function bangunan()
     {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
 
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
+        if (empty($get_tahun)) {
             $tahun = date('Y');
         } else {
-            $this->session->set_userdata('tanggal', $tanggal);
+            $this->session->set_userdata('tahun_session', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'BANGUNAN';
-        $data['bangunan'] = $this->Model_asset_rekap->get_bangunan();
+        $data['title'] = 'REKAP PENAMBAHAN BANGUNAN';
+        $data['bangunan'] = $this->Model_asset_rekap->get_bangunan($tahun);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -294,21 +205,43 @@ class Asset_rekap extends CI_Controller
         $this->load->view('asset_rekap/view_asset_bangunan', $data);
         $this->load->view('templates/footer');
     }
-    public function peralatan()
-    {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
 
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
+    public function bangunan_kurang()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
             $tahun = date('Y');
         } else {
-            $this->session->set_userdata('tanggal', $tanggal);
+            $this->session->set_userdata('tahun_session', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'PERALATAN DAN PERLENGKAPAN';
-        $data['peralatan'] = $this->Model_asset_rekap->get_peralatan();
+        $data['title'] = 'REKAP PENGURANGAN BANGUNAN';
+        $data['bangunan'] = $this->Model_asset_rekap->get_bangunan_kurang($tahun);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('asset_rekap/view_asset_bangunan_kurang', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function peralatan()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'REKAP PENAMBAHAN PERALATAN DAN PERLENGKAPAN';
+        $data['peralatan'] = $this->Model_asset_rekap->get_peralatan($tahun);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -316,21 +249,43 @@ class Asset_rekap extends CI_Controller
         $this->load->view('asset_rekap/view_asset_peralatan', $data);
         $this->load->view('templates/footer');
     }
-    public function kendaraan()
-    {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
 
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
+    public function peralatan_kurang()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
             $tahun = date('Y');
         } else {
-            $this->session->set_userdata('tanggal', $tanggal);
+            $this->session->set_userdata('tahun_session', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'KENDARAAN / ALAT ANGKUT';
-        $data['kendaraan'] = $this->Model_asset_rekap->get_kendaraan();
+        $data['title'] = 'REKAP PENGURANGAN PERALATAN DAN PERLENGKAPAN';
+        $data['peralatan'] = $this->Model_asset_rekap->get_peralatan_kurang($tahun);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('asset_rekap/view_asset_peralatan_kurang', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function kendaraan()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'REKAP PENAMBAHAN KENDARAAN / ALAT ANGKUT';
+        $data['kendaraan'] = $this->Model_asset_rekap->get_kendaraan($tahun);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -338,6 +293,29 @@ class Asset_rekap extends CI_Controller
         $this->load->view('asset_rekap/view_asset_kendaraan', $data);
         $this->load->view('templates/footer');
     }
+
+    public function kendaraan_kurang()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'REKAP PENGURANGAN KENDARAAN / ALAT ANGKUT';
+        $data['kendaraan'] = $this->Model_asset_rekap->get_kendaraan_kurang($tahun);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('asset_rekap/view_asset_kendaraan_kurang', $data);
+        $this->load->view('templates/footer');
+    }
+
     // ini sudah betul
     public function inventaris()
     {
@@ -360,16 +338,15 @@ class Asset_rekap extends CI_Controller
         $this->load->view('asset_rekap/view_asset_inventaris', $data);
         $this->load->view('templates/footer');
     }
-    public function invetaris_kurang()
+    public function inventaris_kurang()
     {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
 
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
+        if (empty($get_tahun)) {
             $tahun = date('Y');
         } else {
-            $this->session->set_userdata('tanggal', $tanggal);
+            $this->session->set_userdata('tahun_session_kurang', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
 
@@ -384,14 +361,13 @@ class Asset_rekap extends CI_Controller
     }
     public function penyusutan()
     {
-        $tanggal = $this->input->get('tanggal');
-        $tahun = substr($tanggal, 0, 4);
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
 
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
+        if (empty($get_tahun)) {
             $tahun = date('Y');
         } else {
-            $this->session->set_userdata('tanggal', $tanggal);
+            $this->session->set_userdata('tahun_session', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
 
@@ -405,6 +381,153 @@ class Asset_rekap extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function trans_dist()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'REKAP PENAMBAHAN INSTALASI TRANSMISI DAN DISTRIBUSI';
+        $data['trans_dist'] = $this->Model_asset_rekap->get_trans_dist($tahun);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('asset_rekap/view_asset_trans_dist', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function sr_baru()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_sr_baru', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'PEMASANGAN SR BARU';
+        $data['sr_baru'] = $this->Model_asset_rekap->get_sr_baru($tahun);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('asset_rekap/view_asset_trans_dist_sr_baru', $data);
+        $this->load->view('templates/footer');
+    }
+    public function cetak_sr_baru()
+    {
+
+        $get_tahun = $this->session->userdata('tahun_session_sr_baru');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'PEMASANGAN SR BARU';
+        $data['sr_baru'] = $this->Model_asset_rekap->get_sr_baru($tahun);
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'portrait');
+
+        $this->pdf->filename = "sr_baru-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/sr_baru_pdf', $data);
+    }
+    public function sr_baru_rekap()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_sr_baru_rekap', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'REKAP SR BARU PER UPK';
+        $data['sr_baru'] = $this->Model_asset_rekap->get_sr_baru_rekap($tahun);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('asset_rekap/view_asset_trans_dist_sr_baru_rekap', $data);
+        $this->load->view('templates/footer');
+    }
+    public function ganti_wm()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_ganti_wm', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'PENGGANTIAN WATER METER';
+        $data['ganti_wm'] = $this->Model_asset_rekap->get_ganti_wm($tahun);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('asset_rekap/view_asset_trans_dist_ganti_wm', $data);
+        $this->load->view('templates/footer');
+    }
+    public function ganti_wm_rekap()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_ganti_wm_rekap', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'REKAP PENGGANTIAN WATER METER PER UPK';
+        $data['ganti_wm'] = $this->Model_asset_rekap->get_ganti_wm_rekap($tahun);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('asset_rekap/view_asset_trans_dist_ganti_wm_rekap', $data);
+        $this->load->view('templates/footer');
+    }
+    public function lainnya()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_lainnya', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'INSTALASI TRANSMISI & DISTRIBUSI LAINNYA';
+        $data['lainnya'] = $this->Model_asset_rekap->get_lainnya($tahun);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('asset_rekap/view_asset_trans_dist_lainnya', $data);
+        $this->load->view('templates/footer');
+    }
 
     // public function upload()
     // {

@@ -5,9 +5,10 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <form id="form_tanggal" action="<?= base_url('asset_rekap/inventaris'); ?>" method="get">
+                    <a href="<?= base_url('asset_rekap/inventaris') ?>"><button class="neumorphic-button">Tahun ini</button></a>
+                    <form id="form_tahun" action="<?= base_url('asset_rekap/inventaris'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
-                            <input type="submit" value="Pilih Tahun" class="neumorphic-button">
+                            <!-- <input type="submit" value="Pilih Tahun" class="neumorphic-button"> -->
                             <!-- <input type="date" id="tanggal" name="tanggal" class="form-control" style="margin-left: 10px;"> -->
                             <select id="tahun" name="tahun" class="form-control" style="margin-left: 15px;">
                                 <?php
@@ -22,7 +23,7 @@
                         </div>
                     </form>
                     <div class="navbar-nav ms-2">
-                        <a href="<?= base_url('asset_rekap/invetaris_kurang') ?>"><button class="float-end neumorphic-button"><i class="fas fa-minus"></i> Rekap Pengurangan</button></a>
+                        <a href="<?= base_url('asset_rekap/inventaris_kurang') ?>"><button class="float-end neumorphic-button"><i class="fas fa-minus"></i> Rekap Pengurangan</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
                         <a href="<?= base_url('asset_rekap/cetak_inventaris') ?>"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>

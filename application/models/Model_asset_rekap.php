@@ -4,90 +4,201 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Model_asset_rekap extends CI_Model
 {
 
-    public function get_tanah()
+    public function get_tanah($tahun)
     {
         $this->db->select(
             '*,
-        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 218) AS total_rupiah'
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 218 AND daftar_asset.status = 1 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 1);
         $this->db->where('daftar_asset.grand_id', 218);
         return $this->db->get()->result();
     }
-    public function get_sumber()
+
+    public function get_sumber($tahun)
     {
         $this->db->select(
             '*,
-        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 220) AS total_rupiah'
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 220 AND daftar_asset.status = 1 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 1);
         $this->db->where('daftar_asset.grand_id', 220);
         return $this->db->get()->result();
     }
-    public function get_pompa()
+
+    public function get_sumber_kurang($tahun)
     {
         $this->db->select(
             '*,
-        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 222) AS total_rupiah'
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 220 AND daftar_asset.status = 2 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 2);
+        $this->db->where('daftar_asset.grand_id', 220);
+        return $this->db->get()->result();
+    }
+
+    public function get_pompa($tahun)
+    {
+        $this->db->select(
+            '*,
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 222 AND daftar_asset.status = 1 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
+        );
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 1);
         $this->db->where('daftar_asset.grand_id', 222);
         return $this->db->get()->result();
     }
-    public function get_olah_air()
+
+    public function get_pompa_kurang($tahun)
     {
         $this->db->select(
             '*,
-        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 224) AS total_rupiah'
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 222 AND daftar_asset.status = 2 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 2);
+        $this->db->where('daftar_asset.grand_id', 222);
+        return $this->db->get()->result();
+    }
+
+    public function get_olah_air($tahun)
+    {
+        $this->db->select(
+            '*,
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 224 AND daftar_asset.status = 1 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
+        );
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 1);
         $this->db->where('daftar_asset.grand_id', 224);
         return $this->db->get()->result();
     }
-    public function get_bangunan()
+
+    public function get_olah_air_kurang($tahun)
     {
         $this->db->select(
             '*,
-        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 228) AS total_rupiah'
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 224 AND daftar_asset.status = 2 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 2);
+        $this->db->where('daftar_asset.grand_id', 224);
+        return $this->db->get()->result();
+    }
+
+    public function get_bangunan($tahun)
+    {
+        $this->db->select(
+            '*,
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 228 AND daftar_asset.status = 1 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
+        );
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 1);
         $this->db->where('daftar_asset.grand_id', 228);
         return $this->db->get()->result();
     }
-    public function get_peralatan()
+
+    public function get_bangunan_kurang($tahun)
     {
         $this->db->select(
             '*,
-        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 244) AS total_rupiah'
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 228 AND daftar_asset.status = 2 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 2);
+        $this->db->where('daftar_asset.grand_id', 228);
+        return $this->db->get()->result();
+    }
+
+    public function get_peralatan($tahun)
+    {
+        $this->db->select(
+            '*,
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 244 AND daftar_asset.status = 1 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
+        );
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 1);
         $this->db->where('daftar_asset.grand_id', 244);
         return $this->db->get()->result();
     }
-    public function get_kendaraan()
+
+    public function get_peralatan_kurang($tahun)
     {
         $this->db->select(
             '*,
-        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 246) AS total_rupiah'
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 244 AND daftar_asset.status = 2 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 2);
+        $this->db->where('daftar_asset.grand_id', 244);
+        return $this->db->get()->result();
+    }
+
+    public function get_kendaraan($tahun)
+    {
+        $this->db->select(
+            '*,
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 246 AND daftar_asset.status = 1 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
+        );
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 1);
         $this->db->where('daftar_asset.grand_id', 246);
         return $this->db->get()->result();
     }
+
+    public function get_kendaraan_kurang($tahun)
+    {
+        $this->db->select(
+            '*,
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 246 AND daftar_asset.status = 2 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
+        );
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 2);
+        $this->db->where('daftar_asset.grand_id', 246);
+        return $this->db->get()->result();
+    }
+
     public function get_inventaris($tahun)
     {
         $this->db->select(
@@ -116,93 +227,102 @@ class Model_asset_rekap extends CI_Model
         $this->db->where('daftar_asset.status', 2);
         return $this->db->get()->result();
     }
-    public function get_penyusutan()
+    public function get_penyusutan($tahun)
     {
         $this->db->select(
             '*,
-        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 251) AS total_rupiah'
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 251 AND daftar_asset.status = 1 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 1);
         $this->db->where('daftar_asset.grand_id', 251);
         return $this->db->get()->result();
     }
-    public function get_trans_dist()
+    public function get_trans_dist($tahun)
     {
         $this->db->select(
             '*,
-        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226) AS total_rupiah'
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226 AND daftar_asset.status = 1 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 1);
         $this->db->where('daftar_asset.grand_id', 226);
         return $this->db->get()->result();
     }
-    public function get_sr_baru()
+    public function get_sr_baru($tahun)
     {
         $this->db->select(
             '*,
-        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 1) AS total_rupiah'
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 1 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
-        $this->db->where('daftar_asset.grand_id', 226);
-        $this->db->where('kode_sr', 1);
-        return $this->db->get()->result();
-    }
-    public function get_sr_baru_rekap()
-    {
-        $this->db->select(
-            '*,
-        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 1) AS total_rupiah,
-        (SELECT SUM(jumlah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 1) AS total_jumlah'
-        );
-        $this->db->from('daftar_asset');
-        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
-        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
         $this->db->where('daftar_asset.grand_id', 226);
         $this->db->where('kode_sr', 1);
         return $this->db->get()->result();
     }
-    public function get_ganti_wm()
+    public function get_sr_baru_rekap($tahun)
     {
         $this->db->select(
             '*,
-        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 2) AS total_rupiah'
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 1 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah,
+        (SELECT SUM(jumlah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 1 AND YEAR(tanggal) = ' . $tahun . ') AS total_jumlah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.grand_id', 226);
+        $this->db->where('kode_sr', 1);
+        return $this->db->get()->result();
+    }
+    public function get_ganti_wm($tahun)
+    {
+        $this->db->select(
+            '*,
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 2 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
+        );
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
         $this->db->where('daftar_asset.grand_id', 226);
         $this->db->where('kode_sr', 2);
         return $this->db->get()->result();
     }
-    public function get_ganti_wm_rekap()
+    public function get_ganti_wm_rekap($tahun)
     {
         $this->db->select(
             '*,
-        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 2) AS total_rupiah,
-        (SELECT SUM(jumlah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 2) AS total_jumlah'
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 2 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah,
+        (SELECT SUM(jumlah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 2 AND YEAR(tanggal) = ' . $tahun . ') AS total_jumlah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
         $this->db->where('daftar_asset.grand_id', 226);
         $this->db->where('kode_sr', 2);
         return $this->db->get()->result();
     }
-    public function get_lainnya()
+    public function get_lainnya($tahun)
     {
         $this->db->select(
             '*,
-        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 0) AS total_rupiah'
+        (SELECT SUM(rupiah) FROM daftar_asset where daftar_asset.grand_id = 226 AND kode_sr = 0 AND YEAR(tanggal) = ' . $tahun . ') AS total_rupiah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
         $this->db->where('daftar_asset.grand_id', 226);
         $this->db->where('kode_sr', 0);
         return $this->db->get()->result();
