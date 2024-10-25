@@ -5,27 +5,27 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <form id="form_tanggal" action="<?= base_url('asset_rekap/inventaris'); ?>" method="get">
+                    <form id="form_tanggal" action="<?= base_url('asset_rekap/inventaris_kurang'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <input type="submit" value="Pilih Tahun" class="neumorphic-button">
-                            <!-- <input type="date" id="tanggal" name="tanggal" class="form-control" style="margin-left: 10px;"> -->
-                            <select id="tahun" name="tahun" class="form-control" style="margin-left: 15px;">
+                            <input type="date" id="tanggal" name="tanggal" class="form-control" style="margin-left: 10px;">
+                            <!-- <select id="tanggal" name="tanggal" class="form-control" style="margin-left: 15px;">
                                 <?php
                                 $currentYear = date('Y');
-                                $selectedYear = isset($_GET['tahun']) ? $_GET['tahun'] : $currentYear; // Memeriksa apakah ada tahun yang dipilih
+                                $selectedYear = isset($_GET['tanggal']) ? $_GET['tanggal'] : $currentYear; // Memeriksa apakah ada tahun yang dipilih
                                 for ($year = 1989; $year <= $currentYear; $year++) {
                                     $selected = ($year == $selectedYear) ? 'selected' : ''; // Menandai tahun yang dipilih
                                     echo "<option value='$year' $selected>$year</option>";
                                 }
                                 ?>
-                            </select>
+                            </select> -->
                         </div>
                     </form>
                     <div class="navbar-nav ms-2">
-                        <a href="<?= base_url('asset_rekap/invetaris_kurang') ?>"><button class="float-end neumorphic-button"><i class="fas fa-minus"></i> Rekap Pengurangan</button></a>
+                        <a href="<?= base_url('asset_rekap/inventaris') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Rekap Penambahan</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('asset_rekap/cetak_inventaris') ?>"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
+                        <a href="<?= base_url('asset_rekap/cetak_inventaris_kurang') ?>"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
                     </div>
                 </nav>
             </div>
@@ -57,7 +57,7 @@
                             $no = 1;
                             $total_rupiah = 0;
                             foreach ($inventaris as $row) :
-                                $total_rupiah = $row->total_rupiah;
+                                $total_rupiah = $row->total_rupiah * -1;
                             ?>
                                 <tr>
                                     <td class="text-center"><?= $no++; ?></td>
@@ -90,7 +90,7 @@
                                     <td class="text-center"><?= $row->tanggal; ?></td>
                                     <td><?= $row->no_bukti_gd; ?></td>
                                     <td><?= $row->no_bukti_vch; ?></td>
-                                    <td class="text-right"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->rupiah * -1, 0, ',', '.'); ?></td>
                                     <td></td>
                                     <!-- <td class="text-center">
                                         <a href="<?= base_url(); ?>asset/edit/<?= $row->id_asset; ?>"><span class="badge badge-primary"><i class="fas fa-fw fa-edit"></i></span></a>

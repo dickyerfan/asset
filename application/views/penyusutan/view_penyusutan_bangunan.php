@@ -54,9 +54,10 @@
                                 <th>Tgl perolehan</th>
                                 <th>Umur</th>
                                 <th>Prsen</th>
-                                <th>Harga Perolehan</th>
+                                <th>Harga Perolehan Thn Lalu</th>
                                 <th>Penambahan</th>
                                 <th>Pengurangan</th>
+                                <th>Harga Perolehan Thn Ini</th>
                                 <th>Akm Thn Lalu</th>
                                 <th>Nilai Buku Thn Lalu</th>
                                 <th>Penyusutan</th>
@@ -88,12 +89,13 @@
                                             <?= $nama_asset; ?>
                                         <?php endif; ?>
                                     </td>
-                                    <td class="text-center"><?= $row->tanggal; ?></td>
+                                    <td class="text-center"><?= date('d-m-Y', strtotime($row->tanggal)); ?></td>
                                     <td class="text-center"><?= $row->umur; ?></td>
                                     <td class="text-center"><?= $row->persen_susut; ?></td>
                                     <td class="text-right"><?= number_format($row->nilai_buku, 0, ',', '.'); ?></td>
                                     <td class="text-right"><?= number_format($row->penambahan, 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?= $row->pengurangan; ?></td>
+                                    <td class="text-right"><?= number_format($row->pengurangan, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>
                                     <td class="text-right"><?= number_format($row->akm_thn_lalu, 0, ',', '.'); ?></td>
                                     <td class="text-right"><?= number_format($row->nilai_buku_lalu, 0, ',', '.'); ?></td>
                                     <td class="text-right"><?= number_format($row->penambahan_penyusutan, 0, ',', '.'); ?></td>
@@ -106,9 +108,10 @@
                         <tfoot>
                             <tr class="text-center bg-light">
                                 <th colspan="5" class="text-right">Total</th>
-                                <th class="text-right"><?= number_format($totals['total_rupiah'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($totals['total_nilai_buku'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($totals['total_penambahan'], 0, ',', '.'); ?></th>
-                                <th class="text-right">-</th>
+                                <th class="text-right"><?= number_format($totals['total_pengurangan'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($totals['total_rupiah'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($totals['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($totals['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($totals['total_penyusutan'], 0, ',', '.'); ?></th>
@@ -116,7 +119,6 @@
                                 <th class="text-right"><?= number_format($totals['total_nilai_buku_final'], 0, ',', '.'); ?></th>
                             </tr>
                         </tfoot>
-
                     </table>
                 </div>
             </div>

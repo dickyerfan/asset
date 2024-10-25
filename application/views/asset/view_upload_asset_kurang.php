@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-header card-outline card-primary shadow">
                 <a class="fw-bold text-dark" style="text-decoration:none ;"><?= strtoupper($title) ?></a>
-                <a href="<?= base_url('asset'); ?>"><button class=" neumorphic-button float-right"><i class="fas fa-reply"></i> Kembali</button></a>
+                <a href="<?= base_url('asset_kurang'); ?>"><button class=" neumorphic-button float-right"><i class="fas fa-reply"></i> Kembali</button></a>
             </div>
 
             <div class="card-body">
@@ -97,17 +97,6 @@
                                     <label for="persen_susut">Persentase Penyusutan : <span class="text-primary">"Untuk Asset Tanah di isi angka 0"</span></label>
                                     <input type="text" class="form-control" id="persen_susut" name="persen_susut" placeholder="Masukan Persentase Penyusutan " value="<?= set_value('persen_susut'); ?>">
                                     <small class="form-text text-danger pl-3"><?= form_error('persen_susut'); ?></small>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label for="status">Status Asset : </label>
-                                    <select name="status" id="status" class="form-control select2">
-                                        <option value="">Pilih Status Asset</option>
-                                        <option value="1">Penambahan</option>
-                                        <option value="2">Pengurangan</option>
-                                    </select>
-                                    <small class="form-text text-danger pl-3"><?= form_error('status'); ?></small>
                                 </div>
                             </div>
                         </div>

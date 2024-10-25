@@ -66,6 +66,7 @@ class Asset extends CI_Controller
 		$this->form_validation->set_rules('id_bagian', 'Bagian/UPK', 'required|trim');
 		$this->form_validation->set_rules('jumlah', 'Jumlah', 'trim|numeric');
 		$this->form_validation->set_rules('rupiah', 'Rupiah', 'required|trim|numeric');
+		$this->form_validation->set_rules('status', 'Status Asset', 'required|trim');
 		$this->form_validation->set_rules('umur', 'Umur Asset', 'required|trim|numeric');
 		$this->form_validation->set_rules('persen_susut', 'Persen Penyusutan', 'required|trim|numeric');
 		$this->form_validation->set_message('required', '%s masih kosong');

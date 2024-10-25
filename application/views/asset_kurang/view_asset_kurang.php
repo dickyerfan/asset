@@ -12,11 +12,14 @@
                         </div>
                     </form>
                     <div class="navbar-nav ms-auto">
-                        <!-- <?php if ($this->session->userdata('level') != 'Pengguna') : ?>
-							<a href="<?= base_url('asset/upload') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Asset</button></a>
-						<?php endif; ?> -->
-                        <a href="<?= base_url('asset_kurang/upload') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input pengurangan Asset</button></a>
+                        <a href="<?= base_url('asset_kurang/all_asset') ?>"><button class="float-end neumorphic-button"> Daftar Semua Asset</button></a>
                     </div>
+                    <!-- <div class="navbar-nav ms-auto">
+                        <?php if ($this->session->userdata('level') != 'Pengguna') : ?>
+							<a href="<?= base_url('asset/upload') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Asset</button></a>
+						<?php endif; ?>
+                        <a href="<?= base_url('asset_kurang/upload') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input pengurangan Asset</button></a>
+                    </div> -->
                 </nav>
             </div>
 
@@ -52,14 +55,14 @@
                         <h5>Bulan : <?= $bulan_lap; ?></h5>
                     </div>
                 </div>
-                <div>
+                <!-- <div>
                     <div class="row justify-content-center">
                         <div class="col-md-6 text-center">
                             <h3 class="neumorphic-button fs-3" style="margin: 100px 100px;">Menu Belum Tersedia</h3>
                         </div>
                     </div>
-                </div>
-                <!-- <div class="table-responsive">
+                </div> -->
+                <div class="table-responsive">
                     <table id="contoh" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr class="text-center">
@@ -136,7 +139,7 @@
                             </tr>
                         </tfoot>
                     </table>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>

@@ -338,7 +338,29 @@ class Asset_rekap extends CI_Controller
         $this->load->view('asset_rekap/view_asset_kendaraan', $data);
         $this->load->view('templates/footer');
     }
+    // ini sudah betul
     public function inventaris()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'REKAP PENAMBAHAN INVENTARIS / PERABOTAN KANTOR';
+        $data['inventaris'] = $this->Model_asset_rekap->get_inventaris($tahun);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('asset_rekap/view_asset_inventaris', $data);
+        $this->load->view('templates/footer');
+    }
+    public function invetaris_kurang()
     {
         $tanggal = $this->input->get('tanggal');
         $tahun = substr($tanggal, 0, 4);
@@ -351,13 +373,13 @@ class Asset_rekap extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'INVENTARIS / PERABOTAN KANTOR';
-        $data['inventaris'] = $this->Model_asset_rekap->get_inventaris();
+        $data['title'] = 'REKAP PENGURANGAN INVENTARIS / PERABOTAN KANTOR';
+        $data['inventaris'] = $this->Model_asset_rekap->get_inventaris_kurang($tahun);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('templates/sidebar');
-        $this->load->view('asset_rekap/view_asset_inventaris', $data);
+        $this->load->view('asset_rekap/view_asset_inventaris_kurang', $data);
         $this->load->view('templates/footer');
     }
     public function penyusutan()

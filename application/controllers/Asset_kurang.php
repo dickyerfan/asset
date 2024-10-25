@@ -48,12 +48,24 @@ class Asset_kurang extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'Pengurangan Asset Tahun';
-        $data['asset'] = $this->Model_asset->get_all($bulan, $tahun);
+        $data['asset'] = $this->Model_asset->get_kurang($bulan, $tahun);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('templates/sidebar');
         $this->load->view('asset_kurang/view_asset_kurang', $data);
+        $this->load->view('templates/footer');
+    }
+    public function all_asset()
+    {
+
+        $data['title'] = 'Daftar Semua Asset';
+        $data['asset'] = $this->Model_asset->get_all_kurang();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('asset_kurang/view_asset_all_kurang', $data);
         $this->load->view('templates/footer');
     }
 
@@ -77,19 +89,19 @@ class Asset_kurang extends CI_Controller
     //         $this->load->view('templates/header', $data);
     //         $this->load->view('templates/navbar');
     //         $this->load->view('templates/sidebar');
-    //         $this->load->view('asset/view_upload_asset', $data);
+    //         $this->load->view('asset/view_upload_asset_kurang', $data);
     //         $this->load->view('templates/footer');
     //     } else {
-    //         $data['asset'] = $this->Model_asset->tambah_asset();
+    //         $data['asset'] = $this->Model_asset->kurang_asset();
     //         $this->session->set_flashdata(
     //             'info',
     //             '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-    //                     <strong>Sukses,</strong> Data Asset baru berhasil di tambah
+    //                     <strong>Sukses,</strong> Data Asset baru berhasil di kurangi
     //                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
     //                     </button>
     //                   </div>'
     //         );
-    //         $alamat = 'asset?tanggal=' . $tanggal;
+    //         $alamat = 'asset_kurang?tanggal=' . $tanggal;
     //         redirect($alamat);
     //         // redirect('asset');
     //     }
