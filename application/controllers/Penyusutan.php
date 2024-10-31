@@ -188,6 +188,7 @@ class Penyusutan extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'Daftar Penyusutan Bangunan';
+        $data['upk_bagian'] = $this->Model_penyusutan->get_upk_bagian();
         $penyusutan_data = $this->Model_penyusutan->get_bangunan($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -196,6 +197,42 @@ class Penyusutan extends CI_Controller
         $this->load->view('templates/navbar');
         $this->load->view('templates/sidebar');
         $this->load->view('penyusutan/view_penyusutan_bangunan', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function bangunan_kantor()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_bangunan', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan->get_upk_bagian();
+        $penyusutan_data = $this->Model_penyusutan->get_bangunan_kantor($tahun, $upk_bagian);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_bangunan_kantor', $data);
         $this->load->view('templates/footer');
     }
 

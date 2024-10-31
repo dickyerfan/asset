@@ -62,6 +62,13 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $('#upk_bagian').change(function() {
+            $('#form_upk_bagian').submit();
+        });
+    });
+</script>
 
 <script>
     window.setTimeout(function() {
