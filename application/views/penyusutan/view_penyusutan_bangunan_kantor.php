@@ -38,6 +38,9 @@
                         <a href="<?= base_url('penyusutan/bangunan_kantor') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Tahun ini</button></a>
                     </div>
                     <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('penyusutan/bangunan_kantor') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Total Bangunan Kantor</button></a>
+                    </div>
+                    <div class="navbar-nav ms-2">
                         <a href="<?= base_url('penyusutan/bangunan') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Total Bangunan</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
@@ -59,7 +62,7 @@
                         <?php if ($selected_upk) : ?>
                             <h5><?= strtoupper($title . ' ' . $selected_upk->name)  . ' ' . $tahun_lap; ?></h5>
                         <?php else : ?>
-                            <h3>Belum ada Bagian / UPK yang dipilih</h3>
+                            <h5><?= strtoupper($title)  . ' BANGUNAN KANTOR' . ' ' . $tahun_lap; ?></h5>
                         <?php endif; ?>
 
                     </div>

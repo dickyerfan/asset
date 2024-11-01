@@ -11,7 +11,7 @@
  Target Server Version : 100418 (10.4.18-MariaDB)
  File Encoding         : 65001
 
- Date: 31/10/2024 15:34:50
+ Date: 01/11/2024 10:33:40
 */
 
 SET NAMES utf8mb4;
@@ -84,7 +84,7 @@ CREATE TABLE `daftar_asset`  (
   INDEX `id_no_per`(`id_no_per` ASC) USING BTREE,
   CONSTRAINT `daftar_asset_ibfk_1` FOREIGN KEY (`id_bagian`) REFERENCES `bagian_upk` (`id_bagian`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `daftar_asset_ibfk_2` FOREIGN KEY (`id_no_per`) REFERENCES `no_per` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 192 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 195 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of daftar_asset
@@ -279,6 +279,9 @@ INSERT INTO `daftar_asset` VALUES (188, 23, 2697, 2671, 228, 0, 34, 0, 'Pembuata
 INSERT INTO `daftar_asset` VALUES (189, 23, 2697, 2671, 228, 0, 34, 0, 'Pembuatan ruang antara/ruang ganti', '2019-10-31', '', '', 5267000, 1, 20, 5, 'Administrator', '2024-10-31 12:56:42');
 INSERT INTO `daftar_asset` VALUES (190, 23, 2697, 2671, 228, 0, 34, 0, 'Perbaikan gedung AMDK (lantai,pemas.Kanopi & paving)', '2019-10-31', '', '', 14122200, 1, 20, 5, 'Administrator', '2024-10-31 12:57:24');
 INSERT INTO `daftar_asset` VALUES (191, 23, 2697, 2671, 228, 0, 34, 0, 'Pembuatan gudang AMDK', '2020-04-30', '', '', 111608000, 1, 20, 5, 'Administrator', '2024-10-31 12:58:04');
+INSERT INTO `daftar_asset` VALUES (192, 15, 2710, 2676, 228, 0, 34, 0, 'Pembuatan ruang genzet Upk Wringin', '2012-06-30', '', '', 8901000, 1, 20, 5, 'Administrator', '2024-11-01 07:39:15');
+INSERT INTO `daftar_asset` VALUES (193, 2, 2723, 2678, 228, 0, 34, 0, 'Pembuatan Kanopi Workshop', '2022-12-13', '', '', 32897847, 1, 20, 5, 'Administrator', '2024-11-01 10:23:28');
+INSERT INTO `daftar_asset` VALUES (194, 2, 2723, 2678, 228, 0, 34, 0, 'Renovasi atap gudang Umum', '2023-11-15', '', '', 111233658, 1, 20, 5, 'Administrator', '2024-11-01 10:24:09');
 
 -- ----------------------------
 -- Table structure for no_per
@@ -1552,7 +1555,7 @@ CREATE TABLE `penyusutan`  (
   PRIMARY KEY (`id_penyusutan`) USING BTREE,
   INDEX `id_asset`(`id_asset` ASC) USING BTREE,
   CONSTRAINT `penyusutan_ibfk_1` FOREIGN KEY (`id_asset`) REFERENCES `daftar_asset` (`id_asset`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 192 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 195 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of penyusutan
@@ -1747,6 +1750,9 @@ INSERT INTO `penyusutan` VALUES (188, 188, 2018, 185120000, 0, 0, 0, 185120000, 
 INSERT INTO `penyusutan` VALUES (189, 189, 2019, 5267000, 0, 0, 0, 5267000, '2024-10-31 12:56:43', 'Administrator');
 INSERT INTO `penyusutan` VALUES (190, 190, 2019, 14122200, 0, 0, 0, 14122200, '2024-10-31 12:57:24', 'Administrator');
 INSERT INTO `penyusutan` VALUES (191, 191, 2020, 111608000, 0, 0, 0, 111608000, '2024-10-31 12:58:04', 'Administrator');
+INSERT INTO `penyusutan` VALUES (192, 192, 2012, 8901000, 0, 0, 0, 8901000, '2024-11-01 07:39:15', 'Administrator');
+INSERT INTO `penyusutan` VALUES (193, 193, 2022, 32897847, 0, 0, 0, 32897847, '2024-11-01 10:23:28', 'Administrator');
+INSERT INTO `penyusutan` VALUES (194, 194, 2023, 111233658, 0, 0, 0, 111233658, '2024-11-01 10:24:09', 'Administrator');
 
 -- ----------------------------
 -- Table structure for user
