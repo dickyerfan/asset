@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <form id="form_tahun" action="<?= base_url('penyusutan/bangunan_kantor'); ?>" method="get">
+                    <form id="form_tahun" action="<?= base_url('penyusutan/bangunan_laboratorium'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <input type="submit" value="Pilih Tahun" class="neumorphic-button">
                             <!-- <input type="date" id="tahun" name="tahun" class="form-control" style="margin-left: 10px;"> -->
@@ -22,7 +22,7 @@
                         </div>
                     </form>
                     <div class="navbar-nav ms-2">
-                        <form id="form_upk_bagian" action="<?= base_url('penyusutan/bangunan_kantor'); ?>" method="get">
+                        <form id="form_upk_bagian" action="<?= base_url('penyusutan/bangunan_laboratorium'); ?>" method="get">
                             <div style="display: flex; align-items: center;">
                                 <select name="upk_bagian" id="upk_bagian" class="form-control select2" style="width:200px;">
                                     <option value="">Pilih Bagian/UPK</option>
@@ -35,16 +35,16 @@
                         </form>
                     </div>
                     <div class="navbar-nav ms-2">
-                        <a href="<?= base_url('penyusutan/bangunan_kantor') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Tahun ini</button></a>
+                        <a href="<?= base_url('penyusutan/bangunan_laboratorium') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Tahun ini</button></a>
                     </div>
                     <div class="navbar-nav ms-2">
-                        <a href="<?= base_url('penyusutan/bangunan_kantor') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Total Bangunan Kantor</button></a>
+                        <a href="<?= base_url('penyusutan/bangunan_laboratorium') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Total Bangunan Lab</button></a>
                     </div>
                     <div class="navbar-nav ms-2">
                         <a href="<?= base_url('penyusutan/bangunan') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Total Bangunan</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('penyusutan/cetak_bangunan_kantor') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
+                        <a href="<?= base_url('penyusutan/bangunan/cetak_bangunan_laboratorium') ?>"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
                     </div>
                 </nav>
             </div>
@@ -52,6 +52,7 @@
             <div class="card-body">
                 <div class="row justify-content-center">
                     <div class="col-lg-6 text-center">
+
                         <?php
                         if (empty($tahun_lap)) {
                             // $bulan_lap = date('m');
@@ -61,10 +62,18 @@
                         <?php if ($selected_upk) : ?>
                             <h5><?= strtoupper($title . ' ' . $selected_upk->name)  . ' ' . $tahun_lap; ?></h5>
                         <?php else : ?>
-                            <h5><?= strtoupper($title)  . ' BANGUNAN KANTOR' . ' ' . $tahun_lap; ?></h5>
+                            <h5><?= strtoupper($title)  . ' BANGUNAN PERALATAN' . ' ' . $tahun_lap; ?></h5>
                         <?php endif; ?>
+
                     </div>
                 </div>
+                <!-- <div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 text-center">
+                            <h3 class="neumorphic-button fs-3" style="margin: 100px 100px;">Menu Belum Tersedia</h3>
+                        </div>
+                    </div>
+                </div> -->
                 <div class="table-responsive">
                     <table id="contoh" class="table table-bordered table-striped table-hover">
                         <thead>
