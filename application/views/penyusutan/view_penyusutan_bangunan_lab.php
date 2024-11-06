@@ -62,7 +62,7 @@
                         <?php if ($selected_upk) : ?>
                             <h5><?= strtoupper($title . ' ' . $selected_upk->name)  . ' ' . $tahun_lap; ?></h5>
                         <?php else : ?>
-                            <h5><?= strtoupper($title)  . ' BANGUNAN PERALATAN' . ' ' . $tahun_lap; ?></h5>
+                            <h5><?= strtoupper($title)  . ' BANGUNAN LABORATORIUM' . ' ' . $tahun_lap; ?></h5>
                         <?php endif; ?>
 
                     </div>

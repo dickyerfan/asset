@@ -255,6 +255,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="<?= base_url('penyusutan/bangunan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Bangunan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="<?= base_url('penyusutan/sumber') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Ins Sumber</p>
@@ -276,12 +282,6 @@
                             <a href="<?= base_url('penyusutan/trans_dist') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Ins Trans & Dist</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('penyusutan/bangunan') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Bangunan</p>
                             </a>
                         </li>
                         <li class="nav-item">

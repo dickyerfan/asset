@@ -5,10 +5,9 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <form id="form_tahun" action="<?= base_url('penyusutan/tanah'); ?>" method="get">
+                    <form id="form_tahun" action="<?= base_url('penyusutan/olah_air_reservoir'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <input type="submit" value="Pilih Tahun" class="neumorphic-button">
-                            <!-- <input type="date" id="tahun" name="tahun" class="form-control" style="margin-left: 10px;"> -->
                             <select id="tahun" name="tahun" class="form-control" style="margin-left: 15px;">
                                 <?php
                                 $currentYear = date('Y');
@@ -21,11 +20,30 @@
                             </select>
                         </div>
                     </form>
-                    <div class="navbar-nav ms-1">
-                        <a href="<?= base_url('penyusutan/tanah') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Tahun ini</button></a>
+                    <div class="navbar-nav ms-2">
+                        <form id="form_upk_bagian" action="<?= base_url('penyusutan/olah_air_reservoir'); ?>" method="get">
+                            <div style="display: flex; align-items: center;">
+                                <select name="upk_bagian" id="upk_bagian" class="form-control select2" style="width:200px;">
+                                    <option value="">Pilih Bagian/UPK</option>
+                                    <?php foreach ($upk_bagian as $row) :  ?>
+                                        <option value="<?= $row->id; ?>"><?= $row->name; ?></option>
+                                    <?php endforeach;  ?>
+                                </select>
+                                <input type="hidden" name="tahun" value="<?= $this->input->get('tahun') ?>">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('penyusutan/olah_air_reservoir') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Tahun ini</button></a>
+                    </div>
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('penyusutan/olah_air_reservoir') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Total olah_air reservoir</button></a>
+                    </div>
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('penyusutan/olah_air') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Total Inst. olah_air</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('penyusutan/cetak_tanah') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
+                        <a href="<?= base_url('penyusutan/cetak_olah_air_reservoir') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
                     </div>
                 </nav>
             </div>
@@ -33,23 +51,19 @@
             <div class="card-body">
                 <div class="row justify-content-center">
                     <div class="col-lg-6 text-center">
-
                         <?php
                         if (empty($tahun_lap)) {
                             // $bulan_lap = date('m');
                             $tahun_lap = date('Y');
                         }
                         ?>
-                        <h5><?= strtoupper($title) . ' ' . $tahun_lap; ?></h5>
+                        <?php if ($selected_upk) : ?>
+                            <h5><?= strtoupper($title . ' ' . $selected_upk->name)  . ' ' . $tahun_lap; ?></h5>
+                        <?php else : ?>
+                            <h5><?= strtoupper($title)  . ' INSTALASI PENGOLAHAN AIR : RESERVOIR AIR' . ' ' . $tahun_lap; ?></h5>
+                        <?php endif; ?>
                     </div>
                 </div>
-                <!-- <div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-6 text-center">
-                            <h3 class="neumorphic-button fs-3" style="margin: 100px 100px;">Menu Belum Tersedia</h3>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="table-responsive">
                     <table id="contoh" class="table table-bordered table-striped table-hover">
                         <thead>
