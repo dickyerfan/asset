@@ -32,7 +32,7 @@ class Model_asset extends CI_Model
         $this->db->where('daftar_asset.status', 2);
         return $this->db->get()->result();
     }
-    public function get_all_kurang()
+    public function get_semua_asset()
     {
         $this->db->select(
             '*,

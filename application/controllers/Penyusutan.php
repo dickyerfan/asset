@@ -12,6 +12,7 @@ class Penyusutan extends CI_Controller
         $this->load->model('Model_penyusutan_sumber');
         $this->load->model('Model_penyusutan_pompa');
         $this->load->model('Model_penyusutan_olah_air');
+        $this->load->model('Model_penyusutan_trans_dist');
         $this->load->library('form_validation');
         if (!$this->session->userdata('nama_pengguna')) {
             $this->session->set_flashdata(
@@ -888,7 +889,7 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun)) {
             $tahun = date('Y');
-            $this->session->unset_userdata('tahun_session_olah_air');
+            $this->session->unset_userdata('tahun_session_pompa');
         } else {
             $this->session->set_userdata('tahun_session_pompa', $get_tahun);
         }
@@ -1665,8 +1666,8 @@ class Penyusutan extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'Daftar Penyusutan Transmisi & Distibusi';
-        $penyusutan_data = $this->Model_penyusutan->get_trans_dist($tahun);
+        $data['title'] = 'Daftar Penyusutan Transmisi & Distribusi';
+        $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
 
@@ -1688,7 +1689,7 @@ class Penyusutan extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Daftar Penyusutan Pengolahan Air';
+        $data['title'] = 'Daftar Penyusutan Transmisi & Distribusi';
         $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1697,6 +1698,686 @@ class Penyusutan extends CI_Controller
         $this->pdf->setPaper('folio', 'landscape');
         $this->pdf->filename = "trans_dist-{$tahun}.pdf";
         $this->pdf->generate('cetakan/trans_dist_pdf', $data);
+    }
+
+    public function trans_dist_bangunan()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_trans_dist_bang');
+        } else {
+            $this->session->set_userdata('tahun_session_trans_dist_bang', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bangunan_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bangunan($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_bangunan();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_trans_dist_bangunan', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_trans_dist_bangunan()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_trans_dist_bang');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_trans_dist_bang');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bangunan_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bangunan($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_bangunan();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "trans_dist_bangunan-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/trans_dist_bangunan_pdf', $data);
+    }
+
+    public function trans_dist_reservoir()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_trans_dist_reservoir');
+        } else {
+            $this->session->set_userdata('tahun_session_trans_dist_reservoir', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_reservoir_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_reservoir($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_reservoir();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_trans_dist_reservoir', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_trans_dist_reservoir()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_trans_dist_reservoir');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_trans_dist_reservoir');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_reservoir_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_reservoir($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_reservoir();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "trans_dist_reservoir-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/trans_dist_reservoir_pdf', $data);
+    }
+
+    public function trans_dist_pipa_trans()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_trans_dist_pipa_trans');
+        } else {
+            $this->session->set_userdata('tahun_session_trans_dist_pipa_trans', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pipa_trans_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pipa_trans($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_pipa_trans();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_trans_dist_pipa_trans', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_trans_dist_pipa_trans()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_trans_dist_pipa_trans');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_trans_dist_pipa_trans');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pipa_trans_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pipa_trans($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_pipa_trans();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "trans_dist_pipa_trans-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/trans_dist_pipa_trans_pdf', $data);
+    }
+
+    public function trans_dist_meter()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_trans_dist_meter');
+        } else {
+            $this->session->set_userdata('tahun_session_trans_dist_meter', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_meter_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_meter($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_meter();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_trans_dist_meter', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_trans_dist_meter()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_trans_dist_meter');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_trans_dist_meter');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_meter_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_meter($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_meter();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "trans_dist_meter-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/trans_dist_meter_pdf', $data);
+    }
+
+    public function trans_dist_ledeng()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_trans_dist_ledeng');
+        } else {
+            $this->session->set_userdata('tahun_session_trans_dist_ledeng', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_ledeng_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_ledeng($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_ledeng();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_trans_dist_ledeng', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_trans_dist_ledeng()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_trans_dist_ledeng');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_trans_dist_ledeng');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_ledeng_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_ledeng($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_ledeng();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "trans_dist_ledeng-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/trans_dist_ledeng_pdf', $data);
+    }
+
+    public function trans_dist_pemadam()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_trans_dist_pemadam');
+        } else {
+            $this->session->set_userdata('tahun_session_trans_dist_pemadam', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pemadam_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pemadam($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_pemadam();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_trans_dist_pemadam', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_trans_dist_pemadam()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_trans_dist_pemadam');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_trans_dist_pemadam');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pemadam_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pemadam($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_pemadam();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "trans_dist_pemadam-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/trans_dist_pemadam_pdf', $data);
+    }
+
+    public function trans_dist_jembatan()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_trans_dist_jembatan');
+        } else {
+            $this->session->set_userdata('tahun_session_trans_dist_jembatan', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_jembatan_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_jembatan($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_jembatan();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_trans_dist_jembatan', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_trans_dist_jembatan()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_trans_dist_jembatan');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_trans_dist_jembatan');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_jembatan_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_jembatan($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_jembatan();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "trans_dist_jembatan-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/trans_dist_jembatan_pdf', $data);
+    }
+
+    public function trans_dist_inst_lain()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_trans_dist_inst_lain');
+        } else {
+            $this->session->set_userdata('tahun_session_trans_dist_inst_lain', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_inst_lain_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_inst_lain($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_inst_lain();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_trans_dist_inst_lain', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_trans_dist_inst_lain()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_trans_dist_inst_lain');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_trans_dist_inst_lain');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_inst_lain_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_inst_lain($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_inst_lain();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "trans_dist_inst_lain-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/trans_dist_inst_lain_pdf', $data);
     }
 
     public function peralatan()
@@ -1722,6 +2403,7 @@ class Penyusutan extends CI_Controller
         $this->load->view('penyusutan/view_penyusutan_peralatan', $data);
         $this->load->view('templates/footer');
     }
+
 
     public function kendaraan()
     {

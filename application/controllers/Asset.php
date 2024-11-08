@@ -97,4 +97,16 @@ class Asset extends CI_Controller
 			// redirect('asset');
 		}
 	}
+	public function asset_semua()
+	{
+
+		$data['title'] = 'Daftar Semua Asset';
+		$data['asset'] = $this->Model_asset->get_semua_asset();
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/navbar');
+		$this->load->view('templates/sidebar');
+		$this->load->view('asset/view_asset_semua', $data);
+		$this->load->view('templates/footer');
+	}
 }

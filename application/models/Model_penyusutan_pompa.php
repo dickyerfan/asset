@@ -8,8 +8,11 @@ class Model_penyusutan_pompa extends CI_Model
         $this->db->select('*');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
         $this->db->where('daftar_asset.grand_id', 222);
+        $this->db->order_by('id_no_per', 'ASC');
+        $this->db->order_by('daftar_asset.id_asset', 'ASC');
         $this->db->order_by('tanggal', 'ASC');
 
         $query = $this->db->get();
@@ -64,7 +67,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
                 $row->nilai_buku_lalu = $row->nilai_buku;
-                $row->akm_thn_ini = $row->rupiah;
+                $row->akm_thn_ini = 0;
             } else {
                 $row->penambahan = 0;
                 $row->pengurangan = 0;
@@ -168,7 +171,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
                 $row->nilai_buku_lalu = $row->nilai_buku;
-                $row->akm_thn_ini = $row->rupiah;
+                $row->akm_thn_ini = 0;
             } else {
                 $row->penambahan = 0;
                 $row->pengurangan = 0;
@@ -275,7 +278,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
                 $row->nilai_buku_lalu = $row->nilai_buku;
-                $row->akm_thn_ini = $row->rupiah;
+                $row->akm_thn_ini = 0;
             } else {
                 $row->penambahan = 0;
                 $row->pengurangan = 0;
@@ -380,7 +383,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
                 $row->nilai_buku_lalu = $row->nilai_buku;
-                $row->akm_thn_ini = $row->rupiah;
+                $row->akm_thn_ini = 0;
             } else {
                 $row->penambahan = 0;
                 $row->pengurangan = 0;
@@ -486,7 +489,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
                 $row->nilai_buku_lalu = $row->nilai_buku;
-                $row->akm_thn_ini = $row->rupiah;
+                $row->akm_thn_ini = 0;
             } else {
                 $row->penambahan = 0;
                 $row->pengurangan = 0;
@@ -590,7 +593,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
                 $row->nilai_buku_lalu = $row->nilai_buku;
-                $row->akm_thn_ini = $row->rupiah;
+                $row->akm_thn_ini = 0;
             } else {
                 $row->penambahan = 0;
                 $row->pengurangan = 0;
@@ -696,7 +699,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
                 $row->nilai_buku_lalu = $row->nilai_buku;
-                $row->akm_thn_ini = $row->rupiah;
+                $row->akm_thn_ini = 0;
             } else {
                 $row->penambahan = 0;
                 $row->pengurangan = 0;
@@ -801,7 +804,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
                 $row->nilai_buku_lalu = $row->nilai_buku;
-                $row->akm_thn_ini = $row->rupiah;
+                $row->akm_thn_ini = 0;
             } else {
                 $row->penambahan = 0;
                 $row->pengurangan = 0;
@@ -907,7 +910,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
                 $row->nilai_buku_lalu = $row->nilai_buku;
-                $row->akm_thn_ini = $row->rupiah;
+                $row->akm_thn_ini = 0;
             } else {
                 $row->penambahan = 0;
                 $row->pengurangan = 0;

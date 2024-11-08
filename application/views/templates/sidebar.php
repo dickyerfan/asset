@@ -51,6 +51,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="<?= base_url('asset/asset_semua') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>
+                            Semua Asset
+                            <!-- <span class="right badge badge-danger">New</span> -->
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
@@ -122,115 +131,6 @@
                     </ul>
                 </li>
 
-                <!-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                            Data Pekerjaan
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= base_url('pekerjaan/pekerjaan') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard Pekerjaan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('pekerjaan/bagian') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Daftar Bagian</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('pekerjaan/subag') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Daftar Sub Bagian/UPK</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('pekerjaan/jabatan') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Daftar Jabatan</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
-                <!-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-car"></i>
-                        <p>
-                            Data Kendaraan
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= base_url('kendaraan/kendaraan_semua') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Daftar Semua Kendaraan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('kendaraan/kendaraan_orang') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Pemegang Kendaraan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('kendaraan/merk') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Daftar Merek</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('kendaraan/type') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Daftar Type </p>
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
-                <!-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>
-                            Data User
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= base_url('user/admin') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Data Admin</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('user/user') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Data User</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
-                <!-- <li class="nav-item">
-                    <a href="<?= base_url('chart') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
-                        <p>
-                            Master Chart
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?= base_url('tabel') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-table"></i>
-                        <p>
-                            Master Tabel
-                        </p>
-                    </a>
-                </li> -->
                 <li class="nav-item">
                     <a href="<?= base_url('penyusutan') ?>" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
