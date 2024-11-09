@@ -442,7 +442,7 @@ class Asset_rekap extends CI_Controller
         $this->pdf->setPaper('folio', 'portrait');
 
         $this->pdf->filename = "sr_baru-{$tahun}.pdf";
-        $this->pdf->generate('cetakan/sr_baru_pdf', $data);
+        $this->pdf->generate('cetakan_asset/sr_baru_pdf', $data);
     }
     public function sr_baru_rekap()
     {

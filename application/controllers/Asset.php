@@ -109,4 +109,30 @@ class Asset extends CI_Controller
 		$this->load->view('asset/view_asset_semua', $data);
 		$this->load->view('templates/footer');
 	}
+
+	public function cetak_asset_semua()
+	{
+
+		$data['title'] = 'Daftar Semua Asset';
+		$data['asset'] = $this->Model_asset->get_semua_asset();
+
+		// Set paper size and orientation
+		$this->pdf->setPaper('folio', 'portrait');
+
+		$this->pdf->filename = "semua_asset.pdf";
+		$this->pdf->generate('cetakan_asset/semua_asset_pdf', $data);
+	}
+
+	public function asset_semua_kurang()
+	{
+
+		$data['title'] = 'Daftar Semua Pengurangan Asset';
+		$data['asset'] = $this->Model_asset->get_semua_asset_kurang();
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/navbar');
+		$this->load->view('templates/sidebar');
+		$this->load->view('asset/view_asset_semua_kurang', $data);
+		$this->load->view('templates/footer');
+	}
 }

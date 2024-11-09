@@ -58,7 +58,7 @@
                         }
                         ?>
                         <?php if ($selected_upk) : ?>
-                            <h5><?= strtoupper($title . ' ' . $selected_upk->name)  . ' ' . $tahun_lap; ?></h5>
+                            <h5><?= strtoupper($title . ' INSTALASI POMPA : ' . $selected_upk->name)  . ' ' . $tahun_lap; ?></h5>
                         <?php else : ?>
                             <h5><?= strtoupper($title)  . ' INSTALASI POMPA : PERALATAN' . ' ' . $tahun_lap; ?></h5>
                         <?php endif; ?>

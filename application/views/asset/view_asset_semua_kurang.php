@@ -11,11 +11,11 @@
                             <input type="date" id="tanggal" name="tanggal" class="form-control" style="margin-left: 10px;">
                         </div>
                     </form> -->
-                    <!-- <div class="navbar-nav ms-2">
-                        <a href="<?= base_url('asset_kurang/all_asset') ?>"><button class="float-end neumorphic-button"> Daftar Semua Asset</button></a>
-                    </div> -->
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('asset/asset_semua') ?>"><button class="float-end neumorphic-button"> Semua Asset</button></a>
+                    </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('asset_kurang') ?>"><button class="float-end neumorphic-button"><i class="fas fa-back"></i> Kembali</button></a>
+                        <a href="<?= base_url('asset/cetak_asset_semua_kurang') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
                     </div>
                 </nav>
             </div>
@@ -76,7 +76,16 @@
                                         <?php endif; ?>
                                     </td>
 
-                                    <td><?= $row->nama_bagian; ?></td>
+                                    <td>
+                                        <?php
+                                        $nama_bagian = $row->nama_bagian;
+                                        ?>
+                                        <?php if ($nama_bagian == "Umum") : ?>
+                                            <?= $nama_bagian = "Bondowoso"; ?>
+                                        <?php else : ?>
+                                            <?= $nama_bagian; ?>
+                                        <?php endif; ?>
+                                    </td>
                                     <td class="text-center"><?= date('d-m-Y', strtotime($row->tanggal)); ?></td>
                                     <td><?= $row->no_bukti_gd; ?></td>
                                     <td><?= $row->no_bukti_vch; ?></td>

@@ -80,46 +80,31 @@
         </table>
     </div>
     <div class="judul">
-        <?php
-        if (empty($tahun_lap)) {
-            // $bulan_lap = date('m');
-            $tahun_lap = date('Y');
-        }
-        ?>
-        <?php if ($selected_upk) : ?>
-            <h5 style="text-align: center;"><?= strtoupper($title . ' INSTALASI POMPA : ' . ' ' . $selected_upk->name)  . ' ' . $tahun_lap; ?></h5>
-        <?php else : ?>
-            <h5 style="text-align: center;"><?= strtoupper($title)  . ' INSTALASI POMPA : PERALATAN' . ' ' . $tahun_lap; ?></h5>
-        <?php endif; ?>
+        <p class="my-0 text-center fw-bold"><?= strtoupper($title); ?></p>
     </div>
     <table class="table tableUtama">
         <thead>
             <tr class="text-center">
                 <th>No</th>
+                <th>No Per</th>
                 <th>Nama Asset</th>
-                <th>Tgl perolehan</th>
-                <th>Umur</th>
-                <th>Prsen</th>
-                <th>Harga Perolehan Thn Lalu</th>
-                <th>Penambahan</th>
-                <th>Pengurangan</th>
-                <th>Harga Perolehan Thn Ini</th>
-                <th>Akm Thn Lalu</th>
-                <th>Nilai Buku Thn Lalu</th>
-                <th>Penyusutan</th>
-                <th>Akm Thn Ini</th>
-                <th>Nilai Buku Thn Ini</th>
+                <th>Lokasi</th>
+                <th>Tanggal</th>
+                <th>No Bkt Gdg</th>
+                <th>No Bkt Vch</th>
+                <th>Nilai Perolehan</th>
             </tr>
         </thead>
         <tbody>
             <?php
             $no = 1;
             $total_rupiah = 0;
-            foreach ($susut as $row) :
-                // $total_rupiah = $row->total_rupiah;
+            foreach ($asset as $row) :
+                $total_rupiah = $row->total_rupiah;
             ?>
                 <tr>
                     <td style="text-align: center;"><?= $no++; ?></td>
+                    <td style="text-align: center;"><?= $row->kode; ?></td>
                     <td>
                         <?php
                         // Memotong nama_asset jika lebih dari 60 karakter
@@ -134,33 +119,34 @@
                             <?= $nama_asset; ?>
                         <?php endif; ?>
                     </td>
+
+                    <td>
+                        <?php
+                        $nama_bagian = $row->nama_bagian;
+                        ?>
+                        <?php if ($nama_bagian == "Umum") : ?>
+                            <?= $nama_bagian = "Bondowoso"; ?>
+                        <?php else : ?>
+                            <?= $nama_bagian; ?>
+                        <?php endif; ?>
+                    </td>
                     <td style="text-align: center;"><?= date('d-m-Y', strtotime($row->tanggal)); ?></td>
-                    <td style="text-align: center;"><?= $row->umur; ?></td>
-                    <td style="text-align: center;"><?= $row->persen_susut; ?></td>
-                    <td style="text-align: right;"><?= number_format($row->nilai_buku, 0, ',', '.'); ?></td>
-                    <td style="text-align: right;"><?= number_format($row->penambahan, 0, ',', '.'); ?></td>
-                    <td style="text-align: right;"><?= number_format($row->pengurangan, 0, ',', '.'); ?></td>
+                    <td><?= $row->no_bukti_gd; ?></td>
+                    <td><?= $row->no_bukti_vch; ?></td>
                     <td style="text-align: right;"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>
-                    <td style="text-align: right;"><?= number_format($row->akm_thn_lalu, 0, ',', '.'); ?></td>
-                    <td style="text-align: right;"><?= number_format($row->nilai_buku_lalu, 0, ',', '.'); ?></td>
-                    <td style="text-align: right;"><?= number_format($row->penambahan_penyusutan, 0, ',', '.'); ?></td>
-                    <td style="text-align: right;"><?= number_format($row->akm_thn_ini, 0, ',', '.'); ?></td>
-                    <td style="text-align: right;"><?= number_format($row->nilai_buku_final, 0, ',', '.'); ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
         <tfoot>
             <tr class="text-center bg-light">
-                <th colspan="5" style="text-align: right;">Total</th>
-                <th style="text-align: right;"><?= number_format($totals['total_nilai_buku'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_penambahan'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_pengurangan'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_rupiah'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_penyusutan'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_akm_thn_ini'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Jumlah</th>
+                <th style="text-align: right;"><?= number_format($total_rupiah, 0, ',', '.'); ?></th>
             </tr>
         </tfoot>
     </table>

@@ -56,18 +56,19 @@ class Asset_kurang extends CI_Controller
         $this->load->view('asset_kurang/view_asset_kurang', $data);
         $this->load->view('templates/footer');
     }
-    public function all_asset()
-    {
 
-        $data['title'] = 'Daftar Semua Asset';
-        $data['asset'] = $this->Model_asset->get_all_kurang();
+    // public function all_asset()
+    // {
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('asset_kurang/view_asset_all_kurang', $data);
-        $this->load->view('templates/footer');
-    }
+    //     $data['title'] = 'Daftar Semua Asset';
+    //     $data['asset'] = $this->Model_asset->get_all_kurang();
+
+    //     $this->load->view('templates/header', $data);
+    //     $this->load->view('templates/navbar');
+    //     $this->load->view('templates/sidebar');
+    //     $this->load->view('asset_kurang/view_asset_all_kurang', $data);
+    //     $this->load->view('templates/footer');
+    // }
 
     // public function upload()
     // {
