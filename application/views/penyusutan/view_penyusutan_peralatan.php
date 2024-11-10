@@ -8,7 +8,6 @@
                     <form id="form_tahun" action="<?= base_url('penyusutan/peralatan'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <input type="submit" value="Pilih Tahun" class="neumorphic-button">
-                            <!-- <input type="date" id="tahun" name="tahun" class="form-control" style="margin-left: 10px;"> -->
                             <select id="tahun" name="tahun" class="form-control" style="margin-left: 15px;">
                                 <?php
                                 $currentYear = date('Y');
@@ -21,7 +20,24 @@
                             </select>
                         </div>
                     </form>
-                    <a href="<?= base_url('penyusutan/peralatan') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Tahun ini</button></a>
+                    <div class="navbar-nav ms-1">
+                        <a href="<?= base_url('penyusutan/peralatan') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Tahun ini</button></a>
+                    </div>
+                    <div class="navbar-nav ms-1">
+                        <a href="<?= base_url('penyusutan/peralatan_gudang') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Gudang</button></a>
+                    </div>
+                    <div class="navbar-nav ms-1">
+                        <a href="<?= base_url('penyusutan/peralatan_laboratorium') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Laboratorium</button></a>
+                    </div>
+                    <div class="navbar-nav ms-1">
+                        <a href="<?= base_url('penyusutan/peralatan_telekomunikasi') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Telekomunikasi</button></a>
+                    </div>
+                    <div class="navbar-nav ms-1">
+                        <a href="<?= base_url('penyusutan/peralatan_bengkel') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Bengkel</button></a>
+                    </div>
+                    <div class="navbar-nav ms-auto">
+                        <a href="<?= base_url('penyusutan/cetak_peralatan') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
+                    </div>
                 </nav>
             </div>
 
@@ -38,13 +54,6 @@
                         <h5><?= strtoupper($title) . ' ' . $tahun_lap; ?></h5>
                     </div>
                 </div>
-                <!-- <div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-6 text-center">
-                            <h3 class="neumorphic-button fs-3" style="margin: 100px 100px;">Menu Belum Tersedia</h3>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="table-responsive">
                     <table id="contoh" class="table table-bordered table-striped table-hover">
                         <thead>
@@ -69,45 +78,148 @@
                         <tbody>
                             <?php
                             $no = 1;
-                            $total_rupiah = 0;
-                            foreach ($susut as $row) :
-                                // $total_rupiah = $row->total_rupiah;
+                            $grouped_data = [];
+                            $totals_per_jenis = [];
+                            // Array untuk nama bangunan berdasarkan parent_id
+                            $nama_peralatan = [
+                                2789 => "Alat-alat Pergudangan",
+                                2793 => "Alat-alat Laboratorium",
+                                2795 => "Alat-alat Telekomunikasi",
+                                2798 => "Alat-alat Bengkel"
+                            ];
+                            foreach ($susut as $row) {
+                                $grouped_data[$row->parent_id][$row->id_no_per][] = $row;
+                            }
+
+                            // Menampilkan data yang telah dikelompokkan
+                            foreach ($grouped_data as $parent_id => $upk_data) {
+                                // Judul berdasarkan parent_id
+                                $nama_peralatan_jenis = $nama_peralatan[$parent_id] ?? "Bangunan Lainnya";
+                                echo "<tr><td colspan='14' class='bg-primary text-white'><strong>{$nama_peralatan_jenis}</strong></td></tr>";
+
+                                // Inisialisasi total per jenis bangunan
+                                $totals_per_jenis[$parent_id] = [
+                                    'total_rupiah' => 0,
+                                    'total_nilai_buku' => 0,
+                                    'total_penambahan' => 0,
+                                    'total_pengurangan' => 0,
+                                    'total_akm_thn_lalu' => 0,
+                                    'total_nilai_buku_lalu' => 0,
+                                    'total_penyusutan' => 0,
+                                    'total_akm_thn_ini' => 0,
+                                    'total_nilai_buku_final' => 0
+                                ];
+
+                                // Menampilkan data per bagian/upk
+                                foreach ($upk_data as $id_no_per => $assets) {
+                                    $name = $assets[0]->name;
+                                    echo "<tr><td colspan='14' class='bg-secondary text-white'><strong> {$name}</strong></td></tr>";
+
+                                    // Inisialisasi total per bagian/upk
+                                    $total_rupiah = 0;
+                                    $total_nilai_buku = 0;
+                                    $total_penambahan = 0;
+                                    $total_pengurangan = 0;
+                                    $total_akm_thn_lalu = 0;
+                                    $total_nilai_buku_lalu = 0;
+                                    $total_penyusutan = 0;
+                                    $total_akm_thn_ini = 0;
+                                    $total_nilai_buku_final = 0;
+
+                                    foreach ($assets as $row) {
+                                        $total_rupiah += $row->rupiah;
+                                        $total_nilai_buku += $row->nilai_buku;
+                                        $total_penambahan += $row->penambahan;
+                                        $total_pengurangan += $row->pengurangan;
+                                        $total_akm_thn_lalu += $row->akm_thn_lalu;
+                                        $total_nilai_buku_lalu += $row->nilai_buku_lalu;
+                                        $total_penyusutan += $row->penambahan_penyusutan;
+                                        $total_akm_thn_ini += $row->akm_thn_ini;
+                                        $total_nilai_buku_final += $row->nilai_buku_final;
+
                             ?>
-                                <tr>
-                                    <td class="text-center"><?= $no++; ?></td>
-                                    <td>
-                                        <?php
-                                        // Memotong nama_asset jika lebih dari 60 karakter
-                                        $nama_asset = $row->nama_asset;
-                                        if (strlen($nama_asset) > 55) {
-                                            $nama_asset = substr($nama_asset, 0, 55) . '...'; // Potong dan tambahkan "..."
-                                        }
-                                        ?>
-                                        <?php if ($row->kode_sr == 1) : ?>
-                                            <?= $nama_asset; ?> <?= $row->jumlah; ?> di <?= $row->nama_bagian; ?>
-                                        <?php else : ?>
-                                            <?= $nama_asset; ?>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td class="text-center"><?= date('d-m-Y', strtotime($row->tanggal)); ?></td>
-                                    <td class="text-center"><?= $row->umur; ?></td>
-                                    <td class="text-center"><?= $row->persen_susut; ?></td>
-                                    <td class="text-right"><?= number_format($row->nilai_buku, 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?= number_format($row->penambahan, 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?= number_format($row->pengurangan, 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?= number_format($row->akm_thn_lalu, 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?= number_format($row->nilai_buku_lalu, 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?= number_format($row->penambahan_penyusutan, 0, ',', '.'); ?></td>
-                                    <!-- <td class="text-right">-</td> -->
-                                    <td class="text-right"><?= number_format($row->akm_thn_ini, 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?= number_format($row->nilai_buku_final, 0, ',', '.'); ?></td>
+                                        <tr>
+                                            <td class="text-center"><?= $no++; ?></td>
+                                            <td>
+                                                <?php
+                                                $nama_asset = $row->nama_asset;
+                                                if (strlen($nama_asset) > 55) {
+                                                    $nama_asset = substr($nama_asset, 0, 55) . '...';
+                                                }
+                                                ?>
+                                                <?= $nama_asset; ?>
+                                            </td>
+                                            <td class="text-center"><?= date('d-m-Y', strtotime($row->tanggal)); ?></td>
+                                            <td class="text-center"><?= $row->umur; ?></td>
+                                            <td class="text-center"><?= $row->persen_susut; ?></td>
+                                            <td class="text-right"><?= number_format($row->nilai_buku, 0, ',', '.'); ?></td>
+                                            <td class="text-right"><?= number_format($row->penambahan, 0, ',', '.'); ?></td>
+                                            <td class="text-right"><?= number_format($row->pengurangan, 0, ',', '.'); ?></td>
+                                            <td class="text-right"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>
+                                            <td class="text-right"><?= number_format($row->akm_thn_lalu, 0, ',', '.'); ?></td>
+                                            <td class="text-right"><?= number_format($row->nilai_buku_lalu, 0, ',', '.'); ?></td>
+                                            <td class="text-right"><?= number_format($row->penambahan_penyusutan, 0, ',', '.'); ?></td>
+                                            <td class="text-right"><?= number_format($row->akm_thn_ini, 0, ',', '.'); ?></td>
+                                            <td class="text-right"><?= number_format($row->nilai_buku_final, 0, ',', '.'); ?></td>
+                                        </tr>
+                                    <?php
+                                    }
+
+                                    // Menampilkan total per bagian/upk
+                                    ?>
+                                    <tr class="bg-light text-right">
+                                        <td colspan="2" class="text-left"><strong>Sub Total <?= $name; ?></strong></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><?= number_format($total_nilai_buku, 0, ',', '.'); ?></td>
+                                        <td><?= number_format($total_penambahan, 0, ',', '.'); ?></td>
+                                        <td><?= number_format($total_pengurangan, 0, ',', '.'); ?></td>
+                                        <td><?= number_format($total_rupiah, 0, ',', '.'); ?></td>
+                                        <td><?= number_format($total_akm_thn_lalu, 0, ',', '.'); ?></td>
+                                        <td><?= number_format($total_nilai_buku_lalu, 0, ',', '.'); ?></td>
+                                        <td><?= number_format($total_penyusutan, 0, ',', '.'); ?></td>
+                                        <td><?= number_format($total_akm_thn_ini, 0, ',', '.'); ?></td>
+                                        <td><?= number_format($total_nilai_buku_final, 0, ',', '.'); ?></td>
+                                    </tr>
+                                <?php
+
+                                    // Menambahkan total per bagian/upk ke total per jenis bangunan
+                                    $totals_per_jenis[$parent_id]['total_rupiah'] += $total_rupiah;
+                                    $totals_per_jenis[$parent_id]['total_nilai_buku'] += $total_nilai_buku;
+                                    $totals_per_jenis[$parent_id]['total_penambahan'] += $total_penambahan;
+                                    $totals_per_jenis[$parent_id]['total_pengurangan'] += $total_pengurangan;
+                                    $totals_per_jenis[$parent_id]['total_akm_thn_lalu'] += $total_akm_thn_lalu;
+                                    $totals_per_jenis[$parent_id]['total_nilai_buku_lalu'] += $total_nilai_buku_lalu;
+                                    $totals_per_jenis[$parent_id]['total_penyusutan'] += $total_penyusutan;
+                                    $totals_per_jenis[$parent_id]['total_akm_thn_ini'] += $total_akm_thn_ini;
+                                    $totals_per_jenis[$parent_id]['total_nilai_buku_final'] += $total_nilai_buku_final;
+                                }
+
+                                // Menampilkan total per jenis sumber
+                                ?>
+                                <tr class="bg-info text-right">
+                                    <td colspan="2" class="text-left"><strong>Sub Total <?= $nama_peralatan_jenis; ?></strong></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku'], 0, ',', '.'); ?></td>
+                                    <td><?= number_format($totals_per_jenis[$parent_id]['total_penambahan'], 0, ',', '.'); ?></td>
+                                    <td><?= number_format($totals_per_jenis[$parent_id]['total_pengurangan'], 0, ',', '.'); ?></td>
+                                    <td><?= number_format($totals_per_jenis[$parent_id]['total_rupiah'], 0, ',', '.'); ?></td>
+                                    <td><?= number_format($totals_per_jenis[$parent_id]['total_akm_thn_lalu'], 0, ',', '.'); ?></td>
+                                    <td><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku_lalu'], 0, ',', '.'); ?></td>
+                                    <td><?= number_format($totals_per_jenis[$parent_id]['total_penyusutan'], 0, ',', '.'); ?></td>
+                                    <td><?= number_format($totals_per_jenis[$parent_id]['total_akm_thn_ini'], 0, ',', '.'); ?></td>
+                                    <td><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku_final'], 0, ',', '.'); ?></td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php
+                            }
+                            ?>
                         </tbody>
                         <tfoot>
                             <tr class="text-center bg-light">
-                                <th colspan="5" class="text-right">Total</th>
+                                <th colspan="5" class="text-left">Total Peralatan</th>
                                 <th class="text-right"><?= number_format($totals['total_nilai_buku'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($totals['total_penambahan'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($totals['total_pengurangan'], 0, ',', '.'); ?></th>

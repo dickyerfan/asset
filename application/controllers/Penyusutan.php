@@ -13,6 +13,9 @@ class Penyusutan extends CI_Controller
         $this->load->model('Model_penyusutan_pompa');
         $this->load->model('Model_penyusutan_olah_air');
         $this->load->model('Model_penyusutan_trans_dist');
+        $this->load->model('Model_penyusutan_peralatan');
+        $this->load->model('Model_penyusutan_kendaraan');
+        $this->load->model('Model_penyusutan_inventaris');
         $this->load->library('form_validation');
         if (!$this->session->userdata('nama_pengguna')) {
             $this->session->set_flashdata(
@@ -2387,13 +2390,14 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun)) {
             $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_peralatan');
         } else {
             $this->session->set_userdata('tahun_session_peralatan', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'Daftar Penyusutan Peralatan';
-        $penyusutan_data = $this->Model_penyusutan->get_peralatan($tahun);
+        $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
 
@@ -2404,6 +2408,28 @@ class Penyusutan extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function cetak_peralatan()
+    {
+        $tahun = $this->session->userdata('tahun_session_peralatan');
+
+        // Hapus session jika tidak ada tahun atau tahun tidak valid
+        if (empty($tahun)) {
+            $this->session->unset_userdata('tahun_session_peralatan');
+            $tahun = date('Y');
+        }
+
+        $data['tahun_lap'] = $tahun;
+        $data['title'] = 'Daftar Penyusutan Peralatan';
+        $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+        $this->pdf->filename = "peralatan-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/peralatan_pdf', $data);
+    }
+
 
     public function kendaraan()
     {
@@ -2412,13 +2438,14 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun)) {
             $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_kendaraan');
         } else {
             $this->session->set_userdata('tahun_session_kendaraan', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'Daftar Penyusutan Kendaraan';
-        $penyusutan_data = $this->Model_penyusutan->get_kendaraan($tahun);
+        $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
 
@@ -2429,6 +2456,28 @@ class Penyusutan extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function cetak_kendaraan()
+    {
+        $tahun = $this->session->userdata('tahun_session_kendaraan');
+
+        // Hapus session jika tidak ada tahun atau tahun tidak valid
+        if (empty($tahun)) {
+            $this->session->unset_userdata('tahun_session_kendaraan');
+            $tahun = date('Y');
+        }
+
+        $data['tahun_lap'] = $tahun;
+        $data['title'] = 'Daftar Penyusutan Kendaraan';
+        $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+        $this->pdf->filename = "kendaraan-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/kendaraan_pdf', $data);
+    }
+
     public function inventaris()
     {
         $get_tahun = $this->input->get('tahun');
@@ -2436,13 +2485,14 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun)) {
             $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_inventaris');
         } else {
             $this->session->set_userdata('tahun_session_inventaris', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'Daftar Penyusutan Inventaris';
-        $penyusutan_data = $this->Model_penyusutan->get_inventaris($tahun);
+        $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
 
@@ -2451,5 +2501,27 @@ class Penyusutan extends CI_Controller
         $this->load->view('templates/sidebar');
         $this->load->view('penyusutan/view_penyusutan_inventaris', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function cetak_inventaris()
+    {
+        $tahun = $this->session->userdata('tahun_session_inventaris');
+
+        // Hapus session jika tidak ada tahun atau tahun tidak valid
+        if (empty($tahun)) {
+            $this->session->unset_userdata('tahun_session_inventaris');
+            $tahun = date('Y');
+        }
+
+        $data['tahun_lap'] = $tahun;
+        $data['title'] = 'Daftar Penyusutan Inventaris';
+        $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+        $this->pdf->filename = "inventaris-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/inventaris_pdf', $data);
     }
 }

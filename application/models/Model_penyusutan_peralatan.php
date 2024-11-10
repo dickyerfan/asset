@@ -1,16 +1,17 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Model_penyusutan_olah_air extends CI_Model
+class Model_penyusutan_peralatan extends CI_Model
 {
-    public function get_olah_air($tahun_lap)
+
+    public function get_peralatan($tahun_lap)
     {
         $this->db->select('*');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
-        $this->db->where('daftar_asset.grand_id', 224);
+        $this->db->where('daftar_asset.grand_id', 244);
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
         $this->db->order_by('tanggal', 'ASC');
@@ -140,13 +141,14 @@ class Model_penyusutan_olah_air extends CI_Model
             ]
         ];
     }
-    public function get_olah_air_bangunan_total($tahun_lap)
+
+    public function get_peralatan_gudang_total($tahun_lap)
     {
         $this->db->select('*');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
-        $this->db->where('daftar_asset.parent_id', 2104);
+        $this->db->where('daftar_asset.parent_id', 2789);
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
         $this->db->order_by('tanggal', 'ASC');
@@ -170,7 +172,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -276,14 +279,14 @@ class Model_penyusutan_olah_air extends CI_Model
         ];
     }
 
-    public function get_olah_air_bangunan($tahun_lap, $upk_bagian)
+    public function get_peralatan_gudang($tahun_lap, $upk_bagian)
     {
         $this->db->select('*');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
         // $this->db->where('daftar_asset.grand_id', 228);
-        $this->db->where('daftar_asset.parent_id', 2104);
+        $this->db->where('daftar_asset.parent_id', 2789);
         $this->db->where('daftar_asset.id_no_per', $upk_bagian);
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
@@ -308,7 +311,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -414,13 +418,13 @@ class Model_penyusutan_olah_air extends CI_Model
         ];
     }
 
-    public function get_olah_air_alat_total($tahun_lap)
+    public function get_peralatan_laboratorium_total($tahun_lap)
     {
         $this->db->select('*');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
-        $this->db->where('daftar_asset.parent_id', 2107);
+        $this->db->where('daftar_asset.parent_id', 2793);
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
         $this->db->order_by('tanggal', 'ASC');
@@ -444,7 +448,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -550,13 +555,13 @@ class Model_penyusutan_olah_air extends CI_Model
         ];
     }
 
-    public function get_olah_air_alat($tahun_lap, $upk_bagian)
+    public function get_peralatan_laboratorium($tahun_lap, $upk_bagian)
     {
         $this->db->select('*');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
-        $this->db->where('daftar_asset.parent_id', 2107);
+        $this->db->where('daftar_asset.parent_id', 2793);
         $this->db->where('daftar_asset.id_no_per', $upk_bagian);
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
@@ -581,7 +586,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -687,13 +693,13 @@ class Model_penyusutan_olah_air extends CI_Model
         ];
     }
 
-    public function get_olah_air_reservoir_total($tahun_lap)
+    public function get_peralatan_telekomunikasi_total($tahun_lap)
     {
         $this->db->select('*');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
-        $this->db->where('daftar_asset.parent_id', 2112);
+        $this->db->where('daftar_asset.parent_id', 2795);
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
         $this->db->order_by('tanggal', 'ASC');
@@ -717,7 +723,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -823,13 +830,13 @@ class Model_penyusutan_olah_air extends CI_Model
         ];
     }
 
-    public function get_olah_air_reservoir($tahun_lap, $upk_bagian)
+    public function get_peralatan_telekomunikasi($tahun_lap, $upk_bagian)
     {
         $this->db->select('*');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
-        $this->db->where('daftar_asset.parent_id', 2112);
+        $this->db->where('daftar_asset.parent_id', 2795);
         $this->db->where('daftar_asset.id_no_per', $upk_bagian);
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
@@ -854,7 +861,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -960,13 +968,13 @@ class Model_penyusutan_olah_air extends CI_Model
         ];
     }
 
-    public function get_olah_air_inst_lain_total($tahun_lap)
+    public function get_peralatan_bengkel_total($tahun_lap)
     {
         $this->db->select('*');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
-        $this->db->where('daftar_asset.parent_id', 2115);
+        $this->db->where('daftar_asset.parent_id', 2798);
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
         $this->db->order_by('tanggal', 'ASC');
@@ -990,7 +998,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -1096,13 +1105,13 @@ class Model_penyusutan_olah_air extends CI_Model
         ];
     }
 
-    public function get_olah_air_inst_lain($tahun_lap, $upk_bagian)
+    public function get_peralatan_bengkel($tahun_lap, $upk_bagian)
     {
         $this->db->select('*');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
-        $this->db->where('daftar_asset.parent_id', 2115);
+        $this->db->where('daftar_asset.parent_id', 2798);
         $this->db->where('daftar_asset.id_no_per', $upk_bagian);
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
@@ -1127,7 +1136,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -1233,33 +1243,33 @@ class Model_penyusutan_olah_air extends CI_Model
         ];
     }
 
-    public function get_unit_olah_air_bangunan()
+    public function get_unit_peralatan_gudang()
     {
         $this->db->select('id, kode, name,parent_id,grand_id, jenis_id');
         $this->db->from('no_per');
-        $this->db->where('parent_id', 2104);
+        $this->db->where('parent_id', 2789);
         return $this->db->get()->result();
     }
-    public function get_unit_olah_air_reservoir()
+    public function get_unit_peralatan_laboratorium()
     {
         $this->db->select('id, kode, name,parent_id,grand_id, jenis_id');
         $this->db->from('no_per');
-        $this->db->where('parent_id', 2112);
+        $this->db->where('parent_id', 2793);
         return $this->db->get()->result();
     }
-    public function get_unit_olah_air_alat()
+    public function get_unit_peralatan_telekomunikasi()
     {
         $this->db->select('id, kode, name,parent_id,grand_id, jenis_id');
         $this->db->from('no_per');
-        $this->db->where('parent_id', 2107);
+        $this->db->where('parent_id', 2795);
         return $this->db->get()->result();
     }
 
-    public function get_unit_olah_air_inst_lain()
+    public function get_unit_peralatan_bengkel()
     {
         $this->db->select('id, kode, name,parent_id,grand_id, jenis_id');
         $this->db->from('no_per');
-        $this->db->where('parent_id', 2115);
+        $this->db->where('parent_id', 2798);
         return $this->db->get()->result();
     }
 }
