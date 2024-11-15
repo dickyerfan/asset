@@ -22,6 +22,32 @@
 	<link rel="stylesheet" href="<?= base_url() ?>assets/select2/select2.min.css" />
 	<link rel="stylesheet" href="<?= base_url() ?>assets/select2/select2-bootstrap-5-theme.min.css" />
 
+	<style>
+		#btn-up {
+			position: fixed;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			bottom: 20px;
+			right: 20px;
+			cursor: pointer;
+			font-size: 15px;
+			background: rgba(192, 192, 192, 0.5);
+			color: #000;
+			border: none;
+			outline: none;
+			padding: 5px 10px;
+		}
+
+		#btn-up:hover {
+			opacity: 0.7;
+		}
+
+		#btn-up:active {
+			opacity: 0.9;
+		}
+	</style>
+
 </head>
 
 <body class="hold-transition sidebar-mini">

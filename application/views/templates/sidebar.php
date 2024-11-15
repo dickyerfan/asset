@@ -33,8 +33,17 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="<?= base_url('asset') ?>" class="nav-link">
+                    <a href="<?= base_url('dashboard_asset') ?>" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard Asset
+                            <!-- <span class="right badge badge-danger">New</span> -->
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('asset') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-plus"></i>
                         <p>
                             Penambahan Asset
                             <!-- <span class="right badge badge-danger">New</span> -->
@@ -43,7 +52,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="<?= base_url('asset_kurang') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="nav-icon fas fa-minus"></i>
                         <p>
                             Pengurangan Asset
                             <!-- <span class="right badge badge-danger">New</span> -->
@@ -52,7 +61,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="<?= base_url('asset/asset_semua') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-file"></i>
+                        <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
                             Semua Asset
                             <!-- <span class="right badge badge-danger">New</span> -->

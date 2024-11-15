@@ -250,15 +250,15 @@
         <tfoot>
             <tr class="text-center bg-light">
                 <th colspan="5" style="text-align: left;">Total Bangunan</th>
-                <th style="text-align: right;"><?= number_format($totals['total_nilai_buku'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_penambahan'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_pengurangan'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_rupiah'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_penyusutan'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_akm_thn_ini'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan['total_nilai_buku_final'], 0, ',', '.'); ?></th>
             </tr>
         </tfoot>
     </table>

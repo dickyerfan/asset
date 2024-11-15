@@ -78,7 +78,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Tanah';
         $penyusutan_data = $this->Model_penyusutan->get_tanah($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_tanah'] = $penyusutan_data['total_tanah'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -101,7 +101,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Tanah';
         $penyusutan_data = $this->Model_penyusutan->get_tanah($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_tanah'] = $penyusutan_data['total_tanah'];
 
         // Set paper size and orientation
         $this->pdf->setPaper('folio', 'landscape');
@@ -126,7 +126,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Bangunan';
         $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_bangunan'] = $penyusutan_data['total_bangunan'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -149,7 +149,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Bangunan';
         $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_bangunan'] = $penyusutan_data['total_bangunan'];
 
         // Set paper size and orientation
         $this->pdf->setPaper('folio', 'landscape');
@@ -430,7 +430,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Instalasi Sumber';
         $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_sumber'] = $penyusutan_data['total_sumber'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -453,7 +453,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Instalasi Sumber';
         $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_sumber'] = $penyusutan_data['total_sumber'];
 
         // Set paper size and orientation
         $this->pdf->setPaper('folio', 'landscape');
@@ -900,7 +900,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Instalasi Pompa';
         $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_pompa'] = $penyusutan_data['total_pompa'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -923,7 +923,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Instalasi Pompa';
         $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_pompa'] = $penyusutan_data['total_pompa'];
 
         // Set paper size and orientation
         $this->pdf->setPaper('folio', 'landscape');
@@ -1286,7 +1286,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Pengolahan Air';
         $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_olah_air'] = $penyusutan_data['total_olah_air'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -1309,7 +1309,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Pengolahan Air';
         $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_olah_air'] = $penyusutan_data['total_olah_air'];
 
         // Set paper size and orientation
         $this->pdf->setPaper('folio', 'landscape');
@@ -1672,7 +1672,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Transmisi & Distribusi';
         $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_trans_dist'] = $penyusutan_data['total_trans_dist'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -1695,7 +1695,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Transmisi & Distribusi';
         $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_trans_dist'] = $penyusutan_data['total_trans_dist'];
 
         // Set paper size and orientation
         $this->pdf->setPaper('folio', 'landscape');
@@ -2399,7 +2399,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Peralatan';
         $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_peralatan'] = $penyusutan_data['total_peralatan'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -2422,7 +2422,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Peralatan';
         $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_peralatan'] = $penyusutan_data['total_peralatan'];
 
         // Set paper size and orientation
         $this->pdf->setPaper('folio', 'landscape');
@@ -2447,7 +2447,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Kendaraan';
         $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_kendaraan'] = $penyusutan_data['total_kendaraan'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -2470,7 +2470,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Kendaraan';
         $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_kendaraan'] = $penyusutan_data['total_kendaraan'];
 
         // Set paper size and orientation
         $this->pdf->setPaper('folio', 'landscape');
@@ -2494,7 +2494,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Inventaris';
         $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_inventaris'] = $penyusutan_data['total_inventaris'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -2517,7 +2517,7 @@ class Penyusutan extends CI_Controller
         $data['title'] = 'Daftar Penyusutan Inventaris';
         $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris($tahun);
         $data['susut'] = $penyusutan_data['results'];
-        $data['totals'] = $penyusutan_data['totals'];
+        $data['total_inventaris'] = $penyusutan_data['total_inventaris'];
 
         // Set paper size and orientation
         $this->pdf->setPaper('folio', 'landscape');

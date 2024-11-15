@@ -228,15 +228,15 @@
                         <tfoot>
                             <tr class="text-center bg-light">
                                 <th colspan="5" class="text-left">Total Instalasi Pengolahan Air</th>
-                                <th class="text-right"><?= number_format($totals['total_nilai_buku'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($totals['total_penambahan'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($totals['total_pengurangan'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($totals['total_rupiah'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($totals['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($totals['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($totals['total_penyusutan'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($totals['total_akm_thn_ini'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($totals['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_olah_air['total_nilai_buku'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_olah_air['total_penambahan'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_olah_air['total_pengurangan'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_olah_air['total_rupiah'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_olah_air['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_olah_air['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_olah_air['total_penyusutan'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_olah_air['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_olah_air['total_nilai_buku_final'], 0, ',', '.'); ?></th>
                             </tr>
                         </tfoot>
                     </table>

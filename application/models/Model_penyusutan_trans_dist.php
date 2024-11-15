@@ -234,7 +234,7 @@ class Model_penyusutan_trans_dist extends CI_Model
         // Return data beserta total
         return [
             'results' => $results,
-            'totals' => [
+            'total_trans_dist' => [
                 'total_rupiah' => $total_rupiah,
                 'total_nilai_buku' => $total_nilai_buku,
                 'total_penambahan' => $total_penambahan,

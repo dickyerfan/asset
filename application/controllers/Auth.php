@@ -38,7 +38,7 @@ class Auth extends CI_Controller
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>');
-                        redirect('asset');
+                        redirect('dashboard_asset');
                     } else {
                         $data_session = [
                             'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
@@ -63,7 +63,7 @@ class Auth extends CI_Controller
                 $this->session->set_flashdata('info', '<div class="alert alert-danger" role="alert">Login Gagal, nama_pengguna Anda Salah.!</div>');
                 redirect('auth');
             }
-            redirect('asset');
+            redirect('dashboard_asset');
         }
     }
 

@@ -128,7 +128,7 @@ class Model_penyusutan_peralatan extends CI_Model
         // Return data beserta total
         return [
             'results' => $results,
-            'totals' => [
+            'total_peralatan' => [
                 'total_rupiah' => $total_rupiah,
                 'total_nilai_buku' => $total_nilai_buku,
                 'total_penambahan' => $total_penambahan,

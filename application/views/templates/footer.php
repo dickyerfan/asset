@@ -3,6 +3,7 @@
         <b>Version</b> 3.2.0
     </div> -->
     <!-- <strong>Copyright &copy; 2024 Pdam Bondowoso.</strong> All rights reserved. -->
+    <button id="btn-up"><i class="fas fa-chevron-circle-up logo"></i></button>
     <div class="text-muted">Built With <span class="text-danger">&hearts;</span> by DIE Art'S Production <?= date('Y'); ?></div>
 </footer>
 <aside class="control-sidebar control-sidebar-dark">
@@ -81,6 +82,14 @@
             $(this).remove();
         });
     }, 1000);
+</script>
+
+<script>
+    $("#btn-up").click(function() {
+        $("html,body").animate({
+            scrollTop: 0
+        }, 500);
+    });
 </script>
 
 <!-- <script>

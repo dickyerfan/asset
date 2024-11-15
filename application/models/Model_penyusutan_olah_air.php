@@ -127,7 +127,7 @@ class Model_penyusutan_olah_air extends CI_Model
         // Return data beserta total
         return [
             'results' => $results,
-            'totals' => [
+            'total_olah_air' => [
                 'total_rupiah' => $total_rupiah,
                 'total_nilai_buku' => $total_nilai_buku,
                 'total_penambahan' => $total_penambahan,
@@ -170,7 +170,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -308,7 +309,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -444,7 +446,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -581,7 +584,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -717,7 +721,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -854,7 +859,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -990,7 +996,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;
@@ -1127,7 +1134,8 @@ class Model_penyusutan_olah_air extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-
+        // Daftar ID parent untuk bangunan
+        $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
             $umur_tahun = $tahun - $row->tahun;

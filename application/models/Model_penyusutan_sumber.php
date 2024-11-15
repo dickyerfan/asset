@@ -130,7 +130,7 @@ class Model_penyusutan_sumber extends CI_Model
         // Return data beserta total
         return [
             'results' => $results,
-            'totals' => [
+            'total_sumber' => [
                 'total_rupiah' => $total_rupiah,
                 'total_nilai_buku' => $total_nilai_buku,
                 'total_penambahan' => $total_penambahan,
