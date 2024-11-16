@@ -24,12 +24,13 @@ class Auth extends CI_Controller
             $cek_nama_pengguna = $this->db->get_where('user', ['nama_pengguna' => $this->input->post('nama_pengguna', true)])->row();
             if ($cek_nama_pengguna) { //Jika nama_pengguna benar
                 if (password_verify($this->input->post('password', true), $cek_nama_pengguna->password)) {
-                    if ($cek_nama_pengguna->level == 'Admin') {
+                    if ($cek_nama_pengguna->bagian == 'Keuangan' || $cek_nama_pengguna->bagian == 'Administrator' || $cek_nama_pengguna->bagian == 'Auditor') {
                         $data_session = [
                             'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
                             'nama_lengkap' => $cek_nama_pengguna->nama_lengkap,
                             'password' => $cek_nama_pengguna->password,
-                            'level' => $cek_nama_pengguna->level
+                            'level' => $cek_nama_pengguna->level,
+                            'bagian' => $cek_nama_pengguna->bagian
                         ];
                         $this->session->set_userdata($data_session);
                         $this->session->set_flashdata('info',         '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -44,7 +45,8 @@ class Auth extends CI_Controller
                             'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
                             'nama_lengkap' => $cek_nama_pengguna->nama_lengkap,
                             'password' => $cek_nama_pengguna->password,
-                            'level' => $cek_nama_pengguna->level
+                            'level' => $cek_nama_pengguna->level,
+                            'bagian' => $cek_nama_pengguna->bagian
                         ];
                         $this->session->set_userdata($data_session);
                         $this->session->set_flashdata('info', '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -53,7 +55,7 @@ class Auth extends CI_Controller
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>');
-                        redirect('asset');
+                        redirect('dashboard_umum');
                     }
                 } else { //jika password salah
                     $this->session->set_flashdata('info', '<div class="alert alert-danger" role="alert">Login Gagal, Password Anda Salah.!</div>');
@@ -96,7 +98,7 @@ class Auth extends CI_Controller
 
         $this->session->unset_userdata('nama_pengguna');
         $this->session->unset_userdata('nama_lengkap');
-        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('bagian');
         $this->session->unset_userdata('password');
         $this->session->unset_userdata('level');
 

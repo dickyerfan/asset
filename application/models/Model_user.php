@@ -15,12 +15,15 @@ class model_user extends CI_Model
 
     public function tambahData()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $data = [
             'nama_pengguna' => $this->input->post('nama_pengguna', true),
             'nama_lengkap' => $this->input->post('nama_lengkap', true),
-            'email' => $this->input->post('email', true),
+            'bagian' => $this->input->post('bagian', true),
             'password' => password_hash($this->input->post('password', true), PASSWORD_DEFAULT),
             'level' => $this->input->post('level', true),
+            'tgl_update' => date('Y-m-d H:i:s'),
+            'petugas_update' => $this->session->userdata('nama_lengkap')
         ];
         $this->db->insert('user', $data);
     }

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard_asset extends CI_Controller
+class Dashboard_umum extends CI_Controller
 {
 
     public function __construct()
@@ -27,18 +27,8 @@ class Dashboard_asset extends CI_Controller
             redirect('auth');
         }
 
-        // $level_pengguna = $this->session->userdata('level');
-        // if ($level_pengguna != 'Admin') {
-        //     $this->session->set_flashdata(
-        //         'info',
-        //         '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-        //             <strong>Maaf,</strong> Anda tidak memiliki hak akses untuk halaman ini...
-        //           </div>'
-        //     );
-        //     redirect('auth');
-        // }
         $bagian = $this->session->userdata('bagian');
-        if ($bagian != 'Keuangan' && $bagian != 'Administrator' && $bagian != 'Auditor') {
+        if ($bagian != 'Umum') {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -61,7 +51,7 @@ class Dashboard_asset extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'Rekap Penyusutan Asset';
+        $data['title'] = 'Daftar Aktuaria';
         $tanah = $this->Model_penyusutan->get_tanah($tahun);
         $data['total_tanah'] = $tanah['total_tanah'];
         $bangunan = $this->Model_penyusutan_bangunan->get_bangunan($tahun);
@@ -86,8 +76,8 @@ class Dashboard_asset extends CI_Controller
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('dashboard/view_dashboard_asset', $data);
+        $this->load->view('templates/sidebar_umum');
+        $this->load->view('dashboard/view_dashboard_umum', $data);
         $this->load->view('templates/footer');
     }
 }

@@ -220,6 +220,23 @@
                     </ul>
                 </li>
                 <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tools"></i>
+                        <p>
+                            Setting
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('setting/daftar_user') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Daftar User</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
                     <a href="<?= base_url('backup') ?>" class="nav-link">
                         <i class="nav-icon fas fa-database"></i>
                         <p>

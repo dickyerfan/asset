@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : DIE ArtS
+ Source Server         : database_lokal
  Source Server Type    : MySQL
- Source Server Version : 100418 (10.4.18-MariaDB)
+ Source Server Version : 100417 (10.4.17-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : asset
 
  Target Server Type    : MySQL
- Target Server Version : 100418 (10.4.18-MariaDB)
+ Target Server Version : 100417 (10.4.17-MariaDB)
  File Encoding         : 65001
 
- Date: 15/11/2024 10:39:05
+ Date: 16/11/2024 21:27:24
 */
 
 SET NAMES utf8mb4;
@@ -2110,17 +2110,27 @@ CREATE TABLE `user`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `nama_pengguna` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `nama_lengkap` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `bagian` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `password` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `level` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Pengguna',
+  `status` int NOT NULL DEFAULT 1,
+  `tgl_update` datetime NULL DEFAULT NULL,
+  `petugas_update` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'admin', 'Administrator', 'admin@gmail.com', '$2y$10$ADv3d1BXOHDyYXGYOHouhu8B.rE4GiayKwPcrFMrMFwJXCzjtBckq', 'Admin');
-INSERT INTO `user` VALUES (2, 'dicky', 'Dicky Erfan Septiono', 'dicky@gmail.com', '$2y$10$MFzEk5qSvSQo1l8Ip4Psaelp4bi20s9Fwus8n3I0J5tien9xdao8G', 'Admin');
-INSERT INTO `user` VALUES (18, 'cunta', 'Somaya Dewantari', 'somaya@gmail.com', '$2y$10$LHvVYekSqy8EJ402tHNFo.jShQERw5H6.tAHjrGRMriAvUNy84HDO', 'Pengguna');
+INSERT INTO `user` VALUES (1, 'admin', 'Administrator', 'Administrator', '$2y$10$ADv3d1BXOHDyYXGYOHouhu8B.rE4GiayKwPcrFMrMFwJXCzjtBckq', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (2, 'dicky', 'Dicky Erfan Septiono', 'Administrator', '$2y$10$MFzEk5qSvSQo1l8Ip4Psaelp4bi20s9Fwus8n3I0J5tien9xdao8G', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (18, 'cunta', 'Somaya Dewantari', 'Keuangan', '$2y$10$LHvVYekSqy8EJ402tHNFo.jShQERw5H6.tAHjrGRMriAvUNy84HDO', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (19, 'linda', 'Linda Anggraita', 'Umum', '$2y$10$jneBYYgZZ5cWkaJ5/ZUJleMtncaSUOeKrscabbo6ZV1.LoA6hFmaG', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (20, 'auditor', 'Auditor Independen', 'Auditor', '$2y$10$jneBYYgZZ5cWkaJ5/ZUJleMtncaSUOeKrscabbo6ZV1.LoA6hFmaG', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (21, 'spi', 'Satuan Pengawas Internal', 'S P I', '$2y$10$jneBYYgZZ5cWkaJ5/ZUJleMtncaSUOeKrscabbo6ZV1.LoA6hFmaG', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (22, 'Langganan', 'Bag. Hubungan Langganan', 'Hubungan Langganan', '$2y$10$jneBYYgZZ5cWkaJ5/ZUJleMtncaSUOeKrscabbo6ZV1.LoA6hFmaG', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (23, 'deni', 'Muhammad Deni S', 'Keuangan', '$2y$10$jneBYYgZZ5cWkaJ5/ZUJleMtncaSUOeKrscabbo6ZV1.LoA6hFmaG', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (24, 'lilik', 'Lilik Yuli', 'Keuangan', '$2y$10$uc..LmDquwTsMfhL0xXC3eKX7vY7NcQN29/GSVXzGFZlQdKF6u/Rm', 'Admin', 1, '2024-11-15 10:07:17', 'Administrator');
+INSERT INTO `user` VALUES (25, 'dian', 'Ahmad Wahyu Dian', 'Keuangan', '$2y$10$a/42efidYalCikapjZZ3GewfZqPJNp/Q5GTPrAu4fxfSsYcDY9Nzm', 'Admin', 1, '2024-11-15 16:16:16', 'Administrator');
 
 SET FOREIGN_KEY_CHECKS = 1;
