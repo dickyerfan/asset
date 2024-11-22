@@ -32,13 +32,15 @@
                             <tr class="text-center">
                                 <th>No</th>
                                 <th>No Per</th>
-                                <th>Nama Per</th>
+                                <!-- <th>Nama Per</th> -->
                                 <th>Nama Asset</th>
                                 <th>Lokasi</th>
                                 <th>Tanggal</th>
                                 <th>No Bkt Gdg</th>
                                 <th>No Bkt Vch</th>
                                 <th>Rupiah</th>
+                                <th>Tgl Update</th>
+                                <th>Ptgs Update</th>
                                 <th>Ket</th>
                             </tr>
                         </thead>
@@ -52,7 +54,7 @@
                                 <tr>
                                     <td class="text-center"><?= $no++; ?></td>
                                     <td><?= $row->kode; ?></td>
-                                    <td>
+                                    <!-- <td>
                                         <?php
                                         $nama_perkiraan = $row->name;
                                         if (strlen($nama_perkiraan) > 35) {
@@ -60,7 +62,7 @@
                                         }
                                         ?>
                                         <?= $nama_perkiraan; ?>
-                                    </td>
+                                    </td> -->
                                     <td>
                                         <?php
                                         // Memotong nama_asset jika lebih dari 60 karakter
@@ -90,9 +92,48 @@
                                     <td><?= $row->no_bukti_gd; ?></td>
                                     <td><?= $row->no_bukti_vch; ?></td>
                                     <td class="text-right"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= $row->tanggal_input; ?></td>
+                                    <td class="text-right"><?= $row->input_asset; ?></td>
                                     <td class="text-center">
-                                        <a href="<?= base_url(); ?>asset_kurang/upload/<?= $row->id_asset; ?>"><span class="badge badge-primary"><i class="fas fa-fw fa-edit"></i></span></a>
-                                        <!-- <a href="<?= base_url(); ?>asset/hapus/<?= $row->id_asset; ?>" class="badge badge-danger"><i class="fas fa-fw fa-trash"></i></a> -->
+                                        <!-- <a href="javascript:void(0);" onclick="confirmReset(<?= $row->id_asset; ?>, '<?= addslashes($row->nama_asset); ?>', '<?= date('d-m-Y', strtotime($row->tanggal)); ?>')">
+                                            <span class="badge badge-primary"><i class="fas fa-fw fa-edit"></i></span>
+                                        </a> -->
+                                        <?php
+                                        // Cek apakah level pengguna Admin
+                                        if ($this->session->userdata('level') != 'Admin') :
+                                        ?>
+                                            <!-- Tombol untuk Non-Admin -->
+                                            <a href="javascript:void(0);" onclick="showAlert('Anda tidak punya akses untuk update data.')">
+                                                <span class="badge badge-secondary"><i class="fas fa-fw fa-ban"></i></span>
+                                            </a>
+                                        <?php else : ?>
+                                            <?php if ($row->status_update == 1) : ?>
+                                                <!-- Tombol jika status_update = 1 -->
+                                                <a href="javascript:void(0);" onclick="showAlert('Asset sudah tidak bisa diupdate lagi.')">
+                                                    <span class="badge badge-secondary"><i class="fas fa-fw fa-ban"></i></span>
+                                                </a>
+                                            <?php elseif ($row->umur == 0) : ?>
+                                                <!-- Tombol jika status_update = 1 -->
+                                                <a href="javascript:void(0);" onclick="showAlert('Asset sudah tidak bisa diupdate lagi.')">
+                                                    <span class="badge badge-secondary"><i class="fas fa-fw fa-ban"></i></span>
+                                                </a>
+                                            <?php else : ?>
+                                                <!-- Tombol jika status_update = 0 -->
+                                                <a href="javascript:void(0);" onclick="confirmReset(<?= $row->id_asset; ?>, '<?= addslashes($row->nama_asset); ?>', '<?= date('d-m-Y', strtotime($row->tanggal)); ?>')">
+                                                    <span class="badge badge-primary"><i class="fas fa-fw fa-edit"></i></span>
+                                                </a>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php if ($this->session->flashdata('error')) : ?>
+                                            <script>
+                                                Swal.fire({
+                                                    title: 'Error',
+                                                    text: '<?= $this->session->flashdata('error'); ?>',
+                                                    icon: 'error',
+                                                    confirmButtonText: 'OK'
+                                                });
+                                            </script>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -100,7 +141,7 @@
                         <tfoot>
                             <tr class="text-center bg-light">
                                 <th></th>
-                                <th></th>
+                                <!-- <th></th> -->
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -108,6 +149,8 @@
                                 <th></th>
                                 <th>Jumlah</th>
                                 <th class="text-right"><?= number_format($total_rupiah, 0, ',', '.'); ?></th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </tfoot>

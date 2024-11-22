@@ -226,15 +226,24 @@ class Model_asset extends CI_Model
         return $this->db->get()->result();
     }
 
-    // public function updateData()
-    // {
+    public function update_umur_dan_persen_susut($id_asset)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $data = [
+            'umur' => 0,
+            'persen_susut' => 0,
+            'tanggal_input' => date('Y-m-d H:i:s'),
+            'input_asset' => $this->session->userdata('nama_lengkap'),
+            'status_update' => 1
+        ];
+        $this->db->where('id_asset', $id_asset);
+        $this->db->update('daftar_asset', $data);
+    }
 
-    //     $data = [
-    //         "nama_jabatan" => $this->input->post('nama_jabatan', true),
-    //     ];
-    //     $this->db->where('id_jabatan', $this->input->post('id'));
-    //     $this->db->update('jabatan', $data);
-    // }
+    public function get_asset_by_id($id_asset)
+    {
+        return $this->db->get_where('daftar_asset', ['id_asset' => $id_asset])->row();
+    }
 
     // public function hapusData($id)
     // {

@@ -119,6 +119,37 @@
     });
 </script>
 
+<script>
+    // Fungsi untuk menampilkan SweetAlert dengan pesan khusus
+    function showAlert(message) {
+        Swal.fire({
+            title: 'Peringatan',
+            text: message,
+            icon: 'error',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        });
+    }
+
+    function confirmReset(id_asset, nama_asset, tanggal) {
+        Swal.fire({
+            title: 'Konfirmasi Pengembalian Nilai Asset',
+            html: `Apakah Anda yakin ingin mengembalikan nilai asset <b>"${nama_asset}"</b> dengan tanggal perolehan <b>${tanggal}</b>..?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, ubah nilai!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect ke URL reset asset jika dikonfirmasi
+                window.location.href = '<?= base_url(); ?>asset/edit_asset_semua/' + id_asset;
+            }
+        });
+    }
+</script>
+
 
 
 

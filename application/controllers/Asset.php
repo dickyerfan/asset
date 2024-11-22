@@ -19,8 +19,19 @@ class Asset extends CI_Controller
 			redirect('auth');
 		}
 
-		$level_pengguna = $this->session->userdata('level');
-		if ($level_pengguna != 'Admin') {
+		// $level_pengguna = $this->session->userdata('level');
+		// if ($level_pengguna != 'Admin') {
+		// 	$this->session->set_flashdata(
+		// 		'info',
+		// 		'<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		//             <strong>Maaf,</strong> Anda tidak memiliki hak akses untuk halaman ini...
+		//           </div>'
+		// 	);
+		// 	redirect('auth');
+		// }
+
+		$bagian = $this->session->userdata('bagian');
+		if ($bagian != 'Keuangan' && $bagian != 'Administrator' && $bagian != 'Auditor') {
 			$this->session->set_flashdata(
 				'info',
 				'<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -149,6 +160,35 @@ class Asset extends CI_Controller
 
 		$this->pdf->filename = "semua_asset.pdf";
 		$this->pdf->generate('cetakan_asset/semua_asset_pdf', $data);
+	}
+
+	public function edit_asset_semua($id_asset)
+	{
+		// Validasi level pengguna
+		if ($this->session->userdata('level') != 'Admin') {
+			$this->session->set_flashdata('error', 'Anda tidak punya akses untuk update data.');
+			redirect('asset/asset_semua');
+		}
+
+		// Ambil data asset berdasarkan ID
+		$asset = $this->Model_asset->get_asset_by_id($id_asset);
+
+		// Validasi status_update
+		if ($asset->status_update == 1) {
+			$this->session->set_flashdata('error', 'Asset sudah tidak bisa diupdate lagi.');
+			redirect('asset/asset_semua');
+		}
+
+		$this->Model_asset->update_umur_dan_persen_susut($id_asset);
+		$this->session->set_flashdata(
+			'info',
+			'<div class="alert alert-primary alert-dismissible fade show" role="alert">
+					<strong>Sukses,</strong> Nilai Asset berhasil di kembalikan ke awal 
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+					</button>
+				  </div>'
+		);
+		redirect('asset/asset_semua');
 	}
 
 	public function asset_semua_kurang()

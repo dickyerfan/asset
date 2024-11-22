@@ -27,8 +27,19 @@ class Penyusutan extends CI_Controller
             redirect('auth');
         }
 
-        $level_pengguna = $this->session->userdata('level');
-        if ($level_pengguna != 'Admin') {
+        // $level_pengguna = $this->session->userdata('level');
+        // if ($level_pengguna != 'Admin') {
+        //     $this->session->set_flashdata(
+        //         'info',
+        //         '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        //             <strong>Maaf,</strong> Anda tidak memiliki hak akses untuk halaman ini...
+        //           </div>'
+        //     );
+        //     redirect('auth');
+        // }
+
+        $bagian = $this->session->userdata('bagian');
+        if ($bagian != 'Keuangan' && $bagian != 'Administrator' && $bagian != 'Auditor') {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
