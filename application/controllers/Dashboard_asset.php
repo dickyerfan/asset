@@ -81,8 +81,9 @@ class Dashboard_asset extends CI_Controller
         $inventaris = $this->Model_penyusutan_inventaris->get_inventaris($tahun);
         $data['total_inventaris'] = $inventaris['total_inventaris'];
 
-        $total_semua = $this->Model_penyusutan->get_total_semua($tahun);
-        $data['total_semua'] = $total_semua['total_semua'];
+        // $total_semua = $this->Model_penyusutan->get_total_semua($tahun);
+        $totals = $this->Model_penyusutan->get_all($tahun);
+        $data['totals'] = $totals['totals'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');

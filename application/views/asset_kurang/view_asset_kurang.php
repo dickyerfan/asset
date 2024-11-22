@@ -51,7 +51,7 @@
                         $bulan_lap = strtr($bulan_lap, $bulan);
 
                         ?>
-                        <h5><?= strtoupper($title) . ' ' . $tahun_lap; ?></h5>
+                        <h5><?= strtoupper($title) . ' TAHUN ' . $tahun_lap; ?></h5>
                         <h5>Bulan : <?= $bulan_lap; ?></h5>
                     </div>
                 </div>

@@ -47,7 +47,7 @@ class Asset extends CI_Controller
 		$data['bulan_lap'] = $bulan;
 		$data['tahun_lap'] = $tahun;
 
-		$data['title'] = 'Penambahan Asset Tahun';
+		$data['title'] = 'Penambahan Asset';
 		$data['asset'] = $this->Model_asset->get_all($bulan, $tahun);
 
 		$this->load->view('templates/header', $data);
@@ -97,6 +97,34 @@ class Asset extends CI_Controller
 			// redirect('asset');
 		}
 	}
+
+	public function asset_kurang()
+	{
+		$tanggal = $this->input->get('tanggal');
+
+		$bulan = substr($tanggal, 5, 2);
+		$tahun = substr($tanggal, 0, 4);
+
+		if (empty($tanggal)) {
+			$tanggal = date('Y-m-d');
+			$bulan = date('m');
+			$tahun = date('Y');
+		} else {
+			$this->session->set_userdata('tanggal', $tanggal);
+		}
+		$data['bulan_lap'] = $bulan;
+		$data['tahun_lap'] = $tahun;
+
+		$data['title'] = 'Pengurangan Asset';
+		$data['asset'] = $this->Model_asset->get_kurang($bulan, $tahun);
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/navbar');
+		$this->load->view('templates/sidebar');
+		$this->load->view('asset_kurang/view_asset_kurang', $data);
+		$this->load->view('templates/footer');
+	}
+
 	public function asset_semua()
 	{
 

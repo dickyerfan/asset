@@ -40,7 +40,7 @@ class Auth extends CI_Controller
                         </button>
                       </div>');
                         redirect('dashboard_asset');
-                    } else {
+                    } elseif ($cek_nama_pengguna->bagian == 'Umum') {
                         $data_session = [
                             'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
                             'nama_lengkap' => $cek_nama_pengguna->nama_lengkap,
@@ -56,6 +56,22 @@ class Auth extends CI_Controller
                         </button>
                       </div>');
                         redirect('dashboard_umum');
+                    } else {
+                        $data_session = [
+                            'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
+                            'nama_lengkap' => $cek_nama_pengguna->nama_lengkap,
+                            'password' => $cek_nama_pengguna->password,
+                            'level' => $cek_nama_pengguna->level,
+                            'bagian' => $cek_nama_pengguna->bagian
+                        ];
+                        $this->session->set_userdata($data_session);
+                        $this->session->set_flashdata('info', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Selamat,</strong> Anda Berhasil Login
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>');
+                        redirect('dashboard_publik');
                     }
                 } else { //jika password salah
                     $this->session->set_flashdata('info', '<div class="alert alert-danger" role="alert">Login Gagal, Password Anda Salah.!</div>');

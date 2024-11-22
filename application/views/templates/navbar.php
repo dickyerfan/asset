@@ -13,7 +13,14 @@
 
         <li class="nav-item">
             <a class="nav-link">
-                <h5 class="font-weight-bold">Asset & Penyusutan</h5>
+                <?php
+                if ($this->session->userdata('bagian') == 'Administrator' || $this->session->userdata('bagian') == 'Keuangan' || $this->session->userdata('bagian') == 'Auditor') {
+                    echo '<h5 class="font-weight-bold">Asset & Penyusutan</h5>';
+                } elseif ($this->session->userdata('bagian') == 'Umum') {
+                    echo '<h5 class="font-weight-bold">Aktuaria</h5>';
+                }
+                ?>
+                <!-- <h5 class="font-weight-bold">Asset & Penyusutan</h5> -->
             </a>
         </li>
     </ul>

@@ -42,28 +42,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url('asset') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-plus"></i>
-                        <p>
-                            Penambahan Asset
-                            <!-- <span class="right badge badge-danger">New</span> -->
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?= base_url('asset_kurang') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-minus"></i>
-                        <p>
-                            Pengurangan Asset
-                            <!-- <span class="right badge badge-danger">New</span> -->
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="<?= base_url('asset/asset_semua') ?>" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
-                            Semua Asset
+                            Daftar Semua Asset
                             <!-- <span class="right badge badge-danger">New</span> -->
                         </p>
                     </a>

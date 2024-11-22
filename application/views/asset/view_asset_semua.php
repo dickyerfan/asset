@@ -5,16 +5,16 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <!-- <form id="form_tanggal" action="<?= base_url('asset_kurang'); ?>" method="get">
-                        <div style="display: flex; align-items: center;">
-                            <input type="submit" value="Pilih Bulan" class="neumorphic-button">
-                            <input type="date" id="tanggal" name="tanggal" class="form-control" style="margin-left: 10px;">
-                        </div>
-                    </form> -->
+                    <div class="navbar-nav">
+                        <a href="<?= base_url('asset') ?>"><button class="float-end neumorphic-button"><i class="nav-icon fas fa-plus"></i> Penambahan Asset</button></a>
+                    </div>
                     <div class="navbar-nav ms-2">
-                        <a href="<?= base_url('asset/asset_semua_kurang') ?>"><button class="float-end neumorphic-button"> Daftar Pengurangan Asset</button></a>
+                        <a href="<?= base_url('asset/asset_kurang') ?>"><button class="float-end neumorphic-button"><i class="nav-icon fas fa-minus"></i> Pengurangan Asset</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
+                        <a href="<?= base_url('asset/asset_semua_kurang') ?>"><button class="float-end neumorphic-button"> Daftar Semua Pengurangan Asset</button></a>
+                    </div>
+                    <div class="navbar-nav ms-2">
                         <a href="<?= base_url('asset/cetak_asset_semua') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
                     </div>
                 </nav>

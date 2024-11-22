@@ -159,15 +159,15 @@
                             </tr>
                             <tr class="text-center bg-light">
                                 <th class="text-left">Total</th>
-                                <th class="text-right"><?= number_format($total_semua['total_nilai_buku'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($total_semua['total_penambahan'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($total_semua['total_pengurangan'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($total_semua['total_rupiah'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($total_semua['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($total_semua['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($total_semua['total_penyusutan'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($total_semua['total_akm_thn_ini'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?= number_format($total_semua['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($totals['total_nilai_buku'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($totals['total_penambahan'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($totals['total_pengurangan'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($totals['total_rupiah'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($totals['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($totals['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($totals['total_penyusutan'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($totals['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($totals['total_nilai_buku_final'], 0, ',', '.'); ?></th>
                             </tr>
 
                         </tbody>

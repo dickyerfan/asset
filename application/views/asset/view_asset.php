@@ -11,6 +11,9 @@
 							<input type="date" id="tanggal" name="tanggal" class="form-control" style="margin-left: 10px;">
 						</div>
 					</form>
+					<div>
+
+					</div>
 					<div class="navbar-nav ms-auto">
 						<!-- <?php if ($this->session->userdata('level') != 'Pengguna') : ?>
 							<a href="<?= base_url('asset/upload') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Asset</button></a>
@@ -48,7 +51,7 @@
 						$bulan_lap = strtr($bulan_lap, $bulan);
 
 						?>
-						<h5><?= strtoupper($title) . ' ' . $tahun_lap; ?></h5>
+						<h5><?= strtoupper($title) . ' TAHUN ' . $tahun_lap; ?></h5>
 						<h5>Bulan : <?= $bulan_lap; ?></h5>
 					</div>
 				</div>
