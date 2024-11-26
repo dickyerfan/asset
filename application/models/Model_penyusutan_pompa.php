@@ -861,6 +861,9 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->nilai_buku_lalu = $nilai_buku_final;
                 $row->akm_thn_ini = 0;
                 $row->nilai_buku_final = $nilai_buku_awal;
+                if ($row->status == 2) {
+                    $row->nilai_buku_final = -1;
+                }
             } else {
                 $row->pengurangan = 0;
                 $row->penambahan = 0;
@@ -999,6 +1002,9 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->nilai_buku_lalu = $nilai_buku_final;
                 $row->akm_thn_ini = 0;
                 $row->nilai_buku_final = $nilai_buku_awal;
+                if ($row->status == 2) {
+                    $row->nilai_buku_final = -1;
+                }
             } else {
                 $row->pengurangan = 0;
                 $row->penambahan = 0;
