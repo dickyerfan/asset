@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : DIE ArtS
+ Source Server         : database_lokal
  Source Server Type    : MySQL
- Source Server Version : 100418 (10.4.18-MariaDB)
+ Source Server Version : 100417 (10.4.17-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : asset
 
  Target Server Type    : MySQL
- Target Server Version : 100418 (10.4.18-MariaDB)
+ Target Server Version : 100417 (10.4.17-MariaDB)
  File Encoding         : 65001
 
- Date: 26/11/2024 15:28:18
+ Date: 27/11/2024 22:38:39
 */
 
 SET NAMES utf8mb4;
@@ -520,11 +520,11 @@ INSERT INTO `daftar_asset` VALUES (428, 2, 2016, 1912, 222, 0, 34, 0, 'Pengganti
 INSERT INTO `daftar_asset` VALUES (429, 2, 2016, 1912, 222, 0, 34, 0, 'Pengangkatan pompa vansan SB Pancoran', '2022-03-02', '', '', -26460740, 2, 0, 0.00, 'Administrator', '2024-11-22 09:35:09', 0);
 INSERT INTO `daftar_asset` VALUES (430, 2, 2016, 1912, 222, 0, 34, 0, 'Penggantian pompa SB Pancoran', '2022-09-30', '', '', 35874449, 1, 16, 12.50, 'Administrator', '2024-11-22 09:36:39', 0);
 INSERT INTO `daftar_asset` VALUES (431, 2, 2016, 1912, 222, 0, 34, 0, 'Pengangkatan pompa vansan SB Pancoran', '2022-10-30', '', '', -52921480, 2, 0, 0.00, 'Administrator', '2024-11-22 09:37:34', 0);
-INSERT INTO `daftar_asset` VALUES (432, 2, 2016, 1912, 222, 0, 34, 0, 'Penggantian pompa SB Pancoran', '2022-10-30', '', '', 62895860, 1, 0, 0.00, 'Administrator', '2024-11-22 14:38:08', 1);
+INSERT INTO `daftar_asset` VALUES (432, 2, 2016, 1912, 222, 0, 34, 0, 'Penggantian pompa SB Pancoran', '2022-10-30', '', '', 62895860, 1, 0, 0.00, 'Administrator', '2024-11-27 22:35:12', 1);
 INSERT INTO `daftar_asset` VALUES (433, 2, 2016, 1912, 222, 0, 34, 0, 'Pengangkatan Motor vansan 3 C (32108011068) dan Pompa Vansan  14-18A (190301872)   SB Pancoran', '2023-01-09', '', '', -62895860, 2, 0, 0.00, 'Administrator', '2024-11-22 09:46:02', 0);
 INSERT INTO `daftar_asset` VALUES (434, 2, 2016, 1912, 222, 0, 34, 0, 'Penggantian pompa SB Pancoran (Motor Grunfos 3 KW S/N 00223802 Rp.56,998,778) dan (Pompa Grunfos 9-16 S/N:A988268882 Rp.43,678,777)', '2023-01-09', '', '', 103364455, 1, 16, 12.50, 'Administrator', '2024-11-22 09:49:46', 0);
 INSERT INTO `daftar_asset` VALUES (435, 2, 2016, 1912, 222, 0, 34, 0, 'Pengangkatan Motor Franklin Elektric 22 KW (s/n 2367169020) dan Pompa Grundfos APP Kenzi SP 77-6 (P2200001420346)   SB 2', '2023-08-07', '', '', -79843100, 2, 0, 0.00, 'Administrator', '2024-11-22 09:52:14', 0);
-INSERT INTO `daftar_asset` VALUES (436, 2, 2016, 1912, 222, 0, 34, 0, 'Penggantian Motor Grunfos 11 KW (S/N  00296839 dan pompa vansan 46-7 (SN 200513336) SB 2', '2023-08-07', '', '', 176400840, 1, 0, 0.00, 'Administrator', '2024-11-26 15:03:51', 1);
+INSERT INTO `daftar_asset` VALUES (436, 2, 2016, 1912, 222, 0, 34, 0, 'Penggantian Motor Grunfos 11 KW (S/N  00296839 dan pompa vansan 46-7 (SN 200513336) SB 2', '2023-08-07', '', '', 176400840, 1, 0, 0.00, 'Administrator', '2024-11-27 22:09:27', 1);
 INSERT INTO `daftar_asset` VALUES (437, 2, 2016, 1912, 222, 0, 34, 0, 'Pemasangan pompa SB Pancoran 2', '2023-12-21', '', '', 164984158, 1, 16, 12.50, 'Administrator', '2024-11-22 09:55:33', 0);
 INSERT INTO `daftar_asset` VALUES (438, 2, 2016, 1912, 222, 0, 34, 0, 'Pemasangan Motor Pompa, Wellhead, Kabel Pompa & Junction Box SB City Plaza', '2024-03-01', '', '', 202946901, 1, 16, 12.50, 'Administrator', '2024-11-22 09:58:52', 0);
 INSERT INTO `daftar_asset` VALUES (439, 2, 2016, 1912, 222, 0, 34, 0, 'Pengangkatan Motor Grunfos 11 KW (S/N  00296839 dan pompa vansan 46-7 (SN 200513336) SB 2', '2024-06-03', '', '', -176400840, 2, 0, 0.00, 'Administrator', '2024-11-22 10:09:08', 0);
@@ -2302,6 +2302,28 @@ INSERT INTO `penyusutan` VALUES (449, 448, 2023, 102851080, 0, 0, 0, 102851080, 
 INSERT INTO `penyusutan` VALUES (450, 449, 2023, 0, 69130700, 0, 0, -69130700, '2024-11-26 15:14:01', 'Administrator');
 INSERT INTO `penyusutan` VALUES (451, 450, 2006, 3252999, 0, 0, 0, 3252999, '2024-11-26 15:21:53', 'Administrator');
 INSERT INTO `penyusutan` VALUES (452, 451, 2013, 40735783, 0, 0, 0, 40735783, '2024-11-26 15:22:39', 'Administrator');
+
+-- ----------------------------
+-- Table structure for persediaan
+-- ----------------------------
+DROP TABLE IF EXISTS `persediaan`;
+CREATE TABLE `persediaan`  (
+  `id_persediaan` int NOT NULL AUTO_INCREMENT,
+  `id_bagian` int NULL DEFAULT NULL,
+  `nama_asset` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `tanggal` date NULL DEFAULT NULL,
+  `nilai_perolehan` bigint NULL DEFAULT NULL,
+  `nilai_persediaan` bigint NULL DEFAULT NULL,
+  `tanggal_persediaan` date NULL DEFAULT NULL,
+  `input_persediaan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `update_persediaan` datetime NULL DEFAULT NULL,
+  `status_persediaan` int NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id_persediaan`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of persediaan
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for user

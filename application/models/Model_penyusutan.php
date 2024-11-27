@@ -377,4 +377,35 @@ class Model_penyusutan extends CI_Model
         $query = $this->db->get('no_per'); // Ganti dengan nama tabel yang sesuai
         return $query->row(); // Mengembalikan satu baris hasil
     }
+
+    // public function update_persediaan()
+    // {
+    //     date_default_timezone_set('Asia/Jakarta');
+    //     $data = [
+    //         'umur' => $this->input->post('umur', true),
+    //         'persen_susut' => $this->input->post('persen_susut', true),
+    //         'tanggal_input' => date('Y-m-d H:i:s'),
+    //         'input_asset' => $this->session->userdata('nama_lengkap'),
+    //         'status_update' => 1
+    //     ];
+    //     $this->db->where('id_asset', $this->input->post('id_asset'));
+    //     $this->db->update('daftar_asset', $data);
+    // }
+
+    public function update_persediaan($table, $data, $id_asset)
+    {
+        $this->db->where('id_asset', $id_asset);
+        $this->db->update($table, $data);
+    }
+
+    public function get_id_asset($id_asset)
+    {
+        $this->db->where('id_asset', $id_asset);
+        return $this->db->get('daftar_asset')->row();
+    }
+
+    public function insert_persediaan($table, $data)
+    {
+        $this->db->insert($table, $data);
+    }
 }

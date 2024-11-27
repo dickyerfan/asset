@@ -37,7 +37,7 @@
                         <a href="<?= base_url('penyusutan/pompa_inst_lain') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Tahun ini</button></a>
                     </div>
                     <div class="navbar-nav ms-2">
-                        <a href="<?= base_url('penyusutan/pompa_inst_lain') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Total Pompa Bangunan</button></a>
+                        <a href="<?= base_url('penyusutan/pompa_inst_lain') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Total Inst. Pompa Lainnya</button></a>
                     </div>
                     <div class="navbar-nav ms-2">
                         <a href="<?= base_url('penyusutan/pompa') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Total Inst. Pompa</button></a>

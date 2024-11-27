@@ -7,6 +7,7 @@ class Penyusutan extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        date_default_timezone_set('Asia/Jakarta');
         $this->load->model('Model_penyusutan');
         $this->load->model('Model_penyusutan_bangunan');
         $this->load->model('Model_penyusutan_sumber');
@@ -2535,4 +2536,135 @@ class Penyusutan extends CI_Controller
         $this->pdf->filename = "inventaris-{$tahun}.pdf";
         $this->pdf->generate('cetakan/inventaris_pdf', $data);
     }
+
+    public function edit_penyusutan($id_asset)
+    {
+
+        $this->form_validation->set_rules('umur', 'Umur Asset', 'required|trim');
+        $this->form_validation->set_rules('persen_susut', 'Persentase', 'required|trim');
+        $this->form_validation->set_message('required', '%s masih kosong');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Form Pengembalian Nilai Asset';
+            $data['edit_persediaan'] = $this->db->get_where('daftar_asset', ['id_asset' => $id_asset])->row();
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('penyusutan/view_edit_persediaan', $data);
+            $this->load->view('templates/footer');
+        } else {
+            date_default_timezone_set('Asia/Jakarta');
+            $tahun_ini = date('Y');
+            $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
+            $data_persediaan = $this->Model_penyusutan->get_id_asset($id_asset);
+            $tanggal = $data_persediaan->tanggal;
+            $tahun_asset = date('Y', strtotime($tanggal));
+            $umur_tahun = $tahun_ini - $tahun_asset;
+            $nilai_buku_awal = $data_persediaan->rupiah;
+
+            for ($i = 1; $i <= $umur_tahun; $i++) {
+                if ($i == 1) {
+                    // Tahun pertama
+                    $akm_thn_lalu = 0;
+                    $nilai_buku_lalu = $nilai_buku_awal;
+                } else {
+                    // Update nilai buku dan akumulasi penyusutan dari tahun sebelumnya
+                    $akm_thn_lalu = $akm_thn_ini;
+                    $nilai_buku_lalu = $nilai_buku_final;
+                }
+
+                // Hitung penyusutan berdasarkan kategori aset
+                if (in_array($data_persediaan->parent_id, $parent_ids_bangunan)) {
+                    $penambahan_penyusutan = ($data_persediaan->persen_susut / 100) * $nilai_buku_awal;
+                } else {
+                    $penambahan_penyusutan = ($data_persediaan->persen_susut / 100) * $nilai_buku_lalu;
+                }
+
+                // Update akumulasi penyusutan dan nilai buku akhir
+                $akm_thn_ini = $akm_thn_lalu + $penambahan_penyusutan;
+                $nilai_buku_final = $nilai_buku_awal - $akm_thn_ini;
+
+                // Jika umur_tahun sudah mencapai umur aset, set nilai buku final menjadi 0
+                if ($i > $data_persediaan->umur) {
+                    $akm_thn_ini = $data_persediaan->rupiah;
+                    $akm_thn_lalu = $data_persediaan->rupiah;
+                    $nilai_buku_final = 1;
+                    $penambahan_penyusutan = 0;
+                    $data_persediaan->penambahan = 0;
+                    $nilai_buku_lalu = 0;
+                    if ($data_persediaan->status == 1) {
+                        $nilai_buku_final = $data_persediaan->rupiah - $akm_thn_ini;
+                        if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
+                            $nilai_buku_final = 1;
+                        }
+                    } else {
+                        $nilai_buku_final = -1;
+                    }
+                    break;
+                }
+            }
+
+            $data = [
+                'nama_asset' => $data_persediaan->nama_asset,
+                'tanggal' => $data_persediaan->tanggal,
+                'nilai_perolehan' => $data_persediaan->rupiah,
+                'id_bagian' => $data_persediaan->id_bagian,
+                'nilai_persediaan' => $nilai_buku_final,
+                'tanggal_persediaan' => date('Y-m-d'),
+                'input_persediaan' => $this->session->userdata('nama_lengkap'),
+                'update_persediaan' => date('Y-m-d H:i:s')
+            ];
+
+            // insert data ke dalam tabel persediaan
+            $this->Model_penyusutan->insert_persediaan('persediaan', $data);
+
+
+            $data = [
+                'umur' => $this->input->post('umur', true),
+                'persen_susut' => $this->input->post('persen_susut', true),
+                'tanggal_input' => date('Y-m-d H:i:s'),
+                'input_asset' => $this->session->userdata('nama_lengkap'),
+                'status_update' => 1
+            ];
+            $this->Model_penyusutan->update_persediaan('daftar_asset', $data, $id_asset);
+
+
+
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Sukses,</strong> Nilai Asset berhasil di update
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            </button>
+                          </div>'
+            );
+            redirect('penyusutan/pompa_alat');
+        }
+    }
+
+    // public function update_persediaan()
+    // {
+    //     $this->Model_penyusutan->update_persediaan();
+    //     if ($this->db->affected_rows() <= 0) {
+    //         $this->session->set_flashdata(
+    //             'info',
+    //             '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    //                     <strong>Maaf,</strong> tidak ada perubahan data
+    //                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    //                     </button>
+    //                   </div>'
+    //         );
+    //         redirect('penyusutan/pompa_alat');
+    //     } else {
+    //         $this->session->set_flashdata(
+    //             'info',
+    //             '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    //                     <strong>Sukses,</strong> Nilai Asset berhasil di update
+    //                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    //                     </button>
+    //                   </div>'
+    //         );
+    //         redirect('penyusutan/pompa_alat');
+    //     }
+    // }
 }
