@@ -106,6 +106,7 @@ class Model_asset extends CI_Model
             'umur' => $this->input->post('umur', true),
             'status' => $this->input->post('status', true),
             'persen_susut' => $this->input->post('persen_susut', true),
+            'tanggal_persediaan' => $this->input->post('tanggal_persediaan', true)
         ];
         $this->db->insert('daftar_asset', $data);
 
@@ -116,7 +117,8 @@ class Model_asset extends CI_Model
         $tanggal_input = $this->input->post('tanggal', true);
         $tahun_asset = date('Y', strtotime($tanggal_input));
 
-
+        $tanggal_persediaan = $this->input->post('tanggal_persediaan', true);
+        $tahun_persediaan = date('Y', strtotime($tanggal_persediaan));
 
         // Tentukan nilai penambahan dan pengurangan berdasarkan status
         if ($status == 2) {
@@ -135,6 +137,7 @@ class Model_asset extends CI_Model
         $data_penyusutan = [
             'id_asset' => $id_asset,
             'tahun' => $tahun_asset,
+            'tahun_persediaan' => $tahun_persediaan,
             'penambahan' => $penambahan,  // Nilai penambahan berdasarkan status
             'penyusutan_tahun_ini' => 0,  // Tidak ada penyusutan di tahun pertama
             'akumulasi_penyusutan' => 0,  // Tidak ada akumulasi penyusutan di tahun pertama

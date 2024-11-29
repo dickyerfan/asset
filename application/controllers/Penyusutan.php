@@ -2540,8 +2540,9 @@ class Penyusutan extends CI_Controller
     public function edit_penyusutan($id_asset)
     {
 
-        $this->form_validation->set_rules('umur', 'Umur Asset', 'required|trim');
-        $this->form_validation->set_rules('persen_susut', 'Persentase', 'required|trim');
+        $this->form_validation->set_rules('umur', 'Umur Asset', 'trim');
+        $this->form_validation->set_rules('persen_susut', 'Persentase', 'trim');
+        $this->form_validation->set_rules('tanggal_persediaan', 'Tanggal Persediaan', 'required|trim');
         $this->form_validation->set_message('required', '%s masih kosong');
 
         if ($this->form_validation->run() == false) {
@@ -2609,8 +2610,13 @@ class Penyusutan extends CI_Controller
                 'tanggal' => $data_persediaan->tanggal,
                 'nilai_perolehan' => $data_persediaan->rupiah,
                 'id_bagian' => $data_persediaan->id_bagian,
+                'id_no_per' => $data_persediaan->id_no_per,
+                'parent_id' => $data_persediaan->parent_id,
+                'grand_id' => $data_persediaan->grand_id,
+                'jenis_id' => $data_persediaan->jenis_id,
                 'nilai_persediaan' => $nilai_buku_final,
-                'tanggal_persediaan' => date('Y-m-d'),
+                // 'tanggal_persediaan' => date('Y-m-d'),
+                'tanggal_persediaan' => $this->input->post('tanggal_persediaan'),
                 'input_persediaan' => $this->session->userdata('nama_lengkap'),
                 'update_persediaan' => date('Y-m-d H:i:s')
             ];
@@ -2618,17 +2624,14 @@ class Penyusutan extends CI_Controller
             // insert data ke dalam tabel persediaan
             $this->Model_penyusutan->insert_persediaan('persediaan', $data);
 
-
             $data = [
-                'umur' => $this->input->post('umur', true),
-                'persen_susut' => $this->input->post('persen_susut', true),
+                'umur' => 0,
+                'persen_susut' => 0,
                 'tanggal_input' => date('Y-m-d H:i:s'),
                 'input_asset' => $this->session->userdata('nama_lengkap'),
                 'status_update' => 1
             ];
             $this->Model_penyusutan->update_persediaan('daftar_asset', $data, $id_asset);
-
-
 
             $this->session->set_flashdata(
                 'info',

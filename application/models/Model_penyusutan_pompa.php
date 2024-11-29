@@ -127,7 +127,12 @@ class Model_penyusutan_pompa extends CI_Model
     // kode sudah fix
     public function get_pompa($tahun_lap)
     {
-        $this->db->select('*');
+        $this->db->select('
+            penyusutan.*, 
+            daftar_asset.*, 
+            no_per.*, 
+            daftar_asset.status AS status_penyusutan
+        ');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
@@ -160,6 +165,11 @@ class Model_penyusutan_pompa extends CI_Model
         $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
+            // if ($row->status == 1) {
+            //     $umur_tahun = $tahun - $row->tahun;
+            // } else {
+            //     $umur_tahun = $tahun - $row->tahun_persediaan;
+            // }
             $umur_tahun = $tahun - $row->tahun;
             $nilai_buku_awal = $row->rupiah; // Nilai awal aset
             $akm_thn_ini = 0;                 // Akumulasi penyusutan tahun ini
@@ -170,7 +180,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->akm_thn_lalu = 0;
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
-                $row->nilai_buku_lalu = $nilai_buku_final;
+                $row->nilai_buku_lalu = 0;
                 $row->akm_thn_ini = 0;
                 $row->nilai_buku_final = $nilai_buku_awal;
             } else {
@@ -225,6 +235,17 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->penambahan_penyusutan = $penambahan_penyusutan;
                 $row->akm_thn_ini = $akm_thn_ini;
                 $row->nilai_buku_final = $nilai_buku_final;
+            }
+            if ($row->status_penyusutan == 2) {
+                $umur_tahun = $tahun - $row->tahun_persediaan;
+                if ($umur_tahun == 0) {
+                    $row->nilai_buku = 0;
+                    $row->pengurangan = $row->rupiah * -1;
+                    $row->nilai_buku_lalu = 0;
+                } else {
+                    $row->pengurangan = 0;
+                    $row->penambahan = 0;
+                }
             }
 
             // Kondisi khusus untuk tanah
@@ -307,7 +328,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->akm_thn_lalu = 0;
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
-                $row->nilai_buku_lalu = $nilai_buku_final;
+                $row->nilai_buku_lalu = 0;
                 $row->akm_thn_ini = 0;
                 $row->nilai_buku_final = $nilai_buku_awal;
             } else {
@@ -446,7 +467,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->akm_thn_lalu = 0;
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
-                $row->nilai_buku_lalu = $nilai_buku_final;
+                $row->nilai_buku_lalu = 0;
                 $row->akm_thn_ini = 0;
                 $row->nilai_buku_final = $nilai_buku_awal;
             } else {
@@ -583,7 +604,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->akm_thn_lalu = 0;
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
-                $row->nilai_buku_lalu = $nilai_buku_final;
+                $row->nilai_buku_lalu = 0;
                 $row->akm_thn_ini = 0;
                 $row->nilai_buku_final = $nilai_buku_awal;
             } else {
@@ -721,7 +742,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->akm_thn_lalu = 0;
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
-                $row->nilai_buku_lalu = $nilai_buku_final;
+                $row->nilai_buku_lalu = 0;
                 $row->akm_thn_ini = 0;
                 $row->nilai_buku_final = $nilai_buku_awal;
             } else {
@@ -848,6 +869,11 @@ class Model_penyusutan_pompa extends CI_Model
         $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
+            // if ($row->status == 1) {
+            //     $umur_tahun = $tahun - $row->tahun;
+            // } else {
+            //     $umur_tahun = $tahun - $row->tahun_persediaan;
+            // }
             $umur_tahun = $tahun - $row->tahun;
             $nilai_buku_awal = $row->rupiah; // Nilai awal aset
             $akm_thn_ini = 0;                 // Akumulasi penyusutan tahun ini
@@ -858,12 +884,9 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->akm_thn_lalu = 0;
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
-                $row->nilai_buku_lalu = $nilai_buku_final;
+                $row->nilai_buku_lalu = 0;
                 $row->akm_thn_ini = 0;
                 $row->nilai_buku_final = $nilai_buku_awal;
-                if ($row->status == 2) {
-                    $row->nilai_buku_final = -1;
-                }
             } else {
                 $row->pengurangan = 0;
                 $row->penambahan = 0;
@@ -916,6 +939,18 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->penambahan_penyusutan = $penambahan_penyusutan;
                 $row->akm_thn_ini = $akm_thn_ini;
                 $row->nilai_buku_final = $nilai_buku_final;
+            }
+
+            if ($row->status == 2) {
+                $umur_tahun = $tahun - $row->tahun_persediaan;
+                if ($umur_tahun == 0) {
+                    $row->nilai_buku = 0;
+                    $row->pengurangan = $row->rupiah * -1;
+                    $row->nilai_buku_lalu = 0;
+                } else {
+                    $row->pengurangan = 0;
+                    $row->penambahan = 0;
+                }
             }
 
             // Kondisi khusus untuk tanah
@@ -999,12 +1034,9 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->akm_thn_lalu = 0;
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
-                $row->nilai_buku_lalu = $nilai_buku_final;
+                $row->nilai_buku_lalu = 0;
                 $row->akm_thn_ini = 0;
                 $row->nilai_buku_final = $nilai_buku_awal;
-                if ($row->status == 2) {
-                    $row->nilai_buku_final = -1;
-                }
             } else {
                 $row->pengurangan = 0;
                 $row->penambahan = 0;
@@ -1057,6 +1089,17 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->penambahan_penyusutan = $penambahan_penyusutan;
                 $row->akm_thn_ini = $akm_thn_ini;
                 $row->nilai_buku_final = $nilai_buku_final;
+            }
+            if ($row->status == 2) {
+                $umur_tahun = $tahun - $row->tahun_persediaan;
+                if ($umur_tahun == 0) {
+                    $row->nilai_buku = 0;
+                    $row->pengurangan = $row->rupiah * -1;
+                    $row->nilai_buku_lalu = 0;
+                } else {
+                    $row->pengurangan = 0;
+                    $row->penambahan = 0;
+                }
             }
 
             // Kondisi khusus untuk tanah
@@ -1139,7 +1182,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->akm_thn_lalu = 0;
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
-                $row->nilai_buku_lalu = $nilai_buku_final;
+                $row->nilai_buku_lalu = 0;
                 $row->akm_thn_ini = 0;
                 $row->nilai_buku_final = $nilai_buku_awal;
             } else {
@@ -1277,7 +1320,7 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->akm_thn_lalu = 0;
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
-                $row->nilai_buku_lalu = $nilai_buku_final;
+                $row->nilai_buku_lalu = 0;
                 $row->akm_thn_ini = 0;
                 $row->nilai_buku_final = $nilai_buku_awal;
             } else {

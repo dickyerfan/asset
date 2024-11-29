@@ -149,7 +149,15 @@
                                                 ?>
                                                 <?= $nama_asset; ?>
                                             </td>
-                                            <td class="text-center"><?= date('d-m-Y', strtotime($row->tanggal)); ?></td>
+                                            <td class="text-center">
+                                                <?php
+                                                echo "<!-- Debug: status = " . $row->status . " -->"; // Tambahkan debug
+                                                if ($row->status_penyusutan == 2) {
+                                                    echo  date('d-m-Y', strtotime($row->tanggal_persediaan));
+                                                } else {
+                                                    echo date('d-m-Y', strtotime($row->tanggal));
+                                                } ?>
+                                            </td>
                                             <td class="text-center"><?= $row->umur; ?></td>
                                             <td class="text-center"><?= $row->persen_susut; ?></td>
                                             <td class="text-right"><?= number_format($row->nilai_buku, 0, ',', '.'); ?></td>

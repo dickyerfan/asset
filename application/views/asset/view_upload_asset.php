@@ -14,8 +14,8 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label for="tanggal">Tanggal Asset :</label>
-                                    <input type="date" class="form-control" id="tanggal" name="tanggal" placeholder="Masukan Tanggal Pesan" value="<?= set_value('tanggal'); ?>">
+                                    <label for="tanggal">Tanggal Perolehan : <span class="text-primary">"Jika pengurangan asset, tanggal di isi sama dengan tanggal perolehan"</span></label>
+                                    <input type="date" class="form-control" id="tanggal" name="tanggal" placeholder="Masukan Tanggal Perolehan" value="<?= set_value('tanggal'); ?>">
                                     <small class="form-text text-danger pl-3"><?= form_error('tanggal'); ?></small>
                                 </div>
                             </div>
@@ -108,6 +108,13 @@
                                         <option value="2">Pengurangan</option>
                                     </select>
                                     <small class="form-text text-danger pl-3"><?= form_error('status'); ?></small>
+                                </div>
+                            </div>
+                            <div id="tanggal-persediaan-group" class="form-group" style="display: none;">
+                                <div class="form-group">
+                                    <label for="tanggal_persediaan">Tanggal Persediaan :</label>
+                                    <input type="date" class="form-control" id="tanggal_persediaan" name="tanggal_persediaan" placeholder="Masukan Tanggal_persediaan" value="<?= set_value('tanggal_persediaan'); ?>">
+                                    <small class="form-text text-danger pl-3"><?= form_error('tanggal_persediaan'); ?></small>
                                 </div>
                             </div>
                         </div>

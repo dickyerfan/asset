@@ -51,6 +51,19 @@
 
 <script>
     $(document).ready(function() {
+        $('#status').on('change', function() {
+            if ($(this).val() === '2') {
+                $('#tanggal-persediaan-group').show(); // Tampilkan elemen
+            } else {
+                $('#tanggal-persediaan-group').hide(); // Sembunyikan elemen
+            }
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
         $('#tanggal').change(function() {
             $('#form_tanggal').submit();
         });
