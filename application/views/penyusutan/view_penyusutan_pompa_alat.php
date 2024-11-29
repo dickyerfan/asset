@@ -83,7 +83,7 @@
                                 <!-- <th>Pengurangan</th> -->
                                 <th>Akm Thn Ini</th>
                                 <th>Nilai Buku Thn Ini</th>
-                                <th>Act</th>
+                                <!-- <th>Act</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -128,31 +128,28 @@
                                     <!-- <td class="text-right">-</td> -->
                                     <td class="text-right"><?= number_format($row->akm_thn_ini, 0, ',', '.'); ?></td>
                                     <td class="text-right"><?= number_format($row->nilai_buku_final, 0, ',', '.'); ?></td>
-                                    <td class="text-center">
+                                    <!-- <td class="text-center">
                                         <?php
                                         // Cek apakah level pengguna Admin
                                         if ($this->session->userdata('level') != 'Admin') :
                                         ?>
-                                            <!-- Tombol untuk Non-Admin -->
+                                            Tombol untuk Non-Admin
                                             <a href="javascript:void(0);" onclick="showAlert('Anda tidak punya akses untuk update data.')">
                                                 <span class="badge badge-secondary"><i class="fas fa-fw fa-ban"></i></span>
                                             </a>
                                         <?php else : ?>
                                             <?php if ($row->status_update == 1) : ?>
-                                                <!-- Tombol jika status_update = 1 -->
+                                                Tombol jika status_update = 1
                                                 <a href="javascript:void(0);" onclick="showAlert('Asset sudah tidak bisa diupdate lagi.')">
                                                     <span class="badge badge-secondary"><i class="fas fa-fw fa-ban"></i></span>
                                                 </a>
                                             <?php elseif ($row->umur == 0) : ?>
-                                                <!-- Tombol jika status_update = 1 -->
+                                                Tombol jika status_update = 1
                                                 <a href="javascript:void(0);" onclick="showAlert('Asset sudah tidak bisa diupdate lagi.')">
                                                     <span class="badge badge-secondary"><i class="fas fa-fw fa-ban"></i></span>
                                                 </a>
                                             <?php else : ?>
-                                                <!-- Tombol jika status_update = 0 -->
-                                                <!-- <a href="javascript:void(0);" onclick="confirmReset(<?= $row->id_asset; ?>, '<?= addslashes($row->nama_asset); ?>', '<?= date('d-m-Y', strtotime($row->tanggal)); ?>')">
-                                                    <span class="badge badge-primary"><i class="fas fa-fw fa-edit"></i></span>
-                                                </a> -->
+                                                Tombol jika status_update = 0
                                                 <a href="<?= base_url(); ?>penyusutan/edit_penyusutan/<?= $row->id_asset; ?>"><span class="badge badge-primary"><i class="fas fa-fw fa-edit"></i></span></a>
                                             <?php endif; ?>
                                         <?php endif; ?>
@@ -166,7 +163,7 @@
                                                 });
                                             </script>
                                         <?php endif; ?>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -182,7 +179,7 @@
                                 <th class="text-right"><?= number_format($totals['total_penyusutan'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($totals['total_akm_thn_ini'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($totals['total_nilai_buku_final'], 0, ',', '.'); ?></th>
-                                <th></th>
+                                <!-- <th></th> -->
                             </tr>
                         </tfoot>
                     </table>

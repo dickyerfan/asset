@@ -11,6 +11,7 @@ class Model_penyusutan extends CI_Model
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
+        $this->db->order_by('tanggal', 'ASC');
 
         $query = $this->db->get();
         $results = $query->result();
@@ -35,11 +36,6 @@ class Model_penyusutan extends CI_Model
         $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
-            // if ($row->status == 1) {
-            //     $umur_tahun = $tahun - $row->tahun;
-            // } else {
-            //     $umur_tahun = $tahun - $row->tahun_persediaan;
-            // }
             $umur_tahun = $tahun - $row->tahun;
             $nilai_buku_awal = $row->rupiah; // Nilai awal aset
             $akm_thn_ini = 0;                 // Akumulasi penyusutan tahun ini
@@ -106,15 +102,24 @@ class Model_penyusutan extends CI_Model
                 $row->akm_thn_ini = $akm_thn_ini;
                 $row->nilai_buku_final = $nilai_buku_final;
             }
+
             if ($row->status == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
                 if ($umur_tahun == 0) {
                     $row->nilai_buku = 0;
                     $row->pengurangan = $row->rupiah * -1;
                     $row->nilai_buku_lalu = 0;
+                    $row->penambahan_penyusutan = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_final = $row->rupiah;
                 } else {
                     $row->pengurangan = 0;
                     $row->penambahan = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_lalu = $row->rupiah * -1;
+                    $row->penambahan_penyusutan = 0;
+                    $row->nilai_buku_final = $row->rupiah;
                 }
             }
 
@@ -122,7 +127,8 @@ class Model_penyusutan extends CI_Model
             if ($row->grand_id == 218) {
                 $row->akm_thn_lalu = 0;
                 $row->akm_thn_ini = 0;
-                $row->nilai_buku_lalu = $row->nilai_buku;
+                $row->nilai_buku_lalu = 0;
+                $row->nilai_buku_final = $row->rupiah;
             }
 
             // Akumulasi total dari setiap kolom
@@ -526,20 +532,6 @@ class Model_penyusutan extends CI_Model
         $query = $this->db->get('no_per'); // Ganti dengan nama tabel yang sesuai
         return $query->row(); // Mengembalikan satu baris hasil
     }
-
-    // public function update_persediaan()
-    // {
-    //     date_default_timezone_set('Asia/Jakarta');
-    //     $data = [
-    //         'umur' => $this->input->post('umur', true),
-    //         'persen_susut' => $this->input->post('persen_susut', true),
-    //         'tanggal_input' => date('Y-m-d H:i:s'),
-    //         'input_asset' => $this->session->userdata('nama_lengkap'),
-    //         'status_update' => 1
-    //     ];
-    //     $this->db->where('id_asset', $this->input->post('id_asset'));
-    //     $this->db->update('daftar_asset', $data);
-    // }
 
     public function update_persediaan($table, $data, $id_asset)
     {

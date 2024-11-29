@@ -236,15 +236,36 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->akm_thn_ini = $akm_thn_ini;
                 $row->nilai_buku_final = $nilai_buku_final;
             }
+
+            // if ($row->status_penyusutan == 2) {
+            //     $umur_tahun = $tahun - $row->tahun_persediaan;
+            //     if ($umur_tahun == 0) {
+            //         $row->nilai_buku = 0;
+            //         $row->pengurangan = $row->rupiah * -1;
+            //         $row->nilai_buku_lalu = 0;
+            //     } else {
+            //         $row->pengurangan = 0;
+            //         $row->penambahan = 0;
+            //     }
+            // }
+
             if ($row->status_penyusutan == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
                 if ($umur_tahun == 0) {
                     $row->nilai_buku = 0;
                     $row->pengurangan = $row->rupiah * -1;
                     $row->nilai_buku_lalu = 0;
+                    $row->penambahan_penyusutan = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_final = $row->rupiah;
                 } else {
                     $row->pengurangan = 0;
                     $row->penambahan = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_lalu = $row->rupiah * -1;
+                    $row->penambahan_penyusutan = 0;
+                    $row->nilai_buku_final = $row->rupiah;
                 }
             }
 
@@ -252,7 +273,8 @@ class Model_penyusutan_pompa extends CI_Model
             if ($row->grand_id == 218) {
                 $row->akm_thn_lalu = 0;
                 $row->akm_thn_ini = 0;
-                $row->nilai_buku_lalu = $row->nilai_buku;
+                $row->nilai_buku_lalu = 0;
+                $row->nilai_buku_final = $row->rupiah;
             }
 
             // Akumulasi total dari setiap kolom
@@ -869,11 +891,6 @@ class Model_penyusutan_pompa extends CI_Model
         $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
-            // if ($row->status == 1) {
-            //     $umur_tahun = $tahun - $row->tahun;
-            // } else {
-            //     $umur_tahun = $tahun - $row->tahun_persediaan;
-            // }
             $umur_tahun = $tahun - $row->tahun;
             $nilai_buku_awal = $row->rupiah; // Nilai awal aset
             $akm_thn_ini = 0;                 // Akumulasi penyusutan tahun ini
@@ -947,9 +964,17 @@ class Model_penyusutan_pompa extends CI_Model
                     $row->nilai_buku = 0;
                     $row->pengurangan = $row->rupiah * -1;
                     $row->nilai_buku_lalu = 0;
+                    $row->penambahan_penyusutan = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_final = $row->rupiah;
                 } else {
                     $row->pengurangan = 0;
                     $row->penambahan = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_lalu = $row->rupiah * -1;
+                    $row->penambahan_penyusutan = 0;
+                    $row->nilai_buku_final = $row->rupiah;
                 }
             }
 
@@ -957,7 +982,8 @@ class Model_penyusutan_pompa extends CI_Model
             if ($row->grand_id == 218) {
                 $row->akm_thn_lalu = 0;
                 $row->akm_thn_ini = 0;
-                $row->nilai_buku_lalu = $row->nilai_buku;
+                $row->nilai_buku_lalu = 0;
+                $row->nilai_buku_final = $row->rupiah;
             }
 
             // Akumulasi total dari setiap kolom
@@ -1090,15 +1116,24 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->akm_thn_ini = $akm_thn_ini;
                 $row->nilai_buku_final = $nilai_buku_final;
             }
+
             if ($row->status == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
                 if ($umur_tahun == 0) {
                     $row->nilai_buku = 0;
                     $row->pengurangan = $row->rupiah * -1;
                     $row->nilai_buku_lalu = 0;
+                    $row->penambahan_penyusutan = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_final = $row->rupiah;
                 } else {
                     $row->pengurangan = 0;
                     $row->penambahan = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_lalu = $row->rupiah * -1;
+                    $row->penambahan_penyusutan = 0;
+                    $row->nilai_buku_final = $row->rupiah;
                 }
             }
 
@@ -1106,7 +1141,8 @@ class Model_penyusutan_pompa extends CI_Model
             if ($row->grand_id == 218) {
                 $row->akm_thn_lalu = 0;
                 $row->akm_thn_ini = 0;
-                $row->nilai_buku_lalu = $row->nilai_buku;
+                $row->nilai_buku_lalu = 0;
+                $row->nilai_buku_final = $row->rupiah;
             }
 
             // Akumulasi total dari setiap kolom

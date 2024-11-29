@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : DIE ArtS
+ Source Server         : database_lokal
  Source Server Type    : MySQL
- Source Server Version : 100418 (10.4.18-MariaDB)
+ Source Server Version : 100417 (10.4.17-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : asset
 
  Target Server Type    : MySQL
- Target Server Version : 100418 (10.4.18-MariaDB)
+ Target Server Version : 100417 (10.4.17-MariaDB)
  File Encoding         : 65001
 
- Date: 29/11/2024 10:56:18
+ Date: 29/11/2024 16:09:06
 */
 
 SET NAMES utf8mb4;
@@ -86,7 +86,7 @@ CREATE TABLE `daftar_asset`  (
   INDEX `id_no_per`(`id_no_per` ASC) USING BTREE,
   CONSTRAINT `daftar_asset_ibfk_1` FOREIGN KEY (`id_bagian`) REFERENCES `bagian_upk` (`id_bagian`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `daftar_asset_ibfk_2` FOREIGN KEY (`id_no_per`) REFERENCES `no_per` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 452 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 461 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of daftar_asset
@@ -537,10 +537,19 @@ INSERT INTO `daftar_asset` VALUES (444, 2, 2016, 1912, 222, 0, 34, 0, 'Pengangka
 INSERT INTO `daftar_asset` VALUES (445, 11, 2024, 1912, 222, 0, 34, 0, 'Pengangkatan & biaya pemasangan pompa  SB Tegalampel', '2020-11-30', NULL, '', '', 63525000, 1, 8, 25.00, 'Administrator', '2024-11-26 15:10:05', 0);
 INSERT INTO `daftar_asset` VALUES (446, 11, 2024, 1912, 222, 0, 34, 0, 'Pemas.pompa SB Karanganyar', '2021-10-28', NULL, '', '', 69130700, 1, 16, 12.50, 'Administrator', '2024-11-26 15:20:00', 0);
 INSERT INTO `daftar_asset` VALUES (447, 11, 2024, 1912, 222, 0, 34, 0, 'Pemas.pompa SB Locare', '2021-10-30', NULL, '', '', 8727321, 1, 16, 12.50, 'Administrator', '2024-11-26 15:11:49', 0);
-INSERT INTO `daftar_asset` VALUES (448, 11, 2024, 1912, 222, 0, 34, 0, 'Penggantian Motor Grunfos 3 KW S/N :00317729 dan Pompa Grunfos 9-12 B S/N;A 98826882 SB Karanganyar', '2023-10-30', NULL, '', '', 102851080, 1, 16, 12.50, 'Administrator', '2024-11-26 15:12:53', 0);
+INSERT INTO `daftar_asset` VALUES (448, 11, 2024, 1912, 222, 0, 34, 0, 'Penggantian Motor Grunfos 3 KW S/N :00317729 dan Pompa Grunfos 9-12 B S/N;A 98826882 SB Karanganyar', '2023-04-30', NULL, '', '', 102851080, 1, 16, 12.50, 'Administrator', '2024-11-26 15:12:53', 0);
 INSERT INTO `daftar_asset` VALUES (449, 11, 2024, 1912, 222, 0, 34, 0, 'Pengangkatan Motor Vansan  3KW S/N 201710229  dan Pompa vansan SP 8-18 s/n 1705205  SB Karanganyar', '2021-10-28', '2023-10-30', '', '', -69130700, 2, 16, 12.50, 'Administrator', '2024-11-26 15:14:01', 0);
 INSERT INTO `daftar_asset` VALUES (450, 12, 2025, 1912, 222, 0, 34, 0, 'Pemasangan kolom pompa', '2006-12-31', NULL, '', '', 3252999, 1, 8, 25.00, 'Administrator', '2024-11-26 15:21:53', 0);
 INSERT INTO `daftar_asset` VALUES (451, 12, 2025, 1912, 222, 0, 34, 0, 'Penggantian pompa UPK Tapen', '2013-07-31', NULL, '', '', 40735783, 1, 8, 25.00, 'Administrator', '2024-11-26 15:22:39', 0);
+INSERT INTO `daftar_asset` VALUES (452, 13, 2028, 1912, 222, 0, 34, 0, 'Penggantian pompa SB Prajekan', '2014-12-31', NULL, '', '', 10748500, 1, 8, 25.00, 'Administrator', '2024-11-29 15:29:08', 0);
+INSERT INTO `daftar_asset` VALUES (453, 13, 2028, 1912, 222, 0, 34, 0, 'Pemasangan pompa,wellhead,panel pompa 2', '2020-08-31', NULL, '', '', 32347865, 1, 16, 12.50, 'Administrator', '2024-11-29 15:37:46', 0);
+INSERT INTO `daftar_asset` VALUES (454, 13, 2028, 1912, 222, 0, 34, 0, 'Pemasangan Inventer', '2021-12-31', NULL, '', '', 63525000, 1, 16, 12.50, 'Administrator', '2024-11-29 15:41:24', 0);
+INSERT INTO `daftar_asset` VALUES (455, 14, 2030, 1912, 222, 0, 34, 0, 'Pemas.pompa,wellhead, panel pompa SB Pakisan 25', '2022-10-29', NULL, '', '', 85379525, 1, 16, 12.50, 'Administrator', '2024-11-29 15:46:55', 0);
+INSERT INTO `daftar_asset` VALUES (456, 15, 2031, 1912, 222, 0, 34, 0, 'Penggantian pompa SB Pakem', '2010-12-31', NULL, '', '', 12500000, 1, 8, 25.00, 'Administrator', '2024-11-29 15:49:53', 0);
+INSERT INTO `daftar_asset` VALUES (457, 15, 2031, 1912, 222, 0, 34, 0, 'Pemasangan pompa,wellhead,panel pompa', '2020-03-31', NULL, '', '', 106357406, 1, 16, 12.50, 'Administrator', '2024-11-29 15:50:57', 0);
+INSERT INTO `daftar_asset` VALUES (458, 16, 2033, 1912, 222, 0, 34, 0, 'Penggantian pompa SB Curahdami', '2016-04-30', NULL, '', '', 60483512, 1, 16, 12.50, 'Administrator', '2024-11-29 15:53:21', 0);
+INSERT INTO `daftar_asset` VALUES (459, 16, 2033, 1912, 222, 0, 34, 0, 'Motor Grundfos 5 KW No.79195511', '2016-04-30', '2024-03-06', '', '', -30241756, 2, 16, 12.50, 'Administrator', '2024-11-29 16:02:17', 0);
+INSERT INTO `daftar_asset` VALUES (460, 16, 2033, 1912, 222, 0, 34, 0, 'Pompa Grundfos SP 14-18  No.2003001018', '2016-04-30', '2024-06-30', '', '', -30241756, 2, 16, 12.50, 'Administrator', '2024-11-29 16:04:26', 0);
 
 -- ----------------------------
 -- Table structure for no_per
@@ -1849,7 +1858,7 @@ CREATE TABLE `penyusutan`  (
   PRIMARY KEY (`id_penyusutan`) USING BTREE,
   INDEX `id_asset`(`id_asset` ASC) USING BTREE,
   CONSTRAINT `penyusutan_ibfk_1` FOREIGN KEY (`id_asset`) REFERENCES `daftar_asset` (`id_asset`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 453 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 462 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of penyusutan
@@ -2304,6 +2313,15 @@ INSERT INTO `penyusutan` VALUES (449, 448, 2023, NULL, 102851080, 0, 0, 0, 10285
 INSERT INTO `penyusutan` VALUES (450, 449, 2021, 2023, 0, 69130700, 0, 0, -69130700, '2024-11-26 15:14:01', 'Administrator');
 INSERT INTO `penyusutan` VALUES (451, 450, 2006, NULL, 3252999, 0, 0, 0, 3252999, '2024-11-26 15:21:53', 'Administrator');
 INSERT INTO `penyusutan` VALUES (452, 451, 2013, NULL, 40735783, 0, 0, 0, 40735783, '2024-11-26 15:22:39', 'Administrator');
+INSERT INTO `penyusutan` VALUES (453, 452, 2014, NULL, 10748500, 0, 0, 0, 10748500, '2024-11-29 15:29:08', 'Administrator');
+INSERT INTO `penyusutan` VALUES (454, 453, 2020, NULL, 32347865, 0, 0, 0, 32347865, '2024-11-29 15:37:46', 'Administrator');
+INSERT INTO `penyusutan` VALUES (455, 454, 2021, NULL, 63525000, 0, 0, 0, 63525000, '2024-11-29 15:41:24', 'Administrator');
+INSERT INTO `penyusutan` VALUES (456, 455, 2022, NULL, 85379525, 0, 0, 0, 85379525, '2024-11-29 15:46:55', 'Administrator');
+INSERT INTO `penyusutan` VALUES (457, 456, 2010, NULL, 12500000, 0, 0, 0, 12500000, '2024-11-29 15:49:53', 'Administrator');
+INSERT INTO `penyusutan` VALUES (458, 457, 2020, NULL, 106357406, 0, 0, 0, 106357406, '2024-11-29 15:50:57', 'Administrator');
+INSERT INTO `penyusutan` VALUES (459, 458, 2016, NULL, 60483512, 0, 0, 0, 60483512, '2024-11-29 15:53:21', 'Administrator');
+INSERT INTO `penyusutan` VALUES (460, 459, 2016, 2024, 0, 30241756, 0, 0, -30241756, '2024-11-29 16:02:17', 'Administrator');
+INSERT INTO `penyusutan` VALUES (461, 460, 2016, 2024, 0, 30241756, 0, 0, -30241756, '2024-11-29 16:04:26', 'Administrator');
 
 -- ----------------------------
 -- Table structure for persediaan

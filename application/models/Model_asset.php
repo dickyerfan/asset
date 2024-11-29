@@ -88,6 +88,13 @@ class Model_asset extends CI_Model
             $rupiah = $rupiah;
         }
 
+        $tanggal_persediaan = $this->input->post('tanggal_persediaan', true);
+        if (!empty($tanggal_persediaan)) {
+            $tanggal_persediaan = $this->input->post('tanggal_persediaan', true);
+        } else {
+            $tanggal_persediaan = null;
+        }
+
         $data = [
             'nama_asset' => $this->input->post('nama_asset', true),
             'id_bagian' => $this->input->post('id_bagian', true),
@@ -106,7 +113,7 @@ class Model_asset extends CI_Model
             'umur' => $this->input->post('umur', true),
             'status' => $this->input->post('status', true),
             'persen_susut' => $this->input->post('persen_susut', true),
-            'tanggal_persediaan' => $this->input->post('tanggal_persediaan', true)
+            'tanggal_persediaan' => $tanggal_persediaan
         ];
         $this->db->insert('daftar_asset', $data);
 
@@ -118,7 +125,11 @@ class Model_asset extends CI_Model
         $tahun_asset = date('Y', strtotime($tanggal_input));
 
         $tanggal_persediaan = $this->input->post('tanggal_persediaan', true);
-        $tahun_persediaan = date('Y', strtotime($tanggal_persediaan));
+        if (!empty($tanggal_persediaan)) {
+            $tahun_persediaan = date('Y', strtotime($tanggal_persediaan));
+        } else {
+            $tahun_persediaan = null; // Jika tanggal_persediaan kosong, tahun_persediaan menjadi null
+        }
 
         // Tentukan nilai penambahan dan pengurangan berdasarkan status
         if ($status == 2) {
