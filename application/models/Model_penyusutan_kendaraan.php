@@ -6,7 +6,12 @@ class Model_penyusutan_kendaraan extends CI_Model
 
     public function get_kendaraan($tahun_lap)
     {
-        $this->db->select('*');
+        $this->db->select('
+        penyusutan.*, 
+        daftar_asset.*, 
+        no_per.*, 
+        daftar_asset.status AS status_penyusutan
+    ');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
@@ -49,7 +54,7 @@ class Model_penyusutan_kendaraan extends CI_Model
                 $row->akm_thn_lalu = 0;
                 $row->nilai_buku = 0;
                 $row->penambahan_penyusutan = 0;
-                $row->nilai_buku_lalu = $nilai_buku_final;
+                $row->nilai_buku_lalu = 0;
                 $row->akm_thn_ini = 0;
                 $row->nilai_buku_final = $nilai_buku_awal;
             } else {
@@ -106,11 +111,39 @@ class Model_penyusutan_kendaraan extends CI_Model
                 $row->nilai_buku_final = $nilai_buku_final;
             }
 
+            if ($row->status_penyusutan == 2) {
+                $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
+                if ($umur_tahun == 0) {
+                    $row->nilai_buku = 0;
+                    $row->pengurangan = $row->rupiah * -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->penambahan_penyusutan = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
+                } else {
+                    $row->pengurangan = 0;
+                    $row->penambahan = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_lalu = $row->rupiah * -1;
+                    $row->penambahan_penyusutan = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                }
+            }
+
             // Kondisi khusus untuk tanah
             if ($row->grand_id == 218) {
                 $row->akm_thn_lalu = 0;
                 $row->akm_thn_ini = 0;
-                $row->nilai_buku_lalu = $row->nilai_buku;
+                $row->nilai_buku_lalu = 0;
+                $row->nilai_buku_final = $row->rupiah;
             }
 
             // Akumulasi total dari setiap kolom
@@ -243,11 +276,39 @@ class Model_penyusutan_kendaraan extends CI_Model
                 $row->nilai_buku_final = $nilai_buku_final;
             }
 
+            if ($row->status == 2) {
+                $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
+                if ($umur_tahun == 0) {
+                    $row->nilai_buku = 0;
+                    $row->pengurangan = $row->rupiah * -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->penambahan_penyusutan = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
+                } else {
+                    $row->pengurangan = 0;
+                    $row->penambahan = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_lalu = $row->rupiah * -1;
+                    $row->penambahan_penyusutan = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                }
+            }
+
             // Kondisi khusus untuk tanah
             if ($row->grand_id == 218) {
                 $row->akm_thn_lalu = 0;
                 $row->akm_thn_ini = 0;
-                $row->nilai_buku_lalu = $row->nilai_buku;
+                $row->nilai_buku_lalu = 0;
+                $row->nilai_buku_final = $row->rupiah;
             }
 
             // Akumulasi total dari setiap kolom
@@ -382,11 +443,39 @@ class Model_penyusutan_kendaraan extends CI_Model
                 $row->nilai_buku_final = $nilai_buku_final;
             }
 
+            if ($row->status == 2) {
+                $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
+                if ($umur_tahun == 0) {
+                    $row->nilai_buku = 0;
+                    $row->pengurangan = $row->rupiah * -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->penambahan_penyusutan = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
+                } else {
+                    $row->pengurangan = 0;
+                    $row->penambahan = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_lalu = $row->rupiah * -1;
+                    $row->penambahan_penyusutan = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                }
+            }
+
             // Kondisi khusus untuk tanah
             if ($row->grand_id == 218) {
                 $row->akm_thn_lalu = 0;
                 $row->akm_thn_ini = 0;
-                $row->nilai_buku_lalu = $row->nilai_buku;
+                $row->nilai_buku_lalu = 0;
+                $row->nilai_buku_final = $row->rupiah;
             }
 
             // Akumulasi total dari setiap kolom
@@ -519,11 +608,39 @@ class Model_penyusutan_kendaraan extends CI_Model
                 $row->nilai_buku_final = $nilai_buku_final;
             }
 
+            if ($row->status == 2) {
+                $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
+                if ($umur_tahun == 0) {
+                    $row->nilai_buku = 0;
+                    $row->pengurangan = $row->rupiah * -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->penambahan_penyusutan = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
+                } else {
+                    $row->pengurangan = 0;
+                    $row->penambahan = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_lalu = $row->rupiah * -1;
+                    $row->penambahan_penyusutan = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                }
+            }
+
             // Kondisi khusus untuk tanah
             if ($row->grand_id == 218) {
                 $row->akm_thn_lalu = 0;
                 $row->akm_thn_ini = 0;
-                $row->nilai_buku_lalu = $row->nilai_buku;
+                $row->nilai_buku_lalu = 0;
+                $row->nilai_buku_final = $row->rupiah;
             }
 
             // Akumulasi total dari setiap kolom
@@ -657,11 +774,39 @@ class Model_penyusutan_kendaraan extends CI_Model
                 $row->nilai_buku_final = $nilai_buku_final;
             }
 
+            if ($row->status == 2) {
+                $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
+                if ($umur_tahun == 0) {
+                    $row->nilai_buku = 0;
+                    $row->pengurangan = $row->rupiah * -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->penambahan_penyusutan = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
+                } else {
+                    $row->pengurangan = 0;
+                    $row->penambahan = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_lalu = $row->rupiah * -1;
+                    $row->penambahan_penyusutan = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                }
+            }
+
             // Kondisi khusus untuk tanah
             if ($row->grand_id == 218) {
                 $row->akm_thn_lalu = 0;
                 $row->akm_thn_ini = 0;
-                $row->nilai_buku_lalu = $row->nilai_buku;
+                $row->nilai_buku_lalu = 0;
+                $row->nilai_buku_final = $row->rupiah;
             }
 
             // Akumulasi total dari setiap kolom
@@ -794,11 +939,39 @@ class Model_penyusutan_kendaraan extends CI_Model
                 $row->nilai_buku_final = $nilai_buku_final;
             }
 
+            if ($row->status == 2) {
+                $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
+                if ($umur_tahun == 0) {
+                    $row->nilai_buku = 0;
+                    $row->pengurangan = $row->rupiah * -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->penambahan_penyusutan = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
+                } else {
+                    $row->pengurangan = 0;
+                    $row->penambahan = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_lalu = $row->rupiah * -1;
+                    $row->penambahan_penyusutan = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                }
+            }
+
             // Kondisi khusus untuk tanah
             if ($row->grand_id == 218) {
                 $row->akm_thn_lalu = 0;
                 $row->akm_thn_ini = 0;
-                $row->nilai_buku_lalu = $row->nilai_buku;
+                $row->nilai_buku_lalu = 0;
+                $row->nilai_buku_final = $row->rupiah;
             }
 
             // Akumulasi total dari setiap kolom
@@ -932,11 +1105,39 @@ class Model_penyusutan_kendaraan extends CI_Model
                 $row->nilai_buku_final = $nilai_buku_final;
             }
 
+            if ($row->status == 2) {
+                $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
+                if ($umur_tahun == 0) {
+                    $row->nilai_buku = 0;
+                    $row->pengurangan = $row->rupiah * -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->penambahan_penyusutan = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
+                } else {
+                    $row->pengurangan = 0;
+                    $row->penambahan = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_lalu = $row->rupiah * -1;
+                    $row->penambahan_penyusutan = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                }
+            }
+
             // Kondisi khusus untuk tanah
             if ($row->grand_id == 218) {
                 $row->akm_thn_lalu = 0;
                 $row->akm_thn_ini = 0;
-                $row->nilai_buku_lalu = $row->nilai_buku;
+                $row->nilai_buku_lalu = 0;
+                $row->nilai_buku_final = $row->rupiah;
             }
 
             // Akumulasi total dari setiap kolom
@@ -974,7 +1175,7 @@ class Model_penyusutan_kendaraan extends CI_Model
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
-        $this->db->where('daftar_asset.parent_id', 2844);
+        $this->db->where('daftar_asset.parent_id', 2855);
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
         $this->db->order_by('tanggal', 'ASC');
@@ -1069,11 +1270,39 @@ class Model_penyusutan_kendaraan extends CI_Model
                 $row->nilai_buku_final = $nilai_buku_final;
             }
 
+            if ($row->status == 2) {
+                $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
+                if ($umur_tahun == 0) {
+                    $row->nilai_buku = 0;
+                    $row->pengurangan = $row->rupiah * -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->penambahan_penyusutan = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
+                } else {
+                    $row->pengurangan = 0;
+                    $row->penambahan = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_lalu = $row->rupiah * -1;
+                    $row->penambahan_penyusutan = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                }
+            }
+
             // Kondisi khusus untuk tanah
             if ($row->grand_id == 218) {
                 $row->akm_thn_lalu = 0;
                 $row->akm_thn_ini = 0;
-                $row->nilai_buku_lalu = $row->nilai_buku;
+                $row->nilai_buku_lalu = 0;
+                $row->nilai_buku_final = $row->rupiah;
             }
 
             // Akumulasi total dari setiap kolom
@@ -1111,7 +1340,7 @@ class Model_penyusutan_kendaraan extends CI_Model
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
-        $this->db->where('daftar_asset.parent_id', 2844);
+        $this->db->where('daftar_asset.parent_id', 2855);
         $this->db->where('daftar_asset.id_no_per', $upk_bagian);
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
@@ -1207,11 +1436,39 @@ class Model_penyusutan_kendaraan extends CI_Model
                 $row->nilai_buku_final = $nilai_buku_final;
             }
 
+            if ($row->status == 2) {
+                $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
+                if ($umur_tahun == 0) {
+                    $row->nilai_buku = 0;
+                    $row->pengurangan = $row->rupiah * -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->penambahan_penyusutan = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
+                } else {
+                    $row->pengurangan = 0;
+                    $row->penambahan = 0;
+                    $row->akm_thn_lalu = 0;
+                    $row->akm_thn_ini = 0;
+                    $row->nilai_buku_lalu = $row->rupiah * -1;
+                    $row->penambahan_penyusutan = 0;
+                    $row->nilai_buku_final = $row->rupiah;
+                }
+            }
+
             // Kondisi khusus untuk tanah
             if ($row->grand_id == 218) {
                 $row->akm_thn_lalu = 0;
                 $row->akm_thn_ini = 0;
-                $row->nilai_buku_lalu = $row->nilai_buku;
+                $row->nilai_buku_lalu = 0;
+                $row->nilai_buku_final = $row->rupiah;
             }
 
             // Akumulasi total dari setiap kolom

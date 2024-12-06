@@ -103,7 +103,7 @@
                             foreach ($grouped_data as $parent_id => $upk_data) {
                                 // Judul berdasarkan parent_id
                                 $nama_olah_air_jenis = $nama_olah_air[$parent_id] ?? "Bangunan Lainnya";
-                                echo "<tr><td colspan='14' class='bg-primary text-white'><strong>{$nama_olah_air_jenis}</strong></td></tr>";
+                                echo "<tr><td class='bg-primary'></td><td colspan='13' class='bg-primary text-white'><strong>{$nama_olah_air_jenis}</strong></td></tr>";
 
                                 // Inisialisasi total per jenis bangunan
                                 $totals_per_jenis[$parent_id] = [
@@ -121,7 +121,7 @@
                                 // Menampilkan data per bagian/upk
                                 foreach ($upk_data as $id_no_per => $assets) {
                                     $name = $assets[0]->name;
-                                    echo "<tr><td colspan='14' class='bg-secondary text-white'><strong> {$name}</strong></td></tr>";
+                                    echo "<tr><td class='bg-secondary'></td><td colspan='13' class='bg-secondary text-white'><strong> {$name}</strong></td></tr>";
 
                                     // Inisialisasi total per bagian/upk
                                     $total_rupiah = 0;
@@ -176,8 +176,8 @@
                                     // Menampilkan total per bagian/upk
                                     ?>
                                     <tr class="bg-light text-right">
-                                        <td colspan="2" class="text-left"><strong>Sub Total <?= $name; ?></strong></td>
                                         <td></td>
+                                        <td colspan="2" class="text-left"><strong>Sub Total <?= $name; ?></strong></td>
                                         <td></td>
                                         <td></td>
                                         <td><?= number_format($total_nilai_buku, 0, ',', '.'); ?></td>
@@ -207,8 +207,8 @@
                                 // Menampilkan total per jenis sumber
                                 ?>
                                 <tr class="bg-info text-right">
-                                    <td colspan="2" class="text-left"><strong>Sub Total <?= $nama_olah_air_jenis; ?></strong></td>
                                     <td></td>
+                                    <td colspan="2" class="text-left"><strong>Sub Total <?= $nama_olah_air_jenis; ?></strong></td>
                                     <td></td>
                                     <td></td>
                                     <td><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku'], 0, ',', '.'); ?></td>

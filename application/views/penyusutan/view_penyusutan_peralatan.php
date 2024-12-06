@@ -35,6 +35,9 @@
                     <div class="navbar-nav ms-1">
                         <a href="<?= base_url('penyusutan/peralatan_bengkel') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Bengkel</button></a>
                     </div>
+                    <div class="navbar-nav ms-1">
+                        <a href="<?= base_url('penyusutan/peralatan_lainnya') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Peralatan lainnya</button></a>
+                    </div>
                     <div class="navbar-nav ms-auto">
                         <a href="<?= base_url('penyusutan/cetak_peralatan') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
                     </div>
@@ -55,7 +58,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table id="contoh" class="table table-bordered table-striped table-hover">
+                    <table id="contoh2" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
@@ -85,7 +88,8 @@
                                 2789 => "Alat-alat Pergudangan",
                                 2793 => "Alat-alat Laboratorium",
                                 2795 => "Alat-alat Telekomunikasi",
-                                2798 => "Alat-alat Bengkel"
+                                2798 => "Alat-alat Bengkel",
+                                4251 => "Alat Perlengkapan Lainnya"
                             ];
                             foreach ($susut as $row) {
                                 $grouped_data[$row->parent_id][$row->id_no_per][] = $row;
@@ -94,10 +98,10 @@
                             // Menampilkan data yang telah dikelompokkan
                             foreach ($grouped_data as $parent_id => $upk_data) {
                                 // Judul berdasarkan parent_id
-                                $nama_peralatan_jenis = $nama_peralatan[$parent_id] ?? "Bangunan Lainnya";
-                                echo "<tr><td colspan='14' class='bg-primary text-white'><strong>{$nama_peralatan_jenis}</strong></td></tr>";
+                                $nama_peralatan_jenis = $nama_peralatan[$parent_id] ?? "Peralatan Lainnya";
+                                echo "<tr><td class='bg-primary'></td><td colspan='13' class='bg-primary text-white'><strong>{$nama_peralatan_jenis}</strong></td></tr>";
 
-                                // Inisialisasi total per jenis bangunan
+                                // Inisialisasi total per jenis peralatan
                                 $totals_per_jenis[$parent_id] = [
                                     'total_rupiah' => 0,
                                     'total_nilai_buku' => 0,
@@ -113,7 +117,7 @@
                                 // Menampilkan data per bagian/upk
                                 foreach ($upk_data as $id_no_per => $assets) {
                                     $name = $assets[0]->name;
-                                    echo "<tr><td colspan='14' class='bg-secondary text-white'><strong> {$name}</strong></td></tr>";
+                                    echo "<tr><td class='bg-secondary'></td><td colspan='13' class='bg-secondary text-white'><strong> {$name}</strong></td></tr>";
 
                                     // Inisialisasi total per bagian/upk
                                     $total_rupiah = 0;
@@ -168,8 +172,8 @@
                                     // Menampilkan total per bagian/upk
                                     ?>
                                     <tr class="bg-light text-right">
-                                        <td colspan="2" class="text-left"><strong>Sub Total <?= $name; ?></strong></td>
                                         <td></td>
+                                        <td colspan="2" class="text-left"><strong>Sub Total <?= $name; ?></strong></td>
                                         <td></td>
                                         <td></td>
                                         <td><?= number_format($total_nilai_buku, 0, ',', '.'); ?></td>
@@ -199,8 +203,8 @@
                                 // Menampilkan total per jenis sumber
                                 ?>
                                 <tr class="bg-info text-right">
-                                    <td colspan="2" class="text-left"><strong>Sub Total <?= $nama_peralatan_jenis; ?></strong></td>
                                     <td></td>
+                                    <td colspan="2" class="text-left"><strong>Sub Total <?= $nama_peralatan_jenis; ?></strong></td>
                                     <td></td>
                                     <td></td>
                                     <td><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku'], 0, ',', '.'); ?></td>

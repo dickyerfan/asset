@@ -2408,7 +2408,7 @@ class Penyusutan extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'Daftar Penyusutan Peralatan';
+        $data['title'] = 'Daftar Penyusutan Peralatan & Perlengkapan';
         $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_peralatan'] = $penyusutan_data['total_peralatan'];
@@ -2440,6 +2440,431 @@ class Penyusutan extends CI_Controller
         $this->pdf->setPaper('folio', 'landscape');
         $this->pdf->filename = "peralatan-{$tahun}.pdf";
         $this->pdf->generate('cetakan/peralatan_pdf', $data);
+    }
+
+    public function peralatan_laboratorium()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_peralatan_laboratorium');
+        } else {
+            $this->session->set_userdata('tahun_session_peralatan_laboratorium', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_laboratorium_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_laboratorium($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_laboratorium();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_peralatan_laboratorium', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_peralatan_laboratorium()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_peralatan_laboratorium');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_peralatan_laboratorium');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_laboratorium_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_laboratorium($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_laboratorium();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "peralatan_laboratorium-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/peralatan_laboratorium_pdf', $data);
+    }
+
+    public function peralatan_gudang()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_peralatan_gudang');
+        } else {
+            $this->session->set_userdata('tahun_session_peralatan_gudang', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_gudang_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_gudang($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_gudang();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_peralatan_gudang', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_peralatan_gudang()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_peralatan_gudang');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_peralatan_gudang');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_gudang_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_gudang($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_gudang();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "peralatan_gudang-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/peralatan_gudang_pdf', $data);
+    }
+
+    public function peralatan_bengkel()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_peralatan_bengkel');
+        } else {
+            $this->session->set_userdata('tahun_session_peralatan_bengkel', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bengkel_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bengkel($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_bengkel();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_peralatan_bengkel', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_peralatan_bengkel()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_peralatan_bengkel');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_peralatan_bengkel');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bengkel_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bengkel($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_bengkel();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "peralatan_bengkel-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/peralatan_bengkel_pdf', $data);
+    }
+
+    public function peralatan_lainnya()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_peralatan_lainnya');
+        } else {
+            $this->session->set_userdata('tahun_session_peralatan_lainnya', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_lainnya_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_lainnya($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_lainnya();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_peralatan_lainnya', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_peralatan_lainnya()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_peralatan_lainnya');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_peralatan_lainnya');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_lainnya_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_lainnya($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_lainnya();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "peralatan_lainnya-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/peralatan_lainnya_pdf', $data);
+    }
+
+    public function peralatan_telekomunikasi()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_peralatan_telekomunikasi');
+        } else {
+            $this->session->set_userdata('tahun_session_peralatan_telekomunikasi', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_telekomunikasi_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_telekomunikasi($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_telekomunikasi();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_peralatan_telekomunikasi', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_peralatan_telekomunikasi()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_peralatan_telekomunikasi');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_peralatan_telekomunikasi');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_telekomunikasi_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_telekomunikasi($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_telekomunikasi();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "peralatan_telekomunikasi-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/peralatan_telekomunikasi_pdf', $data);
     }
 
 
@@ -2490,6 +2915,346 @@ class Penyusutan extends CI_Controller
         $this->pdf->generate('cetakan/kendaraan_pdf', $data);
     }
 
+    public function kendaraan_penumpang()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_kendaraan_penumpang');
+        } else {
+            $this->session->set_userdata('tahun_session_kendaraan_penumpang', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_penumpang_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_penumpang($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_penumpang();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_kendaraan_penumpang', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_kendaraan_penumpang()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_kendaraan_penumpang');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_kendaraan_penumpang');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_penumpang_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_penumpang($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_penumpang();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "kendaraan_penumpang-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/kendaraan_penumpang_pdf', $data);
+    }
+
+    public function kendaraan_angkut()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_kendaraan_angkut');
+        } else {
+            $this->session->set_userdata('tahun_session_kendaraan_angkut', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_angkut_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_angkut($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_angkut();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_kendaraan_angkut', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_kendaraan_angkut()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_kendaraan_angkut');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_kendaraan_angkut');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_angkut_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_angkut($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_angkut();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "kendaraan_angkut-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/kendaraan_angkut_pdf', $data);
+    }
+
+    public function kendaraan_tangki()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_kendaraan_tangki');
+        } else {
+            $this->session->set_userdata('tahun_session_kendaraan_tangki', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_tangki_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_tangki($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_tangki();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_kendaraan_tangki', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_kendaraan_tangki()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_kendaraan_tangki');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_kendaraan_tangki');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_tangki_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_tangki($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_tangki();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "kendaraan_tangki-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/kendaraan_tangki_pdf', $data);
+    }
+
+    public function kendaraan_roda_dua()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_kendaraan_roda_dua');
+        } else {
+            $this->session->set_userdata('tahun_session_kendaraan_roda_dua', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_roda_dua_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_roda_dua($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_roda_dua();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_kendaraan_roda_dua', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_kendaraan_roda_dua()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_kendaraan_roda_dua');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_kendaraan_roda_dua');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_roda_dua_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_roda_dua($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_roda_dua();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "kendaraan_roda_dua-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/kendaraan_roda_dua_pdf', $data);
+    }
+
     public function inventaris()
     {
         $get_tahun = $this->input->get('tahun');
@@ -2535,6 +3300,259 @@ class Penyusutan extends CI_Controller
         $this->pdf->setPaper('folio', 'landscape');
         $this->pdf->filename = "inventaris-{$tahun}.pdf";
         $this->pdf->generate('cetakan/inventaris_pdf', $data);
+    }
+
+    public function inventaris_meubelair()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_inventaris_meubelair');
+        } else {
+            $this->session->set_userdata('tahun_session_inventaris_meubelair', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_meubelair_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_meubelair($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_inventaris->get_unit_inventaris_meubelair();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_inventaris_meubelair', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_inventaris_meubelair()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_inventaris_meubelair');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_inventaris_meubelair');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_meubelair_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_meubelair($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_inventaris->get_unit_inventaris_meubelair();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "inventaris_meubelair-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/inventaris_meubelair_pdf', $data);
+    }
+    public function inventaris_mesin()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_inventaris_mesin');
+        } else {
+            $this->session->set_userdata('tahun_session_inventaris_mesin', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_mesin_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_mesin($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_inventaris->get_unit_inventaris_mesin();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_inventaris_mesin', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_inventaris_mesin()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_inventaris_mesin');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_inventaris_mesin');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_mesin_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_mesin($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_inventaris->get_unit_inventaris_mesin();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "inventaris_mesin-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/inventaris_mesin_pdf', $data);
+    }
+    public function inventaris_rupa()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $upk_bagian = $this->input->get('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_inventaris_rupa');
+        } else {
+            $this->session->set_userdata('tahun_session_inventaris_rupa', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if (!empty($upk_bagian)) {
+            $this->session->set_userdata('upk_bagian', $upk_bagian);
+        } else {
+            $this->session->unset_userdata('upk_bagian', $upk_bagian);
+        }
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_rupa_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_rupa($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_inventaris->get_unit_inventaris_rupa();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_inventaris_rupa', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cetak_inventaris_rupa()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_inventaris_rupa');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_inventaris_rupa');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_rupa_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_rupa($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_inventaris->get_unit_inventaris_rupa();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "inventaris_rupa-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/inventaris_rupa_pdf', $data);
     }
 
     public function edit_penyusutan($id_asset)
