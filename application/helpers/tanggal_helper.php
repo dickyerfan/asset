@@ -45,3 +45,15 @@ function ubahNamaBulan($tanggal)
     }
     return $day . ' ' . $bln . ' ' . $tahun;
 }
+
+if (!function_exists('round_half_to_even')) {
+    function round_half_to_even($value)
+    {
+        $floor_value = floor($value);
+        $fraction = $value - $floor_value;
+        if ($fraction != 0.5) {
+            return round($value);
+        }
+        return $floor_value % 2 == 0 ? $floor_value : $floor_value + 1;
+    }
+}

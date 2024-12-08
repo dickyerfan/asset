@@ -45,7 +45,7 @@ class model_user extends CI_Model
         $data = [
             'nama_pengguna' => $this->input->post('nama_pengguna', true),
             'nama_lengkap' => $this->input->post('nama_lengkap', true),
-            'email' => $this->input->post('email', true),
+            'bagian' => $this->input->post('bagian', true),
             'level' => $this->input->post('level', true),
         ];
         $this->db->where('id', $this->input->post('id'));

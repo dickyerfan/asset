@@ -87,6 +87,7 @@ class Model_penyusutan extends CI_Model
                             $nilai_buku_final = $row->rupiah - $akm_thn_ini;
                             if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
                                 $nilai_buku_final = 1;
+                                $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
                             $nilai_buku_final = -1;

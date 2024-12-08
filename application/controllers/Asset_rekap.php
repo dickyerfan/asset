@@ -19,8 +19,8 @@ class Asset_rekap extends CI_Controller
             redirect('auth');
         }
 
-        $level_pengguna = $this->session->userdata('level');
-        if ($level_pengguna != 'Admin') {
+        $bagian = $this->session->userdata('bagian');
+        if ($bagian != 'Keuangan' && $bagian != 'Administrator' && $bagian != 'Auditor') {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">

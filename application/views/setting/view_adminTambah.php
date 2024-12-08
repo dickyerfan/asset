@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header card-outline card-primary shadow">
                 <h3 class="card-title font-weight-bold mt-2"><?= strtoupper($title)  ?></h3>
-                <a href="<?= base_url('setting/daftar_user'); ?>"><button class="btn btn-primary btn-sm float-right"><i class="fas fa-reply"></i> Kembali</button></a>
+                <a href="<?= base_url('setting/daftar_user'); ?>"><button class="neumorphic-button float-right"><i class="fas fa-reply"></i> Kembali</button></a>
             </div>
             <div class="card-body">
                 <form class="user" action="" method="POST">
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary float-left mb-5" name="tambah" type="submit"><i class="fas fa-save"></i> Simpan</button>
+                    <button class="neumorphic-button float-left mb-5" name="tambah" type="submit"><i class="fas fa-save"></i> Simpan</button>
                 </form>
             </div>
         </div>

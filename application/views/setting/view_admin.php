@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header card-outline card-primary shadow">
                 <h3 class="card-title font-weight-bold mt-2"><?= strtoupper($title)  ?></h3>
-                <a href="<?= base_url('setting/daftar_user/tambah'); ?>"><button class="btn btn-primary btn-sm float-right"><i class="fas fa-plus"></i> Tambah User</button></a>
+                <a href="<?= base_url('setting/daftar_user/tambah'); ?>"><button class="neumorphic-button float-right"><i class="fas fa-plus"></i> Tambah User</button></a>
             </div>
             <div class="p-2">
                 <?= $this->session->flashdata('info'); ?>
@@ -37,18 +37,15 @@
                                 <td><?= $row->tgl_update; ?></td>
                                 <td><?= $row->petugas_update; ?></td>
                                 <td class="text-center">
-                                    <a href="<?= base_url(); ?>user/admin/edit/<?= $row->id; ?>"><span class="badge badge-primary"><i class="fas fa-fw fa-edit"></i> Edit</span></a>
-                                    <a href="<?= base_url(); ?>user/admin/hapus/<?= $row->id; ?>" class="badge badge-danger"><i class="fas fa-fw fa-trash"></i> Hapus</a>
+                                    <a href="<?= base_url(); ?>setting/daftar_user/edit/<?= $row->id; ?>"><span class="neumorphic-button"><i class="fas fa-fw fa-edit"></i> Edit</span></a>
+                                    <a href="<?= base_url(); ?>setting/daftar_user/hapus/<?= $row->id; ?>"><span class="neumorphic-button text-danger"><i class="fas fa-fw fa-trash"></i> Hapus</span></a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
-
-
         </div>
     </div>
-
 </section>
 </div>

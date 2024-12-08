@@ -15,10 +15,10 @@
 
 					</div>
 					<div class="navbar-nav ms-auto">
-						<!-- <?php if ($this->session->userdata('level') != 'Pengguna') : ?>
+						<?php if ($this->session->userdata('level') != 'Pengguna') : ?>
 							<a href="<?= base_url('asset/upload') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Asset</button></a>
-						<?php endif; ?> -->
-						<a href="<?= base_url('asset/upload') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Asset</button></a>
+						<?php endif; ?>
+						<!-- <a href="<?= base_url('asset/upload') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Asset</button></a> -->
 					</div>
 				</nav>
 			</div>

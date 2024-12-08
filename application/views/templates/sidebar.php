@@ -17,7 +17,7 @@
         <div class="collapse" id="user">
             <ul class="nav nav-pills nav-sidebar flex-column">
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="<?= base_url('setting/password') ?>" class="nav-link">
                         <i class="nav-icon fas fa-key"></i>
                         <p>Ganti Password</p>
                     </a>
@@ -201,31 +201,33 @@
                         </li> -->
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tools"></i>
-                        <p>
-                            Setting
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= base_url('setting/daftar_user') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Daftar User</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="<?= base_url('backup') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-database"></i>
-                        <p>
-                            Backup & Restore
-                        </p>
-                    </a>
-                </li>
+                <?php if ($this->session->userdata('level') != 'Pengguna') : ?>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tools"></i>
+                            <p>
+                                Setting
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?= base_url('setting/daftar_user') ?>" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Daftar User</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('backup') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-database"></i>
+                            <p>
+                                Backup & Restore
+                            </p>
+                        </a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item" data-toggle="modal" data-target="#logoutModal">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>

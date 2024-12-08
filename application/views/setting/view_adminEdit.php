@@ -3,10 +3,10 @@
         <div class="card">
             <div class="card-header card-outline card-primary shadow">
                 <h3 class="card-title font-weight-bold mt-2"><?= strtoupper($title)  ?></h3>
-                <a href="<?= base_url('user/admin'); ?>"><button class="btn btn-primary btn-sm float-right"><i class="fas fa-reply"></i> Kembali</button></a>
+                <a href="<?= base_url('setting/daftar_user'); ?>"><button class="neumorphic-button float-right float-right"><i class="fas fa-reply"></i> Kembali</button></a>
             </div>
             <div class="card-body">
-                <form class="user" action="<?= base_url('user/admin/update') ?>" method="POST">
+                <form class="user" action="<?= base_url('setting/daftar_user/update') ?>" method="POST">
                     <div class="row">
                         <div class="col-md-6">
                             <input type="hidden" name="id" id="id" value="<?= $user->id ?>">
@@ -23,8 +23,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="email">Email :</label>
-                                <input type="text" class="form-control" id="email" name="email" value="<?= $user->email; ?>">
+                                <label for="bagian">Bagian :</label>
+                                <input type="text" class="form-control" id="bagian" name="bagian" value="<?= $user->bagian; ?>">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -37,7 +37,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary float-left mb-5" name="tambah" type="submit"><i class="fas fa-save"></i> Simpan</button>
+                    <button class="neumorphic-button float-left mb-5" name="tambah" type="submit"><i class="fas fa-save"></i> Simpan</button>
                 </form>
             </div>
         </div>
