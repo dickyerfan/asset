@@ -73,9 +73,9 @@ class Model_penyusutan_inventaris extends CI_Model
 
                     // Hitung penyusutan berdasarkan kategori aset
                     if (in_array($row->parent_id, $parent_ids_bangunan)) {
-                        $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_awal;
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
                     } else {
-                        $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_lalu;
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
                     }
 
                     // Update akumulasi penyusutan dan nilai buku akhir
@@ -94,6 +94,7 @@ class Model_penyusutan_inventaris extends CI_Model
                             $nilai_buku_final = $row->rupiah - $akm_thn_ini;
                             if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
                                 $nilai_buku_final = 1;
+                                $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
                             $nilai_buku_final = -1;
@@ -122,7 +123,7 @@ class Model_penyusutan_inventaris extends CI_Model
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
                 } elseif ($umur_tahun_kurang > $row->umur) {
-                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_final = 0;
                     $row->nilai_buku_lalu = 0;
                     $row->akm_thn_lalu = $row->rupiah * 1;
                     $row->akm_thn_ini = $row->rupiah * 1;
@@ -238,9 +239,9 @@ class Model_penyusutan_inventaris extends CI_Model
 
                     // Hitung penyusutan berdasarkan kategori aset
                     if (in_array($row->parent_id, $parent_ids_bangunan)) {
-                        $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_awal;
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
                     } else {
-                        $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_lalu;
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
                     }
 
                     // Update akumulasi penyusutan dan nilai buku akhir
@@ -259,6 +260,7 @@ class Model_penyusutan_inventaris extends CI_Model
                             $nilai_buku_final = $row->rupiah - $akm_thn_ini;
                             if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
                                 $nilai_buku_final = 1;
+                                $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
                             $nilai_buku_final = -1;
@@ -287,7 +289,7 @@ class Model_penyusutan_inventaris extends CI_Model
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
                 } elseif ($umur_tahun_kurang > $row->umur) {
-                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_final = 0;
                     $row->nilai_buku_lalu = 0;
                     $row->akm_thn_lalu = $row->rupiah * 1;
                     $row->akm_thn_ini = $row->rupiah * 1;
@@ -405,9 +407,9 @@ class Model_penyusutan_inventaris extends CI_Model
 
                     // Hitung penyusutan berdasarkan kategori aset
                     if (in_array($row->parent_id, $parent_ids_bangunan)) {
-                        $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_awal;
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
                     } else {
-                        $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_lalu;
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
                     }
 
                     // Update akumulasi penyusutan dan nilai buku akhir
@@ -426,6 +428,7 @@ class Model_penyusutan_inventaris extends CI_Model
                             $nilai_buku_final = $row->rupiah - $akm_thn_ini;
                             if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
                                 $nilai_buku_final = 1;
+                                $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
                             $nilai_buku_final = -1;
@@ -454,7 +457,7 @@ class Model_penyusutan_inventaris extends CI_Model
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
                 } elseif ($umur_tahun_kurang > $row->umur) {
-                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_final = 0;
                     $row->nilai_buku_lalu = 0;
                     $row->akm_thn_lalu = $row->rupiah * 1;
                     $row->akm_thn_ini = $row->rupiah * 1;
@@ -570,9 +573,9 @@ class Model_penyusutan_inventaris extends CI_Model
 
                     // Hitung penyusutan berdasarkan kategori aset
                     if (in_array($row->parent_id, $parent_ids_bangunan)) {
-                        $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_awal;
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
                     } else {
-                        $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_lalu;
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
                     }
 
                     // Update akumulasi penyusutan dan nilai buku akhir
@@ -591,6 +594,7 @@ class Model_penyusutan_inventaris extends CI_Model
                             $nilai_buku_final = $row->rupiah - $akm_thn_ini;
                             if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
                                 $nilai_buku_final = 1;
+                                $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
                             $nilai_buku_final = -1;
@@ -619,7 +623,7 @@ class Model_penyusutan_inventaris extends CI_Model
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
                 } elseif ($umur_tahun_kurang > $row->umur) {
-                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_final = 0;
                     $row->nilai_buku_lalu = 0;
                     $row->akm_thn_lalu = $row->rupiah * 1;
                     $row->akm_thn_ini = $row->rupiah * 1;
@@ -736,9 +740,9 @@ class Model_penyusutan_inventaris extends CI_Model
 
                     // Hitung penyusutan berdasarkan kategori aset
                     if (in_array($row->parent_id, $parent_ids_bangunan)) {
-                        $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_awal;
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
                     } else {
-                        $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_lalu;
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
                     }
 
                     // Update akumulasi penyusutan dan nilai buku akhir
@@ -757,6 +761,7 @@ class Model_penyusutan_inventaris extends CI_Model
                             $nilai_buku_final = $row->rupiah - $akm_thn_ini;
                             if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
                                 $nilai_buku_final = 1;
+                                $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
                             $nilai_buku_final = -1;
@@ -785,7 +790,7 @@ class Model_penyusutan_inventaris extends CI_Model
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
                 } elseif ($umur_tahun_kurang > $row->umur) {
-                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_final = 0;
                     $row->nilai_buku_lalu = 0;
                     $row->akm_thn_lalu = $row->rupiah * 1;
                     $row->akm_thn_ini = $row->rupiah * 1;
@@ -901,9 +906,9 @@ class Model_penyusutan_inventaris extends CI_Model
 
                     // Hitung penyusutan berdasarkan kategori aset
                     if (in_array($row->parent_id, $parent_ids_bangunan)) {
-                        $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_awal;
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
                     } else {
-                        $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_lalu;
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
                     }
 
                     // Update akumulasi penyusutan dan nilai buku akhir
@@ -922,6 +927,7 @@ class Model_penyusutan_inventaris extends CI_Model
                             $nilai_buku_final = $row->rupiah - $akm_thn_ini;
                             if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
                                 $nilai_buku_final = 1;
+                                $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
                             $nilai_buku_final = -1;
@@ -950,7 +956,7 @@ class Model_penyusutan_inventaris extends CI_Model
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
                 } elseif ($umur_tahun_kurang > $row->umur) {
-                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_final = 0;
                     $row->nilai_buku_lalu = 0;
                     $row->akm_thn_lalu = $row->rupiah * 1;
                     $row->akm_thn_ini = $row->rupiah * 1;
@@ -1067,9 +1073,9 @@ class Model_penyusutan_inventaris extends CI_Model
 
                     // Hitung penyusutan berdasarkan kategori aset
                     if (in_array($row->parent_id, $parent_ids_bangunan)) {
-                        $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_awal;
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
                     } else {
-                        $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_lalu;
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
                     }
 
                     // Update akumulasi penyusutan dan nilai buku akhir
@@ -1088,6 +1094,7 @@ class Model_penyusutan_inventaris extends CI_Model
                             $nilai_buku_final = $row->rupiah - $akm_thn_ini;
                             if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
                                 $nilai_buku_final = 1;
+                                $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
                             $nilai_buku_final = -1;
@@ -1116,7 +1123,7 @@ class Model_penyusutan_inventaris extends CI_Model
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
                 } elseif ($umur_tahun_kurang > $row->umur) {
-                    $row->nilai_buku_final = -1;
+                    $row->nilai_buku_final = 0;
                     $row->nilai_buku_lalu = 0;
                     $row->akm_thn_lalu = $row->rupiah * 1;
                     $row->akm_thn_ini = $row->rupiah * 1;

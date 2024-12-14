@@ -131,8 +131,7 @@ class Model_penyusutan_pompa extends CI_Model
             penyusutan.*, 
             daftar_asset.*, 
             no_per.*, 
-            daftar_asset.status AS status_penyusutan
-        ');
+            daftar_asset.status AS status_penyusutan');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
@@ -256,15 +255,22 @@ class Model_penyusutan_pompa extends CI_Model
             //     }
             // }
 
-            if ($row->status_penyusutan == 2) {
+            if ($row->status == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
                 if ($umur_tahun == 0) {
                     $row->nilai_buku = 0;
                     $row->pengurangan = $row->rupiah * -1;
                     $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = 0;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
                 } else {
                     $row->pengurangan = 0;
                     $row->penambahan = 0;
@@ -417,13 +423,20 @@ class Model_penyusutan_pompa extends CI_Model
 
             if ($row->status == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
                 if ($umur_tahun == 0) {
                     $row->nilai_buku = 0;
                     $row->pengurangan = $row->rupiah * -1;
                     $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = 0;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
                 } else {
                     $row->pengurangan = 0;
                     $row->penambahan = 0;
@@ -578,13 +591,20 @@ class Model_penyusutan_pompa extends CI_Model
 
             if ($row->status == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
                 if ($umur_tahun == 0) {
                     $row->nilai_buku = 0;
                     $row->pengurangan = $row->rupiah * -1;
                     $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = 0;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
                 } else {
                     $row->pengurangan = 0;
                     $row->penambahan = 0;
@@ -737,13 +757,20 @@ class Model_penyusutan_pompa extends CI_Model
 
             if ($row->status == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
                 if ($umur_tahun == 0) {
                     $row->nilai_buku = 0;
                     $row->pengurangan = $row->rupiah * -1;
                     $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = 0;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
                 } else {
                     $row->pengurangan = 0;
                     $row->penambahan = 0;
@@ -897,13 +924,20 @@ class Model_penyusutan_pompa extends CI_Model
 
             if ($row->status == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
                 if ($umur_tahun == 0) {
                     $row->nilai_buku = 0;
                     $row->pengurangan = $row->rupiah * -1;
                     $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = 0;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
                 } else {
                     $row->pengurangan = 0;
                     $row->penambahan = 0;
@@ -1056,13 +1090,20 @@ class Model_penyusutan_pompa extends CI_Model
 
             if ($row->status == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
                 if ($umur_tahun == 0) {
                     $row->nilai_buku = 0;
                     $row->pengurangan = $row->rupiah * -1;
                     $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = 0;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
                 } else {
                     $row->pengurangan = 0;
                     $row->penambahan = 0;
@@ -1216,13 +1257,20 @@ class Model_penyusutan_pompa extends CI_Model
 
             if ($row->status == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
                 if ($umur_tahun == 0) {
                     $row->nilai_buku = 0;
                     $row->pengurangan = $row->rupiah * -1;
                     $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = 0;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
                 } else {
                     $row->pengurangan = 0;
                     $row->penambahan = 0;
@@ -1375,13 +1423,20 @@ class Model_penyusutan_pompa extends CI_Model
 
             if ($row->status == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
                 if ($umur_tahun == 0) {
                     $row->nilai_buku = 0;
                     $row->pengurangan = $row->rupiah * -1;
                     $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = 0;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
                 } else {
                     $row->pengurangan = 0;
                     $row->penambahan = 0;
@@ -1535,13 +1590,20 @@ class Model_penyusutan_pompa extends CI_Model
 
             if ($row->status == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
+                $umur_tahun_kurang = $tahun - $row->tahun;
                 if ($umur_tahun == 0) {
                     $row->nilai_buku = 0;
                     $row->pengurangan = $row->rupiah * -1;
                     $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
                     $row->akm_thn_ini = 0;
                     $row->nilai_buku_final = $row->rupiah;
+                } elseif ($umur_tahun_kurang > $row->umur) {
+                    $row->nilai_buku_final = 0;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_lalu = $row->rupiah * 1;
+                    $row->akm_thn_ini = $row->rupiah * 1;
                 } else {
                     $row->pengurangan = 0;
                     $row->penambahan = 0;

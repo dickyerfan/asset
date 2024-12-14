@@ -103,7 +103,7 @@
                                         }
                                         ?>
                                         <?php if ($row->kode_sr == 1) : ?>
-                                            <?= $nama_asset; ?> <?= $row->jumlah; ?> di <?= $row->nama_bagian; ?>
+                                            <?= $nama_asset; ?>
                                         <?php else : ?>
                                             <?= $nama_asset; ?>
                                         <?php endif; ?>
