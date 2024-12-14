@@ -27,9 +27,9 @@
                     <div class="navbar-nav ms-1">
                         <a href="<?= base_url('penyusutan/trans_dist_bangunan') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Bang & prbaikan</button></a>
                     </div>
-                    <div class="navbar-nav ms-1">
+                    <!-- <div class="navbar-nav ms-1">
                         <a href="<?= base_url('penyusutan/trans_dist_reservoir') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Reservoir</button></a>
-                    </div>
+                    </div> -->
                     <div class="navbar-nav ms-1">
                         <a href="<?= base_url('penyusutan/trans_dist_pipa_trans') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Pipa Trans & Dist</button></a>
                     </div>
@@ -42,9 +42,9 @@
                     <div class="navbar-nav ms-1">
                         <a href="<?= base_url('penyusutan/trans_dist_ledeng') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Ledeng Umum</button></a>
                     </div>
-                    <div class="navbar-nav ms-1">
+                    <!-- <div class="navbar-nav ms-1">
                         <a href="<?= base_url('penyusutan/trans_dist_pemadam') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> slran. Pemadam</button></a>
-                    </div>
+                    </div> -->
                     <div class="navbar-nav ms-1">
                         <a href="<?= base_url('penyusutan/trans_dist_jembatan') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Jembatan Pipa</button></a>
                     </div>
@@ -247,7 +247,7 @@
                         </tbody>
                         <tfoot>
                             <tr class="text-center bg-light">
-                                <th colspan="5" class="text-left">Total Instalasi Pompa</th>
+                                <th colspan="5" class="text-left">Total Instalasi Transmisi & Distribusi</th>
                                 <th class="text-right"><?= number_format($total_trans_dist['total_nilai_buku'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($total_trans_dist['total_penambahan'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($total_trans_dist['total_pengurangan'], 0, ',', '.'); ?></th>

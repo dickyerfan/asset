@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table id="contoh" class="table table-bordered table-striped table-hover">
+                    <table id="contoh2" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
@@ -81,7 +81,7 @@
                             $nama_inventaris = [
                                 2844 => "Meubelair Kantor",
                                 2846 => "Mesin-mesin Kantor",
-                                2818 => "Rupa2 Inv. Ktr Lainnya"
+                                2848 => "Rupa2 Inv. Ktr Lainnya"
                             ];
                             foreach ($susut as $row) {
                                 $grouped_data[$row->parent_id][$row->id_no_per][] = $row;
@@ -215,7 +215,7 @@
                         </tbody>
                         <tfoot>
                             <tr class="text-center bg-light">
-                                <th colspan="5" class="text-left">Total cetak_inventaris</th>
+                                <th colspan="5" class="text-left">Total Inventaris Kantor</th>
                                 <th class="text-right"><?= number_format($total_inventaris['total_nilai_buku'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($total_inventaris['total_penambahan'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($total_inventaris['total_pengurangan'], 0, ',', '.'); ?></th>
