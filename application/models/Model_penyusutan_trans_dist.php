@@ -122,8 +122,8 @@ class Model_penyusutan_trans_dist extends CI_Model
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
         $this->db->where('daftar_asset.grand_id', 226);
         $this->db->order_by('id_no_per', 'ASC');
-        $this->db->order_by('daftar_asset.id_asset', 'ASC');
         $this->db->order_by('tanggal', 'ASC');
+        $this->db->order_by('daftar_asset.id_asset', 'ASC');
 
         $query = $this->db->get();
         $results = $query->result();
