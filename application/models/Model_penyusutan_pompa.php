@@ -255,7 +255,7 @@ class Model_penyusutan_pompa extends CI_Model
             //     }
             // }
 
-            if ($row->status == 2) {
+            if ($row->status_penyusutan == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
                 $umur_tahun_kurang = $tahun - $row->tahun;
                 if ($umur_tahun == 0) {

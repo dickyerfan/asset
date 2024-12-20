@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : database_lokal
+ Source Server         : DIE ArtS
  Source Server Type    : MySQL
- Source Server Version : 100417 (10.4.17-MariaDB)
+ Source Server Version : 100418 (10.4.18-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : asset
 
  Target Server Type    : MySQL
- Target Server Version : 100417 (10.4.17-MariaDB)
+ Target Server Version : 100418 (10.4.18-MariaDB)
  File Encoding         : 65001
 
- Date: 20/12/2024 17:09:16
+ Date: 20/12/2024 10:41:45
 */
 
 SET NAMES utf8mb4;
@@ -86,7 +86,7 @@ CREATE TABLE `daftar_asset`  (
   INDEX `id_no_per`(`id_no_per` ASC) USING BTREE,
   CONSTRAINT `daftar_asset_ibfk_1` FOREIGN KEY (`id_bagian`) REFERENCES `bagian_upk` (`id_bagian`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `daftar_asset_ibfk_2` FOREIGN KEY (`id_no_per`) REFERENCES `no_per` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2451 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2444 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of daftar_asset
@@ -372,6 +372,7 @@ INSERT INTO `daftar_asset` VALUES (279, 15, 1594, 1569, 220, 0, 34, 0, 'Pemasang
 INSERT INTO `daftar_asset` VALUES (280, 15, 1594, 1569, 220, 0, 34, 0, 'Pemasangan Atap bangunan IPA', '2023-02-28', NULL, '', '', 16333650, 1, 20, 5.00, 'Administrator', '2024-11-07 12:46:06', 0);
 INSERT INTO `daftar_asset` VALUES (281, 16, 1597, 1569, 220, 0, 34, 0, 'Pembuatan rumah ganzet', '2011-05-31', NULL, '', '', 18101700, 1, 20, 5.00, 'Administrator', '2024-11-07 13:34:31', 0);
 INSERT INTO `daftar_asset` VALUES (282, 16, 1597, 1569, 220, 0, 34, 0, 'Pembuatan Sumur Bor (BNA)', '2012-12-31', NULL, '', '', 186450000, 1, 20, 5.00, 'Administrator', '2024-11-07 13:35:07', 0);
+INSERT INTO `daftar_asset` VALUES (283, 16, 1872, 1579, 220, 0, 34, 0, 'Pembuatan Pagar SB Penambangan', '2024-09-07', NULL, '', '', 88892000, 1, 16, 12.50, 'Administrator', '2024-11-07 13:35:43', 0);
 INSERT INTO `daftar_asset` VALUES (284, 17, 1599, 1569, 220, 0, 34, 0, 'Pembuatan sumur bor 1 unit', '2016-12-31', NULL, '', '', 369657600, 1, 20, 5.00, 'Administrator', '2024-11-07 13:37:36', 0);
 INSERT INTO `daftar_asset` VALUES (285, 18, 1601, 1569, 220, 0, 34, 0, 'Pembuatan Sumur SB Kajar', '2022-03-30', NULL, '', '', 480110000, 1, 20, 5.00, 'Administrator', '2024-11-07 13:38:58', 0);
 INSERT INTO `daftar_asset` VALUES (286, 18, 1601, 1569, 220, 0, 34, 0, 'Pembuatan Pagar SB Kajar', '2023-03-30', NULL, '', '', 101873000, 1, 20, 5.00, 'Administrator', '2024-11-07 13:40:19', 0);
@@ -2527,12 +2528,6 @@ INSERT INTO `daftar_asset` VALUES (2440, 22, 2448, 2263, 226, 2, 34, 2, 'Penggan
 INSERT INTO `daftar_asset` VALUES (2441, 22, 2448, 2263, 226, 2, 34, 1, 'Penggantian Water meter 1 unit', '2024-07-31', NULL, '', '', 294150, 1, 16, 12.50, 'Administrator', '2024-12-20 09:55:03', 0);
 INSERT INTO `daftar_asset` VALUES (2442, 22, 2448, 2263, 226, 1, 34, 35, 'Pemasangan SR 35 unit', '2024-09-30', NULL, '', '', 10645250, 1, 16, 12.50, 'Administrator', '2024-12-20 09:55:47', 0);
 INSERT INTO `daftar_asset` VALUES (2443, 22, 2448, 2263, 226, 2, 34, 29, 'Penggantian Water meter 29 unit', '2023-12-31', NULL, '', '', 8186200, 1, 16, 12.50, 'Administrator', '2024-12-20 10:01:25', 0);
-INSERT INTO `daftar_asset` VALUES (2444, 2, 1488, 1472, 218, 0, 34, 0, 'Legalitas Aset Tanah', '2024-09-30', NULL, '', '', 14273000, 1, 0, 0.00, 'Administrator', '2024-12-20 13:15:03', 0);
-INSERT INTO `daftar_asset` VALUES (2445, 16, 1872, 1579, 220, 0, 34, 0, 'Pembuatan Pagar SB Penambangan', '2024-09-07', NULL, '', '', 88892000, 1, 8, 25.00, 'Administrator', '2024-12-20 13:40:52', 0);
-INSERT INTO `daftar_asset` VALUES (2447, 16, 1872, 1579, 220, 0, 34, 0, 'Pembuatan Pagar SB Poncogati', '2024-08-07', NULL, '', '', 124940000, 1, 16, 12.50, 'Administrator', '2024-12-20 13:53:01', 0);
-INSERT INTO `daftar_asset` VALUES (2448, 22, 1884, 1579, 220, 0, 34, 0, 'Pembuatan pagar SB Sukosari 2', '2024-03-18', NULL, '', '', 96052000, 1, 16, 12.50, 'Administrator', '2024-12-20 14:19:15', 0);
-INSERT INTO `daftar_asset` VALUES (2449, 2, 2620, 2552, 226, 0, 34, 0, 'Pemasangan Instalasi Wellhead SB City Plaza & Pemas.Instalasi Distribusi Darurat dia 40 sepanjang 124 meter', '2024-06-03', NULL, '', '', 6488014, 1, 16, 12.50, 'Administrator', '2024-12-20 14:50:53', 0);
-INSERT INTO `daftar_asset` VALUES (2450, 15, 2875, 2795, 244, 0, 34, 0, 'Penggantian seling tower Upk Wringin', '2024-02-21', NULL, '', '', 10000000, 1, 4, 50.00, 'Administrator', '2024-12-20 15:01:24', 0);
 
 -- ----------------------------
 -- Table structure for no_per
@@ -3859,7 +3854,7 @@ CREATE TABLE `penyusutan`  (
   PRIMARY KEY (`id_penyusutan`) USING BTREE,
   INDEX `id_asset`(`id_asset` ASC) USING BTREE,
   CONSTRAINT `penyusutan_ibfk_1` FOREIGN KEY (`id_asset`) REFERENCES `daftar_asset` (`id_asset`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2452 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2445 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of penyusutan
@@ -4145,6 +4140,7 @@ INSERT INTO `penyusutan` VALUES (280, 279, 2021, NULL, 3161000, 0, 0, 0, 3161000
 INSERT INTO `penyusutan` VALUES (281, 280, 2023, NULL, 16333650, 0, 0, 0, 16333650, '2024-11-07 12:46:06', 'Administrator');
 INSERT INTO `penyusutan` VALUES (282, 281, 2011, NULL, 18101700, 0, 0, 0, 18101700, '2024-11-07 13:34:31', 'Administrator');
 INSERT INTO `penyusutan` VALUES (283, 282, 2012, NULL, 186450000, 0, 0, 0, 186450000, '2024-11-07 13:35:07', 'Administrator');
+INSERT INTO `penyusutan` VALUES (284, 283, 2024, NULL, 88892000, 0, 0, 0, 88892000, '2024-11-07 13:35:43', 'Administrator');
 INSERT INTO `penyusutan` VALUES (285, 284, 2016, NULL, 369657600, 0, 0, 0, 369657600, '2024-11-07 13:37:36', 'Administrator');
 INSERT INTO `penyusutan` VALUES (286, 285, 2022, NULL, 480110000, 0, 0, 0, 480110000, '2024-11-07 13:38:58', 'Administrator');
 INSERT INTO `penyusutan` VALUES (287, 286, 2023, NULL, 101873000, 0, 0, 0, 101873000, '2024-11-07 13:40:19', 'Administrator');
@@ -6300,12 +6296,6 @@ INSERT INTO `penyusutan` VALUES (2441, 2440, 2024, NULL, 588300, 0, 0, 0, 588300
 INSERT INTO `penyusutan` VALUES (2442, 2441, 2024, NULL, 294150, 0, 0, 0, 294150, '2024-12-20 09:55:03', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2443, 2442, 2024, NULL, 10645250, 0, 0, 0, 10645250, '2024-12-20 09:55:47', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2444, 2443, 2023, NULL, 8186200, 0, 0, 0, 8186200, '2024-12-20 10:01:25', 'Administrator');
-INSERT INTO `penyusutan` VALUES (2445, 2444, 2024, NULL, 14273000, 0, 0, 0, 14273000, '2024-12-20 13:15:03', 'Administrator');
-INSERT INTO `penyusutan` VALUES (2446, 2445, 2024, NULL, 88892000, 0, 0, 0, 88892000, '2024-12-20 13:40:52', 'Administrator');
-INSERT INTO `penyusutan` VALUES (2448, 2447, 2024, NULL, 124940000, 0, 0, 0, 124940000, '2024-12-20 13:53:01', 'Administrator');
-INSERT INTO `penyusutan` VALUES (2449, 2448, 2024, NULL, 96052000, 0, 0, 0, 96052000, '2024-12-20 14:19:15', 'Administrator');
-INSERT INTO `penyusutan` VALUES (2450, 2449, 2024, NULL, 6488014, 0, 0, 0, 6488014, '2024-12-20 14:50:53', 'Administrator');
-INSERT INTO `penyusutan` VALUES (2451, 2450, 2024, NULL, 10000000, 0, 0, 0, 10000000, '2024-12-20 15:01:24', 'Administrator');
 
 -- ----------------------------
 -- Table structure for persediaan

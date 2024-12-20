@@ -188,7 +188,7 @@
                                     </tr>
                                 <?php
 
-                                    // Menambahkan total per bagian/upk ke total per jenis bangunan
+                                    // Menambahkan total per bagian/upk ke total per jenis peralatan
                                     $totals_per_jenis[$parent_id]['total_rupiah'] += $total_rupiah;
                                     $totals_per_jenis[$parent_id]['total_nilai_buku'] += $total_nilai_buku;
                                     $totals_per_jenis[$parent_id]['total_penambahan'] += $total_penambahan;
@@ -200,7 +200,7 @@
                                     $totals_per_jenis[$parent_id]['total_nilai_buku_final'] += $total_nilai_buku_final;
                                 }
 
-                                // Menampilkan total per jenis sumber
+                                // Menampilkan total per jenis peralatan
                                 ?>
                                 <tr class="bg-info text-right">
                                     <td></td>

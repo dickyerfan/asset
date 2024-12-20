@@ -151,7 +151,6 @@
                                             </td>
                                             <td class="text-center">
                                                 <?php
-                                                echo "<!-- Debug: status = " . $row->status . " -->"; // Tambahkan debug
                                                 if ($row->status_penyusutan == 2) {
                                                     echo  date('d-m-Y', strtotime($row->tanggal_persediaan));
                                                 } else {
