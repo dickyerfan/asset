@@ -437,6 +437,7 @@ class Model_penyusutan extends CI_Model
         $this->db->select('*');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
         $this->db->where('daftar_asset.grand_id', 218);
         $this->db->order_by('tanggal', 'ASC');

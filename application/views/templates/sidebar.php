@@ -36,8 +36,95 @@
                     <a href="<?= base_url('dashboard_asset') ?>" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Dashboard Asset
+                            Rekap Penyusutan
                             <!-- <span class="right badge badge-danger">New</span> -->
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('penyusutan') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Total Penyusutan
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-box"></i>
+                        <p>
+                            Detail Penyusutan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('penyusutan/tanah') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tanah</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('penyusutan/bangunan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Bangunan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('penyusutan/sumber') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ins Sumber</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('penyusutan/pompa') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ins Pompa</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('penyusutan/olah_air') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ins Pengolahan Air</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('penyusutan/trans_dist') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ins Trans & Dist</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('penyusutan/peralatan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Peralatan & Perlk</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('penyusutan/kendaraan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kendaraan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('penyusutan/inventaris') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Inventaris</p>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a href="<?= base_url('asset_rekap/penyusutan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Akm Penyusutan</p>
+                            </a>
+                        </li> -->
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('amortisasi') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-dollar-sign"></i>
+                        <p>
+                            Amortisasi
                         </p>
                     </a>
                 </li>
@@ -122,85 +209,6 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a href="<?= base_url('penyusutan') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-table"></i>
-                        <p>
-                            Total Penyusutan
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-box"></i>
-                        <p>
-                            Detail Penyusutan
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= base_url('penyusutan/tanah') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tanah</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('penyusutan/bangunan') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Bangunan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('penyusutan/sumber') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Ins Sumber</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('penyusutan/pompa') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Ins Pompa</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('penyusutan/olah_air') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Ins Pengolahan Air</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('penyusutan/trans_dist') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Ins Trans & Dist</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('penyusutan/peralatan') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Peralatan & Perlk</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('penyusutan/kendaraan') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Kendaraan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('penyusutan/inventaris') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Inventaris</p>
-                            </a>
-                        </li>
-                        <!-- <li class="nav-item">
-                            <a href="<?= base_url('asset_rekap/penyusutan') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Akm Penyusutan</p>
-                            </a>
-                        </li> -->
-                    </ul>
-                </li>
                 <?php if ($this->session->userdata('level') != 'Pengguna') : ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">

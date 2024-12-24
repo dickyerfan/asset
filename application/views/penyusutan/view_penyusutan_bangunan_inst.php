@@ -44,7 +44,7 @@
                         <a href="<?= base_url('penyusutan/bangunan') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Total Bangunan</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('penyusutan/bangunan/cetak_bangunan_inst_lain') ?>"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
+                        <a href="<?= base_url('penyusutan/cetak_bangunan_inst_lain') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
                     </div>
                 </nav>
             </div>

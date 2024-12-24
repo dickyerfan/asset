@@ -250,7 +250,7 @@ class Penyusutan extends CI_Controller
         // Set paper size and orientation
         $this->pdf->setPaper('folio', 'landscape');
 
-        $this->pdf->filename = "bangunan-{$tahun}.pdf";
+        $this->pdf->filename = "bangunan_kantor-{$tahun}.pdf";
         $this->pdf->generate('cetakan/bangunan_kantor_pdf', $data);
     }
 
@@ -297,6 +297,45 @@ class Penyusutan extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function cetak_bangunan_laboratorium()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_bangunan_lab');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_bangunan_lab');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_lab_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_lab($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_bangunan->get_unit_bangunan_lab();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "bangunan_lab-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/bangunan_lab_pdf', $data);
+    }
+
     public function bangunan_peralatan()
     {
         $get_tahun = $this->input->get('tahun');
@@ -338,6 +377,45 @@ class Penyusutan extends CI_Controller
         $this->load->view('templates/sidebar');
         $this->load->view('penyusutan/view_penyusutan_bangunan_alat', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function cetak_bangunan_peralatan()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_bangunan_alat');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_bangunan_alat');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_alat_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_alat($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_bangunan->get_unit_bangunan_alat();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "bangunan_alat-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/bangunan_alat_pdf', $data);
     }
 
     public function bangunan_bengkel()
@@ -383,6 +461,45 @@ class Penyusutan extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function cetak_bangunan_bengkel()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_bangunan_bengkel');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_bangunan_bengkel');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bengkel_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bengkel($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_bangunan->get_unit_bangunan_bengkel();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "bangunan_bengkel-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/bangunan_bengkel_pdf', $data);
+    }
+
     public function bangunan_inst_lain()
     {
         $get_tahun = $this->input->get('tahun');
@@ -425,6 +542,46 @@ class Penyusutan extends CI_Controller
         $this->load->view('penyusutan/view_penyusutan_bangunan_inst', $data);
         $this->load->view('templates/footer');
     }
+
+    public function cetak_bangunan_inst_lain()
+    {
+        $get_tahun = $this->session->userdata('tahun_session_bangunan_inst');
+        $upk_bagian = $this->session->userdata('upk_bagian');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        if ($upk_bagian) {
+            $data['selected_upk'] = $this->Model_penyusutan->getUpkById($upk_bagian);
+        } else {
+            $data['selected_upk'] = null;
+        }
+
+        if (empty($get_tahun) || empty($upk_bagian)) {
+            // Jika tidak ada filter, ambil semua data
+            $this->session->unset_userdata('tahun_session_bangunan_inst');
+            $this->session->unset_userdata('upk_bagian');
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_inst_total($tahun);
+        } else {
+            // Jika ada filter, ambil data berdasarkan filter
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_inst($tahun, $upk_bagian);
+        }
+
+        $data['title'] = 'Daftar Penyusutan';
+        $data['upk_bagian'] = $this->Model_penyusutan_bangunan->get_unit_bangunan_inst();
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+
+        $this->pdf->filename = "bangunan_inst-{$tahun}.pdf";
+        $this->pdf->generate('cetakan/bangunan_inst_pdf', $data);
+    }
+
 
     public function sumber()
     {
