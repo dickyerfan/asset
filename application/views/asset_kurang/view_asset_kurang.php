@@ -11,15 +11,9 @@
                             <input type="date" id="tanggal" name="tanggal" class="form-control" style="margin-left: 10px;">
                         </div>
                     </form>
-                    <!-- <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('asset_kurang/all_asset') ?>"><button class="float-end neumorphic-button"> Daftar Semua Asset</button></a>
-                    </div> -->
-                    <!-- <div class="navbar-nav ms-auto">
-                        <?php if ($this->session->userdata('level') != 'Pengguna') : ?>
-							<a href="<?= base_url('asset/upload') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Asset</button></a>
-						<?php endif; ?>
-                        <a href="<?= base_url('asset_kurang/upload') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input pengurangan Asset</button></a>
-                    </div> -->
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('asset/asset_semua'); ?>"><button class=" neumorphic-button float-right"><i class="fas fa-reply"></i> Kembali</button></a>
+                    </div>
                 </nav>
             </div>
 

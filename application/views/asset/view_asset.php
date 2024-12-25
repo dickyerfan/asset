@@ -11,14 +11,13 @@
 							<input type="date" id="tanggal" name="tanggal" class="form-control" style="margin-left: 10px;">
 						</div>
 					</form>
-					<div>
-
+					<div class="navbar-nav ms-2">
+						<a href="<?= base_url('asset/asset_semua'); ?>"><button class=" neumorphic-button float-right"><i class="fas fa-reply"></i> Kembali</button></a>
 					</div>
 					<div class="navbar-nav ms-auto">
 						<?php if ($this->session->userdata('level') != 'Pengguna') : ?>
 							<a href="<?= base_url('asset/upload') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Asset</button></a>
 						<?php endif; ?>
-						<!-- <a href="<?= base_url('asset/upload') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Asset</button></a> -->
 					</div>
 				</nav>
 			</div>
@@ -104,8 +103,13 @@
 											<?= $nama_asset; ?>
 										<?php endif; ?>
 									</td>
-
-									<td><?= $row->nama_bagian; ?></td>
+									<td>
+										<?php if ($row->id_bagian == 2) : ?>
+											<?= 'Kantor Pusat'; ?>
+										<?php else : ?>
+											<?= $row->nama_bagian; ?>
+										<?php endif; ?>
+									</td>
 									<td class="text-center"><?= date('d-m-Y', strtotime($row->tanggal)); ?></td>
 									<td><?= $row->no_bukti_gd; ?></td>
 									<td><?= $row->no_bukti_vch; ?></td>

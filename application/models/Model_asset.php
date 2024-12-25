@@ -16,6 +16,7 @@ class Model_asset extends CI_Model
         $this->db->where('MONTH(tanggal)', $bulan);
         $this->db->where('YEAR(tanggal)', $tahun);
         $this->db->where('daftar_asset.status', 1);
+        $this->db->order_by('daftar_asset.id_bagian');
         return $this->db->get()->result();
     }
     public function get_kurang($bulan, $tahun)
@@ -41,6 +42,7 @@ class Model_asset extends CI_Model
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->order_by('daftar_asset.tanggal');
         // $this->db->where('daftar_asset.status', 1);
         return $this->db->get()->result();
     }

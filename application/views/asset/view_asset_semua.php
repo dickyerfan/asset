@@ -66,15 +66,11 @@
                                             <?= $nama_asset; ?>
                                         <?php endif; ?>
                                     </td>
-
                                     <td>
-                                        <?php
-                                        $nama_bagian = $row->nama_bagian;
-                                        ?>
-                                        <?php if ($nama_bagian == "Umum") : ?>
-                                            <?= $nama_bagian = "Bondowoso"; ?>
+                                        <?php if ($row->id_bagian == 2) : ?>
+                                            <?= 'Kantor Pusat'; ?>
                                         <?php else : ?>
-                                            <?= $nama_bagian; ?>
+                                            <?= $row->nama_bagian; ?>
                                         <?php endif; ?>
                                     </td>
                                     <td class="text-center"><?= date('d-m-Y', strtotime($row->tanggal)); ?></td>
