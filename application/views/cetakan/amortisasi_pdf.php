@@ -80,7 +80,7 @@
         </table>
     </div>
     <div class="judul">
-        <p class="my-0 text-center fw-bold"><?= strtoupper($title) . ' ' . $tahun_lap; ?></p>
+        <p class="my-0 text-center fw-bold"><?= strtoupper($title) . ' TAHUN ' . $tahun_lap; ?></p>
     </div>
     <table class="table tableUtama">
         <thead>
@@ -88,8 +88,8 @@
                 <th>No</th>
                 <th>Nama Asset</th>
                 <th>Tgl perolehan</th>
-                <th>Umur</th>
-                <th>Prsen</th>
+                <!-- <th>Umur</th>
+                <th>Prsen</th> -->
                 <th>Harga Perolehan Thn Lalu</th>
                 <th>Penambahan</th>
                 <th>Pengurangan</th>
@@ -112,8 +112,8 @@
                     <td style="text-align: center;"><?= $no++; ?></td>
                     <td style="text-align: left;"><?= $row->nama_amortisasi; ?></td>
                     <td style="text-align: center;"><?= date('d-m-Y', strtotime($row->tanggal)); ?></td>
-                    <td style="text-align: center;"><?= $row->umur; ?></td>
-                    <td style="text-align: center;"><?= $row->persen_susut; ?></td>
+                    <!-- <td style="text-align: center;"><?= $row->umur; ?></td>
+                    <td style="text-align: center;"><?= $row->persen_susut; ?></td> -->
                     <td style="text-align: right;"><?= number_format($row->nilai_buku, 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($row->penambahan, 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($row->pengurangan, 0, ',', '.'); ?></td>
@@ -128,7 +128,7 @@
         </tbody>
         <tfoot>
             <tr class="text-center bg-light">
-                <th colspan="5" style="text-align: center;">Total</th>
+                <th colspan="3" style="text-align: center;">Total</th>
                 <th style="text-align: right;"><?= number_format($total_amortisasi['total_nilai_buku'], 0, ',', '.'); ?></th>
                 <th style="text-align: right;"><?= number_format($total_amortisasi['total_penambahan'], 0, ',', '.'); ?></th>
                 <th style="text-align: right;"><?= number_format($total_amortisasi['total_pengurangan'], 0, ',', '.'); ?></th>

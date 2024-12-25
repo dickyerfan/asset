@@ -92,7 +92,7 @@
         <?php else : ?>
             <h5 style="text-align: center;"><?= strtoupper($title)  . ' BANGUNAN KANTOR' . ' ' . $tahun_lap; ?></h5>
         <?php endif; ?> -->
-        <p style="text-align: center;"><?= strtoupper($title) . ' TAHUN ' . $tahun_lap; ?> <br> ( Berdasarkan Kode Perkiraan )</p>
+        <p style="text-align: center;"><?= strtoupper($title) . ' TAHUN ' . $tahun_lap; ?></p>
     </div>
     <table class="table tableUtama">
         <thead>
@@ -111,7 +111,7 @@
         </thead>
         <tbody>
             <tr>
-                <td style="background-color: lightgray;" colspan="10"><strong>1. Tanah</strong></td>
+                <td style="background-color:darkgray;" colspan="10"><strong>1. Tanah</strong></td>
             </tr>
             <?php
             $no = 1;
@@ -133,6 +133,7 @@
             foreach ($grouped_data as $parent_id => $upk_data) {
                 // Judul berdasarkan parent_id
                 $nama_tanah_jenis = $nama_tanah[$parent_id] ?? "Tanah Lainnya";
+                echo "<tr><td colspan='10' style='background-color: lightgrey';><strong>{$nama_tanah_jenis}</strong></td></tr>";
                 // Inisialisasi total per jenis tanah
                 $totals_per_jenis[$parent_id] = [
                     'total_rupiah' => 0,
@@ -174,6 +175,18 @@
                     <?php
                     }
                     ?>
+                    <tr class="bg-light text-right">
+                        <td class="text-left"><strong><?= $name; ?></strong></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penambahan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_pengurangan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_rupiah, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penyusutan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_ini, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_final, 0, ',', '.'); ?></td>
+                    </tr>
                 <?php
 
                     // Menambahkan total per bagian/upk ke total per jenis tanah
@@ -191,7 +204,7 @@
                 // Menampilkan total per jenis tanah
                 ?>
                 <tr>
-                    <td style="text-align: left;"><strong><?= $nama_tanah_jenis; ?></strong></td>
+                    <td style="text-align: left;"><strong>Sub Total Sub Total <?= $nama_tanah_jenis; ?></strong></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_penambahan'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_pengurangan'], 0, ',', '.'); ?></td>
@@ -220,7 +233,7 @@
         </tbody>
         <tbody>
             <tr>
-                <td style="background-color: lightgray;" colspan="10"><strong>2. Bangunan Gedung</strong></td>
+                <td style="background-color: darkgray;" colspan="10"><strong>2. Bangunan Gedung</strong></td>
             </tr>
             <?php
             $no = 1;
@@ -245,7 +258,7 @@
             foreach ($grouped_data as $parent_id => $upk_data) {
                 // Judul berdasarkan parent_id
                 $nama_bangunan_jenis = $nama_bangunan[$parent_id] ?? "Bangunan Lainnya";
-                // echo "<tr><td colspan='14' class='bg-primary text-white'><strong>{$nama_bangunan_jenis}</strong></td></tr>";
+                echo "<tr><td colspan='10' style='background-color: lightgrey';><strong>{$nama_bangunan_jenis}</strong></td></tr>";
 
                 // Inisialisasi total per jenis bangunan
                 $totals_per_jenis[$parent_id] = [
@@ -291,6 +304,18 @@
                     }
                     // Menampilkan total per bagian/upk
                     ?>
+                    <tr class="bg-light text-right">
+                        <td class="text-left"><strong><?= $name; ?></strong></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penambahan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_pengurangan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_rupiah, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penyusutan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_ini, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_final, 0, ',', '.'); ?></td>
+                    </tr>
                 <?php
                     // Menambahkan total per bagian/upk ke total per jenis bangunan
                     $totals_per_jenis[$parent_id]['total_rupiah'] += $total_rupiah;
@@ -307,7 +332,7 @@
                 // Menampilkan total per jenis bangunan
                 ?>
                 <tr class="text-right">
-                    <td style="text-align: left;"><strong><?= $nama_bangunan_jenis; ?></strong></td>
+                    <td style="text-align: left;"><strong>Sub Total <?= $nama_bangunan_jenis; ?></strong></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_penambahan'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_pengurangan'], 0, ',', '.'); ?></td>
@@ -336,7 +361,7 @@
         </tbody>
         <tbody>
             <tr>
-                <td style="background-color: lightgray;" colspan="10"><strong>3. Instalasi Sumber</strong></td>
+                <td style="background-color: darkgray;" colspan="10"><strong>3. Instalasi Sumber</strong></td>
             </tr>
             <?php
             $no = 1;
@@ -360,7 +385,7 @@
             foreach ($grouped_data as $parent_id => $upk_data) {
                 // Judul berdasarkan parent_id
                 $nama_sumber_jenis = $nama_sumber[$parent_id] ?? "Instalasi Sumber Lainnya";
-                // echo "<tr><td colspan='14' class='bg-primary text-white'><strong>{$nama_sumber_jenis}</strong></td></tr>";
+                echo "<tr><td colspan='10' style='background-color: lightgrey'><strong>{$nama_sumber_jenis}</strong></td></tr>";
 
                 // Inisialisasi total per jenis bangunan
                 $totals_per_jenis[$parent_id] = [
@@ -403,6 +428,18 @@
                     }
                     // Menampilkan total per bagian/upk
                     ?>
+                    <tr class="bg-light text-right">
+                        <td class="text-left"><strong><?= $name; ?></strong></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penambahan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_pengurangan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_rupiah, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penyusutan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_ini, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_final, 0, ',', '.'); ?></td>
+                    </tr>
                 <?php
                     // Menambahkan total per bagian/upk ke total per jenis bangunan
                     $totals_per_jenis[$parent_id]['total_rupiah'] += $total_rupiah;
@@ -418,7 +455,7 @@
                 // Menampilkan total per jenis sumber
                 ?>
                 <tr class="text-right">
-                    <td style="text-align: left;"><strong><?= $nama_sumber_jenis; ?></strong></td>
+                    <td style="text-align: left;"><strong>Sub Total <?= $nama_sumber_jenis; ?></strong></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_penambahan'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_pengurangan'], 0, ',', '.'); ?></td>
@@ -447,7 +484,7 @@
         </tbody>
         <tbody>
             <tr>
-                <td style="background-color: lightgray;" colspan="10"><strong>4. Instalasi Pompa</strong></td>
+                <td style="background-color: darkgray;" colspan="10"><strong>4. Instalasi Pompa</strong></td>
             </tr>
             <?php
             $no = 1;
@@ -467,7 +504,7 @@
             foreach ($grouped_data as $parent_id => $upk_data) {
                 // Judul berdasarkan parent_id
                 $nama_pompa_jenis = $nama_pompa[$parent_id] ?? "Instalasi Pompa Lainnya";
-                // echo "<tr><td colspan='14' class='bg-primary text-white'><strong>{$nama_pompa_jenis}</strong></td></tr>";
+                echo "<tr><td colspan='10' style='background-color: lightgrey'><strong>{$nama_pompa_jenis}</strong></td></tr>";
                 // Inisialisasi total per jenis bangunan
                 $totals_per_jenis[$parent_id] = [
                     'total_rupiah' => 0,
@@ -509,6 +546,18 @@
                     }
                     // Menampilkan total per bagian/upk
                     ?>
+                    <tr class="bg-light text-right">
+                        <td class="text-left"><strong><?= $name; ?></strong></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penambahan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_pengurangan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_rupiah, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penyusutan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_ini, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_final, 0, ',', '.'); ?></td>
+                    </tr>
                 <?php
                     // Menambahkan total per bagian/upk ke total per jenis bangunan
                     $totals_per_jenis[$parent_id]['total_rupiah'] += $total_rupiah;
@@ -524,7 +573,7 @@
                 // Menampilkan total per jenis pompa
                 ?>
                 <tr class="text-right">
-                    <td style="text-align: left;"><strong><?= $nama_pompa_jenis; ?></strong></td>
+                    <td style="text-align: left;"><strong>Sub Total <?= $nama_pompa_jenis; ?></strong></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_penambahan'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_pengurangan'], 0, ',', '.'); ?></td>
@@ -553,7 +602,7 @@
         </tbody>
         <tbody>
             <tr>
-                <td style="background-color: lightgray;" colspan="10"><strong>5. Instalasi Pengolahan Air</strong></td>
+                <td style="background-color: darkgray;" colspan="10"><strong>5. Instalasi Pengolahan Air</strong></td>
             </tr>
             <?php
             $no = 1;
@@ -573,7 +622,7 @@
             foreach ($grouped_data as $parent_id => $upk_data) {
                 // Judul berdasarkan parent_id
                 $nama_olah_air_jenis = $nama_olah_air[$parent_id] ?? "Instalasi olah_air Lainnya";
-                // echo "<tr><td colspan='14' class='bg-primary text-white'><strong>{$nama_olah_air_jenis}</strong></td></tr>";
+                echo "<tr><td colspan='10' style='background-color: lightgrey'><strong>{$nama_olah_air_jenis}</strong></td></tr>";
                 // Inisialisasi total per jenis bangunan
                 $totals_per_jenis[$parent_id] = [
                     'total_rupiah' => 0,
@@ -615,6 +664,18 @@
                     }
                     // Menampilkan total per bagian/upk
                     ?>
+                    <tr class="bg-light text-right">
+                        <td class="text-left"><strong><?= $name; ?></strong></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penambahan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_pengurangan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_rupiah, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penyusutan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_ini, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_final, 0, ',', '.'); ?></td>
+                    </tr>
                 <?php
                     // Menambahkan total per bagian/upk ke total per jenis pengolahan air
                     $totals_per_jenis[$parent_id]['total_rupiah'] += $total_rupiah;
@@ -630,7 +691,7 @@
                 // Menampilkan total per jenis olah_air
                 ?>
                 <tr class="text-right">
-                    <td style="text-align: left;"><strong><?= $nama_olah_air_jenis; ?></strong></td>
+                    <td style="text-align: left;"><strong>Sub Total <?= $nama_olah_air_jenis; ?></strong></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_penambahan'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_pengurangan'], 0, ',', '.'); ?></td>
@@ -659,7 +720,7 @@
         </tbody>
         <tbody>
             <tr>
-                <td style="background-color: lightgray;" colspan="10"><strong>6. Instalasi Transmisi & Distribusi</strong></td>
+                <td style="background-color: darkgray;" colspan="10"><strong>6. Instalasi Transmisi & Distribusi</strong></td>
             </tr>
             <?php
             $no = 1;
@@ -684,7 +745,7 @@
             foreach ($grouped_data as $parent_id => $upk_data) {
                 // Judul berdasarkan parent_id
                 $nama_trans_dist_jenis = $nama_trans_dist[$parent_id] ?? "Instalasi trans_dist Lainnya";
-                // echo "<tr><td colspan='14' class='bg-primary text-white'><strong>{$nama_trans_dist_jenis}</strong></td></tr>";
+                echo "<tr><td colspan='10' style='background-color: lightgrey'><strong>{$nama_trans_dist_jenis}</strong></td></tr>";
                 // Inisialisasi total per jenis bangunan
                 $totals_per_jenis[$parent_id] = [
                     'total_rupiah' => 0,
@@ -726,6 +787,18 @@
                     }
                     // Menampilkan total per bagian/upk
                     ?>
+                    <tr class="bg-light text-right">
+                        <td class="text-left"><strong><?= $name; ?></strong></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penambahan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_pengurangan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_rupiah, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penyusutan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_ini, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_final, 0, ',', '.'); ?></td>
+                    </tr>
                 <?php
                     // Menambahkan total per bagian/upk ke total per jenis pengolahan air
                     $totals_per_jenis[$parent_id]['total_rupiah'] += $total_rupiah;
@@ -741,7 +814,7 @@
                 // Menampilkan total per jenis trans_dist
                 ?>
                 <tr class="text-right">
-                    <td style="text-align: left;"><strong><?= $nama_trans_dist_jenis; ?></strong></td>
+                    <td style="text-align: left;"><strong>Sub Total <?= $nama_trans_dist_jenis; ?></strong></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_penambahan'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_pengurangan'], 0, ',', '.'); ?></td>
@@ -770,7 +843,7 @@
         </tbody>
         <tbody>
             <tr>
-                <td style="background-color: lightgray;" colspan="10"><strong>7. Peralatan & Perlengkapan</strong></td>
+                <td style="background-color: darkgray;" colspan="10"><strong>7. Peralatan & Perlengkapan</strong></td>
             </tr>
             <?php
             $no = 1;
@@ -791,7 +864,7 @@
             foreach ($grouped_data as $parent_id => $upk_data) {
                 // Judul berdasarkan parent_id
                 $nama_peralatan_jenis = $nama_peralatan[$parent_id] ?? "Instalasi peralatan Lainnya";
-                // echo "<tr><td colspan='14' class='bg-primary text-white'><strong>{$nama_peralatan_jenis}</strong></td></tr>";
+                echo "<tr><td colspan='10' style='background-color: lightgrey'><strong>{$nama_peralatan_jenis}</strong></td></tr>";
                 // Inisialisasi total per jenis bangunan
                 $totals_per_jenis[$parent_id] = [
                     'total_rupiah' => 0,
@@ -833,6 +906,18 @@
                     }
                     // Menampilkan total per bagian/upk
                     ?>
+                    <tr class="bg-light text-right">
+                        <td class="text-left"><strong><?= $name; ?></strong></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penambahan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_pengurangan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_rupiah, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penyusutan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_ini, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_final, 0, ',', '.'); ?></td>
+                    </tr>
                 <?php
                     // Menambahkan total per bagian/upk ke total per jenis pengolahan air
                     $totals_per_jenis[$parent_id]['total_rupiah'] += $total_rupiah;
@@ -848,7 +933,7 @@
                 // Menampilkan total per jenis peralatan
                 ?>
                 <tr class="text-right">
-                    <td style="text-align: left;"><strong><?= $nama_peralatan_jenis; ?></strong></td>
+                    <td style="text-align: left;"><strong>Sub Total <?= $nama_peralatan_jenis; ?></strong></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_penambahan'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_pengurangan'], 0, ',', '.'); ?></td>
@@ -877,7 +962,7 @@
         </tbody>
         <tbody>
             <tr>
-                <td style="background-color: lightgray;" colspan="10"><strong>8. Kendaraan & Alat Angkut</strong></td>
+                <td style="background-color: darkgray;" colspan="10"><strong>8. Kendaraan & Alat Angkut</strong></td>
             </tr>
             <?php
             $no = 1;
@@ -897,7 +982,7 @@
             foreach ($grouped_data as $parent_id => $upk_data) {
                 // Judul berdasarkan parent_id
                 $nama_kendaraan_jenis = $nama_kendaraan[$parent_id] ?? "Instalasi kendaraan Lainnya";
-                // echo "<tr><td colspan='14' class='bg-primary text-white'><strong>{$nama_kendaraan_jenis}</strong></td></tr>";
+                echo "<tr><td colspan='10' style='background-color: lightgrey'><strong>{$nama_kendaraan_jenis}</strong></td></tr>";
                 // Inisialisasi total per jenis bangunan
                 $totals_per_jenis[$parent_id] = [
                     'total_rupiah' => 0,
@@ -939,6 +1024,18 @@
                     }
                     // Menampilkan total per bagian/upk
                     ?>
+                    <tr class="bg-light text-right">
+                        <td class="text-left"><strong><?= $name; ?></strong></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penambahan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_pengurangan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_rupiah, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penyusutan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_ini, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_final, 0, ',', '.'); ?></td>
+                    </tr>
                 <?php
                     // Menambahkan total per bagian/upk ke total per jenis pengolahan air
                     $totals_per_jenis[$parent_id]['total_rupiah'] += $total_rupiah;
@@ -954,7 +1051,7 @@
                 // Menampilkan total per jenis kendaraan
                 ?>
                 <tr class="text-right">
-                    <td style="text-align: left;"><strong><?= $nama_kendaraan_jenis; ?></strong></td>
+                    <td style="text-align: left;"><strong>Sub Total <?= $nama_kendaraan_jenis; ?></strong></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_penambahan'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_pengurangan'], 0, ',', '.'); ?></td>
@@ -983,7 +1080,7 @@
         </tbody>
         <tbody>
             <tr>
-                <td style="background-color: lightgray;" colspan="10"><strong>9. Inventaris/Perabotan Kantor</strong></td>
+                <td style="background-color: darkgray;" colspan="10"><strong>9. Inventaris/Perabotan Kantor</strong></td>
             </tr>
             <?php
             $no = 1;
@@ -1002,7 +1099,7 @@
             foreach ($grouped_data as $parent_id => $upk_data) {
                 // Judul berdasarkan parent_id
                 $nama_inventaris_jenis = $nama_inventaris[$parent_id] ?? "Instalasi inventaris Lainnya";
-                // echo "<tr><td colspan='14' class='bg-primary text-white'><strong>{$nama_inventaris_jenis}</strong></td></tr>";
+                echo "<tr><td colspan='10' style='background-color: lightgrey'><strong>{$nama_inventaris_jenis}</strong></td></tr>";
                 // Inisialisasi total per jenis bangunan
                 $totals_per_jenis[$parent_id] = [
                     'total_rupiah' => 0,
@@ -1044,6 +1141,18 @@
                     }
                     // Menampilkan total per bagian/upk
                     ?>
+                    <tr class="bg-light text-right">
+                        <td class="text-left"><strong><?= $name; ?></strong></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penambahan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_pengurangan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_rupiah, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_lalu, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_penyusutan, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_akm_thn_ini, 0, ',', '.'); ?></td>
+                        <td style="text-align: right;"><?= number_format($total_nilai_buku_final, 0, ',', '.'); ?></td>
+                    </tr>
                 <?php
                     // Menambahkan total per bagian/upk ke total per jenis pengolahan air
                     $totals_per_jenis[$parent_id]['total_rupiah'] += $total_rupiah;
@@ -1059,7 +1168,7 @@
                 // Menampilkan total per jenis inventaris
                 ?>
                 <tr class="text-right">
-                    <td style="text-align: left;"><strong><?= $nama_inventaris_jenis; ?></strong></td>
+                    <td style="text-align: left;"><strong>Sub Total <?= $nama_inventaris_jenis; ?></strong></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_penambahan'], 0, ',', '.'); ?></td>
                     <td style="text-align: right;"><?= number_format($totals_per_jenis[$parent_id]['total_pengurangan'], 0, ',', '.'); ?></td>

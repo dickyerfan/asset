@@ -39,76 +39,47 @@ class Model_amortisasi extends CI_Model
         $total_akm_thn_ini = 0;
         $total_nilai_buku_final = 0;
 
-        // Daftar ID parent untuk bangunan
-        $grand_ids = [393];
-
         foreach ($results as &$row) {
-            $umur_tahun = $tahun - $row->tahun + 1;
-            $nilai_buku_awal = $row->rupiah; // Nilai awal aset
-            $akm_thn_ini = 0;                 // Akumulasi penyusutan tahun ini
-            $nilai_buku_final = $nilai_buku_awal; // Nilai buku final untuk tahun berjalan
+            if ($row->status_penyusutan == 1) {
+                $umur_tahun = $tahun - $row->tahun;
+                $nilai_buku_awal = $row->rupiah; // Nilai awal aset
+                $akm_thn_lalu = 0;                 // Akumulasi penyusutan tahun ini
+                $nilai_buku_final = $nilai_buku_awal; // Nilai buku final untuk tahun berjalan
+                $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
+                $akm_thn_ini = $akm_thn_lalu + $penambahan_penyusutan;
+                $nilai_buku_final = $nilai_buku_awal - $akm_thn_ini;
 
-            if ($umur_tahun == 0) {
-                // Kondisi untuk umur_tahun = 0
-                $row->akm_thn_lalu = 0;
-                $row->nilai_buku = 0;
-                $row->penambahan_penyusutan = 0;
-                $row->nilai_buku_lalu = 0;
-                $row->akm_thn_ini = 0;
-                $row->nilai_buku_final = $nilai_buku_awal;
-            } else {
-                $row->pengurangan = 0;
-                $row->penambahan = 0;
-                // Perhitungan bertahap untuk setiap tahun sejak tahun pertama
-                for ($i = 1; $i <= $umur_tahun; $i++) {
-                    if ($i == 1) {
-                        // Tahun pertama
-                        $akm_thn_lalu = 0;
-                        $nilai_buku_lalu = $nilai_buku_awal;
-                    } else {
-                        // Update nilai buku dan akumulasi penyusutan dari tahun sebelumnya
+                if ($umur_tahun == 0) {
+                    $row->akm_thn_lalu = 0;
+                    $row->nilai_buku = 0;
+                    $row->penambahan_penyusutan = $penambahan_penyusutan;
+                    $row->nilai_buku_lalu = 0;
+                    $row->akm_thn_ini = $akm_thn_ini;
+                    $row->nilai_buku_final = $nilai_buku_final;
+                } else {
+                    for ($i = 1; $i <= $umur_tahun; $i++) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
                         $akm_thn_lalu = $akm_thn_ini;
                         $nilai_buku_lalu = $nilai_buku_final;
+                        $akm_thn_ini = $akm_thn_lalu + $penambahan_penyusutan;
+                        $nilai_buku_final = $nilai_buku_awal - $akm_thn_ini;
                     }
-
-                    // Hitung penyusutan berdasarkan kategori aset
-                    if (in_array($row->grand_id, $grand_ids)) {
-                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
-                    } else {
-                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
-                    }
-
-                    // Update akumulasi penyusutan dan nilai buku akhir
-                    $akm_thn_ini = $akm_thn_lalu + $penambahan_penyusutan;
-                    $nilai_buku_final = $nilai_buku_awal - $akm_thn_ini;
-
-                    // Jika umur_tahun sudah mencapai umur aset, set nilai buku final menjadi 0
                     if ($i > $row->umur) {
-                        $akm_thn_ini = $row->rupiah;
-                        $akm_thn_lalu = $row->rupiah;
-                        $nilai_buku_final = 1;
-                        $penambahan_penyusutan = 0;
+                        $row->pengurangan = 0;
                         $row->penambahan = 0;
+                        $akm_thn_lalu = $row->rupiah;
                         $nilai_buku_lalu = 0;
-                        if ($row->status == 1) {
-                            $nilai_buku_final = $row->rupiah - $akm_thn_ini;
-                            if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
-                                $nilai_buku_final = 1;
-                                $akm_thn_ini = $akm_thn_ini - 1;
-                            }
-                        } else {
-                            $nilai_buku_final = -1;
-                        }
-                        break;
+                        $penambahan_penyusutan = 0;
+                        $akm_thn_ini = $row->rupiah;
+                        $nilai_buku_final = 0;
                     }
+                    $row->akm_thn_lalu = $akm_thn_lalu;
+                    $row->nilai_buku_lalu = $nilai_buku_lalu;
+                    $row->penambahan_penyusutan = $penambahan_penyusutan;
+                    $row->akm_thn_ini = $akm_thn_ini;
+                    $row->nilai_buku_final = $nilai_buku_final;
                 }
-
-                // Set hasil akhir setelah loop tahun selesai
-                $row->akm_thn_lalu = $akm_thn_lalu;
-                $row->nilai_buku_lalu = $nilai_buku_lalu;
-                $row->penambahan_penyusutan = $penambahan_penyusutan;
-                $row->akm_thn_ini = $akm_thn_ini;
-                $row->nilai_buku_final = $nilai_buku_final;
             }
 
             if ($row->status_penyusutan == 2) {
@@ -206,7 +177,7 @@ class Model_amortisasi extends CI_Model
     //     $grand_ids = [393];
 
     //     foreach ($results as &$row) {
-    //         $umur_tahun = $tahun - $row->tahun;
+    //         $umur_tahun = $tahun - $row->tahun + 1;
     //         $nilai_buku_awal = $row->rupiah; // Nilai awal aset
     //         $akm_thn_ini = 0;                 // Akumulasi penyusutan tahun ini
     //         $nilai_buku_final = $nilai_buku_awal; // Nilai buku final untuk tahun berjalan

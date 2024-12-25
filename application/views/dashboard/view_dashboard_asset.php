@@ -27,7 +27,7 @@
                         <a href="<?= base_url('dashboard_asset/rekap_detail') ?>"><button class="float-end neumorphic-button"> Rekap Detail</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('dashboard_asset/cetak_rekap_penyusutan') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
+                        <a href="<?= base_url('dashboard_asset/cetak_rekap_penyusutan') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Rekap</button></a>
                     </div>
                 </nav>
             </div>

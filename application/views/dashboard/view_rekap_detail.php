@@ -24,10 +24,10 @@
                         <a href="<?= base_url('dashboard_asset/rekap_perkiraan') ?>"><button class="float-end neumorphic-button"> Rekap Perkiraan</button></a>
                     </div>
                     <div class="navbar-nav ms-2">
-                        <a href="<?= base_url('dashboard_asset') ?>"><button class="float-end neumorphic-button"><i class="fas fa-backward"></i> Kembali</button></a>
+                        <a href="<?= base_url('dashboard_asset') ?>"><button class="float-end neumorphic-button"><i class="fas fa-reply"></i> Kembali</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('dashboard_asset/cetak_rekap_detail') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
+                        <a href="<?= base_url('dashboard_asset/cetak_rekap_detail') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Rekap Detail</button></a>
                     </div>
                 </nav>
             </div>

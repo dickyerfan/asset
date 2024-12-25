@@ -39,14 +39,14 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table id="contoh2" class="table table-bordered table-striped table-hover">
+                    <table id="contoh" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
                                 <th>Nama Asset</th>
                                 <th>Tgl perolehan</th>
-                                <th>Umur</th>
-                                <th>Prsen</th>
+                                <!-- <th>Umur</th>
+                                <th>Prsen</th> -->
                                 <th>Harga Perolehan Thn Lalu</th>
                                 <th>Penambahan</th>
                                 <th>Pengurangan</th>
@@ -67,19 +67,10 @@
                             ?>
                                 <tr>
                                     <td class="text-center"><?= $no++; ?></td>
-                                    <!-- <td>
-                                        <?php
-                                        // Memotong nama_amortisasi jika lebih dari 60 karakter
-                                        $nama_amortisasi = $row->nama_amortisasi;
-                                        if (strlen($nama_amortisasi) > 55) {
-                                            $nama_amortisasi = substr($nama_amortisasi, 0, 55) . '...'; // Potong dan tambahkan "..."
-                                        }
-                                        ?>
-                                    </td> -->
                                     <td class="text-left"><?= $row->nama_amortisasi; ?></td>
                                     <td class="text-center"><?= date('d-m-Y', strtotime($row->tanggal)); ?></td>
-                                    <td class="text-center"><?= $row->umur; ?></td>
-                                    <td class="text-center"><?= $row->persen_susut; ?></td>
+                                    <!-- <td class="text-center"><?= $row->umur; ?></td>
+                                    <td class="text-center"><?= $row->persen_susut; ?></td> -->
                                     <td class="text-right"><?= number_format($row->nilai_buku, 0, ',', '.'); ?></td>
                                     <td class="text-right"><?= number_format($row->penambahan, 0, ',', '.'); ?></td>
                                     <td class="text-right"><?= number_format($row->pengurangan, 0, ',', '.'); ?></td>
@@ -94,7 +85,7 @@
                         </tbody>
                         <tfoot>
                             <tr class="text-center bg-light">
-                                <th colspan="5" class="text-right">Total</th>
+                                <th colspan="3" class="text-right">Total</th>
                                 <th class="text-right"><?= number_format($total_amortisasi['total_nilai_buku'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($total_amortisasi['total_penambahan'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($total_amortisasi['total_pengurangan'], 0, ',', '.'); ?></th>

@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : DIE ArtS
+ Source Server         : database_lokal
  Source Server Type    : MySQL
- Source Server Version : 100418 (10.4.18-MariaDB)
+ Source Server Version : 100417 (10.4.17-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : asset
 
  Target Server Type    : MySQL
- Target Server Version : 100418 (10.4.18-MariaDB)
+ Target Server Version : 100417 (10.4.17-MariaDB)
  File Encoding         : 65001
 
- Date: 24/12/2024 16:13:15
+ Date: 25/12/2024 16:03:15
 */
 
 SET NAMES utf8mb4;
@@ -45,7 +45,7 @@ CREATE TABLE `amortisasi`  (
   INDEX `id_bagian`(`id_bagian` ASC) USING BTREE,
   INDEX `id_no_per`(`id_no_per` ASC) USING BTREE,
   CONSTRAINT `amortisasi_ibfk_2` FOREIGN KEY (`id_no_per`) REFERENCES `no_per` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of amortisasi
@@ -55,6 +55,28 @@ INSERT INTO `amortisasi` VALUES (2, 'Kantor Pusat', 529, 515, 393, 30, NULL, 'Pe
 INSERT INTO `amortisasi` VALUES (3, 'Kantor Pusat', 529, 515, 393, 30, NULL, 'Pengurusan SNI Ijen Water', '2020-07-31', NULL, '', '', 5400000, 1, 5, 20.00, 'Administrator', '2024-12-24 11:04:25', 0);
 INSERT INTO `amortisasi` VALUES (5, 'Kantor Pusat', 525, 510, 393, 30, NULL, 'Kegiatan pra operasi/ Geolistrik PDAM', '2020-12-31', NULL, '', '', 101404000, 1, 5, 20.00, 'Administrator', '2024-12-24 11:08:55', 0);
 INSERT INTO `amortisasi` VALUES (6, 'Kantor Pusat', 526, 510, 393, 30, NULL, 'Risentifikasi SNI Ijen Water', '2021-02-28', NULL, '', '', 21924000, 1, 5, 20.00, 'Administrator', '2024-12-24 11:10:44', 0);
+INSERT INTO `amortisasi` VALUES (7, 'Kantor Pusat', 526, 510, 393, 30, NULL, 'Pengurusan Sertifikat Amalis AMDK', '2021-03-31', NULL, '', '', 10596300, 1, 5, 20.00, 'Administrator', '2024-12-25 09:02:27', 0);
+INSERT INTO `amortisasi` VALUES (8, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Pemetaan Geolistrik', '2021-05-31', NULL, '', '', 100732500, 1, 5, 20.00, 'Administrator', '2024-12-25 09:03:30', 0);
+INSERT INTO `amortisasi` VALUES (9, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Pembuatan RPAM', '2021-10-31', NULL, '', '', 32822000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:04:34', 0);
+INSERT INTO `amortisasi` VALUES (10, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Pemetaan Jaringan (GIS) th.2021', '2021-12-31', NULL, '', '', 25328000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:05:22', 0);
+INSERT INTO `amortisasi` VALUES (11, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Pengurusan SIPA SB Besuk', '2022-05-31', NULL, '', '', 38500000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:06:12', 0);
+INSERT INTO `amortisasi` VALUES (12, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Pembuatan Study Kelayakan', '2022-05-31', NULL, '', '', 62088000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:06:54', 0);
+INSERT INTO `amortisasi` VALUES (13, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Pengurusan SIPA', '2022-11-03', NULL, '', '', 145743000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:07:49', 0);
+INSERT INTO `amortisasi` VALUES (14, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Pembuatan Study Kelayakan', '2022-11-28', NULL, '', '', 76754827, 1, 5, 20.00, 'Administrator', '2024-12-25 09:08:32', 0);
+INSERT INTO `amortisasi` VALUES (15, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Pembuatan Study Kelayakan AMDK', '2022-12-13', NULL, '', '', 30000000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:10:17', 0);
+INSERT INTO `amortisasi` VALUES (16, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Penyusunan Dokumen UPLH Pengeboran SB Kajar', '2023-01-05', NULL, '', '', 32079000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:11:31', 0);
+INSERT INTO `amortisasi` VALUES (17, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Penyusuna Dokumen Pedomnan GCG', '2023-01-31', NULL, '', '', 15891000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:13:18', 0);
+INSERT INTO `amortisasi` VALUES (18, 'Kantor Pusat', 526, 510, 393, 30, NULL, 'Pembuatan Perencanaan Geolistrik Kelurahan Nangkaan', '2023-03-01', NULL, '', '', 8880000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:14:52', 0);
+INSERT INTO `amortisasi` VALUES (19, 'Kantor Pusat', 526, 510, 393, 30, NULL, 'Pembuatan Perencanaan Geolistrik Kelurahan Badean', '2023-03-01', NULL, '', '', 8880000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:15:39', 0);
+INSERT INTO `amortisasi` VALUES (20, 'Kantor Pusat', 526, 510, 393, 30, NULL, 'Pembuatan Perencanaan Geolistrik Desa Pancoran', '2023-03-01', NULL, '', '', 8880000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:18:27', 0);
+INSERT INTO `amortisasi` VALUES (21, 'Kantor Pusat', 526, 510, 393, 30, NULL, 'Pembuatan Perencanaan Geolistrik Desa Locare', '2023-03-01', NULL, '', '', 8880000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:19:09', 0);
+INSERT INTO `amortisasi` VALUES (22, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Pembuatan Perencanaan Geolistrik Desa Sukosari Lor', '2023-03-01', NULL, '', '', 8880000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:19:54', 0);
+INSERT INTO `amortisasi` VALUES (23, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Penyusunan Dokumen UPLH Pengeboran ABT di Nangkaan', '2023-11-08', NULL, '', '', 33200000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:20:53', 0);
+INSERT INTO `amortisasi` VALUES (24, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Proyek Pelebaran Jalan di Sukosari', '2024-01-02', NULL, '', '', 128264260, 1, 5, 20.00, 'Administrator', '2024-12-25 09:23:13', 0);
+INSERT INTO `amortisasi` VALUES (25, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Normalisasi SR (225) Akibat Pelebaran Jalan di Sukosari', '2024-05-31', NULL, '', '', 30598125, 1, 5, 20.00, 'Administrator', '2024-12-25 09:24:43', 0);
+INSERT INTO `amortisasi` VALUES (26, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Legalitas Asset', '2024-05-31', NULL, '', '', 14273000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:25:59', 0);
+INSERT INTO `amortisasi` VALUES (27, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Biaya Rabatan  Pengamanan Pipa Sukosari akibat Pelebaran Jalan', '2024-05-31', NULL, '', '', 9710000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:27:07', 0);
+INSERT INTO `amortisasi` VALUES (28, 'Kantor Pusat', 526, 510, 393, 30, NULL, 'Perpanjangan merk Ijen Water', '2024-12-02', NULL, '', '', 3430000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:29:44', 0);
 
 -- ----------------------------
 -- Table structure for bagian_upk
@@ -125,7 +147,7 @@ CREATE TABLE `daftar_asset`  (
   INDEX `id_no_per`(`id_no_per` ASC) USING BTREE,
   CONSTRAINT `daftar_asset_ibfk_1` FOREIGN KEY (`id_bagian`) REFERENCES `bagian_upk` (`id_bagian`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `daftar_asset_ibfk_2` FOREIGN KEY (`id_no_per`) REFERENCES `no_per` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2467 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2531 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of daftar_asset
@@ -615,7 +637,6 @@ INSERT INTO `daftar_asset` VALUES (484, 18, 2037, 1912, 222, 0, 34, 0, 'Pengangk
 INSERT INTO `daftar_asset` VALUES (485, 18, 2037, 1912, 222, 0, 34, 0, 'Pengangkatan Pompa  Vansan SP 17-14 ( no.180916926)', '2022-11-11', '2024-08-07', '', '', -109275565, 2, 8, 25.00, 'Administrator', '2024-12-02 11:17:49', 0);
 INSERT INTO `daftar_asset` VALUES (486, 18, 2037, 1912, 222, 0, 34, 0, 'Penggantian Motor Grunfos 5,5 KW ( no.00345888)', '2024-08-07', NULL, '', '', 62080678, 1, 8, 25.00, 'Administrator', '2024-12-02 11:18:36', 0);
 INSERT INTO `daftar_asset` VALUES (487, 18, 2037, 1912, 222, 0, 34, 0, 'Penggantian Pompa Grunfos SP 30-4 KW ( no.A13A0004)', '2024-08-07', NULL, '', '', 20931497, 1, 8, 25.00, 'Administrator', '2024-12-02 11:19:09', 0);
-INSERT INTO `daftar_asset` VALUES (488, 18, 2037, 1912, 222, 0, 34, 0, 'Penyesuaian Nilai persediaan 31-juli 2024 (pompa)', '2024-09-01', NULL, '', '', 57508000, 1, 8, 25.00, 'Administrator', '2024-12-02 11:19:52', 0);
 INSERT INTO `daftar_asset` VALUES (489, 19, 2038, 1912, 222, 0, 34, 0, 'Pemasangan pompa SB Taman Krocok', '2019-06-30', NULL, '', '', 44584865, 1, 16, 12.50, 'Administrator', '2024-12-02 11:45:34', 0);
 INSERT INTO `daftar_asset` VALUES (490, 21, 2041, 1912, 222, 0, 34, 0, 'Pemasangan pompa SB Besuk lengkap dengan Well Head', '2021-11-30', NULL, '', '', 172182205, 1, 16, 12.50, 'Administrator', '2024-12-02 11:48:00', 0);
 INSERT INTO `daftar_asset` VALUES (491, 21, 2041, 1912, 222, 0, 34, 0, 'Pengangkatan pompa SB Besuk', '2022-10-13', '2022-10-13', '', '', -86091103, 2, 16, 12.50, 'Administrator', '2024-12-02 11:49:20', 0);
@@ -712,16 +733,16 @@ INSERT INTO `daftar_asset` VALUES (582, 2, 2859, 2795, 244, 0, 34, 0, 'Pengad.LC
 INSERT INTO `daftar_asset` VALUES (583, 2, 2859, 2795, 244, 0, 34, 0, 'Pengadaan HUB', '2019-07-30', NULL, '', '', 4675000, 1, 4, 50.00, 'Administrator', '2024-12-03 12:59:20', 0);
 INSERT INTO `daftar_asset` VALUES (584, 2, 2859, 2795, 244, 0, 34, 0, 'Alat komunikasi/ I Phone', '2019-11-30', NULL, '', '', 7920000, 1, 4, 50.00, 'Administrator', '2024-12-03 12:59:52', 0);
 INSERT INTO `daftar_asset` VALUES (585, 9, 2863, 2795, 244, 0, 34, 0, 'Penggantian seling tower UPK Sukosari', '2024-04-05', NULL, '', '', 14633334, 1, 4, 50.00, 'Administrator', '2024-12-03 13:10:04', 0);
-INSERT INTO `daftar_asset` VALUES (586, 10, 2864, 2795, 244, 0, 34, 0, 'Penggantian seling tower Upk Maesan', '2024-02-21', NULL, '', '', 10000000, 1, 4, 50.00, 'Administrator', '2024-12-03 13:20:08', 0);
+INSERT INTO `daftar_asset` VALUES (586, 10, 2864, 2795, 244, 0, 34, 0, 'Penggantian seling tower Upk Maesan', '2024-02-21', NULL, '', '', 16938600, 1, 4, 50.00, 'Administrator', '2024-12-03 13:20:08', 0);
 INSERT INTO `daftar_asset` VALUES (587, 11, 2867, 2795, 244, 0, 34, 0, 'Penggantian seling tower UPK Tegalampel', '2024-04-05', NULL, '', '', 14633333, 1, 4, 50.00, 'Administrator', '2024-12-03 13:20:55', 0);
 INSERT INTO `daftar_asset` VALUES (588, 12, 2869, 2795, 244, 0, 34, 0, 'Penggantian seling tower UPK Tapen', '2024-04-05', NULL, '', '', 16350000, 1, 4, 50.00, 'Administrator', '2024-12-03 13:21:52', 0);
 INSERT INTO `daftar_asset` VALUES (589, 13, 2871, 2795, 244, 0, 34, 0, 'Penggantian seling tower UPK Prajekan', '2024-04-05', NULL, '', '', 16350000, 1, 4, 50.00, 'Administrator', '2024-12-03 13:22:49', 0);
 INSERT INTO `daftar_asset` VALUES (590, 14, 2873, 2795, 244, 0, 34, 0, 'Penggantian seling tower UPK Tlogosari', '2024-04-05', NULL, '', '', 14633333, 1, 4, 50.00, 'Administrator', '2024-12-03 13:23:32', 0);
-INSERT INTO `daftar_asset` VALUES (591, 16, 2878, 2795, 244, 0, 34, 0, 'Penggantian seling tower Upk Curahdami', '2024-02-21', NULL, '', '', 10000000, 1, 4, 50.00, 'Administrator', '2024-12-03 13:41:02', 0);
+INSERT INTO `daftar_asset` VALUES (591, 16, 2878, 2795, 244, 0, 34, 0, 'Penggantian seling tower Upk Curahdami', '2024-02-21', NULL, '', '', 9216885, 1, 4, 50.00, 'Administrator', '2024-12-03 13:41:02', 0);
 INSERT INTO `daftar_asset` VALUES (592, 17, 2880, 2795, 244, 0, 34, 0, 'Penggantian seling tower UPK Tamanan', '2024-04-05', NULL, '', '', 16350000, 1, 4, 50.00, 'Administrator', '2024-12-03 13:42:28', 0);
-INSERT INTO `daftar_asset` VALUES (593, 18, 2882, 2795, 244, 0, 34, 0, 'Penggantian seling tower Upk Tenggarang', '2024-02-21', NULL, '', '', 10000000, 1, 4, 50.00, 'Administrator', '2024-12-03 13:43:19', 0);
-INSERT INTO `daftar_asset` VALUES (594, 19, 2885, 2795, 244, 0, 34, 0, 'Penggantian seling tower Upk Tamankrocok', '2024-02-21', NULL, '', '', 10000000, 1, 4, 50.00, 'Administrator', '2024-12-03 13:44:39', 0);
-INSERT INTO `daftar_asset` VALUES (595, 20, 2887, 2795, 244, 0, 34, 0, 'Penggantian seling tower Upk Wonosari', '2024-02-21', NULL, '', '', 10000000, 1, 4, 50.00, 'Administrator', '2024-12-03 13:45:41', 0);
+INSERT INTO `daftar_asset` VALUES (593, 18, 2882, 2795, 244, 0, 34, 0, 'Penggantian seling tower Upk Tenggarang', '2024-02-21', NULL, '', '', 9801300, 1, 4, 50.00, 'Administrator', '2024-12-03 13:43:19', 0);
+INSERT INTO `daftar_asset` VALUES (594, 19, 2885, 2795, 244, 0, 34, 0, 'Penggantian seling tower Upk Tamankrocok', '2024-02-21', NULL, '', '', 9737475, 1, 4, 50.00, 'Administrator', '2024-12-03 13:44:39', 0);
+INSERT INTO `daftar_asset` VALUES (595, 20, 2887, 2795, 244, 0, 34, 0, 'Penggantian seling tower Upk Wonosari', '2024-02-21', NULL, '', '', 11488500, 1, 4, 50.00, 'Administrator', '2024-12-03 13:45:41', 0);
 INSERT INTO `daftar_asset` VALUES (596, 2, 3001, 2798, 244, 0, 34, 0, 'Alat Work Shop - Ex JH i', '1990-01-01', NULL, '', '', 24108144, 1, 8, 25.00, 'Administrator', '2024-12-03 13:53:10', 0);
 INSERT INTO `daftar_asset` VALUES (597, 2, 3001, 2798, 244, 0, 34, 0, 'Alat Work Shop - Ex Maspion', '1990-01-01', NULL, '', '', 55626905, 1, 8, 25.00, 'Administrator', '2024-12-03 13:54:47', 0);
 INSERT INTO `daftar_asset` VALUES (598, 2, 3001, 2798, 244, 0, 34, 0, 'Alat Work Shop - Ex Capital Manual', '1990-01-01', NULL, '', '', 5037000, 1, 8, 25.00, 'Administrator', '2024-12-03 13:55:33', 0);
@@ -2490,7 +2511,6 @@ INSERT INTO `daftar_asset` VALUES (2364, 18, 2443, 2263, 226, 1, 34, 15, 'Pemasa
 INSERT INTO `daftar_asset` VALUES (2365, 18, 2443, 2263, 226, 1, 34, 6, 'Pemasangan SR 6 unit', '2024-08-31', NULL, '', '', 6244653, 1, 16, 12.50, 'Administrator', '2024-12-19 15:21:16', 0);
 INSERT INTO `daftar_asset` VALUES (2366, 18, 2443, 2263, 226, 1, 34, 1, 'Pemasangan SR 1 unit', '2024-09-30', NULL, '', '', 1120482, 1, 16, 12.50, 'Administrator', '2024-12-19 15:21:45', 0);
 INSERT INTO `daftar_asset` VALUES (2367, 18, 2443, 2263, 226, 2, 34, 5, 'Penggantian Water meter 5 unit', '2023-12-31', NULL, '', '', 9402800, 1, 16, 12.50, 'Administrator', '2024-12-19 15:25:15', 0);
-INSERT INTO `daftar_asset` VALUES (2368, 18, 2443, 2263, 226, 2, 34, 1, 'Penggantian Water meter 1 unit', '2024-07-31', NULL, '', '', 294150, 1, 16, 12.50, 'Administrator', '2024-12-19 15:25:52', 0);
 INSERT INTO `daftar_asset` VALUES (2369, 19, 2444, 2263, 226, 1, 34, 41, 'Pemasangan SR 41 unit', '2014-12-31', NULL, '', '', 29584544, 1, 16, 12.50, 'Administrator', '2024-12-20 08:25:37', 0);
 INSERT INTO `daftar_asset` VALUES (2370, 19, 2444, 2263, 226, 1, 34, 438, 'Pemasangan SR 438 unit', '2015-12-31', NULL, '', '', 334420313, 1, 16, 12.50, 'Administrator', '2024-12-20 08:26:24', 0);
 INSERT INTO `daftar_asset` VALUES (2371, 19, 2444, 2263, 226, 1, 34, 76, 'Pemasangan SR 76 unit', '2016-12-30', NULL, '', '', 74420095, 1, 16, 12.50, 'Administrator', '2024-12-20 08:27:00', 0);
@@ -2564,14 +2584,13 @@ INSERT INTO `daftar_asset` VALUES (2438, 22, 2448, 2263, 226, 1, 34, 12, 'Pemasa
 INSERT INTO `daftar_asset` VALUES (2439, 22, 2448, 2263, 226, 1, 34, 12, 'Pemasangan SR 12 unit', '2024-09-30', NULL, '', '', 1019618, 1, 16, 12.50, 'Administrator', '2024-12-20 09:52:34', 0);
 INSERT INTO `daftar_asset` VALUES (2440, 22, 2448, 2263, 226, 2, 34, 2, 'Penggantian Water meter 2 unit', '2024-03-31', NULL, '', '', 588300, 1, 16, 12.50, 'Administrator', '2024-12-20 09:54:31', 0);
 INSERT INTO `daftar_asset` VALUES (2441, 22, 2448, 2263, 226, 2, 34, 1, 'Penggantian Water meter 1 unit', '2024-07-31', NULL, '', '', 294150, 1, 16, 12.50, 'Administrator', '2024-12-20 09:55:03', 0);
-INSERT INTO `daftar_asset` VALUES (2442, 22, 2448, 2263, 226, 1, 34, 35, 'Pemasangan SR 35 unit', '2024-09-30', NULL, '', '', 10645250, 1, 16, 12.50, 'Administrator', '2024-12-20 09:55:47', 0);
+INSERT INTO `daftar_asset` VALUES (2442, 22, 2448, 2263, 226, 2, 34, 35, 'Penggantian Water meter 35 unit', '2024-09-30', NULL, '', '', 10295250, 1, 16, 12.50, 'Administrator', '2024-12-20 09:55:47', 0);
 INSERT INTO `daftar_asset` VALUES (2443, 22, 2448, 2263, 226, 2, 34, 29, 'Penggantian Water meter 29 unit', '2023-12-31', NULL, '', '', 8186200, 1, 16, 12.50, 'Administrator', '2024-12-20 10:01:25', 0);
 INSERT INTO `daftar_asset` VALUES (2444, 2, 1488, 1472, 218, 0, 34, 0, 'Biaya sertifikat tanah di Sumber Salam\r\n', '2024-10-08', NULL, '', '', 8750000, 1, 0, 0.00, 'Administrator', '2024-12-20 13:15:03', 0);
 INSERT INTO `daftar_asset` VALUES (2445, 16, 1872, 1579, 220, 0, 34, 0, 'Pembuatan Pagar SB Penambangan', '2024-09-07', NULL, '', '', 88892000, 1, 8, 25.00, 'Administrator', '2024-12-20 13:40:52', 0);
 INSERT INTO `daftar_asset` VALUES (2447, 16, 1872, 1579, 220, 0, 34, 0, 'Pembuatan Pagar SB Poncogati', '2024-08-07', NULL, '', '', 124940000, 1, 16, 12.50, 'Administrator', '2024-12-20 13:53:01', 0);
 INSERT INTO `daftar_asset` VALUES (2448, 22, 1884, 1579, 220, 0, 34, 0, 'Pembuatan pagar SB Sukosari 2', '2024-03-18', NULL, '', '', 96052000, 1, 16, 12.50, 'Administrator', '2024-12-20 14:19:15', 0);
 INSERT INTO `daftar_asset` VALUES (2449, 2, 2620, 2552, 226, 0, 34, 0, 'Pemasangan Instalasi Wellhead SB City Plaza & Pemas.Instalasi Distribusi Darurat dia 40 sepanjang 124 meter', '2024-06-03', NULL, '', '', 6488014, 1, 16, 12.50, 'Administrator', '2024-12-20 14:50:53', 0);
-INSERT INTO `daftar_asset` VALUES (2450, 15, 2875, 2795, 244, 0, 34, 0, 'Penggantian seling tower Upk Wringin', '2024-02-21', NULL, '', '', 10000000, 1, 4, 50.00, 'Administrator', '2024-12-20 15:01:24', 0);
 INSERT INTO `daftar_asset` VALUES (2451, 16, 2690, 2671, 228, 0, 34, 0, 'Renovasi atap & pemindahan kamar mandi', '2024-11-30', NULL, '', '', 34055000, 1, 20, 5.00, 'Administrator', '2024-12-22 10:44:30', 0);
 INSERT INTO `daftar_asset` VALUES (2452, 11, 1588, 1569, 220, 0, 34, 0, 'Pembuatan Sumur Bor SB Locare', '2024-11-11', NULL, '', '', 493127280, 1, 20, 5.00, 'Administrator', '2024-12-22 10:49:48', 0);
 INSERT INTO `daftar_asset` VALUES (2453, 2, 1853, 1579, 220, 0, 34, 0, 'Pembuatan pagar SB Kotakulon', '2024-11-13', NULL, '', '', 99907000, 1, 16, 12.50, 'Administrator', '2024-12-22 10:53:16', 0);
@@ -2588,6 +2607,70 @@ INSERT INTO `daftar_asset` VALUES (2463, 11, 2024, 1912, 222, 0, 34, 0, 'Penggan
 INSERT INTO `daftar_asset` VALUES (2464, 11, 2024, 1912, 222, 0, 34, 0, 'SB Tegalampel 2 (Penyesuaian Nilai Persediaan 31 Juli 2024)', '2024-09-02', NULL, '', '', 57508000, 1, 16, 12.50, 'Administrator', '2024-12-22 12:05:41', 0);
 INSERT INTO `daftar_asset` VALUES (2465, 11, 2024, 1912, 222, 0, 34, 0, 'Pemasangan pompa Submersible SB Locare Pompa Vansan  14-18 & Motor Vansan 4 KW Q=3,8 l/dt,H=75 M lengkap dgn Well Head & Panel Pompa', '2024-11-11', NULL, '', '', 124095706, 1, 16, 12.50, 'Administrator', '2024-12-22 12:06:51', 0);
 INSERT INTO `daftar_asset` VALUES (2466, 2, 2987, 2852, 246, 0, 34, 0, 'Pengadaan Daihatzu Grand Max', '2024-02-18', NULL, '', '', 195650000, 1, 10, 10.00, 'Administrator', '2024-12-22 12:21:17', 0);
+INSERT INTO `daftar_asset` VALUES (2467, 11, 1860, 1579, 220, 0, 34, 0, 'Pembuatan pagar SB Locare', '2024-12-18', NULL, '', '', 87149000, 1, 8, 25.00, 'Administrator', '2024-12-25 11:08:48', 0);
+INSERT INTO `daftar_asset` VALUES (2468, 2, 2364, 2261, 226, 0, 34, 0, 'Pemindahan pipa PVC dia 100 mm L.24 M Perum Graha Pelita Regency', '2024-10-01', NULL, '', '', 5536855, 1, 16, 12.50, 'Administrator', '2024-12-25 11:19:25', 0);
+INSERT INTO `daftar_asset` VALUES (2469, 2, 2364, 2261, 226, 0, 34, 0, 'Pemasangan pipa Perum Pelita River Valley pipa PVC dia 100 mm L 205 M & 50 mm L.742 M', '2024-12-18', NULL, '', '', 124024521, 1, 16, 12.50, 'Administrator', '2024-12-25 11:20:29', 0);
+INSERT INTO `daftar_asset` VALUES (2470, 9, 2366, 2261, 226, 0, 34, 0, 'Pemasangan pipa PVC dia 40 mm L.4 M', '2024-11-13', NULL, '', '', 1109319, 1, 16, 12.50, 'Administrator', '2024-12-25 11:22:50', 0);
+INSERT INTO `daftar_asset` VALUES (2471, 11, 2368, 2261, 226, 0, 34, 0, 'Pemasangan pipa Perum River Side Garden Ds.Karanganyar pipa PVC dia 50 mm L.48 M', '2024-12-09', NULL, '', '', 4267404, 1, 16, 12.50, 'Administrator', '2024-12-25 11:24:40', 0);
+INSERT INTO `daftar_asset` VALUES (2472, 7, 2427, 2263, 226, 1, 34, 18, 'Pemasangan 18 SR  unit', '2024-10-31', NULL, '', '', 16489223, 1, 16, 12.50, 'Administrator', '2024-12-25 12:00:26', 0);
+INSERT INTO `daftar_asset` VALUES (2473, 7, 2427, 2263, 226, 1, 34, 13, 'Pemasangan 13 SR  unit', '2024-11-30', NULL, '', '', 14166931, 1, 16, 12.50, 'Administrator', '2024-12-25 12:01:51', 0);
+INSERT INTO `daftar_asset` VALUES (2474, 7, 2427, 2263, 226, 2, 34, 1, 'Penggantian Water Meter 1 Unit', '2024-10-31', NULL, '', '', 146968, 1, 16, 12.50, 'Administrator', '2024-12-25 12:03:19', 0);
+INSERT INTO `daftar_asset` VALUES (2475, 7, 2427, 2263, 226, 2, 34, 1, 'Penggantian Water Meter 1 Unit', '2024-11-30', NULL, '', '', 298035, 1, 16, 12.50, 'Administrator', '2024-12-25 12:04:27', 0);
+INSERT INTO `daftar_asset` VALUES (2476, 9, 2428, 2263, 226, 1, 34, 3, 'Pemasangan SR 3 Unit', '2024-10-31', NULL, '', '', 3466355, 1, 16, 12.50, 'Administrator', '2024-12-25 12:10:03', 0);
+INSERT INTO `daftar_asset` VALUES (2477, 9, 2428, 2263, 226, 1, 34, 2, 'Pemasangan SR 2 Unit', '2024-11-30', NULL, '', '', 1957890, 1, 16, 12.50, 'Administrator', '2024-12-25 12:10:47', 0);
+INSERT INTO `daftar_asset` VALUES (2478, 9, 2428, 2263, 226, 2, 34, 45, 'Penggantian Water Meter 45 Unit', '2024-10-31', NULL, '', '', 14549300, 1, 16, 12.50, 'Administrator', '2024-12-25 12:12:29', 0);
+INSERT INTO `daftar_asset` VALUES (2479, 9, 2428, 2263, 226, 2, 34, 39, 'Penggantian Water Meter 39 Unit', '2024-11-30', NULL, '', '', 12123365, 1, 16, 12.50, 'Administrator', '2024-12-25 12:13:33', 0);
+INSERT INTO `daftar_asset` VALUES (2480, 10, 2430, 2263, 226, 1, 34, 1, 'Pemasangan SR 1 Unit', '2024-11-30', NULL, '', '', 1040303, 1, 16, 12.50, 'Administrator', '2024-12-25 12:14:57', 0);
+INSERT INTO `daftar_asset` VALUES (2481, 10, 2430, 2263, 226, 2, 34, 2, 'penggantiaan Water meter 2 Unit', '2024-11-30', NULL, '', '', 618035, 1, 16, 12.50, 'Administrator', '2024-12-25 12:16:10', 0);
+INSERT INTO `daftar_asset` VALUES (2482, 10, 2430, 2263, 226, 2, 34, 1, 'Penggantian Water Meter 1 Unit', '2024-11-30', NULL, '', '', 298035, 1, 16, 12.50, 'Administrator', '2024-12-25 12:18:24', 0);
+INSERT INTO `daftar_asset` VALUES (2483, 11, 2433, 2263, 226, 1, 34, 1, 'Pemasangan SR 1 Unit', '2024-10-31', NULL, '', '', 992702, 1, 16, 12.50, 'Administrator', '2024-12-25 12:19:59', 0);
+INSERT INTO `daftar_asset` VALUES (2484, 11, 2433, 2263, 226, 1, 34, 2, 'Pemasangan SR 2 Unit', '2024-11-30', NULL, '', '', 2749590, 1, 16, 12.50, 'Administrator', '2024-12-25 12:20:49', 0);
+INSERT INTO `daftar_asset` VALUES (2485, 11, 2433, 2263, 226, 2, 34, 30, 'Penggantian Water Meter 30 Unit', '2024-10-31', NULL, '', '', 9239085, 1, 16, 12.50, 'Administrator', '2024-12-25 12:22:52', 0);
+INSERT INTO `daftar_asset` VALUES (2486, 11, 2433, 2263, 226, 2, 34, 34, 'Penggantian Water Meter 34 Unit', '2024-11-30', NULL, '', '', 10133190, 1, 16, 12.50, 'Administrator', '2024-12-25 12:23:51', 0);
+INSERT INTO `daftar_asset` VALUES (2487, 12, 2434, 2263, 226, 1, 34, 2, 'Pemasangan SR 2 Unit', '2024-10-31', NULL, '', '', 2090731, 1, 16, 12.50, 'Administrator', '2024-12-25 12:25:58', 0);
+INSERT INTO `daftar_asset` VALUES (2488, 12, 2434, 2263, 226, 2, 34, 47, 'Penggantian Water Meter 47 Unit', '2024-10-31', NULL, '', '', 14298935, 1, 16, 12.50, 'Administrator', '2024-12-25 12:27:43', 0);
+INSERT INTO `daftar_asset` VALUES (2489, 13, 2435, 2263, 226, 1, 34, 2, 'Pemasangan SR 2 Unit', '2024-10-31', NULL, '', '', 1998998, 1, 16, 12.50, 'Administrator', '2024-12-25 12:28:51', 0);
+INSERT INTO `daftar_asset` VALUES (2490, 13, 2435, 2263, 226, 2, 34, 25, 'Penggantian Water Meter 25 Unit', '2024-10-31', NULL, '', '', 7353750, 1, 16, 12.50, 'Administrator', '2024-12-25 12:30:09', 0);
+INSERT INTO `daftar_asset` VALUES (2491, 13, 2435, 2263, 226, 2, 34, 1, 'Penggantian Water Meter 1 Unit', '2024-11-30', NULL, '', '', 260000, 1, 16, 12.50, 'Administrator', '2024-12-25 12:31:10', 0);
+INSERT INTO `daftar_asset` VALUES (2492, 14, 2437, 2263, 226, 1, 34, 1, 'Pemasangan SR 1 Unit', '2024-10-31', NULL, '', '', 1021117, 1, 16, 12.50, 'Administrator', '2024-12-25 12:32:22', 0);
+INSERT INTO `daftar_asset` VALUES (2493, 14, 2437, 2263, 226, 2, 34, 32, 'Penggantian Water Meter 32 Unit', '2024-10-31', NULL, '', '', 9652800, 1, 16, 12.50, 'Administrator', '2024-12-25 12:33:29', 0);
+INSERT INTO `daftar_asset` VALUES (2494, 14, 2437, 2263, 226, 2, 34, 1, 'Penggantian Water Meter 1 Unit', '2024-11-30', NULL, '', '', 320000, 1, 16, 12.50, 'Administrator', '2024-12-25 12:34:17', 0);
+INSERT INTO `daftar_asset` VALUES (2495, 15, 2438, 2263, 226, 1, 34, 2, 'Pemasangan SR 2 Unit', '2024-11-30', NULL, '', '', 1969004, 1, 16, 12.50, 'Administrator', '2024-12-25 12:35:36', 0);
+INSERT INTO `daftar_asset` VALUES (2496, 15, 2438, 2263, 226, 2, 34, 16, 'Penggantian Water Meter 16 Unit', '2024-10-31', NULL, '', '', 5364630, 1, 16, 12.50, 'Administrator', '2024-12-25 12:37:16', 0);
+INSERT INTO `daftar_asset` VALUES (2497, 15, 2438, 2263, 226, 2, 34, 20, 'Penggantian Water Meter 20 Unit', '2024-11-30', NULL, '', '', 6150700, 1, 16, 12.50, 'Administrator', '2024-12-25 12:39:04', 0);
+INSERT INTO `daftar_asset` VALUES (2498, 16, 2440, 2263, 226, 1, 34, 2, 'Pemasangan SR 2 Unit', '2024-11-30', NULL, '', '', 2055886, 1, 16, 12.50, 'Administrator', '2024-12-25 12:40:29', 0);
+INSERT INTO `daftar_asset` VALUES (2499, 16, 2440, 2263, 226, 2, 34, 1, 'Penggantian Water Meter 1 Unit', '2024-11-30', NULL, '', '', 200000, 1, 16, 12.50, 'Administrator', '2024-12-25 12:41:51', 0);
+INSERT INTO `daftar_asset` VALUES (2500, 17, 2441, 2263, 226, 2, 34, 11, 'Penggantian Water Meter 11 Unit', '2024-10-30', NULL, '', '', 3278385, 1, 16, 12.50, 'Administrator', '2024-12-25 12:43:30', 0);
+INSERT INTO `daftar_asset` VALUES (2501, 18, 2443, 2263, 226, 1, 34, 1, 'Pemasangan SR 1 Unit', '2024-11-30', NULL, '', '', 1032383, 1, 16, 12.50, 'Administrator', '2024-12-25 12:44:40', 0);
+INSERT INTO `daftar_asset` VALUES (2502, 18, 2443, 2263, 226, 2, 34, 1, 'Penggantian Water Meter 1 Unit', '2024-11-30', NULL, '', '', 294150, 1, 16, 12.50, 'Administrator', '2024-12-25 12:45:17', 0);
+INSERT INTO `daftar_asset` VALUES (2503, 20, 2446, 2263, 226, 1, 34, 1, 'Pemasangan SR 1 Unit', '2024-10-31', NULL, '', '', 1476125, 1, 16, 12.50, 'Administrator', '2024-12-25 12:52:17', 0);
+INSERT INTO `daftar_asset` VALUES (2504, 20, 2446, 2263, 226, 2, 34, 10, 'Penggantian Water Meter 10 Unit', '2024-10-31', NULL, '', '', 2980350, 1, 16, 12.50, 'Administrator', '2024-12-25 12:54:07', 0);
+INSERT INTO `daftar_asset` VALUES (2505, 20, 2446, 2263, 226, 2, 34, 20, 'Penggantian Water Meter 20 Unit', '2024-11-30', NULL, '', '', 6060700, 1, 16, 12.50, 'Administrator', '2024-12-25 12:55:19', 0);
+INSERT INTO `daftar_asset` VALUES (2506, 21, 2447, 2263, 226, 2, 34, 10, 'Penggantian Water Meter 10 Unit', '2024-11-30', NULL, '', '', 2686200, 1, 16, 12.50, 'Administrator', '2024-12-25 12:56:46', 0);
+INSERT INTO `daftar_asset` VALUES (2507, 21, 2447, 2263, 226, 2, 34, 1, 'Penggantian Water Meter 1 Unit', '2024-07-31', NULL, '', '', 294150, 1, 16, 12.50, 'Administrator', '2024-12-25 13:01:33', 0);
+INSERT INTO `daftar_asset` VALUES (2508, 22, 2448, 2263, 226, 2, 34, 67, 'Penggantian Water Meter 67 Unit', '2024-10-31', NULL, '', '', 20013855, 1, 16, 12.50, 'Administrator', '2024-12-25 13:09:22', 0);
+INSERT INTO `daftar_asset` VALUES (2509, 22, 2448, 2263, 226, 2, 34, 40, 'Penggantian Water Meter 40 Unit', '2024-11-30', NULL, '', '', 12941400, 1, 16, 12.50, 'Administrator', '2024-12-25 13:10:20', 0);
+INSERT INTO `daftar_asset` VALUES (2510, 9, 2625, 2552, 226, 0, 34, 0, 'Pemasangan WM Induk 100 di Sumber Wringin', '2024-11-30', NULL, '', '', 4346500, 1, 8, 25.00, 'Administrator', '2024-12-25 13:14:49', 0);
+INSERT INTO `daftar_asset` VALUES (2511, 10, 2628, 2552, 226, 0, 34, 0, 'Pemasangan Gate valve di Maesan', '2024-11-30', NULL, '', '', 8395000, 1, 8, 25.00, 'Administrator', '2024-12-25 13:16:17', 0);
+INSERT INTO `daftar_asset` VALUES (2512, 18, 2651, 2552, 226, 0, 34, 0, 'Pemasangan Water Meter Induk & Gate Valve dia.75 mm', '2024-11-30', NULL, '', '', 9115891, 1, 8, 25.00, 'Administrator', '2024-12-25 13:17:09', 0);
+INSERT INTO `daftar_asset` VALUES (2513, 2, 2905, 2846, 248, 0, 34, 0, 'Pengadaan Laptop 1 unit', '2024-10-16', NULL, '', '', 10989000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:03:27', 0);
+INSERT INTO `daftar_asset` VALUES (2514, 2, 2905, 2846, 248, 0, 34, 0, 'Pengadaan printer mini (2 bh)', '2024-11-26', NULL, '', '', 900000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:04:24', 0);
+INSERT INTO `daftar_asset` VALUES (2515, 2, 2905, 2846, 248, 0, 34, 0, 'Pengadaan printer mini (1 bh)', '2024-11-26', NULL, '', '', 450000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:04:59', 0);
+INSERT INTO `daftar_asset` VALUES (2516, 2, 2905, 2846, 248, 0, 34, 0, 'Pengadaan CPU Simbada core i3 1 unit', '2024-12-09', NULL, '', '', 3080250, 1, 4, 50.00, 'Administrator', '2024-12-25 14:05:44', 0);
+INSERT INTO `daftar_asset` VALUES (2517, 10, 2909, 2846, 248, 0, 34, 0, 'Pengadaan printer mini (2 bh)', '2024-12-09', NULL, '', '', 900000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:07:51', 0);
+INSERT INTO `daftar_asset` VALUES (2518, 13, 2914, 2846, 248, 0, 34, 0, 'Pengadaan printer mini (1 bh)', '2024-11-26', NULL, '', '', 450000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:09:08', 0);
+INSERT INTO `daftar_asset` VALUES (2519, 20, 2924, 2846, 248, 0, 34, 0, 'Pengadaan printer mini (1 bh)', '2024-12-09', NULL, '', '', 450000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:11:04', 0);
+INSERT INTO `daftar_asset` VALUES (2520, 2, 2935, 2848, 248, 0, 34, 0, 'Pengadaan finger Print Revo W230 N', '2024-10-16', NULL, '', '', 1498500, 1, 4, 50.00, 'Administrator', '2024-12-25 14:13:03', 0);
+INSERT INTO `daftar_asset` VALUES (2521, 16, 2945, 2848, 248, 0, 34, 0, 'Pembelian HP Redmi 13 1 bh', '2024-12-09', NULL, '', '', 1850000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:14:32', 0);
+INSERT INTO `daftar_asset` VALUES (2522, 9, 2868, 2844, 248, 0, 34, 0, 'Pengadaan kursi & meja tamu 1 set', '2024-12-18', NULL, '', '', 4000000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:19:48', 0);
+INSERT INTO `daftar_asset` VALUES (2523, 10, 2870, 2844, 248, 0, 34, 0, 'Pengadaan kursi & meja tamu 1 set', '2024-12-18', NULL, '', '', 4000000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:20:51', 0);
+INSERT INTO `daftar_asset` VALUES (2524, 12, 2876, 2844, 248, 0, 34, 0, 'Pengadaan kursi & meja tamu 1 set', '2024-12-18', NULL, '', '', 4000000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:21:41', 0);
+INSERT INTO `daftar_asset` VALUES (2525, 13, 2879, 2844, 248, 0, 34, 0, 'Pengadaan kursi & meja tamu 1 set', '2024-12-18', NULL, '', '', 4000000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:22:25', 0);
+INSERT INTO `daftar_asset` VALUES (2526, 15, 2884, 2844, 248, 0, 34, 0, 'Pengadaan kursi & meja tamu 1 set', '2024-12-18', NULL, '', '', 4000000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:23:39', 0);
+INSERT INTO `daftar_asset` VALUES (2527, 16, 2886, 2844, 248, 0, 34, 0, 'Pengadaan kursi & meja tamu 1 set', '2024-12-18', NULL, '', '', 4000000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:24:30', 0);
+INSERT INTO `daftar_asset` VALUES (2528, 11, 2874, 2844, 248, 0, 34, 0, 'Pengadaan kursi & meja tamu 1 set', '2024-12-18', NULL, '', '', 4000000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:27:25', 0);
+INSERT INTO `daftar_asset` VALUES (2529, 9, 2908, 2846, 248, 0, 34, 0, 'Pengadaan printer mini (1 bh)', '2024-12-09', NULL, '', '', 450000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:37:33', 0);
+INSERT INTO `daftar_asset` VALUES (2530, 19, 2922, 2846, 248, 0, 34, 0, 'Pengadaan printer mini (1 bh)', '2024-11-26', NULL, '', '', 450000, 1, 4, 50.00, 'Administrator', '2024-12-25 14:43:44', 0);
 
 -- ----------------------------
 -- Table structure for no_per
@@ -2661,12 +2744,12 @@ INSERT INTO `no_per` VALUES (502, '41.06.00', 'DANA PEMB.UTANG JK.PANJANG', '390
 INSERT INTO `no_per` VALUES (503, '41.07.00', 'SAMBUNGAN BARU YANG AKAN DITERIMA', '390', NULL, '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
 INSERT INTO `no_per` VALUES (505, '41.08.00', 'BAYAR DIIMUKA KEPADA PEMDA', '390', NULL, '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
 INSERT INTO `no_per` VALUES (506, '41.09.00', 'PENDAPATAN YANG AKAN DITERIMA', '390', NULL, '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
-INSERT INTO `no_per` VALUES (508, '42.01.00', 'BEBAN DITANGGUHKAN', '393', '393', '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
-INSERT INTO `no_per` VALUES (510, '42.02.00', 'AKUM.AMORT BEBAN DITANGGUHKAN', '393', '393', '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
+INSERT INTO `no_per` VALUES (508, '42.01.00', 'BEBAN DITANGGUHKAN', '393', '', '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
+INSERT INTO `no_per` VALUES (510, '42.02.00', 'AKUM.AMORT BEBAN DITANGGUHKAN', '393', '', '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
 INSERT INTO `no_per` VALUES (512, '42.03.00', 'TRADE MARK', '393', '393', '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
-INSERT INTO `no_per` VALUES (513, '42.04.00', 'AKUM.AMORT.TRADE MARK', '393', '393', '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
-INSERT INTO `no_per` VALUES (515, '42.05.00', 'GOODWILL', '393', '393', '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
-INSERT INTO `no_per` VALUES (517, '42.06.00', 'AKUM.AMORTISASI GOODWILL', '393', '393', '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
+INSERT INTO `no_per` VALUES (513, '42.04.00', 'AKUM.AMORT.TRADE MARK', '393', '', '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
+INSERT INTO `no_per` VALUES (515, '42.05.00', 'GOODWILL', '393', '', '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
+INSERT INTO `no_per` VALUES (517, '42.06.00', 'AKUM.AMORTISASI GOODWILL', '393', '', '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
 INSERT INTO `no_per` VALUES (520, '42.01.01', 'By.Organisasi/Pendirian', '508', '393', '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
 INSERT INTO `no_per` VALUES (521, '42.01.02', 'Sewa Jangka Panjang', '508', '393', '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
 INSERT INTO `no_per` VALUES (522, '42.01.03', 'Kerugian Ditangguhkan', '508', '393', '30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
@@ -3914,7 +3997,7 @@ CREATE TABLE `penyusutan`  (
   PRIMARY KEY (`id_penyusutan`) USING BTREE,
   INDEX `id_asset`(`id_asset` ASC) USING BTREE,
   CONSTRAINT `penyusutan_ibfk_1` FOREIGN KEY (`id_asset`) REFERENCES `daftar_asset` (`id_asset`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2468 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2532 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of penyusutan
@@ -4404,7 +4487,6 @@ INSERT INTO `penyusutan` VALUES (485, 484, 2022, 2024, 0, 109275565, 0, 0, -1092
 INSERT INTO `penyusutan` VALUES (486, 485, 2022, 2024, 0, 109275565, 0, 0, -109275565, '2024-12-02 11:17:49', 'Administrator');
 INSERT INTO `penyusutan` VALUES (487, 486, 2024, NULL, 62080678, 0, 0, 0, 62080678, '2024-12-02 11:18:36', 'Administrator');
 INSERT INTO `penyusutan` VALUES (488, 487, 2024, NULL, 20931497, 0, 0, 0, 20931497, '2024-12-02 11:19:09', 'Administrator');
-INSERT INTO `penyusutan` VALUES (489, 488, 2024, NULL, 57508000, 0, 0, 0, 57508000, '2024-12-02 11:19:52', 'Administrator');
 INSERT INTO `penyusutan` VALUES (490, 489, 2019, NULL, 44584865, 0, 0, 0, 44584865, '2024-12-02 11:45:34', 'Administrator');
 INSERT INTO `penyusutan` VALUES (491, 490, 2021, NULL, 172182205, 0, 0, 0, 172182205, '2024-12-02 11:48:00', 'Administrator');
 INSERT INTO `penyusutan` VALUES (492, 491, 2022, 2022, 0, 86091103, 0, 0, -86091103, '2024-12-02 11:49:20', 'Administrator');
@@ -4501,16 +4583,16 @@ INSERT INTO `penyusutan` VALUES (583, 582, 2019, NULL, 10505000, 0, 0, 0, 105050
 INSERT INTO `penyusutan` VALUES (584, 583, 2019, NULL, 4675000, 0, 0, 0, 4675000, '2024-12-03 12:59:20', 'Administrator');
 INSERT INTO `penyusutan` VALUES (585, 584, 2019, NULL, 7920000, 0, 0, 0, 7920000, '2024-12-03 12:59:52', 'Administrator');
 INSERT INTO `penyusutan` VALUES (586, 585, 2024, NULL, 14633334, 0, 0, 0, 14633334, '2024-12-03 13:10:04', 'Administrator');
-INSERT INTO `penyusutan` VALUES (587, 586, 2024, NULL, 10000000, 0, 0, 0, 10000000, '2024-12-03 13:20:08', 'Administrator');
+INSERT INTO `penyusutan` VALUES (587, 586, 2024, NULL, 16938600, 0, 0, 0, 16938600, '2024-12-03 13:20:08', 'Administrator');
 INSERT INTO `penyusutan` VALUES (588, 587, 2024, NULL, 14633333, 0, 0, 0, 14633333, '2024-12-03 13:20:55', 'Administrator');
 INSERT INTO `penyusutan` VALUES (589, 588, 2024, NULL, 16350000, 0, 0, 0, 16350000, '2024-12-03 13:21:52', 'Administrator');
 INSERT INTO `penyusutan` VALUES (590, 589, 2024, NULL, 16350000, 0, 0, 0, 16350000, '2024-12-03 13:22:49', 'Administrator');
 INSERT INTO `penyusutan` VALUES (591, 590, 2024, NULL, 14633333, 0, 0, 0, 14633333, '2024-12-03 13:23:32', 'Administrator');
-INSERT INTO `penyusutan` VALUES (592, 591, 2024, NULL, 10000000, 0, 0, 0, 10000000, '2024-12-03 13:41:02', 'Administrator');
+INSERT INTO `penyusutan` VALUES (592, 591, 2024, NULL, 9216885, 0, 0, 0, 9216885, '2024-12-03 13:41:02', 'Administrator');
 INSERT INTO `penyusutan` VALUES (593, 592, 2024, NULL, 16350000, 0, 0, 0, 16350000, '2024-12-03 13:42:28', 'Administrator');
-INSERT INTO `penyusutan` VALUES (594, 593, 2024, NULL, 10000000, 0, 0, 0, 10000000, '2024-12-03 13:43:19', 'Administrator');
-INSERT INTO `penyusutan` VALUES (595, 594, 2024, NULL, 10000000, 0, 0, 0, 10000000, '2024-12-03 13:44:39', 'Administrator');
-INSERT INTO `penyusutan` VALUES (596, 595, 2024, NULL, 10000000, 0, 0, 0, 10000000, '2024-12-03 13:45:41', 'Administrator');
+INSERT INTO `penyusutan` VALUES (594, 593, 2024, NULL, 9801300, 0, 0, 0, 9801300, '2024-12-03 13:43:19', 'Administrator');
+INSERT INTO `penyusutan` VALUES (595, 594, 2024, NULL, 9737475, 0, 0, 0, 9737475, '2024-12-03 13:44:39', 'Administrator');
+INSERT INTO `penyusutan` VALUES (596, 595, 2024, NULL, 11488500, 0, 0, 0, 11488500, '2024-12-03 13:45:41', 'Administrator');
 INSERT INTO `penyusutan` VALUES (597, 596, 1990, NULL, 24108144, 0, 0, 0, 24108144, '2024-12-03 13:53:10', 'Administrator');
 INSERT INTO `penyusutan` VALUES (598, 597, 1990, NULL, 55626905, 0, 0, 0, 55626905, '2024-12-03 13:54:47', 'Administrator');
 INSERT INTO `penyusutan` VALUES (599, 598, 1990, NULL, 5037000, 0, 0, 0, 5037000, '2024-12-03 13:55:33', 'Administrator');
@@ -6279,7 +6361,6 @@ INSERT INTO `penyusutan` VALUES (2365, 2364, 2024, NULL, 15248149, 0, 0, 0, 1524
 INSERT INTO `penyusutan` VALUES (2366, 2365, 2024, NULL, 6244653, 0, 0, 0, 6244653, '2024-12-19 15:21:16', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2367, 2366, 2024, NULL, 1120482, 0, 0, 0, 1120482, '2024-12-19 15:21:45', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2368, 2367, 2023, NULL, 9402800, 0, 0, 0, 9402800, '2024-12-19 15:25:15', 'Administrator');
-INSERT INTO `penyusutan` VALUES (2369, 2368, 2024, NULL, 294150, 0, 0, 0, 294150, '2024-12-19 15:25:52', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2370, 2369, 2014, NULL, 29584544, 0, 0, 0, 29584544, '2024-12-20 08:25:37', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2371, 2370, 2015, NULL, 334420313, 0, 0, 0, 334420313, '2024-12-20 08:26:24', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2372, 2371, 2016, NULL, 74420095, 0, 0, 0, 74420095, '2024-12-20 08:27:00', 'Administrator');
@@ -6353,14 +6434,13 @@ INSERT INTO `penyusutan` VALUES (2439, 2438, 2024, NULL, 12086547, 0, 0, 0, 1208
 INSERT INTO `penyusutan` VALUES (2440, 2439, 2024, NULL, 1019618, 0, 0, 0, 1019618, '2024-12-20 09:52:34', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2441, 2440, 2024, NULL, 588300, 0, 0, 0, 588300, '2024-12-20 09:54:31', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2442, 2441, 2024, NULL, 294150, 0, 0, 0, 294150, '2024-12-20 09:55:03', 'Administrator');
-INSERT INTO `penyusutan` VALUES (2443, 2442, 2024, NULL, 10645250, 0, 0, 0, 10645250, '2024-12-20 09:55:47', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2443, 2442, 2024, NULL, 10295250, 0, 0, 0, 10295250, '2024-12-20 09:55:47', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2444, 2443, 2023, NULL, 8186200, 0, 0, 0, 8186200, '2024-12-20 10:01:25', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2445, 2444, 2024, NULL, 8750000, 0, 0, 0, 8750000, '2024-12-20 13:15:03', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2446, 2445, 2024, NULL, 88892000, 0, 0, 0, 88892000, '2024-12-20 13:40:52', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2448, 2447, 2024, NULL, 124940000, 0, 0, 0, 124940000, '2024-12-20 13:53:01', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2449, 2448, 2024, NULL, 96052000, 0, 0, 0, 96052000, '2024-12-20 14:19:15', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2450, 2449, 2024, NULL, 6488014, 0, 0, 0, 6488014, '2024-12-20 14:50:53', 'Administrator');
-INSERT INTO `penyusutan` VALUES (2451, 2450, 2024, NULL, 10000000, 0, 0, 0, 10000000, '2024-12-20 15:01:24', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2452, 2451, 2024, NULL, 34055000, 0, 0, 0, 34055000, '2024-12-22 10:44:30', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2453, 2452, 2024, NULL, 493127280, 0, 0, 0, 493127280, '2024-12-22 10:49:49', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2454, 2453, 2024, NULL, 99907000, 0, 0, 0, 99907000, '2024-12-22 10:53:16', 'Administrator');
@@ -6377,6 +6457,70 @@ INSERT INTO `penyusutan` VALUES (2464, 2463, 2024, NULL, 71640117, 0, 0, 0, 7164
 INSERT INTO `penyusutan` VALUES (2465, 2464, 2024, NULL, 57508000, 0, 0, 0, 57508000, '2024-12-22 12:05:41', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2466, 2465, 2024, NULL, 124095706, 0, 0, 0, 124095706, '2024-12-22 12:06:51', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2467, 2466, 2024, NULL, 195650000, 0, 0, 0, 195650000, '2024-12-22 12:21:17', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2468, 2467, 2024, NULL, 87149000, 0, 0, 0, 87149000, '2024-12-25 11:08:48', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2469, 2468, 2024, NULL, 5536855, 0, 0, 0, 5536855, '2024-12-25 11:19:25', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2470, 2469, 2024, NULL, 124024521, 0, 0, 0, 124024521, '2024-12-25 11:20:29', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2471, 2470, 2024, NULL, 1109319, 0, 0, 0, 1109319, '2024-12-25 11:22:50', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2472, 2471, 2024, NULL, 4267404, 0, 0, 0, 4267404, '2024-12-25 11:24:40', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2473, 2472, 2024, NULL, 16489223, 0, 0, 0, 16489223, '2024-12-25 12:00:26', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2474, 2473, 2024, NULL, 14166931, 0, 0, 0, 14166931, '2024-12-25 12:01:51', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2475, 2474, 2024, NULL, 146968, 0, 0, 0, 146968, '2024-12-25 12:03:19', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2476, 2475, 2024, NULL, 298035, 0, 0, 0, 298035, '2024-12-25 12:04:27', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2477, 2476, 2024, NULL, 3466355, 0, 0, 0, 3466355, '2024-12-25 12:10:03', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2478, 2477, 2024, NULL, 1957890, 0, 0, 0, 1957890, '2024-12-25 12:10:47', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2479, 2478, 2024, NULL, 14549300, 0, 0, 0, 14549300, '2024-12-25 12:12:29', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2480, 2479, 2024, NULL, 12123365, 0, 0, 0, 12123365, '2024-12-25 12:13:33', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2481, 2480, 2024, NULL, 1040303, 0, 0, 0, 1040303, '2024-12-25 12:14:57', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2482, 2481, 2024, NULL, 618035, 0, 0, 0, 618035, '2024-12-25 12:16:10', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2483, 2482, 2024, NULL, 298035, 0, 0, 0, 298035, '2024-12-25 12:18:24', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2484, 2483, 2024, NULL, 992702, 0, 0, 0, 992702, '2024-12-25 12:19:59', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2485, 2484, 2024, NULL, 2749590, 0, 0, 0, 2749590, '2024-12-25 12:20:49', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2486, 2485, 2024, NULL, 9239085, 0, 0, 0, 9239085, '2024-12-25 12:22:52', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2487, 2486, 2024, NULL, 10133190, 0, 0, 0, 10133190, '2024-12-25 12:23:51', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2488, 2487, 2024, NULL, 2090731, 0, 0, 0, 2090731, '2024-12-25 12:25:58', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2489, 2488, 2024, NULL, 14298935, 0, 0, 0, 14298935, '2024-12-25 12:27:43', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2490, 2489, 2024, NULL, 1998998, 0, 0, 0, 1998998, '2024-12-25 12:28:51', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2491, 2490, 2024, NULL, 7353750, 0, 0, 0, 7353750, '2024-12-25 12:30:09', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2492, 2491, 2024, NULL, 260000, 0, 0, 0, 260000, '2024-12-25 12:31:10', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2493, 2492, 2024, NULL, 1021117, 0, 0, 0, 1021117, '2024-12-25 12:32:22', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2494, 2493, 2024, NULL, 9652800, 0, 0, 0, 9652800, '2024-12-25 12:33:29', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2495, 2494, 2024, NULL, 320000, 0, 0, 0, 320000, '2024-12-25 12:34:17', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2496, 2495, 2024, NULL, 1969004, 0, 0, 0, 1969004, '2024-12-25 12:35:36', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2497, 2496, 2024, NULL, 5364630, 0, 0, 0, 5364630, '2024-12-25 12:37:16', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2498, 2497, 2024, NULL, 6150700, 0, 0, 0, 6150700, '2024-12-25 12:39:04', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2499, 2498, 2024, NULL, 2055886, 0, 0, 0, 2055886, '2024-12-25 12:40:29', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2500, 2499, 2024, NULL, 200000, 0, 0, 0, 200000, '2024-12-25 12:41:51', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2501, 2500, 2024, NULL, 3278385, 0, 0, 0, 3278385, '2024-12-25 12:43:30', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2502, 2501, 2024, NULL, 1032383, 0, 0, 0, 1032383, '2024-12-25 12:44:40', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2503, 2502, 2024, NULL, 294150, 0, 0, 0, 294150, '2024-12-25 12:45:17', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2504, 2503, 2024, NULL, 1476125, 0, 0, 0, 1476125, '2024-12-25 12:52:17', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2505, 2504, 2024, NULL, 2980350, 0, 0, 0, 2980350, '2024-12-25 12:54:07', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2506, 2505, 2024, NULL, 6060700, 0, 0, 0, 6060700, '2024-12-25 12:55:19', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2507, 2506, 2024, NULL, 2686200, 0, 0, 0, 2686200, '2024-12-25 12:56:46', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2508, 2507, 2024, NULL, 294150, 0, 0, 0, 294150, '2024-12-25 13:01:33', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2509, 2508, 2024, NULL, 20013855, 0, 0, 0, 20013855, '2024-12-25 13:09:22', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2510, 2509, 2024, NULL, 12941400, 0, 0, 0, 12941400, '2024-12-25 13:10:20', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2511, 2510, 2024, NULL, 4346500, 0, 0, 0, 4346500, '2024-12-25 13:14:49', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2512, 2511, 2024, NULL, 8395000, 0, 0, 0, 8395000, '2024-12-25 13:16:17', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2513, 2512, 2024, NULL, 9115891, 0, 0, 0, 9115891, '2024-12-25 13:17:09', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2514, 2513, 2024, NULL, 10989000, 0, 0, 0, 10989000, '2024-12-25 14:03:27', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2515, 2514, 2024, NULL, 900000, 0, 0, 0, 900000, '2024-12-25 14:04:24', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2516, 2515, 2024, NULL, 450000, 0, 0, 0, 450000, '2024-12-25 14:04:59', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2517, 2516, 2024, NULL, 3080250, 0, 0, 0, 3080250, '2024-12-25 14:05:44', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2518, 2517, 2024, NULL, 900000, 0, 0, 0, 900000, '2024-12-25 14:07:51', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2519, 2518, 2024, NULL, 450000, 0, 0, 0, 450000, '2024-12-25 14:09:08', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2520, 2519, 2024, NULL, 450000, 0, 0, 0, 450000, '2024-12-25 14:11:04', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2521, 2520, 2024, NULL, 1498500, 0, 0, 0, 1498500, '2024-12-25 14:13:03', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2522, 2521, 2024, NULL, 1850000, 0, 0, 0, 1850000, '2024-12-25 14:14:32', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2523, 2522, 2024, NULL, 4000000, 0, 0, 0, 4000000, '2024-12-25 14:19:48', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2524, 2523, 2024, NULL, 4000000, 0, 0, 0, 4000000, '2024-12-25 14:20:51', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2525, 2524, 2024, NULL, 4000000, 0, 0, 0, 4000000, '2024-12-25 14:21:41', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2526, 2525, 2024, NULL, 4000000, 0, 0, 0, 4000000, '2024-12-25 14:22:25', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2527, 2526, 2024, NULL, 4000000, 0, 0, 0, 4000000, '2024-12-25 14:23:39', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2528, 2527, 2024, NULL, 4000000, 0, 0, 0, 4000000, '2024-12-25 14:24:30', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2529, 2528, 2024, NULL, 4000000, 0, 0, 0, 4000000, '2024-12-25 14:27:25', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2530, 2529, 2024, NULL, 450000, 0, 0, 0, 450000, '2024-12-25 14:37:33', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2531, 2530, 2024, NULL, 450000, 0, 0, 0, 450000, '2024-12-25 14:43:44', 'Administrator');
 
 -- ----------------------------
 -- Table structure for penyusutan_amortisasi
@@ -6397,7 +6541,7 @@ CREATE TABLE `penyusutan_amortisasi`  (
   PRIMARY KEY (`id_penyusutan`) USING BTREE,
   INDEX `id_asset`(`id_amortisasi` ASC) USING BTREE,
   CONSTRAINT `penyusutan_amortisasi_ibfk_1` FOREIGN KEY (`id_amortisasi`) REFERENCES `amortisasi` (`id_amortisasi`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2473 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2495 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of penyusutan_amortisasi
@@ -6407,6 +6551,28 @@ INSERT INTO `penyusutan_amortisasi` VALUES (2469, 2, 2016, NULL, 12005000, 0, 0,
 INSERT INTO `penyusutan_amortisasi` VALUES (2470, 3, 2020, NULL, 5400000, 0, 0, 0, 5400000, '2024-12-24 11:04:25', 'Administrator');
 INSERT INTO `penyusutan_amortisasi` VALUES (2471, 5, 2020, NULL, 101404000, 0, 0, 0, 101404000, '2024-12-24 11:08:55', 'Administrator');
 INSERT INTO `penyusutan_amortisasi` VALUES (2472, 6, 2021, NULL, 21924000, 0, 0, 0, 21924000, '2024-12-24 11:10:44', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2473, 7, 2021, NULL, 10596300, 0, 0, 0, 10596300, '2024-12-25 09:02:27', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2474, 8, 2021, NULL, 100732500, 0, 0, 0, 100732500, '2024-12-25 09:03:30', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2475, 9, 2021, NULL, 32822000, 0, 0, 0, 32822000, '2024-12-25 09:04:34', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2476, 10, 2021, NULL, 25328000, 0, 0, 0, 25328000, '2024-12-25 09:05:22', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2477, 11, 2022, NULL, 38500000, 0, 0, 0, 38500000, '2024-12-25 09:06:12', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2478, 12, 2022, NULL, 62088000, 0, 0, 0, 62088000, '2024-12-25 09:06:54', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2479, 13, 2022, NULL, 145743000, 0, 0, 0, 145743000, '2024-12-25 09:07:49', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2480, 14, 2022, NULL, 76754827, 0, 0, 0, 76754827, '2024-12-25 09:08:32', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2481, 15, 2022, NULL, 30000000, 0, 0, 0, 30000000, '2024-12-25 09:10:17', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2482, 16, 2023, NULL, 32079000, 0, 0, 0, 32079000, '2024-12-25 09:11:31', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2483, 17, 2023, NULL, 15891000, 0, 0, 0, 15891000, '2024-12-25 09:13:18', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2484, 18, 2023, NULL, 8880000, 0, 0, 0, 8880000, '2024-12-25 09:14:52', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2485, 19, 2023, NULL, 8880000, 0, 0, 0, 8880000, '2024-12-25 09:15:39', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2486, 20, 2023, NULL, 8880000, 0, 0, 0, 8880000, '2024-12-25 09:18:27', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2487, 21, 2023, NULL, 8880000, 0, 0, 0, 8880000, '2024-12-25 09:19:09', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2488, 22, 2023, NULL, 8880000, 0, 0, 0, 8880000, '2024-12-25 09:19:54', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2489, 23, 2023, NULL, 33200000, 0, 0, 0, 33200000, '2024-12-25 09:20:53', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2490, 24, 2024, NULL, 128264260, 0, 0, 0, 128264260, '2024-12-25 09:23:13', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2491, 25, 2024, NULL, 30598125, 0, 0, 0, 30598125, '2024-12-25 09:24:43', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2492, 26, 2024, NULL, 14273000, 0, 0, 0, 14273000, '2024-12-25 09:25:59', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2493, 27, 2024, NULL, 9710000, 0, 0, 0, 9710000, '2024-12-25 09:27:07', 'Administrator');
+INSERT INTO `penyusutan_amortisasi` VALUES (2494, 28, 2024, NULL, 3430000, 0, 0, 0, 3430000, '2024-12-25 09:29:44', 'Administrator');
 
 -- ----------------------------
 -- Table structure for persediaan
