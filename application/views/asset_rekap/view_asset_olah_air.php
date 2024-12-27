@@ -26,7 +26,7 @@
                         <a href="<?= base_url('asset_rekap/olah_air_kurang') ?>"><button class="float-end neumorphic-button"><i class="fas fa-minus"></i> Rekap Pengurangan</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('asset_rekap/cetak_olah_air') ?>"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
+                        <a href="<?= base_url('asset_rekap/cetak_olah_air') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
                     </div>
                 </nav>
             </div>
@@ -86,8 +86,13 @@
                                             <?= $nama_asset; ?>
                                         <?php endif; ?>
                                     </td>
-
-                                    <td><?= $row->nama_bagian; ?></td>
+                                    <td>
+                                        <?php if ($row->id_bagian == 2) : ?>
+                                            <?= 'Kantor Pusat'; ?>
+                                        <?php else : ?>
+                                            <?= $row->nama_bagian; ?>
+                                        <?php endif; ?>
+                                    </td>
                                     <td class="text-center"><?= $row->tanggal; ?></td>
                                     <td><?= $row->no_bukti_gd; ?></td>
                                     <td><?= $row->no_bukti_vch; ?></td>

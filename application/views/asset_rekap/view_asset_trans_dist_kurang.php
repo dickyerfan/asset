@@ -5,8 +5,8 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <a href="<?= base_url('asset_rekap/inventaris_kurang') ?>"><button class="neumorphic-button">Tahun ini</button></a>
-                    <form id="form_tahun" action="<?= base_url('asset_rekap/inventaris_kurang'); ?>" method="get">
+                    <a href="<?= base_url('asset_rekap/trans_dist') ?>"><button class="neumorphic-button">Tahun ini</button></a>
+                    <form id="form_tahun" action="<?= base_url('asset_rekap/trans_dist'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <!-- <input type="submit" value="Pilih Tahun" class="neumorphic-button"> -->
                             <!-- <input type="date" id="tanggal" name="tanggal" class="form-control" style="margin-left: 10px;"> -->
@@ -22,11 +22,23 @@
                             </select>
                         </div>
                     </form>
+                    <!-- <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('asset_rekap/sr_baru') ?>"><button class="float-end neumorphic-button"><i class="fas fa-file"></i> SR Baru</button></a>
+                    </div>
                     <div class="navbar-nav ms-2">
-                        <a href="<?= base_url('asset_rekap/inventaris') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Rekap Penambahan</button></a>
+                        <a href="<?= base_url('asset_rekap/ganti_wm') ?>"><button class="float-end neumorphic-button"><i class="fas fa-file"></i> Ganti WM</button></a>
+                    </div>
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('asset_rekap/lainnya') ?>"><button class="float-end neumorphic-button"><i class="fas fa-file"></i> Lain-lain</button></a>
+                    </div>
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('asset_rekap/trans_dist') ?>"><button class="float-end neumorphic-button"><i class="fas fa-file"></i> Total</button></a>
+                    </div> -->
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('asset_rekap/trans_dist') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Rekap Penambahan</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('asset_rekap/cetak_inventaris_kurang') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
+                        <a href="<?= base_url('asset_rekap/cetak_trans_dist_kurang') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
                     </div>
                 </nav>
             </div>
@@ -57,8 +69,8 @@
                             <?php
                             $no = 1;
                             $total_rupiah = 0;
-                            foreach ($inventaris as $row) :
-                                $total_rupiah = $row->total_rupiah * -1;
+                            foreach ($trans_dist as $row) :
+                                $total_rupiah = $row->total_rupiah;
                             ?>
                                 <tr>
                                     <td class="text-center"><?= $no++; ?></td>
@@ -96,7 +108,7 @@
                                     <td class="text-center"><?= $row->tanggal; ?></td>
                                     <td><?= $row->no_bukti_gd; ?></td>
                                     <td><?= $row->no_bukti_vch; ?></td>
-                                    <td class="text-right"><?= number_format($row->rupiah * -1, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>
                                     <td></td>
                                     <!-- <td class="text-center">
                                         <a href="<?= base_url(); ?>asset/edit/<?= $row->id_asset; ?>"><span class="badge badge-primary"><i class="fas fa-fw fa-edit"></i></span></a>

@@ -29,7 +29,7 @@
                                         <option value="<?= $row->id; ?>"><?= $row->name; ?></option>
                                     <?php endforeach;  ?>
                                 </select>
-                                <input type="hidden" name="tahun" value="<?= $this->input->get('tahun') ?>">
+                                <input type="hidden" name="tahun" value="<?= $this->input->get('tahun') ?: date('Y') ?>">
                             </div>
                         </form>
                     </div>

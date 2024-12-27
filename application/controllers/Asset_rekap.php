@@ -43,7 +43,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENAMBAHAN TANAH DAN PENYEMPURNAAN TANAH';
-        $data['tanah'] = $this->Model_asset_rekap->get_tanah($tahun);
+        $grand_id_tanah = 218;
+        $data['tanah'] = $this->Model_asset_rekap->get_asset_by_grand_id($tahun, $grand_id_tanah);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -65,7 +66,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENAMBAHAN INSTALASI SUMBER';
-        $data['sumber'] = $this->Model_asset_rekap->get_sumber($tahun);
+        $grand_id_sumber = 220; // grand_id untuk sumber
+        $data['sumber'] = $this->Model_asset_rekap->get_asset_by_grand_id($tahun, $grand_id_sumber);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -87,7 +89,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENGURANGAN INSTALASI SUMBER';
-        $data['sumber'] = $this->Model_asset_rekap->get_sumber_kurang($tahun);
+        $grand_id_sumber = 220; // grand_id untuk sumber
+        $data['sumber'] = $this->Model_asset_rekap->get_asset_by_grand_id_kurang($tahun, $grand_id_sumber);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -109,7 +112,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENAMBAHAN INSTALASI POMPA';
-        $data['pompa'] = $this->Model_asset_rekap->get_pompa($tahun);
+        $grand_id_pompa = 222; // grand_id untuk pompa
+        $data['pompa'] = $this->Model_asset_rekap->get_asset_by_grand_id($tahun, $grand_id_pompa);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -131,8 +135,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENGURANGAN INSTALASI POMPA';
-        $data['pompa'] = $this->Model_asset_rekap->get_pompa_kurang($tahun);
-
+        $grand_id_pompa = 222; // grand_id untuk pompa
+        $data['pompa'] = $this->Model_asset_rekap->get_asset_by_grand_id_kurang($tahun, $grand_id_pompa);
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('templates/sidebar');
@@ -153,7 +157,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENAMBAHAN INSTALASI PENGOLAHAN AIR';
-        $data['olah_air'] = $this->Model_asset_rekap->get_olah_air($tahun);
+        $grand_id_olah_air = 224; // grand_id untuk olah_air
+        $data['olah_air'] = $this->Model_asset_rekap->get_asset_by_grand_id($tahun, $grand_id_olah_air);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -175,7 +180,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENGURANGAN INSTALASI PENGOLAHAN AIR';
-        $data['olah_air'] = $this->Model_asset_rekap->get_olah_air_kurang($tahun);
+        $grand_id_olah_air = 224; // grand_id untuk olah_air
+        $data['olah_air'] = $this->Model_asset_rekap->get_asset_by_grand_id_kurang($tahun, $grand_id_olah_air);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -197,7 +203,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENAMBAHAN BANGUNAN';
-        $data['bangunan'] = $this->Model_asset_rekap->get_bangunan($tahun);
+        $grand_id_bangunan = 228; // grand_id untuk bangunan
+        $data['bangunan'] = $this->Model_asset_rekap->get_asset_by_grand_id($tahun, $grand_id_bangunan);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -219,7 +226,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENGURANGAN BANGUNAN';
-        $data['bangunan'] = $this->Model_asset_rekap->get_bangunan_kurang($tahun);
+        $grand_id_bangunan = 228; // grand_id untuk bangunan
+        $data['bangunan'] = $this->Model_asset_rekap->get_asset_by_grand_id_kurang($tahun, $grand_id_bangunan);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -241,7 +249,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENAMBAHAN PERALATAN DAN PERLENGKAPAN';
-        $data['peralatan'] = $this->Model_asset_rekap->get_peralatan($tahun);
+        $grand_id_peralatan = 244; // grand_id untuk peralatan
+        $data['peralatan'] = $this->Model_asset_rekap->get_asset_by_grand_id($tahun, $grand_id_peralatan);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -263,7 +272,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENGURANGAN PERALATAN DAN PERLENGKAPAN';
-        $data['peralatan'] = $this->Model_asset_rekap->get_peralatan_kurang($tahun);
+        $grand_id_peralatan = 244; // grand_id untuk peralatan
+        $data['peralatan'] = $this->Model_asset_rekap->get_asset_by_grand_id_kurang($tahun, $grand_id_peralatan);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -285,7 +295,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENAMBAHAN KENDARAAN / ALAT ANGKUT';
-        $data['kendaraan'] = $this->Model_asset_rekap->get_kendaraan($tahun);
+        $grand_id_kendaraan = 246; // grand_id untuk kendaraan
+        $data['kendaraan'] = $this->Model_asset_rekap->get_asset_by_grand_id($tahun, $grand_id_kendaraan);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -307,7 +318,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENGURANGAN KENDARAAN / ALAT ANGKUT';
-        $data['kendaraan'] = $this->Model_asset_rekap->get_kendaraan_kurang($tahun);
+        $grand_id_kendaraan = 246; // grand_id untuk kendaraan
+        $data['kendaraan'] = $this->Model_asset_rekap->get_asset_by_grand_id_kurang($tahun, $grand_id_kendaraan);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -316,7 +328,6 @@ class Asset_rekap extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    // ini sudah betul
     public function inventaris()
     {
         $get_tahun = $this->input->get('tahun');
@@ -330,7 +341,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENAMBAHAN INVENTARIS / PERABOTAN KANTOR';
-        $data['inventaris'] = $this->Model_asset_rekap->get_inventaris($tahun);
+        $grand_id_inventaris = 248; // grand_id untuk inventaris
+        $data['inventaris'] = $this->Model_asset_rekap->get_asset_by_grand_id($tahun, $grand_id_inventaris);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -338,6 +350,7 @@ class Asset_rekap extends CI_Controller
         $this->load->view('asset_rekap/view_asset_inventaris', $data);
         $this->load->view('templates/footer');
     }
+
     public function inventaris_kurang()
     {
         $get_tahun = $this->input->get('tahun');
@@ -351,7 +364,8 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENGURANGAN INVENTARIS / PERABOTAN KANTOR';
-        $data['inventaris'] = $this->Model_asset_rekap->get_inventaris_kurang($tahun);
+        $grand_id_inventaris = 248; // grand_id untuk inventaris
+        $data['inventaris'] = $this->Model_asset_rekap->get_asset_by_grand_id_kurang($tahun, $grand_id_inventaris);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -359,6 +373,7 @@ class Asset_rekap extends CI_Controller
         $this->load->view('asset_rekap/view_asset_inventaris_kurang', $data);
         $this->load->view('templates/footer');
     }
+
     public function penyusutan()
     {
         $get_tahun = $this->input->get('tahun');
@@ -394,12 +409,36 @@ class Asset_rekap extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'REKAP PENAMBAHAN INSTALASI TRANSMISI DAN DISTRIBUSI';
-        $data['trans_dist'] = $this->Model_asset_rekap->get_trans_dist($tahun);
+        $grand_id_trans_dist = 226; // grand_id untuk trans_dist
+        $data['trans_dist'] = $this->Model_asset_rekap->get_asset_by_grand_id($tahun, $grand_id_trans_dist);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('templates/sidebar');
         $this->load->view('asset_rekap/view_asset_trans_dist', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function trans_dist_kurang()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'REKAP PENGURANGAN INSTALASI TRANSMISI DAN DISTRIBUSI';
+        $grand_id_trans_dist = 226; // grand_id untuk trans_dist
+        $data['trans_dist'] = $this->Model_asset_rekap->get_asset_by_grand_id_kurang($tahun, $grand_id_trans_dist);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('asset_rekap/view_asset_trans_dist_kurang', $data);
         $this->load->view('templates/footer');
     }
 
@@ -424,6 +463,7 @@ class Asset_rekap extends CI_Controller
         $this->load->view('asset_rekap/view_asset_trans_dist_sr_baru', $data);
         $this->load->view('templates/footer');
     }
+
     public function cetak_sr_baru()
     {
 
