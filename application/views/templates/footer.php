@@ -83,6 +83,13 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $('#no_per').change(function() {
+            $('#form_no_per').submit();
+        });
+    });
+</script>
 
 <script>
     window.setTimeout(function() {

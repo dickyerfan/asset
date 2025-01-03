@@ -11,10 +11,10 @@
                     <div class="navbar-nav ms-2">
                         <a href="<?= base_url('asset/asset_kurang') ?>"><button class="float-end neumorphic-button"><i class="nav-icon fas fa-minus"></i> Pengurangan Asset</button></a>
                     </div>
-                    <div class="navbar-nav ms-auto">
+                    <!-- <div class="navbar-nav ms-auto">
                         <a href="<?= base_url('asset/asset_semua_kurang') ?>"><button class="float-end neumorphic-button"> Daftar Semua Pengurangan Asset</button></a>
-                    </div>
-                    <div class="navbar-nav ms-2">
+                    </div> -->
+                    <div class="navbar-nav ms-auto">
                         <a href="<?= base_url('asset/cetak_asset_semua') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Asset</button></a>
                     </div>
                 </nav>

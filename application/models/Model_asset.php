@@ -19,6 +19,82 @@ class Model_asset extends CI_Model
         $this->db->order_by('daftar_asset.id_bagian');
         return $this->db->get()->result();
     }
+
+    public function get_all_tahun($tahun)
+    {
+        $this->db->select(
+            '*,
+        (SELECT SUM(rupiah) FROM daftar_asset WHERE YEAR(daftar_asset.tanggal) = "' . $tahun . '" AND daftar_asset.status = 1  ) AS total_rupiah'
+        );
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 1);
+        $this->db->order_by('daftar_asset.id_no_per');
+        $this->db->order_by('daftar_asset.tanggal');
+        return $this->db->get()->result();
+    }
+
+    public function get_all_tahun_perkiraan($tahun, $no_per)
+    {
+        $this->db->select(
+            '*,
+        (SELECT SUM(rupiah) FROM daftar_asset WHERE YEAR(daftar_asset.tanggal) = "' . $tahun . '" AND daftar_asset.grand_id = "' . $no_per . '" AND daftar_asset.status = 1 ) AS total_rupiah'
+        );
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.grand_id', $no_per);
+        $this->db->where('daftar_asset.status', 1);
+        $this->db->order_by('daftar_asset.id_no_per');
+        $this->db->order_by('daftar_asset.tanggal');
+        return $this->db->get()->result();
+    }
+
+    public function get_all_kurang_tahun($tahun)
+    {
+        $this->db->select(
+            '*,
+        (SELECT SUM(rupiah) FROM daftar_asset WHERE YEAR(daftar_asset.tanggal_persediaan) = "' . $tahun . '" AND daftar_asset.status = 2) AS total_rupiah'
+        );
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal_persediaan)', $tahun);
+        $this->db->where('daftar_asset.status', 2);
+        $this->db->order_by('daftar_asset.id_no_per');
+        $this->db->order_by('daftar_asset.tanggal');
+        return $this->db->get()->result();
+    }
+
+    public function get_all_kurang_tahun_perkiraan($tahun, $no_per)
+    {
+        $this->db->select(
+            '*,
+        (SELECT SUM(rupiah) FROM daftar_asset WHERE YEAR(daftar_asset.tanggal_persediaan) = "' . $tahun . '" AND daftar_asset.grand_id = "' . $no_per . '" AND daftar_asset.status = 2) AS total_rupiah'
+        );
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('YEAR(tanggal_persediaan)', $tahun);
+        $this->db->where('daftar_asset.grand_id', $no_per);
+        $this->db->where('daftar_asset.status', 2);
+        $this->db->order_by('daftar_asset.id_no_per');
+        $this->db->order_by('daftar_asset.tanggal');
+        return $this->db->get()->result();
+    }
+
+    public function get_no_per()
+    {
+        $ids = [218, 220, 222, 224, 226, 228, 244, 246, 248];
+        $this->db->select('*');
+        $this->db->from('no_per');
+        $this->db->where_in('id', $ids);
+        return $this->db->get()->result();
+    }
+
     public function get_kurang($bulan, $tahun)
     {
         $this->db->select(

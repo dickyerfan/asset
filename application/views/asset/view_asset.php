@@ -12,6 +12,9 @@
 						</div>
 					</form>
 					<div class="navbar-nav ms-2">
+						<a href="<?= base_url('asset/asset_tahun'); ?>"><button class=" neumorphic-button float-right"> Per Tahun</button></a>
+					</div>
+					<div class="navbar-nav ms-2">
 						<a href="<?= base_url('asset/asset_semua'); ?>"><button class=" neumorphic-button float-right"><i class="fas fa-reply"></i> Kembali</button></a>
 					</div>
 					<div class="navbar-nav ms-auto">
