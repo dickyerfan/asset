@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <form id="form_tanggal" action="<?= base_url('asset_kurang'); ?>" method="get">
+                    <form id="form_tanggal" action="<?= base_url('asset/asset_kurang'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <input type="submit" value="Pilih Bulan" class="neumorphic-button">
                             <input type="date" id="tanggal" name="tanggal" class="form-control" style="margin-left: 10px;">
@@ -13,6 +13,9 @@
                     </form>
                     <div class="navbar-nav ms-2">
                         <a href="<?= base_url('asset/asset_kurang_tahun'); ?>"><button class=" neumorphic-button float-right"> Per Tahun</button></a>
+                    </div>
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('asset/asset_kurang_akm'); ?>"><button class=" neumorphic-button float-right"> Akm. Penyusutan</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
                         <a href="<?= base_url('asset/asset_semua'); ?>"><button class=" neumorphic-button float-right"><i class="fas fa-reply"></i> Kembali</button></a>
@@ -131,7 +134,7 @@
                                 <th></th>
                                 <th></th>
                                 <th>Jumlah</th>
-                                <th class="text-right"><?= number_format($total_rupiah, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_rupiah * -1, 0, ',', '.'); ?></th>
                                 <th></th>
                             </tr>
                         </tfoot>

@@ -200,7 +200,7 @@ class Asset extends CI_Controller
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/navbar');
 		$this->load->view('templates/sidebar');
-		$this->load->view('asset/view_asset_semua_kurang', $data);
+		$this->load->view('asset_kurang/view_asset_semua_kurang', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -225,15 +225,15 @@ class Asset extends CI_Controller
 		}
 
 		$data['no_per_descriptions'] = [
-			218 => 'Tanah & Penyempurnaan Tanah',
-			220 => 'Instalasi Sumber',
-			222 => 'Instalasi Pompa',
-			224 => 'Instalasi Pengolahan',
-			226 => 'Instalasi Transmisi & Distribusi',
-			228 => 'Bangunan & Gedung',
-			244 => 'Peralatan & Perlengkapan',
-			246 => 'Kendaraan',
-			248 => 'Inventaris & Perabotan Kantor'
+			218 => 'TANAH & PENYEMPURNAAN TANAH',
+			220 => 'INSTALASI SUMBER',
+			222 => 'INSTALASI POMPA',
+			224 => 'INSTALASI PENGOLAHAN',
+			226 => 'INSTALASI TRANSMISI & DISTRIBUSI',
+			228 => 'BANGUNAN & GEDUNG',
+			244 => 'PERALATAN & PERLENGKAPAN',
+			246 => 'KENDARAAN',
+			248 => 'INVENTARIS & PERABOTAN KANTOR'
 		];
 
 		$data['no_perkiraan'] = $no_per;
@@ -268,15 +268,15 @@ class Asset extends CI_Controller
 		}
 
 		$data['no_per_descriptions'] = [
-			218 => 'Tanah & Penyempurnaan Tanah',
-			220 => 'Instalasi Sumber',
-			222 => 'Instalasi Pompa',
-			224 => 'Instalasi Pengolahan',
-			226 => 'Instalasi Transmisi & Distribusi',
-			228 => 'Bangunan & Gedung',
-			244 => 'Peralatan & Perlengkapan',
-			246 => 'Kendaraan',
-			248 => 'Inventaris & Perabotan Kantor'
+			218 => 'TANAH & PENYEMPURNAAN TANAH',
+			220 => 'INSTALASI SUMBER',
+			222 => 'INSTALASI POMPA',
+			224 => 'INSTALASI PENGOLAHAN',
+			226 => 'INSTALASI TRANSMISI & DISTRIBUSI',
+			228 => 'BANGUNAN & GEDUNG',
+			244 => 'PERALATAN & PERLENGKAPAN',
+			246 => 'KENDARAAN',
+			248 => 'INVENTARIS & PERABOTAN KANTOR'
 		];
 
 		$data['no_perkiraan'] = $no_per;
@@ -286,7 +286,55 @@ class Asset extends CI_Controller
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/navbar');
 		$this->load->view('templates/sidebar');
-		$this->load->view('asset/view_asset_kurang_tahun', $data);
+		$this->load->view('asset_kurang/view_asset_kurang_tahun', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function asset_kurang_akm()
+	{
+		$get_tahun = $this->input->get('tahun');
+		$no_per = $this->input->get('no_per');
+		$tahun = substr($get_tahun, 0, 4);
+
+		if (empty($get_tahun)) {
+			$tahun = date('Y');
+		} else {
+			$this->session->set_userdata('tahun_session_rekap', $get_tahun);
+		}
+		$data['tahun_lap'] = $tahun;
+
+
+		// if (empty($get_tahun) || empty($no_per)) {
+		// 	$penyusutan_data = $this->Model_asset->get_all_kurang_akm2($tahun);
+		// } else {
+		// 	$penyusutan_data = $this->Model_asset->get_all_kurang_akm_perkiraan($tahun, $no_per);
+		// }
+
+		$penyusutan_data = $this->Model_asset->get_all_kurang_akm($tahun);
+
+		$data['susut'] = $penyusutan_data['results'];
+		$data['totals'] = $penyusutan_data['totals'];
+
+		$data['no_per_descriptions'] = [
+			218 => 'TANAH & PENYEMPURNAAN TANAH',
+			220 => 'INSTALASI SUMBER',
+			222 => 'INSTALASI POMPA',
+			224 => 'INSTALASI PENGOLAHAN',
+			226 => 'INSTALASI TRANSMISI & DISTRIBUSI',
+			228 => 'BANGUNAN & GEDUNG',
+			244 => 'PERALATAN & PERLENGKAPAN',
+			246 => 'KENDARAAN',
+			248 => 'INVENTARIS & PERABOTAN KANTOR'
+		];
+
+		$data['no_perkiraan'] = $no_per;
+		$data['title'] = 'Akumulasi Penyusutan Pengurangan Asset';
+		$data['no_per'] = $this->Model_asset->get_no_per();
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/navbar');
+		$this->load->view('templates/sidebar');
+		$this->load->view('asset_kurang/view_asset_kurang_akm', $data);
 		$this->load->view('templates/footer');
 	}
 }
