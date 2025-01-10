@@ -31,9 +31,49 @@ class Model_asset extends CI_Model
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
         $this->db->where('YEAR(tanggal)', $tahun);
         $this->db->where('daftar_asset.status', 1);
+        $this->db->group_by('daftar_asset.id_no_per');
         $this->db->order_by('daftar_asset.id_no_per');
         $this->db->order_by('daftar_asset.tanggal');
         return $this->db->get()->result();
+    }
+
+    public function get_all_tahun_cetak($tahun)
+    {
+        $this->db->select('
+        no_per.id AS grand_id,
+        no_per.name AS name,
+        daftar_asset.id_asset AS id_asset,
+        daftar_asset.nama_asset,
+        daftar_asset.tanggal,
+        daftar_asset.no_bukti_vch,
+        daftar_asset.rupiah,
+        bagian_upk.nama_bagian,
+        bagian_upk.id_bagian,
+        (SELECT SUM(rupiah) FROM daftar_asset WHERE YEAR(daftar_asset.tanggal) = "' . $tahun . '" AND daftar_asset.status = 1 ) AS total_rupiah
+    ');
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.grand_id = no_per.id', 'left');
+        $this->db->where('YEAR(daftar_asset.tanggal)', $tahun);
+        $this->db->where('daftar_asset.status', 1);
+        $this->db->order_by('daftar_asset.grand_id, daftar_asset.tanggal');
+        $query = $this->db->get();
+        $result = $query->result();
+
+        // Kelompokkan data berdasarkan grand_id dan hitung total rupiah per grup
+        $grouped = [];
+        foreach ($result as $row) {
+            if (!isset($grouped[$row->grand_id])) {
+                $grouped[$row->grand_id] = [
+                    'name' => $row->name,
+                    'items' => [],
+                    'total_rupiah_perkiraan' => 0, // Inisialisasi total rupiah
+                ];
+            }
+            $grouped[$row->grand_id]['items'][] = $row;
+            $grouped[$row->grand_id]['total_rupiah_perkiraan'] += $row->rupiah; // Akumulasi total rupiah
+        }
+        return $grouped;
     }
 
     public function get_all_tahun_perkiraan($tahun, $no_per)
@@ -69,6 +109,45 @@ class Model_asset extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function get_all_tahun_kurang_cetak($tahun)
+    {
+        $this->db->select('
+        no_per.id AS grand_id,
+        no_per.name AS name,
+        daftar_asset.id_asset AS id_asset,
+        daftar_asset.nama_asset,
+        daftar_asset.tanggal,
+        daftar_asset.no_bukti_vch,
+        daftar_asset.rupiah,
+        bagian_upk.nama_bagian,
+        bagian_upk.id_bagian,
+        (SELECT SUM(rupiah) FROM daftar_asset WHERE YEAR(daftar_asset.tanggal_persediaan) = "' . $tahun . '" AND daftar_asset.status = 2 ) AS total_rupiah
+    ');
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.grand_id = no_per.id', 'left');
+        $this->db->where('YEAR(daftar_asset.tanggal_persediaan)', $tahun);
+        $this->db->where('daftar_asset.status', 2);
+        $this->db->order_by('daftar_asset.grand_id, daftar_asset.tanggal');
+        $query = $this->db->get();
+        $result = $query->result();
+
+        // Kelompokkan data berdasarkan grand_id dan hitung total rupiah per grup
+        $grouped = [];
+        foreach ($result as $row) {
+            if (!isset($grouped[$row->grand_id])) {
+                $grouped[$row->grand_id] = [
+                    'name' => $row->name,
+                    'items' => [],
+                    'total_rupiah_perkiraan' => 0, // Inisialisasi total rupiah
+                ];
+            }
+            $grouped[$row->grand_id]['items'][] = $row;
+            $grouped[$row->grand_id]['total_rupiah_perkiraan'] += $row->rupiah; // Akumulasi total rupiah
+        }
+        return $grouped;
+    }
+
     public function get_all_kurang_tahun_perkiraan($tahun, $no_per)
     {
         $this->db->select(
@@ -91,9 +170,10 @@ class Model_asset extends CI_Model
         $this->db->select('*');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
-        $this->db->where('penyusutan.tahun_persediaan ', $tahun_lap);
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->where('penyusutan.tahun_persediaan', $tahun_lap);
         $this->db->where('daftar_asset.status', 2);
-        // $this->db->where('daftar_asset.parent_id', 1912);
+        $this->db->where('daftar_asset.grand_id !=', 218);
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
         $this->db->order_by('tanggal', 'ASC');

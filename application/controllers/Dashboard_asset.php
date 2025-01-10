@@ -61,7 +61,7 @@ class Dashboard_asset extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'Rekap Penyusutan Asset';
+        $data['title'] = 'Rekap Perhitungan Penyusutan Fiskal';
         $tanah = $this->Model_penyusutan->get_tanah($tahun);
         $data['total_tanah'] = $tanah['total_tanah'];
         $bangunan = $this->Model_penyusutan_bangunan->get_bangunan($tahun);
@@ -103,7 +103,7 @@ class Dashboard_asset extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'Rekap Penyusutan Asset';
+        $data['title'] = 'Rekap Perhitungan Penyusutan Fiskal';
         $tanah = $this->Model_penyusutan->get_tanah($tahun);
         $data['total_tanah'] = $tanah['total_tanah'];
         $bangunan = $this->Model_penyusutan_bangunan->get_bangunan($tahun);
@@ -129,7 +129,7 @@ class Dashboard_asset extends CI_Controller
         // Set paper size and orientation
         $this->pdf->setPaper('folio', 'landscape');
         $this->pdf->filename = "rekap_penyusutan-{$tahun}.pdf";
-        $this->pdf->generate('cetakan/rekap_penyusutan_pdf', $data);
+        $this->pdf->generate('cetakan_dashboard/rekap_penyusutan_pdf', $data);
     }
 
     public function rekap_detail()
@@ -247,7 +247,64 @@ class Dashboard_asset extends CI_Controller
         // Set paper size and orientation
         $this->pdf->setPaper('folio', 'landscape');
         $this->pdf->filename = "rekap_detail-{$tahun}.pdf";
-        $this->pdf->generate('cetakan/rekap_penyusutan_detail_pdf', $data);
+        $this->pdf->generate('cetakan_dashboard/rekap_penyusutan_detail_pdf', $data);
+    }
+    public function cetak_auditor()
+    {
+        $tahun = $this->session->userdata('tahun_session_rekap_detail');
+
+        // Hapus session jika tidak ada tahun atau tahun tidak valid
+        if (empty($tahun)) {
+            $this->session->unset_userdata('tahun_session_rekap_detail');
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'PERHITUNGAN PENYUSUTAN FISKAL';
+        $tanah = $this->Model_penyusutan->get_tanah($tahun);
+        $data['susut_tanah'] = $tanah['results'];
+        $data['total_tanah'] = $tanah['total_tanah'];
+
+        $bangunan = $this->Model_penyusutan_bangunan->get_bangunan($tahun);
+        $data['susut_bangunan'] = $bangunan['results'];
+        $data['total_bangunan'] = $bangunan['total_bangunan'];
+
+        $sumber = $this->Model_penyusutan_sumber->get_sumber($tahun);
+        $data['susut_sumber'] = $sumber['results'];
+        $data['total_sumber'] = $sumber['total_sumber'];
+
+        $pompa = $this->Model_penyusutan_pompa->get_pompa($tahun);
+        $data['susut_pompa'] = $pompa['results'];
+        $data['total_pompa'] = $pompa['total_pompa'];
+
+        $olah_air = $this->Model_penyusutan_olah_air->get_olah_air($tahun);
+        $data['susut_olah_air'] = $olah_air['results'];
+        $data['total_olah_air'] = $olah_air['total_olah_air'];
+
+        $trans_dist = $this->Model_penyusutan_trans_dist->get_trans_dist($tahun);
+        $data['susut_trans_dist'] = $trans_dist['results'];
+        $data['total_trans_dist'] = $trans_dist['total_trans_dist'];
+
+        $peralatan = $this->Model_penyusutan_peralatan->get_peralatan($tahun);
+        $data['susut_peralatan'] = $peralatan['results'];
+        $data['total_peralatan'] = $peralatan['total_peralatan'];
+
+        $kendaraan = $this->Model_penyusutan_kendaraan->get_kendaraan($tahun);
+        $data['susut_kendaraan'] = $kendaraan['results'];
+        $data['total_kendaraan'] = $kendaraan['total_kendaraan'];
+
+        $inventaris = $this->Model_penyusutan_inventaris->get_inventaris($tahun);
+        $data['susut_inventaris'] = $inventaris['results'];
+        $data['total_inventaris'] = $inventaris['total_inventaris'];
+
+        // $total_semua = $this->Model_penyusutan->get_total_semua($tahun);
+        $totals = $this->Model_penyusutan->get_all($tahun);
+        $data['totals'] = $totals['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'landscape');
+        $this->pdf->filename = "rekap_auditor-{$tahun}.pdf";
+        $this->pdf->generate('cetakan_dashboard/rekap_penyusutan_auditor_pdf', $data);
     }
 
     public function rekap_perkiraan()
@@ -365,6 +422,6 @@ class Dashboard_asset extends CI_Controller
         // Set paper size and orientation
         $this->pdf->setPaper('folio', 'landscape');
         $this->pdf->filename = "rekap_perkiraan-{$tahun}.pdf";
-        $this->pdf->generate('cetakan/rekap_penyusutan_perkiraan_pdf', $data);
+        $this->pdf->generate('cetakan_dashboard/rekap_penyusutan_perkiraan_pdf', $data);
     }
 }

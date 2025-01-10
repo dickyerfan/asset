@@ -5,8 +5,8 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <a href="<?= base_url('dashboard_asset') ?>"><button class="neumorphic-button">Tahun ini</button></a>
-                    <form id="form_tahun" action="<?= base_url('dashboard_asset'); ?>" method="get">
+                    <a href="<?= base_url('dashboard_asset/rekap_detail') ?>"><button class="neumorphic-button">Tahun ini</button></a>
+                    <form id="form_tahun" action="<?= base_url('dashboard_asset/rekap_detail'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <select id="tahun" name="tahun" class="form-control" style="margin-left: 15px;">
                                 <?php
@@ -28,6 +28,9 @@
                     </div>
                     <div class="navbar-nav ms-auto">
                         <a href="<?= base_url('dashboard_asset/cetak_rekap_detail') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Rekap Detail</button></a>
+                    </div>
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('dashboard_asset/cetak_auditor') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Auditor</button></a>
                     </div>
                 </nav>
             </div>

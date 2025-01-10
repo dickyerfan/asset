@@ -121,6 +121,85 @@
                     </ul>
                 </li>
                 <li class="nav-item">
+                    <a href="<?= base_url('penyusutan') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>
+                            Jurnal Umum
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>
+                            Detail Jurnal
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <!-- <li class="nav-item">
+                            <a href="<?= base_url('penyusutan/tanah') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tanah</p>
+                            </a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a href="<?= base_url('jurnal/bangunan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Bangunan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('jurnal/sumber') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ins Sumber</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('jurnal/pompa') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ins Pompa</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('jurnal/olah_air') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ins Pengolahan Air</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('jurnal/trans_dist') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ins Trans & Dist</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('jurnal/peralatan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Peralatan & Perlk</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('jurnal/kendaraan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kendaraan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('jurnal/inventaris') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Inventaris</p>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a href="<?= base_url('asset_rekap/penyusutan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Akm Penyusutan</p>
+                            </a>
+                        </li> -->
+                    </ul>
+                </li>
+                <li class="nav-item">
                     <a href="<?= base_url('amortisasi') ?>" class="nav-link">
                         <i class="nav-icon fas fa-dollar-sign"></i>
                         <p>
@@ -141,7 +220,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
-                            Rekap Asset
+                            Detail Asset
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>

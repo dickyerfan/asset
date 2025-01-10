@@ -5,8 +5,8 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <a href="<?= base_url('dashboard_asset') ?>"><button class="neumorphic-button">Tahun ini</button></a>
-                    <form id="form_tahun" action="<?= base_url('dashboard_asset'); ?>" method="get">
+                    <a href="<?= base_url('dashboard_asset/rekap_perkiraan') ?>"><button class="neumorphic-button">Tahun ini</button></a>
+                    <form id="form_tahun" action="<?= base_url('dashboard_asset/rekap_perkiraan'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <select id="tahun" name="tahun" class="form-control" style="margin-left: 15px;">
                                 <?php

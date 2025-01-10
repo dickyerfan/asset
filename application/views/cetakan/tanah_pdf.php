@@ -91,7 +91,7 @@
         <?php else : ?>
             <h5 style="text-align: center;"><?= strtoupper($title)  . ' BANGUNAN KANTOR' . ' ' . $tahun_lap; ?></h5>
         <?php endif; ?> -->
-        <p style="text-align: center;"><?= strtoupper($title) . ' ' . $tahun_lap; ?></p>
+        <p class="my-0 text-center fw-bold"><?= strtoupper($title) . ' <br> PER 31 DESEMBER ' . $tahun_lap; ?></p>
     </div>
     <table class="table tableUtama">
         <thead>

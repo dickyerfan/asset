@@ -63,7 +63,7 @@ class Penyusutan extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'Daftar Penyusutan Asset';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal  Asset';
         $penyusutan_data = $this->Model_penyusutan->get_all($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -87,7 +87,7 @@ class Penyusutan extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'Daftar Penyusutan Tanah';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal Tanah';
         $penyusutan_data = $this->Model_penyusutan->get_tanah($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_tanah'] = $penyusutan_data['total_tanah'];
@@ -110,7 +110,7 @@ class Penyusutan extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Daftar Penyusutan Tanah';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal Tanah';
         $penyusutan_data = $this->Model_penyusutan->get_tanah($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_tanah'] = $penyusutan_data['total_tanah'];
@@ -135,7 +135,7 @@ class Penyusutan extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Daftar Penyusutan Bangunan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal Bangunan';
         $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_bangunan'] = $penyusutan_data['total_bangunan'];
@@ -158,7 +158,7 @@ class Penyusutan extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Daftar Penyusutan Bangunan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal Bangunan';
         $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_bangunan'] = $penyusutan_data['total_bangunan'];
@@ -203,7 +203,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_kantor($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_bangunan->get_unit_bangunan_kantor();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -242,7 +242,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_kantor($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_bangunan->get_unit_bangunan_kantor();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -285,7 +285,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_lab($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_bangunan->get_unit_bangunan_lab();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -324,7 +324,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_lab($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_bangunan->get_unit_bangunan_lab();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -367,7 +367,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_alat($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_bangunan->get_unit_bangunan_alat();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -406,7 +406,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_alat($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_bangunan->get_unit_bangunan_alat();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -449,7 +449,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bengkel($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_bangunan->get_unit_bangunan_bengkel();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -488,7 +488,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bengkel($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_bangunan->get_unit_bangunan_bengkel();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -531,7 +531,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_inst($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_bangunan->get_unit_bangunan_inst();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -570,7 +570,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_inst($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_bangunan->get_unit_bangunan_inst();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -596,7 +596,7 @@ class Penyusutan extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Daftar Penyusutan Instalasi Sumber';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal  Instalasi Sumber';
         $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_sumber'] = $penyusutan_data['total_sumber'];
@@ -619,7 +619,7 @@ class Penyusutan extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Daftar Penyusutan Instalasi Sumber';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal  Instalasi Sumber';
         $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_sumber'] = $penyusutan_data['total_sumber'];
@@ -664,7 +664,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_bangunan($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_sumber->get_unit_sumber_bangunan();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -703,7 +703,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_bangunan($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_sumber->get_unit_sumber_bangunan();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -748,7 +748,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_reservoir($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_sumber->get_unit_sumber_reservoir();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -787,7 +787,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_reservoir($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_sumber->get_unit_sumber_reservoir();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -833,7 +833,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_sumur($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_sumber->get_unit_sumber_sumur();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -872,7 +872,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_sumur($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_sumber->get_unit_sumber_sumur();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -918,7 +918,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_pipa($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_sumber->get_unit_sumber_pipa();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -957,7 +957,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_pipa($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_sumber->get_unit_sumber_pipa();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1003,7 +1003,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_inst_lain($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_sumber->get_unit_sumber_inst_lain();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1042,7 +1042,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_inst_lain($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_sumber->get_unit_sumber_inst_lain();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1066,7 +1066,7 @@ class Penyusutan extends CI_Controller
             $this->session->set_userdata('tahun_session_pompa', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Daftar Penyusutan Instalasi Pompa';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal  Instalasi Pompa';
         $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_pompa'] = $penyusutan_data['total_pompa'];
@@ -1089,7 +1089,7 @@ class Penyusutan extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Daftar Penyusutan Instalasi Pompa';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal  Instalasi Pompa';
         $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_pompa'] = $penyusutan_data['total_pompa'];
@@ -1134,7 +1134,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_bangunan($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_pompa->get_unit_pompa_bangunan();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1173,7 +1173,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_bangunan($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_pompa->get_unit_pompa_bangunan();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1219,7 +1219,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_listrik($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_pompa->get_unit_pompa_listrik();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1258,7 +1258,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_listrik($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_pompa->get_unit_pompa_listrik();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1304,7 +1304,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_alat($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_pompa->get_unit_pompa_alat();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1343,7 +1343,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_alat($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_pompa->get_unit_pompa_alat();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1389,7 +1389,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_inst_lain($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_pompa->get_unit_pompa_inst_lain();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1428,7 +1428,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_inst_lain($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_pompa->get_unit_pompa_inst_lain();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1452,7 +1452,7 @@ class Penyusutan extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'Daftar Penyusutan Pengolahan Air';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal  Pengolahan Air';
         $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_olah_air'] = $penyusutan_data['total_olah_air'];
@@ -1475,7 +1475,7 @@ class Penyusutan extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Daftar Penyusutan Pengolahan Air';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal  Pengolahan Air';
         $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_olah_air'] = $penyusutan_data['total_olah_air'];
@@ -1520,7 +1520,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_bangunan($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_olah_air->get_unit_olah_air_bangunan();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1559,7 +1559,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_bangunan($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_olah_air->get_unit_olah_air_bangunan();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1605,7 +1605,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_alat($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_olah_air->get_unit_olah_air_alat();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1644,7 +1644,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_alat($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_olah_air->get_unit_olah_air_alat();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1690,7 +1690,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_reservoir($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_olah_air->get_unit_olah_air_reservoir();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1729,7 +1729,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_reservoir($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_olah_air->get_unit_olah_air_reservoir();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1775,7 +1775,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_inst_lain($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_olah_air->get_unit_olah_air_inst_lain();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1814,7 +1814,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_inst_lain($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_olah_air->get_unit_olah_air_inst_lain();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1838,7 +1838,7 @@ class Penyusutan extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'Daftar Penyusutan Transmisi & Distribusi';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal Instalasi Transmisi & Distribusi';
         $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_trans_dist'] = $penyusutan_data['total_trans_dist'];
@@ -1861,7 +1861,7 @@ class Penyusutan extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Daftar Penyusutan Transmisi & Distribusi';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal  Transmisi & Distribusi';
         $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_trans_dist'] = $penyusutan_data['total_trans_dist'];
@@ -1906,7 +1906,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bangunan($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_bangunan();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1945,7 +1945,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bangunan($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_bangunan();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -1991,7 +1991,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_reservoir($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_reservoir();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2030,7 +2030,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_reservoir($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_reservoir();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2076,7 +2076,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pipa_trans($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_pipa_trans();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2115,7 +2115,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pipa_trans($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_pipa_trans();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2161,7 +2161,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_meter($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_meter();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2200,7 +2200,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_meter($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_meter();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2246,7 +2246,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_ledeng($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_ledeng();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2285,7 +2285,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_ledeng($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_ledeng();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2331,7 +2331,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pemadam($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_pemadam();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2370,7 +2370,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pemadam($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_pemadam();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2416,7 +2416,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_jembatan($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_jembatan();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2455,7 +2455,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_jembatan($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_jembatan();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2501,7 +2501,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_inst_lain($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_inst_lain();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2540,7 +2540,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_inst_lain($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_trans_dist->get_unit_trans_dist_inst_lain();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2565,7 +2565,7 @@ class Penyusutan extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'Daftar Penyusutan Peralatan & Perlengkapan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal  Peralatan & Perlengkapan';
         $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_peralatan'] = $penyusutan_data['total_peralatan'];
@@ -2588,7 +2588,7 @@ class Penyusutan extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Daftar Penyusutan Peralatan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal  Peralatan';
         $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_peralatan'] = $penyusutan_data['total_peralatan'];
@@ -2633,7 +2633,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_laboratorium($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_laboratorium();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2672,7 +2672,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_laboratorium($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_laboratorium();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2718,7 +2718,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_gudang($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_gudang();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2757,7 +2757,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_gudang($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_gudang();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2803,7 +2803,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bengkel($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_bengkel();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2842,7 +2842,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bengkel($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_bengkel();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2888,7 +2888,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_lainnya($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_lainnya();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2927,7 +2927,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_lainnya($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_lainnya();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -2973,7 +2973,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_telekomunikasi($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_telekomunikasi();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3012,7 +3012,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_telekomunikasi($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_peralatan->get_unit_peralatan_telekomunikasi();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3038,7 +3038,7 @@ class Penyusutan extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'Daftar Penyusutan Kendaraan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal  Kendaraan';
         $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_kendaraan'] = $penyusutan_data['total_kendaraan'];
@@ -3061,7 +3061,7 @@ class Penyusutan extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Daftar Penyusutan Kendaraan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal  Kendaraan';
         $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_kendaraan'] = $penyusutan_data['total_kendaraan'];
@@ -3106,7 +3106,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_penumpang($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_penumpang();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3145,7 +3145,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_penumpang($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_penumpang();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3191,7 +3191,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_angkut($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_angkut();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3230,7 +3230,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_angkut($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_angkut();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3276,7 +3276,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_tangki($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_tangki();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3315,7 +3315,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_tangki($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_tangki();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3361,7 +3361,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_roda_dua($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_roda_dua();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3400,7 +3400,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_roda_dua($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_kendaraan->get_unit_kendaraan_roda_dua();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3425,7 +3425,7 @@ class Penyusutan extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
 
-        $data['title'] = 'Daftar Penyusutan Inventaris';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal  Inventaris';
         $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_inventaris'] = $penyusutan_data['total_inventaris'];
@@ -3448,7 +3448,7 @@ class Penyusutan extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Daftar Penyusutan Inventaris';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal  Inventaris';
         $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris($tahun);
         $data['susut'] = $penyusutan_data['results'];
         $data['total_inventaris'] = $penyusutan_data['total_inventaris'];
@@ -3493,7 +3493,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_meubelair($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_inventaris->get_unit_inventaris_meubelair();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3532,7 +3532,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_meubelair($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_inventaris->get_unit_inventaris_meubelair();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3577,7 +3577,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_mesin($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_inventaris->get_unit_inventaris_mesin();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3616,7 +3616,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_mesin($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_inventaris->get_unit_inventaris_mesin();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3661,7 +3661,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_rupa($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_inventaris->get_unit_inventaris_rupa();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];
@@ -3700,7 +3700,7 @@ class Penyusutan extends CI_Controller
             $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_rupa($tahun, $upk_bagian);
         }
 
-        $data['title'] = 'Daftar Penyusutan';
+        $data['title'] = 'Perhitungan Penyusutan Fiskal ';
         $data['upk_bagian'] = $this->Model_penyusutan_inventaris->get_unit_inventaris_rupa();
         $data['susut'] = $penyusutan_data['results'];
         $data['totals'] = $penyusutan_data['totals'];

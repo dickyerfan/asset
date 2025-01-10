@@ -80,7 +80,7 @@
         </table>
     </div>
     <div class="judul">
-        <p class="my-0 text-center fw-bold"><?= strtoupper($title) . ' ' . $tahun_lap; ?></p>
+        <p class="my-0 text-center fw-bold"><?= strtoupper($title) . ' <br> PER 31 DESEMBER ' . $tahun_lap; ?></p>
     </div>
     <table class="table tableUtama">
         <thead>

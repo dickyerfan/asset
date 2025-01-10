@@ -35,7 +35,7 @@
             <div class="card-body">
                 <div class="row justify-content-center">
                     <div class="col-lg-6 text-center">
-                        <h5><?= strtoupper($title) . ' TAHUN ' . $tahun_lap; ?></h5>
+                        <h5><?= strtoupper($title) . '  <br> PER 31 DESEMBER ' . $tahun_lap; ?></h5>
                     </div>
                 </div>
                 <div class="table-responsive">

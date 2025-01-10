@@ -164,11 +164,6 @@ class Model_penyusutan_pompa extends CI_Model
         $parent_ids_bangunan = [1569, 1907, 2104, 2255, 2671, 2676, 2678, 2680];
 
         foreach ($results as &$row) {
-            // if ($row->status == 1) {
-            //     $umur_tahun = $tahun - $row->tahun;
-            // } else {
-            //     $umur_tahun = $tahun - $row->tahun_persediaan;
-            // }
             $umur_tahun = $tahun - $row->tahun;
             $nilai_buku_awal = $row->rupiah; // Nilai awal aset
             $akm_thn_ini = 0;                 // Akumulasi penyusutan tahun ini
@@ -198,17 +193,11 @@ class Model_penyusutan_pompa extends CI_Model
                     }
 
                     // Hitung penyusutan berdasarkan kategori aset
-                    // if (in_array($row->parent_id, $parent_ids_bangunan)) {
-                    //     $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_awal;
-                    // } else {
-                    //     $penambahan_penyusutan = ($row->persen_susut / 100) * $nilai_buku_lalu;
-                    // }
                     if (in_array($row->parent_id, $parent_ids_bangunan)) {
                         $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
                     } else {
                         $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
                     }
-
 
                     // Update akumulasi penyusutan dan nilai buku akhir
                     $akm_thn_ini = $akm_thn_lalu + $penambahan_penyusutan;
@@ -229,6 +218,7 @@ class Model_penyusutan_pompa extends CI_Model
                                 $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
+                            $akm_thn_ini = $akm_thn_ini + 1;
                             $nilai_buku_final = -1;
                         }
                         break;
@@ -243,18 +233,6 @@ class Model_penyusutan_pompa extends CI_Model
                 $row->nilai_buku_final = $nilai_buku_final;
             }
 
-            // if ($row->status_penyusutan == 2) {
-            //     $umur_tahun = $tahun - $row->tahun_persediaan;
-            //     if ($umur_tahun == 0) {
-            //         $row->nilai_buku = 0;
-            //         $row->pengurangan = $row->rupiah * -1;
-            //         $row->nilai_buku_lalu = 0;
-            //     } else {
-            //         $row->pengurangan = 0;
-            //         $row->penambahan = 0;
-            //     }
-            // }
-
             if ($row->status_penyusutan == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
                 $umur_tahun_kurang = $tahun - $row->tahun;
@@ -264,21 +242,29 @@ class Model_penyusutan_pompa extends CI_Model
                     $row->nilai_buku_lalu = 0;
                     $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
-                    $row->akm_thn_ini = 0;
-                    $row->nilai_buku_final = $row->rupiah;
-                } elseif ($umur_tahun_kurang > $row->umur) {
-                    $row->nilai_buku_final = 0;
-                    $row->nilai_buku_lalu = 0;
-                    $row->akm_thn_lalu = $row->rupiah * 1;
-                    $row->akm_thn_ini = $row->rupiah * 1;
+                    $row->nilai_buku_final = $nilai_buku_final;
                 } else {
-                    $row->pengurangan = 0;
-                    $row->penambahan = 0;
-                    $row->akm_thn_lalu = 0;
-                    $row->akm_thn_ini = 0;
-                    $row->nilai_buku_lalu = $row->rupiah * -1;
-                    $row->penambahan_penyusutan = 0;
-                    $row->nilai_buku_final = $row->rupiah;
+                    for ($i = 1; $i <= $umur_tahun_kurang; $i++) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
+                        $akm_thn_lalu = $akm_thn_ini;
+                        $nilai_buku_lalu = $nilai_buku_final;
+                    }
+                    if (in_array($row->parent_id, $parent_ids_bangunan)) {
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
+                    } else {
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
+                    }
+                    $akm_thn_ini = $akm_thn_lalu + $penambahan_penyusutan;
+                    $nilai_buku_final = $nilai_buku_awal - $akm_thn_ini;
+
+                    if ($i > $row->umur) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
+                        $akm_thn_lalu = $row->rupiah;
+                        $nilai_buku_lalu = 0;
+                        $penambahan_penyusutan = 0;
+                    }
                 }
             }
 
@@ -407,6 +393,7 @@ class Model_penyusutan_pompa extends CI_Model
                                 $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
+                            $akm_thn_ini = $akm_thn_ini + 1;
                             $nilai_buku_final = -1;
                         }
                         break;
@@ -430,21 +417,29 @@ class Model_penyusutan_pompa extends CI_Model
                     $row->nilai_buku_lalu = 0;
                     $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
-                    $row->akm_thn_ini = 0;
-                    $row->nilai_buku_final = $row->rupiah;
-                } elseif ($umur_tahun_kurang > $row->umur) {
-                    $row->nilai_buku_final = 0;
-                    $row->nilai_buku_lalu = 0;
-                    $row->akm_thn_lalu = $row->rupiah * 1;
-                    $row->akm_thn_ini = $row->rupiah * 1;
+                    $row->nilai_buku_final = $nilai_buku_final;
                 } else {
-                    $row->pengurangan = 0;
-                    $row->penambahan = 0;
-                    $row->akm_thn_lalu = 0;
-                    $row->akm_thn_ini = 0;
-                    $row->nilai_buku_lalu = $row->rupiah * -1;
-                    $row->penambahan_penyusutan = 0;
-                    $row->nilai_buku_final = $row->rupiah;
+                    for ($i = 1; $i <= $umur_tahun_kurang; $i++) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
+                        $akm_thn_lalu = $akm_thn_ini;
+                        $nilai_buku_lalu = $nilai_buku_final;
+                    }
+                    if (in_array($row->parent_id, $parent_ids_bangunan)) {
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
+                    } else {
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
+                    }
+                    $akm_thn_ini = $akm_thn_lalu + $penambahan_penyusutan;
+                    $nilai_buku_final = $nilai_buku_awal - $akm_thn_ini;
+
+                    if ($i > $row->umur) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
+                        $akm_thn_lalu = $row->rupiah;
+                        $nilai_buku_lalu = 0;
+                        $penambahan_penyusutan = 0;
+                    }
                 }
             }
 
@@ -575,6 +570,7 @@ class Model_penyusutan_pompa extends CI_Model
                                 $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
+                            $akm_thn_ini = $akm_thn_ini + 1;
                             $nilai_buku_final = -1;
                         }
                         break;
@@ -598,24 +594,31 @@ class Model_penyusutan_pompa extends CI_Model
                     $row->nilai_buku_lalu = 0;
                     $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
-                    $row->akm_thn_ini = 0;
-                    $row->nilai_buku_final = $row->rupiah;
-                } elseif ($umur_tahun_kurang > $row->umur) {
-                    $row->nilai_buku_final = 0;
-                    $row->nilai_buku_lalu = 0;
-                    $row->akm_thn_lalu = $row->rupiah * 1;
-                    $row->akm_thn_ini = $row->rupiah * 1;
+                    $row->nilai_buku_final = $nilai_buku_final;
                 } else {
-                    $row->pengurangan = 0;
-                    $row->penambahan = 0;
-                    $row->akm_thn_lalu = 0;
-                    $row->akm_thn_ini = 0;
-                    $row->nilai_buku_lalu = $row->rupiah * -1;
-                    $row->penambahan_penyusutan = 0;
-                    $row->nilai_buku_final = $row->rupiah;
+                    for ($i = 1; $i <= $umur_tahun_kurang; $i++) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
+                        $akm_thn_lalu = $akm_thn_ini;
+                        $nilai_buku_lalu = $nilai_buku_final;
+                    }
+                    if (in_array($row->parent_id, $parent_ids_bangunan)) {
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
+                    } else {
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
+                    }
+                    $akm_thn_ini = $akm_thn_lalu + $penambahan_penyusutan;
+                    $nilai_buku_final = $nilai_buku_awal - $akm_thn_ini;
+
+                    if ($i > $row->umur) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
+                        $akm_thn_lalu = $row->rupiah;
+                        $nilai_buku_lalu = 0;
+                        $penambahan_penyusutan = 0;
+                    }
                 }
             }
-
             // Kondisi khusus untuk tanah
             if ($row->grand_id == 218) {
                 $row->akm_thn_lalu = 0;
@@ -741,6 +744,7 @@ class Model_penyusutan_pompa extends CI_Model
                                 $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
+                            $akm_thn_ini = $akm_thn_ini + 1;
                             $nilai_buku_final = -1;
                         }
                         break;
@@ -764,21 +768,29 @@ class Model_penyusutan_pompa extends CI_Model
                     $row->nilai_buku_lalu = 0;
                     $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
-                    $row->akm_thn_ini = 0;
-                    $row->nilai_buku_final = $row->rupiah;
-                } elseif ($umur_tahun_kurang > $row->umur) {
-                    $row->nilai_buku_final = 0;
-                    $row->nilai_buku_lalu = 0;
-                    $row->akm_thn_lalu = $row->rupiah * 1;
-                    $row->akm_thn_ini = $row->rupiah * 1;
+                    $row->nilai_buku_final = $nilai_buku_final;
                 } else {
-                    $row->pengurangan = 0;
-                    $row->penambahan = 0;
-                    $row->akm_thn_lalu = 0;
-                    $row->akm_thn_ini = 0;
-                    $row->nilai_buku_lalu = $row->rupiah * -1;
-                    $row->penambahan_penyusutan = 0;
-                    $row->nilai_buku_final = $row->rupiah;
+                    for ($i = 1; $i <= $umur_tahun_kurang; $i++) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
+                        $akm_thn_lalu = $akm_thn_ini;
+                        $nilai_buku_lalu = $nilai_buku_final;
+                    }
+                    if (in_array($row->parent_id, $parent_ids_bangunan)) {
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
+                    } else {
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
+                    }
+                    $akm_thn_ini = $akm_thn_lalu + $penambahan_penyusutan;
+                    $nilai_buku_final = $nilai_buku_awal - $akm_thn_ini;
+
+                    if ($i > $row->umur) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
+                        $akm_thn_lalu = $row->rupiah;
+                        $nilai_buku_lalu = 0;
+                        $penambahan_penyusutan = 0;
+                    }
                 }
             }
 
@@ -908,6 +920,7 @@ class Model_penyusutan_pompa extends CI_Model
                                 $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
+                            $akm_thn_ini = $akm_thn_ini + 1;
                             $nilai_buku_final = -1;
                         }
                         break;
@@ -931,21 +944,29 @@ class Model_penyusutan_pompa extends CI_Model
                     $row->nilai_buku_lalu = 0;
                     $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
-                    $row->akm_thn_ini = 0;
-                    $row->nilai_buku_final = $row->rupiah;
-                } elseif ($umur_tahun_kurang > $row->umur) {
-                    $row->nilai_buku_final = 0;
-                    $row->nilai_buku_lalu = 0;
-                    $row->akm_thn_lalu = $row->rupiah * 1;
-                    $row->akm_thn_ini = $row->rupiah * 1;
+                    $row->nilai_buku_final = $nilai_buku_final;
                 } else {
-                    $row->pengurangan = 0;
-                    $row->penambahan = 0;
-                    $row->akm_thn_lalu = 0;
-                    $row->akm_thn_ini = 0;
-                    $row->nilai_buku_lalu = $row->rupiah * -1;
-                    $row->penambahan_penyusutan = 0;
-                    $row->nilai_buku_final = $row->rupiah;
+                    for ($i = 1; $i <= $umur_tahun_kurang; $i++) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
+                        $akm_thn_lalu = $akm_thn_ini;
+                        $nilai_buku_lalu = $nilai_buku_final;
+                    }
+                    if (in_array($row->parent_id, $parent_ids_bangunan)) {
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
+                    } else {
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
+                    }
+                    $akm_thn_ini = $akm_thn_lalu + $penambahan_penyusutan;
+                    $nilai_buku_final = $nilai_buku_awal - $akm_thn_ini;
+
+                    if ($i > $row->umur) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
+                        $akm_thn_lalu = $row->rupiah;
+                        $nilai_buku_lalu = 0;
+                        $penambahan_penyusutan = 0;
+                    }
                 }
             }
 
@@ -1452,6 +1473,7 @@ class Model_penyusutan_pompa extends CI_Model
                                 $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
+                            $akm_thn_ini = $akm_thn_ini + 1;
                             $nilai_buku_final = -1;
                         }
                         break;
@@ -1475,21 +1497,29 @@ class Model_penyusutan_pompa extends CI_Model
                     $row->nilai_buku_lalu = 0;
                     $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
-                    $row->akm_thn_ini = 0;
-                    $row->nilai_buku_final = $row->rupiah;
-                } elseif ($umur_tahun_kurang > $row->umur) {
-                    $row->nilai_buku_final = 0;
-                    $row->nilai_buku_lalu = 0;
-                    $row->akm_thn_lalu = $row->rupiah * 1;
-                    $row->akm_thn_ini = $row->rupiah * 1;
+                    $row->nilai_buku_final = $nilai_buku_final;
                 } else {
-                    $row->pengurangan = 0;
-                    $row->penambahan = 0;
-                    $row->akm_thn_lalu = 0;
-                    $row->akm_thn_ini = 0;
-                    $row->nilai_buku_lalu = $row->rupiah * -1;
-                    $row->penambahan_penyusutan = 0;
-                    $row->nilai_buku_final = $row->rupiah;
+                    for ($i = 1; $i <= $umur_tahun_kurang; $i++) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
+                        $akm_thn_lalu = $akm_thn_ini;
+                        $nilai_buku_lalu = $nilai_buku_final;
+                    }
+                    if (in_array($row->parent_id, $parent_ids_bangunan)) {
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
+                    } else {
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
+                    }
+                    $akm_thn_ini = $akm_thn_lalu + $penambahan_penyusutan;
+                    $nilai_buku_final = $nilai_buku_awal - $akm_thn_ini;
+
+                    if ($i > $row->umur) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
+                        $akm_thn_lalu = $row->rupiah;
+                        $nilai_buku_lalu = 0;
+                        $penambahan_penyusutan = 0;
+                    }
                 }
             }
 
@@ -1619,6 +1649,7 @@ class Model_penyusutan_pompa extends CI_Model
                                 $akm_thn_ini = $akm_thn_ini - 1;
                             }
                         } else {
+                            $akm_thn_ini = $akm_thn_ini + 1;
                             $nilai_buku_final = -1;
                         }
                         break;
@@ -1642,21 +1673,29 @@ class Model_penyusutan_pompa extends CI_Model
                     $row->nilai_buku_lalu = 0;
                     $row->akm_thn_lalu = 0;
                     $row->penambahan_penyusutan = 0;
-                    $row->akm_thn_ini = 0;
-                    $row->nilai_buku_final = $row->rupiah;
-                } elseif ($umur_tahun_kurang > $row->umur) {
-                    $row->nilai_buku_final = 0;
-                    $row->nilai_buku_lalu = 0;
-                    $row->akm_thn_lalu = $row->rupiah * 1;
-                    $row->akm_thn_ini = $row->rupiah * 1;
+                    $row->nilai_buku_final = $nilai_buku_final;
                 } else {
-                    $row->pengurangan = 0;
-                    $row->penambahan = 0;
-                    $row->akm_thn_lalu = 0;
-                    $row->akm_thn_ini = 0;
-                    $row->nilai_buku_lalu = $row->rupiah * -1;
-                    $row->penambahan_penyusutan = 0;
-                    $row->nilai_buku_final = $row->rupiah;
+                    for ($i = 1; $i <= $umur_tahun_kurang; $i++) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
+                        $akm_thn_lalu = $akm_thn_ini;
+                        $nilai_buku_lalu = $nilai_buku_final;
+                    }
+                    if (in_array($row->parent_id, $parent_ids_bangunan)) {
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_awal);
+                    } else {
+                        $penambahan_penyusutan = round_half_to_even(($row->persen_susut / 100) * $nilai_buku_lalu);
+                    }
+                    $akm_thn_ini = $akm_thn_lalu + $penambahan_penyusutan;
+                    $nilai_buku_final = $nilai_buku_awal - $akm_thn_ini;
+
+                    if ($i > $row->umur) {
+                        $row->pengurangan = 0;
+                        $row->penambahan = 0;
+                        $akm_thn_lalu = $row->rupiah;
+                        $nilai_buku_lalu = 0;
+                        $penambahan_penyusutan = 0;
+                    }
                 }
             }
 

@@ -48,7 +48,7 @@
                             $tahun_lap = date('Y');
                         }
                         ?>
-                        <h5><?= strtoupper($title) . ' ' . $tahun_lap; ?></h5>
+                        <h5><?= strtoupper($title) . ' <br> PER 31 DESEMBER ' . $tahun_lap; ?></h5>
                     </div>
                 </div>
                 <div class="table-responsive">

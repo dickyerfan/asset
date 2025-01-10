@@ -213,7 +213,7 @@ class Asset extends CI_Controller
 		if (empty($get_tahun)) {
 			$tahun = date('Y');
 		} else {
-			$this->session->set_userdata('tahun_session_rekap', $get_tahun);
+			$this->session->set_userdata('tambah_tahun_session', $get_tahun);
 		}
 		$data['tahun_lap'] = $tahun;
 
@@ -247,6 +247,44 @@ class Asset extends CI_Controller
 		$this->load->view('templates/footer');
 	}
 
+	public function asset_tahun_cetak()
+	{
+		$get_tahun = $this->session->userdata('tambah_tahun_session');
+		$no_per = $this->input->get('no_per');
+		$tahun = substr($get_tahun, 0, 4);
+
+		if (empty($get_tahun)) {
+			$this->session->unset_userdata('tambah_tahun_session');
+			$tahun = date('Y');
+		}
+
+		$data['tahun_lap'] = $tahun;
+
+		$data['asset'] = $this->Model_asset->get_all_tahun_cetak($tahun);
+		$first_group = reset($data['asset']);
+		$data['total_rupiah'] = $first_group['items'][0]->total_rupiah ?? 0;
+
+		$data['no_per_descriptions'] = [
+			218 => 'TANAH & PENYEMPURNAAN TANAH',
+			220 => 'INSTALASI SUMBER',
+			222 => 'INSTALASI POMPA',
+			224 => 'INSTALASI PENGOLAHAN',
+			226 => 'INSTALASI TRANSMISI & DISTRIBUSI',
+			228 => 'BANGUNAN & GEDUNG',
+			244 => 'PERALATAN & PERLENGKAPAN',
+			246 => 'KENDARAAN',
+			248 => 'INVENTARIS & PERABOTAN KANTOR'
+		];
+
+		$data['no_perkiraan'] = $no_per;
+		$data['title'] = 'Penambahan Asset';
+		$data['no_per'] = $this->Model_asset->get_no_per();
+
+		$this->pdf->setPaper('folio', 'portrait');
+		$this->pdf->filename = "tambah-asset_{$tahun}.pdf";
+		$this->pdf->generate('cetakan_asset/tambah_asset_pdf', $data);
+	}
+
 	public function asset_kurang_tahun()
 	{
 		$get_tahun = $this->input->get('tahun');
@@ -256,7 +294,7 @@ class Asset extends CI_Controller
 		if (empty($get_tahun)) {
 			$tahun = date('Y');
 		} else {
-			$this->session->set_userdata('tahun_session_rekap', $get_tahun);
+			$this->session->set_userdata('kurang_tahun_session', $get_tahun);
 		}
 		$data['tahun_lap'] = $tahun;
 
@@ -290,30 +328,22 @@ class Asset extends CI_Controller
 		$this->load->view('templates/footer');
 	}
 
-	public function asset_kurang_akm()
+	public function asset_kurang_tahun_cetak()
 	{
-		$get_tahun = $this->input->get('tahun');
+		$get_tahun = $this->session->userdata('kurang_tahun_session');
 		$no_per = $this->input->get('no_per');
 		$tahun = substr($get_tahun, 0, 4);
 
 		if (empty($get_tahun)) {
+			$this->session->unset_userdata('kurang_tahun_session');
 			$tahun = date('Y');
-		} else {
-			$this->session->set_userdata('tahun_session_rekap', $get_tahun);
 		}
+
 		$data['tahun_lap'] = $tahun;
 
-
-		// if (empty($get_tahun) || empty($no_per)) {
-		// 	$penyusutan_data = $this->Model_asset->get_all_kurang_akm2($tahun);
-		// } else {
-		// 	$penyusutan_data = $this->Model_asset->get_all_kurang_akm_perkiraan($tahun, $no_per);
-		// }
-
-		$penyusutan_data = $this->Model_asset->get_all_kurang_akm($tahun);
-
-		$data['susut'] = $penyusutan_data['results'];
-		$data['totals'] = $penyusutan_data['totals'];
+		$data['asset'] = $this->Model_asset->get_all_tahun_kurang_cetak($tahun);
+		$first_group = reset($data['asset']);
+		$data['total_rupiah'] = $first_group['items'][0]->total_rupiah ?? 0;
 
 		$data['no_per_descriptions'] = [
 			218 => 'TANAH & PENYEMPURNAAN TANAH',
@@ -328,7 +358,36 @@ class Asset extends CI_Controller
 		];
 
 		$data['no_perkiraan'] = $no_per;
-		$data['title'] = 'Akumulasi Penyusutan Pengurangan Asset';
+		$data['title'] = 'Pengurangan Asset';
+		$data['no_per'] = $this->Model_asset->get_no_per();
+
+		$this->pdf->setPaper('folio', 'portrait');
+		$this->pdf->filename = "kurang-asset_{$tahun}.pdf";
+		$this->pdf->generate('cetakan_asset/kurang_asset_pdf', $data);
+	}
+
+	public function asset_kurang_akm()
+	{
+		$get_tahun = $this->input->get('tahun');
+		$no_per = $this->input->get('no_per');
+		$tahun = substr($get_tahun, 0, 4);
+
+		if (empty($get_tahun)) {
+			$tahun = date('Y');
+		} else {
+			$this->session->set_userdata('tahun_session_kurang_akm', $get_tahun);
+		}
+		$data['tahun_lap'] = $tahun;
+
+		$penyusutan_data = $this->Model_asset->get_all_kurang_akm($tahun);
+
+		$data['susut'] = $penyusutan_data['results'];
+		$data['totals'] = $penyusutan_data['totals'];
+
+
+
+		$data['no_perkiraan'] = $no_per;
+		$data['title'] = 'Daftar Pengurangan Penyusutan Asset';
 		$data['no_per'] = $this->Model_asset->get_no_per();
 
 		$this->load->view('templates/header', $data);
@@ -336,5 +395,32 @@ class Asset extends CI_Controller
 		$this->load->view('templates/sidebar');
 		$this->load->view('asset_kurang/view_asset_kurang_akm', $data);
 		$this->load->view('templates/footer');
+	}
+
+	public function asset_kurang_akm_cetak()
+	{
+		$get_tahun = $this->session->userdata('tahun_session_kurang_akm');
+		$no_per = $this->input->get('no_per');
+		$tahun = substr($get_tahun, 0, 4);
+
+		if (empty($get_tahun)) {
+			$this->session->unset_userdata('tahun_session_kurang_akm');
+			$tahun = date('Y');
+		}
+
+		$data['tahun_lap'] = $tahun;
+
+		$penyusutan_data = $this->Model_asset->get_all_kurang_akm($tahun);
+
+		$data['susut'] = $penyusutan_data['results'];
+		$data['totals'] = $penyusutan_data['totals'];
+
+		$data['no_perkiraan'] = $no_per;
+		$data['title'] = 'Daftar Pengurangan Penyusutan Asset';
+		$data['no_per'] = $this->Model_asset->get_no_per();
+
+		$this->pdf->setPaper('folio', 'portrait');
+		$this->pdf->filename = "pengurangan_penyusutan-{$tahun}.pdf";
+		$this->pdf->generate('cetakan_asset/pengurangan_penyusutan_pdf', $data);
 	}
 }

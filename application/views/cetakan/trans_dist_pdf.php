@@ -80,7 +80,7 @@
         </table>
     </div>
     <div class="judul">
-        <p class="my-0 text-center fw-bold"><?= strtoupper($title) . ' ' . $tahun_lap; ?></p>
+        <p class="my-0 text-center fw-bold"><?= strtoupper($title) . ' <br> PER 31 DESEMBER ' . $tahun_lap; ?></p>
     </div>
     <table class="table tableUtama">
         <thead>
@@ -253,7 +253,7 @@
         </tbody>
         <tfoot>
             <tr class="text-center bg-light">
-                <th colspan="5" style="text-align: left;">Total Bangunan</th>
+                <th colspan="5" style="text-align: left;">Total Instalasi Transmisi & Distribusi</th>
                 <th style="text-align: right;"><?= number_format($total_trans_dist['total_nilai_buku'], 0, ',', '.'); ?></th>
                 <th style="text-align: right;"><?= number_format($total_trans_dist['total_penambahan'], 0, ',', '.'); ?></th>
                 <th style="text-align: right;"><?= number_format($total_trans_dist['total_pengurangan'], 0, ',', '.'); ?></th>

@@ -15,7 +15,7 @@
                         <a href="<?= base_url('asset/asset_kurang_tahun'); ?>"><button class=" neumorphic-button float-right"> Per Tahun</button></a>
                     </div>
                     <div class="navbar-nav ms-2">
-                        <a href="<?= base_url('asset/asset_kurang_akm'); ?>"><button class=" neumorphic-button float-right"> Akm. Penyusutan</button></a>
+                        <a href="<?= base_url('asset/asset_kurang_akm'); ?>"><button class=" neumorphic-button float-right"> Dft Pengurangan Penyusutan</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
                         <a href="<?= base_url('asset/asset_semua'); ?>"><button class=" neumorphic-button float-right"><i class="fas fa-reply"></i> Kembali</button></a>
