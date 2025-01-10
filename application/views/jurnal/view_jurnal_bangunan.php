@@ -164,8 +164,10 @@
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
-                                <th>Bagian UPK</th>
-                                <th>Total Penyusutan</th>
+                                <th>Nama Perkiraan</th>
+                                <th>Debet</th>
+                                <th>Kredit</th>
+                                <th>Keterangan</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -196,7 +198,15 @@
                             ?>
                                 <tr class="text-right">
                                     <td class="text-center"><?= $no++; ?></td>
-                                    <td class="text-left"><?= $bagian_upk; ?></td>
+                                    <td class="text-left">
+                                        <?php if ($bagian_upk == 'Umum') : ?>
+                                            <?= 'Bondowoso - Akm Penyusutan '; ?>
+                                        <?php else : ?>
+                                            <?= $bagian_upk . ' - Akm Penyusutan '; ?>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td></td>
+                                    <td><?= number_format($total_penyusutan / 12, 0, ',', '.'); ?></td>
                                     <td><?= number_format($total_penyusutan, 0, ',', '.'); ?></td>
                                 </tr>
                             <?php
@@ -207,6 +217,8 @@
                             <tr class="text-center bg-light">
                                 <th></th>
                                 <th class="text-left">Total Semua Bangunan</th>
+                                <th></th>
+                                <th class="text-right"><?= number_format(array_sum($grouped_by_upk) / 12, 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format(array_sum($grouped_by_upk), 0, ',', '.'); ?></th>
                             </tr>
                         </tfoot>

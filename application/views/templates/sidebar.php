@@ -121,14 +121,14 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url('penyusutan') ?>" class="nav-link">
+                    <a href="<?= base_url('jurnal') ?>" class="nav-link">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>
                             Jurnal Umum
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-list"></i>
                         <p>
@@ -137,12 +137,12 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <!-- <li class="nav-item">
+                        <li class="nav-item">
                             <a href="<?= base_url('penyusutan/tanah') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tanah</p>
                             </a>
-                        </li> -->
+                        </li>
                         <li class="nav-item">
                             <a href="<?= base_url('jurnal/bangunan') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -191,14 +191,8 @@
                                 <p>Inventaris</p>
                             </a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a href="<?= base_url('asset_rekap/penyusutan') ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Akm Penyusutan</p>
-                            </a>
-                        </li> -->
                     </ul>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a href="<?= base_url('amortisasi') ?>" class="nav-link">
                         <i class="nav-icon fas fa-dollar-sign"></i>
