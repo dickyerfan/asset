@@ -11,7 +11,7 @@
  Target Server Version : 100418 (10.4.18-MariaDB)
  File Encoding         : 65001
 
- Date: 10/01/2025 10:53:59
+ Date: 19/01/2025 12:56:58
 */
 
 SET NAMES utf8mb4;
@@ -147,7 +147,7 @@ CREATE TABLE `daftar_asset`  (
   INDEX `id_no_per`(`id_no_per` ASC) USING BTREE,
   CONSTRAINT `daftar_asset_ibfk_1` FOREIGN KEY (`id_bagian`) REFERENCES `bagian_upk` (`id_bagian`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `daftar_asset_ibfk_2` FOREIGN KEY (`id_no_per`) REFERENCES `no_per` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2569 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2571 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of daftar_asset
@@ -169,7 +169,7 @@ INSERT INTO `daftar_asset` VALUES (14, 2, 1488, 1472, 218, 0, 34, 0, 'Biaya Sert
 INSERT INTO `daftar_asset` VALUES (15, 10, 1507, 1472, 218, 0, 34, 0, 'Kecamatan Maesan ( Tanah Wulan /Sumber IKK)', '1994-11-03', NULL, '', '', 781150, 1, 0, 0.00, 'Administrator', '2024-10-28 14:25:31', 0);
 INSERT INTO `daftar_asset` VALUES (16, 12, 1511, 1472, 218, 0, 34, 0, 'Kecamatan Tapen (Sumber IKK)', '1996-11-16', NULL, '', '', 144000, 1, 0, 0.00, 'Administrator', '2024-10-28 14:26:59', 0);
 INSERT INTO `daftar_asset` VALUES (17, 10, 1507, 1472, 218, 0, 34, 0, 'Kecamatan Maesan (Sumber IKK)', '1996-09-16', NULL, '', '', 1505000, 1, 0, 0.00, 'Administrator', '2024-10-28 14:48:56', 0);
-INSERT INTO `daftar_asset` VALUES (18, 7, 1493, 1472, 218, 0, 34, 0, 'Kecamatan Bondowoso (SBIII)', '1996-10-20', NULL, '', '', 5200000, 1, 0, 0.00, 'Administrator', '2024-10-28 15:26:57', 0);
+INSERT INTO `daftar_asset` VALUES (18, 2, 1488, 1472, 218, 0, 34, 0, 'Kecamatan Bondowoso (SBIII)', '1996-10-20', NULL, '', '', 5200000, 1, 0, 0.00, 'Administrator', '2024-10-28 15:26:57', 0);
 INSERT INTO `daftar_asset` VALUES (19, 16, 1515, 1472, 218, 0, 34, 0, 'Kecamatan Curahdami (Mata Air)', '1996-11-05', NULL, '', '', 1500000, 1, 0, 0.00, 'Administrator', '2024-10-28 15:28:10', 0);
 INSERT INTO `daftar_asset` VALUES (20, 15, 1514, 1472, 218, 0, 34, 0, 'Kecamatan Pakem (BPT)', '2001-09-07', NULL, '', '', 250000, 1, 0, 0.00, 'Administrator', '2024-10-28 15:29:02', 0);
 INSERT INTO `daftar_asset` VALUES (21, 15, 1514, 1472, 218, 0, 34, 0, 'Kecamatan Pakem', '2001-07-25', NULL, '', '', 2250000, 1, 0, 0.00, 'Administrator', '2024-10-29 09:14:07', 0);
@@ -239,10 +239,10 @@ INSERT INTO `daftar_asset` VALUES (84, 10, 1507, 1472, 218, 0, 34, 0, 'Pemberian
 INSERT INTO `daftar_asset` VALUES (85, 9, 1497, 1472, 218, 0, 34, 0, 'Pelepasan sertifikat tanah di Sukosari Lor', '2023-08-10', NULL, '', '962/VCH/VIII/2023', 3750000, 1, 0, 0.00, 'Administrator', '2024-10-29 14:23:35', 0);
 INSERT INTO `daftar_asset` VALUES (86, 11, 1510, 1472, 218, 0, 34, 0, 'Pelepasan sertifikat tanah di Pejaten', '2023-08-10', NULL, '', '963/VCH/VIII/2023', 3500000, 1, 0, 0.00, 'Administrator', '2024-10-29 14:49:19', 0);
 INSERT INTO `daftar_asset` VALUES (87, 14, 1513, 1472, 218, 0, 34, 0, 'Penghapusan Hak Milik,Ukur Ulang sertifikat tanah Pakisan 200 m2', '2023-09-21', NULL, '', '679/VCH/VI/2023', 7500000, 1, 0, 0.00, 'Administrator', '2024-10-29 14:50:35', 0);
-INSERT INTO `daftar_asset` VALUES (88, 7, 1493, 1472, 218, 0, 34, 0, 'Pengadaan tanah di Desa Pancoran', '2023-09-30', NULL, '', '1081/VCH/IX/2023', 70000000, 1, 0, 0.00, 'Administrator', '2024-10-29 14:51:49', 0);
-INSERT INTO `daftar_asset` VALUES (89, 7, 1493, 1472, 218, 0, 34, 0, 'Pecah sertifikat & pelepasan hak tanah di Pancoran', '2023-09-30', NULL, '', '1141/VCH/IX/2023', 12500000, 1, 0, 0.00, 'Administrator', '2024-10-29 14:52:40', 0);
+INSERT INTO `daftar_asset` VALUES (88, 2, 1488, 1472, 218, 0, 34, 0, 'Pengadaan tanah di Desa Pancoran', '2023-09-30', NULL, '', '1081/VCH/IX/2023', 70000000, 1, 0, 0.00, 'Administrator', '2024-10-29 14:51:49', 0);
+INSERT INTO `daftar_asset` VALUES (89, 2, 1488, 1472, 218, 0, 34, 0, 'Pecah sertifikat & pelepasan hak tanah di Pancoran', '2023-09-30', NULL, '', '1141/VCH/IX/2023', 12500000, 1, 0, 0.00, 'Administrator', '2024-10-29 14:52:40', 0);
 INSERT INTO `daftar_asset` VALUES (90, 2, 1488, 1472, 218, 0, 34, 0, 'Pecah sertifikat  tanah Besuk dan Tamanan', '2023-08-03', NULL, '', '934/VCH/VIII2023', 37800000, 1, 0, 0.00, 'Administrator', '2024-10-29 14:53:34', 0);
-INSERT INTO `daftar_asset` VALUES (91, 7, 1493, 1472, 218, 0, 34, 0, 'Honor Pengadaan tanah di Desa Pancoran', '2023-10-25', NULL, '', '1289/VCH/X/2023', 3500000, 1, 0, 0.00, 'Administrator', '2024-10-29 14:54:12', 0);
+INSERT INTO `daftar_asset` VALUES (91, 2, 1488, 1472, 218, 0, 34, 0, 'Honor Pengadaan tanah di Desa Pancoran', '2023-10-25', NULL, '', '1289/VCH/X/2023', 3500000, 1, 0, 0.00, 'Administrator', '2024-10-29 14:54:12', 0);
 INSERT INTO `daftar_asset` VALUES (92, 2, 1488, 1472, 218, 0, 34, 0, 'Pengadaan tanah di Sumber Salam', '2024-02-17', NULL, '', '164/VCH/II/2024', 150000000, 1, 0, 0.00, 'Administrator', '2024-10-29 14:55:31', 0);
 INSERT INTO `daftar_asset` VALUES (93, 2, 1488, 1472, 218, 0, 34, 0, 'Honor Pengadaan Tanah di Sumber Salam', '2024-02-21', NULL, '', '201/VCH/II/2024', 7500000, 1, 0, 0.00, 'Administrator', '2024-10-29 14:56:14', 0);
 INSERT INTO `daftar_asset` VALUES (95, 2, 2681, 2671, 228, 0, 34, 0, 'Renovasi Aula NP Rp 24.500.000,00 (1989)', '2000-01-01', NULL, '', '', 27310050, 1, 20, 5.00, 'Administrator', '2024-10-30 07:42:09', 0);
@@ -2705,6 +2705,8 @@ INSERT INTO `daftar_asset` VALUES (2565, 21, 2447, 2263, 226, 2, 34, 1, 'Penggan
 INSERT INTO `daftar_asset` VALUES (2566, 22, 2448, 2263, 226, 1, 34, 1, 'Pemasangan SR 1 unit', '2024-12-31', NULL, '', '', 977967, 1, 16, 12.50, 'Administrator', '2025-01-06 14:06:04', 0);
 INSERT INTO `daftar_asset` VALUES (2567, 22, 2448, 2263, 226, 2, 34, 90, 'Penggantian Water meter 90 unit', '2024-12-31', NULL, '', '', 27223150, 1, 16, 12.50, 'Administrator', '2025-01-06 14:06:47', 0);
 INSERT INTO `daftar_asset` VALUES (2568, 17, 2441, 2263, 226, 1, 34, 1, 'Pemasangan SR 1 unit', '2024-12-31', NULL, '', '', 1723250, 1, 16, 12.50, 'Administrator', '2025-01-06 14:14:58', 0);
+INSERT INTO `daftar_asset` VALUES (2569, 23, 2952, 2848, 248, 0, 34, 500, 'Pengadaan galon 500 bh', '2024-03-25', NULL, '', '', 31250000, 1, 4, 50.00, 'Administrator', '2025-01-15 07:05:44', 0);
+INSERT INTO `daftar_asset` VALUES (2570, 23, 2952, 2848, 248, 0, 34, 600, 'Pengadaan galon 600 bh', '2024-11-22', NULL, '', '', 37800000, 1, 4, 50.00, 'Administrator', '2025-01-15 07:06:34', 0);
 
 -- ----------------------------
 -- Table structure for no_per
@@ -4031,7 +4033,7 @@ CREATE TABLE `penyusutan`  (
   PRIMARY KEY (`id_penyusutan`) USING BTREE,
   INDEX `id_asset`(`id_asset` ASC) USING BTREE,
   CONSTRAINT `penyusutan_ibfk_1` FOREIGN KEY (`id_asset`) REFERENCES `daftar_asset` (`id_asset`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2570 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2572 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of penyusutan
@@ -6589,6 +6591,8 @@ INSERT INTO `penyusutan` VALUES (2566, 2565, 2024, NULL, 394150, 0, 0, 0, 394150
 INSERT INTO `penyusutan` VALUES (2567, 2566, 2024, NULL, 977967, 0, 0, 0, 977967, '2025-01-06 14:06:04', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2568, 2567, 2024, NULL, 27223150, 0, 0, 0, 27223150, '2025-01-06 14:06:47', 'Administrator');
 INSERT INTO `penyusutan` VALUES (2569, 2568, 2024, NULL, 1723250, 0, 0, 0, 1723250, '2025-01-06 14:14:58', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2570, 2569, 2024, NULL, 31250000, 0, 0, 0, 31250000, '2025-01-15 07:05:44', 'Administrator');
+INSERT INTO `penyusutan` VALUES (2571, 2570, 2024, NULL, 37800000, 0, 0, 0, 37800000, '2025-01-15 07:06:34', 'Administrator');
 
 -- ----------------------------
 -- Table structure for penyusutan_amortisasi

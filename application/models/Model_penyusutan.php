@@ -88,7 +88,7 @@ class Model_penyusutan extends CI_Model
                         $penambahan_penyusutan = 0;
                         $row->penambahan = 0;
                         $nilai_buku_lalu = 0;
-                        if ($row->status == 1) {
+                        if ($row->status_penyusutan == 1) {
                             $nilai_buku_final = $row->rupiah - $akm_thn_ini;
                             if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
                                 $nilai_buku_final = 1;
@@ -457,9 +457,9 @@ class Model_penyusutan extends CI_Model
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
         $this->db->where('daftar_asset.grand_id', 218);
+        $this->db->order_by('tanggal', 'ASC');
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
-        $this->db->order_by('tanggal', 'ASC');
 
         $query = $this->db->get();
         $results = $query->result();
@@ -531,7 +531,7 @@ class Model_penyusutan extends CI_Model
                         $penambahan_penyusutan = 0;
                         $row->penambahan = 0;
                         $nilai_buku_lalu = 0;
-                        if ($row->status == 1) {
+                        if ($row->status_penyusutan == 1) {
                             $nilai_buku_final = $row->rupiah - $akm_thn_ini;
                             if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
                                 $nilai_buku_final = 1;

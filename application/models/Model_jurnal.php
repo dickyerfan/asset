@@ -16,7 +16,7 @@ class Model_jurnal extends CI_Model
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
-        $this->db->where('bagian_upk.id_bagian !=', 23);
+        // $this->db->where('bagian_upk.id_bagian !=', 23);
         $this->db->order_by('bagian_upk.id_bagian', 'ASC');
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
@@ -92,7 +92,7 @@ class Model_jurnal extends CI_Model
                         $penambahan_penyusutan = 0;
                         $row->penambahan = 0;
                         $nilai_buku_lalu = 0;
-                        if ($row->status == 1) {
+                        if ($row->status_penyusutan == 1) {
                             $nilai_buku_final = $row->rupiah - $akm_thn_ini;
                             if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
                                 $nilai_buku_final = 1;
@@ -148,6 +148,7 @@ class Model_jurnal extends CI_Model
                     }
                 }
             }
+
 
             // Kondisi khusus untuk tanah
             if ($row->grand_id == 218) {

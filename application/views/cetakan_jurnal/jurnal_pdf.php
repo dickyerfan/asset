@@ -87,8 +87,8 @@
             <tr class="text-center">
                 <th>No</th>
                 <th>Nama Perkiraan</th>
-                <th>Jumlah</th>
-                <th>Total</th>
+                <th>Biaya Penyusutan</th>
+                <th>Akumulasi Penyusutan</th>
                 <th>Keterangan</th>
             </tr>
         </thead>
@@ -179,27 +179,36 @@
 
             ];
             $grand_total = 0;
+            $total_biaya_penyusutan = 0;
             foreach ($categories as $category => $details) {
                 $no = 1;
                 $grouped_by_upk = [];
+                $grouped_biaya_penyusutan = [];
 
                 // Mengelompokkan data berdasarkan bagian_upk
                 foreach ($susut as $row) {
                     if (array_key_exists($row->parent_id, $details['data'])) {
                         $bagian_upk = $row->nama_bagian;
+
                         if (!isset($grouped_by_upk[$bagian_upk])) {
                             $grouped_by_upk[$bagian_upk] = 0;
                         }
-                        $grouped_by_upk[$bagian_upk] += $row->penambahan_penyusutan;
+                        if (!isset($grouped_biaya_penyusutan[$bagian_upk])) {
+                            $grouped_biaya_penyusutan[$bagian_upk] = 0;
+                        }
+
+                        $grouped_by_upk[$bagian_upk] += $row->akm_thn_ini;
+                        $grouped_biaya_penyusutan[$bagian_upk] += $row->penambahan_penyusutan;
                     }
                 }
                 // Hitung total per kategori dan tambahkan ke grand_total
                 $total_kategori = array_sum($grouped_by_upk);
                 $grand_total += $total_kategori;
+                $total_biaya_penyusutan += array_sum($grouped_biaya_penyusutan);
             ?>
                 <tr style="background-color: lightgrey;">
                     <th colspan="2" style="text-align:left">Total <?= $details['label']; ?></th>
-                    <th style="text-align:right"><?= number_format(array_sum($grouped_by_upk) / 12, 0, ',', '.'); ?></th>
+                    <th style="text-align:right"><?= number_format(array_sum($grouped_biaya_penyusutan), 0, ',', '.'); ?></th>
                     <th style="text-align:right"><?= number_format(array_sum($grouped_by_upk), 0, ',', '.'); ?></th>
                     <th></th>
                 </tr>
@@ -215,7 +224,7 @@
                                     ? $details['label'] . ' - Bondowoso'
                                     : $details['label'] . ' - ' . $bagian_upk; ?>
                             </td>
-                            <td><?= number_format($total_penyusutan / 12, 0, ',', '.'); ?></td>
+                            <td><?= number_format($grouped_biaya_penyusutan[$bagian_upk], 0, ',', '.'); ?></td>
                             <td><?= number_format($total_penyusutan, 0, ',', '.'); ?></td>
                             <td></td>
                         </tr>
@@ -230,7 +239,7 @@
         <tfoot>
             <tr style="background-color:lightgray;">
                 <th colspan="2" class="text-left">Total Keseluruhan</th>
-                <th style="text-align:right"><?= number_format($grand_total / 12, 0, ',', '.'); ?></th>
+                <th style="text-align:right"><?= number_format($total_biaya_penyusutan, 0, ',', '.'); ?></th>
                 <th style="text-align:right"><?= number_format($grand_total, 0, ',', '.'); ?></th>
                 <th></th>
             </tr>

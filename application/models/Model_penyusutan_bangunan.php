@@ -90,7 +90,7 @@ class Model_penyusutan_bangunan extends CI_Model
                         $penambahan_penyusutan = 0;
                         $row->penambahan = 0;
                         $nilai_buku_lalu = 0;
-                        if ($row->status == 1) {
+                        if ($row->status_penyusutan == 1) {
                             $nilai_buku_final = $row->rupiah - $akm_thn_ini;
                             if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
                                 $nilai_buku_final = 1;
