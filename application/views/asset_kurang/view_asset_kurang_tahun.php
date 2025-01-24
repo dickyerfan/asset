@@ -79,8 +79,8 @@
                                         <?php
                                         // Memotong nama_asset jika lebih dari 60 karakter
                                         $nama_asset = $row->nama_asset;
-                                        if (strlen($nama_asset) > 55) {
-                                            $nama_asset = substr($nama_asset, 0, 55) . '...'; // Potong dan tambahkan "..."
+                                        if (strlen($nama_asset) > 75) {
+                                            $nama_asset = substr($nama_asset, 0, 75) . '...'; // Potong dan tambahkan "..."
                                         }
                                         ?>
                                         <?php if ($row->kode_sr == 1) : ?>

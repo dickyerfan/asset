@@ -85,11 +85,11 @@
     <table class="table tableUtama">
         <thead>
             <tr class="text-center">
+                <th>No</th>
                 <th>Uraian</th>
-                <th>Lokasi</th>
-                <th>Tgl perolehan</th>
-                <th>No Bukti</th>
-                <th>Rupiah</th>
+                <th>Harga Perolehan</th>
+                <th>Akm Penyusutan</th>
+                <th>Nilai Buku</th>
             </tr>
         </thead>
         <tbody>
@@ -117,7 +117,9 @@
             foreach ($grouped_data as $grand_id => $upk_data) {
                 // Judul berdasarkan grand_id
                 $nama_perkiraan = $no_per[$grand_id] ?? "Bangunan Lainnya";
-                echo "<tr><td colspan='5' style='background-color:grey;'><strong>{$nama_perkiraan}</strong></td></tr>";
+                echo "<tr><td style='background-color:grey;'></td><td colspan='4' style='background-color:grey;'><strong>{$nama_perkiraan}</strong></td></tr>";
+
+
 
                 // Inisialisasi total per jenis bangunan
                 $totals_per_jenis[$grand_id] = [
@@ -158,6 +160,7 @@
 
             ?>
                         <tr>
+                            <td style="text-align: center;"><?= $no++; ?></td>
                             <td>
                                 <?php
                                 $nama_asset = $row->nama_asset;
@@ -167,37 +170,26 @@
                                 ?>
                                 <?= $nama_asset; ?>
                             </td>
-                            <td>
-                                <?php if ($row->id_bagian == 2) : ?>
-                                    <?= 'Kantor Pusat'; ?>
-                                <?php else : ?>
-                                    <?= $row->nama_bagian; ?>
-                                <?php endif; ?>
-                            </td>
-                            <td style="text-align: center;">
-                                <?php if ($row->status == 2) {
-                                    echo  date('d-m-Y', strtotime($row->tanggal_persediaan));
-                                } else {
-                                    echo date('d-m-Y', strtotime($row->tanggal));
-                                }  ?>
-                            </td>
-                            <td><?= $row->no_bukti_vch; ?></td>
+                            <td style="text-align: right;"><?= number_format($row->rupiah * -1, 0, ',', '.'); ?></td>
                             <td style="text-align: right;"><?= number_format($row->akm_thn_ini * -1, 0, ',', '.'); ?></td>
+                            <td style="text-align: right;"><?= number_format($row->nilai_buku_final * -1, 0, ',', '.'); ?></td>
                         </tr>
                     <?php
                     }
                     ?>
                 <?php
+                    $totals_per_jenis[$grand_id]['total_rupiah'] += $total_rupiah;
                     $totals_per_jenis[$grand_id]['total_akm_thn_ini'] += $total_akm_thn_ini;
+                    $totals_per_jenis[$grand_id]['total_nilai_buku_final'] += $total_nilai_buku_final;
                 }
 
                 ?>
                 <tr style='background-color:lightgrey;'>
-                    <td class="text-left"><strong>Sub Total <?= $nama_perkiraan; ?></strong></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="text-left"><strong>SUB TOTAL <?= $nama_perkiraan; ?></strong></td>
+                    <td style="text-align: right;"><strong><?= number_format($totals_per_jenis[$grand_id]['total_rupiah'] * -1, 0, ',', '.'); ?></strong></td>
                     <td style="text-align: right;"><strong><?= number_format($totals_per_jenis[$grand_id]['total_akm_thn_ini'] * -1, 0, ',', '.'); ?></strong></td>
+                    <td style="text-align: right;"><strong><?= number_format($totals_per_jenis[$grand_id]['total_nilai_buku_final'] * -1, 0, ',', '.'); ?></strong></td>
                 </tr>
             <?php
             }
@@ -205,8 +197,11 @@
         </tbody>
         <tfoot>
             <tr style='background-color:grey;'>
-                <th colspan="4" class="text-center">TOTAL</th>
+                <th></th>
+                <th style="text-align: left">TOTAL PENGURANGAN PENYUSUTAN</th>
+                <th style="text-align: right;"><?= number_format($totals['total_rupiah'] * -1, 0, ',', '.'); ?></th>
                 <th style="text-align: right;"><?= number_format($totals['total_akm_thn_ini'] * -1, 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals['total_nilai_buku_final'] * -1, 0, ',', '.'); ?></th>
             </tr>
         </tfoot>
     </table>

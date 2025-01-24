@@ -42,13 +42,13 @@ class Password extends CI_Controller
                 $this->load->view('templates/navbar');
                 $this->load->view('templates/sidebar_publik');
                 $this->load->view('setting/view_gantiPassword', $data);
-                $this->load->view('templates/footer_baku');
+                $this->load->view('templates/footer');
             } else if ($this->session->userdata('bagian') == 'Umum') {
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/navbar');
                 $this->load->view('templates/sidebar_umum');
                 $this->load->view('setting/view_gantiPassword', $data);
-                $this->load->view('templates/footer_produksi');
+                $this->load->view('templates/footer');
             }
         } else {
             $cek_pass = $this->db->get_where('user', ['nama_pengguna' => $this->session->userdata('nama_pengguna')])->row();

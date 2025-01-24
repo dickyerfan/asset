@@ -11,7 +11,7 @@
  Target Server Version : 100418 (10.4.18-MariaDB)
  File Encoding         : 65001
 
- Date: 24/01/2025 10:59:34
+ Date: 19/01/2025 12:56:58
 */
 
 SET NAMES utf8mb4;
@@ -2709,38 +2709,6 @@ INSERT INTO `daftar_asset` VALUES (2569, 23, 2952, 2848, 248, 0, 34, 500, 'Penga
 INSERT INTO `daftar_asset` VALUES (2570, 23, 2952, 2848, 248, 0, 34, 600, 'Pengadaan galon 600 bh', '2024-11-22', NULL, '', '', 37800000, 1, 4, 50.00, 'Administrator', '2025-01-15 07:06:34', 0);
 
 -- ----------------------------
--- Table structure for kel_tarif
--- ----------------------------
-DROP TABLE IF EXISTS `kel_tarif`;
-CREATE TABLE `kel_tarif`  (
-  `id_kel_tarif` int NOT NULL AUTO_INCREMENT,
-  `kel_tarif` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `kel_tarif_ket` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `kode` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NOT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_kel_tarif`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of kel_tarif
--- ----------------------------
-INSERT INTO `kel_tarif` VALUES (1, 'SOSIAL A', 'Sosial A', 'HU', 0, '2025-01-23 13:17:54', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `kel_tarif` VALUES (2, 'SOSIAL B', 'Sosial B', 'SB', 0, '2025-01-23 13:17:54', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `kel_tarif` VALUES (3, 'RUMAH TANGGA A', 'Rumah Tangga A', 'RT A', 0, '2025-01-23 13:17:54', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `kel_tarif` VALUES (4, 'RUMAH TANGGA B', 'Rumah Tangga B', 'RT B', 0, '2025-01-23 13:17:54', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `kel_tarif` VALUES (5, 'RUMAH TANGGA C', 'Rumah Tangga C', 'RT C', 0, '2025-01-23 13:17:54', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `kel_tarif` VALUES (6, 'INSTANSI PEM DESA', 'Instansi Pem Desa', 'IP', 0, '2025-01-23 13:17:54', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `kel_tarif` VALUES (7, 'TNI/POLRI', 'TNI/POLRI', 'AB', 0, '2025-01-23 13:17:54', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `kel_tarif` VALUES (8, 'NIAGA A', 'Niaga A', 'NA', 0, '2025-01-23 13:17:54', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `kel_tarif` VALUES (9, 'NIAGA B', 'Niaga B', 'NB', 0, '2025-01-23 13:17:54', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `kel_tarif` VALUES (10, 'INSTANSI PEM KAB', 'Instansi Pem Kab', 'IK', 0, '2025-01-23 13:17:54', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `kel_tarif` VALUES (11, 'KHUSUS', 'Khusus', 'K', 0, '2025-01-23 13:17:54', 'Administrator', '0000-00-00 00:00:00', '');
-
--- ----------------------------
 -- Table structure for no_per
 -- ----------------------------
 DROP TABLE IF EXISTS `no_per`;
@@ -4045,63 +4013,6 @@ INSERT INTO `no_per` VALUES (4265, '31.07.09.13', 'Alat Perlengkapan Lainnya Won
 INSERT INTO `no_per` VALUES (4266, '31.07.09.14', 'Alat Perlengkapan Lainnya Klabang', '4251', '244', '34', NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
 INSERT INTO `no_per` VALUES (4267, '31.07.09.15', 'Alat Perlengkapan Lainnya Sukosari 2', '4251', '244', '34', NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
 INSERT INTO `no_per` VALUES (4268, '31.07.09.16', 'Alat Perlengkapan Lainnya AMDK', '4251', '244', '34', NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
-
--- ----------------------------
--- Table structure for peny_piutang
--- ----------------------------
-DROP TABLE IF EXISTS `peny_piutang`;
-CREATE TABLE `peny_piutang`  (
-  `id_piutang` int NOT NULL AUTO_INCREMENT,
-  `id_kel_tarif` int NOT NULL,
-  `tgl_piutang` date NOT NULL,
-  `saldo_awal` bigint NULL DEFAULT NULL,
-  `tambah` bigint NULL DEFAULT NULL,
-  `kurang` bigint NULL DEFAULT NULL,
-  `saldo_akhir` bigint NULL DEFAULT NULL,
-  `persen_tagih` decimal(5, 2) NULL DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_piutang`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of peny_piutang
--- ----------------------------
-INSERT INTO `peny_piutang` VALUES (1, 1, '2022-01-01', 25739290, 38266220, 38575480, 25430030, 39.73, '2025-01-23 13:57:44', 'Administrator', '2025-01-23 13:58:07', '');
-INSERT INTO `peny_piutang` VALUES (2, 2, '2022-01-01', 102688489, 409879380, 427777130, 84790739, 16.54, '2025-01-24 01:49:12', 'Administrator', '2025-01-24 07:52:16', '');
-INSERT INTO `peny_piutang` VALUES (3, 3, '2022-01-01', 789523110, 3124859050, 3034529080, 879853080, 22.48, '2025-01-24 01:50:48', 'Administrator', '2025-01-24 07:53:29', '');
-INSERT INTO `peny_piutang` VALUES (4, 4, '2022-01-01', 1807203080, 11247643120, 10872345510, 2182500690, 16.72, '2025-01-24 01:56:25', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (5, 5, '2022-01-01', 83768870, 556006140, 545891980, 93883030, 14.67, '2025-01-24 01:57:02', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (6, 6, '2022-01-01', 38566080, 279666340, 254761470, 63470950, 19.94, '2025-01-24 01:57:32', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (7, 7, '2022-01-01', 65099090, 309814320, 295418620, 79494790, 21.20, '2025-01-24 01:58:00', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (8, 8, '2022-01-01', 104451670, 573025860, 568982350, 108495180, 16.01, '2025-01-24 01:58:33', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (9, 9, '2022-01-01', 8265510, 85551250, 83568380, 10248380, 10.92, '2025-01-24 01:59:18', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (10, 10, '2022-01-01', 22473250, 262081210, 253117860, 31436600, 11.05, '2025-01-24 02:00:04', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (11, 11, '2022-01-01', 0, 80913150, 65209500, 15703650, 19.41, '2025-01-24 02:00:28', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (12, 1, '2023-01-01', 25430030, 39314140, 58612650, 6131520, 9.47, '2025-01-24 02:05:22', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (13, 2, '2023-01-01', 84790739, 274295670, 323619609, 35466800, 9.88, '2025-01-24 02:06:32', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (14, 3, '2023-01-01', 879853080, 3382415240, 3725877290, 536391030, 12.58, '2025-01-24 02:07:17', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (15, 4, '2023-01-01', 2182500690, 13282020690, 13750041760, 1714479620, 11.09, '2025-01-24 02:07:43', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (16, 5, '2023-01-01', 93883030, 685293080, 700272250, 78903860, 10.13, '2025-01-24 02:08:09', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (17, 6, '2023-01-01', 63470950, 461397560, 471871040, 52997470, 10.10, '2025-01-24 02:08:42', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (18, 7, '2023-01-01', 79494790, 277821670, 308055500, 49260960, 13.79, '2025-01-24 02:09:08', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (19, 8, '2023-01-01', 108495180, 563353700, 593727070, 78121810, 11.63, '2025-01-24 02:09:38', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (20, 9, '2023-01-01', 10248380, 172627330, 165328910, 17546800, 9.59, '2025-01-24 02:10:20', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (21, 10, '2023-01-01', 31436600, 334190200, 330749030, 34877770, 9.54, '2025-01-24 02:10:54', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (22, 11, '2023-01-01', 15703650, 248678800, 250103100, 14279350, 5.40, '2025-01-24 02:11:21', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (23, 1, '2024-01-01', 6131520, 42411770, 42688030, 5855260, 12.06, '2025-01-24 02:11:53', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (24, 2, '2024-01-01', 35466800, 256446780, 249162670, 42750910, 14.65, '2025-01-24 02:12:29', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (25, 3, '2024-01-01', 536391030, 3040636370, 3058935780, 518091620, 14.48, '2025-01-24 02:13:05', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (26, 4, '2024-01-01', 1714479620, 13464569980, 13166871970, 2012177630, 13.26, '2025-01-24 02:13:34', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (27, 5, '2024-01-01', 78903860, 657695590, 646685440, 89914010, 12.21, '2025-01-24 02:14:25', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (28, 6, '2024-01-01', 52997470, 391191810, 392200670, 51988610, 11.70, '2025-01-24 02:14:52', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (29, 7, '2024-01-01', 49310960, 295548820, 315427000, 29432780, 8.53, '2025-01-24 02:15:30', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (30, 8, '2024-01-01', 78121810, 603420780, 595001080, 86541510, 12.70, '2025-01-24 02:15:59', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (31, 9, '2024-01-01', 17546800, 150943860, 153701750, 14788910, 8.78, '2025-01-24 02:16:28', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (32, 10, '2024-01-01', 34877770, 312994210, 314162030, 33709950, 9.69, '2025-01-24 02:16:57', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (33, 11, '2024-01-01', 14279350, 178416100, 177838800, 14856650, 7.71, '2025-01-24 02:17:25', 'Administrator', '0000-00-00 00:00:00', '');
 
 -- ----------------------------
 -- Table structure for penyusutan
@@ -6788,12 +6699,12 @@ CREATE TABLE `user`  (
 INSERT INTO `user` VALUES (1, 'admin', 'Administrator', 'Administrator', '$2y$10$ADv3d1BXOHDyYXGYOHouhu8B.rE4GiayKwPcrFMrMFwJXCzjtBckq', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (2, 'dicky', 'Dicky Erfan Septiono', 'Administrator', '$2y$10$MFzEk5qSvSQo1l8Ip4Psaelp4bi20s9Fwus8n3I0J5tien9xdao8G', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (18, 'cunta', 'Somaya Dewantari', 'Keuangan', '$2y$10$LHvVYekSqy8EJ402tHNFo.jShQERw5H6.tAHjrGRMriAvUNy84HDO', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
-INSERT INTO `user` VALUES (19, 'linda', 'Linda Anggraita', 'Umum', '$2y$10$ADv3d1BXOHDyYXGYOHouhu8B.rE4GiayKwPcrFMrMFwJXCzjtBckq', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
-INSERT INTO `user` VALUES (20, 'auditor', 'Auditor', 'Auditor', '$2y$10$KdQMdsBbSiE9gbfsWw/FUuaqHEzohahyjfJbiPdJjlz53sglVrbr6', 'Pengguna', 1, '2024-11-15 15:44:19', 'Administrator');
-INSERT INTO `user` VALUES (21, 'spi', 'Satuan Pengawasan Internal', 'Publik', '$2y$10$JsPhwWAFLryoEvwZ.cI/KehglXFk4AubPSB0UXg8TekA2iKT0tCoy', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
-INSERT INTO `user` VALUES (22, 'Langganan', 'Bag. Hubungan Langganan', 'Publik', '$2y$10$5NYFZDfMRFvvNKIHLq.8yuok6EBbZNSDRcmHTVaRGyh5c7U.3PHGK', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
-INSERT INTO `user` VALUES (23, 'deni', 'Muhammad Deni Saputro', 'Keuangan', '$2y$10$J9HjgwPou7t1dC3k1x2zHu6J//5DG7yU57fxnmOITw3qnNGoxnpLW', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
-INSERT INTO `user` VALUES (24, 'lilik', 'Lilik Yuli Andayani', 'Keuangan', '$2y$10$uc..LmDquwTsMfhL0xXC3eKX7vY7NcQN29/GSVXzGFZlQdKF6u/Rm', 'Admin', 1, '2024-11-15 10:07:17', 'Administrator');
+INSERT INTO `user` VALUES (19, 'linda', 'Linda Anggraita', 'Umum', '$2y$10$jneBYYgZZ5cWkaJ5/ZUJleMtncaSUOeKrscabbo6ZV1.LoA6hFmaG', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (20, 'auditor', 'Auditor', 'Auditor', '$2y$10$jneBYYgZZ5cWkaJ5/ZUJleMtncaSUOeKrscabbo6ZV1.LoA6hFmaG', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (21, 'spi', 'Satuan Pengawasan Internal', 'Publik', '$2y$10$jneBYYgZZ5cWkaJ5/ZUJleMtncaSUOeKrscabbo6ZV1.LoA6hFmaG', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (22, 'Langganan', 'Bag. Hubungan Langganan', 'Publik', '$2y$10$jneBYYgZZ5cWkaJ5/ZUJleMtncaSUOeKrscabbo6ZV1.LoA6hFmaG', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (23, 'deni', 'Muhammad Deni S', 'Keuangan', '$2y$10$jneBYYgZZ5cWkaJ5/ZUJleMtncaSUOeKrscabbo6ZV1.LoA6hFmaG', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (24, 'lilik', 'Lilik Yuli', 'Keuangan', '$2y$10$uc..LmDquwTsMfhL0xXC3eKX7vY7NcQN29/GSVXzGFZlQdKF6u/Rm', 'Admin', 1, '2024-11-15 10:07:17', 'Administrator');
 INSERT INTO `user` VALUES (25, 'dian', 'Ahmad Wahyu Dian', 'Keuangan', '$2y$10$a/42efidYalCikapjZZ3GewfZqPJNp/Q5GTPrAu4fxfSsYcDY9Nzm', 'Pengguna', 1, '2024-11-15 16:16:16', 'Administrator');
 
 SET FOREIGN_KEY_CHECKS = 1;

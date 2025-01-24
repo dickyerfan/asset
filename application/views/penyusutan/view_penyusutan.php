@@ -21,7 +21,10 @@
                             </select>
                         </div>
                     </form>
-                    <a href="<?= base_url('penyusutan') ?>" style="text-decoration: none;"><button class=" neumorphic-button"> Tahun ini</button></a>
+                    <a href="<?= base_url('penyusutan') ?>" style="text-decoration: none;"><button class="neumorphic-button ms-2"> Tahun ini</button></a>
+                    <div class="navbar-nav ms-auto">
+                        <a href="<?= base_url('penyusutan/pengurangan'); ?>"><button class=" neumorphic-button float-right"> Pengurangan</button></a>
+                    </div>
                 </nav>
             </div>
 

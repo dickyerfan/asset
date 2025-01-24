@@ -17,7 +17,7 @@
         <div class="collapse" id="user">
             <ul class="nav nav-pills nav-sidebar flex-column">
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="<?= base_url('setting/password') ?>" class="nav-link">
                         <i class="nav-icon fas fa-key"></i>
                         <p>Ganti Password</p>
                     </a>

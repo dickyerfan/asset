@@ -75,6 +75,56 @@ class Penyusutan extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function pengurangan()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $no_per = $this->input->get('no_per');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session_kurang', $get_tahun);
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['no_perkiraan'] = $no_per;
+        $data['no_per'] = $this->Model_penyusutan->get_no_per();
+
+        $data['title'] = 'Perhitungan Pengurangan Asset';
+        $penyusutan_data = $this->Model_penyusutan->get_all_kurang($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('penyusutan/view_penyusutan_pengurangan', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function pengurangan_cetak()
+    {
+        $tahun = $this->session->userdata('tahun_session_kurang');
+
+        // Hapus session jika tidak ada tahun atau tahun tidak valid
+        if (empty($tahun)) {
+            $this->session->unset_userdata('tahun_session_kurang');
+            $tahun = date('Y');
+        }
+        $data['tahun_lap'] = $tahun;
+
+        $data['title'] = 'Perhitungan Pengurangan Asset';
+        $penyusutan_data = $this->Model_penyusutan->get_all_kurang($tahun);
+        $data['susut'] = $penyusutan_data['results'];
+        $data['totals'] = $penyusutan_data['totals'];
+
+        // Set paper size and orientation
+        $this->pdf->setPaper('folio', 'portrait');
+        $this->pdf->filename = "tanah-{$tahun}.pdf";
+        $this->pdf->generate('cetakan_asset/penyusutan_kurang_pdf', $data);
+    }
+
     public function tanah()
     {
         $get_tahun = $this->input->get('tahun');
