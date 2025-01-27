@@ -387,7 +387,7 @@ class Asset extends CI_Controller
 
 
 		$data['no_perkiraan'] = $no_per;
-		$data['title'] = 'Daftar Pengurangan Penyusutan Asset';
+		$data['title'] = 'Daftar Pengurangan Asset Tetap';
 		$data['no_per'] = $this->Model_asset->get_no_per();
 
 		$this->load->view('templates/header', $data);

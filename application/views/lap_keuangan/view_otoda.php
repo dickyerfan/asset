@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <form id="form_tahun" action="<?= base_url('lap_keuangan/peny_piutang/hitung_piutang'); ?>" method="get">
+                    <form id="form_tahun" action="<?= base_url('lap_keuangan/otoda'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <input type="submit" value="Pilih Tahun" class="neumorphic-button">
                             <!-- <input type="date" id="tahun" name="tahun" class="form-control" style="margin-left: 10px;"> -->
@@ -21,36 +21,30 @@
                             </select>
                         </div>
                     </form>
-                    <a href="<?= base_url('lap_keuangan/peny_piutang/hitung_piutang') ?>" style="text-decoration: none;"><button class="neumorphic-button ms-2"> Tahun ini</button></a>
+                    <a href="<?= base_url('lap_keuangan/otoda') ?>" style="text-decoration: none;"><button class="neumorphic-button ms-2"> Tahun ini</button></a>
                     <div class="navbar-nav ms-auto ">
-                        <a href="<?= base_url('lap_keuangan/peny_piutang/hitung_piutang_cetak'); ?>" target="_blank"><button class=" neumorphic-button float-right"><i class="fas fa-print"></i> Cetak</button></a>
+                        <a href="<?= base_url('lap_keuangan/otoda_cetak'); ?>" target="_blank"><button class=" neumorphic-button float-right"><i class="fas fa-print"></i> Cetak</button></a>
                     </div>
-                    <!-- <div class="navbar-nav ms-2">
-                        <a href="<?= base_url('lap_keuangan/peny_piutang/data_total'); ?>"><button class=" neumorphic-button float-right"> Data Rekap</button></a>
-                    </div> -->
                 </nav>
             </div>
             <div class="card-body">
                 <div class="row justify-content-center">
-                    <div class="col-lg-12 text-left">
-                        <h5><strong>Perhitungan Penyisihan Piutang</strong></h5>
+                    <div class="col-lg-12 text-center">
+                        <h5><strong><?= strtoupper($title); ?></strong></h5>
+                        <h5><strong>Tahun Buku <?= $tahun_lap ?> dan <?= $tahun_lalu ?></strong></h5>
+                        <h5>(Berdasarkan Permen Otoda Nomor 8 Tahun 2000)</h5>
                     </div>
                 </div>
                 <div class="table-responsive">
                     <table id="contoh2" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr class="text-center">
-                                <th>No</th>
                                 <th>Uraian</th>
-                                <th><?= $dua_tahun_lalu; ?></th>
-                                <th><?= $tahun_lalu; ?></th>
-                                <th><?= $tahun_lap; ?></th>
-                                <th>Rata-Rata (%)</th>
-                                <th>Saldo Piutang <?= $tahun_lap; ?></th>
-                                <th>Penyisihan Piutang <?= $tahun_lap; ?></th>
+                                <th><?= $tahun_lap ?></th>
+                                <th><?= $tahun_lalu ?></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <!-- <tbody>
                             <?php if (!empty($hitung_piutang)) : ?>
                                 <?php $no = 1; ?>
                                 <?php foreach ($hitung_piutang as $row) : ?>
@@ -79,7 +73,7 @@
                                     <td colspan="8" class="text-center">Data tidak tersedia</td>
                                 </tr>
                             <?php endif; ?>
-                        </tbody>
+                        </tbody> -->
                     </table>
                 </div>
             </div>

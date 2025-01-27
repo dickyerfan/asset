@@ -291,31 +291,31 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?= base_url('lap_keuangan/neraca'); ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Neraca</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?= base_url('lap_keuangan/lr_saketap'); ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>LR SAK ETAP</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?= base_url('lap_keuangan/otoda'); ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>LR OTODA</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?= base_url('lap_keuangan/ekuitas'); ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Ekuitas</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?= base_url('lap_keuangan/arus_kas'); ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Arus Kas</p>
                             </a>
@@ -339,7 +339,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?= base_url('asset/asset_kurang_akm') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pengurang Aset Tetap</p>
                             </a>

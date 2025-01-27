@@ -167,10 +167,15 @@ class Model_asset extends CI_Model
 
     public function get_all_kurang_akm($tahun_lap)
     {
-        $this->db->select('*');
+        $this->db->select('
+        penyusutan.*, 
+        daftar_asset.*, 
+        no_per.*, 
+        daftar_asset.status AS status_penyusutan');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
         $this->db->where('penyusutan.tahun_persediaan', $tahun_lap);
         $this->db->where('daftar_asset.status', 2);
         $this->db->where('daftar_asset.grand_id !=', 218);
@@ -248,7 +253,7 @@ class Model_asset extends CI_Model
                         $penambahan_penyusutan = 0;
                         $row->penambahan = 0;
                         $nilai_buku_lalu = 0;
-                        if ($row->status == 1) {
+                        if ($row->status_penyusutan == 1) {
                             $nilai_buku_final = $row->rupiah - $akm_thn_ini;
                             if ($nilai_buku_final == 0 || $umur_tahun > $row->umur) {
                                 $nilai_buku_final = 1;
@@ -270,7 +275,7 @@ class Model_asset extends CI_Model
                 $row->nilai_buku_final = $nilai_buku_final;
             }
 
-            if ($row->status == 2) {
+            if ($row->status_penyusutan == 2) {
                 $umur_tahun = $tahun - $row->tahun_persediaan;
                 $umur_tahun_kurang = $tahun - $row->tahun;
                 if ($umur_tahun == 0) {
@@ -304,6 +309,7 @@ class Model_asset extends CI_Model
                     }
                 }
             }
+
 
             // Kondisi khusus untuk tanah
             if ($row->grand_id == 218) {

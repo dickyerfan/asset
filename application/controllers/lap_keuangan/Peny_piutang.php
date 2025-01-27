@@ -165,20 +165,63 @@ class Peny_piutang extends CI_Controller
 
     // public function hitung_piutang()
     // {
-    //     $tanggal = $this->input->get('tahun');
-    //     $tahun = substr($tanggal, 0, 4);
+    //     $tanggal = $this->input->get('tahun') ?? date('Y');
+    //     $tahun = (int)substr($tanggal, 0, 4);
 
-    //     if (empty($tanggal)) {
-    //         $tanggal = date('Y-m-d');
-    //         $bulan = date('m');
-    //         $tahun = date('Y');
-    //     } else {
-    //         $this->session->set_userdata('tahun', $tanggal);
+    //     $start_year = $tahun - 2; // Tahun mulai (3 tahun terakhir)
+    //     $end_year = $tahun;      // Tahun akhir
+
+    //     // Ambil data piutang dan total
+    //     $piutang = $this->Model_lap_keuangan->get_all_tahun_range($start_year, $end_year);
+    //     $totals = $this->Model_lap_keuangan->get_total_by_year_range($start_year, $end_year);
+
+    //     // Olah data untuk tabel baru
+    //     $rekapitulasi = [];
+    //     foreach ($piutang as $row) {
+    //         $year = date('Y', strtotime($row->tgl_piutang));
+    //         $kel_tarif_ket = $row->kel_tarif_ket;
+
+    //         // Buat array jika belum ada
+    //         if (!isset($rekapitulasi[$kel_tarif_ket])) {
+    //             $rekapitulasi[$kel_tarif_ket] = [
+    //                 'uraian' => $kel_tarif_ket,
+    //                 '2_tahun_lalu' => 0,
+    //                 'tahun_lalu' => 0,
+    //                 'tahun_ini' => 0,
+    //                 'rata_rata' => 0,
+    //                 'saldo_tahun_ini' => 0,
+    //                 'penyesuaian_piutang' => 0,
+    //             ];
+    //         }
+
+    //         // Isi data berdasarkan tahun
+    //         if ($year == $tahun - 2) {
+    //             $rekapitulasi[$kel_tarif_ket]['2_tahun_lalu'] = $row->persen_tagih;
+    //         } elseif ($year == $tahun - 1) {
+    //             $rekapitulasi[$kel_tarif_ket]['tahun_lalu'] = $row->persen_tagih;
+    //         } elseif ($year == $tahun) {
+    //             $rekapitulasi[$kel_tarif_ket]['tahun_ini'] = $row->persen_tagih;
+    //             $rekapitulasi[$kel_tarif_ket]['saldo_tahun_ini'] = $row->saldo_akhir;
+    //         }
     //     }
 
-    //     $data['tahun_lap'] = $tahun;
-    //     $data['title'] = 'Perhitungan Penyisihan Piutang Air';
-    //     $data['piutang'] = $this->Model_lap_keuangan->get_hitung_piutang($tahun);
+    //     // Hitung rata-rata dan penyesuaian piutang
+    //     foreach ($rekapitulasi as &$data) {
+    //         $data['rata_rata'] = round(
+    //             ($data['2_tahun_lalu'] + $data['tahun_lalu'] + $data['tahun_ini']) / 3,
+    //             2
+    //         );
+    //         $data['penyesuaian_piutang'] = round(
+    //             $data['rata_rata'] * $data['saldo_tahun_ini'] / 100,
+    //             2
+    //         );
+    //     }
+
+    //     $data = [
+    //         'title' => 'Perhitungan Penyisihan Piutang Air',
+    //         'tahun_lap' => $tahun,
+    //         'rekapitulasi' => $rekapitulasi,
+    //     ];
 
     //     $this->load->view('templates/header', $data);
     //     $this->load->view('templates/navbar');
@@ -189,55 +232,74 @@ class Peny_piutang extends CI_Controller
 
     public function hitung_piutang()
     {
-        $tanggal = $this->input->get('tahun');
-        $tahun = (int) substr($tanggal, 0, 4);
+        $tanggal = $this->input->get('tahun') ?? date('Y');
+        $tahun = (int)substr($tanggal, 0, 4);
 
-        if (empty($tanggal)) {
-            $tanggal = date('Y-m-d');
-            $bulan = date('m');
-            $tahun = date('Y');
-        } else {
-            $this->session->set_userdata('tahun', $tanggal);
-        }
+        $start_year = $tahun - 2; // 2 tahun lalu
+        $end_year = $tahun;      // Tahun ini
 
-        // Inisialisasi data tahun yang digunakan
-        $tahun_2022 = $tahun - 2;
-        $tahun_2023 = $tahun - 1;
-        $tahun_2024 = $tahun;
-
-        // Ambil data persen_tagih dan saldo_akhir
-        $piutang_data = $this->Model_lap_keuangan->get_hitung_piutang([$tahun_2022, $tahun_2023, $tahun_2024]);
-
-        // Proses data
-        $data_table = [];
-        $rata_rata = 0;
-        $saldo_akhir_2024 = 0;
-
-        foreach ($piutang_data as $row) {
-            $tahun_row = (int) $row->tahun;
-            if ($tahun_row === $tahun_2022) {
-                $data_table['persen_tagih_2022'] = $row->persen_tagih;
-            } elseif ($tahun_row === $tahun_2023) {
-                $data_table['persen_tagih_2023'] = $row->persen_tagih;
-            } elseif ($tahun_row === $tahun_2024) {
-                $data_table['persen_tagih_2024'] = $row->persen_tagih;
-                $saldo_akhir_2024 = $row->saldo_akhir;
-            }
-        }
-
-        // Hitung rata-rata dan Peny. Piutang Air
-        $data_table['rata_rata'] = round((
-            ($data_table['persen_tagih_2022'] ?? 0) +
-            ($data_table['persen_tagih_2023'] ?? 0) +
-            ($data_table['persen_tagih_2024'] ?? 0)) / 3, 2);
-
-        $data_table['saldo_akhir'] = $saldo_akhir_2024;
-        $data_table['peny_piutang_air'] = round($data_table['rata_rata'] * $saldo_akhir_2024 / 100, 2);
-
-        // Kirim data ke view
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Perhitungan Penyisihan Piutang Air';
-        $data['piutang'] = $data_table;
+        $data['dua_tahun_lalu'] = $start_year;
+        $data['tahun_lalu'] = $tahun - 1;
+        $data['title'] = 'Perhitungan Penyisihan Piutang';
+        $piutang = $this->Model_lap_keuangan->get_all_tahun_range($start_year, $end_year);
+        $totals = $this->Model_lap_keuangan->get_total_by_year_range($start_year, $end_year);
+
+        // Group data by `kel_tarif_ket` and year
+        $grouped_data = [];
+        foreach ($piutang as $row) {
+            $year = date('Y', strtotime($row->tgl_piutang));
+            $grouped_data[$row->kel_tarif_ket][$year] = $row;
+        }
+
+        $final_data = [];
+        $totals = [
+            '2_years_ago' => 0,
+            'last_year' => 0,
+            'this_year' => 0,
+            'average' => 0,
+            'saldo_this_year' => 0,
+            'adjusted_piutang' => 0,
+        ];
+        foreach ($grouped_data as $uraian => $years) {
+            $data_2_years_ago = isset($years[$start_year]->persen_tagih)
+                ? round($years[$start_year]->persen_tagih, 5)
+                : 0;
+
+            $data_last_year = isset($years[$start_year + 1]->persen_tagih)
+                ? round($years[$start_year + 1]->persen_tagih, 5)
+                : 0;
+
+            $data_this_year = isset($years[$end_year]->persen_tagih)
+                ? round($years[$end_year]->persen_tagih, 5)
+                : 0;
+            $saldo_this_year = $years[$end_year]->saldo_akhir ?? 0;
+
+            $average_persen = ($data_2_years_ago + $data_last_year + $data_this_year) / 3;
+            $average_decimal = round($average_persen / 100, 5);
+            $adjusted_piutang = $average_decimal * $saldo_this_year;
+            // $adjusted_piutang = ($average_persen * $saldo_this_year) / 100;
+
+            $final_data[] = [
+                'uraian' => $uraian,
+                '2_years_ago' => $data_2_years_ago,
+                'last_year' => $data_last_year,
+                'this_year' => $data_this_year,
+                'average' => $average_persen,
+                'saldo_this_year' => $saldo_this_year,
+                'adjusted_piutang' => $adjusted_piutang,
+            ];
+            // Update totals
+            $totals['2_years_ago'] += $data_2_years_ago;
+            $totals['last_year'] += $data_last_year;
+            $totals['this_year'] += $data_this_year;
+            $totals['average'] += $average_persen;
+            $totals['saldo_this_year'] += $saldo_this_year;
+            $totals['adjusted_piutang'] += $adjusted_piutang;
+        }
+
+        $data['hitung_piutang'] = $final_data;
+        $data['totals'] = $totals;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
