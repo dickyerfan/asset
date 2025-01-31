@@ -115,12 +115,15 @@ class Model_penyusutan_trans_dist extends CI_Model
         penyusutan.*, 
         daftar_asset.*, 
         no_per.*, 
+        bagian_upk.*,
         daftar_asset.status AS status_penyusutan');
         $this->db->from('penyusutan');
         $this->db->join('daftar_asset', 'daftar_asset.id_asset = penyusutan.id_asset', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->join('bagian_upk', 'bagian_upk.id_bagian = daftar_asset.id_bagian', 'left');
         $this->db->where('penyusutan.tahun <=', $tahun_lap);
         $this->db->where('daftar_asset.grand_id', 226);
+        $this->db->order_by('bagian_upk.id_bagian', 'ASC');
         $this->db->order_by('id_no_per', 'ASC');
         $this->db->order_by('tanggal', 'ASC');
         $this->db->order_by('daftar_asset.id_asset', 'ASC');
