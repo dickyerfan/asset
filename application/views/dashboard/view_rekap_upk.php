@@ -58,11 +58,12 @@
                                 <th>Penyusutan</th>
                                 <th>Akm Thn Ini</th>
                                 <th>Nilai Buku Thn Ini</th>
+                                <th>By. Peny perbulan</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td colspan="14"><strong>1. Tanah</strong></td>
+                                <td colspan="15"><strong>1. Tanah</strong></td>
                             </tr>
                             <?php
                             $no = 1;
@@ -84,7 +85,7 @@
                             foreach ($grouped_data as $parent_id => $upk_data) {
                                 // Judul berdasarkan parent_id
                                 $nama_tanah_jenis = $nama_tanah[$parent_id] ?? "tanah Lainnya";
-                                echo "<tr><td colspan='14' class='bg-primary text-white'><strong>{$nama_tanah_jenis}</strong></td></tr>";
+                                echo "<tr><td colspan='15' class='bg-primary text-white'><strong>{$nama_tanah_jenis}</strong></td></tr>";
 
                                 // Inisialisasi total per jenis tanah
                                 $totals_per_jenis[$parent_id] = [
@@ -141,6 +142,7 @@
                                         <td><?= number_format($total_penyusutan, 0, ',', '.'); ?></td>
                                         <td><?= number_format($total_akm_thn_ini, 0, ',', '.'); ?></td>
                                         <td><?= number_format($total_nilai_buku_final, 0, ',', '.'); ?></td>
+                                        <td><?= number_format($total_penyusutan / 12, 0, ',', '.'); ?></td>
                                     </tr>
                                 <?php
 
@@ -169,6 +171,7 @@
                                     <td><?= number_format($totals_per_jenis[$parent_id]['total_penyusutan'], 0, ',', '.'); ?></td>
                                     <td><?= number_format($totals_per_jenis[$parent_id]['total_akm_thn_ini'], 0, ',', '.'); ?></td>
                                     <td><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku_final'], 0, ',', '.'); ?></td>
+                                    <td><?= number_format($totals_per_jenis[$parent_id]['total_penyusutan'] / 12, 0, ',', '.'); ?></td>
                                 </tr>
                             <?php
                             }
@@ -184,11 +187,12 @@
                                 <th class="text-right"><?= number_format($total_tanah['total_penyusutan'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($total_tanah['total_akm_thn_ini'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($total_tanah['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_tanah['total_penyusutan'] / 12, 0, ',', '.'); ?></th>
                             </tr>
                         </tbody>
                         <tbody>
                             <tr>
-                                <td colspan="14"><strong>2. Bangunan Gedung</strong></td>
+                                <td colspan="15"><strong>2. Bangunan Gedung</strong></td>
                             </tr>
                             <?php
                             $no = 1;
@@ -213,7 +217,7 @@
                             foreach ($grouped_data as $parent_id => $upk_data) {
                                 // Judul berdasarkan parent_id
                                 $nama_bangunan_jenis = $nama_bangunan[$parent_id] ?? "Bangunan Lainnya";
-                                echo "<tr><td colspan='14' class='bg-primary text-white'><strong>{$nama_bangunan_jenis}</strong></td></tr>";
+                                echo "<tr><td colspan='15' class='bg-primary text-white'><strong>{$nama_bangunan_jenis}</strong></td></tr>";
 
                                 // Inisialisasi total per jenis bangunan
                                 $totals_per_jenis[$parent_id] = [
@@ -270,6 +274,7 @@
                                         <td><?= number_format($total_penyusutan, 0, ',', '.'); ?></td>
                                         <td><?= number_format($total_akm_thn_ini, 0, ',', '.'); ?></td>
                                         <td><?= number_format($total_nilai_buku_final, 0, ',', '.'); ?></td>
+                                        <td><?= number_format($total_penyusutan / 12, 0, ',', '.'); ?></td>
                                     </tr>
                                 <?php
 
@@ -298,6 +303,7 @@
                                     <td><?= number_format($totals_per_jenis[$parent_id]['total_penyusutan'], 0, ',', '.'); ?></td>
                                     <td><?= number_format($totals_per_jenis[$parent_id]['total_akm_thn_ini'], 0, ',', '.'); ?></td>
                                     <td><?= number_format($totals_per_jenis[$parent_id]['total_nilai_buku_final'], 0, ',', '.'); ?></td>
+                                    <td><?= number_format($totals_per_jenis[$parent_id]['total_penyusutan'] / 12, 0, ',', '.'); ?></td>
                                 </tr>
                             <?php
                             }
@@ -313,6 +319,7 @@
                                 <th class="text-right"><?= number_format($total_bangunan['total_penyusutan'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($total_bangunan['total_akm_thn_ini'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($total_bangunan['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_bangunan['total_penyusutan'] / 12, 0, ',', '.'); ?></th>
                             </tr>
                         </tbody>
                         <tbody>
