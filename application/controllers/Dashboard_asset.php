@@ -62,28 +62,96 @@ class Dashboard_asset extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'Rekap Perhitungan Penyusutan Fiskal';
+
         $tanah = $this->Model_penyusutan->get_tanah($tahun);
         $data['total_tanah'] = $tanah['total_tanah'];
+
+        $tanah_amdk = $this->Model_penyusutan->get_tanah_amdk($tahun);
+        $data['total_tanah_amdk'] = $tanah_amdk['total_tanah_amdk'];
+
+        $tanah_non_amdk = $this->Model_penyusutan->get_tanah_non_amdk($tahun);
+        $data['total_tanah_non_amdk'] = $tanah_non_amdk['total_tanah_non_amdk'];
+
         $bangunan = $this->Model_penyusutan_bangunan->get_bangunan($tahun);
         $data['total_bangunan'] = $bangunan['total_bangunan'];
+
+        $bangunan_amdk = $this->Model_penyusutan_bangunan->get_bangunan_amdk($tahun);
+        $data['total_bangunan_amdk'] = $bangunan_amdk['total_bangunan_amdk'];
+
+        $bangunan_non_amdk = $this->Model_penyusutan_bangunan->get_bangunan_non_amdk($tahun);
+        $data['total_bangunan_non_amdk'] = $bangunan_non_amdk['total_bangunan_non_amdk'];
+
         $sumber = $this->Model_penyusutan_sumber->get_sumber($tahun);
         $data['total_sumber'] = $sumber['total_sumber'];
+
+        $sumber_amdk = $this->Model_penyusutan_sumber->get_sumber_amdk($tahun);
+        $data['total_sumber_amdk'] = $sumber_amdk['total_sumber_amdk'];
+
+        $sumber_non_amdk = $this->Model_penyusutan_sumber->get_sumber_non_amdk($tahun);
+        $data['total_sumber_non_amdk'] = $sumber_non_amdk['total_sumber_non_amdk'];
+
         $pompa = $this->Model_penyusutan_pompa->get_pompa($tahun);
         $data['total_pompa'] = $pompa['total_pompa'];
+
+        $pompa_amdk = $this->Model_penyusutan_pompa->get_pompa_amdk($tahun);
+        $data['total_pompa_amdk'] = $pompa_amdk['total_pompa_amdk'];
+
+        $pompa_non_amdk = $this->Model_penyusutan_pompa->get_pompa_non_amdk($tahun);
+        $data['total_pompa_non_amdk'] = $pompa_non_amdk['total_pompa_non_amdk'];
+
         $olah_air = $this->Model_penyusutan_olah_air->get_olah_air($tahun);
         $data['total_olah_air'] = $olah_air['total_olah_air'];
+
+        $olah_air_amdk = $this->Model_penyusutan_olah_air->get_olah_air_amdk($tahun);
+        $data['total_olah_air_amdk'] = $olah_air_amdk['total_olah_air_amdk'];
+
+        $olah_air_non_amdk = $this->Model_penyusutan_olah_air->get_olah_air_non_amdk($tahun);
+        $data['total_olah_air_non_amdk'] = $olah_air_non_amdk['total_olah_air_non_amdk'];
+
         $trans_dist = $this->Model_penyusutan_trans_dist->get_trans_dist($tahun);
         $data['total_trans_dist'] = $trans_dist['total_trans_dist'];
+
+        $trans_dist_amdk = $this->Model_penyusutan_trans_dist->get_trans_dist_amdk($tahun);
+        $data['total_trans_dist_amdk'] = $trans_dist_amdk['total_trans_dist_amdk'];
+
+        $trans_dist_non_amdk = $this->Model_penyusutan_trans_dist->get_trans_dist_non_amdk($tahun);
+        $data['total_trans_dist_non_amdk'] = $trans_dist_non_amdk['total_trans_dist_non_amdk'];
+
         $peralatan = $this->Model_penyusutan_peralatan->get_peralatan($tahun);
         $data['total_peralatan'] = $peralatan['total_peralatan'];
+
+        $peralatan_amdk = $this->Model_penyusutan_peralatan->get_peralatan_amdk($tahun);
+        $data['total_peralatan_amdk'] = $peralatan_amdk['total_peralatan_amdk'];
+
+        $peralatan_non_amdk = $this->Model_penyusutan_peralatan->get_peralatan_non_amdk($tahun);
+        $data['total_peralatan_non_amdk'] = $peralatan_non_amdk['total_peralatan_non_amdk'];
+
         $kendaraan = $this->Model_penyusutan_kendaraan->get_kendaraan($tahun);
         $data['total_kendaraan'] = $kendaraan['total_kendaraan'];
+
+        $kendaraan_amdk = $this->Model_penyusutan_kendaraan->get_kendaraan_amdk($tahun);
+        $data['total_kendaraan_amdk'] = $kendaraan_amdk['total_kendaraan_amdk'];
+
+        $kendaraan_non_amdk = $this->Model_penyusutan_kendaraan->get_kendaraan_non_amdk($tahun);
+        $data['total_kendaraan_non_amdk'] = $kendaraan_non_amdk['total_kendaraan_non_amdk'];
+
         $inventaris = $this->Model_penyusutan_inventaris->get_inventaris($tahun);
         $data['total_inventaris'] = $inventaris['total_inventaris'];
 
-        // $total_semua = $this->Model_penyusutan->get_total_semua($tahun);
+        $inventaris_amdk = $this->Model_penyusutan_inventaris->get_inventaris_amdk($tahun);
+        $data['total_inventaris_amdk'] = $inventaris_amdk['total_inventaris_amdk'];
+
+        $inventaris_non_amdk = $this->Model_penyusutan_inventaris->get_inventaris_non_amdk($tahun);
+        $data['total_inventaris_non_amdk'] = $inventaris_non_amdk['total_inventaris_non_amdk'];
+
         $totals = $this->Model_penyusutan->get_all($tahun);
         $data['totals'] = $totals['totals'];
+
+        $totals_amdk = $this->Model_penyusutan->get_all_amdk($tahun);
+        $data['totals_amdk'] = $totals_amdk['totals_amdk'];
+
+        $totals_non_amdk = $this->Model_penyusutan->get_all_non_amdk($tahun);
+        $data['totals_non_amdk'] = $totals_non_amdk['totals_non_amdk'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -104,27 +172,96 @@ class Dashboard_asset extends CI_Controller
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'Rekap Perhitungan Penyusutan Fiskal';
+
         $tanah = $this->Model_penyusutan->get_tanah($tahun);
         $data['total_tanah'] = $tanah['total_tanah'];
+
+        $tanah_amdk = $this->Model_penyusutan->get_tanah_amdk($tahun);
+        $data['total_tanah_amdk'] = $tanah_amdk['total_tanah_amdk'];
+
+        $tanah_non_amdk = $this->Model_penyusutan->get_tanah_non_amdk($tahun);
+        $data['total_tanah_non_amdk'] = $tanah_non_amdk['total_tanah_non_amdk'];
+
         $bangunan = $this->Model_penyusutan_bangunan->get_bangunan($tahun);
         $data['total_bangunan'] = $bangunan['total_bangunan'];
+
+        $bangunan_amdk = $this->Model_penyusutan_bangunan->get_bangunan_amdk($tahun);
+        $data['total_bangunan_amdk'] = $bangunan_amdk['total_bangunan_amdk'];
+
+        $bangunan_non_amdk = $this->Model_penyusutan_bangunan->get_bangunan_non_amdk($tahun);
+        $data['total_bangunan_non_amdk'] = $bangunan_non_amdk['total_bangunan_non_amdk'];
+
         $sumber = $this->Model_penyusutan_sumber->get_sumber($tahun);
         $data['total_sumber'] = $sumber['total_sumber'];
+
+        $sumber_amdk = $this->Model_penyusutan_sumber->get_sumber_amdk($tahun);
+        $data['total_sumber_amdk'] = $sumber_amdk['total_sumber_amdk'];
+
+        $sumber_non_amdk = $this->Model_penyusutan_sumber->get_sumber_non_amdk($tahun);
+        $data['total_sumber_non_amdk'] = $sumber_non_amdk['total_sumber_non_amdk'];
+
         $pompa = $this->Model_penyusutan_pompa->get_pompa($tahun);
         $data['total_pompa'] = $pompa['total_pompa'];
+
+        $pompa_amdk = $this->Model_penyusutan_pompa->get_pompa_amdk($tahun);
+        $data['total_pompa_amdk'] = $pompa_amdk['total_pompa_amdk'];
+
+        $pompa_non_amdk = $this->Model_penyusutan_pompa->get_pompa_non_amdk($tahun);
+        $data['total_pompa_non_amdk'] = $pompa_non_amdk['total_pompa_non_amdk'];
+
         $olah_air = $this->Model_penyusutan_olah_air->get_olah_air($tahun);
         $data['total_olah_air'] = $olah_air['total_olah_air'];
+
+        $olah_air_amdk = $this->Model_penyusutan_olah_air->get_olah_air_amdk($tahun);
+        $data['total_olah_air_amdk'] = $olah_air_amdk['total_olah_air_amdk'];
+
+        $olah_air_non_amdk = $this->Model_penyusutan_olah_air->get_olah_air_non_amdk($tahun);
+        $data['total_olah_air_non_amdk'] = $olah_air_non_amdk['total_olah_air_non_amdk'];
+
         $trans_dist = $this->Model_penyusutan_trans_dist->get_trans_dist($tahun);
         $data['total_trans_dist'] = $trans_dist['total_trans_dist'];
+
+        $trans_dist_amdk = $this->Model_penyusutan_trans_dist->get_trans_dist_amdk($tahun);
+        $data['total_trans_dist_amdk'] = $trans_dist_amdk['total_trans_dist_amdk'];
+
+        $trans_dist_non_amdk = $this->Model_penyusutan_trans_dist->get_trans_dist_non_amdk($tahun);
+        $data['total_trans_dist_non_amdk'] = $trans_dist_non_amdk['total_trans_dist_non_amdk'];
+
         $peralatan = $this->Model_penyusutan_peralatan->get_peralatan($tahun);
         $data['total_peralatan'] = $peralatan['total_peralatan'];
+
+        $peralatan_amdk = $this->Model_penyusutan_peralatan->get_peralatan_amdk($tahun);
+        $data['total_peralatan_amdk'] = $peralatan_amdk['total_peralatan_amdk'];
+
+        $peralatan_non_amdk = $this->Model_penyusutan_peralatan->get_peralatan_non_amdk($tahun);
+        $data['total_peralatan_non_amdk'] = $peralatan_non_amdk['total_peralatan_non_amdk'];
+
         $kendaraan = $this->Model_penyusutan_kendaraan->get_kendaraan($tahun);
         $data['total_kendaraan'] = $kendaraan['total_kendaraan'];
+
+        $kendaraan_amdk = $this->Model_penyusutan_kendaraan->get_kendaraan_amdk($tahun);
+        $data['total_kendaraan_amdk'] = $kendaraan_amdk['total_kendaraan_amdk'];
+
+        $kendaraan_non_amdk = $this->Model_penyusutan_kendaraan->get_kendaraan_non_amdk($tahun);
+        $data['total_kendaraan_non_amdk'] = $kendaraan_non_amdk['total_kendaraan_non_amdk'];
+
         $inventaris = $this->Model_penyusutan_inventaris->get_inventaris($tahun);
         $data['total_inventaris'] = $inventaris['total_inventaris'];
 
+        $inventaris_amdk = $this->Model_penyusutan_inventaris->get_inventaris_amdk($tahun);
+        $data['total_inventaris_amdk'] = $inventaris_amdk['total_inventaris_amdk'];
+
+        $inventaris_non_amdk = $this->Model_penyusutan_inventaris->get_inventaris_non_amdk($tahun);
+        $data['total_inventaris_non_amdk'] = $inventaris_non_amdk['total_inventaris_non_amdk'];
+
         $totals = $this->Model_penyusutan->get_all($tahun);
         $data['totals'] = $totals['totals'];
+
+        $totals_amdk = $this->Model_penyusutan->get_all_amdk($tahun);
+        $data['totals_amdk'] = $totals_amdk['totals_amdk'];
+
+        $totals_non_amdk = $this->Model_penyusutan->get_all_non_amdk($tahun);
+        $data['totals_non_amdk'] = $totals_non_amdk['totals_non_amdk'];
 
         // Set paper size and orientation
         $this->pdf->setPaper('folio', 'landscape');

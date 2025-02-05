@@ -11,7 +11,7 @@
  Target Server Version : 100418 (10.4.18-MariaDB)
  File Encoding         : 65001
 
- Date: 05/02/2025 07:25:52
+ Date: 24/01/2025 10:59:34
 */
 
 SET NAMES utf8mb4;
@@ -116,53 +116,6 @@ INSERT INTO `bagian_upk` VALUES (20, 'Wonosari', 1, 1);
 INSERT INTO `bagian_upk` VALUES (21, 'Klabang', 1, 1);
 INSERT INTO `bagian_upk` VALUES (22, 'Sukosari 2', 1, 1);
 INSERT INTO `bagian_upk` VALUES (23, 'A M D K', 1, 1);
-
--- ----------------------------
--- Table structure for bank
--- ----------------------------
-DROP TABLE IF EXISTS `bank`;
-CREATE TABLE `bank`  (
-  `id_bank` int NOT NULL AUTO_INCREMENT,
-  `nama_bank` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `status_bank` tinyint(1) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_bank`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of bank
--- ----------------------------
-INSERT INTO `bank` VALUES (1, 'Simpeda Bank Jatim', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
-INSERT INTO `bank` VALUES (2, 'Giro Bank Jatim', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
-INSERT INTO `bank` VALUES (3, 'Tabungan Bank Mandiri', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
-INSERT INTO `bank` VALUES (4, 'Giro Bank Mandiri', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
-INSERT INTO `bank` VALUES (5, 'Taplus BNI 1946', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
-INSERT INTO `bank` VALUES (6, 'Tabungan Britama', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
-INSERT INTO `bank` VALUES (7, 'Giro BTN', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
-INSERT INTO `bank` VALUES (8, 'Giro BSI', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
-
--- ----------------------------
--- Table structure for bank_kas
--- ----------------------------
-DROP TABLE IF EXISTS `bank_kas`;
-CREATE TABLE `bank_kas`  (
-  `id_bank_kas` int NOT NULL AUTO_INCREMENT,
-  `id_bank` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `jumlah` bigint NULL DEFAULT NULL,
-  `tgl_bank` date NULL DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_bank_kas`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of bank_kas
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for daftar_asset
@@ -1481,7 +1434,7 @@ INSERT INTO `daftar_asset` VALUES (1286, 19, 2948, 2848, 248, 0, 34, 0, 'Pengada
 INSERT INTO `daftar_asset` VALUES (1287, 20, 2949, 2848, 248, 0, 34, 0, 'Papan nama kantor', '2021-02-28', NULL, '', '', 2200000, 1, 4, 50.00, 'Administrator', '2024-12-10 14:18:18', 0);
 INSERT INTO `daftar_asset` VALUES (1288, 20, 2949, 2848, 248, 0, 34, 0, 'Pengadaan HP vivo Y 12', '2021-02-28', NULL, '', '', 2638680, 1, 4, 50.00, 'Administrator', '2024-12-10 14:22:10', 0);
 INSERT INTO `daftar_asset` VALUES (1289, 22, 2951, 2848, 248, 0, 34, 0, 'Pengadaan HP vivo Y 12', '2021-02-28', NULL, '', '', 2638680, 1, 4, 50.00, 'Administrator', '2024-12-10 14:23:11', 0);
-INSERT INTO `daftar_asset` VALUES (1290, 22, 2951, 2848, 248, 0, 34, 0, 'Pemb.papan nama aset', '2023-03-28', NULL, '', '', 2220000, 1, 4, 50.00, 'Administrator', '2024-12-10 14:23:51', 0);
+INSERT INTO `daftar_asset` VALUES (1290, 23, 2951, 2848, 248, 0, 34, 0, 'Pemb.papan nama aset', '2023-03-28', NULL, '', '', 2220000, 1, 4, 50.00, 'Administrator', '2024-12-10 14:23:51', 0);
 INSERT INTO `daftar_asset` VALUES (1291, 2, 2935, 2848, 248, 0, 34, 0, 'Perlengkapan sound system', '1991-01-01', NULL, '', '', 313225, 1, 4, 50.00, 'Administrator', '2024-12-10 15:20:11', 0);
 INSERT INTO `daftar_asset` VALUES (1292, 2, 2935, 2848, 248, 0, 34, 0, 'Kamera', '1991-01-01', NULL, '', '', 125000, 1, 4, 50.00, 'Administrator', '2024-12-11 07:05:26', 0);
 INSERT INTO `daftar_asset` VALUES (1293, 2, 2935, 2848, 248, 0, 34, 0, 'Kamera', '1992-01-01', NULL, '', '', 165000, 1, 4, 50.00, 'Administrator', '2024-12-11 07:06:58', 0);
@@ -2754,31 +2707,6 @@ INSERT INTO `daftar_asset` VALUES (2567, 22, 2448, 2263, 226, 2, 34, 90, 'Pengga
 INSERT INTO `daftar_asset` VALUES (2568, 17, 2441, 2263, 226, 1, 34, 1, 'Pemasangan SR 1 unit', '2024-12-31', NULL, '', '', 1723250, 1, 16, 12.50, 'Administrator', '2025-01-06 14:14:58', 0);
 INSERT INTO `daftar_asset` VALUES (2569, 23, 2952, 2848, 248, 0, 34, 500, 'Pengadaan galon 500 bh', '2024-03-25', NULL, '', '', 31250000, 1, 4, 50.00, 'Administrator', '2025-01-15 07:05:44', 0);
 INSERT INTO `daftar_asset` VALUES (2570, 23, 2952, 2848, 248, 0, 34, 600, 'Pengadaan galon 600 bh', '2024-11-22', NULL, '', '', 37800000, 1, 4, 50.00, 'Administrator', '2025-01-15 07:06:34', 0);
-
--- ----------------------------
--- Table structure for kas
--- ----------------------------
-DROP TABLE IF EXISTS `kas`;
-CREATE TABLE `kas`  (
-  `id_kas` int NOT NULL AUTO_INCREMENT,
-  `nama_kas` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `status_kas` tinyint(1) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_kas`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of kas
--- ----------------------------
-INSERT INTO `kas` VALUES (1, 'Dana Kas Besar', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
-INSERT INTO `kas` VALUES (2, 'Dana Kerja', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
-INSERT INTO `kas` VALUES (3, 'Dana Kas Kecil', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
-INSERT INTO `kas` VALUES (4, 'Dana Penagihan', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
-INSERT INTO `kas` VALUES (5, 'Dana Pemeliharaan', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
-INSERT INTO `kas` VALUES (6, 'Dana Operasional AMDK', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
 
 -- ----------------------------
 -- Table structure for kel_tarif
@@ -4133,7 +4061,7 @@ CREATE TABLE `peny_piutang`  (
   `persen_tagih` decimal(5, 2) NULL DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_piutang`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
@@ -4158,7 +4086,7 @@ INSERT INTO `peny_piutang` VALUES (14, 3, '2023-01-01', 879853080, 3382415240, 3
 INSERT INTO `peny_piutang` VALUES (15, 4, '2023-01-01', 2182500690, 13282020690, 13750041760, 1714479620, 11.09, '2025-01-24 02:07:43', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `peny_piutang` VALUES (16, 5, '2023-01-01', 93883030, 685293080, 700272250, 78903860, 10.13, '2025-01-24 02:08:09', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `peny_piutang` VALUES (17, 6, '2023-01-01', 63470950, 461397560, 471871040, 52997470, 10.10, '2025-01-24 02:08:42', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `peny_piutang` VALUES (18, 7, '2023-01-01', 79494790, 277821670, 308005500, 49310960, 13.80, '2025-01-24 02:09:08', 'Administrator', '2025-02-04 14:54:41', '');
+INSERT INTO `peny_piutang` VALUES (18, 7, '2023-01-01', 79494790, 277821670, 308055500, 49260960, 13.79, '2025-01-24 02:09:08', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `peny_piutang` VALUES (19, 8, '2023-01-01', 108495180, 563353700, 593727070, 78121810, 11.63, '2025-01-24 02:09:38', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `peny_piutang` VALUES (20, 9, '2023-01-01', 10248380, 172627330, 165328910, 17546800, 9.59, '2025-01-24 02:10:20', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `peny_piutang` VALUES (21, 10, '2023-01-01', 31436600, 334190200, 330749030, 34877770, 9.54, '2025-01-24 02:10:54', 'Administrator', '0000-00-00 00:00:00', '');

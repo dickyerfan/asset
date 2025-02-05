@@ -78,6 +78,32 @@ class Model_lap_keuangan extends CI_Model
         $this->db->from('kel_tarif');
         return $this->db->get()->result();
     }
+    public function get_bank()
+    {
+        $this->db->select('*');
+        $this->db->from('bank');
+        return $this->db->get()->result();
+    }
+
+    public function input_bank()
+    {
+        // Ambil nilai input
+        $id_bank = $this->input->post('id_bank', true);
+        $tgl_bank = $this->input->post('tgl_bank', true);
+        $jumlah = (float) $this->input->post('jumlah', true);
+
+
+        // Data yang akan dimasukkan ke database
+        $data = [
+            'id_bank' => $this->input->post('id_bank', true),
+            'tgl_bank' => $this->input->post('tgl_bank', true),
+            'jumlah' => $this->input->post('jumlah', true),
+            'created_at' => date('Y-m-d H:i:s'),
+            'created_by' => $this->session->userdata('nama_lengkap')
+        ];
+        // Insert data ke tabel
+        $this->db->insert('bank_kas', $data);
+    }
 
     public function get_hitung_piutang($tahun_lap)
     {

@@ -291,6 +291,12 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="<?= base_url('lap_keuangan/penjelasan'); ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Penjelasan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="<?= base_url('lap_keuangan/neraca'); ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Neraca</p>

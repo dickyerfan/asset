@@ -50,6 +50,15 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
 
 <script>
+    function redirectToPage() {
+        var select = document.getElementById("jenis_transaksi");
+        var url = select.value;
+        if (url) {
+            window.location.href = url;
+        }
+    }
+</script>
+<script>
     $(document).ready(function() {
         $('#status').on('change', function() {
             if ($(this).val() === '2') {

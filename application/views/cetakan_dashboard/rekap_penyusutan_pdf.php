@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asset| </title>
+    <title>Asset | </title>
     <link href="<?= base_url(); ?>assets/datatables/bootstrap5/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -79,6 +79,300 @@
             </tbody>
         </table>
     </div>
+    <div class="judul">
+        <?php
+        if (empty($tahun_lap)) {
+            $tahun_lap = date('Y');
+        }
+        ?>
+        <p style="text-align: center;"><?= strtoupper($title) . ' : BAGIAN / UPK <br> PER 31 DESEMBER ' . $tahun_lap; ?></p>
+    </div>
+    <table class="table tableUtama">
+        <thead>
+            <tr class="text-center">
+                <th>Nama Asset</th>
+                <th>Harga Perolehan Thn Lalu</th>
+                <th>Penambahan</th>
+                <th>Pengurangan</th>
+                <th>Harga Perolehan Thn Ini</th>
+                <th>Akm Thn Lalu</th>
+                <th>Nilai Buku Thn Lalu</th>
+                <th>Penyusutan</th>
+                <th>Akm Thn Ini</th>
+                <th>Nilai Buku Thn Ini</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Tanah & Penyempurnaan Tanah</th>
+                <th style="text-align: right;"><?= number_format($total_tanah_non_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_non_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_non_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_non_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_non_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_non_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_non_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_non_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_non_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Bangunan/Gedung</th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_non_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_non_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_non_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_non_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_non_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_non_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_non_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_non_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_non_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Instalasi Sumber</th>
+                <th style="text-align: right;"><?= number_format($total_sumber_non_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_non_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_non_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_non_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_non_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_non_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_non_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_non_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_non_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Instalasi Pompa</th>
+                <th style="text-align: right;"><?= number_format($total_pompa_non_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_non_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_non_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_non_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_non_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_non_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_non_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_non_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_non_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Instalasi Pengolahan Air</th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_non_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_non_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_non_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_non_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_non_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_non_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_non_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_non_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_non_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Instalasi Trans & Distribusi</th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_non_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_non_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_non_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_non_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_non_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_non_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_non_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_non_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_non_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Peralatan/Perlengkapan</th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_non_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_non_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_non_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_non_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_non_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_non_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_non_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_non_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_non_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Kendaraan/Alat Angkut</th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_non_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_non_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_non_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_non_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_non_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_non_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_non_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_non_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_non_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Inventaris/Perabotan Kantor</th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_non_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_non_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_non_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_non_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_non_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_non_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_non_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_non_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_non_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Total</th>
+                <th style="text-align: right;"><?= number_format($totals_non_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_non_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_non_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_non_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_non_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_non_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_non_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_non_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_non_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="judul">
+        <?php
+        if (empty($tahun_lap)) {
+            $tahun_lap = date('Y');
+        }
+        ?>
+        <p style="text-align: center;"><?= strtoupper($title) . ' : AMDK   <br> PER 31 DESEMBER ' . $tahun_lap; ?></p>
+    </div>
+    <table class="table tableUtama">
+        <thead>
+            <tr class="text-center">
+                <th>Nama Asset</th>
+                <th>Harga Perolehan Thn Lalu</th>
+                <th>Penambahan</th>
+                <th>Pengurangan</th>
+                <th>Harga Perolehan Thn Ini</th>
+                <th>Akm Thn Lalu</th>
+                <th>Nilai Buku Thn Lalu</th>
+                <th>Penyusutan</th>
+                <th>Akm Thn Ini</th>
+                <th>Nilai Buku Thn Ini</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Tanah & Penyempurnaan Tanah</th>
+                <th style="text-align: right;"><?= number_format($total_tanah_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_tanah_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Bangunan/Gedung</th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_bangunan_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Instalasi Sumber</th>
+                <th style="text-align: right;"><?= number_format($total_sumber_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_sumber_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Instalasi Pompa</th>
+                <th style="text-align: right;"><?= number_format($total_pompa_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_pompa_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Instalasi Pengolahan Air</th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_olah_air_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Instalasi Trans & Distribusi</th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_trans_dist_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Peralatan/Perlengkapan</th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_peralatan_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Kendaraan/Alat Angkut</th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_kendaraan_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Inventaris/Perabotan Kantor</th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($total_inventaris_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+            <tr class="text-center bg-light">
+                <th style="text-align: left;">Total</th>
+                <th style="text-align: right;"><?= number_format($totals_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_amdk['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_amdk['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_amdk['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_amdk['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_amdk['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($totals_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+        </tbody>
+    </table>
+
     <div class="judul">
         <?php
         if (empty($tahun_lap)) {
