@@ -12,27 +12,27 @@
                     <div class="row justify-content-center">
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
-                                <label for="id_bank">Nama Bank :</label>
-                                <select name="id_bank" id="id_bank" class="form-control select2">
-                                    <option value="">Pilih Bank</option>
-                                    <?php foreach ($bank as $row) :  ?>
-                                        <option value="<?= $row->id_bank ?>"><?= $row->nama_bank; ?></option>
+                                <label for="id_kas">Nama Kas :</label>
+                                <select name="id_kas" id="id_kas" class="form-control select2">
+                                    <option value="">Pilih kas</option>
+                                    <?php foreach ($kas as $row) :  ?>
+                                        <option value="<?= $row->id_kas ?>"><?= $row->nama_kas; ?></option>
                                     <?php endforeach;  ?>
                                 </select>
-                                <small class="form-text text-danger pl-3"><?= form_error('id_bank'); ?></small>
+                                <small class="form-text text-danger pl-3"><?= form_error('id_bagian'); ?></small>
                             </div>
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label for="tgl_bank">Tanggal Bank :</label>
-                                    <input type="date" class="form-control" id="tgl_bank" name="tgl_bank" placeholder="Masukan Tanggal Piutang" value="<?= set_value('tgl_bank'); ?>">
-                                    <small class="form-text text-danger pl-3"><?= form_error('tgl_bank'); ?></small>
+                                    <label for="tgl_kas">Tanggal Kas :</label>
+                                    <input type="date" class="form-control" id="tgl_kas" name="tgl_kas" placeholder="Masukan Tanggal Piutang" value="<?= set_value('tgl_kas'); ?>">
+                                    <small class="form-text text-danger pl-3"><?= form_error('tgl_kas'); ?></small>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label for="jumlah_bank">Jumlah :</label>
-                                    <input type="text" class="form-control" id="jumlah_bank" name="jumlah_bank" placeholder="Masukan Jumlah" value="<?= set_value('jumlah_bank'); ?>">
-                                    <small class="form-text text-danger pl-3"><?= form_error('jumlah_bank'); ?></small>
+                                    <label for="jumlah_kas">Jumlah :</label>
+                                    <input type="text" class="form-control" id="jumlah_kas" name="jumlah_kas" placeholder="Masukan Jumlah" value="<?= set_value('jumlah_kas'); ?>">
+                                    <small class="form-text text-danger pl-3"><?= form_error('jumlah_kas'); ?></small>
                                 </div>
                             </div>
                         </div>

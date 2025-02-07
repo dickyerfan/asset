@@ -85,24 +85,80 @@ class Model_lap_keuangan extends CI_Model
         return $this->db->get()->result();
     }
 
+    // public function get_bank_input($tahun)
+    // {
+    //     $this->db->select('*');
+    //     $this->db->from('bank_input');
+    //     $this->db->join('bank', 'bank_input.id_bank = bank.id_bank', 'left');
+    //     $this->db->where('YEAR(tgl_bank) =', $tahun);
+    //     return $this->db->get()->result();
+    // }
+
+    public function get_bank_input($tahun)
+    {
+        $tahun_lalu = $tahun - 1;
+
+        $this->db->select('
+        bank.nama_bank, 
+        SUM(CASE WHEN YEAR(tgl_bank) = ' . $tahun . ' THEN bank_input.jumlah_bank ELSE 0 END) as jumlah_tahun_ini,
+        SUM(CASE WHEN YEAR(tgl_bank) = ' . $tahun_lalu . ' THEN bank_input.jumlah_bank ELSE 0 END) as jumlah_tahun_lalu
+    ');
+        $this->db->from('bank_input');
+        $this->db->join('bank', 'bank_input.id_bank = bank.id_bank', 'left');
+        $this->db->where('YEAR(tgl_bank) IN (' . $tahun . ', ' . $tahun_lalu . ')');
+        $this->db->group_by('bank.nama_bank');
+
+        return $this->db->get()->result();
+    }
+
+
     public function input_bank()
     {
+        date_default_timezone_set('Asia/Jakarta');
         // Ambil nilai input
         $id_bank = $this->input->post('id_bank', true);
         $tgl_bank = $this->input->post('tgl_bank', true);
-        $jumlah = (float) $this->input->post('jumlah', true);
+        $jumlah_bank = (float) $this->input->post('jumlah_bank', true);
 
 
         // Data yang akan dimasukkan ke database
         $data = [
             'id_bank' => $this->input->post('id_bank', true),
             'tgl_bank' => $this->input->post('tgl_bank', true),
-            'jumlah' => $this->input->post('jumlah', true),
+            'jumlah_bank' => $this->input->post('jumlah_bank', true),
             'created_at' => date('Y-m-d H:i:s'),
             'created_by' => $this->session->userdata('nama_lengkap')
         ];
         // Insert data ke tabel
-        $this->db->insert('bank_kas', $data);
+        $this->db->insert('bank_input', $data);
+    }
+
+    public function get_kas()
+    {
+        $this->db->select('*');
+        $this->db->from('kas');
+        return $this->db->get()->result();
+    }
+
+    public function input_kas()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        // Ambil nilai input
+        $id_kas = $this->input->post('id_kas', true);
+        $tgl_kas = $this->input->post('tgl_kas', true);
+        $jumlah_kas = (float) $this->input->post('jumlah_kas', true);
+
+
+        // Data yang akan dimasukkan ke database
+        $data = [
+            'id_kas' => $this->input->post('id_kas', true),
+            'tgl_kas' => $this->input->post('tgl_kas', true),
+            'jumlah_kas' => $this->input->post('jumlah_kas', true),
+            'created_at' => date('Y-m-d H:i:s'),
+            'created_by' => $this->session->userdata('nama_lengkap')
+        ];
+        // Insert data ke tabel
+        $this->db->insert('kas_input', $data);
     }
 
     public function get_hitung_piutang($tahun_lap)

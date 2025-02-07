@@ -30,6 +30,32 @@ class Penjelasan extends CI_Controller
             redirect('auth');
         }
     }
+    // public function index()
+    // {
+    //     $tanggal = $this->input->get('tahun');
+    //     $tahun = substr($tanggal, 0, 4);
+
+    //     if (empty($tanggal)) {
+    //         $tanggal = date('Y-m-d');
+    //         $bulan = date('m');
+    //         $tahun = date('Y');
+    //     } else {
+    //         $this->session->set_userdata('tahun', $tanggal);
+    //     }
+
+    //     $data['tahun_lap'] = $tahun;
+    //     $data['tahun_lalu'] = $tahun - 1;
+
+    //     $data['title'] = 'Penjelasan Neraca';
+    //     $data['bank_input'] = $this->Model_lap_keuangan->get_bank_input($tahun);
+
+    //     $this->load->view('templates/header', $data);
+    //     $this->load->view('templates/navbar');
+    //     $this->load->view('templates/sidebar');
+    //     $this->load->view('lap_keuangan/view_penjelasan', $data);
+    //     $this->load->view('templates/footer');
+    // }
+
     public function index()
     {
         $tanggal = $this->input->get('tahun');
@@ -47,7 +73,7 @@ class Penjelasan extends CI_Controller
         $data['tahun_lalu'] = $tahun - 1;
 
         $data['title'] = 'Penjelasan Neraca';
-        $data['piutang'] = $this->Model_lap_keuangan->get_all($tahun);
+        $data['bank_input'] = $this->Model_lap_keuangan->get_bank_input($tahun);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -62,7 +88,7 @@ class Penjelasan extends CI_Controller
         $tanggal = $this->session->userdata('tanggal');
         $this->form_validation->set_rules('id_bank', 'Nama Bank', 'required|trim');
         $this->form_validation->set_rules('tgl_bank', 'Tanggal', 'required|trim');
-        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim|numeric');
+        $this->form_validation->set_rules('jumlah_bank', 'Jumlah', 'required|trim|numeric');
         $this->form_validation->set_message('required', '%s masih kosong');
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
@@ -75,11 +101,42 @@ class Penjelasan extends CI_Controller
             $this->load->view('lap_keuangan/view_upload_bank', $data);
             $this->load->view('templates/footer');
         } else {
-            $data['piutang'] = $this->Model_lap_keuangan->input_bank();
+            $this->Model_lap_keuangan->input_bank();
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                         <strong>Sukses,</strong> Data input bank baru berhasil di tambah
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+            redirect('lap_keuangan/penjelasan');
+        }
+    }
+
+    public function input_kas()
+    {
+        $tanggal = $this->session->userdata('tanggal');
+        $this->form_validation->set_rules('id_kas', 'Nama Kas', 'required|trim');
+        $this->form_validation->set_rules('tgl_kas', 'Tanggal', 'required|trim');
+        $this->form_validation->set_rules('jumlah_kas', 'Jumlah', 'required|trim|numeric');
+        $this->form_validation->set_message('required', '%s masih kosong');
+        $this->form_validation->set_message('numeric', '%s harus berupa angka');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Upload Kas';
+            $data['kas'] = $this->Model_lap_keuangan->get_kas();
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('lap_keuangan/view_upload_kas', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data['kas'] = $this->Model_lap_keuangan->input_kas();
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>Sukses,</strong> Data input kas baru berhasil di tambah
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                         </button>
                       </div>'

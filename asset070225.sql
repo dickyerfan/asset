@@ -11,7 +11,7 @@
  Target Server Version : 100418 (10.4.18-MariaDB)
  File Encoding         : 65001
 
- Date: 07/02/2025 11:01:30
+ Date: 05/02/2025 07:25:52
 */
 
 SET NAMES utf8mb4;
@@ -130,55 +130,39 @@ CREATE TABLE `bank`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_bank`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bank
 -- ----------------------------
-INSERT INTO `bank` VALUES (1, 'Giro & Simpeda Bank Jatim', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `bank` VALUES (2, 'Giro & Tabungan Mandiri', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `bank` VALUES (3, 'Taplus BNI 1946', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `bank` VALUES (4, 'Tabungan Britama', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `bank` VALUES (5, 'Giro BTN', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `bank` VALUES (6, 'Giro BSI', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `bank` VALUES (1, 'Simpeda Bank Jatim', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
+INSERT INTO `bank` VALUES (2, 'Giro Bank Jatim', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
+INSERT INTO `bank` VALUES (3, 'Tabungan Bank Mandiri', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
+INSERT INTO `bank` VALUES (4, 'Giro Bank Mandiri', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
+INSERT INTO `bank` VALUES (5, 'Taplus BNI 1946', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
+INSERT INTO `bank` VALUES (6, 'Tabungan Britama', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
+INSERT INTO `bank` VALUES (7, 'Giro BTN', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
+INSERT INTO `bank` VALUES (8, 'Giro BSI', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
 
 -- ----------------------------
--- Table structure for bank_input
+-- Table structure for bank_kas
 -- ----------------------------
-DROP TABLE IF EXISTS `bank_input`;
-CREATE TABLE `bank_input`  (
-  `id_bank_input` int NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `bank_kas`;
+CREATE TABLE `bank_kas`  (
+  `id_bank_kas` int NOT NULL AUTO_INCREMENT,
   `id_bank` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `jumlah_bank` bigint NULL DEFAULT NULL,
+  `jumlah` bigint NULL DEFAULT NULL,
   `tgl_bank` date NULL DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_bank_input`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id_bank_kas`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of bank_input
+-- Records of bank_kas
 -- ----------------------------
-INSERT INTO `bank_input` VALUES (1, '1', 1614174923, '2022-12-31', '2025-02-06 09:28:16', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (2, '2', 573596422, '2022-12-31', '2025-02-07 10:04:15', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (3, '3', 454676080, '2022-12-31', '2025-02-07 10:07:27', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (4, '4', 627408723, '2022-12-31', '2025-02-07 10:08:08', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (5, '5', 349697559, '2022-12-31', '2025-02-07 10:08:30', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (6, '6', 0, '2022-12-31', '2025-02-07 10:08:47', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (7, '1', 1421770912, '2023-12-31', '2025-02-07 10:10:23', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (8, '2', 450824383, '2023-12-31', '2025-02-07 10:10:43', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (9, '3', 169943237, '2023-12-31', '2025-02-07 10:10:58', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (10, '4', 674301255, '2023-12-31', '2025-02-07 10:11:31', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (11, '5', 215550400, '2023-12-31', '2025-02-07 10:11:48', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (12, '6', 0, '2023-12-31', '2025-02-07 10:11:57', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (13, '1', 1557576789, '2024-12-31', '2025-02-07 10:12:34', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (14, '2', 439453332, '2024-12-31', '2025-02-07 10:13:17', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (15, '3', 40126263, '2024-12-31', '2025-02-07 10:13:44', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (16, '4', 534498165, '2024-12-31', '2025-02-07 10:14:00', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (17, '5', 216266979, '2024-12-31', '2025-02-07 10:14:13', 'Administrator', NULL, '');
-INSERT INTO `bank_input` VALUES (18, '6', 970000, '2024-12-31', '2025-02-07 10:14:28', 'Administrator', NULL, '');
 
 -- ----------------------------
 -- Table structure for daftar_asset
@@ -2795,44 +2779,6 @@ INSERT INTO `kas` VALUES (3, 'Dana Kas Kecil', 0, '2025-02-04 13:59:00', 'Admini
 INSERT INTO `kas` VALUES (4, 'Dana Penagihan', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
 INSERT INTO `kas` VALUES (5, 'Dana Pemeliharaan', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
 INSERT INTO `kas` VALUES (6, 'Dana Operasional AMDK', 0, '2025-02-04 13:59:00', 'Administrator', NULL, '');
-
--- ----------------------------
--- Table structure for kas_input
--- ----------------------------
-DROP TABLE IF EXISTS `kas_input`;
-CREATE TABLE `kas_input`  (
-  `id_kas_input` int NOT NULL AUTO_INCREMENT,
-  `id_kas` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `jumlah_kas` bigint NULL DEFAULT NULL,
-  `tgl_kas` date NULL DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_kas_input`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of kas_input
--- ----------------------------
-INSERT INTO `kas_input` VALUES (1, '1', 0, '2022-12-31', '2025-02-07 10:15:55', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (2, '2', 3425000, '2022-12-31', '2025-02-07 10:16:24', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (3, '3', 1794000, '2022-12-31', '2025-02-07 10:16:48', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (4, '4', 1800000, '2022-12-31', '2025-02-07 10:17:23', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (5, '5', 3700000, '2022-12-31', '2025-02-07 10:18:03', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (6, '6', 12877800, '2022-12-31', '2025-02-07 10:18:22', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (7, '1', 0, '2023-12-31', '2025-02-07 10:34:55', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (8, '2', 3285000, '2023-12-31', '2025-02-07 10:35:12', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (9, '3', 1695300, '2023-12-31', '2025-02-07 10:35:32', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (10, '4', 1800000, '2023-12-31', '2025-02-07 10:35:53', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (11, '5', 3700000, '2023-12-31', '2025-02-07 10:36:06', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (12, '6', 577750, '2023-12-31', '2025-02-07 10:36:22', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (13, '1', 0, '2024-12-31', '2025-02-07 10:37:30', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (14, '2', 1011900, '2024-12-31', '2025-02-07 10:37:53', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (15, '3', 1221000, '2024-12-31', '2025-02-07 10:38:24', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (16, '4', 1800000, '2024-12-31', '2025-02-07 10:38:40', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (17, '5', 3240000, '2024-12-31', '2025-02-07 10:38:53', 'Administrator', NULL, '');
-INSERT INTO `kas_input` VALUES (18, '6', 9765800, '2024-12-31', '2025-02-07 10:39:07', 'Administrator', NULL, '');
 
 -- ----------------------------
 -- Table structure for kel_tarif
