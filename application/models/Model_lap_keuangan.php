@@ -72,6 +72,7 @@ class Model_lap_keuangan extends CI_Model
         $this->db->insert('peny_piutang', $data);
     }
 
+    // neraca
     public function get_kel_tarif()
     {
         $this->db->select('*');
@@ -85,23 +86,14 @@ class Model_lap_keuangan extends CI_Model
         return $this->db->get()->result();
     }
 
-    // public function get_bank_input($tahun)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('bank_input');
-    //     $this->db->join('bank', 'bank_input.id_bank = bank.id_bank', 'left');
-    //     $this->db->where('YEAR(tgl_bank) =', $tahun);
-    //     return $this->db->get()->result();
-    // }
-
     public function get_bank_input($tahun)
     {
         $tahun_lalu = $tahun - 1;
 
         $this->db->select('
         bank.nama_bank, 
-        SUM(CASE WHEN YEAR(tgl_bank) = ' . $tahun . ' THEN bank_input.jumlah_bank ELSE 0 END) as jumlah_tahun_ini,
-        SUM(CASE WHEN YEAR(tgl_bank) = ' . $tahun_lalu . ' THEN bank_input.jumlah_bank ELSE 0 END) as jumlah_tahun_lalu
+        SUM(CASE WHEN YEAR(tgl_bank) = ' . $tahun . ' THEN bank_input.jumlah_bank ELSE 0 END) as jumlah_bank_tahun_ini,
+        SUM(CASE WHEN YEAR(tgl_bank) = ' . $tahun_lalu . ' THEN bank_input.jumlah_bank ELSE 0 END) as jumlah_bank_tahun_lalu
     ');
         $this->db->from('bank_input');
         $this->db->join('bank', 'bank_input.id_bank = bank.id_bank', 'left');
@@ -110,7 +102,6 @@ class Model_lap_keuangan extends CI_Model
 
         return $this->db->get()->result();
     }
-
 
     public function input_bank()
     {
@@ -161,6 +152,24 @@ class Model_lap_keuangan extends CI_Model
         $this->db->insert('kas_input', $data);
     }
 
+    public function get_kas_input($tahun)
+    {
+        $tahun_lalu = $tahun - 1;
+
+        $this->db->select('
+        kas.nama_kas, 
+        SUM(CASE WHEN YEAR(tgl_kas) = ' . $tahun . ' THEN kas_input.jumlah_kas ELSE 0 END) as jumlah_kas_tahun_ini,
+        SUM(CASE WHEN YEAR(tgl_kas) = ' . $tahun_lalu . ' THEN kas_input.jumlah_kas ELSE 0 END) as jumlah_kas_tahun_lalu
+    ');
+        $this->db->from('kas_input');
+        $this->db->join('kas', 'kas_input.id_kas = kas.id_kas', 'left');
+        $this->db->where('YEAR(tgl_kas) IN (' . $tahun . ', ' . $tahun_lalu . ')');
+        $this->db->group_by('kas.nama_kas');
+
+        return $this->db->get()->result();
+    }
+
+    // hitung piutang
     public function get_hitung_piutang($tahun_lap)
     {
         $this->db->select('*, YEAR(peny_piutang.tgl_piutang) as tahun'); // Tambahkan alias "tahun"

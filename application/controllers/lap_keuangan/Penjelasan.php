@@ -30,31 +30,6 @@ class Penjelasan extends CI_Controller
             redirect('auth');
         }
     }
-    // public function index()
-    // {
-    //     $tanggal = $this->input->get('tahun');
-    //     $tahun = substr($tanggal, 0, 4);
-
-    //     if (empty($tanggal)) {
-    //         $tanggal = date('Y-m-d');
-    //         $bulan = date('m');
-    //         $tahun = date('Y');
-    //     } else {
-    //         $this->session->set_userdata('tahun', $tanggal);
-    //     }
-
-    //     $data['tahun_lap'] = $tahun;
-    //     $data['tahun_lalu'] = $tahun - 1;
-
-    //     $data['title'] = 'Penjelasan Neraca';
-    //     $data['bank_input'] = $this->Model_lap_keuangan->get_bank_input($tahun);
-
-    //     $this->load->view('templates/header', $data);
-    //     $this->load->view('templates/navbar');
-    //     $this->load->view('templates/sidebar');
-    //     $this->load->view('lap_keuangan/view_penjelasan', $data);
-    //     $this->load->view('templates/footer');
-    // }
 
     public function index()
     {
@@ -74,6 +49,27 @@ class Penjelasan extends CI_Controller
 
         $data['title'] = 'Penjelasan Neraca';
         $data['bank_input'] = $this->Model_lap_keuangan->get_bank_input($tahun);
+        $data['kas_input'] = $this->Model_lap_keuangan->get_kas_input($tahun);
+
+        // Hitung total Bank
+        $total_bank_tahun_ini = 0;
+        $total_bank_tahun_lalu = 0;
+        foreach ($data['bank_input'] as $bank) {
+            $total_bank_tahun_ini += !empty($bank->jumlah_bank_tahun_ini) ? $bank->jumlah_bank_tahun_ini : 0;
+            $total_bank_tahun_lalu += !empty($bank->jumlah_bank_tahun_lalu) ? $bank->jumlah_bank_tahun_lalu : 0;
+        }
+
+        // Hitung total Kas
+        $total_kas_tahun_ini = 0;
+        $total_kas_tahun_lalu = 0;
+        foreach ($data['kas_input'] as $kas) {
+            $total_kas_tahun_ini += !empty($kas->jumlah_kas_tahun_ini) ? $kas->jumlah_kas_tahun_ini : 0;
+            $total_kas_tahun_lalu += !empty($kas->jumlah_kas_tahun_lalu) ? $kas->jumlah_kas_tahun_lalu : 0;
+        }
+
+        // Total keseluruhan (Kas + Bank)
+        $data['total_tahun_ini'] = $total_bank_tahun_ini + $total_kas_tahun_ini;
+        $data['total_tahun_lalu'] = $total_bank_tahun_lalu + $total_kas_tahun_lalu;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
