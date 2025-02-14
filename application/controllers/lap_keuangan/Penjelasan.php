@@ -50,6 +50,8 @@ class Penjelasan extends CI_Controller
         $data['title'] = 'Penjelasan Neraca';
         $data['bank_input'] = $this->Model_lap_keuangan->get_bank_input($tahun);
         $data['kas_input'] = $this->Model_lap_keuangan->get_kas_input($tahun);
+        $data['pbt_input'] = $this->Model_lap_keuangan->get_pbt_input($tahun);
+        $data['pdm_input'] = $this->Model_lap_keuangan->get_pdm_input($tahun);
 
         // Hitung total Bank
         $total_bank_tahun_ini = 0;
@@ -139,5 +141,307 @@ class Penjelasan extends CI_Controller
             );
             redirect('lap_keuangan/penjelasan');
         }
+    }
+
+    public function input_deposito()
+    {
+        $tanggal = $this->session->userdata('tanggal');
+        $this->form_validation->set_rules('tahun', 'Tahun', 'required|trim');
+        $this->form_validation->set_rules('nilai_neraca', 'Jumlah Deposito', 'required|trim|numeric');
+        $this->form_validation->set_message('required', '%s masih kosong');
+        $this->form_validation->set_message('numeric', '%s harus berupa angka');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Upload Deposito';
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('lap_keuangan/view_upload_deposito', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $insert = $this->Model_lap_keuangan->input_deposito();
+
+            if (!$insert) {
+                // Jika gagal insert karena tahun sudah ada
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Gagal!</strong> Data untuk tahun tersebut sudah ada di database.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>'
+                );
+            } else {
+                // Jika sukses insert
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <strong>Sukses!</strong> Data input deposito berhasil ditambahkan.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>'
+                );
+            }
+            redirect('lap_keuangan/penjelasan');
+        }
+    }
+
+    public function input_pend_blm_terima()
+    {
+        $tanggal = $this->session->userdata('tanggal');
+        $this->form_validation->set_rules('nama_pbt', 'Nama / Uraian', 'required|trim');
+        $this->form_validation->set_rules('tgl_pbt', 'Tahun', 'required|trim');
+        $this->form_validation->set_rules('jumlah_pbt', 'Jumlah', 'required|trim|numeric');
+        $this->form_validation->set_message('required', '%s masih kosong');
+        $this->form_validation->set_message('numeric', '%s harus berupa angka');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Upload Penerimaan Belum Diterima';
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('lap_keuangan/view_upload_pbt', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $input_pbt = $this->Model_lap_keuangan->input_pbt();
+
+            if ($input_pbt) {
+                // Jika sukses insert
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>Sukses!</strong> Data berhasil ditambahkan.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+            </div>'
+                );
+            } else {
+                // Jika gagal karena data sudah ada
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Gagal!</strong> Data dengan nama dan tahun yang sama sudah ada.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+            </div>'
+                );
+            }
+
+            redirect('lap_keuangan/penjelasan');
+        }
+    }
+
+
+    public function input_piutang_non_usaha($tahun, $total_pnu)
+    {
+        if ($total_pnu == 0) {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal,</strong> Data Belum ada! Tidak dapat menambahkan data.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+            redirect('lap_keuangan/penjelasan');
+            return;
+        }
+
+        // Cek apakah data sudah ada di database
+        $this->db->where('tahun_neraca', $tahun);
+        $this->db->where('kategori', 'Aset Lancar');
+        $this->db->where('akun', 'Piutang Non Usaha');
+        $query = $this->db->get('neraca');
+
+        if ($query->num_rows() > 0) {
+            // Jika data sudah ada, tampilkan pesan peringatan
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal,</strong> Data sudah ada! Tidak dapat menambahkan data yang sama.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+        } else {
+            // Jika belum ada, lakukan insert
+            $data = [
+                'tahun_neraca' => $tahun,
+                'kategori' => 'Aset Lancar',
+                'akun' => 'Piutang Non Usaha',
+                'nilai_neraca' => $total_pnu,
+                'posisi' => 5,
+                'no_neraca' => '1.4',
+                'status' => 1
+            ];
+
+            $this->db->insert('neraca', $data);
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>Sukses,</strong> Data berhasil disimpan ke Neraca!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+        }
+        redirect('lap_keuangan/penjelasan');
+    }
+
+    public function input_pembayaran_dimuka()
+    {
+        $tanggal = $this->session->userdata('tanggal');
+        $this->form_validation->set_rules('nama_pdm', 'Nama / Uraian', 'required|trim');
+        $this->form_validation->set_rules('tgl_pdm', 'Tahun', 'required|trim');
+        $this->form_validation->set_rules('jumlah_pdm', 'Jumlah', 'required|trim|numeric');
+        $this->form_validation->set_message('required', '%s masih kosong');
+        $this->form_validation->set_message('numeric', '%s harus berupa angka');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Upload Penerimaan Belum Diterima';
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('lap_keuangan/view_upload_pdm', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $input_pbt = $this->Model_lap_keuangan->input_pdm();
+
+            if ($input_pbt) {
+                // Jika sukses insert
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>Sukses!</strong> Data berhasil ditambahkan.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+            </div>'
+                );
+            } else {
+                // Jika gagal karena data sudah ada
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Gagal!</strong> Data dengan nama dan tahun yang sama sudah ada.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+            </div>'
+                );
+            }
+
+            redirect('lap_keuangan/penjelasan');
+        }
+    }
+
+    public function input_kas_bank($tahun, $total_tahun_ini)
+    {
+        if ($total_tahun_ini == 0) {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal,</strong> Data Belum ada! Tidak dapat menambahkan data.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+            redirect('lap_keuangan/penjelasan');
+            return;
+        }
+
+        // Cek apakah data sudah ada di database
+        $this->db->where('tahun_neraca', $tahun);
+        $this->db->where('kategori', 'Aset Lancar');
+        $this->db->where('akun', 'Kas dan Bank');
+        $query = $this->db->get('neraca');
+
+        if ($query->num_rows() > 0) {
+            // Jika data sudah ada, tampilkan pesan peringatan
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal,</strong> Data sudah ada! Tidak dapat menambahkan data yang sama.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+        } else {
+            // Jika belum ada, lakukan insert
+            $data = [
+                'tahun_neraca' => $tahun,
+                'kategori' => 'Aset Lancar',
+                'akun' => 'Kas dan Bank',
+                'nilai_neraca' => $total_tahun_ini,
+                'posisi' => 1,
+                'no_neraca' => '1.1',
+                'status' => 1
+            ];
+
+            $this->db->insert('neraca', $data);
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>Sukses,</strong> Data berhasil disimpan ke Neraca!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+        }
+        redirect('lap_keuangan/penjelasan');
+    }
+
+    public function input_pdm($tahun, $total_pdm_tahun_ini)
+    {
+        if ($total_pdm_tahun_ini == 0) {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal,</strong> Data Belum ada! Tidak dapat menambahkan data.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+            redirect('lap_keuangan/penjelasan');
+            return;
+        }
+
+        // Cek apakah data sudah ada di database
+        $this->db->where('tahun_neraca', $tahun);
+        $this->db->where('kategori', 'Aset Lancar');
+        $this->db->where('akun', 'Pembayaran Dimuka');
+        $query = $this->db->get('neraca');
+
+        if ($query->num_rows() > 0) {
+            // Jika data sudah ada, tampilkan pesan peringatan
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal,</strong> Data sudah ada! Tidak dapat menambahkan data yang sama.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+        } else {
+            // Jika belum ada, lakukan insert
+            $data = [
+                'tahun_neraca' => $tahun,
+                'kategori' => 'Aset Lancar',
+                'akun' => 'Pembayaran Dimuka',
+                'nilai_neraca' => $total_pdm_tahun_ini,
+                'posisi' => 8,
+                'no_neraca' => '1.7',
+                'status' => 1
+            ];
+
+            $this->db->insert('neraca', $data);
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>Sukses,</strong> Data berhasil disimpan ke Neraca!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+        }
+        redirect('lap_keuangan/penjelasan');
     }
 }

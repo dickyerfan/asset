@@ -345,6 +345,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="<?= base_url('lap_keuangan/persediaan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Persediaan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="<?= base_url('asset/asset_kurang_akm') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pengurang Aset Tetap</p>

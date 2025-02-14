@@ -163,73 +163,6 @@ class Peny_piutang extends CI_Controller
         }
     }
 
-    // public function hitung_piutang()
-    // {
-    //     $tanggal = $this->input->get('tahun') ?? date('Y');
-    //     $tahun = (int)substr($tanggal, 0, 4);
-
-    //     $start_year = $tahun - 2; // Tahun mulai (3 tahun terakhir)
-    //     $end_year = $tahun;      // Tahun akhir
-
-    //     // Ambil data piutang dan total
-    //     $piutang = $this->Model_lap_keuangan->get_all_tahun_range($start_year, $end_year);
-    //     $totals = $this->Model_lap_keuangan->get_total_by_year_range($start_year, $end_year);
-
-    //     // Olah data untuk tabel baru
-    //     $rekapitulasi = [];
-    //     foreach ($piutang as $row) {
-    //         $year = date('Y', strtotime($row->tgl_piutang));
-    //         $kel_tarif_ket = $row->kel_tarif_ket;
-
-    //         // Buat array jika belum ada
-    //         if (!isset($rekapitulasi[$kel_tarif_ket])) {
-    //             $rekapitulasi[$kel_tarif_ket] = [
-    //                 'uraian' => $kel_tarif_ket,
-    //                 '2_tahun_lalu' => 0,
-    //                 'tahun_lalu' => 0,
-    //                 'tahun_ini' => 0,
-    //                 'rata_rata' => 0,
-    //                 'saldo_tahun_ini' => 0,
-    //                 'penyesuaian_piutang' => 0,
-    //             ];
-    //         }
-
-    //         // Isi data berdasarkan tahun
-    //         if ($year == $tahun - 2) {
-    //             $rekapitulasi[$kel_tarif_ket]['2_tahun_lalu'] = $row->persen_tagih;
-    //         } elseif ($year == $tahun - 1) {
-    //             $rekapitulasi[$kel_tarif_ket]['tahun_lalu'] = $row->persen_tagih;
-    //         } elseif ($year == $tahun) {
-    //             $rekapitulasi[$kel_tarif_ket]['tahun_ini'] = $row->persen_tagih;
-    //             $rekapitulasi[$kel_tarif_ket]['saldo_tahun_ini'] = $row->saldo_akhir;
-    //         }
-    //     }
-
-    //     // Hitung rata-rata dan penyesuaian piutang
-    //     foreach ($rekapitulasi as &$data) {
-    //         $data['rata_rata'] = round(
-    //             ($data['2_tahun_lalu'] + $data['tahun_lalu'] + $data['tahun_ini']) / 3,
-    //             2
-    //         );
-    //         $data['penyesuaian_piutang'] = round(
-    //             $data['rata_rata'] * $data['saldo_tahun_ini'] / 100,
-    //             2
-    //         );
-    //     }
-
-    //     $data = [
-    //         'title' => 'Perhitungan Penyisihan Piutang Air',
-    //         'tahun_lap' => $tahun,
-    //         'rekapitulasi' => $rekapitulasi,
-    //     ];
-
-    //     $this->load->view('templates/header', $data);
-    //     $this->load->view('templates/navbar');
-    //     $this->load->view('templates/sidebar');
-    //     $this->load->view('lap_keuangan/view_hitung_piutang', $data);
-    //     $this->load->view('templates/footer');
-    // }
-
     public function hitung_piutang()
     {
         $tanggal = $this->input->get('tahun') ?? date('Y');
@@ -263,22 +196,21 @@ class Peny_piutang extends CI_Controller
         ];
         foreach ($grouped_data as $uraian => $years) {
             $data_2_years_ago = isset($years[$start_year]->persen_tagih)
-                ? round($years[$start_year]->persen_tagih, 5)
+                ? round($years[$start_year]->persen_tagih, 8)
                 : 0;
 
             $data_last_year = isset($years[$start_year + 1]->persen_tagih)
-                ? round($years[$start_year + 1]->persen_tagih, 5)
+                ? round($years[$start_year + 1]->persen_tagih, 8)
                 : 0;
 
             $data_this_year = isset($years[$end_year]->persen_tagih)
-                ? round($years[$end_year]->persen_tagih, 5)
+                ? round($years[$end_year]->persen_tagih, 8)
                 : 0;
             $saldo_this_year = $years[$end_year]->saldo_akhir ?? 0;
 
             $average_persen = ($data_2_years_ago + $data_last_year + $data_this_year) / 3;
             $average_decimal = round($average_persen / 100, 5);
             $adjusted_piutang = $average_decimal * $saldo_this_year;
-            // $adjusted_piutang = ($average_persen * $saldo_this_year) / 100;
 
             $final_data[] = [
                 'uraian' => $uraian,
@@ -306,5 +238,114 @@ class Peny_piutang extends CI_Controller
         $this->load->view('templates/sidebar');
         $this->load->view('lap_keuangan/view_hitung_piutang', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function input_piutang_usaha($tahun, $total_piu_usaha_tahun_ini)
+    {
+        if ($total_piu_usaha_tahun_ini == 0) {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal,</strong> Data Belum ada! Tidak dapat menambahkan data.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+            redirect('lap_keuangan/peny_piutang/hitung_piutang');
+            return;
+        }
+        // Cek apakah data sudah ada di database
+        $this->db->where('tahun_neraca', $tahun);
+        $this->db->where('kategori', 'Aset Lancar');
+        $this->db->where('akun', 'Piutang Usaha');
+        $query = $this->db->get('neraca');
+
+        if ($query->num_rows() > 0) {
+            // Jika data sudah ada, tampilkan pesan peringatan
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal,</strong> Data sudah ada! Tidak dapat menambahkan data yang sama.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+        } else {
+            // Jika belum ada, lakukan insert
+            $data = [
+                'tahun_neraca' => $tahun,
+                'kategori' => 'Aset Lancar',
+                'akun' => 'Piutang Usaha',
+                'nilai_neraca' => $total_piu_usaha_tahun_ini,
+                'posisi' => 3,
+                'no_neraca' => '1.2',
+                'status' => 1
+            ];
+            $this->db->insert('neraca', $data);
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>Sukses,</strong> Data berhasil disimpan ke Neraca!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+        }
+        redirect('lap_keuangan/peny_piutang/hitung_piutang');
+    }
+
+    public function input_akm_piutang_usaha($tahun, $total_akm_piu_usaha_tahun_ini)
+    {
+        if ($total_akm_piu_usaha_tahun_ini == 0) {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal,</strong> Data Belum ada! Tidak dapat menambahkan data.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+            redirect('lap_keuangan/peny_piutang/hitung_piutang');
+            return;
+        }
+        // Cek apakah data sudah ada di database
+        $this->db->where('tahun_neraca', $tahun);
+        $this->db->where('kategori', 'Aset Lancar');
+        $this->db->where('akun', 'Akm Kerugian Piutang Usaha');
+        $query = $this->db->get('neraca');
+
+        if ($query->num_rows() > 0) {
+            // Jika data sudah ada, tampilkan pesan peringatan
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal,</strong> Data sudah ada! Tidak dapat menambahkan data yang sama.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+        } else {
+            // Jika belum ada, lakukan insert
+            $data = [
+                'tahun_neraca' => $tahun,
+                'kategori' => 'Aset Lancar',
+                'akun' => 'Akm Kerugian Piutang Usaha',
+                'nilai_neraca' => $total_akm_piu_usaha_tahun_ini * -1,
+                'posisi' => 4,
+                'no_neraca' => '1.3',
+                'status' => 1
+            ];
+
+            $this->db->insert('neraca', $data);
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>Sukses,</strong> Data berhasil disimpan ke Neraca!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+        }
+        redirect('lap_keuangan/peny_piutang/hitung_piutang');
     }
 }

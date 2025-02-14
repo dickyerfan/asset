@@ -46,8 +46,8 @@ class Neraca extends CI_Controller
         $data['tahun_lap'] = $tahun;
         $data['tahun_lalu'] = $tahun - 1;
 
-        $data['title'] = 'Neraca Komparatif';
-        $data['piutang'] = $this->Model_lap_keuangan->get_all($tahun);
+        $data['title'] = 'LAPORAN POSISI KEUANGAN';
+        $data['neraca'] = $this->Model_lap_keuangan->get_all_neraca($tahun);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
@@ -56,80 +56,29 @@ class Neraca extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    // public function data_total()
-    // {
-    //     $tanggal = $this->input->get('tahun') ?? date('Y');
-    //     $tahun = (int)substr($tanggal, 0, 4);
+    public function neraca_cetak()
+    {
+        $tahun = $this->session->userdata('tahun');
+        $tahun = substr($tahun, 0, 4);
 
-    //     if (empty($tanggal)) {
-    //         $tanggal = date('Y-m-d');
-    //         $tahun = date('Y');
-    //     } else {
-    //         $this->session->set_userdata('tahun', $tanggal);
-    //     }
+        if (empty($tahun)) {
+            $tahun = date('Y-m-d');
+            $bulan = date('m');
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun', $tahun);
+        }
 
-    //     $start_year = $tahun - 2; // Tahun mulai (3 tahun terakhir)
-    //     $end_year = $tahun;      // Tahun akhir
+        $data['tahun_lap'] = $tahun;
+        $data['tahun_lalu'] = $tahun - 1;
 
-    //     $data['tahun_lap'] = $tahun;
-    //     $data['title'] = 'Perhitungan Penyisihan Kerugian Piutang Daftar Mutasi Piutang Air 3 Tahun Terakhir';
-    //     $piutang = $this->Model_lap_keuangan->get_all_tahun_range($start_year, $end_year); // Data sesuai range tahun
-    //     $totals = $this->Model_lap_keuangan->get_total_by_year_range($start_year, $end_year); // Total berdasarkan range tahun
+        $data['title'] = 'LAPORAN POSISI KEUANGAN';
+        $data['neraca'] = $this->Model_lap_keuangan->get_all_neraca($tahun);
 
-    //     $grouped_data = [];
-    //     foreach ($piutang as $row) {
-    //         $year = date('Y', strtotime($row->tgl_piutang));
-    //         $grouped_data[$year][] = $row;
-    //     }
-
-    //     $data = [
-    //         'title' => 'Penyisihan Piutang',
-    //         'tahun_lap' => $tahun,
-    //         'piutang' => $grouped_data,
-    //         'totals' => array_column($totals, null, 'year'), // Total berdasarkan tahun sebagai indeks
-    //     ];
-
-    //     $this->load->view('templates/header', $data);
-    //     $this->load->view('templates/navbar');
-    //     $this->load->view('templates/sidebar');
-    //     $this->load->view('lap_keuangan/view_peny_piutang_total', $data);
-    //     $this->load->view('templates/footer');
-    // }
-
-    // public function data_total_cetak()
-    // {
-    //     $tahun = $this->session->userdata('tahun');
-
-    //     if (empty($tahun)) {
-    //         $this->session->unset_userdata('tahun');
-    //         $tahun = date('Y');
-    //     }
-    //     // $data['tahun_lap'] = $tahun;
-    //     $start_year = $tahun - 2;
-    //     $end_year = $tahun;
-
-    //     $data['tahun_lap'] = $tahun;
-    //     $data['title'] = 'Perhitungan Penyisihan Kerugian Piutang Daftar Mutasi Piutang Air 3 Tahun Terakhir';
-    //     $piutang = $this->Model_lap_keuangan->get_all_tahun_range($start_year, $end_year);
-    //     $totals = $this->Model_lap_keuangan->get_total_by_year_range($start_year, $end_year);
-
-    //     $grouped_data = [];
-    //     foreach ($piutang as $row) {
-    //         $year = date('Y', strtotime($row->tgl_piutang));
-    //         $grouped_data[$year][] = $row;
-    //     }
-
-    //     $data = [
-    //         'title' => 'Penyisihan Piutang',
-    //         'tahun_lap' => $tahun,
-    //         'piutang' => $grouped_data,
-    //         'totals' => array_column($totals, null, 'year'),
-    //     ];
-
-    //     $this->pdf->setPaper('folio', 'portrait');
-    //     $this->pdf->filename = "peny_piutang-{$tahun}.pdf";
-    //     $this->pdf->generate('cetakan_lap_keuangan/peny_piutang_pdf', $data);
-    // }
+        $this->pdf->setPaper('folio', 'portrait');
+        $this->pdf->filename = "neraca-{$tahun}.pdf";
+        $this->pdf->generate('cetakan_lap_keuangan/neraca_pdf', $data);
+    }
 
     // public function tambah()
     // {
@@ -164,81 +113,5 @@ class Neraca extends CI_Controller
     //     }
     // }
 
-    // public function hitung_piutang()
-    // {
-    //     $tanggal = $this->input->get('tahun') ?? date('Y');
-    //     $tahun = (int)substr($tanggal, 0, 4);
 
-    //     $start_year = $tahun - 2; // 2 tahun lalu
-    //     $end_year = $tahun;      // Tahun ini
-
-    //     $data['tahun_lap'] = $tahun;
-    //     $data['dua_tahun_lalu'] = $start_year;
-    //     $data['tahun_lalu'] = $tahun - 1;
-    //     $data['title'] = 'Perhitungan Penyisihan Piutang';
-    //     $piutang = $this->Model_lap_keuangan->get_all_tahun_range($start_year, $end_year);
-    //     $totals = $this->Model_lap_keuangan->get_total_by_year_range($start_year, $end_year);
-
-    //     // Group data by `kel_tarif_ket` and year
-    //     $grouped_data = [];
-    //     foreach ($piutang as $row) {
-    //         $year = date('Y', strtotime($row->tgl_piutang));
-    //         $grouped_data[$row->kel_tarif_ket][$year] = $row;
-    //     }
-
-    //     $final_data = [];
-    //     $totals = [
-    //         '2_years_ago' => 0,
-    //         'last_year' => 0,
-    //         'this_year' => 0,
-    //         'average' => 0,
-    //         'saldo_this_year' => 0,
-    //         'adjusted_piutang' => 0,
-    //     ];
-    //     foreach ($grouped_data as $uraian => $years) {
-    //         $data_2_years_ago = isset($years[$start_year]->persen_tagih)
-    //             ? round($years[$start_year]->persen_tagih, 5)
-    //             : 0;
-
-    //         $data_last_year = isset($years[$start_year + 1]->persen_tagih)
-    //             ? round($years[$start_year + 1]->persen_tagih, 5)
-    //             : 0;
-
-    //         $data_this_year = isset($years[$end_year]->persen_tagih)
-    //             ? round($years[$end_year]->persen_tagih, 5)
-    //             : 0;
-    //         $saldo_this_year = $years[$end_year]->saldo_akhir ?? 0;
-
-    //         $average_persen = ($data_2_years_ago + $data_last_year + $data_this_year) / 3;
-    //         $average_decimal = round($average_persen / 100, 5);
-    //         $adjusted_piutang = $average_decimal * $saldo_this_year;
-    //         // $adjusted_piutang = ($average_persen * $saldo_this_year) / 100;
-
-    //         $final_data[] = [
-    //             'uraian' => $uraian,
-    //             '2_years_ago' => $data_2_years_ago,
-    //             'last_year' => $data_last_year,
-    //             'this_year' => $data_this_year,
-    //             'average' => $average_persen,
-    //             'saldo_this_year' => $saldo_this_year,
-    //             'adjusted_piutang' => $adjusted_piutang,
-    //         ];
-    //         // Update totals
-    //         $totals['2_years_ago'] += $data_2_years_ago;
-    //         $totals['last_year'] += $data_last_year;
-    //         $totals['this_year'] += $data_this_year;
-    //         $totals['average'] += $average_persen;
-    //         $totals['saldo_this_year'] += $saldo_this_year;
-    //         $totals['adjusted_piutang'] += $adjusted_piutang;
-    //     }
-
-    //     $data['hitung_piutang'] = $final_data;
-    //     $data['totals'] = $totals;
-
-    //     $this->load->view('templates/header', $data);
-    //     $this->load->view('templates/navbar');
-    //     $this->load->view('templates/sidebar');
-    //     $this->load->view('lap_keuangan/view_hitung_piutang', $data);
-    //     $this->load->view('templates/footer');
-    // }
 }

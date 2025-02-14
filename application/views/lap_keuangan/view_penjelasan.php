@@ -29,6 +29,8 @@
                             <option value="<?= base_url('lap_keuangan/penjelasan/input_bank') ?>">Bank</option>
                             <option value="<?= base_url('lap_keuangan/penjelasan/input_kas') ?>">Kas</option>
                             <option value="<?= base_url('lap_keuangan/penjelasan/input_deposito') ?>">Deposito</option>
+                            <option value="<?= base_url('lap_keuangan/penjelasan/input_pend_blm_terima') ?>">Pendapatan Blm Terima</option>
+                            <option value="<?= base_url('lap_keuangan/penjelasan/input_pembayaran_dimuka') ?>">Pembayaran Dimuka</option>
                         </select>
                     </div>
                 </nav>
@@ -52,7 +54,12 @@
                         <tbody>
                             <tr>
                                 <th class="text-left">KAS DAN BANK</th>
-                                <th class="text-right"><?= number_format($total_tahun_ini, 0, ',', '.'); ?></th>
+                                <!-- <th class="text-right"><?= number_format($total_tahun_ini, 0, ',', '.'); ?></th> -->
+                                <th class="text-right">
+                                    <a href="<?= base_url('lap_keuangan/penjelasan/input_kas_bank/' . $tahun_lap . '/' . $total_tahun_ini) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
+                                        <?= number_format($total_tahun_ini, 0, ',', '.'); ?>
+                                    </a>
+                                </th>
                                 <th class="text-right"><?= number_format($total_tahun_lalu, 0, ',', '.'); ?></th>
                             </tr>
                         </tbody>
@@ -118,6 +125,78 @@
                                 <th class="text-left">Total Kas</th>
                                 <th class="text-right"><?= number_format($total_kas_tahun_ini, 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($total_kas_tahun_lalu, 0, ',', '.'); ?></th>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <?php
+                            $total_pbt_tahun_ini = 0;
+                            $total_pbt_tahun_lalu = 0;
+                            ?>
+                            <?php if (!empty($pbt_input)) : ?>
+                                <?php $no = 1; ?>
+                                <?php foreach ($pbt_input as $row) : ?>
+                                    <tr>
+                                        <!-- <td class="text-center"><?= $no++; ?></td> -->
+                                        <td class="text-left"><?= $row->nama_pbt; ?></td>
+                                        <td class="text-right"><?= number_format($row->jumlah_pbt_tahun_ini, 0, ',', '.'); ?></td>
+                                        <td class="text-right"><?= number_format($row->jumlah_pbt_tahun_lalu, 0, ',', '.'); ?></td>
+                                    </tr>
+
+                                    <?php
+                                    // Menjumlahkan total
+                                    $total_pbt_tahun_ini += $row->jumlah_pbt_tahun_ini;
+                                    $total_pbt_tahun_lalu += $row->jumlah_pbt_tahun_lalu;
+                                    ?>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <tr>
+                                    <td colspan="8" class="text-center">Data tidak tersedia</td>
+                                </tr>
+                            <?php endif; ?>
+                            <tr>
+                                <th class="text-left">Total Piutang Non Usaha</th>
+                                <th class="text-right">
+                                    <a href="<?= base_url('lap_keuangan/penjelasan/input_piutang_non_usaha/' . $tahun_lap . '/' . $total_pbt_tahun_ini) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
+                                        <?= number_format($total_pbt_tahun_ini, 0, ',', '.'); ?>
+                                    </a>
+                                </th>
+                                <th class="text-right"><?= number_format($total_pbt_tahun_lalu, 0, ',', '.'); ?></th>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <?php
+                            $total_pdm_tahun_ini = 0;
+                            $total_pdm_tahun_lalu = 0;
+                            ?>
+                            <?php if (!empty($pdm_input)) : ?>
+                                <?php $no = 1; ?>
+                                <?php foreach ($pdm_input as $row) : ?>
+                                    <tr>
+                                        <!-- <td class="text-center"><?= $no++; ?></td> -->
+                                        <td class="text-left"><?= $row->nama_pdm; ?></td>
+                                        <td class="text-right"><?= number_format($row->jumlah_pdm_tahun_ini, 0, ',', '.'); ?></td>
+                                        <td class="text-right"><?= number_format($row->jumlah_pdm_tahun_lalu, 0, ',', '.'); ?></td>
+                                    </tr>
+
+                                    <?php
+                                    // Menjumlahkan total
+                                    $total_pdm_tahun_ini += $row->jumlah_pdm_tahun_ini;
+                                    $total_pdm_tahun_lalu += $row->jumlah_pdm_tahun_lalu;
+                                    ?>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <tr>
+                                    <td colspan="8" class="text-center">Data tidak tersedia</td>
+                                </tr>
+                            <?php endif; ?>
+                            <tr>
+                                <th class="text-left">Total Pembayaran Dimuka</th>
+                                <th class="text-right">
+                                    <a href="<?= base_url('lap_keuangan/penjelasan/input_pdm/' . $tahun_lap . '/' . $total_pdm_tahun_ini) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
+                                        <?= number_format($total_pdm_tahun_ini, 0, ',', '.'); ?>
+                                    </a>
+                                </th>
+                                <th class="text-right"><?= number_format($total_pdm_tahun_lalu, 0, ',', '.'); ?></th>
                             </tr>
                         </tbody>
                     </table>

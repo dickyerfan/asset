@@ -71,8 +71,18 @@
                                     <td class="text-right"><?= number_format($totals['last_year'] / 100, 2, ',', '.'); ?>%</td>
                                     <td class="text-right"><?= number_format($totals['this_year'] / 100, 2, ',', '.'); ?>%</td>
                                     <td class="text-right"><?= number_format($totals['average'] / 100, 2, ',', '.'); ?>%</td>
-                                    <td class="text-right"><?= number_format($totals['saldo_this_year'], 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?= number_format($totals['adjusted_piutang'], 0, ',', '.'); ?></td>
+                                    <!-- <td class="text-right"><?= number_format($totals['saldo_this_year'], 0, ',', '.'); ?></td> -->
+                                    <!-- <td class="text-right"><?= number_format($totals['adjusted_piutang'], 0, ',', '.'); ?></td> -->
+                                    <td class="text-right">
+                                        <a href="<?= base_url('lap_keuangan/peny_piutang/input_piutang_usaha/' . $tahun_lap . '/' . $totals['saldo_this_year']) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
+                                            <?= number_format($totals['saldo_this_year'], 0, ',', '.'); ?>
+                                        </a>
+                                    </td>
+                                    <td class="text-right">
+                                        <a href="<?= base_url('lap_keuangan/peny_piutang/input_akm_piutang_usaha/' . $tahun_lap . '/' . $totals['adjusted_piutang']) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
+                                            <?= number_format($totals['adjusted_piutang'], 0, ',', '.'); ?>
+                                        </a>
+                                    </td>
                                 </tr>
                             <?php else : ?>
                                 <tr>
