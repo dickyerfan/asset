@@ -234,6 +234,7 @@ class Penjelasan extends CI_Controller
 
     public function input_piutang_non_usaha($tahun, $total_pnu)
     {
+        date_default_timezone_set('Asia/Jakarta');
         if ($total_pnu == 0) {
             $this->session->set_flashdata(
                 'info',
@@ -305,9 +306,9 @@ class Penjelasan extends CI_Controller
             $this->load->view('lap_keuangan/view_upload_pdm', $data);
             $this->load->view('templates/footer');
         } else {
-            $input_pbt = $this->Model_lap_keuangan->input_pdm();
+            $input_pdm = $this->Model_lap_keuangan->input_pdm();
 
-            if ($input_pbt) {
+            if ($input_pdm) {
                 // Jika sukses insert
                 $this->session->set_flashdata(
                     'info',
@@ -335,6 +336,7 @@ class Penjelasan extends CI_Controller
 
     public function input_kas_bank($tahun, $total_tahun_ini)
     {
+        date_default_timezone_set('Asia/Jakarta');
         if ($total_tahun_ini == 0) {
             $this->session->set_flashdata(
                 'info',
@@ -391,6 +393,7 @@ class Penjelasan extends CI_Controller
 
     public function input_pdm($tahun, $total_pdm_tahun_ini)
     {
+        date_default_timezone_set('Asia/Jakarta');
         if ($total_pdm_tahun_ini == 0) {
             $this->session->set_flashdata(
                 'info',
@@ -429,7 +432,9 @@ class Penjelasan extends CI_Controller
                 'nilai_neraca' => $total_pdm_tahun_ini,
                 'posisi' => 8,
                 'no_neraca' => '1.7',
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('neraca', $data);
@@ -443,5 +448,48 @@ class Penjelasan extends CI_Controller
             );
         }
         redirect('lap_keuangan/penjelasan');
+    }
+
+    public function input_pajak_pnd()
+    {
+        $tanggal = $this->session->userdata('tanggal');
+        $this->form_validation->set_rules('tahun', 'Tahun', 'required|trim');
+        $this->form_validation->set_rules('nilai_neraca', 'Jumlah Pajak Dimuka', 'required|trim|numeric');
+        $this->form_validation->set_message('required', '%s masih kosong');
+        $this->form_validation->set_message('numeric', '%s harus berupa angka');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Upload Deposito';
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('lap_keuangan/view_upload_pajak_pnd', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $insert = $this->Model_lap_keuangan->input_pajak_pnd();
+
+            if (!$insert) {
+                // Jika gagal insert karena tahun sudah ada
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Gagal!</strong> Data untuk tahun tersebut sudah ada di database.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>'
+                );
+            } else {
+                // Jika sukses insert
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <strong>Sukses!</strong> Data input Pajak Dimuka berhasil ditambahkan.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>'
+                );
+            }
+            redirect('lap_keuangan/penjelasan');
+        }
     }
 }

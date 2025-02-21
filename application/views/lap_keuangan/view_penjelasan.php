@@ -31,6 +31,7 @@
                             <option value="<?= base_url('lap_keuangan/penjelasan/input_deposito') ?>">Deposito</option>
                             <option value="<?= base_url('lap_keuangan/penjelasan/input_pend_blm_terima') ?>">Pendapatan Blm Terima</option>
                             <option value="<?= base_url('lap_keuangan/penjelasan/input_pembayaran_dimuka') ?>">Pembayaran Dimuka</option>
+                            <option value="<?= base_url('lap_keuangan/penjelasan/input_pajak_pnd') ?>">Pajak Pertambahan Nilai Dimuka</option>
                         </select>
                     </div>
                 </nav>
@@ -46,7 +47,7 @@
                         <thead>
                             <tr class="text-center">
                                 <!-- <th>No</th> -->
-                                <th>Keterangan</th>
+                                <th>Uraian / Keterangan</th>
                                 <th>Tahun <?= $tahun_lap ?></th>
                                 <th>Tahun <?= $tahun_lalu ?></th>
                             </tr>

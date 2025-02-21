@@ -126,6 +126,7 @@ class Persediaan extends CI_Controller
 
     public function input_harga_perolehan($tahun, $total_harga_perolehan)
     {
+        date_default_timezone_set('Asia/Jakarta');
         if ($total_harga_perolehan == 0) {
             $this->session->set_flashdata(
                 'info',
@@ -163,7 +164,9 @@ class Persediaan extends CI_Controller
                 'nilai_neraca' => $total_harga_perolehan,
                 'posisi' => 6,
                 'no_neraca' => '1.5',
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('neraca', $data);
@@ -181,6 +184,7 @@ class Persediaan extends CI_Controller
 
     public function input_nilai_penurunan($tahun, $total_nilai_penurunan)
     {
+        date_default_timezone_set('Asia/Jakarta');
         if ($total_nilai_penurunan == 0) {
             $this->session->set_flashdata(
                 'info',
@@ -218,7 +222,9 @@ class Persediaan extends CI_Controller
                 'nilai_neraca' => $total_nilai_penurunan * -1,
                 'posisi' => 7,
                 'no_neraca' => '1.5.1',
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('neraca', $data);

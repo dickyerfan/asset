@@ -291,12 +291,6 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= base_url('lap_keuangan/penjelasan'); ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Penjelasan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="<?= base_url('lap_keuangan/neraca'); ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Neraca</p>
@@ -315,9 +309,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('lap_keuangan/ekuitas'); ?>" class="nav-link">
+                            <a href="<?= base_url('lap_keuangan/perubahan_ekuitas'); ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Ekuitas</p>
+                                <p>PERUBAHAN EKUITAS</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -330,6 +324,18 @@
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>LK Arus Kas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('lap_keuangan/penjelasan'); ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Penjelasan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('lap_keuangan/asset_tetap') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Asset Tetap</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -351,9 +357,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('asset/asset_kurang_akm') ?>" class="nav-link">
+                            <a href="<?= base_url('lap_keuangan/hutang') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Pengurang Aset Tetap</p>
+                                <p>Hutang</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('lap_keuangan/ekuitas') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ekuitas</p>
                             </a>
                         </li>
                         <li class="nav-item">
