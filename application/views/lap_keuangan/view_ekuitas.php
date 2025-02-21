@@ -154,6 +154,63 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+
+                        <?php
+                        if (empty($tahun_lap)) {
+                            $tahun_lap = date('Y');
+                        }
+                        ?>
+                        <h5><?= strtoupper($title7) . ' ' . $tahun_lap; ?></h5>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="contoh2" class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Uraian</th>
+                                <th><?= $tahun_lap ?></th>
+                                <th><?= $tahun_lalu ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $total_aktl_tahun_ini = 0;
+                            $total_aktl_tahun_lalu = 0;
+                            ?>
+                            <?php if (!empty($aktl_input)) : ?>
+                                <?php $no = 1; ?>
+                                <?php foreach ($aktl_input as $row) : ?>
+                                    <tr>
+                                        <td class="text-left"><?= $row->nama_aktl; ?></td>
+                                        <td class="text-right"><?= number_format($row->jumlah_aktl_tahun_ini, 0, ',', '.'); ?></td>
+                                        <td class="text-right"><?= number_format($row->jumlah_aktl_tahun_lalu, 0, ',', '.'); ?></td>
+                                    </tr>
+
+                                    <?php
+                                    $total_aktl_tahun_ini += $row->jumlah_aktl_tahun_ini;
+                                    $total_aktl_tahun_lalu += $row->jumlah_aktl_tahun_lalu;
+                                    ?>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <tr>
+                                    <td colspan="8" class="text-center">Data tidak tersedia</td>
+                                </tr>
+                            <?php endif; ?>
+                            <tr>
+                                <th class="text-left">Total Akm Kerugian Tahun Lalu</th>
+                                <th class="text-right">
+                                    <a href="<?= base_url('lap_keuangan/ekuitas/input_aktl_neraca/' . $tahun_lap . '/' . $total_aktl_tahun_ini) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
+                                        <?= number_format($total_aktl_tahun_ini, 0, ',', '.'); ?>
+                                    </a>
+
+                                </th>
+                                <th class="text-right"><?= number_format($total_aktl_tahun_lalu, 0, ',', '.'); ?></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

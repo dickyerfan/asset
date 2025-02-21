@@ -5,8 +5,8 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <a href="<?= base_url('dashboard_publik') ?>"><button class="neumorphic-button">Tahun ini</button></a>
-                    <form id="form_tahun" action="<?= base_url('dashboard_publik'); ?>" method="get">
+                    <a href="<?= base_url('dashboard_pelihara') ?>"><button class="neumorphic-button">Tahun ini</button></a>
+                    <form id="form_tahun" action="<?= base_url('dashboard_pelihara'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <select id="tahun" name="tahun" class="form-control" style="margin-left: 15px;">
                                 <?php
@@ -21,7 +21,7 @@
                         </div>
                     </form>
                     <div class="navbar-nav ms-auto">
-                        <!-- <a href="<?= base_url('dashboard_publik/cetak_rekap_penyusutan') ?>"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Dokumen</button></a> -->
+                        <!-- <a href="<?= base_url('dashboard_pelihara/cetak_rekap_penyusutan') ?>"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Dokumen</button></a> -->
                     </div>
                 </nav>
             </div>

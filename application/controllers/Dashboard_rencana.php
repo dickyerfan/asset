@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard_umum extends CI_Controller
+class Dashboard_rencana extends CI_Controller
 {
 
     public function __construct()
@@ -19,7 +19,7 @@ class Dashboard_umum extends CI_Controller
         }
 
         $bagian = $this->session->userdata('bagian');
-        if ($bagian != 'Umum') {
+        if ($bagian != 'Perencanaan') {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -41,12 +41,12 @@ class Dashboard_umum extends CI_Controller
             $this->session->set_userdata('tahun_session', $get_tahun);
         }
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'Dashboard Umum';
+        $data['title'] = 'Dashboard Perencanaan';
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar_umum');
-        $this->load->view('dashboard/view_dashboard_umum', $data);
+        $this->load->view('templates/sidebar_rencana');
+        $this->load->view('dashboard/view_dashboard_rencana', $data);
         $this->load->view('templates/footer');
     }
 }

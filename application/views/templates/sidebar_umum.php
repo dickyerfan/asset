@@ -17,7 +17,7 @@
         <div class="collapse" id="user">
             <ul class="nav nav-pills nav-sidebar flex-column">
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="<?= base_url('setting/password') ?>" class="nav-link">
                         <i class="nav-icon fas fa-key"></i>
                         <p>Ganti Password</p>
                     </a>
@@ -36,19 +36,19 @@
                     <a href="<?= base_url('dashboard_umum') ?>" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Dashboard Umum
+                            Dashboard
                             <!-- <span class="right badge badge-danger">New</span> -->
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="<?= base_url('backup') ?>" class="nav-link">
                         <i class="nav-icon fas fa-database"></i>
                         <p>
                             Backup & Restore
                         </p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item" data-toggle="modal" data-target="#logoutModal">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>

@@ -1205,5 +1205,49 @@ class Model_lap_keuangan extends CI_Model
         $this->db->insert('neraca', $data);
         return true;
     }
+
+    public function input_aktl()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $tahun = $this->input->post('tgl_aktl', true); // Tahun sudah dalam format YYYY
+        $nama_aktl = $this->input->post('nama_aktl', true);
+        $jumlah_aktl = $this->input->post('jumlah_aktl', true);
+
+        // Cek apakah kombinasi tahun dan nama_up sudah ada di database
+        $this->db->where('tgl_aktl', $tahun);
+        $this->db->where('nama_aktl', $nama_up);
+        $query = $this->db->get('aktl_input');
+
+        if ($query->num_rows() > 0) {
+            return false; // Data sudah ada, return false
+        }
+
+        // Data yang akan dimasukkan ke database
+        $data = [
+            'nama_aktl' => $nama_aktl,
+            'tgl_aktl' => $tahun, // Pastikan ini hanya tahun (YYYY)
+            'jumlah_aktl' => $jumlah_aktl,
+            'created_at' => date('Y-m-d H:i:s'),
+            'created_by' => $this->session->userdata('nama_lengkap')
+        ];
+
+        // Insert data ke tabel dan kembalikan statusnya
+        return $this->db->insert('aktl_input', $data);
+    }
+
+    public function get_aktl_input($tahun)
+    {
+        $tahun_lalu = $tahun - 1;
+        $this->db->select('
+        *, 
+        SUM(CASE WHEN YEAR(tgl_aktl) = ' . $tahun . ' THEN aktl_input.jumlah_aktl ELSE 0 END) as jumlah_aktl_tahun_ini,
+        SUM(CASE WHEN YEAR(tgl_aktl) = ' . $tahun_lalu . ' THEN aktl_input.jumlah_aktl ELSE 0 END) as jumlah_aktl_tahun_lalu
+    ');
+        $this->db->from('aktl_input');
+        $this->db->where('YEAR(tgl_aktl) IN (' . $tahun . ', ' . $tahun_lalu . ')');
+        $this->db->group_by('aktl_input.nama_aktl');
+        $this->db->order_by('aktl_input.id_aktl', 'ASC');
+        return $this->db->get()->result();
+    }
     // akhir ekuitas
 }

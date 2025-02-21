@@ -1,21 +1,119 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : DIE ArtS
+ Source Server         : database_lokal
  Source Server Type    : MySQL
- Source Server Version : 100418 (10.4.18-MariaDB)
+ Source Server Version : 100417 (10.4.17-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : asset
 
  Target Server Type    : MySQL
- Target Server Version : 100418 (10.4.18-MariaDB)
+ Target Server Version : 100417 (10.4.17-MariaDB)
  File Encoding         : 65001
 
- Date: 21/02/2025 10:53:25
+ Date: 21/02/2025 16:33:41
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for aktl_input
+-- ----------------------------
+DROP TABLE IF EXISTS `aktl_input`;
+CREATE TABLE `aktl_input`  (
+  `id_aktl` int NOT NULL AUTO_INCREMENT,
+  `nama_aktl` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `jumlah_aktl` bigint NULL DEFAULT NULL,
+  `tgl_aktl` year NULL DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `modified_at` datetime NULL DEFAULT NULL,
+  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_aktl`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 79 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of aktl_input
+-- ----------------------------
+INSERT INTO `aktl_input` VALUES (1, 'Rugi eks BPAM', 1078656774, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (2, 'Rugi Tahun Buku 1993', 1562200725, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (3, 'Rugi Tahun Buku 1994', 502039712, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (4, 'Rugi Tahun Buku 1995', 320153568, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (5, 'Rugi Tahun Buku 1996', 318883412, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (6, 'Rugi Tahun Buku 1997', 310747140, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (7, 'Rugi Tahun Buku 1998', 268706703, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (8, 'Rugi Tahun Buku 1999', 105686123, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (9, 'Rugi Tahun Buku 2000', 689590282, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (10, 'Rugi Tahun Buku 2001', 10354149, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (11, 'Rugi Tahun Buku 2002', 1056645772, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (12, 'Rugi Tahun Buku 2003', 259926003, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (13, 'Rugi Tahun Buku 2004', 541138539, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (14, 'Rugi Tahun Buku 2009', 678065949, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (15, 'Rugi Tahun Buku 2011', 693183889, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (16, 'Reklasifikasi Sak Etap 2011', -472869455, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (17, '-', -257746511, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (18, 'Koreksi By Penyusutan Aset', -170261777, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (19, 'Rugi Tahun Buku 2012', 431126946, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (20, 'Koreksi Tagihan piutang air Th. 2012', -2788310, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (21, 'Rugi Tahun Buku 2013', 16906421, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (22, 'Koreksi kekurangan by Pajak krn pembulatan', 63, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (23, 'Subsidi selisih perhitungan tarif air Th 2015', -1183163800, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (24, 'Pengakuan IPK estimasi DAPENMA PAMSI Th 2021', 270054383, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (25, 'Pengakuan IPK estimasi DAPENMA PAMSI Th 2022', 1128948143, 2022, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (26, 'Rugi eks BPAM', 1078656774, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (27, 'Rugi Tahun Buku 1993', 1562200725, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (28, 'Rugi Tahun Buku 1994', 502039712, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (29, 'Rugi Tahun Buku 1995', 320153568, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (30, 'Rugi Tahun Buku 1996', 318883412, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (31, 'Rugi Tahun Buku 1997', 310747140, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (32, 'Rugi Tahun Buku 1998', 268706703, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (33, 'Rugi Tahun Buku 1999', 105686123, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (34, 'Rugi Tahun Buku 2000', 689590282, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (35, 'Rugi Tahun Buku 2001', 10354149, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (36, 'Rugi Tahun Buku 2002', 1056645772, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (37, 'Rugi Tahun Buku 2003', 259926003, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (38, 'Rugi Tahun Buku 2004', 541138539, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (39, 'Rugi Tahun Buku 2009', 678065949, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (40, 'Rugi Tahun Buku 2011', 693183889, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (41, 'Reklasifikasi Sak Etap 2011', -472869455, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (42, '-', -257746511, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (43, 'Koreksi By Penyusutan Aset', -170261777, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (44, 'Rugi Tahun Buku 2012', 431126946, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (45, 'Koreksi Tagihan piutang air Th. 2012', -2788310, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (46, 'Rugi Tahun Buku 2013', 16906421, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (47, 'Koreksi kekurangan by Pajak krn pembulatan', 63, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (48, 'Subsidi selisih perhitungan tarif air Th 2015', -1183163800, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (49, 'Pengakuan IPK estimasi DAPENMA PAMSI Th 2021', 270054383, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (50, 'Pengakuan IPK estimasi DAPENMA PAMSI Th 2022', 1128948143, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (51, 'Pengakuan IPK estimasi DAPENMA PAMSI Th 2023', -1649067220, 2023, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (52, 'Rugi eks BPAM', 1078656774, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (53, 'Rugi Tahun Buku 1993', 1562200725, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (54, 'Rugi Tahun Buku 1994', 502039712, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (55, 'Rugi Tahun Buku 1995', 320153568, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (56, 'Rugi Tahun Buku 1996', 318883412, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (57, 'Rugi Tahun Buku 1997', 310747140, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (58, 'Rugi Tahun Buku 1998', 268706703, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (59, 'Rugi Tahun Buku 1999', 105686123, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (60, 'Rugi Tahun Buku 2000', 689590282, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (61, 'Rugi Tahun Buku 2001', 10354149, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (62, 'Rugi Tahun Buku 2002', 1056645772, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (63, 'Rugi Tahun Buku 2003', 259926003, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (64, 'Rugi Tahun Buku 2004', 541138539, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (65, 'Rugi Tahun Buku 2009', 678065949, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (66, 'Rugi Tahun Buku 2011', 693183889, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (67, 'Reklasifikasi Sak Etap 2011', -472869455, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (68, '-', -257746511, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (69, 'Koreksi By Penyusutan Aset', -170261777, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (70, 'Rugi Tahun Buku 2012', 431126946, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (71, 'Koreksi Tagihan piutang air Th. 2012', -2788310, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (72, 'Rugi Tahun Buku 2013', 16906421, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (73, 'Koreksi kekurangan by Pajak krn pembulatan', 63, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (74, 'Subsidi selisih perhitungan tarif air Th 2015', -1183163800, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (75, 'Pengakuan IPK estimasi DAPENMA PAMSI Th 2021', 270054383, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (76, 'Pengakuan IPK estimasi DAPENMA PAMSI Th 2022', 1128948143, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (77, 'Pengakuan IPK estimasi DAPENMA PAMSI Th 2023', -1649067220, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
+INSERT INTO `aktl_input` VALUES (78, 'Pengakuan IPK estimasi DAPENMA PAMSI Th 2024', 0, 2024, '2025-02-21 16:17:15', 'Administrator', NULL, '');
 
 -- ----------------------------
 -- Table structure for amortisasi
@@ -92,7 +190,7 @@ CREATE TABLE `atdp_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_atdp`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of atdp_input
@@ -168,7 +266,7 @@ CREATE TABLE `bank`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_bank`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bank
@@ -194,7 +292,7 @@ CREATE TABLE `bank_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_bank_input`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bank_input
@@ -232,7 +330,7 @@ CREATE TABLE `bymhd_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_bymhd`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bymhd_input
@@ -261,7 +359,7 @@ CREATE TABLE `cb_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_cb`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of cb_input
@@ -281,7 +379,7 @@ CREATE TABLE `cu_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_cu`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of cu_input
@@ -2898,7 +2996,7 @@ CREATE TABLE `hnu_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_hnu`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of hnu_input
@@ -2951,7 +3049,7 @@ CREATE TABLE `hnu_lain_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_hnu_lain`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of hnu_lain_input
@@ -2985,7 +3083,7 @@ CREATE TABLE `kas`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_kas`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of kas
@@ -3011,7 +3109,7 @@ CREATE TABLE `kas_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_kas_input`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of kas_input
@@ -3050,7 +3148,7 @@ CREATE TABLE `kel_tarif`  (
   `modified_at` datetime NOT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_kel_tarif`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of kel_tarif
@@ -3081,7 +3179,7 @@ CREATE TABLE `kll_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_kll`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of kll_input
@@ -3110,7 +3208,7 @@ CREATE TABLE `mh_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_mh`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mh_input
@@ -3146,7 +3244,7 @@ CREATE TABLE `neraca`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_neraca`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 107 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 108 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of neraca
@@ -3252,6 +3350,7 @@ INSERT INTO `neraca` VALUES (103, 2024, 'Ekuitas', 'Modal Hibah', 581571100, 30,
 INSERT INTO `neraca` VALUES (104, 2024, 'Ekuitas', 'Cadangan Umum', 1433301490, 31, '5.3', '1', '0000-00-00 00:00:00', '', NULL, '');
 INSERT INTO `neraca` VALUES (105, 2024, 'Ekuitas', 'Cadangan Bertujuan', 0, 32, '5.4', '1', '2025-02-21 07:48:40', 'Administrator', NULL, '');
 INSERT INTO `neraca` VALUES (106, 2024, 'Ekuitas', 'Pengukuran Kembali Imbalan Paska Kerja', -704098144, 33, '5.4.1', '1', '2025-02-21 07:59:07', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (107, 2024, 'Ekuitas', 'Akm Kerugian Tahun Lalu', -6507117623, 34, '5.4.2', '1', '0000-00-00 00:00:00', '', NULL, '');
 
 -- ----------------------------
 -- Table structure for no_per
@@ -4573,7 +4672,7 @@ CREATE TABLE `pbt_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_pbt`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pbt_input
@@ -4614,7 +4713,7 @@ CREATE TABLE `pdd_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_pdd`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pdd_input
@@ -4643,7 +4742,7 @@ CREATE TABLE `pdm_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_pdm`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pdm_input
@@ -4690,7 +4789,7 @@ CREATE TABLE `peny_piutang`  (
   `modified_at` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_piutang`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of peny_piutang
@@ -7377,7 +7476,7 @@ CREATE TABLE `persediaan`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_persediaan`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of persediaan
@@ -7457,7 +7556,7 @@ CREATE TABLE `up_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_up`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of up_input
@@ -7490,7 +7589,7 @@ CREATE TABLE `user`  (
   `tgl_update` datetime NULL DEFAULT NULL,
   `petugas_update` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
@@ -7498,13 +7597,16 @@ CREATE TABLE `user`  (
 INSERT INTO `user` VALUES (1, 'admin', 'Administrator', 'Administrator', '$2y$10$ADv3d1BXOHDyYXGYOHouhu8B.rE4GiayKwPcrFMrMFwJXCzjtBckq', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (2, 'dicky', 'Dicky Erfan Septiono', 'Administrator', '$2y$10$MFzEk5qSvSQo1l8Ip4Psaelp4bi20s9Fwus8n3I0J5tien9xdao8G', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (18, 'cunta', 'Somaya Dewantari', 'Keuangan', '$2y$10$LHvVYekSqy8EJ402tHNFo.jShQERw5H6.tAHjrGRMriAvUNy84HDO', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
-INSERT INTO `user` VALUES (19, 'linda', 'Linda Anggraita', 'Umum', '$2y$10$ADv3d1BXOHDyYXGYOHouhu8B.rE4GiayKwPcrFMrMFwJXCzjtBckq', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (19, 'linda', 'Linda Anggraita', 'Umum', '$2y$10$8ylJ7GP5dKSmQlrw5NKfNesoiYjxLQenGoehGaaExWRUeLro3fwBe', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (20, 'auditor', 'Auditor', 'Auditor', '$2y$10$KdQMdsBbSiE9gbfsWw/FUuaqHEzohahyjfJbiPdJjlz53sglVrbr6', 'Pengguna', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (21, 'spi', 'Satuan Pengawasan Internal', 'Publik', '$2y$10$JsPhwWAFLryoEvwZ.cI/KehglXFk4AubPSB0UXg8TekA2iKT0tCoy', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
-INSERT INTO `user` VALUES (22, 'Langganan', 'Bag. Hubungan Langganan', 'Publik', '$2y$10$5NYFZDfMRFvvNKIHLq.8yuok6EBbZNSDRcmHTVaRGyh5c7U.3PHGK', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (22, 'langgan', 'Bagian Hubungan Langganan', 'Langgan', '$2y$10$5NYFZDfMRFvvNKIHLq.8yuok6EBbZNSDRcmHTVaRGyh5c7U.3PHGK', 'Pengguna', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (23, 'deni', 'Muhammad Deni Saputro', 'Keuangan', '$2y$10$J9HjgwPou7t1dC3k1x2zHu6J//5DG7yU57fxnmOITw3qnNGoxnpLW', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (24, 'lilik', 'Lilik Yuli Andayani', 'Keuangan', '$2y$10$uc..LmDquwTsMfhL0xXC3eKX7vY7NcQN29/GSVXzGFZlQdKF6u/Rm', 'Admin', 1, '2024-11-15 10:07:17', 'Administrator');
 INSERT INTO `user` VALUES (25, 'dian', 'Ahmad Wahyu Dian', 'Keuangan', '$2y$10$a/42efidYalCikapjZZ3GewfZqPJNp/Q5GTPrAu4fxfSsYcDY9Nzm', 'Pengguna', 1, '2024-11-15 16:16:16', 'Administrator');
+INSERT INTO `user` VALUES (26, 'umum', 'Bagian Umum & Administrasi', 'Umum', '$2y$10$JB8KmAEumUGqQ5sbSgs14uFuw0K108nl1GmqdguAMi5WRvOeXczOi', 'Pengguna', 1, '2025-02-21 14:34:49', 'Administrator');
+INSERT INTO `user` VALUES (27, 'perencanaan', 'Bagian Perencanaan', 'Perencanaan', '$2y$10$52Zqk9YnqaH9L4OyfQQUY.AYztAhgkx8ipB3GKfQRTibWg2JUWZ1i', 'Pengguna', 1, '2025-02-21 14:34:55', 'Administrator');
+INSERT INTO `user` VALUES (28, 'pemeliharaan', 'Bagian Pemeliharaan', 'Pemeliharaan', '$2y$10$XVAryTgKsoICqlgrMuY3WOeLeUgtRuXOEnZ4vMOfKrRjdusp5xpnu', 'Pengguna', 1, '2025-02-21 14:34:59', 'Administrator');
 
 -- ----------------------------
 -- Table structure for utsr_input
@@ -7520,7 +7622,7 @@ CREATE TABLE `utsr_input`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_utsr`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of utsr_input

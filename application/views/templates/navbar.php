@@ -15,12 +15,16 @@
             <a class="nav-link">
                 <?php
                 if ($this->session->userdata('bagian') == 'Administrator' || $this->session->userdata('bagian') == 'Keuangan' || $this->session->userdata('bagian') == 'Auditor') {
-                    echo '<h5 class="font-weight-bold">Asset & Penyusutan</h5>';
-                } elseif ($this->session->userdata('bagian') == 'Umum') {
-                    echo '<h5 class="font-weight-bold">Aktuaria</h5>';
+                    echo '<h5 class="font-weight-bold">Asset,Penyusutan & Evkin</h5>';
+                } else {
+                    echo '<h5 class="font-weight-bold">Evaluasi Kinerja</h5>';
                 }
                 ?>
-                <!-- <h5 class="font-weight-bold">Asset & Penyusutan</h5> -->
+            </a>
+        </li>
+        <li class="nav-item" data-toggle="modal" data-target="#logoutModal">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
             </a>
         </li>
     </ul>

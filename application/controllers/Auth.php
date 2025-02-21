@@ -56,6 +56,54 @@ class Auth extends CI_Controller
                         </button>
                       </div>');
                         redirect('dashboard_umum');
+                    } elseif ($cek_nama_pengguna->bagian == 'Langgan') {
+                        $data_session = [
+                            'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
+                            'nama_lengkap' => $cek_nama_pengguna->nama_lengkap,
+                            'password' => $cek_nama_pengguna->password,
+                            'level' => $cek_nama_pengguna->level,
+                            'bagian' => $cek_nama_pengguna->bagian
+                        ];
+                        $this->session->set_userdata($data_session);
+                        $this->session->set_flashdata('info', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Selamat,</strong> Anda Berhasil Login
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>');
+                        redirect('dashboard_langgan');
+                    } elseif ($cek_nama_pengguna->bagian == 'Perencanaan') {
+                        $data_session = [
+                            'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
+                            'nama_lengkap' => $cek_nama_pengguna->nama_lengkap,
+                            'password' => $cek_nama_pengguna->password,
+                            'level' => $cek_nama_pengguna->level,
+                            'bagian' => $cek_nama_pengguna->bagian
+                        ];
+                        $this->session->set_userdata($data_session);
+                        $this->session->set_flashdata('info', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Selamat,</strong> Anda Berhasil Login
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>');
+                        redirect('dashboard_rencana');
+                    } elseif ($cek_nama_pengguna->bagian == 'Pemeliharaan') {
+                        $data_session = [
+                            'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
+                            'nama_lengkap' => $cek_nama_pengguna->nama_lengkap,
+                            'password' => $cek_nama_pengguna->password,
+                            'level' => $cek_nama_pengguna->level,
+                            'bagian' => $cek_nama_pengguna->bagian
+                        ];
+                        $this->session->set_userdata($data_session);
+                        $this->session->set_flashdata('info', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Selamat,</strong> Anda Berhasil Login
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>');
+                        redirect('dashboard_pelihara');
                     } else {
                         $data_session = [
                             'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
