@@ -120,7 +120,7 @@
                                         // echo "<td class='text-right'>" . number_format($total_labarugi_bersih_Sebelum_pajak, 0, ',', '.') . "</td>";
 
                                         echo "<th class='text-right'>
-                                        <a href='" . base_url('lap_keuangan/beban_pajak/input_bpk_lr/' . $tahun_lap . '/' . $total_labarugi_bersih_Sebelum_pajak) . "' 
+                                        <a href='" . base_url('lap_keuangan/beban_pajak/input_lrbsp/' . $tahun_lap . '/' . $total_labarugi_bersih_Sebelum_pajak) . "' 
                                            onclick='return confirm(\"Apakah Anda yakin ingin menyimpan data ini ke Neraca?\");' 
                                            style='text-decoration: none; color: inherit;'>
                                             " . number_format($total_labarugi_bersih_Sebelum_pajak, 0, ',', '.') . "
@@ -142,11 +142,21 @@
                                         echo "<td class='text-right'>" . number_format($total_penghasilan_komprehensif_lain_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
 
-                                        $total_labarugi_bersih_setelah_pajak = $total_labarugi_bersih_Sebelum_pajak - ($total_beban_pajak_penghasilan + $total_penghasilan_komprehensif_lain);
-                                        $total_labarugi_bersih_setelah_pajak_lalu = $total_labarugi_bersih_Sebelum_pajak_lalu - ($total_beban_pajak_penghasilan_lalu + $total_penghasilan_komprehensif_lain_lalu);
+                                        $total_penghasilan_komprehensif_tahun_berjalan = $total_labarugi_bersih_Sebelum_pajak - ($total_beban_pajak_penghasilan + $total_penghasilan_komprehensif_lain);
+                                        $total_penghasilan_komprehensif_tahun_berjalan_lalu = $total_labarugi_bersih_Sebelum_pajak_lalu - ($total_beban_pajak_penghasilan_lalu + $total_penghasilan_komprehensif_lain_lalu);
+
                                         echo "<tr class='font-weight-bold bg-warning text-left'>";
                                         echo "<td colspan='2'>JUMLAH PENGHASILAN KOMPREHENSIF TAHUN BERJALAN</td>";
-                                        echo "<td class='text-right'>" . number_format($total_labarugi_bersih_setelah_pajak, 0, ',', '.') . "</td>";
+                                        // echo "<td class='text-right'>" . number_format($total_penghasilan_komprehensif_tahun_berjalan, 0, ',', '.') . "</td>";
+
+                                        echo "<th class='text-right'>
+                                        <a href='" . base_url('lap_keuangan/lr_sak_ep/input_pktb/' . $tahun_lap . '/' . $total_penghasilan_komprehensif_tahun_berjalan) . "' 
+                                           onclick='return confirm(\"Apakah Anda yakin ingin menyimpan data ini ke Neraca?\");' 
+                                           style='text-decoration: none; color: inherit;'>
+                                            " . number_format($total_penghasilan_komprehensif_tahun_berjalan, 0, ',', '.') . "
+                                        </a>
+                                        </th>";
+
                                         echo "<td class='text-right'>" . number_format($total_labarugi_bersih_setelah_pajak_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
                                     }
@@ -243,7 +253,7 @@
                                 // echo "<td class='text-right'>" . number_format($total_labarugi_bersih_Sebelum_pajak, 0, ',', '.') . "</td>";
 
                                 echo "<th class='text-right'>
-                                <a href='" . base_url('lap_keuangan/beban_pajak/input_bpk_lr/' . $tahun_lap . '/' . $total_labarugi_bersih_Sebelum_pajak) . "' 
+                                <a href='" . base_url('lap_keuangan/beban_pajak/input_lrbsp/' . $tahun_lap . '/' . $total_labarugi_bersih_Sebelum_pajak) . "' 
                                    onclick='return confirm(\"Apakah Anda yakin ingin menyimpan data ini ke Neraca?\");' 
                                    style='text-decoration: none; color: inherit;'>
                                     " . number_format($total_labarugi_bersih_Sebelum_pajak, 0, ',', '.') . "
@@ -265,12 +275,21 @@
                                 echo "<td class='text-right'>" . number_format($total_penghasilan_komprehensif_lain_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
 
-                                $total_labarugi_bersih_setelah_pajak = $total_labarugi_bersih_Sebelum_pajak - ($total_beban_pajak_penghasilan + $total_penghasilan_komprehensif_lain);
-                                $total_labarugi_bersih_setelah_pajak_lalu = $total_labarugi_bersih_Sebelum_pajak_lalu - ($total_beban_pajak_penghasilan_lalu + $total_penghasilan_komprehensif_lain_lalu);
+                                $total_penghasilan_komprehensif_tahun_berjalan = $total_labarugi_bersih_Sebelum_pajak - ($total_beban_pajak_penghasilan + $total_penghasilan_komprehensif_lain);
+                                $total_penghasilan_komprehensif_tahun_berjalan_lalu = $total_labarugi_bersih_Sebelum_pajak_lalu - ($total_beban_pajak_penghasilan_lalu + $total_penghasilan_komprehensif_lain_lalu);
                                 echo "<tr class='font-weight-bold bg-warning text-left'>";
                                 echo "<td colspan='2'>JUMLAH PENGHASILAN KOMPREHENSIF TAHUN BERJALAN</td>";
-                                echo "<td class='text-right'>" . number_format($total_labarugi_bersih_setelah_pajak, 0, ',', '.') . "</td>";
-                                echo "<td class='text-right'>" . number_format($total_labarugi_bersih_setelah_pajak_lalu, 0, ',', '.') . "</td>";
+                                // echo "<td class='text-right'>" . number_format($total_penghasilan_komprehensif_tahun_berjalan, 0, ',', '.') . "</td>";
+
+                                echo "<th class='text-right'>
+                                <a href='" . base_url('lap_keuangan/lr_sak_ep/input_pktb/' . $tahun_lap . '/' . $total_penghasilan_komprehensif_tahun_berjalan) . "' 
+                                   onclick='return confirm(\"Apakah Anda yakin ingin menyimpan data ini ke Neraca?\");' 
+                                   style='text-decoration: none; color: inherit;'>
+                                    " . number_format($total_penghasilan_komprehensif_tahun_berjalan, 0, ',', '.') . "
+                                </a>
+                                </th>";
+
+                                echo "<td class='text-right'>" . number_format($total_penghasilan_komprehensif_tahun_berjalan_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
                             }
                             ?>

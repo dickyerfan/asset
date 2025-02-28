@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Beban extends CI_Controller
+class Penghasilan_komp_lain extends CI_Controller
 {
 
     public function __construct()
@@ -47,46 +47,43 @@ class Beban extends CI_Controller
         $data['tahun_lap'] = $tahun;
         $data['tahun_lalu'] = $tahun - 1;
 
-        $data['title'] = 'Beban Operasi';
-        $data['title2'] = 'Beban Pengolahan Air';
-        $data['title3'] = 'Beban Transmisi Dan Distribusi';
-        $data['title4'] = 'Beban (HPP) Sambungan Baru';
-        $data['title5'] = 'Beban Umum Dan Adminstrasi';
-        $data['title6'] = 'Beban Lain-lain';
+        $data['title'] = 'Surplus Revaluasi Tanah/Aset Tidak Lancar';
+        $data['title2'] = 'Pengukuran Kembali Atas Program Imbalan Pasti';
+        $data['title3'] = 'Beban Pajak Penghasilan Terkait';
+        $data['title4'] = 'Penghasilan Komprehensif Lain Tahun Berjalan';
 
-        $data['bop_input'] = $this->Model_labarugi->get_bop_input($tahun);
-        $data['bpa_input'] = $this->Model_labarugi->get_bpa_input($tahun);
-        $data['btd_input'] = $this->Model_labarugi->get_btd_input($tahun);
-        $data['bsb_input'] = $this->Model_labarugi->get_bsb_input($tahun);
-        $data['bua_input'] = $this->Model_labarugi->get_bua_input($tahun);
-        $data['bll_input'] = $this->Model_labarugi->get_bll_input($tahun);
+        $data['srt_input'] = $this->Model_labarugi->get_srt_input($tahun);
+        $data['pkapip_input'] = $this->Model_labarugi->get_pkapip_input($tahun);
+        $data['bppt_input'] = $this->Model_labarugi->get_bppt_input($tahun);
+        $data['pkltb_input'] = $this->Model_labarugi->get_pkltb_input($tahun);
+
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('templates/sidebar');
-        $this->load->view('lap_keuangan/laba_rugi/view_beban', $data);
+        $this->load->view('lap_keuangan/laba_rugi/view_penghasilan_komp_lain', $data);
         $this->load->view('templates/footer');
     }
 
-    public function input_bop()
+    public function input_srt()
     {
         $tanggal = $this->session->userdata('tanggal');
-        $this->form_validation->set_rules('nama_bop', 'Nama / Uraian', 'required|trim');
-        $this->form_validation->set_rules('jenis_bop', 'Jenis', 'required|trim');
-        $this->form_validation->set_rules('tgl_bop', 'Tahun', 'required|trim');
-        $this->form_validation->set_rules('jumlah_bop', 'Jumlah', 'required|trim|numeric');
+        $this->form_validation->set_rules('nama_srt', 'Nama / Uraian', 'required|trim');
+        $this->form_validation->set_rules('jenis_srt', 'Jenis', 'required|trim');
+        $this->form_validation->set_rules('tgl_srt', 'Tahun', 'required|trim');
+        $this->form_validation->set_rules('jumlah_srt', 'Jumlah', 'required|trim|numeric');
         $this->form_validation->set_message('required', '%s masih kosong');
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Beban Operasi';
+            $data['title'] = 'Upload Surplus Revaluasi Tanah/Aset Tidak Lancar';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
-            $this->load->view('lap_keuangan/laba_rugi/view_upload_bop', $data);
+            $this->load->view('lap_keuangan/laba_rugi/view_upload_srt', $data);
             $this->load->view('templates/footer');
         } else {
-            $insert = $this->Model_labarugi->input_bop();
+            $insert = $this->Model_labarugi->input_srt();
             if (!$insert) {
                 // Jika gagal insert karena tahun sudah ada
                 $this->session->set_flashdata(
@@ -102,21 +99,21 @@ class Beban extends CI_Controller
                 $this->session->set_flashdata(
                     'info',
                     '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <strong>Sukses!</strong> Data input Beban Operasi baru berhasil ditambahkan.
+                    <strong>Sukses!</strong> Data input Surplus Revaluasi Tanah/Aset Tidak Lancar baru berhasil ditambahkan.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                     </button>
                 </div>'
                 );
             }
-            redirect('lap_keuangan/beban');
+            redirect('lap_keuangan/penghasilan_komp_lain');
         }
     }
 
-    public function input_bop_neraca($tahun, $total_seluruh_bop_tahun_ini)
+    public function input_srt_lr($tahun, $total_seluruh_srt_tahun_ini)
     {
         date_default_timezone_set('Asia/Jakarta');
-
-        if ($total_seluruh_bop_tahun_ini == 0) {
+        $tahun_ini = date('Y');
+        if ($total_seluruh_srt_tahun_ini == 0 && $tahun == $tahun_ini) {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -125,14 +122,14 @@ class Beban extends CI_Controller
                         </button>
                       </div>'
             );
-            redirect('lap_keuangan/beban');
+            redirect('lap_keuangan/penghasilan_komp_lain');
             return;
         }
 
         // Cek apakah data sudah ada di database
         $this->db->where('tahun_lr_sak_ep', $tahun);
-        $this->db->where('kategori', 'Beban Usaha');
-        $this->db->where('akun', 'a. Beban Operasi');
+        $this->db->where('kategori', '(Kerugian) Penghasilan Komprehensip Lain');
+        $this->db->where('akun', 'Surplus Revaluasi Tanah/Aset Tidak Lancar');
         $query = $this->db->get('lr_sak_ep');
 
         if ($query->num_rows() > 0) {
@@ -149,10 +146,10 @@ class Beban extends CI_Controller
             // Jika belum ada, lakukan insert
             $data = [
                 'tahun_lr_sak_ep' => $tahun,
-                'kategori' => 'Beban Usaha',
-                'akun' => 'a. Beban Operasi',
-                'nilai_lr_sak_ep' => $total_seluruh_bop_tahun_ini,
-                'posisi' => 4,
+                'kategori' => '(Kerugian) Penghasilan Komprehensip Lain',
+                'akun' => 'Surplus Revaluasi Tanah/Aset Tidak Lancar',
+                'nilai_lr_sak_ep' => $total_seluruh_srt_tahun_ini,
+                'posisi' => 13,
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'created_by' => $this->session->userdata('nama_lengkap')
@@ -168,16 +165,119 @@ class Beban extends CI_Controller
                       </div>'
             );
         }
-        redirect('lap_keuangan/beban');
+        redirect('lap_keuangan/penghasilan_komp_lain');
     }
 
-    public function input_bpa()
+    public function input_pkapip()
     {
         $tanggal = $this->session->userdata('tanggal');
-        $this->form_validation->set_rules('nama_bpa', 'Nama / Uraian', 'required|trim');
-        $this->form_validation->set_rules('jenis_bpa', 'Jenis', 'required|trim');
-        $this->form_validation->set_rules('tgl_bpa', 'Tahun', 'required|trim');
-        $this->form_validation->set_rules('jumlah_bpa', 'Jumlah', 'required|trim|numeric');
+        $this->form_validation->set_rules('nama_pkapip', 'Nama / Uraian', 'required|trim');
+        $this->form_validation->set_rules('jenis_pkapip', 'Jenis', 'required|trim');
+        $this->form_validation->set_rules('tgl_pkapip', 'Tahun', 'required|trim');
+        $this->form_validation->set_rules('jumlah_pkapip', 'Jumlah', 'required|trim|numeric');
+        $this->form_validation->set_message('required', '%s masih kosong');
+        $this->form_validation->set_message('numeric', '%s harus berupa angka');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Upload Pengukuran Kembali Atas Program Imbalan Pasti';
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('lap_keuangan/laba_rugi/view_upload_pkapip', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $insert = $this->Model_labarugi->input_pkapip();
+            if (!$insert) {
+                // Jika gagal insert karena tahun sudah ada
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Gagal!</strong> Data untuk tahun tersebut sudah ada di database.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>'
+                );
+            } else {
+                // Jika sukses insert
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <strong>Sukses!</strong> Data input Pengukuran Kembali Atas Program Imbalan Pasti baru berhasil ditambahkan.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>'
+                );
+            }
+            redirect('lap_keuangan/penghasilan_komp_lain');
+        }
+    }
+
+    public function input_pkapip_lr($tahun, $total_seluruh_pkapip_tahun_ini)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $tahun_ini = date('Y');
+        if ($total_seluruh_pkapip_tahun_ini == 0 && $tahun == $tahun_ini) {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal,</strong> Data Belum ada! Tidak dapat menambahkan data.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+            redirect('lap_keuangan/penghasilan_komp_lain');
+            return;
+        }
+
+        // Cek apakah data sudah ada di database
+        $this->db->where('tahun_lr_sak_ep', $tahun);
+        $this->db->where('kategori', '(Kerugian) Penghasilan Komprehensip Lain');
+        $this->db->where('akun', 'Pengukuran Kembali Atas Program Imbalan Pasti');
+        $query = $this->db->get('lr_sak_ep');
+
+        if ($query->num_rows() > 0) {
+            // Jika data sudah ada, tampilkan pesan peringatan
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal,</strong> Data sudah ada! Tidak dapat menambahkan data yang sama.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+        } else {
+            // Jika belum ada, lakukan insert
+            $data = [
+                'tahun_lr_sak_ep' => $tahun,
+                'kategori' => '(Kerugian) Penghasilan Komprehensip Lain',
+                'akun' => 'Pengukuran Kembali Atas Program Imbalan Pasti',
+                'nilai_lr_sak_ep' => $total_seluruh_pkapip_tahun_ini,
+                'posisi' => 14,
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
+            ];
+
+            $this->db->insert('lr_sak_ep', $data);
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>Sukses,</strong> Data berhasil disimpan ke Laba Rugi!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+        }
+        redirect('lap_keuangan/penghasilan_komp_lain');
+    }
+
+    public function input_bppt()
+    {
+        $tanggal = $this->session->userdata('tanggal');
+        $this->form_validation->set_rules('nama_bppt', 'Nama / Uraian', 'required|trim');
+        $this->form_validation->set_rules('jenis_bppt', 'Jenis', 'required|trim');
+        $this->form_validation->set_rules('tgl_bppt', 'Tahun', 'required|trim');
+        $this->form_validation->set_rules('jumlah_bppt', 'Jumlah', 'required|trim|numeric');
         $this->form_validation->set_message('required', '%s masih kosong');
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
@@ -186,10 +286,10 @@ class Beban extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
-            $this->load->view('lap_keuangan/laba_rugi/view_upload_bpa', $data);
+            $this->load->view('lap_keuangan/laba_rugi/view_upload_bppt', $data);
             $this->load->view('templates/footer');
         } else {
-            $insert = $this->Model_labarugi->input_bpa();
+            $insert = $this->Model_labarugi->input_bppt();
             if (!$insert) {
                 // Jika gagal insert karena tahun sudah ada
                 $this->session->set_flashdata(
@@ -205,227 +305,21 @@ class Beban extends CI_Controller
                 $this->session->set_flashdata(
                     'info',
                     '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <strong>Sukses!</strong> Data input Beban Pengolah Air baru berhasil ditambahkan.
+                    <strong>Sukses!</strong> Data input Beban Pajak Penghasilan Terkait baru berhasil ditambahkan.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                     </button>
                 </div>'
                 );
             }
-            redirect('lap_keuangan/beban');
+            redirect('lap_keuangan/penghasilan_komp_lain');
         }
     }
 
-    public function input_bpa_neraca($tahun, $total_seluruh_bpa_tahun_ini)
-    {
-        date_default_timezone_set('Asia/Jakarta');
-
-        if ($total_seluruh_bpa_tahun_ini == 0) {
-            $this->session->set_flashdata(
-                'info',
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Gagal,</strong> Data Belum ada! Tidak dapat menambahkan data.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                      </div>'
-            );
-            redirect('lap_keuangan/beban');
-            return;
-        }
-
-        // Cek apakah data sudah ada di database
-        $this->db->where('tahun_lr_sak_ep', $tahun);
-        $this->db->where('kategori', 'Beban Usaha');
-        $this->db->where('akun', 'b. Beban Pengolahan Air');
-        $query = $this->db->get('lr_sak_ep');
-
-        if ($query->num_rows() > 0) {
-            // Jika data sudah ada, tampilkan pesan peringatan
-            $this->session->set_flashdata(
-                'info',
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Gagal,</strong> Data sudah ada! Tidak dapat menambahkan data yang sama.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                      </div>'
-            );
-        } else {
-            // Jika belum ada, lakukan insert
-            $data = [
-                'tahun_lr_sak_ep' => $tahun,
-                'kategori' => 'Beban Usaha',
-                'akun' => 'b. Beban Pengolahan Air',
-                'nilai_lr_sak_ep' => $total_seluruh_bpa_tahun_ini,
-                'posisi' => 5,
-                'status' => 1,
-                'created_at' => date('Y-m-d H:i:s'),
-                'created_by' => $this->session->userdata('nama_lengkap')
-            ];
-
-            $this->db->insert('lr_sak_ep', $data);
-            $this->session->set_flashdata(
-                'info',
-                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                        <strong>Sukses,</strong> Data berhasil disimpan ke Laba Rugi!
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                      </div>'
-            );
-        }
-        redirect('lap_keuangan/beban');
-    }
-
-    public function input_btd()
-    {
-        $tanggal = $this->session->userdata('tanggal');
-        $this->form_validation->set_rules('nama_btd', 'Nama / Uraian', 'required|trim');
-        $this->form_validation->set_rules('jenis_btd', 'Jenis', 'required|trim');
-        $this->form_validation->set_rules('tgl_btd', 'Tahun', 'required|trim');
-        $this->form_validation->set_rules('jumlah_btd', 'Jumlah', 'required|trim|numeric');
-        $this->form_validation->set_message('required', '%s masih kosong');
-        $this->form_validation->set_message('numeric', '%s harus berupa angka');
-
-        if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Beban Transmisi Dan Distribusi';
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar');
-            $this->load->view('lap_keuangan/laba_rugi/view_upload_btd', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $insert = $this->Model_labarugi->input_btd();
-            if (!$insert) {
-                // Jika gagal insert karena tahun sudah ada
-                $this->session->set_flashdata(
-                    'info',
-                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Gagal!</strong> Data untuk tahun tersebut sudah ada di database.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                    </button>
-                </div>'
-                );
-            } else {
-                // Jika sukses insert
-                $this->session->set_flashdata(
-                    'info',
-                    '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <strong>Sukses!</strong> Data input Beban Transmisi Dan Distribusi baru berhasil ditambahkan.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                    </button>
-                </div>'
-                );
-            }
-            redirect('lap_keuangan/beban');
-        }
-    }
-
-    public function input_btd_neraca($tahun, $total_seluruh_btd_tahun_ini)
-    {
-        date_default_timezone_set('Asia/Jakarta');
-
-        if ($total_seluruh_btd_tahun_ini == 0) {
-            $this->session->set_flashdata(
-                'info',
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Gagal,</strong> Data Belum ada! Tidak dapat menambahkan data.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                      </div>'
-            );
-            redirect('lap_keuangan/beban');
-            return;
-        }
-
-        // Cek apakah data sudah ada di database
-        $this->db->where('tahun_lr_sak_ep', $tahun);
-        $this->db->where('kategori', 'Beban Usaha');
-        $this->db->where('akun', 'c. Beban Transmisi dan Distribusi');
-        $query = $this->db->get('lr_sak_ep');
-
-        if ($query->num_rows() > 0) {
-            // Jika data sudah ada, tampilkan pesan peringatan
-            $this->session->set_flashdata(
-                'info',
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Gagal,</strong> Data sudah ada! Tidak dapat menambahkan data yang sama.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                      </div>'
-            );
-        } else {
-            // Jika belum ada, lakukan insert
-            $data = [
-                'tahun_lr_sak_ep' => $tahun,
-                'kategori' => 'Beban Usaha',
-                'akun' => 'c. Beban Transmisi dan Distribusi',
-                'nilai_lr_sak_ep' => $total_seluruh_btd_tahun_ini,
-                'posisi' => 6,
-                'status' => 1,
-                'created_at' => date('Y-m-d H:i:s'),
-                'created_by' => $this->session->userdata('nama_lengkap')
-            ];
-
-            $this->db->insert('lr_sak_ep', $data);
-            $this->session->set_flashdata(
-                'info',
-                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                        <strong>Sukses,</strong> Data berhasil disimpan ke Laba Rugi!
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                      </div>'
-            );
-        }
-        redirect('lap_keuangan/beban');
-    }
-
-    public function input_bsb()
-    {
-        $tanggal = $this->session->userdata('tanggal');
-        $this->form_validation->set_rules('nama_bsb', 'Nama / Uraian', 'required|trim');
-        $this->form_validation->set_rules('jenis_bsb', 'Jenis', 'required|trim');
-        $this->form_validation->set_rules('tgl_bsb', 'Tahun', 'required|trim');
-        $this->form_validation->set_rules('jumlah_bsb', 'Jumlah', 'required|trim|numeric');
-        $this->form_validation->set_message('required', '%s masih kosong');
-        $this->form_validation->set_message('numeric', '%s harus berupa angka');
-
-        if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Beban (HPP) Sambungan Baru';
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar');
-            $this->load->view('lap_keuangan/laba_rugi/view_upload_bsb', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $insert = $this->Model_labarugi->input_bsb();
-            if (!$insert) {
-                // Jika gagal insert karena tahun sudah ada
-                $this->session->set_flashdata(
-                    'info',
-                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Gagal!</strong> Data untuk tahun tersebut sudah ada di database.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                    </button>
-                </div>'
-                );
-            } else {
-                // Jika sukses insert
-                $this->session->set_flashdata(
-                    'info',
-                    '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <strong>Sukses!</strong> Data input Beban (HPP) Sambungan Baru baru berhasil ditambahkan.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                    </button>
-                </div>'
-                );
-            }
-            redirect('lap_keuangan/beban');
-        }
-    }
-
-    public function input_bsb_neraca($tahun, $total_seluruh_bsb_tahun_ini)
+    public function input_bppt_lr($tahun, $total_seluruh_bppt_tahun_ini)
     {
         date_default_timezone_set('Asia/Jakarta');
         $tahun_ini = date('Y');
-        if ($total_seluruh_bsb_tahun_ini == 0 && $tahun == $tahun_ini) {
+        if ($total_seluruh_bppt_tahun_ini == 0 && $tahun == $tahun_ini) {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -434,14 +328,14 @@ class Beban extends CI_Controller
                         </button>
                       </div>'
             );
-            redirect('lap_keuangan/beban');
+            redirect('lap_keuangan/penghasilan_komp_lain');
             return;
         }
 
         // Cek apakah data sudah ada di database
         $this->db->where('tahun_lr_sak_ep', $tahun);
-        $this->db->where('kategori', 'Beban Usaha');
-        $this->db->where('akun', 'd. Beban (HPP) Sambungan Baru');
+        $this->db->where('kategori', '(Kerugian) Penghasilan Komprehensip Lain');
+        $this->db->where('akun', 'Beban Pajak Penghasilan Terkait');
         $query = $this->db->get('lr_sak_ep');
 
         if ($query->num_rows() > 0) {
@@ -458,10 +352,10 @@ class Beban extends CI_Controller
             // Jika belum ada, lakukan insert
             $data = [
                 'tahun_lr_sak_ep' => $tahun,
-                'kategori' => 'Beban Usaha',
-                'akun' => 'd. Beban (HPP) Sambungan Baru',
-                'nilai_lr_sak_ep' => $total_seluruh_bsb_tahun_ini,
-                'posisi' => 7,
+                'kategori' => '(Kerugian) Penghasilan Komprehensip Lain',
+                'akun' => 'Beban Pajak Penghasilan Terkait',
+                'nilai_lr_sak_ep' => $total_seluruh_bppt_tahun_ini,
+                'posisi' => 15,
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'created_by' => $this->session->userdata('nama_lengkap')
@@ -477,28 +371,28 @@ class Beban extends CI_Controller
                       </div>'
             );
         }
-        redirect('lap_keuangan/beban');
+        redirect('lap_keuangan/penghasilan_komp_lain');
     }
 
-    public function input_bua()
+    public function input_pkltb()
     {
         $tanggal = $this->session->userdata('tanggal');
-        $this->form_validation->set_rules('nama_bua', 'Nama / Uraian', 'required|trim');
-        $this->form_validation->set_rules('jenis_bua', 'Jenis', 'required|trim');
-        $this->form_validation->set_rules('tgl_bua', 'Tahun', 'required|trim');
-        $this->form_validation->set_rules('jumlah_bua', 'Jumlah', 'required|trim|numeric');
+        $this->form_validation->set_rules('nama_pkltb', 'Nama / Uraian', 'required|trim');
+        $this->form_validation->set_rules('jenis_pkltb', 'Jenis', 'required|trim');
+        $this->form_validation->set_rules('tgl_pkltb', 'Tahun', 'required|trim');
+        $this->form_validation->set_rules('jumlah_pkltb', 'Jumlah', 'required|trim|numeric');
         $this->form_validation->set_message('required', '%s masih kosong');
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Beban (HPP) Sambungan Baru';
+            $data['title'] = 'Upload Beban Pengolah Air';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
-            $this->load->view('lap_keuangan/laba_rugi/view_upload_bua', $data);
+            $this->load->view('lap_keuangan/laba_rugi/view_upload_pkltb', $data);
             $this->load->view('templates/footer');
         } else {
-            $insert = $this->Model_labarugi->input_bua();
+            $insert = $this->Model_labarugi->input_pkltb();
             if (!$insert) {
                 // Jika gagal insert karena tahun sudah ada
                 $this->session->set_flashdata(
@@ -514,21 +408,21 @@ class Beban extends CI_Controller
                 $this->session->set_flashdata(
                     'info',
                     '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <strong>Sukses!</strong> Data input Beban (HPP) Sambungan Baru baru berhasil ditambahkan.
+                    <strong>Sukses!</strong> Data input Penghasilan Komprehensif Lain Tahun Berjalan baru berhasil ditambahkan.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                     </button>
                 </div>'
                 );
             }
-            redirect('lap_keuangan/beban');
+            redirect('lap_keuangan/penghasilan_komp_lain');
         }
     }
 
-    public function input_bua_neraca($tahun, $total_seluruh_bua_tahun_ini)
+    public function input_pkltb_lr($tahun, $total_seluruh_pkltb_tahun_ini)
     {
         date_default_timezone_set('Asia/Jakarta');
         $tahun_ini = date('Y');
-        if ($total_seluruh_bua_tahun_ini == 0 && $tahun == $tahun_ini) {
+        if ($total_seluruh_pkltb_tahun_ini == 0 && $tahun == $tahun_ini) {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -537,14 +431,14 @@ class Beban extends CI_Controller
                         </button>
                       </div>'
             );
-            redirect('lap_keuangan/beban');
+            redirect('lap_keuangan/penghasilan_komp_lain');
             return;
         }
 
         // Cek apakah data sudah ada di database
         $this->db->where('tahun_lr_sak_ep', $tahun);
-        $this->db->where('kategori', 'Beban Umum Dan Administrasi');
-        $this->db->where('akun', 'Beban Umum Dan Administrasi');
+        $this->db->where('kategori', '(Kerugian) Penghasilan Komprehensip Lain');
+        $this->db->where('akun', 'Penghasilan Komprehensif Lain Tahun Berjalan');
         $query = $this->db->get('lr_sak_ep');
 
         if ($query->num_rows() > 0) {
@@ -561,10 +455,10 @@ class Beban extends CI_Controller
             // Jika belum ada, lakukan insert
             $data = [
                 'tahun_lr_sak_ep' => $tahun,
-                'kategori' => 'Beban Umum Dan Administrasi',
-                'akun' => 'Beban Umum Dan Administrasi',
-                'nilai_lr_sak_ep' => $total_seluruh_bua_tahun_ini,
-                'posisi' => 8,
+                'kategori' => '(Kerugian) Penghasilan Komprehensip Lain',
+                'akun' => 'Penghasilan Komprehensif Lain Tahun Berjalan',
+                'nilai_lr_sak_ep' => $total_seluruh_pkltb_tahun_ini,
+                'posisi' => 15,
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'created_by' => $this->session->userdata('nama_lengkap')
@@ -580,109 +474,6 @@ class Beban extends CI_Controller
                       </div>'
             );
         }
-        redirect('lap_keuangan/beban');
-    }
-
-    public function input_bll()
-    {
-        $tanggal = $this->session->userdata('tanggal');
-        $this->form_validation->set_rules('nama_bll', 'Nama / Uraian', 'required|trim');
-        $this->form_validation->set_rules('jenis_bll', 'Jenis', 'required|trim');
-        $this->form_validation->set_rules('tgl_bll', 'Tahun', 'required|trim');
-        $this->form_validation->set_rules('jumlah_bll', 'Jumlah', 'required|trim|numeric');
-        $this->form_validation->set_message('required', '%s masih kosong');
-        $this->form_validation->set_message('numeric', '%s harus berupa angka');
-
-        if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Beban (HPP) Sambungan Baru';
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar');
-            $this->load->view('lap_keuangan/laba_rugi/view_upload_bll', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $insert = $this->Model_labarugi->input_bll();
-            if (!$insert) {
-                // Jika gagal insert karena tahun sudah ada
-                $this->session->set_flashdata(
-                    'info',
-                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Gagal!</strong> Data untuk tahun tersebut sudah ada di database.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                    </button>
-                </div>'
-                );
-            } else {
-                // Jika sukses insert
-                $this->session->set_flashdata(
-                    'info',
-                    '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <strong>Sukses!</strong> Data input Beban (HPP) Sambungan Baru baru berhasil ditambahkan.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                    </button>
-                </div>'
-                );
-            }
-            redirect('lap_keuangan/beban');
-        }
-    }
-
-    public function input_bll_neraca($tahun, $total_seluruh_bll_tahun_ini)
-    {
-        date_default_timezone_set('Asia/Jakarta');
-        $tahun_ini = date('Y');
-        if ($total_seluruh_bll_tahun_ini == 0 && $tahun == $tahun_ini) {
-            $this->session->set_flashdata(
-                'info',
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Gagal,</strong> Data Belum ada! Tidak dapat menambahkan data.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                      </div>'
-            );
-            redirect('lap_keuangan/beban');
-            return;
-        }
-
-        // Cek apakah data sudah ada di database
-        $this->db->where('tahun_lr_sak_ep', $tahun);
-        $this->db->where('kategori', 'Pendapatan - Beban Lain-lain');
-        $this->db->where('akun', 'Beban Lain-lain');
-        $query = $this->db->get('lr_sak_ep');
-
-        if ($query->num_rows() > 0) {
-            // Jika data sudah ada, tampilkan pesan peringatan
-            $this->session->set_flashdata(
-                'info',
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Gagal,</strong> Data sudah ada! Tidak dapat menambahkan data yang sama.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                      </div>'
-            );
-        } else {
-            // Jika belum ada, lakukan insert
-            $data = [
-                'tahun_lr_sak_ep' => $tahun,
-                'kategori' => 'Pendapatan - Beban Lain-lain',
-                'akun' => 'Beban Lain-lain',
-                'nilai_lr_sak_ep' => $total_seluruh_bll_tahun_ini * -1,
-                'posisi' => 10,
-                'status' => 1,
-                'created_at' => date('Y-m-d H:i:s'),
-                'created_by' => $this->session->userdata('nama_lengkap')
-            ];
-
-            $this->db->insert('lr_sak_ep', $data);
-            $this->session->set_flashdata(
-                'info',
-                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                        <strong>Sukses,</strong> Data berhasil disimpan ke Laba Rugi!
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                      </div>'
-            );
-        }
-        redirect('lap_keuangan/beban');
+        redirect('lap_keuangan/penghasilan_komp_lain');
     }
 }

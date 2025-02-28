@@ -40,8 +40,9 @@
                             <tr class="text-center">
                                 <th>No</th>
                                 <th>Uraian</th>
-                                <th>31 Desember <?= htmlspecialchars($tahun_lap) ?></th>
-                                <th>31 Desember <?= htmlspecialchars($tahun_lalu) ?></th>
+                                <th> <?= htmlspecialchars($tahun_lap) ?> (Unaudited)</th>
+                                <th> <?= htmlspecialchars($tahun_lap) ?> (Audited)</th>
+                                <th> <?= htmlspecialchars($tahun_lalu) ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,12 +74,14 @@
                                         echo "<tr class='font-weight-bold bg-light'>";
                                         echo "<td colspan='2'>Jumlah Aset Lancar</td>";
                                         echo "<td class='text-right'>" . number_format($total_aset_lancar, 0, ',', '.') . "</td>";
+                                        echo "<td ></td>";
                                         echo "<td class='text-right'>" . number_format($total_aset_lancar_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
                                     } elseif ($kategori_sebelumnya == 'Aset Tidak Lancar') {
                                         echo "<tr class='font-weight-bold bg-light'>";
                                         echo "<td colspan='2'>Jumlah Aset Tidak Lancar</td>";
                                         echo "<td class='text-right'>" . number_format($total_aset_tidak_lancar, 0, ',', '.') . "</td>";
+                                        echo "<td ></td>";
                                         echo "<td class='text-right'>" . number_format($total_aset_tidak_lancar_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
 
@@ -88,24 +91,28 @@
                                         echo "<tr class='font-weight-bold bg-warning'>";
                                         echo "<td colspan='2'>JUMLAH ASET</td>";
                                         echo "<td class='text-right'>" . number_format($total_aset, 0, ',', '.') . "</td>";
+                                        echo "<td ></td>";
                                         echo "<td class='text-right'>" . number_format($total_aset_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
                                     } elseif ($kategori_sebelumnya == 'Liabilitas Jangka Pendek') {
                                         echo "<tr class='font-weight-bold bg-light'>";
                                         echo "<td colspan='2'>Jumlah Liabilitas Jangka Pendek</td>";
                                         echo "<td class='text-right'>" . number_format($total_liabilitas_jangka_pendek, 0, ',', '.') . "</td>";
+                                        echo "<td ></td>";
                                         echo "<td class='text-right'>" . number_format($total_liabilitas_jangka_pendek_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
                                     } elseif ($kategori_sebelumnya == 'Liabilitas Jangka Panjang') {
                                         echo "<tr class='font-weight-bold bg-light'>";
                                         echo "<td colspan='2'>Jumlah Liabilitas Jangka Panjang</td>";
                                         echo "<td class='text-right'>" . number_format($total_liabilitas_jangka_panjang, 0, ',', '.') . "</td>";
+                                        echo "<td ></td>";
                                         echo "<td class='text-right'>" . number_format($total_liabilitas_jangka_panjang_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
                                     } elseif ($kategori_sebelumnya == 'Ekuitas') {
                                         echo "<tr class='font-weight-bold bg-light'>";
                                         echo "<td colspan='2'>Jumlah Ekuitas</td>";
                                         echo "<td class='text-right'>" . number_format($total_ekuitas, 0, ',', '.') . "</td>";
+                                        echo "<td ></td>";
                                         echo "<td class='text-right'>" . number_format($total_ekuitas_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
 
@@ -115,12 +122,13 @@
                                         echo "<tr class='font-weight-bold bg-warning text-center'>";
                                         echo "<td colspan='2'>JUMLAH LIABILITAS & EKUITAS</td>";
                                         echo "<td class='text-right'>" . number_format($total_liabilitas_ekuitas, 0, ',', '.') . "</td>";
+                                        echo "<td ></td>";
                                         echo "<td class='text-right'>" . number_format($total_liabilitas_ekuitas_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
                                     }
 
                                     echo "<tr class='font-weight-bold'>";
-                                    echo "<td colspan='4'>" . htmlspecialchars($row->kategori) . "</td>";
+                                    echo "<td colspan='5'>" . htmlspecialchars($row->kategori) . "</td>";
                                     echo "</tr>";
                                     $kategori_sebelumnya = $row->kategori;
                                 }
@@ -133,6 +141,7 @@
                                 echo "<td class='text-center'>{$row->no_neraca}</td>";
                                 echo "<td>" . htmlspecialchars($row->akun) . "</td>";
                                 echo "<td class='text-right'>" . number_format($row->nilai_neraca, 0, ',', '.') . "</td>";
+                                echo "<td ></td>";
                                 echo "<td class='text-right'>" . number_format($nilai_tahun_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
 
@@ -160,12 +169,14 @@
                                 echo "<tr class='font-weight-bold bg-light'>";
                                 echo "<td colspan='2'>Jumlah Aset Lancar</td>";
                                 echo "<td class='text-right'>" . number_format($total_aset_lancar, 0, ',', '.') . "</td>";
+                                echo "<td ></td>";
                                 echo "<td class='text-right'>" . number_format($total_aset_lancar_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
                             } elseif ($kategori_sebelumnya == 'Aset Tidak Lancar') {
                                 echo "<tr class='font-weight-bold bg-light'>";
                                 echo "<td colspan='2'>Jumlah Aset Tidak Lancar</td>";
                                 echo "<td class='text-right'>" . number_format($total_aset_tidak_lancar, 0, ',', '.') . "</td>";
+                                echo "<td ></td>";
                                 echo "<td class='text-right'>" . number_format($total_aset_tidak_lancar_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
 
@@ -175,24 +186,28 @@
                                 echo "<tr class='font-weight-bold bg-warning'>";
                                 echo "<td colspan='2'>JUMLAH ASET</td>";
                                 echo "<td class='text-right'>" . number_format($total_aset, 0, ',', '.') . "</td>";
+                                echo "<td ></td>";
                                 echo "<td class='text-right'>" . number_format($total_aset_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
                             } elseif ($kategori_sebelumnya == 'Liabilitas Jangka Pendek') {
                                 echo "<tr class='font-weight-bold bg-light'>";
                                 echo "<td colspan='2'>Jumlah Liabilitas Jangka Pendek</td>";
                                 echo "<td class='text-right'>" . number_format($total_liabilitas_jangka_pendek, 0, ',', '.') . "</td>";
+                                echo "<td ></td>";
                                 echo "<td class='text-right'>" . number_format($total_liabilitas_jangka_pendek_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
                             } elseif ($kategori_sebelumnya == 'Liabilitas Jangka Panjang') {
                                 echo "<tr class='font-weight-bold bg-light'>";
                                 echo "<td colspan='2'>Jumlah Liabilitas Jangka Panjang</td>";
                                 echo "<td class='text-right'>" . number_format($total_liabilitas_jangka_panjang, 0, ',', '.') . "</td>";
+                                echo "<td ></td>";
                                 echo "<td class='text-right'>" . number_format($total_liabilitas_jangka_panjang_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
                             } elseif ($kategori_sebelumnya == 'Ekuitas') {
                                 echo "<tr class='font-weight-bold bg-light'>";
                                 echo "<td colspan='2'>Total Ekuitas</td>";
                                 echo "<td class='text-right'>" . number_format($total_ekuitas, 0, ',', '.') . "</td>";
+                                echo "<td ></td>";
                                 echo "<td class='text-right'>" . number_format($total_ekuitas_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
 
@@ -202,6 +217,7 @@
                                 echo "<tr class='font-weight-bold bg-warning'>";
                                 echo "<td colspan='2'>JUMLAH LIABILITAS & EKUITAS</td>";
                                 echo "<td class='text-right'>" . number_format($total_liabilitas_ekuitas, 0, ',', '.') . "</td>";
+                                echo "<td ></td>";
                                 echo "<td class='text-right'>" . number_format($total_liabilitas_ekuitas_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
                             }

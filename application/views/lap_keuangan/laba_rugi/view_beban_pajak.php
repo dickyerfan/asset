@@ -279,8 +279,11 @@
                                 Pajak Penghasilan Badan Terhutang Dibulatkan
                             </th>
                             <th class="text-right">
-                                <?= number_format($ppbt_bulat_tahun_ini, 0, ',', '.'); ?>
+                                <a href="<?= base_url('lap_keuangan/beban_pajak/input_bppt_lr/' . $tahun_lap . '/' . $ppbt_bulat_tahun_ini) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Lap Laba Rugi?');" style="text-decoration: none; color: inherit;">
+                                    <?= number_format($ppbt_bulat_tahun_ini, 0, ',', '.'); ?>
+                                </a>
                             </th>
+
                             <th class="text-right">
                                 <?= number_format($ppbt_bulat_tahun_lalu, 0, ',', '.'); ?>
                             </th>
@@ -338,7 +341,7 @@
                                     <?= number_format($total_bpd_tahun_ini, 0, ',', '.'); ?>
                                 </th> -->
                                 <th class="text-right">
-                                    <a href="<?= base_url('lap_keuangan/beban_pajak/input_bpd_neraca/' . $tahun_lap . '/' . $total_bpd_tahun_ini) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
+                                    <a href="<?= base_url('lap_keuangan/beban_pajak/input_bpd_lr/' . $tahun_lap . '/' . $total_bpd_tahun_ini) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Lap Rugi Laba?');" style="text-decoration: none; color: inherit;">
                                         <?= number_format($total_bpd_tahun_ini, 0, ',', '.'); ?>
                                     </a>
                                 </th>

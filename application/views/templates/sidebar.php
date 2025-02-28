@@ -322,9 +322,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?= base_url('lap_keuangan/penghasilan_komp_lain') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Hit. Pajak Fiskal</p>
+                                <p>Penghasilan Komp. Lain</p>
                             </a>
                         </li>
                         <li class="nav-item">

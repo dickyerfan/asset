@@ -153,7 +153,9 @@ class Ekuitas extends CI_Controller
                 'nilai_neraca' => $total_seluruh_ppyd_tahun_ini,
                 'posisi' => 28,
                 'no_neraca' => '5.1',
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('neraca', $data);
@@ -255,7 +257,9 @@ class Ekuitas extends CI_Controller
                 'nilai_neraca' => $total_seluruh_ppybds_tahun_ini,
                 'posisi' => 29,
                 'no_neraca' => '5.2',
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('neraca', $data);
@@ -357,7 +361,9 @@ class Ekuitas extends CI_Controller
                 'nilai_neraca' => $total_seluruh_mh_tahun_ini,
                 'posisi' => 30,
                 'no_neraca' => '5.2.1',
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('neraca', $data);
@@ -459,7 +465,9 @@ class Ekuitas extends CI_Controller
                 'nilai_neraca' => $total_seluruh_cu_tahun_ini,
                 'posisi' => 31,
                 'no_neraca' => '5.3',
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('neraca', $data);
@@ -647,7 +655,9 @@ class Ekuitas extends CI_Controller
                 'nilai_neraca' => $total_seluruh_aktl_tahun_ini * -1,
                 'posisi' => 34,
                 'no_neraca' => '5.4.2',
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('neraca', $data);

@@ -558,6 +558,52 @@ class Model_labarugi extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function input_bpd()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $tahun = $this->input->post('tgl_bpd', true); // Tahun sudah dalam format YYYY
+        $nama_bpd = $this->input->post('nama_bpd', true);
+        $jenis_bpd = $this->input->post('jenis_bpd', true);
+        $jumlah_bpd = $this->input->post('jumlah_bpd', true);
+
+        // Cek apakah kombinasi tahun dan nama_bpd sudah ada di database
+        $this->db->where('tgl_bpd', $tahun);
+        $this->db->where('nama_bpd', $nama_bpd);
+        $query = $this->db->get('lr_bpd');
+
+        if ($query->num_rows() > 0) {
+            return false; // Data sudah ada, return false
+        }
+
+        // Data yang akan dimasukkan ke database
+        $data = [
+            'nama_bpd' => $nama_bpd,
+            'jenis_bpd' => $jenis_bpd,
+            'tgl_bpd' => $tahun, // Pastikan ini hanya tahun (YYYY)
+            'jumlah_bpd' => $jumlah_bpd,
+            'created_at' => date('Y-m-d H:i:s'),
+            'created_by' => $this->session->userdata('nama_lengkap')
+        ];
+
+        // Insert data ke tabel dan kembalikan statusnya
+        return $this->db->insert('lr_bpd', $data);
+    }
+
+    public function get_bpd_input($tahun)
+    {
+        $tahun_lalu = $tahun - 1;
+        $this->db->select('
+        *, 
+        SUM(CASE WHEN YEAR(tgl_bpd) = ' . $tahun . ' THEN lr_bpd.jumlah_bpd ELSE 0 END) as jumlah_bpd_tahun_ini,
+        SUM(CASE WHEN YEAR(tgl_bpd) = ' . $tahun_lalu . ' THEN lr_bpd.jumlah_bpd ELSE 0 END) as jumlah_bpd_tahun_lalu
+    ');
+        $this->db->from('lr_bpd');
+        $this->db->where('YEAR(tgl_bpd) IN (' . $tahun . ', ' . $tahun_lalu . ')');
+        $this->db->group_by('lr_bpd.nama_bpd');
+        $this->db->order_by('lr_bpd.id_bpd', 'ASC');
+        return $this->db->get()->result();
+    }
+
     // public function get_bpk_input($tahun)
     // {
     //     $tahun_lalu = $tahun - 1;
@@ -591,8 +637,193 @@ class Model_labarugi extends CI_Model
     //     return $this->db->get()->result();
     // }
 
-
-
-
     // kode akhir untuk beban pajak
+
+
+    // kode untuk penghasilan komprehensif lainnya
+    public function input_srt()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $tahun = $this->input->post('tgl_srt', true); // Tahun sudah dalam format YYYY
+        $nama_srt = $this->input->post('nama_srt', true);
+        $jenis_srt = $this->input->post('jenis_srt', true);
+        $jumlah_srt = $this->input->post('jumlah_srt', true);
+
+        // Cek apakah kombinasi tahun dan nama_srt sudah ada di database
+        $this->db->where('tgl_srt', $tahun);
+        $this->db->where('nama_srt', $nama_srt);
+        $query = $this->db->get('lr_srt');
+
+        if ($query->num_rows() > 0) {
+            return false; // Data sudah ada, return false
+        }
+
+        // Data yang akan dimasukkan ke database
+        $data = [
+            'nama_srt' => $nama_srt,
+            'jenis_srt' => $jenis_srt,
+            'tgl_srt' => $tahun, // Pastikan ini hanya tahun (YYYY)
+            'jumlah_srt' => $jumlah_srt,
+            'created_at' => date('Y-m-d H:i:s'),
+            'created_by' => $this->session->userdata('nama_lengkap')
+        ];
+
+        // Insert data ke tabel dan kembalikan statusnya
+        return $this->db->insert('lr_srt', $data);
+    }
+
+    public function get_srt_input($tahun)
+    {
+        $tahun_lalu = $tahun - 1;
+        $this->db->select('
+        *, 
+        SUM(CASE WHEN YEAR(tgl_srt) = ' . $tahun . ' THEN lr_srt.jumlah_srt ELSE 0 END) as jumlah_srt_tahun_ini,
+        SUM(CASE WHEN YEAR(tgl_srt) = ' . $tahun_lalu . ' THEN lr_srt.jumlah_srt ELSE 0 END) as jumlah_srt_tahun_lalu
+    ');
+        $this->db->from('lr_srt');
+        $this->db->where('YEAR(tgl_srt) IN (' . $tahun . ', ' . $tahun_lalu . ')');
+        $this->db->group_by('lr_srt.nama_srt');
+        $this->db->order_by('lr_srt.id_srt', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    public function input_pkapip()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $tahun = $this->input->post('tgl_pkapip', true); // Tahun sudah dalam format YYYY
+        $nama_pkapip = $this->input->post('nama_pkapip', true);
+        $jenis_pkapip = $this->input->post('jenis_pkapip', true);
+        $jumlah_pkapip = $this->input->post('jumlah_pkapip', true);
+
+        // Cek apakah kombinasi tahun dan nama_pkapip sudah ada di database
+        $this->db->where('tgl_pkapip', $tahun);
+        $this->db->where('nama_pkapip', $nama_pkapip);
+        $query = $this->db->get('lr_pkapip');
+
+        if ($query->num_rows() > 0) {
+            return false; // Data sudah ada, return false
+        }
+
+        // Data yang akan dimasukkan ke database
+        $data = [
+            'nama_pkapip' => $nama_pkapip,
+            'jenis_pkapip' => $jenis_pkapip,
+            'tgl_pkapip' => $tahun, // Pastikan ini hanya tahun (YYYY)
+            'jumlah_pkapip' => $jumlah_pkapip,
+            'created_at' => date('Y-m-d H:i:s'),
+            'created_by' => $this->session->userdata('nama_lengkap')
+        ];
+
+        // Insert data ke tabel dan kembalikan statusnya
+        return $this->db->insert('lr_pkapip', $data);
+    }
+
+    public function get_pkapip_input($tahun)
+    {
+        $tahun_lalu = $tahun - 1;
+        $this->db->select('
+        *, 
+        SUM(CASE WHEN YEAR(tgl_pkapip) = ' . $tahun . ' THEN lr_pkapip.jumlah_pkapip ELSE 0 END) as jumlah_pkapip_tahun_ini,
+        SUM(CASE WHEN YEAR(tgl_pkapip) = ' . $tahun_lalu . ' THEN lr_pkapip.jumlah_pkapip ELSE 0 END) as jumlah_pkapip_tahun_lalu
+    ');
+        $this->db->from('lr_pkapip');
+        $this->db->where('YEAR(tgl_pkapip) IN (' . $tahun . ', ' . $tahun_lalu . ')');
+        $this->db->group_by('lr_pkapip.nama_pkapip');
+        $this->db->order_by('lr_pkapip.id_pkapip', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    public function input_bppt()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $tahun = $this->input->post('tgl_bppt', true); // Tahun sudah dalam format YYYY
+        $nama_bppt = $this->input->post('nama_bppt', true);
+        $jenis_bppt = $this->input->post('jenis_bppt', true);
+        $jumlah_bppt = $this->input->post('jumlah_bppt', true);
+
+        // Cek apakah kombinasi tahun dan nama_bppt sudah ada di database
+        $this->db->where('tgl_bppt', $tahun);
+        $this->db->where('nama_bppt', $nama_bppt);
+        $query = $this->db->get('lr_bppt');
+
+        if ($query->num_rows() > 0) {
+            return false; // Data sudah ada, return false
+        }
+
+        // Data yang akan dimasukkan ke database
+        $data = [
+            'nama_bppt' => $nama_bppt,
+            'jenis_bppt' => $jenis_bppt,
+            'tgl_bppt' => $tahun, // Pastikan ini hanya tahun (YYYY)
+            'jumlah_bppt' => $jumlah_bppt,
+            'created_at' => date('Y-m-d H:i:s'),
+            'created_by' => $this->session->userdata('nama_lengkap')
+        ];
+
+        // Insert data ke tabel dan kembalikan statusnya
+        return $this->db->insert('lr_bppt', $data);
+    }
+
+    public function get_bppt_input($tahun)
+    {
+        $tahun_lalu = $tahun - 1;
+        $this->db->select('
+        *, 
+        SUM(CASE WHEN YEAR(tgl_bppt) = ' . $tahun . ' THEN lr_bppt.jumlah_bppt ELSE 0 END) as jumlah_bppt_tahun_ini,
+        SUM(CASE WHEN YEAR(tgl_bppt) = ' . $tahun_lalu . ' THEN lr_bppt.jumlah_bppt ELSE 0 END) as jumlah_bppt_tahun_lalu
+    ');
+        $this->db->from('lr_bppt');
+        $this->db->where('YEAR(tgl_bppt) IN (' . $tahun . ', ' . $tahun_lalu . ')');
+        $this->db->group_by('lr_bppt.nama_bppt');
+        $this->db->order_by('lr_bppt.id_bppt', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    public function input_pkltb()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $tahun = $this->input->post('tgl_pkltb', true); // Tahun sudah dalam format YYYY
+        $nama_pkltb = $this->input->post('nama_pkltb', true);
+        $jenis_pkltb = $this->input->post('jenis_pkltb', true);
+        $jumlah_pkltb = $this->input->post('jumlah_pkltb', true);
+
+        // Cek apakah kombinasi tahun dan nama_pkltb sudah ada di database
+        $this->db->where('tgl_pkltb', $tahun);
+        $this->db->where('nama_pkltb', $nama_pkltb);
+        $query = $this->db->get('lr_pkltb');
+
+        if ($query->num_rows() > 0) {
+            return false; // Data sudah ada, return false
+        }
+
+        // Data yang akan dimasukkan ke database
+        $data = [
+            'nama_pkltb' => $nama_pkltb,
+            'jenis_pkltb' => $jenis_pkltb,
+            'tgl_pkltb' => $tahun, // Pastikan ini hanya tahun (YYYY)
+            'jumlah_pkltb' => $jumlah_pkltb,
+            'created_at' => date('Y-m-d H:i:s'),
+            'created_by' => $this->session->userdata('nama_lengkap')
+        ];
+
+        // Insert data ke tabel dan kembalikan statusnya
+        return $this->db->insert('lr_pkltb', $data);
+    }
+
+    public function get_pkltb_input($tahun)
+    {
+        $tahun_lalu = $tahun - 1;
+        $this->db->select('
+        *, 
+        SUM(CASE WHEN YEAR(tgl_pkltb) = ' . $tahun . ' THEN lr_pkltb.jumlah_pkltb ELSE 0 END) as jumlah_pkltb_tahun_ini,
+        SUM(CASE WHEN YEAR(tgl_pkltb) = ' . $tahun_lalu . ' THEN lr_pkltb.jumlah_pkltb ELSE 0 END) as jumlah_pkltb_tahun_lalu
+    ');
+        $this->db->from('lr_pkltb');
+        $this->db->where('YEAR(tgl_pkltb) IN (' . $tahun . ', ' . $tahun_lalu . ')');
+        $this->db->group_by('lr_pkltb.nama_pkltb');
+        $this->db->order_by('lr_pkltb.id_pkltb', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    // kode akhir untuk penghasilan komprehensif lainnya
 }

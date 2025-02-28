@@ -332,7 +332,9 @@ class Hutang extends CI_Controller
                 'nilai_neraca' => $total_seluruh_hnu_tahun_ini,
                 'posisi' => 18,
                 'no_neraca' => '3.2',
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('neraca', $data);
@@ -433,7 +435,11 @@ class Hutang extends CI_Controller
                 'nilai_neraca' => $total_bymhd_tahun_ini,
                 'posisi' => 19,
                 'no_neraca' => '3.3',
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap'),
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('neraca', $data);
@@ -534,7 +540,9 @@ class Hutang extends CI_Controller
                 'nilai_neraca' => $total_up_tahun_ini,
                 'posisi' => 20,
                 'no_neraca' => '3.4',
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('neraca', $data);
@@ -887,7 +895,9 @@ class Hutang extends CI_Controller
                 'nilai_neraca' => $total_kll_tahun_ini,
                 'posisi' => 27,
                 'no_neraca' => '4.3.1',
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('neraca', $data);

@@ -273,7 +273,9 @@ class Penjelasan extends CI_Controller
                 'nilai_neraca' => $total_pnu,
                 'posisi' => 5,
                 'no_neraca' => '1.4',
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('neraca', $data);
@@ -375,7 +377,9 @@ class Penjelasan extends CI_Controller
                 'nilai_neraca' => $total_tahun_ini,
                 'posisi' => 1,
                 'no_neraca' => '1.1',
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('neraca', $data);

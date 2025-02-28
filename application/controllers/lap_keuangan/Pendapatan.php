@@ -148,7 +148,9 @@ class Pendapatan extends CI_Controller
                 'akun' => 'a. Pendapatan Penjualan Air',
                 'nilai_lr_sak_ep' => $total_seluruh_ppa_tahun_ini,
                 'posisi' => 1,
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('lr_sak_ep', $data);
@@ -247,7 +249,9 @@ class Pendapatan extends CI_Controller
                 'akun' => 'b. Pendapatan Non Air',
                 'nilai_lr_sak_ep' => $total_seluruh_ppna_tahun_ini,
                 'posisi' => 2,
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('lr_sak_ep', $data);
@@ -347,7 +351,9 @@ class Pendapatan extends CI_Controller
                 'akun' => 'c. Pendapatan Kemitraan',
                 'nilai_lr_sak_ep' => $total_seluruh_pk_tahun_ini,
                 'posisi' => 3,
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('lr_sak_ep', $data);
@@ -447,7 +453,9 @@ class Pendapatan extends CI_Controller
                 'akun' => 'Pendapatan Lain-lain',
                 'nilai_lr_sak_ep' => $total_seluruh_pll_tahun_ini,
                 'posisi' => 9,
-                'status' => 1
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
             ];
 
             $this->db->insert('lr_sak_ep', $data);
