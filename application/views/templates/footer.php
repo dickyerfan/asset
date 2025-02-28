@@ -259,7 +259,48 @@
         })
     })
 </script>
+<script>
+    $(document).ready(function() {
+        let options = {
+            "Koreksi Fiskal Positif": [{
+                    value: "Beban Rapat dan Tamu",
+                    text: "Beban Rapat dan Tamu"
+                },
+                {
+                    value: "Beban Representasi",
+                    text: "Beban Representasi"
+                },
+                {
+                    value: "Beban Penyisihan Piutang",
+                    text: "Beban Penyisihan Piutang"
+                }
+            ],
+            "Koreksi Fiskal Negatif": [{
+                value: "Pendapatan bunga giro dan Deposito",
+                text: "Pendapatan bunga giro dan Deposito"
+            }]
+        };
 
+        $("#jenis_bpk").change(function() {
+            let jenis = $(this).val();
+            let $namaBpk = $("#nama_bpk");
+
+            // Kosongkan dropdown nama_bpk
+            $namaBpk.empty();
+            $namaBpk.append('<option value="">Pilih Uraian</option>');
+
+            // Jika ada opsi yang sesuai dengan jenis yang dipilih
+            if (jenis in options) {
+                $.each(options[jenis], function(index, item) {
+                    $namaBpk.append($('<option>', {
+                        value: item.value,
+                        text: item.text
+                    }));
+                });
+            }
+        });
+    });
+</script>
 <!-- <script>
     $(function() {
         // Get context with jQuery - using jQuery's .get() method.

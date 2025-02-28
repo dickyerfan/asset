@@ -238,9 +238,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('lap_keuangan/otoda'); ?>" class="nav-link">
+                            <a href="<?= base_url('lap_keuangan/lr_sak_ep'); ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>LR OTODA</p>
+                                <p>LR SAK EP</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -301,6 +301,24 @@
                             <a href="<?= base_url('lap_keuangan/ekuitas') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Ekuitas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('lap_keuangan/pendapatan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pendapatan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('lap_keuangan/beban') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Beban</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('lap_keuangan/beban_pajak') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Beban Pajak</p>
                             </a>
                         </li>
                         <li class="nav-item">

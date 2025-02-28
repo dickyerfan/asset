@@ -1056,6 +1056,94 @@ class Model_lap_keuangan extends CI_Model
     // akhir kode untuk hutang
 
     // ekuitas
+    public function input_ppyd()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $tahun = $this->input->post('tgl_ppyd', true); // Tahun sudah dalam format YYYY
+        $nama_ppyd = $this->input->post('nama_ppyd', true);
+        $jumlah_ppyd = $this->input->post('jumlah_ppyd', true);
+
+        // Cek apakah kombinasi tahun dan nama_up sudah ada di database
+        $this->db->where('tgl_ppyd', $tahun);
+        $this->db->where('nama_ppyd', $nama_up);
+        $query = $this->db->get('ppyd_input');
+
+        if ($query->num_rows() > 0) {
+            return false; // Data sudah ada, return false
+        }
+
+        // Data yang akan dimasukkan ke database
+        $data = [
+            'nama_ppyd' => $nama_ppyd,
+            'tgl_ppyd' => $tahun, // Pastikan ini hanya tahun (YYYY)
+            'jumlah_ppyd' => $jumlah_ppyd,
+            'created_at' => date('Y-m-d H:i:s'),
+            'created_by' => $this->session->userdata('nama_lengkap')
+        ];
+
+        // Insert data ke tabel dan kembalikan statusnya
+        return $this->db->insert('ppyd_input', $data);
+    }
+
+    public function get_ppyd_input($tahun)
+    {
+        $tahun_lalu = $tahun - 1;
+        $this->db->select('
+        *, 
+        SUM(CASE WHEN YEAR(tgl_ppyd) = ' . $tahun . ' THEN ppyd_input.jumlah_ppyd ELSE 0 END) as jumlah_ppyd_tahun_ini,
+        SUM(CASE WHEN YEAR(tgl_ppyd) = ' . $tahun_lalu . ' THEN ppyd_input.jumlah_ppyd ELSE 0 END) as jumlah_ppyd_tahun_lalu
+    ');
+        $this->db->from('ppyd_input');
+        $this->db->where('YEAR(tgl_ppyd) IN (' . $tahun . ', ' . $tahun_lalu . ')');
+        $this->db->group_by('ppyd_input.nama_ppyd');
+        $this->db->order_by('ppyd_input.id_ppyd', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    public function input_ppybds()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $tahun = $this->input->post('tgl_ppybds', true); // Tahun sudah dalam format YYYY
+        $nama_ppybds = $this->input->post('nama_ppybds', true);
+        $jumlah_ppybds = $this->input->post('jumlah_ppybds', true);
+
+        // Cek apakah kombinasi tahun dan nama_up sudah ada di database
+        $this->db->where('tgl_ppybds', $tahun);
+        $this->db->where('nama_ppybds', $nama_up);
+        $query = $this->db->get('ppybds_input');
+
+        if ($query->num_rows() > 0) {
+            return false; // Data sudah ada, return false
+        }
+
+        // Data yang akan dimasukkan ke database
+        $data = [
+            'nama_ppybds' => $nama_ppybds,
+            'tgl_ppybds' => $tahun, // Pastikan ini hanya tahun (YYYY)
+            'jumlah_ppybds' => $jumlah_ppybds,
+            'created_at' => date('Y-m-d H:i:s'),
+            'created_by' => $this->session->userdata('nama_lengkap')
+        ];
+
+        // Insert data ke tabel dan kembalikan statusnya
+        return $this->db->insert('ppybds_input', $data);
+    }
+
+    public function get_ppybds_input($tahun)
+    {
+        $tahun_lalu = $tahun - 1;
+        $this->db->select('
+        *, 
+        SUM(CASE WHEN YEAR(tgl_ppybds) = ' . $tahun . ' THEN ppybds_input.jumlah_ppybds ELSE 0 END) as jumlah_ppybds_tahun_ini,
+        SUM(CASE WHEN YEAR(tgl_ppybds) = ' . $tahun_lalu . ' THEN ppybds_input.jumlah_ppybds ELSE 0 END) as jumlah_ppybds_tahun_lalu
+    ');
+        $this->db->from('ppybds_input');
+        $this->db->where('YEAR(tgl_ppybds) IN (' . $tahun . ', ' . $tahun_lalu . ')');
+        $this->db->group_by('ppybds_input.nama_ppybds');
+        $this->db->order_by('ppybds_input.id_ppybds', 'ASC');
+        return $this->db->get()->result();
+    }
+
     public function input_mh()
     {
         date_default_timezone_set('Asia/Jakarta');

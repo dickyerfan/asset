@@ -48,6 +48,120 @@
                             $tahun_lap = date('Y');
                         }
                         ?>
+                        <h5><?= strtoupper($title) . ' ' . $tahun_lap; ?></h5>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="contoh2" class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Uraian</th>
+                                <th><?= $tahun_lap ?></th>
+                                <th><?= $tahun_lalu ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $total_ppyd_tahun_ini = 0;
+                            $total_ppyd_tahun_lalu = 0;
+                            ?>
+                            <?php if (!empty($ppyd_input)) : ?>
+                                <?php $no = 1; ?>
+                                <?php foreach ($ppyd_input as $row) : ?>
+                                    <tr>
+                                        <td class="text-left"><?= $row->nama_ppyd; ?></td>
+                                        <td class="text-right"><?= number_format($row->jumlah_ppyd_tahun_ini, 0, ',', '.'); ?></td>
+                                        <td class="text-right"><?= number_format($row->jumlah_ppyd_tahun_lalu, 0, ',', '.'); ?></td>
+                                    </tr>
+
+                                    <?php
+                                    $total_ppyd_tahun_ini += $row->jumlah_ppyd_tahun_ini;
+                                    $total_ppyd_tahun_lalu += $row->jumlah_ppyd_tahun_lalu;
+                                    ?>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <tr>
+                                    <td colspan="8" class="text-center">Data tidak tersedia</td>
+                                </tr>
+                            <?php endif; ?>
+                            <tr>
+                                <th class="text-left">Total Penyertaan Pemda Yang Dipisahkan</th>
+                                <th class="text-right">
+                                    <a href="<?= base_url('lap_keuangan/ekuitas/input_ppyd_neraca/' . $tahun_lap . '/' . $total_ppyd_tahun_ini) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
+                                        <?= number_format($total_ppyd_tahun_ini, 0, ',', '.'); ?>
+                                    </a>
+
+                                </th>
+                                <th class="text-right"><?= number_format($total_ppyd_tahun_lalu, 0, ',', '.'); ?></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+
+                        <?php
+                        if (empty($tahun_lap)) {
+                            $tahun_lap = date('Y');
+                        }
+                        ?>
+                        <h5><?= strtoupper($title2) . ' ' . $tahun_lap; ?></h5>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="contoh2" class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Uraian</th>
+                                <th><?= $tahun_lap ?></th>
+                                <th><?= $tahun_lalu ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $total_ppybds_tahun_ini = 0;
+                            $total_ppybds_tahun_lalu = 0;
+                            ?>
+                            <?php if (!empty($ppybds_input)) : ?>
+                                <?php $no = 1; ?>
+                                <?php foreach ($ppybds_input as $row) : ?>
+                                    <tr>
+                                        <td class="text-left"><?= $row->nama_ppybds; ?></td>
+                                        <td class="text-right"><?= number_format($row->jumlah_ppybds_tahun_ini, 0, ',', '.'); ?></td>
+                                        <td class="text-right"><?= number_format($row->jumlah_ppybds_tahun_lalu, 0, ',', '.'); ?></td>
+                                    </tr>
+
+                                    <?php
+                                    $total_ppybds_tahun_ini += $row->jumlah_ppybds_tahun_ini;
+                                    $total_ppybds_tahun_lalu += $row->jumlah_ppybds_tahun_lalu;
+                                    ?>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <tr>
+                                    <td colspan="8" class="text-center">Data tidak tersedia</td>
+                                </tr>
+                            <?php endif; ?>
+                            <tr>
+                                <th class="text-left">Total Penyertaan Pemda Yang Dipisahkan</th>
+                                <th class="text-right">
+                                    <a href="<?= base_url('lap_keuangan/ekuitas/input_ppybds_neraca/' . $tahun_lap . '/' . $total_ppybds_tahun_ini) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
+                                        <?= number_format($total_ppybds_tahun_ini, 0, ',', '.'); ?>
+                                    </a>
+
+                                </th>
+                                <th class="text-right"><?= number_format($total_ppybds_tahun_lalu, 0, ',', '.'); ?></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+
+                        <?php
+                        if (empty($tahun_lap)) {
+                            $tahun_lap = date('Y');
+                        }
+                        ?>
                         <h5><?= strtoupper($title3) . ' ' . $tahun_lap; ?></h5>
                     </div>
                 </div>
@@ -142,7 +256,7 @@
                                 </tr>
                             <?php endif; ?>
                             <tr>
-                                <th class="text-left">Total Modal Hibah</th>
+                                <th class="text-left">Total Cadangan Umum</th>
                                 <th class="text-right">
                                     <a href="<?= base_url('lap_keuangan/ekuitas/input_cu_neraca/' . $tahun_lap . '/' . $total_cu_tahun_ini) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
                                         <?= number_format($total_cu_tahun_ini, 0, ',', '.'); ?>
