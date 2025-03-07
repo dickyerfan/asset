@@ -121,6 +121,7 @@ class Model_lap_keuangan extends CI_Model
             'kategori' => 'Aset Lancar',
             'akun' => 'Deposito',
             'nilai_neraca' => $nilai_neraca,
+            'nilai_neraca_audited' => $nilai_neraca,
             'posisi' => 2,
             'no_neraca' => '1.1.1',
             'status' => 1,

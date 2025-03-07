@@ -30,14 +30,6 @@
             margin-right: 10px;
         }
 
-        /* hr {
-            height: 0.3px;
-            background-color: black !important;
-            margin-top: 2px;
-            width: 200px;
-            text-align: start;
-        } */
-
         .tableUtama {
             border-collapse: collapse;
             /* Agar garis tabel menyatu */
@@ -179,25 +171,25 @@
                 echo "<tr>";
                 echo "<td class='text-center'>{$row->no_neraca}</td>";
                 echo "<td>" . htmlspecialchars($row->akun) . "</td>";
-                echo "<td style='text-align:right;'>" . number_format($row->nilai_neraca, 0, ',', '.') . "</td>";
+                echo "<td style='text-align:right;'>" . number_format($row->nilai_neraca_audited, 0, ',', '.') . "</td>";
                 echo "<td style='text-align:right;'>" . number_format($nilai_tahun_lalu, 0, ',', '.') . "</td>";
                 echo "</tr>";
 
                 // **Hitung total berdasarkan kategori**
                 if ($row->kategori == 'Aset Lancar') {
-                    $total_aset_lancar += $row->nilai_neraca;
+                    $total_aset_lancar += $row->nilai_neraca_audited;
                     $total_aset_lancar_lalu += $nilai_tahun_lalu;
                 } elseif ($row->kategori == 'Aset Tidak Lancar') {
-                    $total_aset_tidak_lancar += $row->nilai_neraca;
+                    $total_aset_tidak_lancar += $row->nilai_neraca_audited;
                     $total_aset_tidak_lancar_lalu += $nilai_tahun_lalu;
                 } elseif ($row->kategori == 'Liabilitas Jangka Pendek') {
-                    $total_liabilitas_jangka_pendek += $row->nilai_neraca;
+                    $total_liabilitas_jangka_pendek += $row->nilai_neraca_audited;
                     $total_liabilitas_jangka_pendek_lalu += $nilai_tahun_lalu;
                 } elseif ($row->kategori == 'Liabilitas Jangka Panjang') {
-                    $total_liabilitas_jangka_panjang += $row->nilai_neraca;
+                    $total_liabilitas_jangka_panjang += $row->nilai_neraca_audited;
                     $total_liabilitas_jangka_panjang_lalu += $nilai_tahun_lalu;
                 } elseif ($row->kategori == 'Ekuitas') {
-                    $total_ekuitas += $row->nilai_neraca;
+                    $total_ekuitas += $row->nilai_neraca_audited;
                     $total_ekuitas_lalu += $nilai_tahun_lalu;
                 }
             }

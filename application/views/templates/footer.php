@@ -50,6 +50,18 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
 
 <script>
+    function alert_edit_neraca() {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Peringatan!',
+            text: 'Data ini sudah pernah diperbarui dan tidak bisa diedit lagi!..silakan hubungi Administrator',
+            confirmButtonText: 'OK'
+        });
+    }
+</script>
+
+
+<script>
     function redirectToPage() {
         var select = document.getElementById("jenis_transaksi");
         var url = select.value;

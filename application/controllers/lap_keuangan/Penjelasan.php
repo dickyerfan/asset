@@ -108,7 +108,7 @@ class Penjelasan extends CI_Controller
                         </button>
                       </div>'
             );
-            redirect('lap_keuangan/penjelasan');
+            redirect('lap_keuangan/penjelasan?tahun=' . $tahun);
         }
     }
 
@@ -139,7 +139,7 @@ class Penjelasan extends CI_Controller
                         </button>
                       </div>'
             );
-            redirect('lap_keuangan/penjelasan');
+            redirect('lap_keuangan/penjelasan?tahun=' . $tahun);
         }
     }
 
@@ -182,8 +182,69 @@ class Penjelasan extends CI_Controller
                 </div>'
                 );
             }
-            redirect('lap_keuangan/penjelasan');
+            redirect('lap_keuangan/penjelasan?tahun=' . $tahun);
         }
+    }
+
+    public function input_kas_bank($tahun, $total_tahun_ini)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        if ($total_tahun_ini == 0) {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal,</strong> Data Belum ada! Tidak dapat menambahkan data.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+            redirect('lap_keuangan/penjelasan?tahun=' . $tahun);
+            return;
+        }
+
+        // Cek apakah data sudah ada di database
+        $this->db->where('tahun_neraca', $tahun);
+        $this->db->where('kategori', 'Aset Lancar');
+        $this->db->where('akun', 'Kas dan Bank');
+        $query = $this->db->get('neraca');
+
+        if ($query->num_rows() > 0) {
+            // Jika data sudah ada, tampilkan pesan peringatan
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal,</strong> Data sudah ada! Tidak dapat menambahkan data yang sama.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+            redirect('lap_keuangan/penjelasan?tahun=' . $tahun);
+        } else {
+            // Jika belum ada, lakukan insert
+            $data = [
+                'tahun_neraca' => $tahun,
+                'kategori' => 'Aset Lancar',
+                'akun' => 'Kas dan Bank',
+                'nilai_neraca' => $total_tahun_ini,
+                'nilai_neraca_audited' => $total_tahun_ini,
+                'posisi' => 1,
+                'no_neraca' => '1.1',
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->session->userdata('nama_lengkap')
+            ];
+
+            $this->db->insert('neraca', $data);
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>Sukses,</strong> Data berhasil disimpan ke Neraca!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>'
+            );
+        }
+        redirect('lap_keuangan/penjelasan?tahun=' . $tahun);
     }
 
     public function input_pend_blm_terima()
@@ -227,7 +288,7 @@ class Penjelasan extends CI_Controller
                 );
             }
 
-            redirect('lap_keuangan/penjelasan');
+            redirect('lap_keuangan/penjelasan?tahun=' . $tahun);
         }
     }
 
@@ -244,7 +305,7 @@ class Penjelasan extends CI_Controller
                         </button>
                       </div>'
             );
-            redirect('lap_keuangan/penjelasan');
+            redirect('lap_keuangan/penjelasan?tahun=' . $tahun);
             return;
         }
 
@@ -271,6 +332,7 @@ class Penjelasan extends CI_Controller
                 'kategori' => 'Aset Lancar',
                 'akun' => 'Piutang Non Usaha',
                 'nilai_neraca' => $total_pnu,
+                'nilai_neraca_audited' => $total_pnu,
                 'posisi' => 5,
                 'no_neraca' => '1.4',
                 'status' => 1,
@@ -288,7 +350,7 @@ class Penjelasan extends CI_Controller
                       </div>'
             );
         }
-        redirect('lap_keuangan/penjelasan');
+        redirect('lap_keuangan/penjelasan?tahun=' . $tahun);
     }
 
     public function input_pembayaran_dimuka()
@@ -332,68 +394,10 @@ class Penjelasan extends CI_Controller
                 );
             }
 
-            redirect('lap_keuangan/penjelasan');
+            redirect('lap_keuangan/penjelasan?tahun=' . $tahun);
         }
     }
 
-    public function input_kas_bank($tahun, $total_tahun_ini)
-    {
-        date_default_timezone_set('Asia/Jakarta');
-        if ($total_tahun_ini == 0) {
-            $this->session->set_flashdata(
-                'info',
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Gagal,</strong> Data Belum ada! Tidak dapat menambahkan data.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                      </div>'
-            );
-            redirect('lap_keuangan/penjelasan');
-            return;
-        }
-
-        // Cek apakah data sudah ada di database
-        $this->db->where('tahun_neraca', $tahun);
-        $this->db->where('kategori', 'Aset Lancar');
-        $this->db->where('akun', 'Kas dan Bank');
-        $query = $this->db->get('neraca');
-
-        if ($query->num_rows() > 0) {
-            // Jika data sudah ada, tampilkan pesan peringatan
-            $this->session->set_flashdata(
-                'info',
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Gagal,</strong> Data sudah ada! Tidak dapat menambahkan data yang sama.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                      </div>'
-            );
-        } else {
-            // Jika belum ada, lakukan insert
-            $data = [
-                'tahun_neraca' => $tahun,
-                'kategori' => 'Aset Lancar',
-                'akun' => 'Kas dan Bank',
-                'nilai_neraca' => $total_tahun_ini,
-                'posisi' => 1,
-                'no_neraca' => '1.1',
-                'status' => 1,
-                'created_at' => date('Y-m-d H:i:s'),
-                'created_by' => $this->session->userdata('nama_lengkap')
-            ];
-
-            $this->db->insert('neraca', $data);
-            $this->session->set_flashdata(
-                'info',
-                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                        <strong>Sukses,</strong> Data berhasil disimpan ke Neraca!
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                      </div>'
-            );
-        }
-        redirect('lap_keuangan/penjelasan');
-    }
 
     public function input_pdm($tahun, $total_pdm_tahun_ini)
     {
@@ -407,7 +411,7 @@ class Penjelasan extends CI_Controller
                         </button>
                       </div>'
             );
-            redirect('lap_keuangan/penjelasan');
+            redirect('lap_keuangan/penjelasan?tahun=' . $tahun);
             return;
         }
 
@@ -434,6 +438,7 @@ class Penjelasan extends CI_Controller
                 'kategori' => 'Aset Lancar',
                 'akun' => 'Pembayaran Dimuka',
                 'nilai_neraca' => $total_pdm_tahun_ini,
+                'nilai_neraca_audited' => $total_pdm_tahun_ini,
                 'posisi' => 8,
                 'no_neraca' => '1.7',
                 'status' => 1,
@@ -451,7 +456,7 @@ class Penjelasan extends CI_Controller
                       </div>'
             );
         }
-        redirect('lap_keuangan/penjelasan');
+        redirect('lap_keuangan/penjelasan?tahun=' . $tahun);
     }
 
     public function input_pajak_pnd()
@@ -493,7 +498,7 @@ class Penjelasan extends CI_Controller
                 </div>'
                 );
             }
-            redirect('lap_keuangan/penjelasan');
+            redirect('lap_keuangan/penjelasan?tahun=' . $tahun);
         }
     }
 }

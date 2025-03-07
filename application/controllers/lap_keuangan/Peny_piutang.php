@@ -277,6 +277,7 @@ class Peny_piutang extends CI_Controller
                 'kategori' => 'Aset Lancar',
                 'akun' => 'Piutang Usaha',
                 'nilai_neraca' => $total_piu_usaha_tahun_ini,
+                'nilai_neraca_audited' => $total_piu_usaha_tahun_ini,
                 'posisi' => 3,
                 'no_neraca' => '1.2',
                 'status' => 1
@@ -331,6 +332,7 @@ class Peny_piutang extends CI_Controller
                 'kategori' => 'Aset Lancar',
                 'akun' => 'Akm Kerugian Piutang Usaha',
                 'nilai_neraca' => $total_akm_piu_usaha_tahun_ini * -1,
+                'nilai_neraca_audited' => $total_akm_piu_usaha_tahun_ini * -1,
                 'posisi' => 4,
                 'no_neraca' => '1.3',
                 'status' => 1
