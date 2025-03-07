@@ -327,18 +327,6 @@
                                 <p>Penghasilan Komp. Lain</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Rinc. Beban Otoda</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Reklas Biaya</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 <?php if ($this->session->userdata('bagian') == 'Administrator') : ?>

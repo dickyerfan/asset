@@ -398,18 +398,18 @@
                         </thead>
                         <tbody>
                             <?php
-                            $total_seluruh_bop_tahun_ini = $total_bpa_tahun_ini + $total_bop_tahun_ini + $total_btd_tahun_ini + $total_btd_tahun_ini;
-                            $total_seluruh_bop_tahun_lalu = $total_bpa_tahun_lalu + $total_bop_tahun_lalu + $total_btd_tahun_lalu + $total_btd_tahun_lalu;
+                            $total_beban_usaha_tahun_ini = $total_bpa_tahun_ini + $total_bop_tahun_ini + $total_btd_tahun_ini + $total_bua_tahun_ini;
+                            $total_beban_usaha_tahun_lalu = $total_bpa_tahun_lalu + $total_bop_tahun_lalu + $total_btd_tahun_lalu + $total_bua_tahun_lalu;
 
                             ?>
                             <tr>
-                                <th class="text-left">Total Keseluruhan Beban </th>
+                                <th class="text-left">Total Beban Usaha untuk data Evkin </th>
                                 <th class="text-right">
-                                    <a href="<?= base_url('lap_keuangan/beban/input_hnu_neraca/' . $tahun_lap . '/' . $total_seluruh_bop_tahun_ini) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
-                                        <?= number_format($total_seluruh_bop_tahun_ini, 0, ',', '.'); ?>
+                                    <a href="<?= base_url('lap_keuangan/beban/input_bu_evkin/' . $tahun_lap . '/' . $total_beban_usaha_tahun_ini) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
+                                        <?= number_format($total_beban_usaha_tahun_ini, 0, ',', '.'); ?>
                                     </a>
                                 </th>
-                                <th class="text-right"><?= number_format($total_seluruh_bop_tahun_lalu, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_beban_usaha_tahun_lalu, 0, ',', '.'); ?></th>
                             </tr>
                         </tbody>
                     </table>

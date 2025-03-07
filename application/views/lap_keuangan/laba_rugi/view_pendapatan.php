@@ -60,6 +60,8 @@
                             <?php
                             $total_ppa_tahun_ini = 0;
                             $total_ppa_tahun_lalu = 0;
+                            $total_pa_tahun_ini = 0;
+                            $total_pa_tahun_lalu = 0;
                             ?>
                             <?php if (!empty($ppa_input)) : ?>
                                 <?php $no = 1; ?>
@@ -73,6 +75,8 @@
                                     <?php
                                     $total_ppa_tahun_ini += $row->jumlah_ppa_tahun_ini;
                                     $total_ppa_tahun_lalu += $row->jumlah_ppa_tahun_lalu;
+                                    $total_pa_tahun_ini += $row->jumlah_pa_tahun_ini;
+                                    $total_pa_tahun_lalu += $row->jumlah_pa_tahun_lalu;
                                     ?>
                                 <?php endforeach; ?>
                             <?php else : ?>
@@ -91,6 +95,15 @@
                                     </a>
                                 </th>
                                 <th class="text-right"><?= number_format($total_ppa_tahun_lalu, 0, ',', '.'); ?></th>
+                            </tr>
+                            <tr>
+                                <th class="text-left">Total Pendapatan Air Untuk Data Evkin</th>
+                                <th class="text-right">
+                                    <a href="<?= base_url('lap_keuangan/pendapatan/input_pa_evkin/' . $tahun_lap . '/' . $total_pa_tahun_ini) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
+                                        <?= number_format($total_pa_tahun_ini, 0, ',', '.'); ?>
+                                    </a>
+                                </th>
+                                <th class="text-right"><?= number_format($total_pa_tahun_lalu, 0, ',', '.'); ?></th>
                             </tr>
                         </tbody>
                     </table>

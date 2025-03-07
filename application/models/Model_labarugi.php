@@ -48,20 +48,46 @@ class Model_labarugi extends CI_Model
         return $this->db->insert('lr_ppa', $data);
     }
 
+    // public function get_ppa_input($tahun)
+    // {
+    //     $tahun_lalu = $tahun - 1;
+    //     $this->db->select('
+    //     *, 
+    //     SUM(CASE WHEN YEAR(tgl_ppa) = ' . $tahun . ' THEN lr_ppa.jumlah_ppa ELSE 0 END) as jumlah_ppa_tahun_ini,
+    //     SUM(CASE WHEN YEAR(tgl_ppa) = ' . $tahun_lalu . ' THEN lr_ppa.jumlah_ppa ELSE 0 END) as jumlah_ppa_tahun_lalu
+    // ');
+    //     $this->db->from('lr_ppa');
+    //     $this->db->where('YEAR(tgl_ppa) IN (' . $tahun . ', ' . $tahun_lalu . ')');
+    //     $this->db->group_by('lr_ppa.nama_ppa');
+    //     $this->db->order_by('lr_ppa.id_ppa', 'ASC');
+    //     return $this->db->get()->result();
+    // }
+
     public function get_ppa_input($tahun)
     {
         $tahun_lalu = $tahun - 1;
         $this->db->select('
-        *, 
-        SUM(CASE WHEN YEAR(tgl_ppa) = ' . $tahun . ' THEN lr_ppa.jumlah_ppa ELSE 0 END) as jumlah_ppa_tahun_ini,
-        SUM(CASE WHEN YEAR(tgl_ppa) = ' . $tahun_lalu . ' THEN lr_ppa.jumlah_ppa ELSE 0 END) as jumlah_ppa_tahun_lalu
-    ');
+            *,
+            SUM(CASE WHEN YEAR(tgl_ppa) = ' . $tahun . ' THEN lr_ppa.jumlah_ppa ELSE 0 END) as jumlah_ppa_tahun_ini,
+            SUM(CASE WHEN YEAR(tgl_ppa) = ' . $tahun_lalu . ' THEN lr_ppa.jumlah_ppa ELSE 0 END) as jumlah_ppa_tahun_lalu,
+    
+            SUM(CASE WHEN YEAR(tgl_ppa) = ' . $tahun . ' 
+                     AND nama_ppa IN (\'Harga Air\', \'Beban Tetap Administrasi\', \'Beban Tetap Jasa\') 
+                     THEN lr_ppa.jumlah_ppa ELSE 0 END) as jumlah_pa_tahun_ini,
+    
+            SUM(CASE WHEN YEAR(tgl_ppa) = ' . $tahun_lalu . ' 
+                     AND nama_ppa IN (\'Harga Air\', \'Beban Tetap Administrasi\', \'Beban Tetap Jasa\') 
+                     THEN lr_ppa.jumlah_ppa ELSE 0 END) as jumlah_pa_tahun_lalu
+        ');
         $this->db->from('lr_ppa');
         $this->db->where('YEAR(tgl_ppa) IN (' . $tahun . ', ' . $tahun_lalu . ')');
         $this->db->group_by('lr_ppa.nama_ppa');
         $this->db->order_by('lr_ppa.id_ppa', 'ASC');
         return $this->db->get()->result();
     }
+
+
+
     public function input_ppna()
     {
         date_default_timezone_set('Asia/Jakarta');
