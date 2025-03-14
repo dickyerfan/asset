@@ -23,4 +23,13 @@ class Model_penyesuaian_ekuitas extends CI_Model
         $this->db->where('tahun_neraca', $tahun);
         return $this->db->get()->result();
     }
+
+    public function get_by_year_audited($tahun)
+    {
+        $this->db->select('tahun_neraca, akun, nilai_neraca_audited');
+        $this->db->from('neraca');
+        $this->db->where('kategori', 'Ekuitas');
+        $this->db->where('tahun_neraca', $tahun);
+        return $this->db->get()->result();
+    }
 }

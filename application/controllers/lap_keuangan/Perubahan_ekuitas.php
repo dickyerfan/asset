@@ -52,6 +52,9 @@ class Perubahan_ekuitas extends CI_Controller
         $data['ekuitas_dua_tahun_lalu'] = $this->Model_penyesuaian_ekuitas->get_by_year($tahun - 2);
         $data['ekuitas_tahun_lalu'] = $this->Model_penyesuaian_ekuitas->get_by_year($tahun - 1);
         $data['ekuitas_tahun_ini'] = $this->Model_penyesuaian_ekuitas->get_by_year($tahun);
+        $data['ekuitas_dua_tahun_lalu_audited'] = $this->Model_penyesuaian_ekuitas->get_by_year_audited($tahun - 2);
+        $data['ekuitas_tahun_lalu_audited'] = $this->Model_penyesuaian_ekuitas->get_by_year_audited($tahun - 1);
+        $data['ekuitas_tahun_ini_audited'] = $this->Model_penyesuaian_ekuitas->get_by_year_audited($tahun);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
