@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : DIE ArtS
+ Source Server         : database_lokal
  Source Server Type    : MySQL
- Source Server Version : 100418 (10.4.18-MariaDB)
+ Source Server Version : 100417 (10.4.17-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : asset
 
  Target Server Type    : MySQL
- Target Server Version : 100418 (10.4.18-MariaDB)
+ Target Server Version : 100417 (10.4.17-MariaDB)
  File Encoding         : 65001
 
- Date: 14/03/2025 10:55:14
+ Date: 28/02/2025 16:28:47
 */
 
 SET NAMES utf8mb4;
@@ -3716,7 +3716,6 @@ CREATE TABLE `lr_sak_ep`  (
   `kategori` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `akun` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `nilai_lr_sak_ep` bigint NULL DEFAULT NULL,
-  `nilai_lr_sak_ep_audited` bigint NULL DEFAULT NULL,
   `posisi` int NULL DEFAULT NULL,
   `no_lr_sak_ep` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
@@ -3730,54 +3729,54 @@ CREATE TABLE `lr_sak_ep`  (
 -- ----------------------------
 -- Records of lr_sak_ep
 -- ----------------------------
-INSERT INTO `lr_sak_ep` VALUES (1, 2022, 'Pendapatan Usaha', 'a. Pendapatan Penjualan Air', 19229294840, 19229294840, 1, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (2, 2022, 'Pendapatan Usaha', 'b. Pendapatan Non Air', 2129190790, 2129190790, 2, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (3, 2022, 'Pendapatan Usaha', 'c. Pendapatan Kemitraan', 0, 0, 3, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (4, 2022, 'Beban Usaha', 'a. Beban Operasi', 3113422982, 3113422982, 4, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (5, 2022, 'Beban Usaha', 'b. Beban Pengolahan Air', 114837440, 114837440, 5, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (6, 2022, 'Beban Usaha', 'c. Beban Transmisi dan Distribusi', 3984471171, 3984471171, 6, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (7, 2022, 'Beban Usaha', 'd. Beban (HPP) Sambungan Baru', 0, 0, 7, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (8, 2022, 'Beban Umum Dan Administrasi', 'Beban Umum Dan Administrasi', 9401518657, 9401518657, 8, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (9, 2022, 'Pendapatan - Beban Lain-lain', 'Pendapatan Lain-lain', 1645390226, 1645390226, 9, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (10, 2022, 'Pendapatan - Beban Lain-lain', 'Beban Lain-lain', -2493307655, -2493307655, 10, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (11, 2022, 'Beban Pajak Penghasilan', 'Pajak Kini', 808512314, 808512314, 11, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (12, 2022, 'Beban Pajak Penghasilan', 'Beban Pajak Ditangguhkan', 0, 0, 12, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (13, 2022, '(Kerugian) Penghasilan Komprehensip Lain', 'Surplus Revaluasi Tanah/Aset Tidak Lancar', 0, 0, 13, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (14, 2022, '(Kerugian) Penghasilan Komprehensip Lain', 'Pengukuran Kembali Atas Program Imbalan Pasti', 0, 0, 14, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (15, 2022, '(Kerugian) Penghasilan Komprehensip Lain', 'Beban Pajak Penghasilan Terkait', 0, 0, 15, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (16, 2022, '(Kerugian) Penghasilan Komprehensip Lain', 'Penghasilan Komprehensif Lain Tahun Berjalan', 0, 0, 16, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (17, 2023, 'Pendapatan Usaha', 'a. Pendapatan Penjualan Air', 21583106880, 21583106880, 1, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (18, 2023, 'Pendapatan Usaha', 'b. Pendapatan Non Air', 1489614700, 1489614700, 2, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (19, 2023, 'Pendapatan Usaha', 'c. Pendapatan Kemitraan', 0, 0, 3, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (20, 2023, 'Beban Usaha', 'a. Beban Operasi', 3343233919, 3343233919, 4, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (21, 2023, 'Beban Usaha', 'b. Beban Pengolahan Air', 111265672, 111265672, 5, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (22, 2023, 'Beban Usaha', 'c. Beban Transmisi dan Distribusi', 4237548311, 4237548311, 6, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (23, 2023, 'Beban Usaha', 'd. Beban (HPP) Sambungan Baru', 0, 0, 7, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (24, 2023, 'Beban Umum Dan Administrasi', 'Beban Umum Dan Administrasi', 12211751931, 12211751931, 8, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (25, 2023, 'Pendapatan - Beban Lain-lain', 'Pendapatan Lain-lain', 1973472944, 1973472944, 9, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (26, 2023, 'Pendapatan - Beban Lain-lain', 'Beban Lain-lain', -3168934036, -3168934036, 10, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (27, 2023, 'Beban Pajak Penghasilan', 'Pajak Kini', 489753346, 489753346, 11, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (28, 2023, 'Beban Pajak Penghasilan', 'Beban Pajak Ditangguhkan', 0, 0, 12, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (29, 2023, '(Kerugian) Penghasilan Komprehensip Lain', 'Surplus Revaluasi Tanah/Aset Tidak Lancar', 0, 0, 13, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (30, 2023, '(Kerugian) Penghasilan Komprehensip Lain', 'Pengukuran Kembali Atas Program Imbalan Pasti', 0, 0, 14, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (31, 2023, '(Kerugian) Penghasilan Komprehensip Lain', 'Beban Pajak Penghasilan Terkait', 0, 0, 15, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (32, 2023, '(Kerugian) Penghasilan Komprehensip Lain', 'Penghasilan Komprehensif Lain Tahun Berjalan', 0, 0, 16, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (33, 2024, 'Pendapatan Usaha', 'a. Pendapatan Penjualan Air', 20487227720, 20487227720, 1, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (34, 2024, 'Pendapatan Usaha', 'b. Pendapatan Non Air', 1469923000, 1469923000, 2, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (35, 2024, 'Pendapatan Usaha', 'c. Pendapatan Kemitraan', 0, 0, 3, NULL, '1', '2025-02-28 13:10:23', 'Administrator', '2025-03-10 14:27:35', 'Administrator');
-INSERT INTO `lr_sak_ep` VALUES (36, 2024, 'Pendapatan - Beban Lain-lain', 'Pendapatan Lain-lain', 1934425611, 1934425611, 9, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (37, 2024, 'Beban Usaha', 'a. Beban Operasi', 3507774821, 3507774821, 4, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (38, 2024, 'Beban Usaha', 'b. Beban Pengolahan Air', 107618826, 107618826, 5, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (39, 2024, 'Beban Usaha', 'c. Beban Transmisi dan Distribusi', 4168314124, 4168314124, 6, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (40, 2024, 'Beban Usaha', 'd. Beban (HPP) Sambungan Baru', 0, 0, 7, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (41, 2024, 'Beban Umum Dan Administrasi', 'Beban Umum Dan Administrasi', 10917501628, 10917501628, 8, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (42, 2024, 'Pendapatan - Beban Lain-lain', 'Beban Lain-lain', -2624241394, -2624241394, 10, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (43, 2024, 'Beban Pajak Penghasilan', 'Pajak Kini', 524951800, 524951800, 11, NULL, '1', '2025-02-28 13:17:11', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (44, 2024, 'Beban Pajak Penghasilan', 'Beban Pajak Ditangguhkan', 0, 0, 12, NULL, '1', '2025-02-28 13:51:36', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (45, 2024, '(Kerugian) Penghasilan Komprehensip Lain', 'Surplus Revaluasi Tanah/Aset Tidak Lancar', 0, 0, 13, NULL, '1', '2025-02-28 14:43:45', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (46, 2024, '(Kerugian) Penghasilan Komprehensip Lain', 'Pengukuran Kembali Atas Program Imbalan Pasti', 0, 0, 14, NULL, '1', '2025-02-28 14:44:01', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (47, 2024, '(Kerugian) Penghasilan Komprehensip Lain', 'Beban Pajak Penghasilan Terkait', 0, 0, 15, NULL, '1', '2025-02-28 14:44:10', 'Administrator', NULL, '');
-INSERT INTO `lr_sak_ep` VALUES (48, 2024, '(Kerugian) Penghasilan Komprehensip Lain', 'Penghasilan Komprehensif Lain Tahun Berjalan', 0, 0, 16, NULL, '1', '2025-02-28 14:44:16', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (1, 2022, 'Pendapatan Usaha', 'a. Pendapatan Penjualan Air', 19229294840, 1, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (2, 2022, 'Pendapatan Usaha', 'b. Pendapatan Non Air', 2129190790, 2, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (3, 2022, 'Pendapatan Usaha', 'c. Pendapatan Kemitraan', 0, 3, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (4, 2022, 'Beban Usaha', 'a. Beban Operasi', 3113422982, 4, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (5, 2022, 'Beban Usaha', 'b. Beban Pengolahan Air', 114837440, 5, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (6, 2022, 'Beban Usaha', 'c. Beban Transmisi dan Distribusi', 3984471171, 6, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (7, 2022, 'Beban Usaha', 'd. Beban (HPP) Sambungan Baru', 0, 7, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (8, 2022, 'Beban Umum Dan Administrasi', 'Beban Umum Dan Administrasi', 9401518657, 8, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (9, 2022, 'Pendapatan - Beban Lain-lain', 'Pendapatan Lain-lain', 1645390226, 9, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (10, 2022, 'Pendapatan - Beban Lain-lain', 'Beban Lain-lain', -2493307655, 10, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (11, 2022, 'Beban Pajak Penghasilan', 'Pajak Kini', 808512314, 11, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (12, 2022, 'Beban Pajak Penghasilan', 'Beban Pajak Ditangguhkan', 0, 12, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (13, 2022, '(Kerugian) Penghasilan Komprehensip Lain', 'Surplus Revaluasi Tanah/Aset Tidak Lancar', 0, 13, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (14, 2022, '(Kerugian) Penghasilan Komprehensip Lain', 'Pengukuran Kembali Atas Program Imbalan Pasti', 0, 14, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (15, 2022, '(Kerugian) Penghasilan Komprehensip Lain', 'Beban Pajak Penghasilan Terkait', 0, 15, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (16, 2022, '(Kerugian) Penghasilan Komprehensip Lain', 'Penghasilan Komprehensif Lain Tahun Berjalan', 0, 16, NULL, '1', '2025-02-24 12:57:41', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (17, 2023, 'Pendapatan Usaha', 'a. Pendapatan Penjualan Air', 21583106880, 1, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (18, 2023, 'Pendapatan Usaha', 'b. Pendapatan Non Air', 1489614700, 2, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (19, 2023, 'Pendapatan Usaha', 'c. Pendapatan Kemitraan', 0, 3, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (20, 2023, 'Beban Usaha', 'a. Beban Operasi', 3343233919, 4, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (21, 2023, 'Beban Usaha', 'b. Beban Pengolahan Air', 111265672, 5, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (22, 2023, 'Beban Usaha', 'c. Beban Transmisi dan Distribusi', 4237548311, 6, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (23, 2023, 'Beban Usaha', 'd. Beban (HPP) Sambungan Baru', 0, 7, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (24, 2023, 'Beban Umum Dan Administrasi', 'Beban Umum Dan Administrasi', 12211751931, 8, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (25, 2023, 'Pendapatan - Beban Lain-lain', 'Pendapatan Lain-lain', 1973472944, 9, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (26, 2023, 'Pendapatan - Beban Lain-lain', 'Beban Lain-lain', -3168934036, 10, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (27, 2023, 'Beban Pajak Penghasilan', 'Pajak Kini', 489753346, 11, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (28, 2023, 'Beban Pajak Penghasilan', 'Beban Pajak Ditangguhkan', 0, 12, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (29, 2023, '(Kerugian) Penghasilan Komprehensip Lain', 'Surplus Revaluasi Tanah/Aset Tidak Lancar', 0, 13, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (30, 2023, '(Kerugian) Penghasilan Komprehensip Lain', 'Pengukuran Kembali Atas Program Imbalan Pasti', 0, 14, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (31, 2023, '(Kerugian) Penghasilan Komprehensip Lain', 'Beban Pajak Penghasilan Terkait', 0, 15, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (32, 2023, '(Kerugian) Penghasilan Komprehensip Lain', 'Penghasilan Komprehensif Lain Tahun Berjalan', 0, 16, NULL, '1', '2025-02-25 11:12:07', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (33, 2024, 'Pendapatan Usaha', 'a. Pendapatan Penjualan Air', 20487227720, 1, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (34, 2024, 'Pendapatan Usaha', 'b. Pendapatan Non Air', 1469923000, 2, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (35, 2024, 'Pendapatan Usaha', 'c. Pendapatan Kemitraan', 0, 3, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (36, 2024, 'Pendapatan - Beban Lain-lain', 'Pendapatan Lain-lain', 1934425611, 9, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (37, 2024, 'Beban Usaha', 'a. Beban Operasi', 3507774821, 4, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (38, 2024, 'Beban Usaha', 'b. Beban Pengolahan Air', 107618826, 5, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (39, 2024, 'Beban Usaha', 'c. Beban Transmisi dan Distribusi', 4168314124, 6, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (40, 2024, 'Beban Usaha', 'd. Beban (HPP) Sambungan Baru', 0, 7, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (41, 2024, 'Beban Umum Dan Administrasi', 'Beban Umum Dan Administrasi', 10917501628, 8, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (42, 2024, 'Pendapatan - Beban Lain-lain', 'Beban Lain-lain', -2624241394, 10, NULL, '1', '2025-02-28 13:10:23', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (43, 2024, 'Beban Pajak Penghasilan', 'Pajak Kini', 524951800, 11, NULL, '1', '2025-02-28 13:17:11', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (44, 2024, 'Beban Pajak Penghasilan', 'Beban Pajak Ditangguhkan', 0, 12, NULL, '1', '2025-02-28 13:51:36', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (45, 2024, '(Kerugian) Penghasilan Komprehensip Lain', 'Surplus Revaluasi Tanah/Aset Tidak Lancar', 0, 13, NULL, '1', '2025-02-28 14:43:45', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (46, 2024, '(Kerugian) Penghasilan Komprehensip Lain', 'Pengukuran Kembali Atas Program Imbalan Pasti', 0, 14, NULL, '1', '2025-02-28 14:44:01', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (47, 2024, '(Kerugian) Penghasilan Komprehensip Lain', 'Beban Pajak Penghasilan Terkait', 0, 15, NULL, '1', '2025-02-28 14:44:10', 'Administrator', NULL, '');
+INSERT INTO `lr_sak_ep` VALUES (48, 2024, '(Kerugian) Penghasilan Komprehensip Lain', 'Penghasilan Komprehensif Lain Tahun Berjalan', 0, 15, NULL, '1', '2025-02-28 14:44:16', 'Administrator', NULL, '');
 
 -- ----------------------------
 -- Table structure for lr_srt
@@ -3859,111 +3858,111 @@ CREATE TABLE `neraca`  (
 -- ----------------------------
 -- Records of neraca
 -- ----------------------------
-INSERT INTO `neraca` VALUES (1, 2022, 'Aset Lancar', 'Kas dan Bank', 3643150507, 3643150507, 1, '1.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (2, 2022, 'Aset Lancar', 'Deposito', 0, 0, 2, '1.1.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (3, 2022, 'Aset Lancar', 'Piutang Usaha', 3575307119, 3575307119, 3, '1.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (4, 2022, 'Aset Lancar', 'Akm Kerugian Piutang Usaha', -600697269, -600697269, 4, '1.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (5, 2022, 'Aset Lancar', 'Piutang Non Usaha', 293066190, 293066190, 5, '1.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (6, 2022, 'Aset Lancar', 'Persediaan', 5356406998, 5356406998, 6, '1.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (7, 2022, 'Aset Lancar', 'Penurunan Nilai Persediaan', -122711214, -122711214, 7, '1.5.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (8, 2022, 'Aset Lancar', 'Pembayaran Dimuka', 177143200, 177143200, 8, '1.7', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (9, 2022, 'Aset Lancar', 'Pajak Pertambahan Nilai Dimuka', 14026345, 14026345, 9, '1.8', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (10, 2022, 'Aset Tidak Lancar', 'Aset Tetap', 78032499901, 78032499901, 10, '2.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (11, 2022, 'Aset Tidak Lancar', 'Akm Depresiasi Aset Tetap', -47769982269, -47769982269, 11, '2.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (12, 2022, 'Aset Tidak Lancar', 'Aset Tetap Dikerjasamakan', 0, 0, 12, '2.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (13, 2022, 'Aset Tidak Lancar', 'Aset Tetap Dalam Penyelesaian', 3625315419, 3625315419, 13, '2.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (14, 2022, 'Aset Tidak Lancar', 'Aset Tidak Berwujud', 440031941, 440031941, 14, '2.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (15, 2022, 'Aset Tidak Lancar', 'Akm Amortisasi Aset Tidak Berwujud', 0, 0, 15, '2.5.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (16, 2022, 'Aset Tidak Lancar', 'Aset Pajak Tangguhan', 0, 0, 16, '2.6', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (17, 2022, 'Liabilitas Jangka Pendek', 'Utang Usaha', 1853700, 1853700, 17, '3.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (18, 2022, 'Liabilitas Jangka Pendek', 'Utang Non Usaha', 938072075, 938072075, 18, '3.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (19, 2022, 'Liabilitas Jangka Pendek', 'Biaya Yang Masih Harus Dibayar', 200649599, 200649599, 19, '3.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (20, 2022, 'Liabilitas Jangka Pendek', 'Utang Pajak', 643740314, 643740314, 20, '3.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (21, 2022, 'Liabilitas Jangka Pendek', 'Liabilitas Imbalan Pasca Kerja Dapenma', 130443768, 130443768, 21, '3.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (22, 2022, 'Liabilitas Jangka Pendek', 'Liabilitas Imbalan Pasca Kerja', 0, 0, 22, '3.6', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (23, 2022, 'Liabilitas Jangka Pendek', 'Utang Jangka Pendek Lainnya', 0, 0, 23, '3.7', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (24, 2022, 'Liabilitas Jangka Panjang', 'Liabilitas Imbalan Pasca Kerja Dapenma (pj)', 0, 0, 24, '4.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (25, 2022, 'Liabilitas Jangka Panjang', 'Liabilitas Imbalan Pasca Kerja (pj)', 0, 0, 25, '4.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (26, 2022, 'Liabilitas Jangka Panjang', 'Liabilitas Pajak Tanggguhan', 0, 0, 26, '4.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (27, 2022, 'Liabilitas Jangka Panjang', 'Kewajiban Lain-lain', 967741612, 967741612, 27, '4.3.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (28, 2022, 'Ekuitas', 'Penyertaan Pemda Yang Dipisahkan', 19937782363, 19937782363, 28, '5.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (29, 2022, 'Ekuitas', 'Penyertaan Pemerintah Yang Belum Ditetapkan Status', 26391554720, 26391554720, 29, '5.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (30, 2022, 'Ekuitas', 'Modal Hibah', 581571100, 581571100, 30, '5.2.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (31, 2022, 'Ekuitas', 'Cadangan Umum', 747574547, 747574547, 31, '5.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (32, 2022, 'Ekuitas', 'Cadangan Bertujuan', 0, 0, 32, '5.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (33, 2022, 'Ekuitas', 'Pengukuran Kembali Imbalan Paska Kerja', 1190952276, 1190952276, 33, '5.4.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (34, 2022, 'Ekuitas', 'Akm Kerugian Tahun Lalu', -8156184843, -8156184843, 34, '5.4.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (35, 2022, 'Ekuitas', 'Laba Rugi Tahun Berjalan', 3087805637, 3087805637, 35, '5.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (36, 2023, 'Aset Lancar', 'Kas dan Bank', 2943448238, 2943448238, 1, '1.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (37, 2023, 'Aset Lancar', 'Deposito', 500000000, 500000000, 2, '1.1.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (38, 2023, 'Aset Lancar', 'Piutang Usaha', 2618506990, 2618506990, 3, '1.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (39, 2023, 'Aset Lancar', 'Akm Kerugian Piutang Usaha', -395410927, -395410927, 4, '1.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (40, 2023, 'Aset Lancar', 'Piutang Non Usaha', 248849790, 248849790, 5, '1.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (41, 2023, 'Aset Lancar', 'Persediaan', 4621317143, 4621317143, 6, '1.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (42, 2023, 'Aset Lancar', 'Penurunan Nilai Persediaan', -181101495, -181101495, 7, '1.5.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (43, 2023, 'Aset Lancar', 'Pembayaran Dimuka', 26441950, 26441950, 8, '1.7', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (44, 2023, 'Aset Lancar', 'Pajak Pertambahan Nilai Dimuka', 0, 0, 9, '1.8', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (45, 2023, 'Aset Tidak Lancar', 'Aset Tetap', 84649008297, 84649008297, 10, '2.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (46, 2023, 'Aset Tidak Lancar', 'Akm Depresiasi Aset Tetap', -51291849005, -51291849005, 11, '2.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (47, 2023, 'Aset Tidak Lancar', 'Aset Tetap Dikerjasamakan', 0, 0, 12, '2.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (48, 2023, 'Aset Tidak Lancar', 'Aset Tetap Dalam Penyelesaian', 3543128004, 3543128004, 13, '2.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (49, 2023, 'Aset Tidak Lancar', 'Aset Tidak Berwujud', 538493676, 538493676, 14, '2.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (50, 2023, 'Aset Tidak Lancar', 'Akm Amortisasi Aset Tidak Berwujud', 0, 0, 15, '2.5.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (51, 2023, 'Aset Tidak Lancar', 'Aset Pajak Tangguhan', 0, 0, 16, '2.6', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (52, 2023, 'Liabilitas Jangka Pendek', 'Utang Usaha', 214192393, 214192393, 17, '3.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (53, 2023, 'Liabilitas Jangka Pendek', 'Utang Non Usaha', 921446567, 921446567, 18, '3.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (54, 2023, 'Liabilitas Jangka Pendek', 'Biaya Yang Masih Harus Dibayar', 184050301, 184050301, 19, '3.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (55, 2023, 'Liabilitas Jangka Pendek', 'Utang Pajak', 458799377, 458799377, 20, '3.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (56, 2023, 'Liabilitas Jangka Pendek', 'Liabilitas Imbalan Pasca Kerja Dapenma', 245983200, 245983200, 21, '3.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (57, 2023, 'Liabilitas Jangka Pendek', 'Liabilitas Imbalan Pasca Kerja', 0, 0, 22, '3.6', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (58, 2023, 'Liabilitas Jangka Pendek', 'Utang Jangka Pendek Lainnya', 0, 0, 23, '3.7', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (59, 2023, 'Liabilitas Jangka Panjang', 'Liabilitas Imbalan Pasca Kerja Dapenma (pj)', 0, 0, 24, '4.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (60, 2023, 'Liabilitas Jangka Panjang', 'Liabilitas Imbalan Pasca Kerja (pj)', 0, 0, 25, '4.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (61, 2023, 'Liabilitas Jangka Panjang', 'Liabilitas Pajak Tanggguhan', 0, 0, 26, '4.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (62, 2023, 'Liabilitas Jangka Panjang', 'Kewajiban Lain-lain', 1806361424, 1806361424, 27, '4.3.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (63, 2023, 'Ekuitas', 'Penyertaan Pemda Yang Dipisahkan', 21636075463, 21636075463, 28, '5.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (64, 2023, 'Ekuitas', 'Penyertaan Pemerintah Yang Belum Ditetapkan Status', 26289115900, 26289115900, 29, '5.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (65, 2023, 'Ekuitas', 'Modal Hibah', 581571100, 581571100, 30, '5.2.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (66, 2023, 'Ekuitas', 'Cadangan Umum', 1210745393, 1210745393, 31, '5.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (67, 2023, 'Ekuitas', 'Cadangan Bertujuan', 0, 0, 32, '5.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (68, 2023, 'Ekuitas', 'Pengukuran Kembali Imbalan Paska Kerja', -704098144, -704098144, 33, '5.4.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (69, 2023, 'Ekuitas', 'Akm Kerugian Tahun Lalu', -6507117623, -6507117623, 34, '5.4.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (70, 2023, 'Ekuitas', 'Laba Rugi Tahun Berjalan', 1483707310, 1483707310, 35, '5.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (76, 2024, 'Aset Lancar', 'Piutang Usaha', 2900107840, 2900107840, 3, '1.2', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (77, 2024, 'Aset Lancar', 'Piutang Non Usaha', 230284690, 230284690, 5, '1.4', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (78, 2024, 'Aset Lancar', 'Kas dan Bank', 2805930228, 2805930228, 1, '1.1', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (79, 2024, 'Aset Lancar', 'Deposito', 0, 0, 2, '1.1.1', '1', '2025-02-17 08:56:15', 'Administrator', '2025-03-10 11:13:52', 'Administrator');
-INSERT INTO `neraca` VALUES (80, 2024, 'Aset Lancar', 'Akm Kerugian Piutang Usaha', -408758278, -408708484, 4, '1.3', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (81, 2024, 'Aset Lancar', 'Persediaan', 4133325398, 4133325398, 6, '1.5', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (82, 2024, 'Aset Lancar', 'Penurunan Nilai Persediaan', -99563583, -99563583, 7, '1.5.1', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (83, 2024, 'Aset Lancar', 'Pembayaran Dimuka', 225661300, 225661300, 8, '1.7', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (84, 2024, 'Aset Lancar', 'Pajak Pertambahan Nilai Dimuka', 0, 0, 9, '1.8', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (85, 2024, 'Aset Tidak Lancar', 'Aset Tetap', 89953311396, 89953311396, 10, '2.1', '1', '2025-02-17 09:40:24', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (86, 2024, 'Aset Tidak Lancar', 'Akm Depresiasi Aset Tetap', -54483523877, -54483523877, 11, '2.2', '1', '2025-02-17 09:45:10', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (87, 2024, 'Aset Tidak Lancar', 'Aset Tetap Dikerjasamakan', 0, 0, 12, '2.3', '1', '2025-02-17 10:03:39', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (88, 2024, 'Aset Tidak Lancar', 'Akm Amortisasi Aset Tidak Berwujud', 0, 0, 15, '2.5.1', '1', '2025-02-17 11:14:03', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (89, 2024, 'Aset Tidak Lancar', 'Aset Pajak Tangguhan', 0, 0, 16, '2.6', '1', '2025-02-17 11:14:17', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (90, 2024, 'Aset Tidak Lancar', 'Aset Tetap Dalam Penyelesaian', 3648502355, 3648502355, 13, '2.4', '1', '2025-02-17 13:35:35', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (91, 2024, 'Aset Tidak Lancar', 'Aset Tidak Berwujud', 403877200, 403877200, 14, '2.5', '1', '2025-02-17 14:01:32', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (92, 2024, 'Liabilitas Jangka Pendek', 'Utang Usaha', 0, 0, 17, '3.1', '1', '2025-02-18 08:53:53', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (93, 2024, 'Liabilitas Jangka Pendek', 'Utang Non Usaha', 1169335401, 1169335401, 18, '3.2', '1', '0000-00-00 00:00:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (94, 2024, 'Liabilitas Jangka Pendek', 'Biaya Yang Masih Harus Dibayar', 180186353, 180186353, 19, '3.3', '1', '0000-00-00 00:00:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (95, 2024, 'Liabilitas Jangka Pendek', 'Utang Pajak', 430928713, 430928713, 20, '3.4', '1', '0000-00-00 00:00:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (96, 2024, 'Liabilitas Jangka Pendek', 'Liabilitas Imbalan Pasca Kerja Dapenma', 0, 0, 21, '3.5', '1', '2025-02-20 13:04:55', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (97, 2024, 'Liabilitas Jangka Pendek', 'Liabilitas Imbalan Pasca Kerja', 0, 0, 22, '3.6', '1', '2025-02-20 13:05:20', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (98, 2024, 'Liabilitas Jangka Pendek', 'Utang Jangka Pendek Lainnya', 0, 0, 23, '3.7', '1', '2025-02-20 13:05:43', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (99, 2024, 'Liabilitas Jangka Panjang', 'Liabilitas Imbalan Pasca Kerja Dapenma (pj)', 0, 0, 24, '4.1', '1', '2025-02-20 13:18:19', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (100, 2024, 'Liabilitas Jangka Panjang', 'Liabilitas Imbalan Pasca Kerja (pj)', 0, 0, 25, '4.2', '1', '2025-02-20 13:18:40', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (101, 2024, 'Liabilitas Jangka Panjang', 'Liabilitas Pajak Tanggguhan', 0, 0, 26, '4.3', '1', '2025-02-20 13:19:04', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (102, 2024, 'Liabilitas Jangka Panjang', 'Kewajiban Lain-lain', 1942693052, 1942693052, 27, '4.3.1', '1', '0000-00-00 00:00:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (103, 2024, 'Ekuitas', 'Modal Hibah', 581571100, 581571100, 30, '5.2.1', '1', '0000-00-00 00:00:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (104, 2024, 'Ekuitas', 'Cadangan Umum', 1433301490, 1433301490, 31, '5.3', '1', '0000-00-00 00:00:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (105, 2024, 'Ekuitas', 'Cadangan Bertujuan', 0, 0, 32, '5.4', '1', '2025-02-21 07:48:40', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (106, 2024, 'Ekuitas', 'Pengukuran Kembali Imbalan Paska Kerja', -704098144, -704098144, 33, '5.4.1', '1', '2025-02-21 07:59:07', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (107, 2024, 'Ekuitas', 'Akm Kerugian Tahun Lalu', -6507117623, -6507117623, 34, '5.4.2', '1', '0000-00-00 00:00:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (108, 2024, 'Ekuitas', 'Penyertaan Pemda Yang Dipisahkan', 22452114484, 22452114484, 28, '5.1', '1', '0000-00-00 00:00:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (109, 2024, 'Ekuitas', 'Penyertaan Pemerintah Yang Belum Ditetapkan Status', 26289115900, 26289115900, 29, '5.2', '1', '0000-00-00 00:00:00', 'Administrator', NULL, '');
-INSERT INTO `neraca` VALUES (110, 2024, 'Ekuitas', 'Laba Rugi Tahun Berjalan', 2041173738, 2041173738, 35, '5.5', '1', '2025-02-28 15:36:53', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (1, 2022, 'Aset Lancar', 'Kas dan Bank', 3643150507, NULL, 1, '1.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (2, 2022, 'Aset Lancar', 'Deposito', 0, NULL, 2, '1.1.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (3, 2022, 'Aset Lancar', 'Piutang Usaha', 3575307119, NULL, 3, '1.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (4, 2022, 'Aset Lancar', 'Akm Kerugian Piutang Usaha', -600697269, NULL, 4, '1.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (5, 2022, 'Aset Lancar', 'Piutang Non Usaha', 293066190, NULL, 5, '1.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (6, 2022, 'Aset Lancar', 'Persediaan', 5356406998, NULL, 6, '1.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (7, 2022, 'Aset Lancar', 'Penurunan Nilai Persediaan', -122711214, NULL, 7, '1.5.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (8, 2022, 'Aset Lancar', 'Pembayaran Dimuka', 177143200, NULL, 8, '1.7', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (9, 2022, 'Aset Lancar', 'Pajak Pertambahan Nilai Dimuka', 14026345, NULL, 9, '1.8', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (10, 2022, 'Aset Tidak Lancar', 'Aset Tetap', 78032499901, NULL, 10, '2.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (11, 2022, 'Aset Tidak Lancar', 'Akm Depresiasi Aset Tetap', -47769982269, NULL, 11, '2.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (12, 2022, 'Aset Tidak Lancar', 'Aset Tetap Dikerjasamakan', 0, NULL, 12, '2.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (13, 2022, 'Aset Tidak Lancar', 'Aset Tetap Dalam Penyelesaian', 3625315419, NULL, 13, '2.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (14, 2022, 'Aset Tidak Lancar', 'Aset Tidak Berwujud', 440031941, NULL, 14, '2.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (15, 2022, 'Aset Tidak Lancar', 'Akm Amortisasi Aset Tidak Berwujud', 0, NULL, 15, '2.5.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (16, 2022, 'Aset Tidak Lancar', 'Aset Pajak Tangguhan', 0, NULL, 16, '2.6', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (17, 2022, 'Liabilitas Jangka Pendek', 'Utang Usaha', 1853700, NULL, 17, '3.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (18, 2022, 'Liabilitas Jangka Pendek', 'Utang Non Usaha', 938072075, NULL, 18, '3.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (19, 2022, 'Liabilitas Jangka Pendek', 'Biaya Yang Masih Harus Dibayar', 200649599, NULL, 19, '3.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (20, 2022, 'Liabilitas Jangka Pendek', 'Utang Pajak', 643740314, NULL, 20, '3.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (21, 2022, 'Liabilitas Jangka Pendek', 'Liabilitas Imbalan Pasca Kerja Dapenma', 130443768, NULL, 21, '3.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (22, 2022, 'Liabilitas Jangka Pendek', 'Liabilitas Imbalan Pasca Kerja', 0, NULL, 22, '3.6', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (23, 2022, 'Liabilitas Jangka Pendek', 'Utang Jangka Pendek Lainnya', 0, NULL, 23, '3.7', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (24, 2022, 'Liabilitas Jangka Panjang', 'Liabilitas Imbalan Pasca Kerja Dapenma (pj)', 0, NULL, 24, '4.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (25, 2022, 'Liabilitas Jangka Panjang', 'Liabilitas Imbalan Pasca Kerja (pj)', 0, NULL, 25, '4.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (26, 2022, 'Liabilitas Jangka Panjang', 'Liabilitas Pajak Tanggguhan', 0, NULL, 26, '4.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (27, 2022, 'Liabilitas Jangka Panjang', 'Kewajiban Lain-lain', 967741612, NULL, 27, '4.3.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (28, 2022, 'Ekuitas', 'Penyertaan Pemda Yang Dipisahkan', 19937782363, NULL, 28, '5.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (29, 2022, 'Ekuitas', 'Penyertaan Pemerintah Yang Belum Ditetapkan Status', 26391554720, NULL, 29, '5.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (30, 2022, 'Ekuitas', 'Modal Hibah', 581571100, NULL, 30, '5.2.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (31, 2022, 'Ekuitas', 'Cadangan Umum', 747574547, NULL, 31, '5.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (32, 2022, 'Ekuitas', 'Cadangan Bertujuan', 0, NULL, 32, '5.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (33, 2022, 'Ekuitas', 'Pengukuran Kembali Imbalan Paska Kerja', 1190952276, NULL, 33, '5.4.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (34, 2022, 'Ekuitas', 'Akm Kerugian Tahun Lalu', -8156184843, NULL, 34, '5.4.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (35, 2022, 'Ekuitas', 'Laba Rugi Tahun Berjalan', 3087805637, NULL, 35, '5.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (36, 2023, 'Aset Lancar', 'Kas dan Bank', 2943448238, NULL, 1, '1.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (37, 2023, 'Aset Lancar', 'Deposito', 500000000, NULL, 2, '1.1.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (38, 2023, 'Aset Lancar', 'Piutang Usaha', 2618506990, NULL, 3, '1.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (39, 2023, 'Aset Lancar', 'Akm Kerugian Piutang Usaha', -395410927, NULL, 4, '1.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (40, 2023, 'Aset Lancar', 'Piutang Non Usaha', 248849790, NULL, 5, '1.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (41, 2023, 'Aset Lancar', 'Persediaan', 4621317143, NULL, 6, '1.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (42, 2023, 'Aset Lancar', 'Penurunan Nilai Persediaan', -181101495, NULL, 7, '1.5.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (43, 2023, 'Aset Lancar', 'Pembayaran Dimuka', 26441950, NULL, 8, '1.7', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (44, 2023, 'Aset Lancar', 'Pajak Pertambahan Nilai Dimuka', 0, NULL, 9, '1.8', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (45, 2023, 'Aset Tidak Lancar', 'Aset Tetap', 84649008297, NULL, 10, '2.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (46, 2023, 'Aset Tidak Lancar', 'Akm Depresiasi Aset Tetap', -51291849005, NULL, 11, '2.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (47, 2023, 'Aset Tidak Lancar', 'Aset Tetap Dikerjasamakan', 0, NULL, 12, '2.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (48, 2023, 'Aset Tidak Lancar', 'Aset Tetap Dalam Penyelesaian', 3543128004, NULL, 13, '2.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (49, 2023, 'Aset Tidak Lancar', 'Aset Tidak Berwujud', 538493676, NULL, 14, '2.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (50, 2023, 'Aset Tidak Lancar', 'Akm Amortisasi Aset Tidak Berwujud', 0, NULL, 15, '2.5.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (51, 2023, 'Aset Tidak Lancar', 'Aset Pajak Tangguhan', 0, NULL, 16, '2.6', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (52, 2023, 'Liabilitas Jangka Pendek', 'Utang Usaha', 214192393, NULL, 17, '3.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (53, 2023, 'Liabilitas Jangka Pendek', 'Utang Non Usaha', 921446567, NULL, 18, '3.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (54, 2023, 'Liabilitas Jangka Pendek', 'Biaya Yang Masih Harus Dibayar', 184050301, NULL, 19, '3.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (55, 2023, 'Liabilitas Jangka Pendek', 'Utang Pajak', 458799377, NULL, 20, '3.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (56, 2023, 'Liabilitas Jangka Pendek', 'Liabilitas Imbalan Pasca Kerja Dapenma', 245983200, NULL, 21, '3.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (57, 2023, 'Liabilitas Jangka Pendek', 'Liabilitas Imbalan Pasca Kerja', 0, NULL, 22, '3.6', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (58, 2023, 'Liabilitas Jangka Pendek', 'Utang Jangka Pendek Lainnya', 0, NULL, 23, '3.7', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (59, 2023, 'Liabilitas Jangka Panjang', 'Liabilitas Imbalan Pasca Kerja Dapenma (pj)', 0, NULL, 24, '4.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (60, 2023, 'Liabilitas Jangka Panjang', 'Liabilitas Imbalan Pasca Kerja (pj)', 0, NULL, 25, '4.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (61, 2023, 'Liabilitas Jangka Panjang', 'Liabilitas Pajak Tanggguhan', 0, NULL, 26, '4.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (62, 2023, 'Liabilitas Jangka Panjang', 'Kewajiban Lain-lain', 1806361424, NULL, 27, '4.3.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (63, 2023, 'Ekuitas', 'Penyertaan Pemda Yang Dipisahkan', 21636075463, NULL, 28, '5.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (64, 2023, 'Ekuitas', 'Penyertaan Pemerintah Yang Belum Ditetapkan Status', 26289115900, NULL, 29, '5.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (65, 2023, 'Ekuitas', 'Modal Hibah', 581571100, NULL, 30, '5.2.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (66, 2023, 'Ekuitas', 'Cadangan Umum', 1210745393, NULL, 31, '5.3', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (67, 2023, 'Ekuitas', 'Cadangan Bertujuan', 0, NULL, 32, '5.4', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (68, 2023, 'Ekuitas', 'Pengukuran Kembali Imbalan Paska Kerja', -704098144, NULL, 33, '5.4.1', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (69, 2023, 'Ekuitas', 'Akm Kerugian Tahun Lalu', -6507117623, NULL, 34, '5.4.2', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (70, 2023, 'Ekuitas', 'Laba Rugi Tahun Berjalan', 1483707310, NULL, 35, '5.5', '1', '2025-02-10 15:25:00', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (76, 2024, 'Aset Lancar', 'Piutang Usaha', 2900107840, NULL, 3, '1.2', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (77, 2024, 'Aset Lancar', 'Piutang Non Usaha', 230284690, NULL, 5, '1.4', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (78, 2024, 'Aset Lancar', 'Kas dan Bank', 2805930228, NULL, 1, '1.1', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (79, 2024, 'Aset Lancar', 'Deposito', 0, NULL, 2, '1.1.1', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (80, 2024, 'Aset Lancar', 'Akm Kerugian Piutang Usaha', -408758278, NULL, 4, '1.3', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (81, 2024, 'Aset Lancar', 'Persediaan', 4133325398, NULL, 6, '1.5', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (82, 2024, 'Aset Lancar', 'Penurunan Nilai Persediaan', -99563583, NULL, 7, '1.5.1', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (83, 2024, 'Aset Lancar', 'Pembayaran Dimuka', 225661300, NULL, 8, '1.7', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (84, 2024, 'Aset Lancar', 'Pajak Pertambahan Nilai Dimuka', 0, NULL, 9, '1.8', '1', '2025-02-17 08:56:15', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (85, 2024, 'Aset Tidak Lancar', 'Aset Tetap', 89953311396, NULL, 10, '2.1', '1', '2025-02-17 09:40:24', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (86, 2024, 'Aset Tidak Lancar', 'Akm Depresiasi Aset Tetap', -54483523877, NULL, 11, '2.2', '1', '2025-02-17 09:45:10', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (87, 2024, 'Aset Tidak Lancar', 'Aset Tetap Dikerjasamakan', 0, NULL, 12, '2.3', '1', '2025-02-17 10:03:39', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (88, 2024, 'Aset Tidak Lancar', 'Akm Amortisasi Aset Tidak Berwujud', 0, NULL, 15, '2.5.1', '1', '2025-02-17 11:14:03', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (89, 2024, 'Aset Tidak Lancar', 'Aset Pajak Tangguhan', 0, NULL, 16, '2.6', '1', '2025-02-17 11:14:17', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (90, 2024, 'Aset Tidak Lancar', 'Aset Tetap Dalam Penyelesaian', 3648502355, NULL, 13, '2.4', '1', '2025-02-17 13:35:35', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (91, 2024, 'Aset Tidak Lancar', 'Aset Tidak Berwujud', 403877200, NULL, 14, '2.5', '1', '2025-02-17 14:01:32', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (92, 2024, 'Liabilitas Jangka Pendek', 'Utang Usaha', 0, NULL, 17, '3.1', '1', '2025-02-18 08:53:53', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (93, 2024, 'Liabilitas Jangka Pendek', 'Utang Non Usaha', 1169335401, NULL, 18, '3.2', '1', '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `neraca` VALUES (94, 2024, 'Liabilitas Jangka Pendek', 'Biaya Yang Masih Harus Dibayar', 180186353, NULL, 19, '3.3', '1', '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `neraca` VALUES (95, 2024, 'Liabilitas Jangka Pendek', 'Utang Pajak', 430928713, NULL, 20, '3.4', '1', '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `neraca` VALUES (96, 2024, 'Liabilitas Jangka Pendek', 'Liabilitas Imbalan Pasca Kerja Dapenma', 0, NULL, 21, '3.5', '1', '2025-02-20 13:04:55', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (97, 2024, 'Liabilitas Jangka Pendek', 'Liabilitas Imbalan Pasca Kerja', 0, NULL, 22, '3.6', '1', '2025-02-20 13:05:20', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (98, 2024, 'Liabilitas Jangka Pendek', 'Utang Jangka Pendek Lainnya', 0, NULL, 23, '3.7', '1', '2025-02-20 13:05:43', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (99, 2024, 'Liabilitas Jangka Panjang', 'Liabilitas Imbalan Pasca Kerja Dapenma (pj)', 0, NULL, 24, '4.1', '1', '2025-02-20 13:18:19', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (100, 2024, 'Liabilitas Jangka Panjang', 'Liabilitas Imbalan Pasca Kerja (pj)', 0, NULL, 25, '4.2', '1', '2025-02-20 13:18:40', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (101, 2024, 'Liabilitas Jangka Panjang', 'Liabilitas Pajak Tanggguhan', 0, NULL, 26, '4.3', '1', '2025-02-20 13:19:04', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (102, 2024, 'Liabilitas Jangka Panjang', 'Kewajiban Lain-lain', 1942693052, NULL, 27, '4.3.1', '1', '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `neraca` VALUES (103, 2024, 'Ekuitas', 'Modal Hibah', 581571100, NULL, 30, '5.2.1', '1', '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `neraca` VALUES (104, 2024, 'Ekuitas', 'Cadangan Umum', 1433301490, NULL, 31, '5.3', '1', '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `neraca` VALUES (105, 2024, 'Ekuitas', 'Cadangan Bertujuan', 0, NULL, 32, '5.4', '1', '2025-02-21 07:48:40', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (106, 2024, 'Ekuitas', 'Pengukuran Kembali Imbalan Paska Kerja', -704098144, NULL, 33, '5.4.1', '1', '2025-02-21 07:59:07', 'Administrator', NULL, '');
+INSERT INTO `neraca` VALUES (107, 2024, 'Ekuitas', 'Akm Kerugian Tahun Lalu', -6507117623, NULL, 34, '5.4.2', '1', '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `neraca` VALUES (108, 2024, 'Ekuitas', 'Penyertaan Pemda Yang Dipisahkan', 22452114484, NULL, 28, '5.1', '1', '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `neraca` VALUES (109, 2024, 'Ekuitas', 'Penyertaan Pemerintah Yang Belum Ditetapkan Status', 26289115900, NULL, 29, '5.2', '1', '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `neraca` VALUES (110, 2024, 'Ekuitas', 'Laba Rugi Tahun Berjalan', 2041173738, NULL, 35, '5.5', '1', '2025-02-28 15:36:53', 'Administrator', NULL, '');
 
 -- ----------------------------
 -- Table structure for no_per

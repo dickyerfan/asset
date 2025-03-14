@@ -59,6 +59,16 @@
         });
     }
 </script>
+<script>
+    function alert_edit_lr_sak_ep()() {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Peringatan!',
+            text: 'Data ini sudah pernah diperbarui dan tidak bisa diedit lagi!..silakan hubungi Administrator',
+            confirmButtonText: 'OK'
+        });
+    }
+</script>
 
 
 <script>

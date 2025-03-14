@@ -42,6 +42,7 @@
                                 <th>No</th>
                                 <th>Uraian</th>
                                 <th><?= htmlspecialchars($tahun_lap) ?></th>
+                                <th><?= htmlspecialchars($tahun_lap) ?> Audited</th>
                                 <th><?= htmlspecialchars($tahun_lalu) ?></th>
                             </tr>
                         </thead>
@@ -50,6 +51,7 @@
                             $kategori_sebelumnya = '';
                             $data_tahun_lalu = [];
                             $data_tahun_sekarang = [];
+                            $data_tahun_sekarang_audited = [];
 
                             // **1. Simpan data tahun lalu & tahun sekarang dalam array terpisah**
                             foreach ($lr_sak_ep as $row) {
@@ -58,12 +60,16 @@
                                 }
                                 if ($row->tahun_lr_sak_ep == $tahun_lap) {
                                     $data_tahun_sekarang[] = $row;
+                                    $data_tahun_sekarang_audited[] = $row;
                                 }
                             }
 
                             // **Variabel untuk menyimpan total kategori**
                             $total_pendapatan_usaha = $total_beban_usaha = 0;
                             $total_beban_umum_administrasi = $total_pendapatan_beban_lain = $total_beban_pajak_penghasilan = $total_penghasilan_komprehensif_lain = 0;
+                            $total_labarugi_operasional = 0;
+                            $total_pendapatan_usaha_audited = $total_beban_usaha_audited = 0;
+                            $total_beban_umum_administrasi_audited = $total_pendapatan_beban_lain_audited = $total_beban_pajak_penghasilan_audited = $total_penghasilan_komprehensif_lain_audited = 0;
                             $total_labarugi_operasional = 0;
                             $total_pendapatan_usaha_lalu = $total_beban_usaha_lalu = 0;
                             $total_beban_umum_administrasi_lalu = $total_pendapatan_beban_lain_lalu = $total_beban_pajak_penghasilan_lalu = $total_penghasilan_komprehensif_lain_lalu = 0;
@@ -76,44 +82,53 @@
                                         echo "<tr class='font-weight-bold bg-light'>";
                                         echo "<td colspan='2'>Jumlah Pendapatan Usaha</td>";
                                         echo "<td class='text-right'>" . number_format($total_pendapatan_usaha, 0, ',', '.') . "</td>";
+                                        echo "<td class='text-right'>" . number_format($total_pendapatan_usaha_audited, 0, ',', '.') . "</td>";
                                         echo "<td class='text-right'>" . number_format($total_pendapatan_usaha_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
                                     } elseif ($kategori_sebelumnya == 'Beban Usaha') {
                                         echo "<tr class='font-weight-bold bg-light'>";
                                         echo "<td colspan='2'>Jumlah Beban Usaha</td>";
                                         echo "<td class='text-right'>" . number_format($total_beban_usaha, 0, ',', '.') . "</td>";
+                                        echo "<td class='text-right'>" . number_format($total_beban_usaha_audited, 0, ',', '.') . "</td>";
                                         echo "<td class='text-right'>" . number_format($total_beban_usaha_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
 
                                         // **Total laba rugi ditampilkan setelah Total pendapatan usaha - Beban Usaha**
                                         $total_labarugi_kotor = $total_pendapatan_usaha - $total_beban_usaha;
+                                        $total_labarugi_kotor_audited = $total_pendapatan_usaha_audited - $total_beban_usaha_audited;
                                         $total_labarugi_kotor_lalu = $total_pendapatan_usaha_lalu - $total_beban_usaha_lalu;
                                         echo "<tr class='font-weight-bold bg-warning'>";
                                         echo "<td colspan='2'>LABA RUGI KOTOR</td>";
                                         echo "<td class='text-right'>" . number_format($total_labarugi_kotor, 0, ',', '.') . "</td>";
+                                        echo "<td class='text-right'>" . number_format($total_labarugi_kotor_audited, 0, ',', '.') . "</td>";
                                         echo "<td class='text-right'>" . number_format($total_labarugi_kotor_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
                                     } elseif ($kategori_sebelumnya == 'Beban Umum Dan Administrasi') {
                                         echo "<tr class='font-weight-bold bg-light'>";
                                         echo "<td colspan='2'>Beban Umum Dan Administrasi</td>";
                                         echo "<td class='text-right'>" . number_format($total_beban_umum_administrasi, 0, ',', '.') . "</td>";
+                                        echo "<td class='text-right'>" . number_format($total_beban_umum_administrasi_audited, 0, ',', '.') . "</td>";
                                         echo "<td class='text-right'>" . number_format($total_beban_umum_administrasi_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
 
                                         $total_labarugi_operasional = $total_labarugi_kotor - $total_beban_umum_administrasi;
+                                        $total_labarugi_operasional_audited = $total_labarugi_kotor_audited - $total_beban_umum_administrasi_audited;
                                         $total_labarugi_operasional_lalu = $total_labarugi_kotor_lalu - $total_beban_umum_administrasi_lalu;
                                         echo "<tr class='font-weight-bold bg-warning'>";
                                         echo "<td colspan='2'>LABA RUGI OPERASIONAL</td>";
                                         echo "<td class='text-right'>" . number_format($total_labarugi_operasional, 0, ',', '.') . "</td>";
+                                        echo "<td class='text-right'>" . number_format($total_labarugi_operasional_audited, 0, ',', '.') . "</td>";
                                         echo "<td class='text-right'>" . number_format($total_labarugi_operasional_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
                                     } elseif ($kategori_sebelumnya == 'Pendapatan - Beban Lain-lain') {
                                         echo "<tr class='font-weight-bold bg-light'>";
                                         echo "<td colspan='2'>Jumlah Pendapatan - Beban Lain-lain</td>";
                                         echo "<td class='text-right'>" . number_format($total_pendapatan_beban_lain, 0, ',', '.') . "</td>";
+                                        echo "<td class='text-right'>" . number_format($total_pendapatan_beban_lain_audited, 0, ',', '.') . "</td>";
                                         echo "<td class='text-right'>" . number_format($total_pendapatan_beban_lain_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
                                         $total_labarugi_bersih_Sebelum_pajak = $total_labarugi_operasional + $total_pendapatan_beban_lain;
+                                        $total_labarugi_bersih_Sebelum_pajak_audited = $total_labarugi_operasional_audited + $total_pendapatan_beban_lain_audited;
                                         $total_labarugi_bersih_Sebelum_pajak_lalu = $total_labarugi_operasional_lalu + $total_pendapatan_beban_lain_lalu;
                                         echo "<tr class='font-weight-bold bg-warning'>";
                                         echo "<td colspan='2'>LABA RUGI BERSIH SEBELUM PAJAK</td>";
@@ -127,22 +142,26 @@
                                         </a>
                                       </th>";
 
+                                        echo "<td class='text-right'>" . number_format($total_labarugi_bersih_Sebelum_pajak_audited, 0, ',', '.') . "</td>";
                                         echo "<td class='text-right'>" . number_format($total_labarugi_bersih_Sebelum_pajak_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
                                     } elseif ($kategori_sebelumnya == 'Beban Pajak Penghasilan') {
                                         echo "<tr class='font-weight-bold bg-light'>";
                                         echo "<td colspan='2'>Jumlah Beban Pajak Penghasilan</td>";
                                         echo "<td class='text-right'>" . number_format($total_beban_pajak_penghasilan, 0, ',', '.') . "</td>";
+                                        echo "<td class='text-right'>" . number_format($total_beban_pajak_penghasilan_audited, 0, ',', '.') . "</td>";
                                         echo "<td class='text-right'>" . number_format($total_beban_pajak_penghasilan_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
                                     } elseif ($kategori_sebelumnya == '(Kerugian) Penghasilan Komprehensip Lain') {
                                         echo "<tr class='font-weight-bold bg-light'>";
                                         echo "<td colspan='2'>Jumlah (Kerugian) Penghasilan Komprehensip Lain</td>";
                                         echo "<td class='text-right'>" . number_format($total_penghasilan_komprehensif_lain, 0, ',', '.') . "</td>";
+                                        echo "<td class='text-right'>" . number_format($total_penghasilan_komprehensif_lain_audited, 0, ',', '.') . "</td>";
                                         echo "<td class='text-right'>" . number_format($total_penghasilan_komprehensif_lain_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
 
                                         $total_penghasilan_komprehensif_tahun_berjalan = $total_labarugi_bersih_Sebelum_pajak - ($total_beban_pajak_penghasilan + $total_penghasilan_komprehensif_lain);
+                                        $total_penghasilan_komprehensif_tahun_berjalan_audited = $total_labarugi_bersih_Sebelum_pajak_audited - ($total_beban_pajak_penghasilan_audited + $total_penghasilan_komprehensif_lain_audited);
                                         $total_penghasilan_komprehensif_tahun_berjalan_lalu = $total_labarugi_bersih_Sebelum_pajak_lalu - ($total_beban_pajak_penghasilan_lalu + $total_penghasilan_komprehensif_lain_lalu);
 
                                         echo "<tr class='font-weight-bold bg-warning text-left'>";
@@ -156,13 +175,13 @@
                                             " . number_format($total_penghasilan_komprehensif_tahun_berjalan, 0, ',', '.') . "
                                         </a>
                                         </th>";
-
+                                        echo "<td class='text-right'>" . number_format($total_labarugi_bersih_setelah_pajak_audited, 0, ',', '.') . "</td>";
                                         echo "<td class='text-right'>" . number_format($total_labarugi_bersih_setelah_pajak_lalu, 0, ',', '.') . "</td>";
                                         echo "</tr>";
                                     }
 
                                     echo "<tr class='font-weight-bold'>";
-                                    echo "<td colspan='4'>" . htmlspecialchars($row->kategori) . "</td>";
+                                    echo "<td colspan='5'>" . htmlspecialchars($row->kategori) . "</td>";
                                     echo "</tr>";
                                     $kategori_sebelumnya = $row->kategori;
                                 }
@@ -176,6 +195,22 @@
                                 echo "<td class='text-center'></td>";
                                 echo "<td>" . htmlspecialchars($row->akun) . "</td>";
                                 echo "<td class='text-right'>" . number_format(abs($row->nilai_lr_sak_ep), 0, ',', '.') . "</td>"; // abs itu fungsinya untuk mengubah nilai negatif menjadi positif
+
+                                echo "<td class='text-right'>";
+                                if ($row->status == 1) {
+                                    echo "<a href='" . base_url('lap_keuangan/lr_sak_ep/edit_audited/' . $row->id_lr_sak_ep . '?tahun=' . $this->input->get('tahun')) . "' 
+                                    style='color: black; text-decoration: none;'>
+                                    " . number_format(abs($row->nilai_lr_sak_ep_audited), 0, ',', '.') . "
+                                    </a>";
+                                } else {
+                                    echo "<a href='#' onclick='alert_edit_lr_sak_ep(); return false;' 
+                                    style='color: black; text-decoration: none; cursor: not-allowed;'>
+                                    " . number_format(abs($row->nilai_lr_sak_ep_audited), 0, ',', '.') . "
+                                    </a>";
+                                }
+                                echo "</td>";
+
+                                // echo "<td class='text-right'>" . number_format(abs($row->nilai_lr_sak_ep_audited), 0, ',', '.') . "</td>";
                                 echo "<td class='text-right'>" . number_format(abs($nilai_tahun_lalu), 0, ',', '.') . "</td>";
                                 echo "</tr>";
 
@@ -183,21 +218,27 @@
                                 // **Hitung total berdasarkan kategori**
                                 if ($row->kategori == 'Pendapatan Usaha') {
                                     $total_pendapatan_usaha += $row->nilai_lr_sak_ep ?? 0;
+                                    $total_pendapatan_usaha_audited += $row->nilai_lr_sak_ep_audited ?? 0;
                                     $total_pendapatan_usaha_lalu += $nilai_tahun_lalu ?? 0;
                                 } elseif ($row->kategori == 'Beban Usaha') {
                                     $total_beban_usaha += $row->nilai_lr_sak_ep ?? 0;
+                                    $total_beban_usaha_audited += $row->nilai_lr_sak_ep_audited ?? 0;
                                     $total_beban_usaha_lalu += $nilai_tahun_lalu ?? 0;
                                 } elseif ($row->kategori == 'Beban Umum Dan Administrasi') {
                                     $total_beban_umum_administrasi += $row->nilai_lr_sak_ep ?? 0;
+                                    $total_beban_umum_administrasi_audited += $row->nilai_lr_sak_ep_audited ?? 0;
                                     $total_beban_umum_administrasi_lalu += $nilai_tahun_lalu ?? 0;
                                 } elseif ($row->kategori == 'Pendapatan - Beban Lain-lain') {
                                     $total_pendapatan_beban_lain += $row->nilai_lr_sak_ep ?? 0;
+                                    $total_pendapatan_beban_lain_audited += $row->nilai_lr_sak_ep_audited ?? 0;
                                     $total_pendapatan_beban_lain_lalu += $nilai_tahun_lalu ?? 0;
                                 } elseif ($row->kategori == 'Beban Pajak Penghasilan') {
                                     $total_beban_pajak_penghasilan += $row->nilai_lr_sak_ep ?? 0;
+                                    $total_beban_pajak_penghasilan_audited += $row->nilai_lr_sak_ep_audited ?? 0;
                                     $total_beban_pajak_penghasilan_lalu += $nilai_tahun_lalu ?? 0;
                                 } elseif ($row->kategori == '(Kerugian) Penghasilan Komprehensip Lain') {
                                     $total_penghasilan_komprehensif_lain += $row->nilai_lr_sak_ep ?? 0;
+                                    $total_penghasilan_komprehensif_lain_audited += $row->nilai_lr_sak_ep_audited ?? 0;
                                     $total_penghasilan_komprehensif_lain_lalu += $nilai_tahun_lalu ?? 0;
                                 }
                             }
@@ -207,21 +248,25 @@
                                 echo "<tr class='font-weight-bold bg-light'>";
                                 echo "<td colspan='2'>Jumlah Pendapatan Usaha</td>";
                                 echo "<td class='text-right'>" . number_format($total_pendapatan_usaha, 0, ',', '.') . "</td>";
+                                echo "<td class='text-right'>" . number_format($total_pendapatan_usaha_audited, 0, ',', '.') . "</td>";
                                 echo "<td class='text-right'>" . number_format($total_pendapatan_usaha_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
                             } elseif ($kategori_sebelumnya == 'Beban Usaha') {
                                 echo "<tr class='font-weight-bold bg-light'>";
                                 echo "<td colspan='2'>Jumlah Beban Usaha</td>";
                                 echo "<td class='text-right'>" . number_format($total_beban_usaha, 0, ',', '.') . "</td>";
+                                echo "<td class='text-right'>" . number_format($total_beban_usaha_audited, 0, ',', '.') . "</td>";
                                 echo "<td class='text-right'>" . number_format($total_beban_usaha_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
 
                                 // **Total laba rugi ditampilkan setelah Total pendapatan usaha - Beban Usaha**
                                 $total_labarugi_kotor = $total_pendapatan_usaha - $total_beban_usaha;
+                                $total_labarugi_kotor_audited = $total_pendapatan_usaha_audited - $total_beban_usaha_audited;
                                 $total_labarugi_kotor_lalu = $total_pendapatan_usaha_lalu - $total_beban_usaha_lalu;
                                 echo "<tr class='font-weight-bold bg-warning'>";
                                 echo "<td colspan='2'>LABA RUGI KOTOR</td>";
                                 echo "<td class='text-right'>" . number_format($total_labarugi_kotor, 0, ',', '.') . "</td>";
+                                echo "<td class='text-right'>" . number_format($total_labarugi_kotor_audited, 0, ',', '.') . "</td>";
                                 echo "<td class='text-right'>" . number_format($total_labarugi_kotor_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
                             } elseif ($kategori_sebelumnya == 'Beban Umum Dan Administrasi') {
@@ -229,24 +274,29 @@
                                 echo "<tr class='font-weight-bold bg-light'>";
                                 echo "<td colspan='2'>Beban Umum Dan Administrasi</td>";
                                 echo "<td class='text-right'>" . number_format($total_beban_umum_administrasi, 0, ',', '.') . "</td>";
+                                echo "<td class='text-right'>" . number_format($total_beban_umum_administrasi_audited, 0, ',', '.') . "</td>";
                                 echo "<td class='text-right'>" . number_format($total_beban_umum_administrasi_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
 
                                 $total_labarugi_operasional = $total_labarugi_kotor - $total_beban_umum_administrasi;
+                                $total_labarugi_operasional_audited = $total_labarugi_kotor_audited - $total_beban_umum_administrasi_audited;
                                 $total_labarugi_operasional_lalu = $total_labarugi_kotor_lalu - $total_beban_umum_administrasi_lalu;
                                 echo "<tr class='font-weight-bold bg-warning'>";
                                 echo "<td colspan='2'>LABA RUGI OPERASIONAL</td>";
                                 echo "<td class='text-right'>" . number_format($total_labarugi_operasional, 0, ',', '.') . "</td>";
+                                echo "<td class='text-right'>" . number_format($total_labarugi_operasional_audited, 0, ',', '.') . "</td>";
                                 echo "<td class='text-right'>" . number_format($total_labarugi_operasional_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
                             } elseif ($kategori_sebelumnya == 'Pendapatan - Beban Lain-lain') {
                                 echo "<tr class='font-weight-bold bg-light'>";
                                 echo "<td colspan='2'>Jumlah Pendapatan - Beban Lain-lain</td>";
                                 echo "<td class='text-right'>" . number_format($total_pendapatan_beban_lain, 0, ',', '.') . "</td>";
+                                echo "<td class='text-right'>" . number_format($total_pendapatan_beban_lain_audited, 0, ',', '.') . "</td>";
                                 echo "<td class='text-right'>" . number_format($total_pendapatan_beban_lain_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
 
                                 $total_labarugi_bersih_Sebelum_pajak = $total_labarugi_operasional + $total_pendapatan_beban_lain;
+                                $total_labarugi_bersih_Sebelum_pajak_audited = $total_labarugi_operasional_audited + $total_pendapatan_beban_lain_audited;
                                 $total_labarugi_bersih_Sebelum_pajak_lalu = $total_labarugi_operasional_lalu + $total_pendapatan_beban_lain_lalu;
                                 echo "<tr class='font-weight-bold bg-warning'>";
                                 echo "<td colspan='2'>LABA RUGI BERSIH SEBELUM PAJAK</td>";
@@ -260,6 +310,7 @@
                                 </a>
                               </th>";
 
+                                echo "<td class='text-right'>" . number_format($total_labarugi_bersih_Sebelum_pajak_audited, 0, ',', '.') . "</td>";
                                 echo "<td class='text-right'>" . number_format($total_labarugi_bersih_Sebelum_pajak_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
                             } elseif ($kategori_sebelumnya == 'Beban Pajak Penghasilan') {
@@ -272,10 +323,12 @@
                                 echo "<tr class='font-weight-bold bg-light'>";
                                 echo "<td colspan='2'>Jumlah (Kerugian) Penghasilan Komprehensip Lain</td>";
                                 echo "<td class='text-right'>" . number_format($total_penghasilan_komprehensif_lain, 0, ',', '.') . "</td>";
+                                echo "<td class='text-right'>" . number_format($total_penghasilan_komprehensif_lain_audited, 0, ',', '.') . "</td>";
                                 echo "<td class='text-right'>" . number_format($total_penghasilan_komprehensif_lain_lalu, 0, ',', '.') . "</td>";
                                 echo "</tr>";
 
                                 $total_penghasilan_komprehensif_tahun_berjalan = $total_labarugi_bersih_Sebelum_pajak - ($total_beban_pajak_penghasilan + $total_penghasilan_komprehensif_lain);
+                                $total_penghasilan_komprehensif_tahun_berjalan_audited = $total_labarugi_bersih_Sebelum_pajak_audited - ($total_beban_pajak_penghasilan_audited + $total_penghasilan_komprehensif_lain_audited);
                                 $total_penghasilan_komprehensif_tahun_berjalan_lalu = $total_labarugi_bersih_Sebelum_pajak_lalu - ($total_beban_pajak_penghasilan_lalu + $total_penghasilan_komprehensif_lain_lalu);
                                 echo "<tr class='font-weight-bold bg-warning text-left'>";
                                 echo "<td colspan='2'>JUMLAH PENGHASILAN KOMPREHENSIF TAHUN BERJALAN</td>";
@@ -288,8 +341,9 @@
                                     " . number_format($total_penghasilan_komprehensif_tahun_berjalan, 0, ',', '.') . "
                                 </a>
                                 </th>";
-
+                                echo "<td class='text-right'>" . number_format($total_penghasilan_komprehensif_tahun_berjalan_audited, 0, ',', '.') . "</td>";
                                 echo "<td class='text-right'>" . number_format($total_penghasilan_komprehensif_tahun_berjalan_lalu, 0, ',', '.') . "</td>";
+
                                 echo "</tr>";
                             }
                             ?>

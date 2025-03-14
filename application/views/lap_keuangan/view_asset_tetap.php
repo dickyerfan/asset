@@ -117,7 +117,7 @@
                             <tr class="text-center bg-light">
                                 <th class="text-left">Total</th>
                                 <th class="text-right">
-                                    <a href="<?= base_url('lap_keuangan/asset_tetap/input_harga_perolehan/' . $tahun_lap . '/' . $totals['total_rupiah']) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
+                                    <a href="<?= base_url('lap_keuangan/asset_tetap/input_aset_tetap/' . $tahun_lap . '/' . $totals['total_rupiah']) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Neraca?');" style="text-decoration: none; color: inherit;">
                                         <?= number_format($totals['total_rupiah'], 0, ',', '.'); ?>
                                     </a>
                                 </th>

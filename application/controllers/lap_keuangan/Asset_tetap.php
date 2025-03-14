@@ -156,10 +156,10 @@ class Asset_tetap extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function input_harga_perolehan($tahun, $total_harga_perolehan)
+    public function input_aset_tetap($tahun, $total_aset_tetap)
     {
         date_default_timezone_set('Asia/Jakarta');
-        if ($total_harga_perolehan == 0) {
+        if ($total_aset_tetap == 0) {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -193,7 +193,8 @@ class Asset_tetap extends CI_Controller
                 'tahun_neraca' => $tahun,
                 'kategori' => 'Aset Tidak Lancar',
                 'akun' => 'Aset Tetap',
-                'nilai_neraca' => $total_harga_perolehan,
+                'nilai_neraca' => $total_aset_tetap,
+                'nilai_neraca_audited' => $total_aset_tetap,
                 'posisi' => 10,
                 'no_neraca' => '2.1',
                 'status' => 1,
@@ -252,6 +253,7 @@ class Asset_tetap extends CI_Controller
                 'kategori' => 'Aset Tidak Lancar',
                 'akun' => 'Akm Depresiasi Aset Tetap',
                 'nilai_neraca' => $total_akm_tahun_ini * -1,
+                'nilai_neraca_audited' => $total_akm_tahun_ini * -1,
                 'posisi' => 11,
                 'no_neraca' => '2.2',
                 'status' => 1,
@@ -481,6 +483,7 @@ class Asset_tetap extends CI_Controller
                 'kategori' => 'Aset Tidak Lancar',
                 'akun' => 'Aset Tetap Dalam Penyelesaian',
                 'nilai_neraca' => $total_atdp,
+                'nilai_neraca_audited' => $total_atdp,
                 'posisi' => 13,
                 'no_neraca' => '2.4',
                 'status' => 1,
@@ -539,6 +542,7 @@ class Asset_tetap extends CI_Controller
                 'kategori' => 'Aset Tidak Lancar',
                 'akun' => 'Aset Tidak Berwujud',
                 'nilai_neraca' => $total_atb * -1,
+                'nilai_neraca_audited' => $total_atb * -1,
                 'posisi' => 14,
                 'no_neraca' => '2.5',
                 'status' => 1,
