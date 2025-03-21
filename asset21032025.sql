@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : DIE ArtS
+ Source Server         : database_lokal
  Source Server Type    : MySQL
- Source Server Version : 100418 (10.4.18-MariaDB)
+ Source Server Version : 100417 (10.4.17-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : asset
 
  Target Server Type    : MySQL
- Target Server Version : 100418 (10.4.18-MariaDB)
+ Target Server Version : 100417 (10.4.17-MariaDB)
  File Encoding         : 65001
 
- Date: 21/03/2025 10:57:50
+ Date: 14/03/2025 16:08:59
 */
 
 SET NAMES utf8mb4;
@@ -223,36 +223,35 @@ CREATE TABLE `bagian_upk`  (
   `nama_bagian` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `status` int NOT NULL DEFAULT 1,
   `status_upk` int NOT NULL DEFAULT 1,
-  `status_evkin` int NOT NULL,
   PRIMARY KEY (`id_bagian`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bagian_upk
 -- ----------------------------
-INSERT INTO `bagian_upk` VALUES (1, 'Direktur', 0, 0, 0);
-INSERT INTO `bagian_upk` VALUES (2, 'Umum', 1, 0, 0);
-INSERT INTO `bagian_upk` VALUES (3, 'Keuangan', 1, 0, 0);
-INSERT INTO `bagian_upk` VALUES (4, 'Pemeliharaan', 1, 0, 0);
-INSERT INTO `bagian_upk` VALUES (5, 'Perencanaan', 1, 0, 0);
-INSERT INTO `bagian_upk` VALUES (6, 'Langganan', 1, 0, 0);
-INSERT INTO `bagian_upk` VALUES (7, 'Bondowoso', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (8, 'S P I', 1, 0, 0);
-INSERT INTO `bagian_upk` VALUES (9, 'Sukosari 1', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (10, 'Maesan', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (11, 'Tegalampel', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (12, 'Tapen', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (13, 'Prajekan', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (14, 'Tlogosari', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (15, 'Wringin', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (16, 'Curahdami', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (17, 'Tamanan', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (18, 'Tenggarang', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (19, 'Tamankrocok', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (20, 'Wonosari', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (21, 'Klabang', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (22, 'Sukosari 2', 1, 1, 1);
-INSERT INTO `bagian_upk` VALUES (23, 'A M D K', 1, 1, 0);
+INSERT INTO `bagian_upk` VALUES (1, 'Direktur', 0, 0);
+INSERT INTO `bagian_upk` VALUES (2, 'Umum', 1, 0);
+INSERT INTO `bagian_upk` VALUES (3, 'Keuangan', 1, 0);
+INSERT INTO `bagian_upk` VALUES (4, 'Pemeliharaan', 1, 0);
+INSERT INTO `bagian_upk` VALUES (5, 'Perencanaan', 1, 0);
+INSERT INTO `bagian_upk` VALUES (6, 'Langganan', 1, 0);
+INSERT INTO `bagian_upk` VALUES (7, 'Bondowoso', 1, 1);
+INSERT INTO `bagian_upk` VALUES (8, 'S P I', 1, 0);
+INSERT INTO `bagian_upk` VALUES (9, 'Sukosari 1', 1, 1);
+INSERT INTO `bagian_upk` VALUES (10, 'Maesan', 1, 1);
+INSERT INTO `bagian_upk` VALUES (11, 'Tegalampel', 1, 1);
+INSERT INTO `bagian_upk` VALUES (12, 'Tapen', 1, 1);
+INSERT INTO `bagian_upk` VALUES (13, 'Prajekan', 1, 1);
+INSERT INTO `bagian_upk` VALUES (14, 'Tlogosari', 1, 1);
+INSERT INTO `bagian_upk` VALUES (15, 'Wringin', 1, 1);
+INSERT INTO `bagian_upk` VALUES (16, 'Curahdami', 1, 1);
+INSERT INTO `bagian_upk` VALUES (17, 'Tamanan', 1, 1);
+INSERT INTO `bagian_upk` VALUES (18, 'Tenggarang', 1, 1);
+INSERT INTO `bagian_upk` VALUES (19, 'Tamankrocok', 1, 1);
+INSERT INTO `bagian_upk` VALUES (20, 'Wonosari', 1, 1);
+INSERT INTO `bagian_upk` VALUES (21, 'Klabang', 1, 1);
+INSERT INTO `bagian_upk` VALUES (22, 'Sukosari 2', 1, 1);
+INSERT INTO `bagian_upk` VALUES (23, 'A M D K', 1, 1);
 
 -- ----------------------------
 -- Table structure for bank
@@ -2982,205 +2981,6 @@ INSERT INTO `daftar_asset` VALUES (2567, 22, 2448, 2263, 226, 2, 34, 90, 'Pengga
 INSERT INTO `daftar_asset` VALUES (2568, 17, 2441, 2263, 226, 1, 34, 1, 'Pemasangan SR 1 unit', '2024-12-31', NULL, '', '', 1723250, 1, 16, 12.50, 'Administrator', '2025-01-06 14:14:58', 0);
 INSERT INTO `daftar_asset` VALUES (2569, 23, 2952, 2848, 248, 0, 34, 500, 'Pengadaan galon 500 bh', '2024-03-25', NULL, '', '', 31250000, 1, 4, 50.00, 'Administrator', '2025-01-15 07:05:44', 0);
 INSERT INTO `daftar_asset` VALUES (2570, 23, 2952, 2848, 248, 0, 34, 600, 'Pengadaan galon 600 bh', '2024-11-22', NULL, '', '', 37800000, 1, 4, 50.00, 'Administrator', '2025-01-15 07:06:34', 0);
-
--- ----------------------------
--- Table structure for ek_ganti_meter
--- ----------------------------
-DROP TABLE IF EXISTS `ek_ganti_meter`;
-CREATE TABLE `ek_ganti_meter`  (
-  `id_ek_gm` int NOT NULL AUTO_INCREMENT,
-  `id_bagian` int NOT NULL,
-  `jumlah_gm` int NULL DEFAULT NULL,
-  `tgl_gm` date NULL DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_ek_gm`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_ganti_meter
--- ----------------------------
-INSERT INTO `ek_ganti_meter` VALUES (1, 7, 6, '2023-01-01', '2025-03-18 13:17:26', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (2, 13, 1, '2023-01-01', '2025-03-18 13:17:26', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (3, 20, 1, '2023-01-01', '2025-03-20 09:19:35', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (4, 16, 3, '2023-02-01', '2025-03-20 09:20:18', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (5, 22, 1, '2023-02-01', '2025-03-20 09:20:18', 'Bagian Pemeliharaan', '2025-03-20 08:29:27', 'Bagian Pemeliharaan');
-INSERT INTO `ek_ganti_meter` VALUES (6, 7, 1, '2023-03-01', '2025-03-20 09:20:52', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (7, 11, 2, '2023-03-01', '2025-03-20 09:20:52', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (8, 12, 23, '2023-03-01', '2025-03-20 09:20:52', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (9, 14, 18, '2023-03-01', '2025-03-20 09:20:52', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (10, 17, 1, '2023-03-01', '2025-03-20 09:20:52', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (11, 7, 1, '2023-04-01', '2025-03-20 09:21:17', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (12, 9, 15, '2023-04-01', '2025-03-20 09:21:17', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (13, 14, 3, '2023-04-01', '2025-03-20 09:21:17', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (14, 7, 2, '2023-05-01', '2025-03-20 09:21:41', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (15, 10, 4, '2023-05-01', '2025-03-20 09:21:41', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (16, 22, 1, '2023-05-01', '2025-03-20 09:21:41', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (17, 7, 2, '2023-06-01', '2025-03-20 09:22:11', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (18, 11, 1, '2023-06-01', '2025-03-20 09:22:11', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (19, 14, 7, '2023-06-01', '2025-03-20 09:22:11', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (20, 16, 15, '2023-06-01', '2025-03-20 09:22:11', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (21, 17, 1, '2023-06-01', '2025-03-20 09:22:11', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (22, 7, 25, '2023-07-01', '2025-03-20 09:22:53', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (23, 10, 1, '2023-07-01', '2025-03-20 09:22:53', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (24, 14, 1, '2023-07-01', '2025-03-20 09:22:53', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (25, 15, 14, '2023-07-01', '2025-03-20 09:22:53', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (26, 18, 1, '2023-07-01', '2025-03-20 09:22:53', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (27, 7, 1, '2023-08-01', '2025-03-20 09:23:24', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (28, 12, 1, '2023-08-01', '2025-03-20 09:23:24', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (29, 13, 1, '2023-08-01', '2025-03-20 09:23:24', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (30, 16, 3, '2023-08-01', '2025-03-20 09:23:24', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (31, 7, 16, '2023-09-01', '2025-03-20 09:23:51', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (32, 10, 5, '2023-09-01', '2025-03-20 09:23:51', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (33, 14, 2, '2023-09-01', '2025-03-20 09:23:51', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (34, 16, 12, '2023-09-01', '2025-03-20 09:23:51', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (35, 7, 2, '2023-10-01', '2025-03-20 09:24:12', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (36, 9, 28, '2023-10-01', '2025-03-20 09:24:12', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (37, 7, 3, '2023-11-01', '2025-03-20 09:24:42', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (38, 11, 2, '2023-11-01', '2025-03-20 09:24:42', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (39, 13, 33, '2023-11-01', '2025-03-20 09:24:42', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (40, 15, 20, '2023-11-01', '2025-03-20 09:24:42', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (41, 19, 28, '2023-11-01', '2025-03-20 09:24:42', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (42, 9, 1, '2023-12-01', '2025-03-20 09:25:16', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (43, 11, 1, '2023-12-01', '2025-03-20 09:25:16', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (44, 16, 3, '2023-12-01', '2025-03-20 09:25:16', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (45, 18, 30, '2023-12-01', '2025-03-20 09:25:16', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_ganti_meter` VALUES (46, 22, 26, '2023-12-01', '2025-03-20 09:25:16', 'Bagian Pemeliharaan', NULL, '');
-
--- ----------------------------
--- Table structure for ek_tekanan_air
--- ----------------------------
-DROP TABLE IF EXISTS `ek_tekanan_air`;
-CREATE TABLE `ek_tekanan_air`  (
-  `id_ek_tka` int NOT NULL AUTO_INCREMENT,
-  `id_bagian` int NOT NULL,
-  `jumlah_sr` int NULL DEFAULT NULL,
-  `jumlah_cek` int NULL DEFAULT NULL,
-  `jumlah_07` int NULL DEFAULT NULL,
-  `jumlah_sr_70` int NULL DEFAULT NULL,
-  `tahun_tka` year NULL DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_ek_tka`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_tekanan_air
--- ----------------------------
-INSERT INTO `ek_tekanan_air` VALUES (1, 7, 5591, 29, 29, 5591, 2023, '2025-03-21 09:27:10', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (2, 9, 1253, 8, 7, 1096, 2023, '2025-03-21 09:27:10', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (3, 10, 1266, 15, 15, 1266, 2023, '2025-03-21 09:28:06', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (4, 11, 1769, 9, 7, 1376, 2023, '2025-03-21 09:39:56', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (5, 12, 1135, 7, 7, 1135, 2023, '2025-03-21 09:40:32', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (6, 13, 1070, 2, 2, 1070, 2023, '2025-03-21 09:41:41', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (7, 14, 858, 14, 6, 368, 2023, '2025-03-21 09:42:15', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (8, 15, 999, 8, 1, 129, 2023, '2025-03-21 09:42:46', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (9, 16, 1302, 10, 9, 1172, 2023, '2025-03-21 09:43:13', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (10, 17, 307, 12, 12, 307, 2023, '2025-03-21 09:43:30', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (11, 18, 579, 7, 5, 414, 2023, '2025-03-21 09:43:49', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (12, 19, 804, 4, 4, 804, 2023, '2025-03-21 09:44:31', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (13, 21, 111, 2, 2, 111, 2023, '2025-03-21 09:44:51', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (14, 20, 1191, 7, 7, 1191, 2023, '2025-03-21 09:45:06', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (15, 22, 1490, 8, 8, 1490, 2023, '2025-03-21 09:46:47', 'Bagian Pemeliharaan', NULL, '');
-
--- ----------------------------
--- Table structure for ek_tera_meter
--- ----------------------------
-DROP TABLE IF EXISTS `ek_tera_meter`;
-CREATE TABLE `ek_tera_meter`  (
-  `id_ek_tm` int NOT NULL AUTO_INCREMENT,
-  `id_bagian` int NOT NULL,
-  `jumlah_tm` int NULL DEFAULT NULL,
-  `tgl_tm` date NULL DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_ek_tm`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 81 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_tera_meter
--- ----------------------------
-INSERT INTO `ek_tera_meter` VALUES (1, 15, 6, '2023-01-01', '2025-03-17 14:04:09', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (2, 7, 90, '2023-02-01', '2025-03-17 14:04:09', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (3, 9, 12, '2023-02-01', '2025-03-17 14:04:09', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (4, 10, 62, '2023-02-01', '2025-03-19 13:45:57', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (5, 11, 50, '2023-02-01', '2025-03-19 13:45:57', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (6, 12, 40, '2023-02-01', '2025-03-19 13:51:15', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (7, 13, 18, '2023-02-01', '2025-03-19 13:51:15', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (8, 15, 2, '2023-02-01', '2025-03-19 13:55:16', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (9, 16, 10, '2023-02-01', '2025-03-19 13:55:16', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (10, 17, 5, '2023-02-01', '2025-03-19 13:55:16', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (11, 7, 58, '2023-03-01', '2025-03-19 14:26:34', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (12, 9, 19, '2023-03-01', '2025-03-19 14:27:23', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (13, 10, 20, '2023-03-01', '2025-03-19 14:27:23', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (14, 11, 15, '2023-03-01', '2025-03-19 14:30:50', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (15, 12, 8, '2023-03-01', '2025-03-19 14:30:50', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (16, 14, 5, '2023-03-01', '2025-03-19 14:30:50', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (17, 15, 12, '2023-03-01', '2025-03-19 14:30:50', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (18, 16, 102, '2023-03-01', '2025-03-19 14:30:50', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (19, 17, 25, '2023-03-01', '2025-03-19 14:30:50', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (20, 22, 38, '2023-03-01', '2025-03-19 14:31:21', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (21, 7, 19, '2023-04-01', '2025-03-19 14:43:11', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (22, 10, 53, '2023-04-01', '2025-03-19 14:43:11', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (23, 11, 21, '2023-04-01', '2025-03-19 14:43:11', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (24, 15, 1, '2023-04-01', '2025-03-19 14:43:11', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (25, 16, 188, '2023-04-01', '2025-03-19 14:43:11', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (31, 7, 74, '2023-05-01', '2025-03-20 09:11:07', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (32, 9, 25, '2023-05-01', '2025-03-20 09:11:07', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (33, 10, 46, '2023-05-01', '2025-03-20 09:11:07', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (34, 11, 70, '2023-05-01', '2025-03-20 09:11:07', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (35, 12, 72, '2023-05-01', '2025-03-20 09:11:07', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (36, 13, 15, '2023-05-01', '2025-03-20 09:11:07', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (37, 14, 9, '2023-05-01', '2025-03-20 09:11:07', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (38, 15, 9, '2023-05-01', '2025-03-20 09:11:07', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (39, 17, 8, '2023-05-01', '2025-03-20 09:11:07', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (40, 19, 26, '2023-05-01', '2025-03-20 09:11:07', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (41, 22, 149, '2023-05-01', '2025-03-20 09:11:07', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (42, 7, 91, '2023-06-01', '2025-03-20 09:13:40', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (43, 9, 74, '2023-06-01', '2025-03-20 09:13:40', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (44, 10, 68, '2023-06-01', '2025-03-20 09:13:40', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (45, 11, 143, '2023-06-01', '2025-03-20 09:13:40', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (46, 12, 97, '2023-06-01', '2025-03-20 09:13:40', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (47, 13, 32, '2023-06-01', '2025-03-20 09:13:40', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (48, 14, 1, '2023-06-01', '2025-03-20 09:13:40', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (49, 15, 14, '2023-06-01', '2025-03-20 09:13:40', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (50, 17, 15, '2023-06-01', '2025-03-20 09:13:40', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (51, 18, 71, '2023-06-01', '2025-03-20 09:13:40', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (52, 19, 55, '2023-06-01', '2025-03-20 09:13:40', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (53, 20, 40, '2023-06-01', '2025-03-20 09:13:40', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (54, 22, 144, '2023-06-01', '2025-03-20 09:13:40', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (55, 7, 151, '2023-07-01', '2025-03-20 09:14:48', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (56, 9, 41, '2023-07-01', '2025-03-20 09:14:48', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (57, 11, 51, '2023-07-01', '2025-03-20 09:14:48', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (58, 12, 13, '2023-07-01', '2025-03-20 09:14:48', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (59, 13, 142, '2023-07-01', '2025-03-20 09:14:48', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (60, 14, 48, '2023-07-01', '2025-03-20 09:14:48', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (61, 15, 61, '2023-07-01', '2025-03-20 09:14:48', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (62, 17, 8, '2023-07-01', '2025-03-20 09:14:48', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (63, 19, 39, '2023-07-01', '2025-03-20 09:14:48', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (64, 20, 39, '2023-07-01', '2025-03-20 09:14:48', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (65, 21, 12, '2023-07-01', '2025-03-20 09:14:48', 'Bagian Pemeliharaan', '2025-03-20 08:23:43', 'Bagian Pemeliharaan');
-INSERT INTO `ek_tera_meter` VALUES (66, 7, 253, '2023-08-01', '2025-03-20 09:15:33', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (67, 9, 81, '2023-08-01', '2025-03-20 09:15:33', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (68, 14, 56, '2023-08-01', '2025-03-20 09:15:33', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (69, 15, 24, '2023-08-01', '2025-03-20 09:15:33', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (70, 18, 49, '2023-08-01', '2025-03-20 09:15:33', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (71, 19, 10, '2023-08-01', '2025-03-20 09:15:33', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (72, 20, 121, '2023-08-01', '2025-03-20 09:15:33', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (73, 21, 13, '2023-08-01', '2025-03-20 09:15:33', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (74, 7, 102, '2023-09-01', '2025-03-20 09:16:26', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (75, 14, 73, '2023-09-01', '2025-03-20 09:16:26', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (76, 15, 92, '2023-09-01', '2025-03-20 09:16:26', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (77, 20, 30, '2023-09-01', '2025-03-20 09:16:26', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (78, 7, 181, '2023-10-01', '2025-03-20 09:16:43', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (79, 14, 1, '2023-11-01', '2025-03-20 09:17:05', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tera_meter` VALUES (80, 22, 1, '2023-11-01', '2025-03-20 09:17:25', 'Bagian Pemeliharaan', NULL, '');
 
 -- ----------------------------
 -- Table structure for hnu_input

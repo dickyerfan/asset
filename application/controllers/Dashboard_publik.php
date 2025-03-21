@@ -17,17 +17,6 @@ class Dashboard_publik extends CI_Controller
             );
             redirect('auth');
         }
-
-        // $bagian = $this->session->userdata('bagian');
-        // if ($bagian != 'Umum') {
-        //     $this->session->set_flashdata(
-        //         'info',
-        //         '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-        //             <strong>Maaf,</strong> Anda tidak memiliki hak akses untuk halaman ini...
-        //           </div>'
-        //     );
-        //     redirect('auth');
-        // }
     }
 
     public function index()

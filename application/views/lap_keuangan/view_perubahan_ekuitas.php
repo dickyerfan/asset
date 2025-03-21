@@ -346,8 +346,9 @@
                                 <td class="text-right"><?= number_format(get_nilai_audited($ekuitas_tahun_lalu_audited, 'Laba Rugi Tahun Berjalan'), 0, ',', '.') ?></td>
                             </tr>
                             <?php
-                            // $nilai_saldo_laba_tahun_lalu = get_nilai_audited($ekuitas_tahun_lalu_audited, 'Akm Kerugian Tahun Lalu') + get_nilai_audited($ekuitas_tahun_lalu_audited, 'Laba Rugi Tahun Berjalan');
-                            $nilai_saldo_laba_tahun_lalu = $nilai_saldo_laba_dua_tahun_lalu + $nilai_lb_dua_tahun_lalu + get_nilai_audited($ekuitas_tahun_lalu_audited, 'Laba Rugi Tahun Berjalan') + $nilai_aktl_tahun_lalu;
+                            $nilai_saldo_laba_tahun_lalu = get_nilai_audited($ekuitas_tahun_lalu_audited, 'Akm Kerugian Tahun Lalu') + get_nilai_audited($ekuitas_tahun_lalu_audited, 'Laba Rugi Tahun Berjalan');
+
+                            // $nilai_saldo_laba_tahun_lalu = $nilai_saldo_laba_dua_tahun_lalu + $nilai_lb_dua_tahun_lalu + get_nilai_audited($ekuitas_tahun_lalu_audited, 'Laba Rugi Tahun Berjalan') + $nilai_aktl_tahun_lalu;
                             ?>
                             <tr>
                                 <td>Saldo Per 31 Desember <?= $tahun_lalu ?></td>
@@ -426,7 +427,8 @@
                             </tr>
                             <tr>
                                 <?php
-                                $nilai_saldo_laba_tahun_ini = $nilai_saldo_laba_tahun_lalu + $nilai_lb_tahun_ini + get_nilai_audited($ekuitas_tahun_ini_audited, 'Laba Rugi Tahun Berjalan');
+                                // $nilai_saldo_laba_tahun_ini = $nilai_saldo_laba_tahun_lalu + $nilai_lb_tahun_ini + get_nilai_audited($ekuitas_tahun_ini_audited, 'Laba Rugi Tahun Berjalan');
+                                $nilai_saldo_laba_tahun_ini = get_nilai_audited($ekuitas_tahun_ini_audited, 'Akm Kerugian Tahun Lalu') + get_nilai_audited($ekuitas_tahun_ini_audited, 'Laba Rugi Tahun Berjalan');
                                 ?>
                                 <td>Saldo Per 31 Desember <?= $tahun_lap ?></td>
                                 <td class="text-right"><?= number_format(get_nilai_audited($ekuitas_tahun_ini_audited, 'Penyertaan Pemda Yang Dipisahkan'), 0, ',', '.') ?></td>
