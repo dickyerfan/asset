@@ -65,6 +65,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('pelihara/sb_mag') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-water"></i>
+                        <p>
+                            Sumur & Sumber
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item" data-toggle="modal" data-target="#logoutModal">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>

@@ -12,6 +12,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
+                                <input type="hidden" name="id_ek_tka" value="<?= $tekanan_air->id_ek_tka; ?>">
                                 <label for="id_bagian">Nama UPK :</label>
                                 <select name="id_bagian" class="form-control">
                                     <?php foreach ($bagian_upk as $bagian) : ?>

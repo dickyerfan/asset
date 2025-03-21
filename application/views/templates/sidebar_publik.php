@@ -68,6 +68,14 @@
                                 <p>Jam Operasional</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('pelihara/sb_mag') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Sumur & Sumber
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <!-- <li class="nav-item">

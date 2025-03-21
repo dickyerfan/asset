@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : database_lokal
+ Source Server         : DIE ArtS
  Source Server Type    : MySQL
- Source Server Version : 100417 (10.4.17-MariaDB)
+ Source Server Version : 100418 (10.4.18-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : asset
 
  Target Server Type    : MySQL
- Target Server Version : 100417 (10.4.17-MariaDB)
+ Target Server Version : 100418 (10.4.18-MariaDB)
  File Encoding         : 65001
 
- Date: 21/03/2025 16:00:43
+ Date: 21/03/2025 10:57:50
 */
 
 SET NAMES utf8mb4;
@@ -3050,83 +3050,6 @@ INSERT INTO `ek_ganti_meter` VALUES (45, 18, 30, '2023-12-01', '2025-03-20 09:25
 INSERT INTO `ek_ganti_meter` VALUES (46, 22, 26, '2023-12-01', '2025-03-20 09:25:16', 'Bagian Pemeliharaan', NULL, '');
 
 -- ----------------------------
--- Table structure for ek_jam_ops
--- ----------------------------
-DROP TABLE IF EXISTS `ek_jam_ops`;
-CREATE TABLE `ek_jam_ops`  (
-  `id_ek_jam_ops` int NOT NULL AUTO_INCREMENT,
-  `id_sb_mag` int NOT NULL,
-  `jumlah_jam_ops` int NULL DEFAULT NULL,
-  `tgl_jam_ops` date NULL DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_ek_jam_ops`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_jam_ops
--- ----------------------------
-INSERT INTO `ek_jam_ops` VALUES (1, 1, 744, '2023-01-01', '2025-03-21 15:59:54', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (2, 2, 739, '2023-01-01', '2025-03-21 15:59:54', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (3, 3, 744, '2023-01-01', '2025-03-21 15:59:54', 'Bagian Pemeliharaan', NULL, '');
-
--- ----------------------------
--- Table structure for ek_sb_mag
--- ----------------------------
-DROP TABLE IF EXISTS `ek_sb_mag`;
-CREATE TABLE `ek_sb_mag`  (
-  `id_sb_mag` int NOT NULL AUTO_INCREMENT,
-  `id_bagian` int NOT NULL,
-  `nama_sb_mag` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `status_sb_mag` int NULL DEFAULT 1,
-  `lokasi_sb_mag` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_sb_mag`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_sb_mag
--- ----------------------------
-INSERT INTO `ek_sb_mag` VALUES (1, 7, 'SB 1 Transmigrasi\r\n', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (2, 7, 'SB  2 Pusat', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (3, 7, 'SB 4 Petung', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (4, 7, 'SB 6 Pancoran', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (5, 7, 'SB 7 Kota Kulon', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (6, 7, 'SB 10 Penambangan', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (7, 7, 'SB Poncogati', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (8, 7, 'SB EDC', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (9, 7, 'SB Ground', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (10, 7, 'SB Wijaya Kusuma', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (11, 9, 'MA Sumber Wringin', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (12, 10, 'MA Tanah Wulan', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (13, 11, 'SB Tegal Ampel II', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (14, 11, 'SB Tegal Ampel I', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (15, 11, 'SB Locare', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (16, 11, 'SB Karang Anyar', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (17, 12, 'SB Tapen', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (18, 12, 'Sumber Mangli', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (19, 21, 'MAG Mangli', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (20, 21, 'SB Besuk', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (21, 13, 'SB Prajekan 1', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (22, 13, 'SB Prajekan 2', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (23, 14, 'MA Sumber Balen', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (24, 14, 'SB Pakisan', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (25, 15, 'IPA Petung', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (26, 15, 'SB Wringin', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (27, 22, 'SB Wonokusumo', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (28, 22, 'MAG Bedihan', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (29, 16, 'SB Curahdami', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (30, 17, 'SB Tamanan', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (31, 18, 'SB Kajar Tenggarang', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (32, 19, 'SB Taman Krocok', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (33, 20, 'MAG. Bedihan', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
-
--- ----------------------------
 -- Table structure for ek_tekanan_air
 -- ----------------------------
 DROP TABLE IF EXISTS `ek_tekanan_air`;
@@ -3148,7 +3071,7 @@ CREATE TABLE `ek_tekanan_air`  (
 -- ----------------------------
 -- Records of ek_tekanan_air
 -- ----------------------------
-INSERT INTO `ek_tekanan_air` VALUES (1, 7, 5591, 29, 29, 5591, 2023, '2025-03-21 09:27:10', 'Bagian Pemeliharaan', '2025-03-21 13:07:14', 'Bagian Pemeliharaan');
+INSERT INTO `ek_tekanan_air` VALUES (1, 7, 5591, 29, 29, 5591, 2023, '2025-03-21 09:27:10', 'Bagian Pemeliharaan', NULL, '');
 INSERT INTO `ek_tekanan_air` VALUES (2, 9, 1253, 8, 7, 1096, 2023, '2025-03-21 09:27:10', 'Bagian Pemeliharaan', NULL, '');
 INSERT INTO `ek_tekanan_air` VALUES (3, 10, 1266, 15, 15, 1266, 2023, '2025-03-21 09:28:06', 'Bagian Pemeliharaan', NULL, '');
 INSERT INTO `ek_tekanan_air` VALUES (4, 11, 1769, 9, 7, 1376, 2023, '2025-03-21 09:39:56', 'Bagian Pemeliharaan', NULL, '');

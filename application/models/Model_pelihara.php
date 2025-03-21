@@ -146,4 +146,66 @@ class Model_pelihara extends CI_Model
         $this->db->where('id_ek_tka', $id);
         return $this->db->update('ek_tekanan_air', $data);
     }
+    // akhir tekanan air
+
+    // jam ops
+    public function get_jam_ops($tahun)
+    {
+        $this->db->select('
+        ek_sb_mag.id_sb_mag,
+        ek_sb_mag.nama_sb_mag, 
+        bagian_upk.nama_bagian, 
+        SUM(CASE WHEN MONTH(ek_jam_ops.tgl_jam_ops) = 1 THEN ek_jam_ops.jumlah_jam_ops ELSE 0 END) AS jan,
+        SUM(CASE WHEN MONTH(ek_jam_ops.tgl_jam_ops) = 2 THEN ek_jam_ops.jumlah_jam_ops ELSE 0 END) AS feb,
+        SUM(CASE WHEN MONTH(ek_jam_ops.tgl_jam_ops) = 3 THEN ek_jam_ops.jumlah_jam_ops ELSE 0 END) AS mar,
+        SUM(CASE WHEN MONTH(ek_jam_ops.tgl_jam_ops) = 4 THEN ek_jam_ops.jumlah_jam_ops ELSE 0 END) AS apr,
+        SUM(CASE WHEN MONTH(ek_jam_ops.tgl_jam_ops) = 5 THEN ek_jam_ops.jumlah_jam_ops ELSE 0 END) AS mei,
+        SUM(CASE WHEN MONTH(ek_jam_ops.tgl_jam_ops) = 6 THEN ek_jam_ops.jumlah_jam_ops ELSE 0 END) AS jun,
+        SUM(CASE WHEN MONTH(ek_jam_ops.tgl_jam_ops) = 7 THEN ek_jam_ops.jumlah_jam_ops ELSE 0 END) AS jul,
+        SUM(CASE WHEN MONTH(ek_jam_ops.tgl_jam_ops) = 8 THEN ek_jam_ops.jumlah_jam_ops ELSE 0 END) AS agu,
+        SUM(CASE WHEN MONTH(ek_jam_ops.tgl_jam_ops) = 9 THEN ek_jam_ops.jumlah_jam_ops ELSE 0 END) AS sep,
+        SUM(CASE WHEN MONTH(ek_jam_ops.tgl_jam_ops) = 10 THEN ek_jam_ops.jumlah_jam_ops ELSE 0 END) AS okt,
+        SUM(CASE WHEN MONTH(ek_jam_ops.tgl_jam_ops) = 11 THEN ek_jam_ops.jumlah_jam_ops ELSE 0 END) AS nov,
+        SUM(CASE WHEN MONTH(ek_jam_ops.tgl_jam_ops) = 12 THEN ek_jam_ops.jumlah_jam_ops ELSE 0 END) AS des,
+        COALESCE(SUM(ek_jam_ops.jumlah_jam_ops), 0) AS total
+    ');
+
+        $this->db->from('ek_jam_ops');
+        $this->db->join('ek_sb_mag', 'ek_jam_ops.id_sb_mag = ek_sb_mag.id_sb_mag', 'left');
+        $this->db->join('bagian_upk', 'bagian_upk.id_bagian = ek_sb_mag.id_bagian', 'left');
+        $this->db->where('YEAR(ek_jam_ops.tgl_jam_ops)', $tahun);
+        // Tambahkan GROUP BY untuk memisahkan data berdasarkan id_sb_mag
+        $this->db->group_by('ek_sb_mag.id_sb_mag, bagian_upk.nama_bagian, ek_sb_mag.nama_sb_mag');
+        $this->db->order_by('ek_sb_mag.id_sb_mag');
+
+        return $this->db->get()->result();
+    }
+
+    public function get_sb_mag()
+    {
+        $this->db->select('*');
+        $this->db->from('ek_sb_mag');
+        $this->db->join('bagian_upk', 'ek_sb_mag.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->order_by('ek_sb_mag.id_bagian');
+        return $this->db->get()->result();
+    }
+
+    public function input_jam_ops($table, $data)
+    {
+        if (!empty($data)) {
+            $this->db->insert_batch($table, $data);
+        }
+    }
+
+    public function cek_duplikasi_jam_ops($tgl_jam_ops, $id_sb_mag)
+    {
+        $this->db->where('tgl_jam_ops', $tgl_jam_ops);
+        $this->db->where('id_sb_mag', $id_sb_mag);
+        $query = $this->db->get('ek_jam_ops');
+
+        return $query->num_rows() > 0;
+    }
+
+
+    // akhir jam ops
 }
