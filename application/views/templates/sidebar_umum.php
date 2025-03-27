@@ -41,6 +41,22 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('umum/pelatihan') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-globe"></i>
+                        <p>
+                            Pelatihan
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('umum/kerjasama') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-allergies"></i>
+                        <p>
+                            Kerjasama
+                        </p>
+                    </a>
+                </li>
                 <!-- <li class="nav-item">
                     <a href="<?= base_url('backup') ?>" class="nav-link">
                         <i class="nav-icon fas fa-database"></i>

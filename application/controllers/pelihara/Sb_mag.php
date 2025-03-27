@@ -97,6 +97,7 @@ class Sb_mag extends CI_Controller
         date_default_timezone_set('Asia/Jakarta');
         $this->form_validation->set_rules('id_bagian', 'Nama UPK', 'required|trim');
         $this->form_validation->set_rules('nama_sb_mag', 'Jumlah SR', 'required|trim');
+        $this->form_validation->set_rules('mulai_ops', 'Mulai Operasional', 'required|trim');
         $this->form_validation->set_message('required', '%s masih kosong');
 
         if ($this->form_validation->run() == false) {
@@ -111,6 +112,7 @@ class Sb_mag extends CI_Controller
             $id_bagian = $this->input->post('id_bagian');
             $nama_sb_mag = $this->input->post('nama_sb_mag');
             $lokasi_sb_mag = $this->input->post('lokasi_sb_mag');
+            $mulai_ops = $this->input->post('mulai_ops');
             $created_by = $this->session->userdata('nama_lengkap');
             $created_at = date('Y-m-d H:i:s');
 
@@ -118,6 +120,7 @@ class Sb_mag extends CI_Controller
                 'id_bagian' => $id_bagian,
                 'nama_sb_mag' => $nama_sb_mag,
                 'lokasi_sb_mag' => $lokasi_sb_mag,
+                'mulai_ops' => $mulai_ops,
                 'created_by' => $created_by,
                 'created_at' => $created_at
             ];
@@ -151,55 +154,55 @@ class Sb_mag extends CI_Controller
         }
     }
 
-    public function edit_tka($id_ek_tka)
-    {
-        $tahun = $this->session->userdata('tahun_session');
-        date_default_timezone_set('Asia/Jakarta');
-        $data['title'] = 'Edit Data Tekanan Air';
-        $data['tekanan_air'] = $this->Model_pelihara->get_tekanan_air_by_id($id_ek_tka);
-        $data['bagian_upk'] = $this->Model_pelihara->get_bagian();
+    // public function edit_tka($id_ek_tka)
+    // {
+    //     $tahun = $this->session->userdata('tahun_session');
+    //     date_default_timezone_set('Asia/Jakarta');
+    //     $data['title'] = 'Edit Data Tekanan Air';
+    //     $data['tekanan_air'] = $this->Model_pelihara->get_tekanan_air_by_id($id_ek_tka);
+    //     $data['bagian_upk'] = $this->Model_pelihara->get_bagian();
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar_pelihara');
-        $this->load->view('pelihara/view_edit_tka', $data);
-        $this->load->view('templates/footer');
-    }
+    //     $this->load->view('templates/header', $data);
+    //     $this->load->view('templates/navbar');
+    //     $this->load->view('templates/sidebar_pelihara');
+    //     $this->load->view('pelihara/view_edit_tka', $data);
+    //     $this->load->view('templates/footer');
+    // }
 
-    public function update_tka()
-    {
-        $tahun = $this->session->userdata('tahun_session');
-        date_default_timezone_set('Asia/Jakarta');
+    // public function update_tka()
+    // {
+    //     $tahun = $this->session->userdata('tahun_session');
+    //     date_default_timezone_set('Asia/Jakarta');
 
-        $id_ek_tka = $this->input->post('id_ek_tka');
-        $id_bagian = $this->input->post('id_bagian');
-        $jumlah_sr = $this->input->post('jumlah_sr');
-        $jumlah_07 = $this->input->post('jumlah_07');
-        $jumlah_cek = $this->input->post('jumlah_cek');
-        $jumlah_sr_70 = $this->input->post('jumlah_sr_70');
-        $tahun_tka = $this->input->post('tahun_tka');
-        $modified_by = $this->session->userdata('nama_lengkap');
-        $modified_at = date('Y-m-d H:i:s');
+    //     $id_ek_tka = $this->input->post('id_ek_tka');
+    //     $id_bagian = $this->input->post('id_bagian');
+    //     $jumlah_sr = $this->input->post('jumlah_sr');
+    //     $jumlah_07 = $this->input->post('jumlah_07');
+    //     $jumlah_cek = $this->input->post('jumlah_cek');
+    //     $jumlah_sr_70 = $this->input->post('jumlah_sr_70');
+    //     $tahun_tka = $this->input->post('tahun_tka');
+    //     $modified_by = $this->session->userdata('nama_lengkap');
+    //     $modified_at = date('Y-m-d H:i:s');
 
-        $data_tka = [
-            'id_bagian' => $id_bagian,
-            'tahun_tka' => $tahun_tka,
-            'jumlah_sr' => $jumlah_sr,
-            'jumlah_07' => $jumlah_07,
-            'jumlah_cek' => $jumlah_cek,
-            'jumlah_sr_70' => $jumlah_sr_70,
-            'modified_by' => $modified_by,
-            'modified_at' => $modified_at
-        ];
+    //     $data_tka = [
+    //         'id_bagian' => $id_bagian,
+    //         'tahun_tka' => $tahun_tka,
+    //         'jumlah_sr' => $jumlah_sr,
+    //         'jumlah_07' => $jumlah_07,
+    //         'jumlah_cek' => $jumlah_cek,
+    //         'jumlah_sr_70' => $jumlah_sr_70,
+    //         'modified_by' => $modified_by,
+    //         'modified_at' => $modified_at
+    //     ];
 
-        $this->Model_pelihara->update_tekanan_air($id_ek_tka, $data_tka);
-        $this->session->set_flashdata(
-            'info',
-            '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                <strong>Sukses!</strong> Data Tera Meter berhasil diedit.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>'
-        );
-        redirect('pelihara/sb_mag?tahun=' . $tahun);
-    }
+    //     $this->Model_pelihara->update_tekanan_air($id_ek_tka, $data_tka);
+    //     $this->session->set_flashdata(
+    //         'info',
+    //         '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+    //             <strong>Sukses!</strong> Data Tera Meter berhasil diedit.
+    //             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    //         </div>'
+    //     );
+    //     redirect('pelihara/sb_mag?tahun=' . $tahun);
+    // }
 }

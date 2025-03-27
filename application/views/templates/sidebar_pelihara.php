@@ -73,6 +73,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('pelihara/kualitas_air') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-flask"></i>
+                        <p>
+                            Data Uji Kualitas
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item" data-toggle="modal" data-target="#logoutModal">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>

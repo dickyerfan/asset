@@ -154,6 +154,9 @@ class Model_pelihara extends CI_Model
         $this->db->select('
         ek_sb_mag.id_sb_mag,
         ek_sb_mag.nama_sb_mag, 
+        ek_sb_mag.mulai_ops, 
+        ek_jam_ops.tgl_jam_ops, 
+        ek_jam_ops.id_ek_jam_ops, 
         bagian_upk.nama_bagian, 
         SUM(CASE WHEN MONTH(ek_jam_ops.tgl_jam_ops) = 1 THEN ek_jam_ops.jumlah_jam_ops ELSE 0 END) AS jan,
         SUM(CASE WHEN MONTH(ek_jam_ops.tgl_jam_ops) = 2 THEN ek_jam_ops.jumlah_jam_ops ELSE 0 END) AS feb,
@@ -196,16 +199,119 @@ class Model_pelihara extends CI_Model
             $this->db->insert_batch($table, $data);
         }
     }
-
-    public function cek_duplikasi_jam_ops($tgl_jam_ops, $id_sb_mag)
+    public function input_sb_mag($table, $data)
     {
-        $this->db->where('tgl_jam_ops', $tgl_jam_ops);
+        if (!empty($data)) {
+            $this->db->insert($table, $data);
+        }
+    }
+
+    public function cek_duplikasi_jam_ops($bulan, $tahun, $id_sb_mag)
+    {
+        $this->db->where('MONTH(tgl_jam_ops)', $bulan); // Ambil bulan dari tanggal di database
+        $this->db->where('YEAR(tgl_jam_ops)', $tahun); // Ambil tahun dari tanggal di database
         $this->db->where('id_sb_mag', $id_sb_mag);
         $query = $this->db->get('ek_jam_ops');
 
         return $query->num_rows() > 0;
     }
 
+    public function update_jo($id_ek_jam_ops, $tgl_jam_ops, $data)
+    {
+        $this->db->where('id_ek_jam_ops', $id_ek_jam_ops);
+        $this->db->where('tgl_jam_ops', $tgl_jam_ops);
+        $this->db->update('ek_jam_ops', $data);
+
+        return $this->db->affected_rows(); // Mengembalikan jumlah baris yang terupdate
+    }
+
+    public function getByIdTgl_jam_ops($id_sb_mag, $tgl_jam_ops)
+    {
+        $this->db->select('*');
+        $this->db->from('ek_jam_ops');
+        $this->db->where('id_sb_mag', $id_sb_mag);
+        $this->db->where('tgl_jam_ops', $tgl_jam_ops);
+        return $this->db->get()->row(); // Ambil satu baris data
+    }
 
     // akhir jam ops
+
+
+    public function get_kualitas_air($tahun)
+    {
+        $this->db->select('tahun_ka,parameter,id_ek_ka, MONTHNAME(tahun_ka) AS bulan, jumlah_sample_int, jumlah_sample_eks, jumlah_terambil, jumlah_sample_oke_ya, jumlah_sample_oke_tidak, tempat_uji');
+        $this->db->from('ek_kualitas_air');
+        $this->db->where('YEAR(tahun_ka)', $tahun);
+        $this->db->order_by('parameter', 'ASC');
+        $this->db->order_by('MONTH(tahun_ka)', 'ASC'); // Urutkan berdasarkan parameter lalu bulan
+        return $this->db->get()->result();
+    }
+
+    public function input_kualitas_air($table, $data_kualitas_air)
+    {
+        if (!empty($data_kualitas_air)) {
+            return $this->db->insert($table, $data_kualitas_air);
+        }
+    }
+
+    public function get_kualitas_air_by_id($id)
+    {
+        return $this->db->get_where('ek_kualitas_air', ['id_ek_ka' => $id])->row();
+    }
+
+    public function update_kualitas_air($id, $data_ka)
+    {
+        $this->db->where('id_ek_ka', $id);
+        return $this->db->update('ek_kualitas_air', $data_ka);
+    }
+
+    public function get_sample_uji($tahun)
+    {
+        $this->db->select("
+            MONTHNAME(tahun_ka) AS bulan, 
+            SUM(CASE WHEN parameter = 'FISIK' THEN jumlah_sample_int ELSE 0 END) AS fisika,
+            SUM(CASE WHEN parameter = 'MIKROBIOLOGI' THEN jumlah_sample_int ELSE 0 END) AS mikrobiologi,
+            SUM(CASE WHEN parameter = 'SISA CHLOR' THEN jumlah_sample_int ELSE 0 END) AS sisa_chlor,
+            SUM(CASE WHEN parameter = 'KIMIA WAJIB' THEN jumlah_sample_int ELSE 0 END) AS kimia_wajib,
+            SUM(CASE WHEN parameter = 'KIMIA TAMBAHAN' THEN jumlah_sample_int ELSE 0 END) AS kimia_tambahan
+        ");
+        $this->db->from("ek_kualitas_air");
+        $this->db->where("YEAR(tahun_ka)", $tahun);
+        $this->db->group_by("MONTH(tahun_ka)");
+        $this->db->order_by("MONTH(tahun_ka)", "ASC");
+
+        return $this->db->get()->result_array();
+    }
+
+    public function get_uji_syarat($tahun)
+    {
+        $this->db->select("
+            MONTHNAME(tahun_ka) AS bulan, 
+            SUM(CASE WHEN parameter = 'FISIK' THEN jumlah_sample_int ELSE 0 END) AS fisika,
+            SUM(CASE WHEN parameter = 'MIKROBIOLOGI' THEN jumlah_sample_int ELSE 0 END) AS mikrobiologi,
+            SUM(CASE WHEN parameter = 'SISA CHLOR' THEN jumlah_sample_int ELSE 0 END) AS sisa_chlor,
+            SUM(CASE WHEN parameter = 'KIMIA WAJIB' THEN jumlah_sample_int ELSE 0 END) AS kimia_wajib,
+            SUM(CASE WHEN parameter = 'KIMIA TAMBAHAN' THEN jumlah_sample_int ELSE 0 END) AS kimia_tambahan,
+            SUM(CASE WHEN parameter = 'FISIK' THEN jumlah_sample_eks ELSE 0 END) AS fisika_eks,
+            SUM(CASE WHEN parameter = 'MIKROBIOLOGI' THEN jumlah_sample_eks ELSE 0 END) AS mikrobiologi_eks,
+            SUM(CASE WHEN parameter = 'SISA CHLOR' THEN jumlah_sample_eks ELSE 0 END) AS sisa_chlor_eks,
+            SUM(CASE WHEN parameter = 'KIMIA WAJIB' THEN jumlah_sample_eks ELSE 0 END) AS kimia_wajib_eks,
+            SUM(CASE WHEN parameter = 'KIMIA TAMBAHAN' THEN jumlah_sample_eks ELSE 0 END) AS kimia_tambahan_eks,
+            SUM(CASE WHEN parameter = 'FISIK' THEN jumlah_terambil ELSE 0 END) AS jumlah_terambil,
+            SUM(CASE WHEN parameter = 'FISIK' THEN jumlah_sample_eks ELSE 0 END) AS jumlah_terambil_eks
+            
+        ");
+        $this->db->from("ek_kualitas_air");
+        $this->db->where("YEAR(tahun_ka)", $tahun);
+        $this->db->group_by("MONTH(tahun_ka)");
+        $this->db->order_by("MONTH(tahun_ka)", "ASC");
+
+        return $this->db->get()->result_array();
+    }
+
+
+
+
+
+    // akhir kualitas air
 }

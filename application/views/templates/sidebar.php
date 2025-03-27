@@ -350,15 +350,77 @@
                     <li class="nav-item">
                         <a href="<?= base_url('backup') ?>" class="nav-link">
                             <i class="nav-icon fas fa-database"></i>
-                            <p>
-                                Backup & Restore
-                            </p>
+                            <p>Backup & Restore</p>
                         </a>
                     </li>
                 <?php endif; ?>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-box"></i>
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>
+                            Umum
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('umum/pelatihan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pelatihan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('umum/kerjasama') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kerjasama</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-bullhorn"></i>
+                        <p>
+                            Langganan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('langganan/cak_layanan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Cakupan Layanan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('langganan/data_pengaduan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Data Pengaduan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('langganan/tambah_sr') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Penambahan SR</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('langganan/pendapatan_kec') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Rincian Pend. Kec</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('langganan/efek_tagih') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Efektifitas Penagihan</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tools"></i>
                         <p>
                             Pemeliharaan
                             <i class="right fas fa-angle-left"></i>
@@ -387,6 +449,12 @@
                             <a href="<?= base_url('pelihara/sb_mag') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Sumur & Sumber</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('pelihara/kualitas_air') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Data Uji Kualitas</p>
                             </a>
                         </li>
                     </ul>

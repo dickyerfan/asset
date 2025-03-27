@@ -24,15 +24,22 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="nama_sb_mag">Nama Sumber :</label>
-                                    <input type="text" class="form-control" id="nama_sb_mag" name="nama_sb_mag" placeholder="Masukan Jumlah" value="<?= set_value('nama_sb_mag'); ?>">
+                                    <input type="text" class="form-control" id="nama_sb_mag" name="nama_sb_mag" placeholder="Masukan Nama Sumber" value="<?= set_value('nama_sb_mag'); ?>">
                                     <small class="form-text text-danger pl-3"><?= form_error('nama_sb_mag'); ?></small>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="lokasi_sb_mag">Lokasi Sumber :</label>
-                                    <input type="text" class="form-control" id="lokasi_sb_mag" name="lokasi_sb_mag" placeholder="Masukan Jumlah" value="<?= set_value('lokasi_sb_mag'); ?>">
+                                    <input type="text" class="form-control" id="lokasi_sb_mag" name="lokasi_sb_mag" placeholder="Masukan lokasi" value="<?= set_value('lokasi_sb_mag'); ?>">
                                     <small class="form-text text-danger pl-3"><?= form_error('lokasi_sb_mag'); ?></small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="mulai_ops">Mulai Operasional:</label>
+                                    <input type="date" class="form-control" id="mulai_ops" name="mulai_ops" placeholder="Masukan Tanggal" value="<?= set_value('mulai_ops'); ?>">
+                                    <small class="form-text text-danger pl-3"><?= form_error('mulai_ops'); ?></small>
                                 </div>
                             </div>
                         </div>

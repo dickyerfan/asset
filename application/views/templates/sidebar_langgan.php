@@ -41,6 +41,46 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('langganan/cak_layanan') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-globe"></i>
+                        <p>
+                            Cakupan Layanan
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('langganan/data_pengaduan') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-bullhorn"></i>
+                        <p>
+                            Data Pengaduan
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('langganan/tambah_sr') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-plus"></i>
+                        <p>
+                            Penambahan SR
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('langganan/pendapatan_kec') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-donate"></i>
+                        <p>
+                            Rincian Pend. Kec
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('langganan/efek_tagih') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-calculator"></i>
+                        <p>
+                            Efektifitas Penagihan
+                        </p>
+                    </a>
+                </li>
                 <!-- <li class="nav-item">
                     <a href="<?= base_url('backup') ?>" class="nav-link">
                         <i class="nav-icon fas fa-database"></i>

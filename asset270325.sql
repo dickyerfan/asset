@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : DIE ArtS
+ Source Server         : database_lokal
  Source Server Type    : MySQL
- Source Server Version : 100418 (10.4.18-MariaDB)
+ Source Server Version : 100417 (10.4.17-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : asset
 
  Target Server Type    : MySQL
- Target Server Version : 100418 (10.4.18-MariaDB)
+ Target Server Version : 100417 (10.4.17-MariaDB)
  File Encoding         : 65001
 
- Date: 27/03/2025 14:47:21
+ Date: 21/03/2025 16:00:43
 */
 
 SET NAMES utf8mb4;
@@ -3068,123 +3068,9 @@ CREATE TABLE `ek_jam_ops`  (
 -- ----------------------------
 -- Records of ek_jam_ops
 -- ----------------------------
-INSERT INTO `ek_jam_ops` VALUES (1, 1, 744, '2023-01-01', '2025-03-21 15:59:54', 'Bagian Pemeliharaan', '2025-03-27 13:55:01', 'Bagian Pemeliharaan');
+INSERT INTO `ek_jam_ops` VALUES (1, 1, 744, '2023-01-01', '2025-03-21 15:59:54', 'Bagian Pemeliharaan', NULL, '');
 INSERT INTO `ek_jam_ops` VALUES (2, 2, 739, '2023-01-01', '2025-03-21 15:59:54', 'Bagian Pemeliharaan', NULL, '');
 INSERT INTO `ek_jam_ops` VALUES (3, 3, 744, '2023-01-01', '2025-03-21 15:59:54', 'Bagian Pemeliharaan', NULL, '');
-
--- ----------------------------
--- Table structure for ek_kualitas_air
--- ----------------------------
-DROP TABLE IF EXISTS `ek_kualitas_air`;
-CREATE TABLE `ek_kualitas_air`  (
-  `id_ek_ka` int NOT NULL AUTO_INCREMENT,
-  `parameter` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `jumlah_sample_int` int NULL DEFAULT NULL,
-  `jumlah_sample_eks` int NULL DEFAULT NULL,
-  `jumlah_terambil` int NULL DEFAULT NULL,
-  `jumlah_sample_oke_ya` int NULL DEFAULT NULL,
-  `jumlah_sample_oke_tidak` int NULL DEFAULT NULL,
-  `tempat_uji` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `tahun_ka` date NULL DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_ek_ka`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_kualitas_air
--- ----------------------------
-INSERT INTO `ek_kualitas_air` VALUES (1, 'FISIK', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-01-01', '2025-03-26 07:42:12', 'Administrator', '2025-03-26 10:33:10', 'Bagian Pemeliharaan');
-INSERT INTO `ek_kualitas_air` VALUES (2, 'FISIK', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-02-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (3, 'MIKROBIOLOGI', 10, 0, 10, 10, 0, 'AMDK Bondowoso', '2023-01-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (4, 'MIKROBIOLOGI', 10, 0, 10, 10, 0, 'AMDK Bondowoso', '2023-02-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (5, 'SISA CHLOR', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-01-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (6, 'MIKROBIOLOGI', 10, 0, 10, 10, 0, 'AMDK Bondowoso', '2023-03-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (7, 'FISIK', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-04-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (8, 'FISIK', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-03-01', '2025-03-26 08:10:42', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (9, 'KIMIA WAJIB', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-01-01', '2025-03-26 08:14:48', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (10, 'KIMIA TAMBAHAN', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-01-01', '2025-03-26 08:15:45', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (12, 'FISIK', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-05-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (13, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-06-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (14, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-07-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (15, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-08-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (16, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-09-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (17, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-10-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (18, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-11-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (19, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-12-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (20, 'MIKROBIOLOGI', 10, 0, 10, 10, 0, 'AMDK Bondowoso', '2023-04-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (21, 'MIKROBIOLOGI', 10, 0, 10, 10, 0, 'AMDK Bondowoso', '2023-05-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (22, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'AMDK Bondowoso', '2023-06-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (23, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'AMDK Bondowoso', '2023-07-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (24, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'AMDK Bondowoso', '2023-08-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (25, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'AMDK Bondowoso', '2023-09-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (26, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'AMDK Bondowoso', '2023-10-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (27, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'AMDK Bondowoso', '2023-11-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (28, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'AMDK Bondowoso', '2023-12-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (29, 'SISA CHLOR', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-02-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (30, 'SISA CHLOR', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-03-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (31, 'SISA CHLOR', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-04-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (32, 'SISA CHLOR', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-05-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (33, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-06-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (34, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-07-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (35, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-08-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (36, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-09-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (37, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-10-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (38, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-11-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (39, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-12-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (40, 'KIMIA TAMBAHAN', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-02-01', '2025-03-26 08:26:59', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (41, 'KIMIA TAMBAHAN', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-03-01', '2025-03-26 08:28:21', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (42, 'KIMIA TAMBAHAN', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-04-01', '2025-03-26 08:28:21', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (43, 'KIMIA TAMBAHAN', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-05-01', '2025-03-26 08:28:21', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (44, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-06-01', '2025-03-26 08:28:21', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (45, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-07-01', '2025-03-26 08:28:21', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (46, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-08-01', '2025-03-26 08:28:21', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (47, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-09-01', '2025-03-26 08:28:21', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (48, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-10-01', '2025-03-26 08:28:21', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (49, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-11-01', '2025-03-26 08:28:21', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (50, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-12-01', '2025-03-26 08:28:21', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (51, 'KIMIA WAJIB', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-02-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (52, 'KIMIA WAJIB', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-03-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (53, 'KIMIA WAJIB', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-04-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (54, 'KIMIA WAJIB', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-05-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (55, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-06-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (56, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-07-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (57, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-08-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (58, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-09-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (59, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-10-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (60, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-11-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (61, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-12-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-
--- ----------------------------
--- Table structure for ek_pengaduan
--- ----------------------------
-DROP TABLE IF EXISTS `ek_pengaduan`;
-CREATE TABLE `ek_pengaduan`  (
-  `id_ek_aduan` int NOT NULL AUTO_INCREMENT,
-  `jenis_aduan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `jumlah_aduan` int NULL DEFAULT NULL,
-  `jumlah_aduan_ya` int NULL DEFAULT NULL,
-  `jumlah_aduan_tidak` int NULL DEFAULT NULL,
-  `tgl_aduan` date NULL DEFAULT NULL,
-  `status` int NULL DEFAULT 0,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_ek_aduan`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_pengaduan
--- ----------------------------
-INSERT INTO `ek_pengaduan` VALUES (1, 'Teknis', 102, 102, NULL, '2023-01-01', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pengaduan` VALUES (2, 'Pelayanan', 17, 17, NULL, '2023-01-01', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pengaduan` VALUES (3, 'Rekening Air\r\n', 1, 1, NULL, '2023-01-01', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pengaduan` VALUES (4, 'Teknis', 123, 123, NULL, '2023-02-01', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pengaduan` VALUES (5, 'Pelayanan', 17, 17, NULL, '2023-02-01', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pengaduan` VALUES (6, 'Rekening Air\r\n', 8, 8, NULL, '2023-02-01', 0, '0000-00-00 00:00:00', '', NULL, '');
 
 -- ----------------------------
 -- Table structure for ek_sb_mag
@@ -3196,94 +3082,49 @@ CREATE TABLE `ek_sb_mag`  (
   `nama_sb_mag` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `status_sb_mag` int NULL DEFAULT 1,
   `lokasi_sb_mag` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `mulai_ops` date NULL DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_sb_mag`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ek_sb_mag
 -- ----------------------------
-INSERT INTO `ek_sb_mag` VALUES (1, 7, 'SB 1 Transmigrasi\r\n', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (2, 7, 'SB  2 Pusat', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (3, 7, 'SB 4 Petung', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (4, 7, 'SB 6 Pancoran', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (5, 7, 'SB 7 Kota Kulon', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (6, 7, 'SB 10 Penambangan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (7, 7, 'SB Poncogati', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (8, 7, 'SB EDC', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (9, 7, 'SB Ground', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (10, 7, 'SB Wijaya Kusuma', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (11, 9, 'MA Sumber Wringin', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (12, 10, 'MA Tanah Wulan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (13, 11, 'SB Tegal Ampel II', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (14, 11, 'SB Tegal Ampel I', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (15, 11, 'SB Locare', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (16, 11, 'SB Karang Anyar', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (17, 12, 'SB Tapen', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (18, 12, 'Sumber Mangli', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (19, 21, 'MAG Mangli', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (20, 21, 'SB Besuk', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (21, 13, 'SB Prajekan 1', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (22, 13, 'SB Prajekan 2', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (23, 14, 'MA Sumber Balen', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (24, 14, 'SB Pakisan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (25, 15, 'IPA Petung', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (26, 15, 'SB Wringin', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (27, 22, 'SB Wonokusumo', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (28, 22, 'MAG Bedihan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (29, 16, 'SB Curahdami', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (30, 17, 'SB Tamanan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (31, 18, 'SB Kajar Tenggarang', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (32, 19, 'SB Taman Krocok', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (33, 20, 'MAG. Bedihan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (34, 7, 'SB City Plaza', 1, '', '2024-08-01', '2025-03-27 09:39:56', 'Bagian Pemeliharaan', NULL, '');
-
--- ----------------------------
--- Table structure for ek_tambah_sr
--- ----------------------------
-DROP TABLE IF EXISTS `ek_tambah_sr`;
-CREATE TABLE `ek_tambah_sr`  (
-  `id_ek_sr` int NOT NULL AUTO_INCREMENT,
-  `id_bagian` int NOT NULL,
-  `jumlah_sr` int NULL DEFAULT NULL,
-  `tgl_sr` date NULL DEFAULT NULL,
-  `status` int NULL DEFAULT 0,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_ek_sr`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_tambah_sr
--- ----------------------------
-INSERT INTO `ek_tambah_sr` VALUES (1, 7, 45, '2023-01-01', 1, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', '2025-03-27 13:32:57', 'Bagian Hubungan Langganan');
-INSERT INTO `ek_tambah_sr` VALUES (2, 9, 15, '2023-01-01', 0, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (3, 10, 16, '2023-01-01', 0, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (4, 11, 20, '2023-01-01', 0, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (5, 12, 21, '2023-01-01', 0, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (6, 13, 9, '2023-01-01', 0, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (7, 14, 32, '2023-01-01', 0, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (8, 15, 13, '2023-01-01', 0, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (9, 16, 39, '2023-01-01', 0, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (10, 17, 2, '2023-01-01', 0, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (11, 18, 8, '2023-01-01', 0, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (12, 19, 2, '2023-01-01', 0, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (13, 20, 18, '2023-01-01', 0, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (14, 21, 3, '2023-01-01', 0, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (15, 22, 12, '2023-01-01', 0, '2025-03-27 13:10:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (16, 7, 22, '2023-02-01', 0, '2025-03-27 13:13:25', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (17, 11, 4, '2023-02-01', 0, '2025-03-27 13:13:25', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (18, 13, 2, '2023-02-01', 0, '2025-03-27 13:13:25', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (19, 14, 2, '2023-02-01', 0, '2025-03-27 13:13:25', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (20, 15, 1, '2023-02-01', 0, '2025-03-27 13:13:25', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (21, 16, 4, '2023-02-01', 0, '2025-03-27 13:13:25', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (22, 19, 1, '2023-02-01', 0, '2025-03-27 13:13:25', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (1, 7, 'SB 1 Transmigrasi\r\n', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (2, 7, 'SB  2 Pusat', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (3, 7, 'SB 4 Petung', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (4, 7, 'SB 6 Pancoran', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (5, 7, 'SB 7 Kota Kulon', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (6, 7, 'SB 10 Penambangan', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (7, 7, 'SB Poncogati', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (8, 7, 'SB EDC', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (9, 7, 'SB Ground', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (10, 7, 'SB Wijaya Kusuma', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (11, 9, 'MA Sumber Wringin', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (12, 10, 'MA Tanah Wulan', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (13, 11, 'SB Tegal Ampel II', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (14, 11, 'SB Tegal Ampel I', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (15, 11, 'SB Locare', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (16, 11, 'SB Karang Anyar', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (17, 12, 'SB Tapen', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (18, 12, 'Sumber Mangli', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (19, 21, 'MAG Mangli', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (20, 21, 'SB Besuk', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (21, 13, 'SB Prajekan 1', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (22, 13, 'SB Prajekan 2', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (23, 14, 'MA Sumber Balen', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (24, 14, 'SB Pakisan', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (25, 15, 'IPA Petung', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (26, 15, 'SB Wringin', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (27, 22, 'SB Wonokusumo', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (28, 22, 'MAG Bedihan', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (29, 16, 'SB Curahdami', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (30, 17, 'SB Tamanan', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (31, 18, 'SB Kajar Tenggarang', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (32, 19, 'SB Taman Krocok', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (33, 20, 'MAG. Bedihan', 1, NULL, '2025-03-21 14:18:41', 'Administrator', NULL, '');
 
 -- ----------------------------
 -- Table structure for ek_tekanan_air

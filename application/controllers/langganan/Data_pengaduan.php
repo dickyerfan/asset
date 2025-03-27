@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Jam_ops extends CI_Controller
+class Data_pengaduan extends CI_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Model_pelihara');
+        $this->load->model('Model_langgan');
         $this->load->library('form_validation');
         if (!$this->session->userdata('nama_pengguna')) {
             $this->session->set_flashdata(
@@ -20,7 +20,7 @@ class Jam_ops extends CI_Controller
         }
 
         $bagian = $this->session->userdata('bagian');
-        if ($bagian != 'Pemeliharaan' && $bagian != 'Publik' && $bagian != 'Administrator' && $bagian != 'Keuangan') {
+        if ($bagian != 'Langgan' && $bagian != 'Publik' && $bagian != 'Administrator' && $bagian != 'Keuangan') {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -43,37 +43,37 @@ class Jam_ops extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'DATA JAM OPERASIONAL';
-        $data['jam_ops'] = $this->Model_pelihara->get_jam_ops($tahun);
+        $data['title'] = 'DATA PENGADUAN';
+        $data['pengaduan'] = $this->Model_langgan->get_pengaduan($tahun);
 
-        if ($this->session->userdata('bagian') == 'Pemeliharaan') {
+        if ($this->session->userdata('bagian') == 'Langgan') {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar_pelihara');
-            $this->load->view('pelihara/view_jam_ops', $data);
+            $this->load->view('templates/sidebar_langgan');
+            $this->load->view('langganan/view_pengaduan', $data);
             $this->load->view('templates/footer');
         } elseif ($this->session->userdata('bagian') == 'Publik') {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar_publik');
-            $this->load->view('pelihara/view_jam_ops', $data);
+            $this->load->view('langganan/view_pengaduan', $data);
             $this->load->view('templates/footer');
         } elseif ($this->session->userdata('bagian') == 'Administrator') {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
-            $this->load->view('pelihara/view_jam_ops', $data);
+            $this->load->view('langganan/view_pengaduan', $data);
             $this->load->view('templates/footer');
         } elseif ($this->session->userdata('bagian') == 'Keuangan') {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
-            $this->load->view('pelihara/view_jam_ops', $data);
+            $this->load->view('langganan/view_pengaduan', $data);
             $this->load->view('templates/footer');
         }
     }
 
-    public function cetak_jam_ops()
+    public function cetak_sr()
     {
         $tahun = $this->session->userdata('tahun_session');
 
@@ -83,59 +83,60 @@ class Jam_ops extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'DATA JAM OPERASIONAL';
-        $data['jam_ops'] = $this->Model_pelihara->get_jam_ops($tahun);
+        $data['title'] = 'REALISASI PEMASANGAN SR BARU';
+        $data['tambah_sr'] = $this->Model_langgan->get_tambah_sr($tahun);
 
         $this->pdf->setPaper('folio', 'landscape');
-        $this->pdf->filename = "jam_ops-{$tahun}.pdf";
-        $this->pdf->generate('pelihara/cetak_jam_ops_pdf', $data);
+        $this->pdf->filename = "tambah_sr-{$tahun}.pdf";
+        $this->pdf->generate('langgan/cetak_tambah_sr_pdf', $data);
     }
 
 
-    public function input_jam_ops()
+    public function input_sr()
     {
         $tahun = $this->session->userdata('tahun_session');
         date_default_timezone_set('Asia/Jakarta');
-        $this->form_validation->set_rules('id_sb_mag[]', 'Nama Sumber', 'required', [
+
+        $this->form_validation->set_rules('id_bagian[]', 'nama_bagian', 'required', [
             'required' => 'Harap pilih minimal satu %s.'
         ]);
-        $this->form_validation->set_rules('tgl_jam_ops', 'Tanggal Jam Ops', 'required|trim');
+        $this->form_validation->set_rules('tgl_sr', 'Tanggal Penambahan SR', 'required|trim');
         $this->form_validation->set_message('required', '%s masih kosong');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Input Data Jam Operasional';
-            $data['sb_mag'] = $this->Model_pelihara->get_sb_mag();
+            $data['title'] = 'Input Data Penambahan SR';
+            $data['bagian'] = $this->Model_langgan->get_bagian();
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar_pelihara');
-            $this->load->view('pelihara/view_input_jam_ops', $data);
+            $this->load->view('templates/sidebar_langgan');
+            $this->load->view('langganan/view_input_tambah_sr', $data);
             $this->load->view('templates/footer');
         } else {
-            $tgl_jam_ops = $this->input->post('tgl_jam_ops');
-            $bulan = date('m', strtotime($tgl_jam_ops)); // Ambil bulan dari tanggal
-            $tahun_input = date('Y', strtotime($tgl_jam_ops)); // Ambil tahun dari tanggal
-            $id_sb_mag = $this->input->post('id_sb_mag'); // Array dari checkbox
-            $jumlah_jam_ops = $this->input->post('jumlah_jam_ops'); // Array dari input jumlah
+            $tgl_sr = $this->input->post('tgl_sr');
+            $bulan = date('m', strtotime($tgl_sr)); // Ambil bulan dari tanggal
+            $tahun_input = date('Y', strtotime($tgl_sr)); // Ambil tahun dari tanggal
+            $id_bagian = $this->input->post('id_bagian'); // Array dari checkbox
+            $jumlah_sr = $this->input->post('jumlah_sr'); // Array dari input jumlah
             $created_by = $this->session->userdata('nama_lengkap');
             $created_at = date('Y-m-d H:i:s');
 
-            $data_jam_ops = [];
+            $data_sr = [];
             $duplikasi_terdeteksi = false;
 
-            foreach ($id_sb_mag as $sb_mag) {
-                if (!empty($jumlah_jam_ops[$sb_mag])) {
-                    // **Cek apakah data dengan tgl_jam_ops dan id_sb_mag sudah ada**
-                    $cek_duplikasi = $this->Model_pelihara->cek_duplikasi_jam_ops($bulan, $tahun_input, $sb_mag);
+            foreach ($id_bagian as $bagian) {
+                if (!empty($jumlah_sr[$bagian])) {
+                    // **Cek apakah data dengan tgl_sr dan id_bagian sudah ada**
+                    $cek_duplikasi = $this->Model_langgan->cek_duplikasi_sr($bulan, $tahun_input, $bagian);
 
                     if ($cek_duplikasi) {
                         $duplikasi_terdeteksi = true;
                         break;
                     }
 
-                    $data_jam_ops[] = [
-                        'id_sb_mag' => $sb_mag,
-                        'tgl_jam_ops' => $tgl_jam_ops,
-                        'jumlah_jam_ops' => $jumlah_jam_ops[$sb_mag],
+                    $data_sr[] = [
+                        'id_bagian' => $bagian,
+                        'tgl_sr' => $tgl_sr,
+                        'jumlah_sr' => $jumlah_sr[$bagian],
                         'created_by' => $created_by,
                         'created_at' => $created_at
                     ];
@@ -146,16 +147,16 @@ class Jam_ops extends CI_Controller
                 $this->session->set_flashdata(
                     'info',
                     '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Gagal!</strong> Data untuk tanggal dan sumber yang dipilih sudah ada di database.
+                    <strong>Gagal!</strong> Data untuk tanggal dan bagian yang dipilih sudah ada di database.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>'
                 );
-            } elseif (!empty($data_jam_ops)) {
-                $this->Model_pelihara->input_jam_ops('ek_jam_ops', $data_jam_ops);
+            } elseif (!empty($data_sr)) {
+                $this->Model_langgan->input_tambah_sr('ek_tambah_sr', $data_sr);
                 $this->session->set_flashdata(
                     'info',
                     '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <strong>Sukses!</strong> Data Jam Operasional berhasil ditambahkan.
+                    <strong>Sukses!</strong> Data penambahan SR berhasil ditambahkan.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>'
                 );
@@ -163,63 +164,64 @@ class Jam_ops extends CI_Controller
                 $this->session->set_flashdata(
                     'info',
                     '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Gagal!</strong> Pastikan jumlah jam operasional diisi untuk setiap bagian yang dipilih.
+                    <strong>Gagal!</strong> Pastikan jumlah penambahan SR diisi untuk setiap bagian yang dipilih.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>'
                 );
             }
 
-            $alamat = 'pelihara/jam_ops?tahun=' . $tahun;
+            $alamat = 'langganan/tambah_sr?tahun=' . $tahun;
             redirect($alamat);
         }
     }
 
 
-    public function edit_jo($id_sb_mag, $tgl_jam_ops)
+    public function edit_sr($id_bagian, $tgl_sr)
     {
-        $data['title'] = 'Edit Data Jam Operasional';
-        $data['row'] = $this->Model_pelihara->getByIdTgl_jam_ops($id_sb_mag, $tgl_jam_ops);
+        $data['title'] = 'Edit Data penambahan SR';
+        $data['row'] = $this->Model_langgan->getByIdTgl_sr($id_bagian, $tgl_sr);
 
         if (!$data['row']) {
             show_404(); // Jika data tidak ditemukan, tampilkan halaman 404
         }
 
-        $data['id_sb_mag'] = $id_sb_mag;
-        $data['tgl_jam_ops'] = $tgl_jam_ops;
+        $data['id_bagian'] = $id_bagian;
+        $data['tgl_sr'] = $tgl_sr;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('templates/sidebar_pelihara');
-        $this->load->view('pelihara/view_edit_jam_ops', $data);
+        $this->load->view('langganan/view_edit_tambah_sr', $data);
         $this->load->view('templates/footer');
     }
 
-    public function update_jo()
+    public function update_sr()
     {
         date_default_timezone_set('Asia/Jakarta');
-        $id_sb_mag = $this->input->post('id_sb_mag');
-        $tgl_jam_ops = $this->input->post('tgl_jam_ops');
+        $id_bagian = $this->input->post('id_bagian');
+        $tgl_sr = $this->input->post('tgl_sr');
         $field = $this->input->post('field'); // Nama kolom yang akan diubah
         $value = $this->input->post('value');
 
         // Cek apakah semua input ada
-        if (empty($id_sb_mag) || empty($tgl_jam_ops) || empty($field) || empty($value)) {
+        if (empty($id_bagian) || empty($tgl_sr) || empty($field) || empty($value)) {
             $this->session->set_flashdata('error', 'Data tidak valid!');
-            $tahun = date('Y', strtotime($tgl_jam_ops));
-            redirect('pelihara/jam_ops?tahun=' . $tahun);
+            $tahun = date('Y', strtotime($tgl_sr));
+            redirect('langganan/tambah_sr?tahun=' . $tahun);
         }
 
         $data = [
             $field => $value,
+            'status' => 1,
             'modified_at' => date('Y-m-d H:i:s'),
             'modified_by' => $this->session->userdata('nama_lengkap')
         ];
 
-        if ($this->Model_pelihara->update_jo($id_sb_mag, $tgl_jam_ops, $data)) {
+        if ($this->Model_langgan->update_sr($id_bagian, $tgl_sr, $data)) {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <strong>Sukses!</strong> Data Jam Operasional berhasil diedit.
+                    <strong>Sukses!</strong> Data penambahan SR berhasil diedit.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>'
             );
@@ -227,13 +229,13 @@ class Jam_ops extends CI_Controller
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Gagal!</strong> Data Jam Operasional berhasil diedit.
+                    <strong>Gagal!</strong> Data penambahan SR berhasil diedit.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>'
             );
         }
 
-        $tahun = date('Y', strtotime($tgl_jam_ops));
-        redirect('pelihara/jam_ops?tahun=' . $tahun);
+        $tahun = date('Y', strtotime($tgl_sr));
+        redirect('langganan/tambah_sr?tahun=' . $tahun);
     }
 }
