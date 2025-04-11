@@ -12,7 +12,6 @@ class Model_langgan extends CI_Model
         return $this->db->get()->result();
     }
 
-
     // tambah sr
     public function get_tambah_sr($tahun)
     {
@@ -95,7 +94,6 @@ class Model_langgan extends CI_Model
         $this->db->where('YEAR(tgl_aduan)', $tahun);
         $this->db->group_by(['MONTH(tgl_aduan)', 'jenis_aduan']);
         $this->db->order_by('MONTH(tgl_aduan)', 'ASC');
-
         return $this->db->get()->result();
     }
 
@@ -130,7 +128,52 @@ class Model_langgan extends CI_Model
     // akhir pengaduan
 
     // cakupan layanan
+    public function get_data_penduduk($tahun)
+    {
+        $this->db->select("*");
+        $this->db->from('ek_data_penduduk');
+        $this->db->join('ek_kecamatan', 'ek_kecamatan.id_kec = ek_data_penduduk.id_kec', 'left');
+        $this->db->where('tahun_data', $tahun);
+        $this->db->order_by('ek_kecamatan.id_kec');
+        return $this->db->get()->result();
+    }
 
+    public function get_kec()
+    {
+        $this->db->select('*');
+        $this->db->from('ek_kecamatan');
+        $this->db->where('status', 0);
+        return $this->db->get()->result();
+    }
+
+    public function input_data_penduduk($table, $data)
+    {
+        if (!empty($data)) {
+            $this->db->insert($table, $data);
+        }
+    }
+
+    public function get_tekanan_air_by_id($id)
+    {
+        return $this->db->get_where('ek_tekanan_air', ['id_ek_tka' => $id])->row();
+    }
+
+    public function update_tekanan_air($id, $data)
+    {
+        $this->db->where('id_ek_tka', $id);
+        return $this->db->update('ek_tekanan_air', $data);
+    }
+
+
+    public function get_data_pelanggan($tahun)
+    {
+        $this->db->select("*");
+        $this->db->from('ek_data_pelanggan');
+        $this->db->join('bagian_upk', 'bagian_upk.id_bagian = ek_data_pelanggan.id_bagian', 'left');
+        $this->db->where('tahun_data', $tahun);
+        $this->db->order_by('bagian_upk.id_bagian');
+        return $this->db->get()->result();
+    }
 
     // akhir cakupan layanan
 

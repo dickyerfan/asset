@@ -91,155 +91,317 @@ class Cak_layanan extends CI_Controller
         $this->pdf->generate('langganan/cetak_pengaduan_pdf', $data);
     }
 
-
-    public function input_aduan()
+    public function data_penduduk()
     {
-        $tahun = $this->session->userdata('tahun_session');
-        date_default_timezone_set('Asia/Jakarta');
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
 
-        $this->form_validation->set_rules('jenis_aduan[]', 'Jenis Aduan', 'required', [
-            'required' => 'Harap pilih minimal satu %s.'
-        ]);
-        $this->form_validation->set_rules('tgl_aduan', 'Tanggal pengaduan', 'required|trim');
-        $this->form_validation->set_message('required', '%s masih kosong');
-
-        if ($this->form_validation->run() == false) {
-            $data['title'] = 'Input Data Pengaduan';
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar_langgan');
-            $this->load->view('langganan/view_input_aduan', $data);
-            $this->load->view('templates/footer');
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
         } else {
-            $tgl_aduan = $this->input->post('tgl_aduan');
-            $bulan = date('m', strtotime($tgl_aduan)); // Ambil bulan dari tanggal
-            $tahun_input = date('Y', strtotime($tgl_aduan)); // Ambil tahun dari tanggal
-            $jenis_aduan = $this->input->post('jenis_aduan'); // Array dari checkbox
-            $jumlah_aduan = $this->input->post('jumlah_aduan'); // Array dari input jumlah
-            $jumlah_aduan_ya = $this->input->post('jumlah_aduan_ya'); // Array dari input jumlah
-            $jumlah_aduan_tidak = $this->input->post('jumlah_aduan_tidak'); // Array dari input jumlah
-            $created_by = $this->session->userdata('nama_lengkap');
-            $created_at = date('Y-m-d H:i:s');
-
-            $data_aduan = [];
-            $duplikasi_terdeteksi = false;
-
-            $map_aduan = [
-                'teknis' => 'Teknis',
-                'pelayanan' => 'Pelayanan',
-                'rekening_air' => 'Rekening Air'
-            ];
-
-            foreach ($jenis_aduan as $aduan_slug) {
-                $aduan_label = $map_aduan[$aduan_slug] ?? $aduan_slug;
-
-                if (isset($jumlah_aduan[$aduan_slug]) && $jumlah_aduan[$aduan_slug] !== '') {
-                    $cek_duplikasi = $this->Model_langgan->cek_duplikasi_aduan($bulan, $tahun_input, $aduan_label);
-
-                    if ($cek_duplikasi) {
-                        $duplikasi_terdeteksi = true;
-                        break;
-                    }
-
-                    $data_aduan[] = [
-                        'jenis_aduan' => $aduan_label,
-                        'tgl_aduan' => $tgl_aduan,
-                        'jumlah_aduan' => $jumlah_aduan[$aduan_slug],
-                        'jumlah_aduan_ya' => $jumlah_aduan_ya[$aduan_slug] ?? 0,
-                        'jumlah_aduan_tidak' => $jumlah_aduan_tidak[$aduan_slug] ?? 0,
-                        'created_by' => $created_by,
-                        'created_at' => $created_at
-                    ];
-                }
-            }
-
-            if ($duplikasi_terdeteksi) {
-                $this->session->set_flashdata(
-                    'info',
-                    '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Gagal!</strong> Data untuk tanggal dan bagian yang dipilih sudah ada di database.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>'
-                );
-            } elseif (!empty($data_aduan)) {
-                $this->Model_langgan->input_tambah_aduan('ek_pengaduan', $data_aduan);
-                $this->session->set_flashdata(
-                    'info',
-                    '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <strong>Sukses!</strong> Data penambahan Pengaduan berhasil ditambahkan.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>'
-                );
-            } else {
-                $this->session->set_flashdata(
-                    'info',
-                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Gagal!</strong> Pastikan jumlah penambahan Pengaduan diisi untuk setiap bagian yang dipilih.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>'
-                );
-            }
-
-            $alamat = 'langganan/data_pengaduan?tahun=' . $tahun;
-            redirect($alamat);
+            $this->session->set_userdata('tahun_session', $get_tahun);
         }
-    }
 
-    public function edit_aduan($id_ek_aduan)
-    {
-        $tahun = $this->session->userdata('tahun_session');
-        date_default_timezone_set('Asia/Jakarta');
-        $data['title'] = 'Edit Data Pengaduan';
-        $data['aduan'] = $this->Model_langgan->get_id_pengaduan($id_ek_aduan);
-
-        if (!$data['aduan']) {
-            show_404(); // Jika data tidak ditemukan, tampilkan halaman 404
-        }
+        $data['tahun_lap'] = $tahun;
+        $data['title'] = 'DATA PENDUDUK';
+        $data['data_penduduk'] = $this->Model_langgan->get_data_penduduk($tahun);
 
         if ($this->session->userdata('bagian') == 'Langgan') {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar_pelihara');
-            $this->load->view('langganan/view_edit_aduan', $data);
+            $this->load->view('templates/sidebar_langgan');
+            $this->load->view('langganan/view_data_penduduk', $data);
             $this->load->view('templates/footer');
-        } else {
+        } elseif ($this->session->userdata('bagian') == 'Publik') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_publik');
+            $this->load->view('langganan/view_data_penduduk', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Administrator') {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
-            $this->load->view('langganan/view_edit_aduan', $data);
+            $this->load->view('langganan/view_data_penduduk', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Keuangan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('langganan/view_data_penduduk', $data);
             $this->load->view('templates/footer');
         }
     }
 
-    public function update_aduan()
+    public function input_data_penduduk()
     {
         $tahun = $this->session->userdata('tahun_session');
         date_default_timezone_set('Asia/Jakarta');
+        $this->form_validation->set_rules('id_kec', 'Nama Kecamatan', 'required|trim');
+        $this->form_validation->set_rules('wil_layan', 'Wil Layanan', 'required|trim');
+        $this->form_validation->set_rules('wil_adm', 'Wil Administrasi', 'required|trim');
+        $this->form_validation->set_rules('jumlah_penduduk', 'Jumlah Penduduk', 'required|trim');
+        $this->form_validation->set_rules('jumlah_kk', 'Jumlah KK', 'required|trim');
+        $this->form_validation->set_rules('jiwa_kk', 'Jiwa KK', 'required|trim');
+        $this->form_validation->set_rules('tahun_data', 'Tahun Data', 'required|trim');
+        $this->form_validation->set_message('required', '%s masih kosong');
 
-        $id_ek_aduan = $this->input->post('id_ek_aduan');
-        $jumlah_aduan = $this->input->post('jumlah_aduan');
-        $jumlah_aduan_ya = $this->input->post('jumlah_aduan_ya');
-        $jumlah_aduan_tidak = $this->input->post('jumlah_aduan_tidak');
-        $modified_by = $this->session->userdata('nama_lengkap');
-        $modified_at = date('Y-m-d H:i:s');
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Input Data Penduduk';
+            $data['kec'] = $this->Model_langgan->get_kec();
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_pelihara');
+            $this->load->view('langganan/view_input_penduduk', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $id_kec = $this->input->post('id_kec');
+            $wil_layan = $this->input->post('wil_layan');
+            $wil_adm = $this->input->post('wil_adm');
+            $jumlah_penduduk = $this->input->post('jumlah_penduduk');
+            $jumlah_kk = $this->input->post('jumlah_kk');
+            $jiwa_kk = $this->input->post('jiwa_kk');
+            $jumlah_wil_layan = $this->input->post('jumlah_wil_layan');
+            $jumlah_kk_layan = $this->input->post('jumlah_kk_layan');
+            $jiwa_kk_layan = $this->input->post('jiwa_kk_layan');
+            $tahun_data = $this->input->post('tahun_data');
+            $created_by = $this->session->userdata('nama_lengkap');
+            $created_at = date('Y-m-d H:i:s');
 
-        $data_aduan = [
-            'jumlah_aduan' => $jumlah_aduan,
-            'jumlah_aduan_ya' => $jumlah_aduan_ya,
-            'jumlah_aduan_tidak' => $jumlah_aduan_tidak,
-            'modified_by' => $modified_by,
-            'modified_at' => $modified_at
-        ];
+            $data_penduduk = [
+                'id_kec' => $id_kec,
+                'tahun_data' => $tahun_data,
+                'wil_layan' => $wil_layan,
+                'wil_adm' => $wil_adm,
+                'jumlah_penduduk' => $jumlah_penduduk,
+                'jumlah_kk' => $jumlah_kk,
+                'jiwa_kk' => $jiwa_kk,
+                'jumlah_wil_layan' => $jumlah_wil_layan,
+                'jumlah_kk_layan' => $jumlah_kk_layan,
+                'jiwa_kk_layan' => $jiwa_kk_layan,
+                'created_by' => $created_by,
+                'created_at' => $created_at
+            ];
 
-        $this->Model_langgan->update_aduan($id_ek_aduan, $data_aduan);
-        $this->session->set_flashdata(
-            'info',
-            '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                <strong>Sukses!</strong> Data Pengaduan berhasil diedit.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>'
-        );
-        $alamat = 'langganan/data_pengaduan?tahun=' . $tahun;
-        redirect($alamat);
+            // Cek apakah tahun dan id kec sudah ada di database
+            $this->db->where('tahun_data', $tahun);
+            $this->db->where('id_kec', $id_kec);
+            $query = $this->db->get('ek_data_penduduk');
+
+            if ($query->num_rows() > 0) {
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal!</strong> Data Penduduk sudah ada.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>'
+                );
+                redirect('langganan/cak_layanan/data_penduduk?tahun=' . $tahun);
+                return false;
+            } else {
+                $this->Model_langgan->input_data_penduduk('ek_data_penduduk', $data_penduduk);
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>Sukses!</strong> Data Penduduk berhasil ditambahkan.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>'
+                );
+                redirect('langganan/cak_layanan/data_penduduk?tahun=' . $tahun);
+            }
+        }
     }
+
+    public function data_pelanggan()
+    {
+        $get_tahun = $this->input->get('tahun');
+        $tahun = substr($get_tahun, 0, 4);
+
+        if (empty($get_tahun)) {
+            $tahun = date('Y');
+        } else {
+            $this->session->set_userdata('tahun_session', $get_tahun);
+        }
+
+        $data['tahun_lap'] = $tahun;
+        $data['title'] = 'DATA PELANGGAN AKTIF DAN NON AKTIF';
+        $data['data_pelanggan'] = $this->Model_langgan->get_data_pelanggan($tahun);
+
+        if ($this->session->userdata('bagian') == 'Langgan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_langgan');
+            $this->load->view('langganan/view_data_pelanggan', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Publik') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_publik');
+            $this->load->view('langganan/view_data_pelanggan', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Administrator') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('langganan/view_data_pelanggan', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Keuangan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('langganan/view_data_pelanggan', $data);
+            $this->load->view('templates/footer');
+        }
+    }
+
+    // public function input_aduan()
+    // {
+    //     $tahun = $this->session->userdata('tahun_session');
+    //     date_default_timezone_set('Asia/Jakarta');
+
+    //     $this->form_validation->set_rules('jenis_aduan[]', 'Jenis Aduan', 'required', [
+    //         'required' => 'Harap pilih minimal satu %s.'
+    //     ]);
+    //     $this->form_validation->set_rules('tgl_aduan', 'Tanggal pengaduan', 'required|trim');
+    //     $this->form_validation->set_message('required', '%s masih kosong');
+
+    //     if ($this->form_validation->run() == false) {
+    //         $data['title'] = 'Input Data Pengaduan';
+    //         $this->load->view('templates/header', $data);
+    //         $this->load->view('templates/navbar');
+    //         $this->load->view('templates/sidebar_langgan');
+    //         $this->load->view('langganan/view_input_aduan', $data);
+    //         $this->load->view('templates/footer');
+    //     } else {
+    //         $tgl_aduan = $this->input->post('tgl_aduan');
+    //         $bulan = date('m', strtotime($tgl_aduan)); // Ambil bulan dari tanggal
+    //         $tahun_input = date('Y', strtotime($tgl_aduan)); // Ambil tahun dari tanggal
+    //         $jenis_aduan = $this->input->post('jenis_aduan'); // Array dari checkbox
+    //         $jumlah_aduan = $this->input->post('jumlah_aduan'); // Array dari input jumlah
+    //         $jumlah_aduan_ya = $this->input->post('jumlah_aduan_ya'); // Array dari input jumlah
+    //         $jumlah_aduan_tidak = $this->input->post('jumlah_aduan_tidak'); // Array dari input jumlah
+    //         $created_by = $this->session->userdata('nama_lengkap');
+    //         $created_at = date('Y-m-d H:i:s');
+
+    //         $data_aduan = [];
+    //         $duplikasi_terdeteksi = false;
+
+    //         $map_aduan = [
+    //             'teknis' => 'Teknis',
+    //             'pelayanan' => 'Pelayanan',
+    //             'rekening_air' => 'Rekening Air'
+    //         ];
+
+    //         foreach ($jenis_aduan as $aduan_slug) {
+    //             $aduan_label = $map_aduan[$aduan_slug] ?? $aduan_slug;
+
+    //             if (isset($jumlah_aduan[$aduan_slug]) && $jumlah_aduan[$aduan_slug] !== '') {
+    //                 $cek_duplikasi = $this->Model_langgan->cek_duplikasi_aduan($bulan, $tahun_input, $aduan_label);
+
+    //                 if ($cek_duplikasi) {
+    //                     $duplikasi_terdeteksi = true;
+    //                     break;
+    //                 }
+
+    //                 $data_aduan[] = [
+    //                     'jenis_aduan' => $aduan_label,
+    //                     'tgl_aduan' => $tgl_aduan,
+    //                     'jumlah_aduan' => $jumlah_aduan[$aduan_slug],
+    //                     'jumlah_aduan_ya' => $jumlah_aduan_ya[$aduan_slug] ?? 0,
+    //                     'jumlah_aduan_tidak' => $jumlah_aduan_tidak[$aduan_slug] ?? 0,
+    //                     'created_by' => $created_by,
+    //                     'created_at' => $created_at
+    //                 ];
+    //             }
+    //         }
+
+    //         if ($duplikasi_terdeteksi) {
+    //             $this->session->set_flashdata(
+    //                 'info',
+    //                 '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    //                 <strong>Gagal!</strong> Data untuk tanggal dan bagian yang dipilih sudah ada di database.
+    //                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    //             </div>'
+    //             );
+    //         } elseif (!empty($data_aduan)) {
+    //             $this->Model_langgan->input_tambah_aduan('ek_pengaduan', $data_aduan);
+    //             $this->session->set_flashdata(
+    //                 'info',
+    //                 '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+    //                 <strong>Sukses!</strong> Data penambahan Pengaduan berhasil ditambahkan.
+    //                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    //             </div>'
+    //             );
+    //         } else {
+    //             $this->session->set_flashdata(
+    //                 'info',
+    //                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    //                 <strong>Gagal!</strong> Pastikan jumlah penambahan Pengaduan diisi untuk setiap bagian yang dipilih.
+    //                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    //             </div>'
+    //             );
+    //         }
+
+    //         $alamat = 'langganan/data_pengaduan?tahun=' . $tahun;
+    //         redirect($alamat);
+    //     }
+    // }
+
+    // public function edit_aduan($id_ek_aduan)
+    // {
+    //     $tahun = $this->session->userdata('tahun_session');
+    //     date_default_timezone_set('Asia/Jakarta');
+    //     $data['title'] = 'Edit Data Pengaduan';
+    //     $data['aduan'] = $this->Model_langgan->get_id_pengaduan($id_ek_aduan);
+
+    //     if (!$data['aduan']) {
+    //         show_404(); // Jika data tidak ditemukan, tampilkan halaman 404
+    //     }
+
+    //     if ($this->session->userdata('bagian') == 'Langgan') {
+    //         $this->load->view('templates/header', $data);
+    //         $this->load->view('templates/navbar');
+    //         $this->load->view('templates/sidebar_pelihara');
+    //         $this->load->view('langganan/view_edit_aduan', $data);
+    //         $this->load->view('templates/footer');
+    //     } else {
+    //         $this->load->view('templates/header', $data);
+    //         $this->load->view('templates/navbar');
+    //         $this->load->view('templates/sidebar');
+    //         $this->load->view('langganan/view_edit_aduan', $data);
+    //         $this->load->view('templates/footer');
+    //     }
+    // }
+
+    // public function update_aduan()
+    // {
+    //     $tahun = $this->session->userdata('tahun_session');
+    //     date_default_timezone_set('Asia/Jakarta');
+
+    //     $id_ek_aduan = $this->input->post('id_ek_aduan');
+    //     $jumlah_aduan = $this->input->post('jumlah_aduan');
+    //     $jumlah_aduan_ya = $this->input->post('jumlah_aduan_ya');
+    //     $jumlah_aduan_tidak = $this->input->post('jumlah_aduan_tidak');
+    //     $modified_by = $this->session->userdata('nama_lengkap');
+    //     $modified_at = date('Y-m-d H:i:s');
+
+    //     $data_aduan = [
+    //         'jumlah_aduan' => $jumlah_aduan,
+    //         'jumlah_aduan_ya' => $jumlah_aduan_ya,
+    //         'jumlah_aduan_tidak' => $jumlah_aduan_tidak,
+    //         'modified_by' => $modified_by,
+    //         'modified_at' => $modified_at
+    //     ];
+
+    //     $this->Model_langgan->update_aduan($id_ek_aduan, $data_aduan);
+    //     $this->session->set_flashdata(
+    //         'info',
+    //         '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+    //             <strong>Sukses!</strong> Data Pengaduan berhasil diedit.
+    //             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    //         </div>'
+    //     );
+    //     $alamat = 'langganan/data_pengaduan?tahun=' . $tahun;
+    //     redirect($alamat);
+    // }
 }

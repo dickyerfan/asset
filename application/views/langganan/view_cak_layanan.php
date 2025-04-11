@@ -20,11 +20,17 @@
                             </select>
                         </div>
                     </form>
-                    <?php if ($this->session->userdata('bagian') == 'Langgan') { ?>
+                    <!-- <?php if ($this->session->userdata('bagian') == 'Langgan') { ?>
                         <div class="navbar-nav ms-2">
                             <a href="<?= base_url('langganan/cak_layanan/input_data_penduduk') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Data Penduduk</button></a>
                         </div>
-                    <?php } ?>
+                    <?php } ?> -->
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('langganan/cak_layanan/data_penduduk') ?>"><button class="float-end neumorphic-button"><i class="fas fa-user"></i> Data Penduduk</button></a>
+                    </div>
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('langganan/cak_layanan/data_pelanggan') ?>"><button class="float-end neumorphic-button"><i class="fas fa-user"></i> Data Pelanggan</button></a>
+                    </div>
                     <div class="navbar-nav ms-auto">
                         <a href="<?= base_url('langganan/cak_layanan/cetak_data_penduduk') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak PDF</button></a>
                     </div>
@@ -154,11 +160,6 @@
                             <td>:</td>
                             <td class="text-right">2,5</td>
                         </tr>
-                        <tr>
-                            <td>Jumlah Kec di Wilayah Administratif</td>
-                            <td>:</td>
-                            <td class="text-right">23</td>
-                        </tr>
                     </tbody>
                 </table>
 
@@ -214,7 +215,7 @@
                     </tbody>
                 </table>
                 <div class="text-right font-weight-bold">
-                    Cakupan Pelayanan Administratif : 7,11%
+                    Cakupan Pelayanan Teknis : 8,72%
                 </div>
             </div>
 
