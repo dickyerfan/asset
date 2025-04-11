@@ -11,7 +11,7 @@
  Target Server Version : 100418 (10.4.18-MariaDB)
  File Encoding         : 65001
 
- Date: 27/03/2025 14:47:21
+ Date: 11/04/2025 10:47:51
 */
 
 SET NAMES utf8mb4;
@@ -3073,6 +3073,48 @@ INSERT INTO `ek_jam_ops` VALUES (2, 2, 739, '2023-01-01', '2025-03-21 15:59:54',
 INSERT INTO `ek_jam_ops` VALUES (3, 3, 744, '2023-01-01', '2025-03-21 15:59:54', 'Bagian Pemeliharaan', NULL, '');
 
 -- ----------------------------
+-- Table structure for ek_kecamatan
+-- ----------------------------
+DROP TABLE IF EXISTS `ek_kecamatan`;
+CREATE TABLE `ek_kecamatan`  (
+  `id_kec` int NOT NULL AUTO_INCREMENT,
+  `nama_kec` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `status` int NULL DEFAULT 0,
+  `created_at` datetime NOT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `modified_at` datetime NULL DEFAULT NULL,
+  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_kec`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of ek_kecamatan
+-- ----------------------------
+INSERT INTO `ek_kecamatan` VALUES (1, 'Maesan', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (2, 'Grujugan', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (3, 'Tamanan', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (4, 'Jambesari DS', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (5, 'Pujer', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (6, 'Tlogosari', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (7, 'Sukosari', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (8, 'Sumberwringin', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (9, 'Tapen', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (10, 'Wonosari', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (11, 'Tenggarang', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (12, 'Bondowoso', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (13, 'Curahdami', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (14, 'Binakal', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (15, 'Pakem', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (16, 'Wringin', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (17, 'Tegalampel', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (18, 'Tamankrocok', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (19, 'Klabang', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (20, 'Ijen', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (21, 'Botolinggo', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (22, 'Prajekan', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_kecamatan` VALUES (23, 'Cermee', 0, '0000-00-00 00:00:00', '', NULL, '');
+
+-- ----------------------------
 -- Table structure for ek_kualitas_air
 -- ----------------------------
 DROP TABLE IF EXISTS `ek_kualitas_air`;
@@ -3174,17 +3216,47 @@ CREATE TABLE `ek_pengaduan`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_ek_aduan`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ek_pengaduan
 -- ----------------------------
-INSERT INTO `ek_pengaduan` VALUES (1, 'Teknis', 102, 102, NULL, '2023-01-01', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pengaduan` VALUES (2, 'Pelayanan', 17, 17, NULL, '2023-01-01', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pengaduan` VALUES (3, 'Rekening Air\r\n', 1, 1, NULL, '2023-01-01', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pengaduan` VALUES (4, 'Teknis', 123, 123, NULL, '2023-02-01', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pengaduan` VALUES (5, 'Pelayanan', 17, 17, NULL, '2023-02-01', 0, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pengaduan` VALUES (6, 'Rekening Air\r\n', 8, 8, NULL, '2023-02-01', 0, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (1, 'Teknis', 102, 102, 0, '2023-01-01', 0, '2025-04-10 12:24:09', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (2, 'Pelayanan', 17, 17, 0, '2023-01-01', 0, '2025-04-10 12:24:09', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (3, 'Rekening Air', 1, 1, 0, '2023-01-01', 0, '2025-04-10 12:24:09', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (4, 'Teknis', 123, 123, 0, '2023-02-01', 0, '2025-04-10 12:26:16', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (5, 'Pelayanan', 17, 17, 0, '2023-02-01', 0, '2025-04-10 12:26:16', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (6, 'Rekening Air', 8, 8, 0, '2023-02-01', 0, '2025-04-10 12:26:16', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (7, 'Teknis', 136, 136, 0, '2023-03-01', 0, '2025-04-10 12:26:45', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (8, 'Pelayanan', 7, 7, 0, '2023-03-01', 0, '2025-04-10 12:26:45', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (9, 'Rekening Air', 5, 5, 0, '2023-03-01', 0, '2025-04-10 12:26:45', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (10, 'Teknis', 96, 96, 0, '2023-04-01', 0, '2025-04-10 12:27:23', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (11, 'Pelayanan', 9, 9, 0, '2023-04-01', 0, '2025-04-10 12:27:23', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (12, 'Rekening Air', 5, 5, 0, '2023-04-01', 0, '2025-04-10 12:27:23', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (13, 'Teknis', 154, 154, 0, '2023-05-01', 0, '2025-04-10 12:33:21', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (14, 'Pelayanan', 31, 31, 0, '2023-05-01', 0, '2025-04-10 12:33:21', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (15, 'Rekening Air', 4, 4, 0, '2023-05-01', 0, '2025-04-10 12:33:21', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (16, 'Teknis', 154, 154, 0, '2023-06-01', 0, '2025-04-10 12:34:02', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (17, 'Pelayanan', 15, 15, 0, '2023-06-01', 0, '2025-04-10 12:34:02', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (18, 'Rekening Air', 2, 2, 0, '2023-06-01', 0, '2025-04-10 12:34:02', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (19, 'Teknis', 170, 170, 0, '2023-07-01', 0, '2025-04-10 12:34:25', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (20, 'Pelayanan', 2, 2, 0, '2023-07-01', 0, '2025-04-10 12:34:25', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (21, 'Rekening Air', 0, 0, 0, '2023-07-01', 0, '2025-04-10 12:34:25', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (22, 'Teknis', 141, 141, 0, '2023-08-01', 0, '2025-04-10 12:34:57', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (23, 'Pelayanan', 2, 2, 0, '2023-08-01', 0, '2025-04-10 12:34:57', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (24, 'Rekening Air', 0, 0, 0, '2023-08-01', 0, '2025-04-10 12:34:57', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (25, 'Teknis', 150, 150, 0, '2023-09-01', 0, '2025-04-10 12:35:19', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (26, 'Pelayanan', 5, 5, 0, '2023-09-01', 0, '2025-04-10 12:35:19', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (27, 'Rekening Air', 0, 0, 0, '2023-09-01', 0, '2025-04-10 12:35:19', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (28, 'Teknis', 122, 122, 0, '2023-10-01', 0, '2025-04-10 12:35:49', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (29, 'Pelayanan', 3, 3, 0, '2023-10-01', 0, '2025-04-10 12:35:49', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (30, 'Rekening Air', 0, 0, 0, '2023-10-01', 0, '2025-04-10 12:35:49', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (31, 'Teknis', 153, 153, 0, '2023-11-01', 0, '2025-04-10 12:36:22', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (32, 'Pelayanan', 1, 1, 0, '2023-11-01', 0, '2025-04-10 12:36:22', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (33, 'Rekening Air', 0, 0, 0, '2023-11-01', 0, '2025-04-10 12:36:22', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (34, 'Teknis', 116, 116, 0, '2023-12-01', 0, '2025-04-10 12:37:00', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (35, 'Pelayanan', 12, 12, 0, '2023-12-01', 0, '2025-04-10 12:37:00', 'Bagian Hubungan Langganan', NULL, '');
+INSERT INTO `ek_pengaduan` VALUES (36, 'Rekening Air', 0, 0, 0, '2023-12-01', 0, '2025-04-10 12:37:00', 'Bagian Hubungan Langganan', '2025-04-11 08:06:58', 'Bagian Hubungan Langganan');
 
 -- ----------------------------
 -- Table structure for ek_sb_mag

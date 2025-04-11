@@ -99,7 +99,39 @@ class Model_langgan extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function input_tambah_aduan($table, $data)
+    {
+        if (!empty($data)) {
+            $this->db->insert_batch($table, $data);
+        }
+    }
+
+    public function cek_duplikasi_aduan($bulan, $tahun, $aduan)
+    {
+        $this->db->where('MONTH(tgl_aduan)', $bulan); // Ambil bulan dari tanggal di database
+        $this->db->where('YEAR(tgl_aduan)', $tahun); // Ambil tahun dari tanggal di database
+        $this->db->where('jenis_aduan', $aduan);
+        $query = $this->db->get('ek_pengaduan');
+
+        return $query->num_rows() > 0;
+    }
+
+    public function get_id_pengaduan($id_ek_aduan)
+    {
+        return $this->db->get_where('ek_pengaduan', ['id_ek_aduan' => $id_ek_aduan])->row();
+    }
+
+    public function update_aduan($id_ek_aduan, $data)
+    {
+        $this->db->where('id_ek_aduan', $id_ek_aduan);
+        return $this->db->update('ek_pengaduan', $data);
+    }
+
     // akhir pengaduan
 
+    // cakupan layanan
+
+
+    // akhir cakupan layanan
 
 }

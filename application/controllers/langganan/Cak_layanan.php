@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Data_pengaduan extends CI_Controller
+class Cak_layanan extends CI_Controller
 {
 
     public function __construct()
@@ -43,32 +43,32 @@ class Data_pengaduan extends CI_Controller
         }
 
         $data['tahun_lap'] = $tahun;
-        $data['title'] = 'DATA PENGADUAN';
-        $data['pengaduan'] = $this->Model_langgan->get_pengaduan($tahun);
+        $data['title'] = 'PERHITUNGAN CAKUPAN PELAYANAN';
+        // $data['cak_layanan'] = $this->Model_langgan->get_cak_layanan($tahun);
 
         if ($this->session->userdata('bagian') == 'Langgan') {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar_langgan');
-            $this->load->view('langganan/view_pengaduan', $data);
+            $this->load->view('langganan/view_cak_layanan', $data);
             $this->load->view('templates/footer');
         } elseif ($this->session->userdata('bagian') == 'Publik') {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar_publik');
-            $this->load->view('langganan/view_pengaduan', $data);
+            $this->load->view('langganan/view_cak_layanan', $data);
             $this->load->view('templates/footer');
         } elseif ($this->session->userdata('bagian') == 'Administrator') {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
-            $this->load->view('langganan/view_pengaduan', $data);
+            $this->load->view('langganan/view_cak_layanan', $data);
             $this->load->view('templates/footer');
         } elseif ($this->session->userdata('bagian') == 'Keuangan') {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
-            $this->load->view('langganan/view_pengaduan', $data);
+            $this->load->view('langganan/view_cak_layanan', $data);
             $this->load->view('templates/footer');
         }
     }

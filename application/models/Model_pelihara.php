@@ -312,6 +312,5 @@ class Model_pelihara extends CI_Model
 
 
 
-
     // akhir kualitas air
 }
