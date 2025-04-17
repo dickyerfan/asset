@@ -32,7 +32,7 @@
                         <a href="<?= base_url('langganan/cak_layanan/data_pelanggan') ?>"><button class="float-end neumorphic-button"><i class="fas fa-user"></i> Data Pelanggan</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('langganan/cak_layanan/cetak_data_penduduk') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak PDF</button></a>
+                        <a href="<?= base_url('langganan/cak_layanan/cetak_cak_layanan') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak PDF</button></a>
                     </div>
                 </nav>
             </div>
@@ -53,30 +53,51 @@
                         <tr>
                             <td>Jumlah penduduk</td>
                             <td>:</td>
-                            <td class="text-right">788.007</td>
+                            <td class="text-right"><?= number_format($cakupan['total_penduduk'] ?? 0, 0, ',', '.'); ?></td>
                         </tr>
                         <tr>
                             <td>Jumlah KK</td>
                             <td>:</td>
-                            <td class="text-right">312.241</td>
+                            <td class="text-right"><?= number_format($cakupan['total_kk'] ?? 0, 0, ',', '.'); ?></td>
                         </tr>
                         <tr>
                             <td>Rata - rata Jiwa per RT</td>
                             <td>:</td>
-                            <td class="text-right">2,52 / 2,523714</td>
+                            <td class="text-right"><?= number_format($cakupan['rata_jiwa_kk'] ?? 0, 6, ',', '.'); ?></td>
                         </tr>
                         <tr>
                             <td>Yang dilayani air bersih</td>
                             <td>:</td>
-                            <td class="text-right">17</td>
+                            <td class="text-right"><?= number_format($cakupan['jumlah_wil_layan_ya'] ?? 0, 0, ',', '.'); ?></td>
                         </tr>
                         <tr>
                             <td>Jumlah Kec di Wilayah Administratif</td>
                             <td>:</td>
-                            <td class="text-right">23</td>
+                            <td class="text-right"><?= number_format($cakupan['total_wil_layan_semua'] ?? 0, 0, ',', '.'); ?></td>
                         </tr>
                     </tbody>
                 </table>
+
+                <?php
+                $total_pelanggan =
+                    ($pelanggan['total_rt_dom'] ?? 0) +
+                    ($pelanggan['total_niaga_dom'] ?? 0) +
+                    ($pelanggan['total_sl_hu_dom'] ?? 0) +
+                    ($pelanggan['total_n_aktif_dom'] ?? 0);
+
+                $rata_jiwa = $cakupan['rata_jiwa_kk'] ?? 0;
+                $total_jiwa_terlayani = $pelanggan['total_rt_dom'] * $rata_jiwa + $pelanggan['total_niaga_dom'] * $rata_jiwa + $pelanggan['total_sl_hu_dom'] * 100 + $pelanggan['total_n_aktif_dom'] * $rata_jiwa;
+                $cakupan_admin = ($cakupan['total_penduduk'] ?? 0) > 0
+                    ? ($total_jiwa_terlayani / $cakupan['total_penduduk']) * 100
+                    : 0;
+
+                $rata_jiwa2 = $cakupan['rata_jiwa_kk2'] ?? 0;
+                $total_jiwa_terlayani2 = $pelanggan['total_rt_dom'] * $rata_jiwa2 + $pelanggan['total_niaga_dom'] * $rata_jiwa2 + $pelanggan['total_sl_hu_dom'] * 100 + $pelanggan['total_n_aktif_dom'] * $rata_jiwa2;
+
+                $cakupan_teknis = ($cakupan['total_penduduk'] ?? 0) > 0
+                    ? ($total_jiwa_terlayani2 / $cakupan['total_wil_layan']) * 100
+                    : 0;
+                ?>
 
                 <table class="table table-bordered table-sm mt-4">
                     <thead class="thead-light text-center">
@@ -93,44 +114,44 @@
                     <tbody>
                         <tr>
                             <td>Rumah Tangga</td>
-                            <td class="text-right">18.102 SL</td>
-                            <td class="text-right">2,523714</td>
-                            <td class="text-right">45.684</td>
+                            <td class="text-right"><?= number_format($pelanggan['total_rt_dom'] ?? 0, 0, ',', '.'); ?> SL</td>
+                            <td class="text-right"><?= number_format($cakupan['rata_jiwa_kk'] ?? 0, 6, ',', '.'); ?></td>
+                            <td class="text-right"><?= number_format(($pelanggan['total_rt_dom'] ?? 0) * $rata_jiwa, 0, ',', '.'); ?></td>
                         </tr>
                         <tr>
                             <td>Niaga Kecil + Menengah</td>
-                            <td class="text-right">449 SL</td>
-                            <td class="text-right">2,523714</td>
-                            <td class="text-right">1.133</td>
+                            <td class="text-right"><?= number_format($pelanggan['total_niaga_dom'] ?? 0, 0, ',', '.'); ?> SL</td>
+                            <td class="text-right"><?= number_format($cakupan['rata_jiwa_kk'] ?? 0, 6, ',', '.'); ?></td>
+                            <td class="text-right"><?= number_format(($pelanggan['total_niaga_dom'] ?? 0) * $rata_jiwa, 0, ',', '.'); ?></td>
                         </tr>
                         <tr>
                             <td>Hunian Vertikal + Kawasan Hunian</td>
                             <td class="text-right">-</td>
-                            <td class="text-right">0,00</td>
-                            <td class="text-right">0</td>
+                            <td class="text-right">-</td>
+                            <td class="text-right">-</td>
                         </tr>
                         <tr>
                             <td>Hidran Umum</td>
-                            <td class="text-right">53 SL</td>
+                            <td class="text-right"><?= number_format($pelanggan['total_sl_hu_dom'] ?? 0, 0, ',', '.'); ?> SL</td>
                             <td class="text-right">-</td>
-                            <td class="text-right">5.300</td>
+                            <td class="text-right"><?= number_format(($pelanggan['total_sl_hu_dom'] ?? 0) * 100, 0, ',', '.'); ?></td>
                         </tr>
                         <tr>
                             <td>Pelanggan Tidak Aktif</td>
-                            <td class="text-right">1.546 SL</td>
-                            <td class="text-right">2,523714</td>
-                            <td class="text-right">3.902</td>
+                            <td class="text-right"><?= number_format($pelanggan['total_n_aktif_dom'] ?? 0, 0, ',', '.'); ?> SL</td>
+                            <td class="text-right"><?= number_format($cakupan['rata_jiwa_kk'] ?? 0, 6, ',', '.'); ?></td>
+                            <td class="text-right"><?= number_format(($pelanggan['total_n_aktif_dom'] ?? 0) * $rata_jiwa, 0, ',', '.'); ?></td>
                         </tr>
                         <tr class="font-weight-bold">
                             <td>Jumlah</td>
-                            <td class="text-right">20.150 SL</td>
+                            <td class="text-right"><?= number_format($total_pelanggan ?? 0, 0, ',', '.'); ?> SL</td>
                             <td></td>
-                            <td class="text-right">56.019</td>
+                            <td class="text-right"><?= number_format($total_jiwa_terlayani ?? 0, 0, ',', '.'); ?></td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="text-right font-weight-bold">
-                    Cakupan Pelayanan Administratif : 7,11%
+                    Cakupan Pelayanan Administratif : <?= number_format($cakupan_admin ?? 0, 2, ',', '.'); ?> %
                 </div>
             </div>
             <div class="container my-4">
@@ -143,22 +164,22 @@
                         <tr>
                             <td>Jumlah penduduk di wilayah pelayanan</td>
                             <td>:</td>
-                            <td class="text-right">609207</td>
+                            <td class="text-right"><?= number_format($cakupan['total_wil_layan'] ?? 0, 0, ',', '.'); ?></td>
                         </tr>
                         <tr>
                             <td>Jumlah Kec di wilayah pelayanan</td>
                             <td>:</td>
-                            <td class="text-right">17</td>
+                            <td class="text-right"><?= number_format($cakupan['jumlah_wil_layan_ya'] ?? 0, 0, ',', '.'); ?></td>
                         </tr>
                         <tr>
                             <td>Jumlah KK di wilayah pelayanan</td>
                             <td>:</td>
-                            <td class="text-right">241.306</td>
+                            <td class="text-right"><?= number_format($cakupan['total_kk_layan'] ?? 0, 0, ',', '.'); ?></td>
                         </tr>
                         <tr>
                             <td>Rata2 jiwa per KK di wilayah pelayanan</td>
                             <td>:</td>
-                            <td class="text-right">2,5</td>
+                            <td class="text-right"><?= number_format($cakupan['rata_jiwa_kk2'] ?? 0, 6, ',', '.'); ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -178,44 +199,44 @@
                     <tbody>
                         <tr>
                             <td>Rumah Tangga</td>
-                            <td class="text-right">18.102 SL</td>
-                            <td class="text-right">2,523714</td>
-                            <td class="text-right">45.684</td>
+                            <td class="text-right"><?= number_format($pelanggan['total_rt_dom'] ?? 0, 0, ',', '.'); ?> SL</td>
+                            <td class="text-right"><?= number_format($cakupan['rata_jiwa_kk2'] ?? 0, 6, ',', '.'); ?></td>
+                            <td class="text-right"><?= number_format(($pelanggan['total_rt_dom'] ?? 0) * $rata_jiwa2, 0, ',', '.'); ?></td>
                         </tr>
                         <tr>
                             <td>Niaga Kecil + Menengah</td>
-                            <td class="text-right">449 SL</td>
-                            <td class="text-right">2,523714</td>
-                            <td class="text-right">1.133</td>
+                            <td class="text-right"><?= number_format($pelanggan['total_niaga_dom'] ?? 0, 0, ',', '.'); ?> SL</td>
+                            <td class="text-right"><?= number_format($cakupan['rata_jiwa_kk2'] ?? 0, 6, ',', '.'); ?></td>
+                            <td class="text-right"><?= number_format(($pelanggan['total_niaga_dom'] ?? 0) * $rata_jiwa2, 0, ',', '.'); ?></td>
                         </tr>
                         <tr>
                             <td>Hunian Vertikal + Kawasan Hunian</td>
                             <td class="text-right">-</td>
-                            <td class="text-right">0,00</td>
-                            <td class="text-right">0</td>
+                            <td class="text-right">-</td>
+                            <td class="text-right">-</td>
                         </tr>
                         <tr>
                             <td>Hidran Umum</td>
-                            <td class="text-right">53 SL</td>
+                            <td class="text-right"><?= number_format($pelanggan['total_sl_hu_dom'] ?? 0, 0, ',', '.'); ?> SL</td>
                             <td class="text-right">-</td>
-                            <td class="text-right">5.300</td>
+                            <td class="text-right"><?= number_format(($pelanggan['total_sl_hu_dom'] ?? 0) * 100, 0, ',', '.'); ?></td>
                         </tr>
                         <tr>
                             <td>Pelanggan Tidak Aktif</td>
-                            <td class="text-right">1.546 SL</td>
-                            <td class="text-right">2,523714</td>
-                            <td class="text-right">3.902</td>
+                            <td class="text-right"><?= number_format($pelanggan['total_n_aktif_dom'] ?? 0, 0, ',', '.'); ?> SL</td>
+                            <td class="text-right"><?= number_format($cakupan['rata_jiwa_kk2'] ?? 0, 6, ',', '.'); ?></td>
+                            <td class="text-right"><?= number_format(($pelanggan['total_n_aktif_dom'] ?? 0) * $rata_jiwa2, 0, ',', '.'); ?></td>
                         </tr>
                         <tr class="font-weight-bold">
                             <td>Jumlah</td>
-                            <td class="text-right">20.150 SL</td>
+                            <td class="text-right"><?= number_format($total_pelanggan ?? 0, 0, ',', '.'); ?> SL</td>
                             <td></td>
-                            <td class="text-right">56.019</td>
+                            <td class="text-right"><?= number_format($total_jiwa_terlayani2 ?? 0, 0, ',', '.'); ?></td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="text-right font-weight-bold">
-                    Cakupan Pelayanan Teknis : 8,72%
+                    Cakupan Pelayanan Teknis : <?= number_format($cakupan_teknis ?? 0, 2, ',', '.'); ?> %
                 </div>
             </div>
 

@@ -128,6 +128,22 @@ class Model_langgan extends CI_Model
     // akhir pengaduan
 
     // cakupan layanan
+
+    // public function get_cak_layanan($tahun)
+    // {
+    //     $query = $this->db->get_where('ek_cak_layanan', ['tahun_data' => $tahun]);
+    //     $result = $query->result();
+
+    //     $data = [];
+    //     foreach ($result as $row) {
+    //         // Normalisasi nama_layanan: lowercase, spasi jadi _
+    //         $key = strtolower(str_replace(' ', '_', $row->nama_layanan));
+    //         $data[$key] = $row->jumlah_layanan;
+    //     }
+
+    //     return $data;
+    // }
+
     public function get_data_penduduk($tahun)
     {
         $this->db->select("*");
@@ -153,6 +169,7 @@ class Model_langgan extends CI_Model
         }
     }
 
+
     public function get_tekanan_air_by_id($id)
     {
         return $this->db->get_where('ek_tekanan_air', ['id_ek_tka' => $id])->row();
@@ -169,10 +186,17 @@ class Model_langgan extends CI_Model
     {
         $this->db->select("*");
         $this->db->from('ek_data_pelanggan');
-        $this->db->join('bagian_upk', 'bagian_upk.id_bagian = ek_data_pelanggan.id_bagian', 'left');
+        $this->db->join('ek_kecamatan', 'ek_kecamatan.id_kec = ek_data_pelanggan.id_kec', 'left');
         $this->db->where('tahun_data', $tahun);
-        $this->db->order_by('bagian_upk.id_bagian');
+        $this->db->order_by('ek_kecamatan.id_kec');
         return $this->db->get()->result();
+    }
+
+    public function input_data_pelanggan($table, $data)
+    {
+        if (!empty($data)) {
+            $this->db->insert($table, $data);
+        }
     }
 
     // akhir cakupan layanan

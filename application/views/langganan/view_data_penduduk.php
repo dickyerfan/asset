@@ -64,17 +64,34 @@
                             $no = 1;
                             $total_penduduk = 0;
                             $total_kk = 0;
-                            $total_jiwa_kk = 0;
+                            // $total_jiwa_kk = 0;
                             $total_wil_layan = 0;
                             $total_kk_layan = 0;
-                            $total_jiwa_kk_layan = 0;
+                            // $total_jiwa_kk_layan = 0;
+                            $jumlah_wil_layan_ya = 0;
+                            $total_wil_layan_semua = 0;
                             foreach ($data_penduduk as $data) :
                                 $total_penduduk += (int) $data->jumlah_penduduk;
                                 $total_kk += (int) $data->jumlah_kk;
-                                $total_jiwa_kk += (float) $data->jiwa_kk;
+                                // $total_jiwa_kk += (float) $data->jiwa_kk;
                                 $total_wil_layan += (int) $data->jumlah_wil_layan;
                                 $total_kk_layan += (int) $data->jumlah_kk_layan;
-                                $total_jiwa_kk_layan += (float) $data->jiwa_kk_layan;
+                                // $total_jiwa_kk_layan += (float) $data->jiwa_kk_layan;
+                                if (strtoupper($data->wil_layan) === 'YA') {
+                                    $jumlah_wil_layan_ya++;
+                                }
+                                if (!empty($data->wil_layan)) {
+                                    $total_wil_layan_semua++;
+                                }
+                                $jumlah_penduduk = intval($data->jumlah_penduduk);
+                                $jumlah_kk = intval($data->jumlah_kk);
+                                $jumlah_wil_layan = intval($data->jumlah_wil_layan);
+                                $jumlah_kk_layan = intval($data->jumlah_kk_layan);
+
+                                $jiwa_kk = ($jumlah_kk > 0) ? ($jumlah_penduduk / $jumlah_kk) : 0;
+                                $jiwa_kk_layan = ($jumlah_kk_layan > 0) ? ($jumlah_wil_layan / $jumlah_kk_layan) : 0;
+
+
                             ?>
                                 <tr class="text-center">
                                     <td><?= $no++; ?></td>
@@ -83,10 +100,10 @@
                                     <td><?= $data->wil_adm; ?></td>
                                     <td><?= $data->jumlah_penduduk ?? 0; ?></td>
                                     <td><?= $data->jumlah_kk ?? 0; ?></td>
-                                    <td><?= $data->jiwa_kk ?? 0; ?></td>
+                                    <td><?= number_format($jiwa_kk, 2, ',', '.'); ?></td>
                                     <td><?= $data->jumlah_wil_layan ?? 0; ?></td>
                                     <td><?= $data->jumlah_kk_layan ?? 0; ?></td>
-                                    <td><?= $data->jiwa_kk_layan ?? 0; ?></td>
+                                    <td><?= number_format($jiwa_kk_layan, 2, ',', '.');  ?></td>
                                     <td>
                                         <?php if ($this->session->userdata('bagian') == 'Langgan' or $this->session->userdata('bagian') == 'Administrator') { ?>
                                             <div class="text-center">
@@ -97,12 +114,29 @@
                                 </tr>
                             <?php endforeach; ?>
                             <tr class="text-center">s
-                                <td colspan="4">Kabupaten Bondowoso</td>
-                                <td><?= number_format($total_penduduk, '0', ',', '.'); ?></td>
-                                <td><?= number_format($total_kk, '0', ',', '.'); ?></td>
+                                <td colspan="2">Kabupaten Bondowoso</td>
+                                <td>
+                                    <!-- <a href="<?= base_url('langganan/cak_layanan/input_wil_layan_ya/' . $tahun_lap . '/' . $jumlah_wil_layan_ya) ?>" onclick="return confirm('Apakah Anda yakin ingin menyimpan data ini ke Database.?');" style="text-decoration: none; color: inherit;">
+                                        <?= number_format($jumlah_wil_layan_ya, 0, ',', '.'); ?>
+                                    </a> -->
+                                    <!-- <?= number_format($jumlah_wil_layan_ya, 0, ',', '.'); ?> -->
+                                </td>
+                                <td>
+                                    <!-- <?= number_format($total_wil_layan_semua, 0, ',', '.'); ?> -->
+                                </td>
+                                <td>
+                                    <?= number_format($total_penduduk, 0, ',', '.'); ?>
+                                </td>
+                                <td>
+                                    <?= number_format($total_kk, 0, ',', '.'); ?>
+                                </td>
                                 <td></td>
-                                <td><?= number_format($total_wil_layan, '0', ',', '.'); ?></td>
-                                <td><?= number_format($total_kk_layan, '0', ',', '.'); ?></td>
+                                <td>
+                                    <?= number_format($total_wil_layan, 0, ',', '.'); ?>
+                                </td>
+                                <td>
+                                    <?= number_format($total_kk_layan, 0, ',', '.'); ?>
+                                </td>
                                 <td></td>
                                 <td></td>
                             </tr>

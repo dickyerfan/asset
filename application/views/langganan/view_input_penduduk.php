@@ -50,6 +50,8 @@
                                     <small class="form-text text-danger pl-3"><?= form_error('wil_adm'); ?></small>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="jumlah_penduduk">Jumlah Penduduk :</label>
@@ -57,20 +59,11 @@
                                     <small class="form-text text-danger pl-3"><?= form_error('jumlah_penduduk'); ?></small>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="jumlah_kk">Jumlah KK :</label>
                                     <input type="number" class="form-control" id="jumlah_kk" name="jumlah_kk" placeholder="Masukan Jumlah" value="<?= set_value('jumlah_kk'); ?>">
                                     <small class="form-text text-danger pl-3"><?= form_error('jumlah_kk'); ?></small>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label for="jiwa_kk">Jiwa KK :</label>
-                                    <input type="number" class="form-control" id="jiwa_kk" name="jiwa_kk" placeholder="Masukan Jumlah" value="<?= set_value('jiwa_kk'); ?>">
-                                    <small class="form-text text-danger pl-3"><?= form_error('jiwa_kk'); ?></small>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -84,13 +77,6 @@
                                 <div class="form-group">
                                     <label for="jumlah_kk_layan">Jumlah KK Layanan :</label>
                                     <input type="number" class="form-control" id="jumlah_kk_layan" name="jumlah_kk_layan" placeholder="Masukan Jumlah" value="<?= set_value('jumlah_kk_layan'); ?>">
-                                    <small class="form-text text-danger pl-3"><?= form_error('jumlah_kk_layan'); ?></small>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label for="jiwa_kk_layan">Jiwa KK Layanan :</label>
-                                    <input type="number" class="form-control" id="jiwa_kk_layan" name="jiwa_kk_layan" placeholder="Masukan jiwa" value="<?= set_value('jumlah_kk_layan'); ?>">
                                     <small class="form-text text-danger pl-3"><?= form_error('jumlah_kk_layan'); ?></small>
                                 </div>
                             </div>

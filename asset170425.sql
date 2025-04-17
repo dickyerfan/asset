@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : DIE ArtS
+ Source Server         : database_lokal
  Source Server Type    : MySQL
- Source Server Version : 100418 (10.4.18-MariaDB)
+ Source Server Version : 100417 (10.4.17-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : asset
 
  Target Server Type    : MySQL
- Target Server Version : 100418 (10.4.18-MariaDB)
+ Target Server Version : 100417 (10.4.17-MariaDB)
  File Encoding         : 65001
 
- Date: 17/04/2025 16:02:35
+ Date: 11/04/2025 16:54:44
 */
 
 SET NAMES utf8mb4;
@@ -2984,39 +2984,12 @@ INSERT INTO `daftar_asset` VALUES (2569, 23, 2952, 2848, 248, 0, 34, 500, 'Penga
 INSERT INTO `daftar_asset` VALUES (2570, 23, 2952, 2848, 248, 0, 34, 600, 'Pengadaan galon 600 bh', '2024-11-22', NULL, '', '', 37800000, 1, 4, 50.00, 'Administrator', '2025-01-15 07:06:34', 0);
 
 -- ----------------------------
--- Table structure for ek_cak_layanan
--- ----------------------------
-DROP TABLE IF EXISTS `ek_cak_layanan`;
-CREATE TABLE `ek_cak_layanan`  (
-  `id_cak_layanan` int NOT NULL AUTO_INCREMENT,
-  `nama_layanan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `jumlah_layanan` int NULL DEFAULT NULL,
-  `tahun_data` year NULL DEFAULT NULL,
-  `status` int NULL DEFAULT 1,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_cak_layanan`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_cak_layanan
--- ----------------------------
-INSERT INTO `ek_cak_layanan` VALUES (1, 'Jumlah Penduduk', 796911, 2023, 1, '2025-04-15 10:39:19', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_cak_layanan` VALUES (2, 'Jumlah KK', 309270, 2023, 1, '2025-04-15 10:50:45', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_cak_layanan` VALUES (3, 'Jumlah Wilayah Layanan', 18, 2023, 1, '2025-04-15 10:50:56', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_cak_layanan` VALUES (4, 'Jumlah Kecamatan', 23, 2023, 1, '2025-04-15 10:51:03', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_cak_layanan` VALUES (5, 'Jumlah Penduduk Diwilayah Pelayanan', 645027, 2023, 1, '2025-04-15 10:51:15', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_cak_layanan` VALUES (6, 'Jumlah KK Diwilayah Pelayanan', 251236, 2023, 1, '2025-04-15 10:51:21', 'Bagian Hubungan Langganan', NULL, '');
-
--- ----------------------------
 -- Table structure for ek_data_pelanggan
 -- ----------------------------
 DROP TABLE IF EXISTS `ek_data_pelanggan`;
 CREATE TABLE `ek_data_pelanggan`  (
   `id_data_pelanggan` int NOT NULL AUTO_INCREMENT,
-  `id_kec` int NOT NULL,
+  `id_bagian` int NOT NULL,
   `n_aktif_dom` int NULL DEFAULT NULL,
   `rt_dom` int NULL DEFAULT NULL,
   `niaga_dom` int NULL DEFAULT NULL,
@@ -3037,26 +3010,26 @@ CREATE TABLE `ek_data_pelanggan`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_data_pelanggan`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ek_data_pelanggan
 -- ----------------------------
-INSERT INTO `ek_data_pelanggan` VALUES (1, 12, 111, 5083, 287, 0, 0, 4, 400, 0, 67, 28, 0, 122, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_data_pelanggan` VALUES (2, 7, 109, 1177, 19, 0, 0, 4, 400, 8, 22, 6, 0, 25, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_data_pelanggan` VALUES (3, 1, 16, 1185, 25, 0, 0, 3, 300, 2, 24, 4, 0, 27, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_data_pelanggan` VALUES (4, 17, 129, 1568, 16, 0, 0, 4, 400, 2, 27, 4, 0, 19, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_data_pelanggan` VALUES (5, 9, 35, 1088, 5, 0, 0, 6, 600, 2, 16, 2, 0, 18, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_data_pelanggan` VALUES (6, 22, 38, 988, 12, 0, 0, 0, 0, 0, 10, 6, 0, 16, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_data_pelanggan` VALUES (7, 6, 295, 790, 28, 0, 0, 4, 400, 0, 8, 4, 0, 24, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_data_pelanggan` VALUES (8, 16, 193, 971, 16, 0, 0, 13, 1300, 9, 2, 13, 0, 14, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_data_pelanggan` VALUES (9, 13, 31, 1237, 11, 0, 0, 5, 500, 1, 33, 3, 0, 13, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_data_pelanggan` VALUES (10, 3, 14, 268, 6, 0, 0, 0, 0, 0, 8, 2, 0, 8, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_data_pelanggan` VALUES (11, 11, 21, 447, 5, 0, 0, 0, 0, 1, 7, 5, 0, 115, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_data_pelanggan` VALUES (12, 18, 112, 520, 0, 0, 0, 1, 100, 0, 10, 0, 0, 11, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_data_pelanggan` VALUES (13, 10, 124, 1069, 0, 0, 0, 1, 100, 2, 44, 0, 0, 6, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_data_pelanggan` VALUES (14, 19, 1, 98, 2, 0, 0, 1, 100, 0, 2, 0, 1, 7, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_data_pelanggan` VALUES (15, 8, 70, 1451, 1, 0, 0, 8, 800, 3, 23, 0, 0, 8, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (1, 7, 111, 5083, 287, 0, 0, 4, 400, 0, 67, 28, 0, 122, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (2, 9, 109, 1177, 19, 0, 0, 4, 400, 8, 22, 6, 0, 25, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (3, 10, 16, 1185, 25, 0, 0, 3, 300, 2, 24, 4, 0, 27, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (4, 11, 129, 1568, 16, 0, 0, 4, 400, 2, 27, 4, 0, 19, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (5, 12, 35, 1088, 5, 0, 0, 6, 600, 2, 16, 2, 0, 18, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (6, 13, 38, 988, 12, 0, 0, 0, 0, 0, 10, 6, 0, 16, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (7, 14, 295, 790, 28, 0, 0, 4, 400, 0, 8, 4, 0, 24, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (8, 15, 193, 971, 16, 0, 0, 13, 1300, 9, 2, 13, 0, 14, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (9, 16, 31, 1237, 11, 0, 0, 5, 500, 1, 33, 3, 0, 13, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (10, 17, 14, 268, 6, 0, 0, 0, 0, 0, 8, 2, 0, 8, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (11, 18, 21, 447, 5, 0, 0, 0, 0, 1, 7, 5, 0, 115, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (12, 19, 112, 520, 0, 0, 0, 1, 100, 0, 10, 0, 0, 11, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (13, 20, 124, 1069, 0, 0, 0, 1, 100, 2, 44, 0, 0, 6, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (14, 21, 1, 98, 2, 0, 0, 1, 100, 0, 2, 0, 1, 7, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_data_pelanggan` VALUES (15, 22, 70, 1451, 1, 0, 0, 8, 800, 3, 23, 0, 0, 8, 0, 0, 2023, '0000-00-00 00:00:00', '', NULL, '');
 
 -- ----------------------------
 -- Table structure for ek_data_penduduk
@@ -3069,65 +3042,44 @@ CREATE TABLE `ek_data_penduduk`  (
   `wil_adm` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `jumlah_penduduk` int NULL DEFAULT NULL,
   `jumlah_kk` int NULL DEFAULT NULL,
+  `jiwa_kk` int NULL DEFAULT NULL,
   `jumlah_wil_layan` int NULL DEFAULT NULL,
   `jumlah_kk_layan` int NULL DEFAULT NULL,
+  `jiwa_kk_layan` int NULL DEFAULT NULL,
   `tahun_data` year NULL DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_data_penduduk`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ek_data_penduduk
 -- ----------------------------
-INSERT INTO `ek_data_penduduk` VALUES (1, 1, 'YA', 'YA', 49312, 18746, 49312, 18746, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (2, 2, 'TIDAK', 'TIDAK', 38271, 14116, 0, 0, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (3, 3, 'YA', 'YA', 39413, 14797, 39413, 14797, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (4, 4, 'TIDAK', 'TIDAK', 36848, 13843, 0, 0, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (5, 5, 'YA', 'YA', 41268, 16390, 41268, 16390, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (6, 6, 'YA', 'YA', 47459, 18931, 47459, 18931, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (7, 7, 'YA', 'YA', 15668, 6474, 15668, 6474, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (8, 8, 'YA', 'YA', 35622, 14093, 35622, 14093, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (9, 9, 'YA', 'YA', 34459, 14302, 34459, 14302, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (10, 10, 'YA', 'YA', 41293, 16596, 41293, 16596, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (11, 11, 'YA', 'YA', 44310, 16334, 44310, 16334, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (12, 12, 'YA', 'YA', 77755, 27314, 77755, 27314, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (13, 13, 'YA', 'YA', 35146, 12994, 35146, 12994, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (14, 14, 'TIDAK', 'TIDAK', 17436, 6870, 0, 0, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (15, 15, 'YA', 'YA', 23886, 9592, 23886, 9592, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (16, 16, 'YA', 'YA', 41183, 16489, 41183, 16489, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (17, 17, 'YA', 'YA', 26789, 10497, 26789, 10497, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (18, 18, 'YA', 'YA', 16854, 7120, 16854, 7120, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (19, 19, 'YA', 'YA', 18926, 7953, 18926, 7953, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (20, 20, 'TIDAK', 'TIDAK', 12277, 4687, 0, 0, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (21, 21, 'YA', 'YA', 29763, 12054, 29763, 12054, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (22, 22, 'YA', 'YA', 25921, 10560, 25921, 10560, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (23, 23, 'TIDAK', 'TIDAK', 47052, 18518, 0, 0, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (24, 1, 'YA', 'YA', 49212, 18881, 49212, 18881, 2024, '2025-04-15 14:50:24', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (25, 2, 'TIDAK', 'TIDAK', 38165, 14399, 0, 0, 2024, '2025-04-16 07:41:20', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (26, 3, 'YA', 'YA', 39535, 14987, 39535, 14987, 2024, '2025-04-16 09:47:58', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (28, 4, 'TIDAK', 'TIDAK', 36076, 13955, 0, 0, 2024, '2025-04-16 10:05:52', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (29, 5, 'YA', 'YA', 40594, 16487, 40594, 16487, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (30, 6, 'YA', 'YA', 47078, 19107, 47078, 19107, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (31, 7, 'YA', 'YA', 15553, 6498, 15553, 6498, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (32, 8, 'YA', 'YA', 35127, 14363, 35127, 14363, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (33, 9, 'YA', 'YA', 34003, 14299, 34003, 14299, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (34, 10, 'YA', 'YA', 40764, 16700, 40764, 16700, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (35, 11, 'YA', 'YA', 43973, 16523, 43973, 16523, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (36, 12, 'YA', 'YA', 76805, 27584, 76805, 27584, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (37, 13, 'YA', 'YA', 34889, 13195, 34889, 13195, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (38, 14, 'TIDAK', 'TIDAK', 17066, 6880, 0, 0, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (39, 15, 'YA', 'YA', 23362, 9677, 23362, 9677, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (40, 16, 'YA', 'YA', 40755, 16560, 40755, 16560, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (41, 17, 'YA', 'YA', 26571, 10632, 26571, 10632, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (42, 18, 'YA', 'YA', 16654, 7190, 16654, 7190, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (43, 19, 'YA', 'YA', 18688, 7955, 18688, 7955, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (44, 20, 'TIDAK', 'TIDAK', 12030, 4728, 0, 0, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (45, 21, 'TIDAK', 'TIDAK', 29110, 12195, 0, 0, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (46, 22, 'YA', 'YA', 25644, 10668, 25644, 10668, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
-INSERT INTO `ek_data_penduduk` VALUES (47, 23, 'TIDAK', 'TIDAK', 46353, 18778, 0, 0, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (1, 1, 'YA', 'YA', 49312, 18746, 3, 49312, 18746, 3, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (2, 2, 'TIDAK', 'TIDAK', 38271, 14116, 3, 0, 0, 0, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (3, 3, 'YA', 'YA', 39413, 14797, 3, 39413, 14797, 3, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (4, 4, 'TIDAK', 'TIDAK', 36848, 13843, 3, 0, 0, 0, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (5, 5, 'YA', 'YA', 41268, 16390, 3, 41268, 16390, 3, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (6, 6, 'YA', 'YA', 47459, 18931, 3, 47459, 18931, 3, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (7, 7, 'YA', 'YA', 15668, 6474, 2, 15668, 6474, 2, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (8, 8, 'YA', 'YA', 35622, 14093, 3, 35622, 14093, 3, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (9, 9, 'YA', 'YA', 34459, 14302, 2, 34459, 14302, 2, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (10, 10, 'YA', 'YA', 41293, 16596, 2, 41293, 16596, 2, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (11, 11, 'YA', 'YA', 44310, 16334, 3, 44310, 16334, 3, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (12, 12, 'YA', 'YA', 77755, 27314, 3, 77755, 27314, 3, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (13, 13, 'YA', 'YA', 35146, 12994, 3, 35146, 12994, 3, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (14, 14, 'TIDAK', 'TIDAK', 17436, 6870, 3, 0, 0, 0, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (15, 15, 'YA', 'YA', 23886, 9592, 2, 23886, 9592, 2, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (16, 16, 'YA', 'YA', 41183, 16489, 3, 41183, 16489, 3, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (17, 17, 'YA', 'YA', 26789, 10497, 3, 26789, 10497, 3, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (18, 18, 'YA', 'YA', 16854, 7120, 2, 16854, 7120, 2, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (19, 19, 'YA', 'YA', 18926, 7953, 2, 18926, 7953, 2, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (20, 20, 'TIDAK', 'TIDAK', 12277, 4687, 3, 0, 0, 0, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (21, 21, 'YA', 'YA', 29763, 12054, 2, 29763, 12054, 2, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (22, 22, 'YA', 'YA', 25921, 10560, 2, 25921, 10560, 2, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
+INSERT INTO `ek_data_penduduk` VALUES (23, 23, 'TIDAK', 'TIDAK', 47052, 18518, 3, 0, 0, 0, 2023, '2025-04-11 15:15:53', 'Administrator', NULL, '');
 
 -- ----------------------------
 -- Table structure for ek_ganti_meter
@@ -3475,7 +3427,7 @@ CREATE TABLE `ek_tambah_sr`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_ek_sr`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ek_tambah_sr
@@ -3502,21 +3454,6 @@ INSERT INTO `ek_tambah_sr` VALUES (19, 14, 2, '2023-02-01', 0, '2025-03-27 13:13
 INSERT INTO `ek_tambah_sr` VALUES (20, 15, 1, '2023-02-01', 0, '2025-03-27 13:13:25', 'Bagian Hubungan Langganan', NULL, '');
 INSERT INTO `ek_tambah_sr` VALUES (21, 16, 4, '2023-02-01', 0, '2025-03-27 13:13:25', 'Bagian Hubungan Langganan', NULL, '');
 INSERT INTO `ek_tambah_sr` VALUES (22, 19, 1, '2023-02-01', 0, '2025-03-27 13:13:25', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (23, 7, 70, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (24, 9, 13, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (25, 10, 9, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (26, 11, 10, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (27, 12, 6, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (28, 13, 6, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (29, 14, 10, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (30, 15, 19, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (31, 16, 10, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (32, 17, 1, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (33, 18, 2, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (34, 19, 2, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (35, 20, 8, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (36, 21, 1, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
-INSERT INTO `ek_tambah_sr` VALUES (37, 22, 4, '2024-01-01', 0, '2025-04-15 14:47:50', 'Bagian Hubungan Langganan', NULL, '');
 
 -- ----------------------------
 -- Table structure for ek_tekanan_air

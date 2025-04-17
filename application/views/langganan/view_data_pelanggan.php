@@ -128,7 +128,7 @@
                                 $total['total_semua'] += $baris_total;
                             ?>
                                 <tr class="text-center">
-                                    <td class="text-left"><?= $data->nama_bagian; ?></td>
+                                    <td class="text-left"><?= $data->nama_kec; ?></td>
                                     <td><?= $data->n_aktif_dom ?? 0; ?></td>
                                     <td><?= $data->rt_dom ?? 0; ?></td>
                                     <td><?= $data->niaga_dom ?? 0; ?></td>
