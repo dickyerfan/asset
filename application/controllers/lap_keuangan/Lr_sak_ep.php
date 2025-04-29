@@ -20,7 +20,7 @@ class Lr_sak_ep extends CI_Controller
         }
 
         $bagian = $this->session->userdata('bagian');
-        if ($bagian != 'Keuangan' && $bagian != 'Administrator' && $bagian != 'Auditor') {
+        if ($bagian != 'Keuangan' && $bagian != 'Administrator' && $bagian != 'Auditor' && $bagian != 'Publik') {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -49,11 +49,19 @@ class Lr_sak_ep extends CI_Controller
         $data['title'] = 'LAPORAN LABA - RUGI DAN PENGHASILAN KOMPREHENSIP LAIN';
         $data['lr_sak_ep'] = $this->Model_labarugi->get_all_sak_ep($tahun);
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('lap_keuangan/view_lr_sak_ep', $data);
-        $this->load->view('templates/footer');
+        if ($this->session->userdata('bagian') == 'Publik') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_publik');
+            $this->load->view('lap_keuangan/view_lr_sak_ep', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('lap_keuangan/view_lr_sak_ep', $data);
+            $this->load->view('templates/footer');
+        }
     }
 
     public function lr_sak_ep_cetak()

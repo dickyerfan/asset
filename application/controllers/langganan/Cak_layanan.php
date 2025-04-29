@@ -265,7 +265,7 @@ class Cak_layanan extends CI_Controller
             $data['kec'] = $this->Model_langgan->get_kec();
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar_pelihara');
+            $this->load->view('templates/sidebar_langgan');
             $this->load->view('langganan/view_input_penduduk', $data);
             $this->load->view('templates/footer');
         } else {
@@ -457,7 +457,7 @@ class Cak_layanan extends CI_Controller
             $data['kec'] = $this->Model_langgan->get_kec();
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar_pelihara');
+            $this->load->view('templates/sidebar_langgan');
             $this->load->view('langganan/view_input_pelanggan', $data);
             $this->load->view('templates/footer');
         } else {
@@ -546,7 +546,7 @@ class Cak_layanan extends CI_Controller
     //     if ($this->session->userdata('bagian') == 'Langgan') {
     //         $this->load->view('templates/header', $data);
     //         $this->load->view('templates/navbar');
-    //         $this->load->view('templates/sidebar_pelihara');
+    //         $this->load->view('templates/sidebar_langgan');
     //         $this->load->view('langganan/view_edit_aduan', $data);
     //         $this->load->view('templates/footer');
     //     } else {

@@ -43,6 +43,41 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-coins"></i>
+                        <p>
+                            Keuangan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('lap_keuangan/neraca') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Neraca</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('lap_keuangan/lr_sak_ep') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Lap Laba Rugi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('lap_keuangan/perubahan_ekuitas') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Per Ekuitas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('keuangan/arus_kas') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Lap Arus Kas</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
                         <p>
                             Umum
@@ -92,7 +127,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('langganan/pendapatan_kec') ?>" class="nav-link">
+                            <a href="<?= base_url('langganan/rincian_pendapatan') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Rincian Pend. Kec</p>
                             </a>
@@ -142,7 +177,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="<?= base_url('pelihara/kualitas_air') ?>" class="nav-link">
-                                <i class="nav-icon fas fa-flask"></i>
+                                <i class="far fa-circle nav-icon"></i>
                                 <p>
                                     Data Uji Kualitas
                                 </p>

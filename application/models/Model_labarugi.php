@@ -72,11 +72,11 @@ class Model_labarugi extends CI_Model
             SUM(CASE WHEN YEAR(tgl_ppa) = ' . $tahun_lalu . ' THEN lr_ppa.jumlah_ppa ELSE 0 END) as jumlah_ppa_tahun_lalu,
     
             SUM(CASE WHEN YEAR(tgl_ppa) = ' . $tahun . ' 
-                     AND nama_ppa IN (\'Harga Air\', \'Beban Tetap Administrasi\', \'Beban Tetap Jasa\') 
+                     AND nama_ppa IN (\'Harga Air\', \'Beban Tetap Administrasi\', \'Beban Tetap Jasa\', \'Layanan pengiriman Tangki Air\') 
                      THEN lr_ppa.jumlah_ppa ELSE 0 END) as jumlah_pa_tahun_ini,
     
             SUM(CASE WHEN YEAR(tgl_ppa) = ' . $tahun_lalu . ' 
-                     AND nama_ppa IN (\'Harga Air\', \'Beban Tetap Administrasi\', \'Beban Tetap Jasa\') 
+                     AND nama_ppa IN (\'Harga Air\', \'Beban Tetap Administrasi\', \'Beban Tetap Jasa\', \'Layanan pengiriman Tangki Air\') 
                      THEN lr_ppa.jumlah_ppa ELSE 0 END) as jumlah_pa_tahun_lalu
         ');
         $this->db->from('lr_ppa');

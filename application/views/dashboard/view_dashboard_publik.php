@@ -32,7 +32,127 @@
                     </div>
                 </div>
                 <div class="table-responsive">
+                    <table class="table table-bordered table-sm" style="font-size: 12px;">
+                        <thead class="text-center">
+                            <tr>
+                                <th rowspan="2">INDIKATOR KINERJA & RUMUS</th>
+                                <th rowspan="2">BOBOT</th>
+                                <th rowspan="2">STANDAR</th>
+                                <th rowspan="2">NILAI</th>
+                                <th colspan="5">PENILAIAN</th>
+                                <th rowspan="2">N</th>
+                                <th rowspan="2">B</th>
+                                <th rowspan="2">H</th>
+                            </tr>
+                            <tr>
+                                <th>Perhitungan</th>
+                                <th colspan="4">=</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="12" class="font-weight-bold">I. ASPEK KEUANGAN</td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">1. RENTABILITAS</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">a. ROE (Return Of Equity)<br>
+                                    <a>Kemampuan perusahaan untuk menghasilkan laba atas investasi yang dilakukannya</a>
+                                    <br>
+                                    <br>
+                                    <i>Laba bersih setelah pajak / Jumlah Ekuitas x 100%</i>
+                                </td>
+                                <td class="text-center align-middle">0,055</td>
+                                <td class="text-center">> 10%<br>7 - 10<br>3 - 7<br>0 - 3<br>
+                                    < 0%</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td class="text-center align-middle font-weight-bold" colspan="4"><?= number_format($laba_rugi_bersih, 0, ',', '.'); ?> / <?= number_format($total_ekuitas_audited, 0, ',', '.'); ?> X 100 % = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_roe, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_roe; ?></td>
+                                <td class="text-center align-middle">0,055</td>
+                                <td class="text-center align-middle"><?= number_format($hasil, 2, ',', '.'); ?></td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">b. Ratio Operasi<br>
+                                    <a>Kemampuan perusahaan membiayai operasinya dari pendapatan operasi</a>
+                                    <br>
+                                    <br>
+                                    <i>Biaya Operasi / Pendapatan Operasi</i>
+                                </td>
+                                <td class="text-center align-middle">0,055</td>
+                                <td class="text-center">≤ 0,5<br>> 0,5 - 0,65<br>> 0,65 - 0,85<br>> 0,85 - 1,00<br>> 1,00</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold">18.706.794.084,40 / 21.957.150.720,00 = </td>
+                                <td class="text-center align-middle">0,85</td>
+                                <td class="text-center align-middle">2</td>
+                                <td class="text-center align-middle">0,055</td>
+                                <td class="text-center align-middle">0,11</td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">2. LIKUIDITAS</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">a. Cash Ratio<br>
+                                    <a>Kemampuan perusahaan membayar kewajiban jangka pendeknya dengan Kas dan Setara kas</a>
+                                    <br>
+                                    <br>
+                                    <i>Kas + Setara Kas / Utang Lancar x 100%</i>
+                                </td>
+                                <td class="text-center align-middle">0,055</td>
+                                <td class="text-center">> 100%<br>80 - 100<br>60 - 80<br>40 - 60<br>
+                                    < 40</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold">2.805.930.230,00 / 1.780.450.466,00 x 100 % = </td>
+                                <td class="text-center align-middle">157,60</td>
+                                <td class="text-center align-middle">5</td>
+                                <td class="text-center align-middle">0,055</td>
+                                <td class="text-center align-middle">0,28</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">b. Efektifitas Penagihan<br>
+                                    <a>Efektifitas perusahaan dalam menagih piutang</a>
+                                    <br>
+                                    <br>
+                                    <i>Penerimaan Rekening Air / Jumlah Rekening Air x 100%</i>
+                                </td>
+                                <td class="text-center align-middle">0,055</td>
+                                <td class="text-center">> 90 %<br>> 85% - 90%<br>> 80% - 85%<br>> 75% - 80%<br>≤ 75%</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold">18.916.023.490,00 / 19.453.424.630,00x 100 % =</td>
+                                <td class="text-center align-middle">97,24</td>
+                                <td class="text-center align-middle">5</td>
+                                <td class="text-center align-middle">0,055</td>
+                                <td class="text-center align-middle">0,28</td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">3. SOLVABILITAS</td>
+
+                            </tr>
+                            <tr>
+                                <td class="pl-4">Kemampuan perusahaan menjamin seluruh hutangnya dengan aktiva yang dimiliki<br><br>
+                                    <a>Total Aktiva / Total Utang x 100%</a>
+                                </td>
+                                <td class="text-center align-middle">0,03</td>
+                                <td class="text-center">> 200%<br>170 - 200<br>135 - 170<br>100 - 135<br>
+                                    < 100%</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold">52.212.898.692,69 / 3.723.143.518,00 x 100 % = </td>
+                                <td class="text-center align-middle">1.402,39</td>
+                                <td class="text-center align-middle">5</td>
+                                <td class="text-center align-middle">0,03</td>
+                                <td class="text-center align-middle">0,15</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="11" class="text-right">TOTAL</th>
+                                <th class="text-center font-weight-bold">0,98</th>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
+
             </div>
         </div>
     </div>

@@ -405,7 +405,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('langganan/pendapatan_kec') ?>" class="nav-link">
+                            <a href="<?= base_url('langganan/rincian_pendapatan') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Rincian Pend. Kec</p>
                             </a>

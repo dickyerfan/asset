@@ -12,6 +12,31 @@ class Model_langgan extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function get_kec()
+    {
+        $this->db->select('*');
+        $this->db->from('ek_kecamatan');
+        $this->db->where('status', 0);
+        $this->db->order_by('nama_kec', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    public function get_tarif_dom()
+    {
+        $this->db->select('*');
+        $this->db->from('kel_tarif');
+        $this->db->where('jenis', 'dom');
+        return $this->db->get()->result();
+    }
+
+    public function get_tarif_n_dom()
+    {
+        $this->db->select('*');
+        $this->db->from('kel_tarif');
+        $this->db->where('jenis', 'n_dom');
+        return $this->db->get()->result();
+    }
+
     // tambah sr
     public function get_tambah_sr($tahun)
     {
@@ -154,13 +179,7 @@ class Model_langgan extends CI_Model
         return $this->db->get()->result();
     }
 
-    public function get_kec()
-    {
-        $this->db->select('*');
-        $this->db->from('ek_kecamatan');
-        $this->db->where('status', 0);
-        return $this->db->get()->result();
-    }
+
 
     public function input_data_penduduk($table, $data)
     {
@@ -200,5 +219,62 @@ class Model_langgan extends CI_Model
     }
 
     // akhir cakupan layanan
+
+    // rincian Pendapatan kecamatan
+
+    public function get_rincian($tahun)
+    {
+        $this->db->select("*");
+        $this->db->from('ek_rincian_pendapatan');
+        $this->db->join('ek_kecamatan', 'ek_kecamatan.id_kec = ek_rincian_pendapatan.id_kec', 'left');
+        $this->db->join('kel_tarif', 'kel_tarif.id_kel_tarif = ek_rincian_pendapatan.id_kel_tarif', 'left');
+        $this->db->where('tahun_data', $tahun);
+        // $this->db->order_by('ek_kecamatan.nama_kec', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    public function input_rincian($table, $data)
+    {
+        if (!empty($data)) {
+            $this->db->insert($table, $data);
+        }
+    }
+
+    // akhir rincian Pendapatan kecamatan
+
+    // efek tagih
+    public function get_efek_tagih($tahun)
+    {
+        $this->db->select("*");
+        $this->db->from('ek_efek_tagih');
+        $this->db->join('bagian_upk', 'bagian_upk.id_bagian = ek_efek_tagih.id_bagian', 'left');
+        $this->db->where('tahun_data', $tahun);
+        $this->db->where('bagian_upk.status_evkin', 1);
+        return $this->db->get()->result();
+    }
+
+    public function input_efek_tagih($table, $data)
+    {
+        if (!empty($data)) {
+            $this->db->insert($table, $data);
+        }
+    }
+    public function input_sisa_piu($table, $data)
+    {
+        if (!empty($data)) {
+            $this->db->insert($table, $data);
+        }
+    }
+
+    public function get_sisa_piu($tahun)
+    {
+        $this->db->select("*");
+        $this->db->from('ek_sisa_piutang');
+        $this->db->where('tahun_data', $tahun);
+        return $this->db->get()->result();
+    }
+
+    // akhir efek tagih
+
 
 }

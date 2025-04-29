@@ -20,7 +20,7 @@ class Neraca extends CI_Controller
         }
 
         $bagian = $this->session->userdata('bagian');
-        if ($bagian != 'Keuangan' && $bagian != 'Administrator' && $bagian != 'Auditor') {
+        if ($bagian != 'Keuangan' && $bagian != 'Administrator' && $bagian != 'Auditor' && $bagian != 'Publik') {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -49,11 +49,19 @@ class Neraca extends CI_Controller
         $data['title'] = 'LAPORAN POSISI KEUANGAN';
         $data['neraca'] = $this->Model_lap_keuangan->get_all_neraca($tahun);
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('lap_keuangan/view_neraca', $data);
-        $this->load->view('templates/footer');
+        if ($this->session->userdata('bagian') == 'Publik') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_publik');
+            $this->load->view('lap_keuangan/view_neraca', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('lap_keuangan/view_neraca', $data);
+            $this->load->view('templates/footer');
+        }
     }
 
     public function neraca_cetak()

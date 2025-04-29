@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url('langganan/pendapatan_kec') ?>" class="nav-link">
+                    <a href="<?= base_url('langganan/rincian_pendapatan') ?>" class="nav-link">
                         <i class="nav-icon fas fa-donate"></i>
                         <p>
                             Rincian Pend. Kec

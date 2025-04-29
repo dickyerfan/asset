@@ -20,7 +20,7 @@ class Perubahan_ekuitas extends CI_Controller
         }
 
         $bagian = $this->session->userdata('bagian');
-        if ($bagian != 'Keuangan' && $bagian != 'Administrator' && $bagian != 'Auditor') {
+        if ($bagian != 'Keuangan' && $bagian != 'Administrator' && $bagian != 'Auditor' && $bagian != 'Publik') {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -56,10 +56,18 @@ class Perubahan_ekuitas extends CI_Controller
         $data['ekuitas_tahun_lalu_audited'] = $this->Model_penyesuaian_ekuitas->get_by_year_audited($tahun - 1);
         $data['ekuitas_tahun_ini_audited'] = $this->Model_penyesuaian_ekuitas->get_by_year_audited($tahun);
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('lap_keuangan/view_perubahan_ekuitas', $data);
-        $this->load->view('templates/footer');
+        if ($this->session->userdata('bagian') == 'Publik') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_publik');
+            $this->load->view('lap_keuangan/view_perubahan_ekuitas', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('lap_keuangan/view_perubahan_ekuitas', $data);
+            $this->load->view('templates/footer');
+        }
     }
 }

@@ -50,6 +50,7 @@
                                 <th colspan="6" class="align-middle">Domestik</th>
                                 <th colspan="8" class="align-middle">Non Domestik</th>
                                 <th rowspan="3" class="align-middle">Total</th>
+                                <th rowspan="3" class="align-middle">Total Aktif</th>
                                 <th rowspan="3" class="align-middle">Action</th>
                             </tr>
                             <tr class="text-center">
@@ -68,7 +69,7 @@
                             </tr>
                             <tr class="text-center">
                                 <th>SL</th>
-                                <th>Unit Komunal</th>
+                                <th>Unit Kom</th>
                                 <th>SL</th>
                                 <th>Jiwa</th>
                             </tr>
@@ -91,7 +92,8 @@
                                 'inst_n_dom' => 0,
                                 'k2_n_dom' => 0,
                                 'lain_n_dom' => 0,
-                                'total_semua' => 0
+                                'total_semua' => 0,
+                                'total_semua_aktif' => 0
                             ];
 
                             foreach ($data_pelanggan as $data) :
@@ -103,6 +105,19 @@
                                     ($data->unit_kom_dom ?? 0) +
                                     ($data->sl_hu_dom ?? 0) +
                                     ($data->n_aktif_n_dom ?? 0) +
+                                    ($data->sosial_n_dom ?? 0) +
+                                    ($data->niaga_n_dom ?? 0) +
+                                    ($data->ind_n_dom ?? 0) +
+                                    ($data->inst_n_dom ?? 0) +
+                                    ($data->k2_n_dom ?? 0) +
+                                    ($data->lain_n_dom ?? 0);
+
+                                $total_aktif =
+                                    ($data->rt_dom ?? 0) +
+                                    ($data->niaga_dom ?? 0) +
+                                    ($data->sl_kom_dom ?? 0) +
+                                    ($data->unit_kom_dom ?? 0) +
+                                    ($data->sl_hu_dom ?? 0) +
                                     ($data->sosial_n_dom ?? 0) +
                                     ($data->niaga_n_dom ?? 0) +
                                     ($data->ind_n_dom ?? 0) +
@@ -126,24 +141,26 @@
                                 $total['k2_n_dom'] += $data->k2_n_dom ?? 0;
                                 $total['lain_n_dom'] += $data->lain_n_dom ?? 0;
                                 $total['total_semua'] += $baris_total;
+                                $total['total_semua_aktif'] += $total_aktif;
                             ?>
                                 <tr class="text-center">
                                     <td class="text-left"><?= $data->nama_kec; ?></td>
-                                    <td><?= $data->n_aktif_dom ?? 0; ?></td>
-                                    <td><?= $data->rt_dom ?? 0; ?></td>
-                                    <td><?= $data->niaga_dom ?? 0; ?></td>
-                                    <td><?= $data->sl_kom_dom ?? 0; ?></td>
-                                    <td><?= $data->unit_kom_dom ?? 0; ?></td>
-                                    <td><?= $data->sl_hu_dom ?? 0; ?></td>
-                                    <td><?= $data->jiwa_dom ?? 0; ?></td>
-                                    <td><?= $data->n_aktif_n_dom ?? 0; ?></td>
-                                    <td><?= $data->sosial_n_dom ?? 0; ?></td>
-                                    <td><?= $data->niaga_n_dom ?? 0; ?></td>
-                                    <td><?= $data->ind_n_dom ?? 0; ?></td>
-                                    <td><?= $data->inst_n_dom ?? 0; ?></td>
-                                    <td><?= $data->k2_n_dom ?? 0; ?></td>
-                                    <td><?= $data->lain_n_dom ?? 0; ?></td>
-                                    <td><?= $baris_total; ?></td>
+                                    <td><?= number_format($data->n_aktif_dom ?? 0, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($data->rt_dom ?? 0, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($data->niaga_dom ?? 0, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($data->sl_kom_dom ?? 0, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($data->unit_kom_dom ?? 0, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($data->sl_hu_dom ?? 0, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($data->jiwa_dom ?? 0, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($data->n_aktif_n_dom ?? 0, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($data->sosial_n_dom ?? 0, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($data->niaga_n_dom ?? 0, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($data->ind_n_dom ?? 0, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($data->inst_n_dom ?? 0, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($data->k2_n_dom ?? 0, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($data->lain_n_dom ?? 0, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($baris_total, '0', ',', '.'); ?></td>
+                                    <td><?= number_format($total_aktif, '0', ',', '.'); ?></td>
                                     <td>
                                         <?php if ($this->session->userdata('bagian') == 'Langgan' or $this->session->userdata('bagian') == 'Administrator') { ?>
                                             <div class="text-center">
@@ -157,21 +174,22 @@
                         <tfoot>
                             <tr class="font-weight-bold text-center bg-light">
                                 <td>Total</td>
-                                <td><?= $total['n_aktif_dom'] ?></td>
-                                <td><?= $total['rt_dom'] ?></td>
-                                <td><?= $total['niaga_dom'] ?></td>
-                                <td><?= $total['sl_kom_dom'] ?></td>
-                                <td><?= $total['unit_kom_dom'] ?></td>
-                                <td><?= $total['sl_hu_dom'] ?></td>
-                                <td><?= $total['jiwa_dom'] ?></td>
-                                <td><?= $total['n_aktif_n_dom'] ?></td>
-                                <td><?= $total['sosial_n_dom'] ?></td>
-                                <td><?= $total['niaga_n_dom'] ?></td>
-                                <td><?= $total['ind_n_dom'] ?></td>
-                                <td><?= $total['inst_n_dom'] ?></td>
-                                <td><?= $total['k2_n_dom'] ?></td>
-                                <td><?= $total['lain_n_dom'] ?></td>
-                                <td><?= $total['total_semua'] ?></td>
+                                <td><?= number_format($total['n_aktif_dom'], '0', ',', '.');  ?></td>
+                                <td><?= number_format($total['rt_dom'], '0', ',', '.'); ?></td>
+                                <td><?= number_format($total['niaga_dom'], '0', ',', '.'); ?></td>
+                                <td><?= number_format($total['sl_kom_dom'], '0', ',', '.'); ?></td>
+                                <td><?= number_format($total['unit_kom_dom'], '0', ',', '.'); ?></td>
+                                <td><?= number_format($total['sl_hu_dom'], '0', ',', '.'); ?></td>
+                                <td><?= number_format($total['jiwa_dom'], '0', ',', '.'); ?></td>
+                                <td><?= number_format($total['n_aktif_n_dom'], '0', ',', '.'); ?></td>
+                                <td><?= number_format($total['sosial_n_dom'], '0', ',', '.'); ?></td>
+                                <td><?= number_format($total['niaga_n_dom'], '0', ',', '.'); ?></td>
+                                <td><?= number_format($total['ind_n_dom'], '0', ',', '.'); ?></td>
+                                <td><?= number_format($total['inst_n_dom'], '0', ',', '.'); ?></td>
+                                <td><?= number_format($total['k2_n_dom'], '0', ',', '.'); ?></td>
+                                <td><?= number_format($total['lain_n_dom'], '0', ',', '.'); ?></td>
+                                <td><?= number_format($total['total_semua'], '0', ',', '.'); ?></td>
+                                <td><?= number_format($total['total_semua_aktif'], '0', ',', '.'); ?></td>
                                 <td></td>
                             </tr>
                         </tfoot>
