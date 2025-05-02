@@ -147,18 +147,14 @@ class Dashboard_publik extends CI_Controller
             }
         }
         $data['total_ekuitas_audited'] = $total_ekuitas_audited;
-        // Lakukan pengecekan apakah $data['total_ekuitas_audited'] memiliki nilai dan tidak nol
         if (isset($data['total_ekuitas_audited']) && $data['total_ekuitas_audited'] != 0) {
             $data['persen_roe'] = $data['laba_rugi_bersih'] / $data['total_ekuitas_audited'] * 100;
         } else {
-            // Handle kasus ketika $data['total_ekuitas_audited'] nol atau tidak ada
-            // Anda bisa memberikan nilai default atau melakukan tindakan lain sesuai kebutuhan
-            $data['persen_roe'] = 0; // Contoh: set persen_roe menjadi 0
+            $data['persen_roe'] = 0;
         }
-
         $persen_roe = $data['persen_roe'];
 
-        $hasil_perhitungan_roe = 0; // Inisialisasi variabel hasil
+        $hasil_perhitungan_roe = 0;
         if ($persen_roe < 0) {
             $hasil_perhitungan_roe = 1;
         } elseif ($persen_roe <= 3) {
@@ -172,7 +168,10 @@ class Dashboard_publik extends CI_Controller
         }
         $data['hasil_perhitungan_roe'] = $hasil_perhitungan_roe;
         $bobot = 0.055;
-        $data['hasil'] = $hasil_perhitungan_roe * $bobot;
+        $data['hasil_roe'] = $hasil_perhitungan_roe * $bobot;
+
+        // hitung rasio operasi
+
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');

@@ -71,7 +71,7 @@
                                 <td class="text-center align-middle font-weight-bold"><?= number_format($persen_roe, 2, ',', '.'); ?></td>
                                 <td class="text-center align-middle"><?= $hasil_perhitungan_roe; ?></td>
                                 <td class="text-center align-middle">0,055</td>
-                                <td class="text-center align-middle"><?= number_format($hasil, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= number_format($hasil_roe, 2, ',', '.'); ?></td>
                             </tr>
                             <tr>
                                 <td class="pl-4">b. Ratio Operasi<br>
