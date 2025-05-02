@@ -356,6 +356,29 @@
                 <?php endif; ?>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-globe"></i>
+                        <p>
+                            Evaluasi Kinerja
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('dashboard_publik') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>KemenPUPR</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('evkin_permendagri') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Permendagri 47 th 99</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
                         <p>
                             Umum

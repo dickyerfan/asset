@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard_langgan extends CI_Controller
+class Evkin_permendagri extends CI_Controller
 {
 
     public function __construct()
@@ -20,17 +20,6 @@ class Dashboard_langgan extends CI_Controller
             );
             redirect('auth');
         }
-
-        $bagian = $this->session->userdata('bagian');
-        if ($bagian != 'Langgan') {
-            $this->session->set_flashdata(
-                'info',
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Maaf,</strong> Anda tidak memiliki hak akses untuk halaman ini...
-                  </div>'
-            );
-            redirect('auth');
-        }
     }
 
     public function index()
@@ -45,7 +34,7 @@ class Dashboard_langgan extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
         $data['tahun_lalu'] = $tahun - 1;
-        $data['title'] = 'Penilaian Tingkat Kesehatan Tahun ' . $tahun . ' menurut indikator KemenPUPR';
+        $data['title'] = 'Perhitungan Penilaian Kinerja Tahun ' . $tahun . ' Berdasarkan Permendagri No 47 Th 1999';
 
         $data['lr_sak_ep'] = $this->Model_labarugi->get_all_sak_ep($tahun);
         $data['neraca'] = $this->Model_lap_keuangan->get_all_neraca($tahun);
@@ -364,10 +353,42 @@ class Dashboard_langgan extends CI_Controller
         $data['hasil_solva'] = $hasil_perhitungan_solva * $bobot_solva;
         $data['total_hasil_keuangan'] = $data['hasil_roe'] + $data['hasil_rasio_ops'] + $data['hasil_cash_rasio'] + $data['hasil_efek'] + $data['hasil_solva'];
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar_langgan');
-        $this->load->view('dashboard/view_dashboard_langgan', $data);
-        $this->load->view('templates/footer');
+        if ($this->session->userdata('bagian') == 'Publik') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_publik');
+            $this->load->view('dashboard/view_evkin_permendagri', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Langgan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_langgan');
+            $this->load->view('dashboard/view_evkin_permendagri', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Perencanaan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_rencana');
+            $this->load->view('dashboard/view_evkin_permendagri', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Pemeliharaan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_pelihara');
+            $this->load->view('dashboard/view_evkin_permendagri', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Umum') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_umum');
+            $this->load->view('dashboard/view_evkin_permendagri', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('dashboard/view_evkin_permendagri', $data);
+            $this->load->view('templates/footer');
+        }
     }
 }

@@ -36,7 +36,16 @@
                     <a href="<?= base_url('dashboard_langgan') ?>" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Dashboard
+                            KemenPUPR
+                            <!-- <span class="right badge badge-danger">New</span> -->
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('evkin_permendagri') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Permendagri 47 th 99
                             <!-- <span class="right badge badge-danger">New</span> -->
                         </p>
                     </a>

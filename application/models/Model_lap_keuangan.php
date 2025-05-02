@@ -1352,4 +1352,16 @@ class Model_lap_keuangan extends CI_Model
         return $this->db->get()->result();
     }
     // akhir ekuitas
+
+    // cari nilai per akun di neraca
+    public function get_kas_dan_bank_by_tahun($tahun)
+    {
+        $this->db->select_sum('nilai_neraca');
+        $this->db->from('neraca');
+        $this->db->where('tahun_neraca', $tahun);
+        $this->db->where_in('akun', ['Kas dan Bank', 'Deposito']);
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result ? $result->nilai_neraca : 0;
+    }
 }

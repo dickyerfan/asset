@@ -36,7 +36,16 @@
                     <a href="<?= base_url('dashboard_publik') ?>" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Dashboard
+                            KemenPUPR
+                            <!-- <span class="right badge badge-danger">New</span> -->
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('evkin_permendagri') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Permendagri 47 th 99
                             <!-- <span class="right badge badge-danger">New</span> -->
                         </p>
                     </a>
@@ -65,7 +74,7 @@
                         <li class="nav-item">
                             <a href="<?= base_url('lap_keuangan/perubahan_ekuitas') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Per Ekuitas</p>
+                                <p>Perubahan Ekuitas</p>
                             </a>
                         </li>
                         <li class="nav-item">

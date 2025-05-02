@@ -5,8 +5,8 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <a href="<?= base_url('dashboard_langgan') ?>"><button class="neumorphic-button">Tahun ini</button></a>
-                    <form id="form_tahun" action="<?= base_url('dashboard_langgan'); ?>" method="get">
+                    <a href="<?= base_url('evkin_permendagri') ?>"><button class="neumorphic-button">Tahun ini</button></a>
+                    <form id="form_tahun" action="<?= base_url('evkin_permendagri'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <select id="tahun" name="tahun" class="form-control" style="margin-left: 15px;">
                                 <?php
@@ -20,8 +20,11 @@
                             </select>
                         </div>
                     </form>
+                    <!-- <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('evkin_permendagri/cetak_evkin_pupr') ?>"><button class="float-end neumorphic-button"> Permendagri 47 Th 1999</button></a>
+                    </div> -->
                     <div class="navbar-nav ms-auto">
-                        <!-- <a href="<?= base_url('dashboard_langgan/cetak_rekap_penyusutan') ?>"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Dokumen</button></a> -->
+                        <a href="<?= base_url('evkin_permendagri/cetak_evkin_pupr') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Dokumen</button></a>
                     </div>
                 </nav>
             </div>
