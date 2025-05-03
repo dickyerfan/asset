@@ -45,7 +45,8 @@ class Dashboard_langgan extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
         $data['tahun_lalu'] = $tahun - 1;
-        $data['title'] = 'Penilaian Tingkat Kesehatan Tahun ' . $tahun . ' menurut indikator KemenPUPR';
+        $data['title'] = 'Penilaian Kinerja Tahun ' . $tahun . ' <br> Berdasarkan indikator KemenPUPR';
+        $data['title2'] = 'Penilaian Kinerja Tahun ' . $tahun . ' <br> Berdasarkan Kepmendagri No. 47 Tahun 1999';
 
         $data['lr_sak_ep'] = $this->Model_labarugi->get_all_sak_ep($tahun);
         $data['neraca'] = $this->Model_lap_keuangan->get_all_neraca($tahun);

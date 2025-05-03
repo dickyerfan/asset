@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard_publik extends CI_Controller
+class Evkin_pupr extends CI_Controller
 {
 
     public function __construct()
@@ -34,104 +34,21 @@ class Dashboard_publik extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
         $data['tahun_lalu'] = $tahun - 1;
-        $data['title'] = 'Penilaian Kinerja Tahun ' . $tahun . ' <br> Berdasarkan indikator KemenPUPR';
-        $data['title2'] = 'Penilaian Kinerja Tahun ' . $tahun . ' <br> Berdasarkan Kepmendagri No. 47 Tahun 1999';
+        $data['title'] = 'Penilaian Tingkat Kesehatan Tahun ' . $tahun . ' menurut indikator KemenPUPR';
 
-        $data['lr_sak_ep'] = $this->Model_labarugi->get_all_sak_ep($tahun);
         $data['neraca'] = $this->Model_lap_keuangan->get_all_neraca($tahun);
 
-        // perhitungan laba rugi
-        $total_pendapatan_usaha = $total_beban_usaha = 0;
-        $total_beban_umum_administrasi = $total_pendapatan_beban_lain = $total_beban_pajak_penghasilan = $total_penghasilan_komprehensif_lain = 0;
-        $total_labarugi_operasional = 0;
-        $total_pendapatan_usaha_audited = $total_beban_usaha_audited = 0;
-        $total_beban_umum_administrasi_audited = $total_pendapatan_beban_lain_audited = $total_beban_pajak_penghasilan_audited = $total_penghasilan_komprehensif_lain_audited = 0;
-        $total_labarugi_operasional_audited = 0;
-        $total_pendapatan_usaha_lalu = $total_beban_usaha_lalu = 0;
-        $total_beban_umum_administrasi_lalu = $total_pendapatan_beban_lain_lalu = $total_beban_pajak_penghasilan_lalu = $total_penghasilan_komprehensif_lain_lalu = 0;
-        $total_labarugi_operasional_lalu = 0;
+        $data['lr_sak_ep'] = $this->Model_labarugi->get_all_sak_ep($tahun);
+        $laba_rugi = $this->Model_labarugi->hitung_laba_rugi_bersih($tahun);
+        $data['laba_rugi_bersih'] = $laba_rugi['laba_rugi_bersih'];
+        $data['pendapatan_usaha'] = $laba_rugi['pendapatan_usaha'];
+        $data['beban_usaha'] = $laba_rugi['beban_usaha'];
+        $data['persen_rasio_ops'] = $laba_rugi['persen_rasio_ops'];
+        $data['hasil_perhitungan_rasio_ops'] = $laba_rugi['hasil_perhitungan_rasio_ops'];
+        $data['hasil_rasio_ops'] = $laba_rugi['hasil_rasio_ops'];
 
         $bobot = 0.055;
         $bobot_solva = 0.030;
-        $data_tahun_lalu = [];
-        $data_tahun_sekarang = [];
-        $data_tahun_sekarang_audited = [];
-
-        foreach ($data['lr_sak_ep'] as $row) {
-            if ($row->tahun_lr_sak_ep == $data['tahun_lalu']) {
-                $data_tahun_lalu[$row->akun] = $row->nilai_lr_sak_ep;
-            }
-            if ($row->tahun_lr_sak_ep == $data['tahun_lap']) {
-                $data_tahun_sekarang[] = $row;
-                $data_tahun_sekarang_audited[] = $row;
-            }
-        }
-
-        foreach ($data_tahun_sekarang as $row) {
-            $nilai_tahun_lalu = isset($data_tahun_lalu[$row->akun]) ? $data_tahun_lalu[$row->akun] : 0;
-
-            if ($row->kategori == 'Pendapatan Usaha') {
-                $total_pendapatan_usaha += $row->nilai_lr_sak_ep ?? 0;
-                $total_pendapatan_usaha_audited += $row->nilai_lr_sak_ep_audited ?? 0;
-                $total_pendapatan_usaha_lalu += $nilai_tahun_lalu ?? 0;
-            } elseif ($row->kategori == 'Beban Usaha') {
-                $total_beban_usaha += $row->nilai_lr_sak_ep ?? 0;
-                $total_beban_usaha_audited += $row->nilai_lr_sak_ep_audited ?? 0;
-                $total_beban_usaha_lalu += $nilai_tahun_lalu ?? 0;
-            } elseif ($row->kategori == 'Beban Umum Dan Administrasi') {
-                $total_beban_umum_administrasi += $row->nilai_lr_sak_ep ?? 0;
-                $total_beban_umum_administrasi_audited += $row->nilai_lr_sak_ep_audited ?? 0;
-                $total_beban_umum_administrasi_lalu += $nilai_tahun_lalu ?? 0;
-            } elseif ($row->kategori == 'Pendapatan - Beban Lain-lain') {
-                $total_pendapatan_beban_lain += $row->nilai_lr_sak_ep ?? 0;
-                $total_pendapatan_beban_lain_audited += $row->nilai_lr_sak_ep_audited ?? 0;
-                $total_pendapatan_beban_lain_lalu += $nilai_tahun_lalu ?? 0;
-            } elseif ($row->kategori == 'Beban Pajak Penghasilan') {
-                $total_beban_pajak_penghasilan += $row->nilai_lr_sak_ep ?? 0;
-                $total_beban_pajak_penghasilan_audited += $row->nilai_lr_sak_ep_audited ?? 0;
-                $total_beban_pajak_penghasilan_lalu += $nilai_tahun_lalu ?? 0;
-            } elseif ($row->kategori == '(Kerugian) Penghasilan Komprehensip Lain') {
-                $total_penghasilan_komprehensif_lain += $row->nilai_lr_sak_ep ?? 0;
-                $total_penghasilan_komprehensif_lain_audited += $row->nilai_lr_sak_ep_audited ?? 0;
-                $total_penghasilan_komprehensif_lain_lalu += $nilai_tahun_lalu ?? 0;
-            }
-        }
-
-        $total_labarugi_kotor_audited = $total_pendapatan_usaha_audited - $total_beban_usaha_audited;
-        $total_labarugi_operasional_audited = $total_labarugi_kotor_audited - $total_beban_umum_administrasi_audited;
-        $total_labarugi_bersih_Sebelum_pajak_audited = $total_labarugi_operasional_audited + $total_pendapatan_beban_lain_audited;
-        $total_penghasilan_komprehensif_tahun_berjalan_audited = $total_labarugi_bersih_Sebelum_pajak_audited - ($total_beban_pajak_penghasilan_audited + $total_penghasilan_komprehensif_lain_audited);
-        $data['laba_rugi_bersih'] = $total_penghasilan_komprehensif_tahun_berjalan_audited;
-
-        // hitung rasio operasi
-        $data['pendapatan_usaha'] = $total_pendapatan_usaha_audited;
-        $data['beban_usaha'] = $total_beban_usaha_audited + $total_beban_umum_administrasi_audited;
-
-
-
-        if (isset($data['beban_usaha']) && isset($data['pendapatan_usaha']) && $data['beban_usaha'] != 0 && $data['pendapatan_usaha'] != 0) {
-            $data['persen_rasio_ops'] = $data['beban_usaha'] / $data['pendapatan_usaha'];
-        } else {
-            $data['persen_rasio_ops'] = 0;
-        }
-
-        $persen_rasio_ops = $data['persen_rasio_ops'];
-
-        $hasil_perhitungan_rasio_ops = 0;
-        if ($persen_rasio_ops < 0) {
-            $hasil_perhitungan_rasio_ops = 1;
-        } elseif ($persen_rasio_ops <= 3) {
-            $hasil_perhitungan_rasio_ops = 2;
-        } elseif ($persen_rasio_ops <= 7) {
-            $hasil_perhitungan_rasio_ops = 3;
-        } elseif ($persen_rasio_ops <= 10) {
-            $hasil_perhitungan_rasio_ops = 4;
-        } else {
-            $hasil_perhitungan_rasio_ops = 5;
-        }
-        $data['hasil_perhitungan_rasio_ops'] = $hasil_perhitungan_rasio_ops;
-        $data['hasil_rasio_ops'] = $hasil_perhitungan_rasio_ops * $bobot;
-
 
         // perhitungan ekuitas di neraca
         $total_aset_lancar = $total_aset_tidak_lancar = 0;
@@ -358,13 +275,37 @@ class Dashboard_publik extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar_publik');
-            $this->load->view('dashboard/view_dashboard_publik', $data);
+            $this->load->view('dashboard/view_evkin_pupr', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Langgan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_langgan');
+            $this->load->view('dashboard/view_evkin_pupr', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Perencanaan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_rencana');
+            $this->load->view('dashboard/view_evkin_pupr', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Pemeliharaan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_pelihara');
+            $this->load->view('dashboard/view_evkin_pupr', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Umum') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_umum');
+            $this->load->view('dashboard/view_evkin_pupr', $data);
             $this->load->view('templates/footer');
         } else {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
-            $this->load->view('dashboard/view_dashboard_publik', $data);
+            $this->load->view('dashboard/view_evkin_pupr', $data);
             $this->load->view('templates/footer');
         }
     }

@@ -237,12 +237,12 @@
                                 <p>LR SAK ETAP</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="<?= base_url('lap_keuangan/lr_sak_ep'); ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>LR SAK EP</p>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a href="<?= base_url('lap_keuangan/perubahan_ekuitas'); ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -329,31 +329,7 @@
                         </li>
                     </ul>
                 </li>
-                <?php if ($this->session->userdata('bagian') == 'Administrator') : ?>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tools"></i>
-                            <p>
-                                Setting
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?= base_url('setting/daftar_user') ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Daftar User</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= base_url('backup') ?>" class="nav-link">
-                            <i class="nav-icon fas fa-database"></i>
-                            <p>Backup & Restore</p>
-                        </a>
-                    </li>
-                <?php endif; ?>
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-globe"></i>
@@ -365,6 +341,12 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="<?= base_url('dashboard_publik') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Rekap Penilaian</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('evkin_pupr') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>KemenPUPR</p>
                             </a>
@@ -482,6 +464,31 @@
                         </li>
                     </ul>
                 </li>
+                <?php if ($this->session->userdata('bagian') == 'Administrator') : ?>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tools"></i>
+                            <p>
+                                Setting
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?= base_url('setting/daftar_user') ?>" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Daftar User</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('backup') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-database"></i>
+                            <p>Backup & Restore</p>
+                        </a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item" data-toggle="modal" data-target="#logoutModal">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>

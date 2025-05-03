@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard_publik extends CI_Controller
+class Evkin_pupr extends CI_Controller
 {
 
     public function __construct()
@@ -34,8 +34,7 @@ class Dashboard_publik extends CI_Controller
         }
         $data['tahun_lap'] = $tahun;
         $data['tahun_lalu'] = $tahun - 1;
-        $data['title'] = 'Penilaian Kinerja Tahun ' . $tahun . ' <br> Berdasarkan indikator KemenPUPR';
-        $data['title2'] = 'Penilaian Kinerja Tahun ' . $tahun . ' <br> Berdasarkan Kepmendagri No. 47 Tahun 1999';
+        $data['title'] = 'Penilaian Tingkat Kesehatan Tahun ' . $tahun . ' menurut indikator KemenPUPR';
 
         $data['lr_sak_ep'] = $this->Model_labarugi->get_all_sak_ep($tahun);
         $data['neraca'] = $this->Model_lap_keuangan->get_all_neraca($tahun);
@@ -358,13 +357,37 @@ class Dashboard_publik extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar_publik');
-            $this->load->view('dashboard/view_dashboard_publik', $data);
+            $this->load->view('dashboard/view_evkin_pupr', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Langgan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_langgan');
+            $this->load->view('dashboard/view_evkin_pupr', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Perencanaan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_rencana');
+            $this->load->view('dashboard/view_evkin_pupr', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Pemeliharaan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_pelihara');
+            $this->load->view('dashboard/view_evkin_pupr', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Umum') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_umum');
+            $this->load->view('dashboard/view_evkin_pupr', $data);
             $this->load->view('templates/footer');
         } else {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
-            $this->load->view('dashboard/view_dashboard_publik', $data);
+            $this->load->view('dashboard/view_evkin_pupr', $data);
             $this->load->view('templates/footer');
         }
     }
