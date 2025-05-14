@@ -361,6 +361,31 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-coins"></i>
+                        <p>
+                            Keuangan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('keuangan/modal_pemda') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Penyertaan Modal</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('keuangan/kejadian_penting') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kejadian Penting</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
                         <p>
                             Umum
@@ -421,6 +446,12 @@
                                 <p>Efektifitas Penagihan</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('langganan/pendapatan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pendapatan & Tarif</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -460,6 +491,12 @@
                             <a href="<?= base_url('pelihara/kualitas_air') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Data Uji Kualitas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('pelihara/kapasitas_produksi') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kapasitas Produksi</p>
                             </a>
                         </li>
                     </ul>

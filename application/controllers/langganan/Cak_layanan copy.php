@@ -69,7 +69,7 @@ class Cak_layanan extends CI_Controller
             }
         }
 
-        $cakupan = [
+        $data['cakupan'] = [
             'total_penduduk' => $total_penduduk,
             'total_kk' => $total_kk,
             'rata_jiwa_kk' => $total_kk != 0 ? $total_penduduk / $total_kk : 0,
@@ -79,6 +79,7 @@ class Cak_layanan extends CI_Controller
             'jumlah_wil_layan_ya' => $jumlah_wil_layan_ya,
             'total_wil_layan_semua' => $total_wil_layan_semua
         ];
+        // $data['data_penduduk'] = $data_penduduk;
 
         $total_rt_dom = 0;
         $total_niaga_dom = 0;
@@ -92,38 +93,14 @@ class Cak_layanan extends CI_Controller
             $total_n_aktif_dom += (int) $dl->n_aktif_dom;
         }
 
-        $pelanggan = [
+        $data['pelanggan'] = [
             'total_rt_dom' => $total_rt_dom,
             'total_niaga_dom' => $total_niaga_dom,
             'total_sl_hu_dom' => $total_sl_hu_dom,
             'total_n_aktif_dom' => $total_n_aktif_dom
         ];
 
-        $total_pelanggan =
-            ($pelanggan['total_rt_dom'] ?? 0) +
-            ($pelanggan['total_niaga_dom'] ?? 0) +
-            ($pelanggan['total_sl_hu_dom'] ?? 0) +
-            ($pelanggan['total_n_aktif_dom'] ?? 0);
-
-        $rata_jiwa = $cakupan['rata_jiwa_kk'] ?? 0;
-        $total_jiwa_terlayani = $pelanggan['total_rt_dom'] * $rata_jiwa + $pelanggan['total_niaga_dom'] * $rata_jiwa + $pelanggan['total_sl_hu_dom'] * 100 + $pelanggan['total_n_aktif_dom'] * $rata_jiwa;
-        $cakupan_admin = ($cakupan['total_penduduk'] ?? 0) > 0
-            ? ($total_jiwa_terlayani / $cakupan['total_penduduk']) * 100
-            : 0;
-
-        $rata_jiwa2 = $cakupan['rata_jiwa_kk2'] ?? 0;
-        $total_jiwa_terlayani2 = $pelanggan['total_rt_dom'] * $rata_jiwa2 + $pelanggan['total_niaga_dom'] * $rata_jiwa2 + $pelanggan['total_sl_hu_dom'] * 100 + $pelanggan['total_n_aktif_dom'] * $rata_jiwa2;
-
-        $cakupan_teknis = ($cakupan['total_penduduk'] ?? 0) > 0 ? ($total_jiwa_terlayani2 / $cakupan['total_wil_layan']) * 100 : 0;
-        $data['cakupan'] = $cakupan;
-        $data['pelanggan'] = $pelanggan;
-        $data['total_pelanggan'] = $total_pelanggan;
-        $data['rata_jiwa'] = $rata_jiwa;
-        $data['rata_jiwa2'] = $rata_jiwa2;
-        $data['total_jiwa_terlayani'] = $total_jiwa_terlayani;
-        $data['cakupan_admin'] = $cakupan_admin;
-        $data['total_jiwa_terlayani2'] = $total_jiwa_terlayani2;
-        $data['cakupan_teknis'] = $cakupan_teknis;
+        // $data['data_pelanggan'] = $data_pelanggan;
 
         if ($this->session->userdata('bagian') == 'Langgan') {
             $this->load->view('templates/header', $data);

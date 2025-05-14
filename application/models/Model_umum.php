@@ -1,8 +1,37 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Model_langgan extends CI_Model
+class Model_umum extends CI_Model
 {
+
+    public function get_kerjasama($tahun)
+    {
+        $this->db->select('*');
+        $this->db->from('ek_kerjasama');
+        $this->db->where('tahun_perjanjian', $tahun);
+        return $this->db->get()->result();
+    }
+
+    public function input_kerjasama($table, $data)
+    {
+        if (!empty($data)) {
+            $this->db->insert($table, $data);
+        }
+    }
+
+    public function get_id_kerjasama($id_kerjasama)
+    {
+        return $this->db->get_where('ek_kerjasama', ['id_kerjasama' => $id_kerjasama])->row();
+    }
+
+    public function update_kerjasama($id_kerjasama, $data)
+    {
+        $this->db->where('id_kerjasama', $id_kerjasama);
+        return $this->db->update('ek_kerjasama', $data);
+    }
+
+
+
 
     public function get_bagian()
     {
@@ -21,27 +50,6 @@ class Model_langgan extends CI_Model
         return $this->db->get()->result();
     }
 
-    public function get_tarif()
-    {
-        $this->db->select('*');
-        $this->db->from('kel_tarif');
-        return $this->db->get()->result();
-    }
-    public function get_tarif_dom()
-    {
-        $this->db->select('*');
-        $this->db->from('kel_tarif');
-        $this->db->where('jenis', 'dom');
-        return $this->db->get()->result();
-    }
-
-    public function get_tarif_n_dom()
-    {
-        $this->db->select('*');
-        $this->db->from('kel_tarif');
-        $this->db->where('jenis', 'n_dom');
-        return $this->db->get()->result();
-    }
 
     // tambah sr
     public function get_tambah_sr($tahun)
@@ -159,22 +167,6 @@ class Model_langgan extends CI_Model
     // akhir pengaduan
 
     // cakupan layanan
-
-    // public function get_cak_layanan($tahun)
-    // {
-    //     $query = $this->db->get_where('ek_cak_layanan', ['tahun_data' => $tahun]);
-    //     $result = $query->result();
-
-    //     $data = [];
-    //     foreach ($result as $row) {
-    //         // Normalisasi nama_layanan: lowercase, spasi jadi _
-    //         $key = strtolower(str_replace(' ', '_', $row->nama_layanan));
-    //         $data[$key] = $row->jumlah_layanan;
-    //     }
-
-    //     return $data;
-    // }
-
     public function get_data_penduduk($tahun)
     {
         $this->db->select("*");

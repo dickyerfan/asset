@@ -34,9 +34,9 @@
                         <!-- <h5><?= strtoupper($title); ?></h5> -->
                     </div>
                 </div>
-                <div class="row">
+                <div class="row justify-content-center">
                     <!-- Kiri: KemenPUPR -->
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <h5 class="text-center"><?= strtoupper($title); ?></h5>
 
                         <!-- Tabel Kinerja -->
@@ -54,34 +54,34 @@
                                     <td class="group-label align-middle">diatas 2.8</td>
                                     <td>SEHAT</td>
                                     <td class="text-left">KEUANGAN</td>
-                                    <td class="text-center font-weight-bold">0,98</td>
+                                    <td class="text-center font-weight-bold"><?= number_format($total_hasil_keuangan, 2); ?></td>
                                 </tr>
                                 <tr class="table-category text-center">
                                     <td class="group-label align-middle">2.2 s/d 2.8</td>
                                     <td>KURANG SEHAT</td>
                                     <td class="text-left">PELAYANAN</td>
-                                    <td class="text-center font-weight-bold">0,65</td>
+                                    <td class="text-center font-weight-bold"><?= number_format($total_hasil_pelayanan, 2); ?></td>
                                 </tr>
                                 <tr class="table-category text-center">
                                     <td class="group-label align-middle">dibawah 2.2</td>
                                     <td>SAKIT</td>
                                     <td class="text-left">OPERASIONAL</td>
-                                    <td class="text-center font-weight-bold">1,61</td>
+                                    <td class="text-center font-weight-bold"><?= number_format($total_hasil_operasional, 2); ?></td>
 
                                 <tr class="table-category text-center">
                                     <td> </td>
                                     <td> </td>
                                     <td class="text-left">SUMBER DAYA MANUSIA</td>
-                                    <td class="text-center font-weight-bold">0,55</td>
+                                    <td class="text-center font-weight-bold"><?= number_format($total_hasil_sdm, 2); ?></td>
                                 </tr>
 
                                 <tr class="table-category text-center font-weight-bold">
                                     <td colspan="3" class="text-right">TOTAL KATEGORI</td>
-                                    <td class="text-center font-weight-bold">3,79</td>
+                                    <td class="text-center font-weight-bold"><?= number_format($total, 2); ?></td>
                                 </tr>
                                 <tr class="text-center font-weight-bold">
                                     <td colspan="3"> </td>
-                                    <td class="bg-primary">SEHAT</td>
+                                    <td class="bg-primary"><?= $kategori_pupr; ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -89,8 +89,11 @@
                     </div>
 
                     <!-- Kanan: Kemendagri -->
-                    <div class="col-md-6">
-                        <h5 class="text-center"><?= strtoupper($title2); ?></h5>
+
+                </div>
+                <div class="row justify-content-center">
+                    <h5 class="text-center"><?= strtoupper($title2); ?></h5>
+                    <div class="col-md-8">
                         <!-- Tabel Kinerja -->
                         <table class="table table-bordered">
                             <thead class="text-center">
@@ -107,21 +110,21 @@
                                     <td class="group-label align-middle">BAIK SEKALI</td>
                                     <td class="text-left">KEUANGAN</td>
                                     <td>= (41 / 60) x 45</td>
-                                    <td class="text-center font-weight-bold">30,75</td>
+                                    <td class="text-center font-weight-bold"><?= number_format($total_keuangan_kepmen, 2); ?></td>
                                 </tr>
                                 <tr class="table-category text-center">
                                     <td class="group-label align-middle">> 60 - 75</td>
                                     <td class="group-label align-middle">BAIK</td>
                                     <td class="text-left">OPERASIONAL</td>
                                     <td>= (27 / 47) x 40</td>
-                                    <td class="text-center font-weight-bold">22,98</td>
+                                    <td class="text-center font-weight-bold"><?= number_format($total_operasional_kepmen, 2); ?></td>
                                 </tr>
                                 <tr class="table-category text-center">
                                     <td class="group-label align-middle">> 45 - 60</td>
                                     <td class="group-label align-middle">CUKUP</td>
                                     <td class="text-left">ADMINISTRASI</td>
                                     <td>= (33 / 36) x 15</td>
-                                    <td class="text-center font-weight-bold">13,75</td>
+                                    <td class="text-center font-weight-bold"><?= number_format($total_administrasi_kepmen, 2); ?></td>
 
                                 <tr class="table-category text-center">
                                     <td class="group-label align-middle">> 30 - 45</td>
@@ -137,17 +140,19 @@
                                     <td class="group-label align-middle">TIDAK BAIK</td>
                                     <td></td>
                                     <td class="text-right font-weight-bold">TOTAL NILAI KINERJA</td>
-                                    <td class="text-center font-weight-bold">67,48</td>
+                                    <td class="text-center font-weight-bold"><?= number_format($total_kepmen, 2); ?></td>
                                 </tr>
                                 <tr class="text-center font-weight-bold">
                                     <td colspan="4"> </td>
-                                    <td class="bg-primary">BAIK</td>
+                                    <td class="bg-primary"><?= $kategori_kepmen; ?></td>
                                 </tr>
                             </tbody>
                         </table>
-
-                        <!-- Tambahan Tabel Jumlah & Maksimum -->
-                        <!-- <table class="table table-bordered mt-4">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <table class="table table-bordered">
                             <thead class="text-center">
                                 <tr>
                                     <th rowspan="2">ASPEK</th>
@@ -185,7 +190,7 @@
                                     <td>143</td>
                                 </tr>
                             </tbody>
-                        </table> -->
+                        </table>
                     </div>
                 </div>
             </div>

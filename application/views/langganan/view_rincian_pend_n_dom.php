@@ -34,31 +34,41 @@
                 </nav>
             </div>
             <div class="card-body">
-                <div class="container mt-4">
+                <div class="container mt-8">
                     <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <div class="card shadow-sm">
-                                <div class="card-header bg-primary text-white py-2">
-                                    <h6 class="mb-0">Ringkasan Data</h6>
-                                </div>
-                                <div class="card-body p-0">
-                                    <table class="table table-sm table-bordered table-striped mb-0">
-                                        <tbody>
-                                            <tr>
-                                                <th colspan="2">Total Pelanggan</th>
-                                                <td colspan="3" class="text-right"><?= number_format($total_semua['sr'], 0, ',', '.') ?> SR</td>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="2">Total Pemakaian Air</th>
-                                                <td colspan="3" class="text-right"><?= number_format($total_semua['vol'], 0, ',', '.') ?> M3</td>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="2">Total Pendapatan</th>
-                                                <td colspan="3" class="text-right text-success font-weight-bold">Rp <?= number_format($total_semua['rp'], 0, ',', '.') ?></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                        <div class="col-md-12">
+                            <div class="card-header bg-primary text-white">
+                                <h6 class="mb-0 text-center">Ringkasan Data</h6>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th colspan="2">Domestik</th>
+                                            <td colspan="3" class="text-right"><?= number_format($domestik['sr'], 0, ',', '.') ?> SR</td>
+                                            <th colspan="2">Non Domestik</th>
+                                            <td colspan="3" class="text-right"><?= number_format($non_domestik['sr'], 0, ',', '.') ?> SR</td>
+                                            <th colspan="2">Total Pelanggan</th>
+                                            <td colspan="3" class="text-right"><?= number_format($total_semua['sr'], 0, ',', '.') ?> SR</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2">Air Domestik</th>
+                                            <td colspan="3" class="text-right"><?= number_format($domestik['vol'], 0, ',', '.') ?> M3</td>
+                                            <th colspan="2">Air Non Domestik</th>
+                                            <td colspan="3" class="text-right"><?= number_format($non_domestik['vol'], 0, ',', '.') ?> M3</td>
+                                            <th colspan="2">Total Pemakaian Air</th>
+                                            <td colspan="3" class="text-right"><?= number_format($total_semua['vol'], 0, ',', '.') ?> M3</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2">Pendapatan Domestik</th>
+                                            <td colspan="3" class="text-right text-success font-weight-bold">Rp <?= number_format($domestik['rp'], 0, ',', '.') ?></td>
+                                            <th colspan="2">Pendapatan Non Domestik</th>
+                                            <td colspan="3" class="text-right text-success font-weight-bold">Rp <?= number_format($non_domestik['rp'], 0, ',', '.') ?></td>
+                                            <th colspan="2">Total Pendapatan</th>
+                                            <td colspan="3" class="text-right text-success font-weight-bold">Rp <?= number_format($total_semua['rp'], 0, ',', '.') ?></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

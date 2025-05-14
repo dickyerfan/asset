@@ -57,6 +57,20 @@ class Rincian_pendapatan extends CI_Controller
         $kategori_non_domestik = ['SOSIAL B', 'INSTANSI PEM DESA', 'TNI/POLRI', 'INSTANSI PEM KAB', 'KHUSUS', 'NIAGA B']; // sesuaikan ini
         $data['total_non_domestik'] = $this->hitung_total_rincian($rincian_all, $kategori_non_domestik);
 
+        // Total Domestik
+        $data['domestik'] = [
+            'sr' => $data['total_domestik']['sr'],
+            'vol' => $data['total_domestik']['vol'],
+            'rp' => $data['total_domestik']['rp'],
+        ];
+
+        // Total Non Domestik
+        $data['non_domestik'] = [
+            'sr' => $data['total_non_domestik']['sr'],
+            'vol' => $data['total_non_domestik']['vol'],
+            'rp' => $data['total_non_domestik']['rp'],
+        ];
+
         // Total gabungan
         $data['total_semua'] = [
             'sr' => $data['total_domestik']['sr'] + $data['total_non_domestik']['sr'],
@@ -267,6 +281,20 @@ class Rincian_pendapatan extends CI_Controller
         $rincian_all = $this->Model_langgan->get_rincian($tahun); // jika perlu panggil ulang
         $kategori_non_domestik = ['SOSIAL B', 'INSTANSI PEM DESA', 'TNI/POLRI', 'INSTANSI PEM KAB', 'KHUSUS', 'NIAGA B']; // sesuaikan ini
         $data['total_non_domestik'] = $this->hitung_total_rincian($rincian_all, $kategori_non_domestik);
+
+        // Total Domestik
+        $data['domestik'] = [
+            'sr' => $data['total_domestik']['sr'],
+            'vol' => $data['total_domestik']['vol'],
+            'rp' => $data['total_domestik']['rp'],
+        ];
+
+        // Total Non Domestik
+        $data['non_domestik'] = [
+            'sr' => $data['total_non_domestik']['sr'],
+            'vol' => $data['total_non_domestik']['vol'],
+            'rp' => $data['total_non_domestik']['rp'],
+        ];
 
         // Total gabungan
         $data['total_semua'] = [

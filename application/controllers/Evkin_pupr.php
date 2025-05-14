@@ -7,9 +7,7 @@ class Evkin_pupr extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Model_labarugi');
-        $this->load->model('Model_lap_keuangan');
-        $this->load->model('Model_langgan');
+        $this->load->model('Model_evkin');
         $this->load->library('form_validation');
         if (!$this->session->userdata('nama_pengguna')) {
             $this->session->set_flashdata(
@@ -36,240 +34,125 @@ class Evkin_pupr extends CI_Controller
         $data['tahun_lalu'] = $tahun - 1;
         $data['title'] = 'Penilaian Tingkat Kesehatan Tahun ' . $tahun . ' menurut indikator KemenPUPR';
 
-        $data['neraca'] = $this->Model_lap_keuangan->get_all_neraca($tahun);
-
-        $data['lr_sak_ep'] = $this->Model_labarugi->get_all_sak_ep($tahun);
-        $laba_rugi = $this->Model_labarugi->hitung_laba_rugi_bersih($tahun);
+        // aspek keuangan
+        $laba_rugi = $this->Model_evkin->hitung_laba_rugi_bersih($tahun);
         $data['laba_rugi_bersih'] = $laba_rugi['laba_rugi_bersih'];
         $data['pendapatan_usaha'] = $laba_rugi['pendapatan_usaha'];
         $data['beban_usaha'] = $laba_rugi['beban_usaha'];
         $data['persen_rasio_ops'] = $laba_rugi['persen_rasio_ops'];
         $data['hasil_perhitungan_rasio_ops'] = $laba_rugi['hasil_perhitungan_rasio_ops'];
         $data['hasil_rasio_ops'] = $laba_rugi['hasil_rasio_ops'];
+        $data['total_ekuitas_audited'] = $laba_rugi['total_ekuitas_audited'];
+        $data['persen_roe'] = $laba_rugi['persen_roe'];
+        $data['hasil_perhitungan_roe'] = $laba_rugi['hasil_perhitungan_roe'];
+        $data['hasil_roe'] = $laba_rugi['hasil_roe'];
+        $data['persen_cash_rasio'] = $laba_rugi['persen_cash_rasio'];
+        $data['hasil_perhitungan_cash_rasio'] = $laba_rugi['hasil_perhitungan_cash_rasio'];
+        $data['hasil_cash_rasio'] = $laba_rugi['hasil_cash_rasio'];
+        $data['total_kas_bank'] = $laba_rugi['total_kas_bank'];
+        $data['hutang_lancar'] = $laba_rugi['hutang_lancar'];
+        $data['persen_efek'] = $laba_rugi['persen_efek'];
+        $data['hasil_perhitungan_efek'] = $laba_rugi['hasil_perhitungan_efek'];
+        $data['hasil_efek'] = $laba_rugi['hasil_efek'];
+        $data['persen_solva'] = $laba_rugi['persen_solva'];
+        $data['hasil_perhitungan_solva'] = $laba_rugi['hasil_perhitungan_solva'];
+        $data['hasil_solva'] = $laba_rugi['hasil_solva'];
+        $data['rek_tagih'] = $laba_rugi['rek_tagih'];
+        $data['total_pa_tahun_ini'] = $laba_rugi['total_pa_tahun_ini'];
+        $data['total_asset'] = $laba_rugi['total_asset'];
+        $data['total_utang'] = $laba_rugi['total_utang'];
+        $data['total_hasil_keuangan'] = $laba_rugi['total_hasil_keuangan'];
+        // akhir aspek keuangan
 
-        $bobot = 0.055;
-        $bobot_solva = 0.030;
+        // aspek pelayanan
+        // cakupan teknis
+        $pelayanan = $this->Model_evkin->hitung_pelayanan($tahun);
+        $data['total_jiwa_terlayani2'] = $pelayanan['total_jiwa_terlayani2'];
+        $data['total_wil_layan'] = $pelayanan['total_wil_layan'];
+        $data['persen_cak_teknis'] = $pelayanan['persen_cak_teknis'];
+        $data['hasil_perhitungan_cak_teknis'] = $pelayanan['hasil_perhitungan_cak_teknis'];
+        $data['hasil_cak_teknis'] = $pelayanan['hasil_cak_teknis'];
 
-        // perhitungan ekuitas di neraca
-        $total_aset_lancar = $total_aset_tidak_lancar = 0;
-        $total_liabilitas_jangka_pendek = $total_liabilitas_jangka_panjang = $total_ekuitas = 0;
-        $total_aset_lancar_audited = $total_aset_tidak_lancar_audited = 0;
-        $total_liabilitas_jangka_pendek_audited = $total_liabilitas_jangka_panjang_audited = $total_ekuitas_audited = 0;
-        $total_aset_lancar_lalu = $total_aset_tidak_lancar_lalu = 0;
-        $total_liabilitas_jangka_pendek_lalu = $total_liabilitas_jangka_panjang_lalu = $total_ekuitas_lalu = 0;
+        // pengaduan
+        $pengaduan = $this->Model_evkin->hitung_pengaduan($tahun);
+        $data['jumlah_keluhan_selesai'] = $pengaduan['jumlah_keluhan_selesai'];
+        $data['jumlah_keluhan'] = $pengaduan['jumlah_keluhan'];
+        $data['persen_pengaduan'] = $pengaduan['persen_pengaduan'];
+        $data['hasil_perhitungan_pengaduan'] = $pengaduan['hasil_perhitungan_pengaduan'];
+        $data['hasil_pengaduan'] = $pengaduan['hasil_pengaduan'];
 
-        $data_tahun_lalu = [];
-        $data_tahun_sekarang = [];
-        $data_tahun_sekarang_audited = [];
+        // kualitas air
+        $kualitas = $this->Model_evkin->hitung_kualitas_air($tahun);
+        $data['total_jumlah_syarat'] = $kualitas['total_jumlah_syarat'];
+        $data['total_jumlah_terambil'] = $kualitas['total_jumlah_terambil'];
+        $data['persen_kualitas'] = $kualitas['persen_kualitas'];
+        $data['hasil_perhitungan_kualitas'] = $kualitas['hasil_perhitungan_kualitas'];
+        $data['hasil_kualitas'] = $kualitas['hasil_kualitas'];
 
-        foreach ($data['neraca'] as $row) {
-            if ($row->tahun_neraca == $data['tahun_lalu']) {
-                $data_tahun_lalu[$row->akun] = $row->nilai_neraca;
-            }
-            if ($row->tahun_neraca == $data['tahun_lap']) {
-                $data_tahun_sekarang[] = $row;
-                $data_tahun_sekarang_audited[] = $row;
-            }
-        }
+        // jumlah pelanggan
+        $pelanggan = $this->Model_evkin->hitung_pelanggan($tahun);
+        $data['jumlah_pelanggan'] = $pelanggan['jumlah_pelanggan'];
+        $data['jumlah_pelanggan_tahun_lalu'] = $pelanggan['jumlah_pelanggan_tahun_lalu'];
+        $data['persen_pelanggan'] = $pelanggan['persen_pelanggan'];
+        $data['hasil_perhitungan_pelanggan'] = $pelanggan['hasil_perhitungan_pelanggan'];
+        $data['hasil_pelanggan'] = $pelanggan['hasil_pelanggan'];
+        $data['total_pelanggan_tahun_ini'] = $pelanggan['total_pelanggan_tahun_ini'];
 
-        foreach ($data_tahun_sekarang as $row) {
-            $nilai_tahun_lalu = isset($data_tahun_lalu[$row->akun]) ? $data_tahun_lalu[$row->akun] : 0;
+        // jumlah air domestik
+        $air_dom = $this->Model_evkin->hitung_air_domestik($tahun);
+        $data['jumlah_air_terjual'] = $air_dom['jumlah_air_terjual'];
+        $data['jumlah_pelanggan_dom'] = $air_dom['jumlah_pelanggan_dom'];
+        $data['persen_air_dom'] = $air_dom['persen_air_dom'];
+        $data['hasil_perhitungan_air_dom'] = $air_dom['hasil_perhitungan_air_dom'];
+        $data['hasil_air_dom'] = $air_dom['hasil_air_dom'];
 
-            if ($row->kategori == 'Aset Lancar') {
-                $total_aset_lancar += $row->nilai_neraca ?? 0;
-                $total_aset_lancar_audited += $row->nilai_neraca_audited ?? 0;
-                $total_aset_lancar_lalu += $nilai_tahun_lalu ?? 0;
-            } elseif ($row->kategori == 'Aset Tidak Lancar') {
-                $total_aset_tidak_lancar += $row->nilai_neraca ?? 0;
-                $total_aset_tidak_lancar_audited += $row->nilai_neraca_audited ?? 0;
-                $total_aset_tidak_lancar_lalu += $nilai_tahun_lalu ?? 0;
-            } elseif ($row->kategori == 'Liabilitas Jangka Pendek') {
-                $total_liabilitas_jangka_pendek += $row->nilai_neraca ?? 0;
-                $total_liabilitas_jangka_pendek_audited += $row->nilai_neraca_audited ?? 0;
-                $total_liabilitas_jangka_pendek_lalu += $nilai_tahun_lalu ?? 0;
-            } elseif ($row->kategori == 'Liabilitas Jangka Panjang') {
-                $total_liabilitas_jangka_panjang += $row->nilai_neraca ?? 0;
-                $total_liabilitas_jangka_panjang_audited += $row->nilai_neraca_audited ?? 0;
-                $total_liabilitas_jangka_panjang_lalu += $nilai_tahun_lalu ?? 0;
-            } elseif ($row->kategori == 'Ekuitas') {
-                $total_ekuitas += $row->nilai_neraca ?? 0;
-                $total_ekuitas_audited += $row->nilai_neraca_audited ?? 0;
-                $total_ekuitas_lalu += $nilai_tahun_lalu ?? 0;
-            }
-        }
-        $data['total_ekuitas_audited'] = $total_ekuitas_audited;
+        $data['total_hasil_pelayanan'] = $data['hasil_air_dom'] + $data['hasil_pelanggan'] + $data['hasil_kualitas'] + $data['hasil_pengaduan'] + $data['hasil_cak_teknis'];
+        // akhir aspek pelayanan
 
+        // aspek operasioanl
+        // efisiensi produksi
+        $kap_prod = $this->Model_evkin->hitung_efisiensi_prod($tahun);
+        $data['total_volume_produksi'] = $kap_prod['total_volume_produksi'];
+        $data['total_terpasang'] = $kap_prod['total_terpasang'];
+        $data['persen_kap_prod'] = $kap_prod['persen_kap_prod'];
+        $data['hasil_kap_prod'] = $kap_prod['hasil_kap_prod'];
+        $data['hasil_perhitungan_kap_prod'] = $kap_prod['hasil_perhitungan_kap_prod'];
 
-        if (isset($data['total_ekuitas_audited']) && $data['total_ekuitas_audited'] != 0) {
-            $data['persen_roe'] = $data['laba_rugi_bersih'] / $data['total_ekuitas_audited'] * 100;
-        } else {
-            $data['persen_roe'] = 0;
-        }
-        $persen_roe = $data['persen_roe'];
+        // tekanan air
+        $tekanan_air = $this->Model_evkin->hitung_tekanan_air($tahun);
+        $data['jumlah_pelanggan_dilayani'] = $tekanan_air['jumlah_pelanggan_dilayani'];
+        $data['total_pelanggan'] = $tekanan_air['total_pelanggan'];
+        $data['persen_tekanan_air'] = $tekanan_air['persen_tekanan_air'];
+        $data['hasil_tekanan_air'] = $tekanan_air['hasil_tekanan_air'];
+        $data['hasil_perhitungan_tekanan_air'] = $tekanan_air['hasil_perhitungan_tekanan_air'];
 
-        $hasil_perhitungan_roe = 0;
-        if ($persen_roe < 0) {
-            $hasil_perhitungan_roe = 1;
-        } elseif ($persen_roe <= 3) {
-            $hasil_perhitungan_roe = 2;
-        } elseif ($persen_roe <= 7) {
-            $hasil_perhitungan_roe = 3;
-        } elseif ($persen_roe <= 10) {
-            $hasil_perhitungan_roe = 4;
-        } else {
-            $hasil_perhitungan_roe = 5;
-        }
-        $data['hasil_perhitungan_roe'] = $hasil_perhitungan_roe;
-        $data['hasil_roe'] = $hasil_perhitungan_roe * $bobot;
+        // ganti meter
+        $ganti_meter = $this->Model_evkin->hitung_ganti_meter($tahun);
+        $data['total_semua_meter'] = $ganti_meter['total_semua_meter'];
+        $data['total_pelanggan'] = $ganti_meter['total_pelanggan'];
+        $data['persen_ganti_meter'] = $ganti_meter['persen_ganti_meter'];
+        $data['hasil_ganti_meter'] = $ganti_meter['hasil_ganti_meter'];
+        $data['hasil_perhitungan_ganti_meter'] = $ganti_meter['hasil_perhitungan_ganti_meter'];
 
-        // hitung cash Rasio
-        $data['hutang_lancar'] = $total_liabilitas_jangka_pendek_audited;
-        $data['total_kas_bank'] = $this->Model_lap_keuangan->get_kas_dan_bank_by_tahun($tahun);
+        // pendapatan
+        $pendapatan = $this->Model_evkin->hitung_pendapatan($tahun);
+        $data['total_vol'] = $pendapatan['total_vol'];
+        $data['volume_produksi'] = $pendapatan['volume_produksi'];
+        $data['total_dis_vol_prod'] = $pendapatan['total_dis_vol_prod'];
+        $data['persen_nrw'] = $pendapatan['persen_nrw'];
+        $data['hasil_nrw'] = $pendapatan['hasil_nrw'];
+        $data['hasil_perhitungan_nrw'] = $pendapatan['hasil_perhitungan_nrw'];
 
-        if (isset($data['total_kas_bank']) && isset($data['hutang_lancar']) && $data['total_kas_bank'] != 0 && $data['hutang_lancar'] != 0) {
-            $data['persen_cash_rasio'] = $data['total_kas_bank'] / $data['hutang_lancar'] * 100;
-        } else {
-            $data['persen_cash_rasio'] = 0;
-        }
-        $persen_cash_rasio = $data['persen_cash_rasio'];
+        // jam operasional
+        $jam_ops = $this->Model_evkin->hitung_jam_ops($tahun);
+        $data['total_jam_ops'] = $jam_ops['total_jam_ops'];
+        $data['jam_ops_setahun'] = $jam_ops['jam_ops_setahun'];
+        $data['persen_jam_ops'] = $jam_ops['persen_jam_ops'];
+        $data['hasil_jam_ops'] = $jam_ops['hasil_jam_ops'];
+        $data['hasil_perhitungan_jam_ops'] = $jam_ops['hasil_perhitungan_jam_ops'];
 
-        $hasil_perhitungan_cash_rasio = 0;
-        if ($persen_cash_rasio < 40) {
-            $hasil_perhitungan_cash_rasio = 1;
-        } elseif ($persen_cash_rasio >= 40 && $persen_cash_rasio < 60) {
-            $hasil_perhitungan_cash_rasio = 2;
-        } elseif ($persen_cash_rasio >= 60 && $persen_cash_rasio < 80) {
-            $hasil_perhitungan_cash_rasio = 3;
-        } elseif ($persen_cash_rasio >= 80 && $persen_cash_rasio < 100) {
-            $hasil_perhitungan_cash_rasio = 4;
-        } else {
-            $hasil_perhitungan_cash_rasio = 5;
-        }
-        $data['hasil_perhitungan_cash_rasio'] = $hasil_perhitungan_cash_rasio;
-        $data['hasil_cash_rasio'] = $hasil_perhitungan_cash_rasio * $bobot;
-
-        // hitung efektifitas penagihan
-        $data['efek'] = $this->Model_langgan->get_efek_tagih($tahun);
-        $data['sisa_piu'] = $this->Model_langgan->get_sisa_piu($tahun);
-        $data['bagian_upk'] = $this->db->where('status_evkin', 1)->get('bagian_upk')->result();
-
-        $kategori = [
-            '1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr',
-            '5' => 'Mei', '6' => 'Jun', '7' => 'Jul', '8' => 'Ags',
-            '9' => 'Sep', '10' => 'Okt', '11' => 'Nov', '12' => 'Des'
-        ];
-
-        $data_rinci = [];
-        foreach ($data['bagian_upk'] as $upk) {
-            $nama_upk = $upk->nama_bagian;
-            $data_rinci[$nama_upk] = [];
-            foreach (array_keys($kategori) as $bulan) {
-                $data_rinci[$nama_upk][$bulan] = ['sr' => 0, 'rp' => 0];
-            }
-        }
-
-        foreach ($data['efek'] as $row) {
-            $upk = $row->nama_bagian;
-            $bulan = (string) $row->bulan_data;
-
-            if (isset($data_rinci[$upk][$bulan])) {
-                $data_rinci[$upk][$bulan]['sr'] += $row->jumlah_sr;
-                $data_rinci[$upk][$bulan]['rp'] += $row->rupiah;
-            }
-        }
-
-        $total_keseluruhan = [];
-        foreach (array_keys($kategori) as $bulan) {
-            $total_keseluruhan[$bulan] = ['sr' => 0, 'rp' => 0];
-        }
-        $total_keseluruhan['JUMLAH'] = ['sr' => 0, 'rp' => 0];
-
-        foreach ($data_rinci as $item) {
-            foreach (array_keys($kategori) as $bulan) {
-                $total_keseluruhan[$bulan]['sr'] += $item[$bulan]['sr'];
-                $total_keseluruhan[$bulan]['rp'] += $item[$bulan]['rp'];
-            }
-        }
-
-        foreach (array_keys($kategori) as $bulan) {
-            $total_keseluruhan['JUMLAH']['sr'] += $total_keseluruhan[$bulan]['sr'];
-            $total_keseluruhan['JUMLAH']['rp'] += $total_keseluruhan[$bulan]['rp'];
-        }
-        $data['total_rp'] = $total_keseluruhan['JUMLAH']['rp'];
-
-        $ppa_input = $this->Model_labarugi->get_ppa_input($tahun);
-        $data['ppa_input'] = $ppa_input;
-
-        $total_pa_tahun_ini = 0;
-
-        if (!empty($ppa_input)) {
-            foreach ($ppa_input as $row) {
-                $total_pa_tahun_ini += $row->jumlah_pa_tahun_ini;
-            }
-        }
-
-        $data_piu = [
-            '1 Bulan' => 0,
-            '2 Bulan' => 0,
-            '3 Bulan' => 0,
-            '4 Bulan - 1 Tahun' => 0,
-        ];
-
-        foreach ($data['sisa_piu'] as $row) {
-            if (isset($data_piu[$row->uraian])) {
-                $data_piu[$row->uraian] = $row->rupiah;
-            }
-        }
-        $total = array_sum($data_piu);
-
-        $data['total_pa_tahun_ini'] = $total_pa_tahun_ini;
-        $data['sisa_rek'] = $total;
-        $data['rek_tagih'] = $data['total_pa_tahun_ini'] - $data['sisa_rek'] + $data['total_rp'];
-        $data['persen_efek'] = ($data['total_pa_tahun_ini'] == 0) ? 0 : round(($data['rek_tagih'] / $data['total_pa_tahun_ini']) * 100, 2);
-
-        $persen_efek = $data['persen_efek'];
-
-        $hasil_perhitungan_efek = 0;
-        if ($persen_efek <= 75) {
-            $hasil_perhitungan_efek = 1;
-        } elseif ($persen_efek > 75 && $persen_efek <= 80) {
-            $hasil_perhitungan_efek = 2;
-        } elseif ($persen_efek > 80 && $persen_efek <= 85) {
-            $hasil_perhitungan_efek = 3;
-        } elseif ($persen_efek > 85 && $persen_efek <= 90) {
-            $hasil_perhitungan_efek = 4;
-        } elseif ($persen_efek > 90) {
-            $hasil_perhitungan_efek = 5;
-        }
-        $data['hasil_perhitungan_efek'] = $hasil_perhitungan_efek;
-        $data['hasil_efek'] = $hasil_perhitungan_efek * $bobot;
-
-        // hitung solvabilitas
-        $data['total_asset'] = $total_aset_lancar_audited + $total_aset_tidak_lancar_audited;
-        $data['total_utang'] = $total_liabilitas_jangka_pendek_audited + $total_liabilitas_jangka_panjang_audited;
-
-        if (isset($data['total_asset']) && isset($data['total_utang']) && $data['total_asset'] != 0 && $data['total_utang'] != 0) {
-            $data['persen_solva'] = $data['total_asset'] / $data['total_utang'] * 100;
-        } else {
-            $data['persen_solva'] = 0;
-        }
-        $persen_solva = $data['persen_solva'];
-
-        $hasil_perhitungan_solva = 0;
-        if ($persen_solva < 100) {
-            $hasil_perhitungan_solva = 1;
-        } elseif ($persen_solva >= 100 && $persen_solva < 135) {
-            $hasil_perhitungan_solva = 2;
-        } elseif ($persen_solva >= 135 && $persen_solva < 170) {
-            $hasil_perhitungan_solva = 3;
-        } elseif ($persen_solva >= 170 && $persen_solva < 200) {
-            $hasil_perhitungan_solva = 4;
-        } elseif ($persen_solva >= 200) {
-            $hasil_perhitungan_solva = 5;
-        }
-        $data['hasil_perhitungan_solva'] = $hasil_perhitungan_solva;
-        $data['hasil_solva'] = $hasil_perhitungan_solva * $bobot_solva;
-        $data['total_hasil_keuangan'] = $data['hasil_roe'] + $data['hasil_rasio_ops'] + $data['hasil_cash_rasio'] + $data['hasil_efek'] + $data['hasil_solva'];
+        $data['total_hasil_operasional'] = $data['hasil_kap_prod'] + $data['hasil_tekanan_air'] + $data['hasil_ganti_meter'] + $data['hasil_nrw'] + $data['hasil_jam_ops'];
+        // akhir aspek operasional
 
         if ($this->session->userdata('bagian') == 'Publik') {
             $this->load->view('templates/header', $data);

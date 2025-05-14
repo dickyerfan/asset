@@ -78,27 +78,6 @@
                     </tbody>
                 </table>
 
-                <?php
-                $total_pelanggan =
-                    ($pelanggan['total_rt_dom'] ?? 0) +
-                    ($pelanggan['total_niaga_dom'] ?? 0) +
-                    ($pelanggan['total_sl_hu_dom'] ?? 0) +
-                    ($pelanggan['total_n_aktif_dom'] ?? 0);
-
-                $rata_jiwa = $cakupan['rata_jiwa_kk'] ?? 0;
-                $total_jiwa_terlayani = $pelanggan['total_rt_dom'] * $rata_jiwa + $pelanggan['total_niaga_dom'] * $rata_jiwa + $pelanggan['total_sl_hu_dom'] * 100 + $pelanggan['total_n_aktif_dom'] * $rata_jiwa;
-                $cakupan_admin = ($cakupan['total_penduduk'] ?? 0) > 0
-                    ? ($total_jiwa_terlayani / $cakupan['total_penduduk']) * 100
-                    : 0;
-
-                $rata_jiwa2 = $cakupan['rata_jiwa_kk2'] ?? 0;
-                $total_jiwa_terlayani2 = $pelanggan['total_rt_dom'] * $rata_jiwa2 + $pelanggan['total_niaga_dom'] * $rata_jiwa2 + $pelanggan['total_sl_hu_dom'] * 100 + $pelanggan['total_n_aktif_dom'] * $rata_jiwa2;
-
-                $cakupan_teknis = ($cakupan['total_penduduk'] ?? 0) > 0
-                    ? ($total_jiwa_terlayani2 / $cakupan['total_wil_layan']) * 100
-                    : 0;
-                ?>
-
                 <table class="table table-bordered table-sm mt-4">
                     <thead class="thead-light text-center">
                         <tr>

@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : lokalan
+ Source Server         : DIE ArtS
  Source Server Type    : MySQL
- Source Server Version : 100432 (10.4.32-MariaDB)
+ Source Server Version : 100418 (10.4.18-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : asset
 
  Target Server Type    : MySQL
- Target Server Version : 100432 (10.4.32-MariaDB)
+ Target Server Version : 100418 (10.4.18-MariaDB)
  File Encoding         : 65001
 
- Date: 14/05/2025 15:55:58
+ Date: 29/04/2025 16:00:25
 */
 
 SET NAMES utf8mb4;
@@ -3407,484 +3407,14 @@ CREATE TABLE `ek_jam_ops`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_ek_jam_ops`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 421 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ek_jam_ops
 -- ----------------------------
-INSERT INTO `ek_jam_ops` VALUES (1, 1, 724, '2024-01-01', '2025-03-21 15:59:54', 'Bagian Pemeliharaan', '2025-03-27 13:55:01', 'Bagian Pemeliharaan');
-INSERT INTO `ek_jam_ops` VALUES (2, 2, 732, '2024-01-01', '2025-03-21 15:59:54', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (3, 3, 731, '2024-01-01', '2025-03-21 15:59:54', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (4, 4, 736, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (5, 5, 712, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (6, 6, 724, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (7, 7, 721, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (8, 8, 732, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (9, 9, 730, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (10, 10, 726, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (11, 11, 0, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (12, 12, 732, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (13, 13, 744, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (14, 14, 694, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (15, 15, 733, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (16, 16, 728, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (17, 17, 732, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (18, 18, 736, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (19, 19, 744, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (20, 20, 186, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (21, 21, 744, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (22, 22, 710, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (23, 23, 712, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (24, 24, 698, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (25, 25, 620, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (26, 26, 744, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (27, 27, 739, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (28, 28, 496, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (29, 29, 713, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (30, 30, 0, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (31, 31, 724, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (32, 32, 718, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (33, 33, 692, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (34, 34, 561, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (35, 35, 720, '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (36, 1, 722, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (37, 2, 739, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (38, 3, 741, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (39, 4, 688, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (40, 5, 728, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (41, 6, 726, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (42, 7, 730, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (43, 8, 732, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (44, 9, 744, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (45, 10, 674, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (46, 11, 0, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (47, 12, 724, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (48, 13, 744, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (49, 14, 735, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (50, 15, 743, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (51, 16, 742, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (52, 17, 742, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (53, 18, 732, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (54, 19, 744, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (55, 20, 267, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (56, 21, 744, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (57, 22, 710, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (58, 23, 712, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (59, 24, 744, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (60, 25, 620, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (61, 26, 734, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (62, 27, 734, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (63, 28, 465, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (64, 29, 716, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (65, 30, 0, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (66, 31, 726, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (67, 32, 710, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (68, 33, 713, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (69, 34, 548, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (70, 35, 716, '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (71, 1, 673, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (72, 2, 690, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (73, 3, 682, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (74, 4, 672, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (75, 5, 652, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (76, 6, 674, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (77, 7, 674, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (78, 8, 680, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (79, 9, 686, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (80, 10, 682, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (81, 11, 0, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (82, 12, 696, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (83, 13, 696, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (84, 14, 652, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (85, 15, 647, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (86, 16, 663, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (87, 17, 649, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (88, 18, 668, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (89, 19, 696, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (90, 20, 264, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (91, 21, 696, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (92, 22, 679, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (93, 23, 682, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (94, 24, 675, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (95, 25, 620, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (96, 26, 672, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (97, 27, 647, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (98, 28, 464, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (99, 29, 665, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (100, 30, 0, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (101, 31, 674, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (102, 32, 687, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (103, 33, 667, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (104, 34, 498, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (105, 35, 665, '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (106, 1, 733, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (107, 2, 742, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (108, 3, 739, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (109, 4, 720, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (110, 5, 736, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (111, 6, 728, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (112, 7, 736, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (113, 8, 733, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (114, 9, 741, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (115, 10, 737, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (116, 11, 0, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (117, 12, 720, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (118, 13, 729, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (119, 14, 730, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (120, 15, 728, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (121, 16, 728, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (122, 17, 722, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (123, 18, 718, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (124, 19, 740, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (125, 20, 264, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (126, 21, 740, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (127, 22, 724, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (128, 23, 724, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (129, 24, 696, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (130, 25, 620, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (131, 26, 706, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (132, 27, 718, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (133, 28, 487, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (134, 29, 685, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (135, 30, 0, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (136, 31, 728, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (137, 32, 712, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (138, 33, 734, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (139, 34, 569, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (140, 35, 685, '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (141, 1, 718, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (142, 2, 680, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (143, 3, 720, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (144, 4, 717, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (145, 5, 720, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (146, 6, 716, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (147, 7, 720, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (148, 8, 720, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (149, 9, 720, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (150, 10, 718, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (151, 11, 0, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (152, 12, 720, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (153, 13, 720, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (154, 14, 684, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (155, 15, 706, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (156, 16, 710, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (157, 17, 691, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (158, 18, 720, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (159, 19, 720, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (160, 20, 267, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (161, 21, 720, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (162, 22, 686, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (163, 23, 710, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (164, 24, 720, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (165, 25, 620, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (166, 26, 720, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (167, 27, 716, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (168, 28, 360, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (169, 29, 690, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (170, 30, 0, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (171, 31, 716, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (172, 32, 712, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (173, 33, 719, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (174, 34, 578, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (175, 35, 690, '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (176, 1, 731, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (177, 2, 737, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (178, 3, 742, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (179, 4, 732, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (180, 5, 689, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (181, 6, 725, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (182, 7, 735, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (183, 8, 724, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (184, 9, 742, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (185, 10, 739, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (186, 11, 0, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (187, 12, 744, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (188, 13, 720, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (189, 14, 692, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (190, 15, 723, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (191, 16, 731, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (192, 17, 709, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (193, 18, 720, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (194, 19, 744, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (195, 20, 270, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (196, 21, 744, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (197, 22, 713, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (198, 23, 733, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (199, 24, 674, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (200, 25, 620, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (201, 26, 734, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (202, 27, 729, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (203, 28, 452, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (204, 29, 685, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (205, 30, 0, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (206, 31, 725, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (207, 32, 685, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (208, 33, 714, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (209, 34, 581, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (210, 35, 685, '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (211, 1, 685, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (212, 2, 715, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (213, 3, 717, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (214, 4, 692, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (215, 5, 717, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (216, 6, 718, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (217, 7, 689, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (218, 8, 720, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (219, 9, 720, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (220, 10, 716, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (221, 11, 0, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (222, 12, 720, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (223, 13, 720, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (224, 14, 698, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (225, 15, 690, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (226, 16, 701, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (227, 17, 695, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (228, 18, 712, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (229, 19, 720, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (230, 20, 271, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (231, 21, 720, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (232, 22, 710, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (233, 23, 720, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (234, 24, 657, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (235, 25, 620, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (236, 26, 720, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (237, 27, 710, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (238, 28, 472, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (239, 29, 718, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (240, 30, 0, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (241, 31, 718, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (242, 32, 710, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (243, 33, 690, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (244, 34, 571, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (245, 35, 684, '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (246, 1, 673, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (247, 2, 694, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (248, 3, 736, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (249, 4, 717, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (250, 5, 720, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (251, 6, 726, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (252, 7, 717, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (253, 8, 717, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (254, 9, 693, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (255, 10, 741, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (256, 11, 744, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (257, 12, 744, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (258, 13, 712, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (259, 14, 674, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (260, 15, 672, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (261, 16, 670, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (262, 17, 679, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (263, 18, 620, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (264, 19, 744, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (265, 20, 262, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (266, 21, 744, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (267, 22, 610, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (268, 23, 710, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (269, 24, 720, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (270, 25, 590, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (271, 26, 744, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (272, 27, 718, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (273, 28, 480, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (274, 29, 713, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (275, 30, 0, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (276, 31, 726, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (277, 32, 649, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (278, 33, 738, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (279, 34, 562, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (280, 35, 688, '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (281, 1, 739, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (282, 2, 712, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (283, 3, 720, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (284, 4, 728, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (285, 5, 720, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (286, 6, 730, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (287, 7, 718, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (288, 8, 741, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (289, 9, 743, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (290, 10, 720, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (291, 11, 710, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (292, 12, 744, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (293, 13, 685, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (294, 14, 737, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (295, 15, 680, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (296, 16, 720, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (297, 17, 673, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (298, 18, 620, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (299, 19, 744, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (300, 20, 250, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (301, 21, 744, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (302, 22, 730, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (303, 23, 728, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (304, 24, 696, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (305, 25, 590, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (306, 26, 720, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (307, 27, 710, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (308, 28, 480, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (309, 29, 689, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (310, 30, 0, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (311, 31, 730, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (312, 32, 725, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (313, 33, 692, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (314, 34, 569, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (315, 35, 689, '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (316, 1, 717, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (317, 2, 720, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (318, 3, 715, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (319, 4, 684, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (320, 5, 720, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (321, 6, 718, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (322, 7, 695, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (323, 8, 690, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (324, 9, 712, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (325, 10, 620, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (326, 11, 710, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (327, 12, 720, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (328, 13, 720, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (329, 14, 679, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (330, 15, 677, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (331, 16, 712, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (332, 17, 709, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (333, 18, 600, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (334, 19, 710, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (335, 20, 257, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (336, 21, 710, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (337, 22, 712, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (338, 23, 712, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (339, 24, 720, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (340, 25, 582, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (341, 26, 720, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (342, 27, 698, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (343, 28, 474, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (344, 29, 690, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (345, 30, 0, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (346, 31, 718, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (347, 32, 729, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (348, 33, 712, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (349, 34, 586, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (350, 35, 690, '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (351, 1, 742, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (352, 2, 743, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (353, 3, 713, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (354, 4, 680, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (355, 5, 743, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (356, 6, 744, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (357, 7, 738, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (358, 8, 742, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (359, 9, 720, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (360, 10, 726, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (361, 11, 724, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (362, 12, 720, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (363, 13, 720, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (364, 14, 717, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (365, 15, 689, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (366, 16, 720, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (367, 17, 709, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (368, 18, 620, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (369, 19, 744, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (370, 20, 262, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (371, 21, 744, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (372, 22, 712, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (373, 23, 722, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (374, 24, 713, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (375, 25, 580, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (376, 26, 744, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (377, 27, 694, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (378, 28, 465, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (379, 29, 713, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (380, 30, 0, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (381, 31, 744, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (382, 32, 692, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (383, 33, 677, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (384, 34, 582, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (385, 35, 713, '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (386, 1, 720, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (387, 2, 720, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (388, 3, 712, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (389, 4, 720, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (390, 5, 719, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (391, 6, 693, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (392, 7, 717, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (393, 8, 720, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (394, 9, 710, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (395, 10, 717, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (396, 11, 691, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (397, 12, 720, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (398, 13, 688, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (399, 14, 680, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (400, 15, 688, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (401, 16, 718, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (402, 17, 710, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (403, 18, 600, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (404, 19, 720, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (405, 20, 264, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (406, 21, 720, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (407, 22, 702, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (408, 23, 702, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (409, 24, 578, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (410, 25, 468, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (411, 26, 720, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (412, 27, 695, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (413, 28, 480, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (414, 29, 690, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (415, 30, 0, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (416, 31, 693, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (417, 32, 687, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (418, 33, 696, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (419, 34, 580, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_jam_ops` VALUES (420, 35, 690, '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-
--- ----------------------------
--- Table structure for ek_kapasitas_prod
--- ----------------------------
-DROP TABLE IF EXISTS `ek_kapasitas_prod`;
-CREATE TABLE `ek_kapasitas_prod`  (
-  `id_ek_kp` int NOT NULL AUTO_INCREMENT,
-  `id_bagian` int NOT NULL,
-  `kap_pasang` decimal(5, 2) NULL DEFAULT NULL,
-  `terpasang` int NULL DEFAULT NULL,
-  `tidak_manfaat` int NULL DEFAULT NULL,
-  `volume_produksi` int NULL DEFAULT NULL,
-  `tahun_kp` year NULL DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_ek_kp`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_kapasitas_prod
--- ----------------------------
-INSERT INTO `ek_kapasitas_prod` VALUES (1, 7, 53.30, 1569229, 85141, 1131733, 2024, '2025-05-07 12:34:18', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (2, 9, 8.50, 266488, 9405, 219430, 2024, '2025-05-07 12:34:18', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (3, 10, 8.50, 264533, 774, 249039, 2024, '2025-05-07 12:34:18', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (4, 11, 16.50, 498877, 30246, 327894, 2024, '2025-05-07 12:34:18', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (5, 12, 9.50, 287419, 21605, 192067, 2024, '2025-05-07 12:34:18', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (6, 13, 4.60, 82283, 3240, 49364, 2024, '2025-05-07 12:34:18', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (7, 14, 8.90, 270213, 15639, 202969, 2024, '2025-05-07 12:34:18', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (8, 15, 9.00, 244117, 13699, 96685, 2024, '2025-05-07 12:34:18', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (9, 16, 9.00, 279484, 6251, 194370, 2024, '2025-05-07 12:34:18', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (10, 17, 12.40, 308843, 17579, 224777, 2024, '2025-05-07 12:34:18', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (11, 18, 9.00, 279506, 0, 264040, 2024, '2025-05-07 12:34:18', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (12, 19, 4.00, 119994, 15157, 52551, 2024, '2025-05-07 12:34:18', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (13, 21, 7.00, 212905, 15207, 114209, 2024, '2025-05-07 12:34:18', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (14, 20, 4.00, 98776, 2444, 87523, 2024, '2025-05-07 12:34:18', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (15, 22, 6.20, 185693, 5991, 163287, 2024, '2025-05-07 12:34:18', 'Bagian Pemeliharaan', '2025-05-07 12:51:16', 'Bagian Pemeliharaan');
-INSERT INTO `ek_kapasitas_prod` VALUES (16, 7, 50.00, 1582923, 135403, 1146205, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (17, 9, 9.00, 268938, 9492, 207649, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (18, 10, 9.00, 268545, 7822, 245492, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (19, 11, 17.00, 532842, 40766, 336050, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (20, 12, 10.00, 295679, 21952, 201114, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (21, 13, 9.00, 255056, 19984, 181736, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (22, 14, 9.00, 242679, 13498, 115496, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (23, 15, 9.00, 280462, 8620, 193624, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (24, 16, 10.00, 291141, 1828, 275507, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (25, 17, 4.00, 124715, 24683, 60219, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (26, 18, 7.00, 209401, 14957, 124096, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (27, 19, 5.00, 106056, 4243, 87342, 2023, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kapasitas_prod` VALUES (28, 21, 6.00, 91836, 2536, 167851, 2023, '0000-00-00 00:00:00', '', '2025-05-07 14:17:00', 'Bagian Pemeliharaan');
-INSERT INTO `ek_kapasitas_prod` VALUES (29, 20, 7.00, 205658, 15820, 59608, 2023, '0000-00-00 00:00:00', '', '2025-05-07 14:16:52', 'Bagian Pemeliharaan');
-INSERT INTO `ek_kapasitas_prod` VALUES (30, 22, 13.00, 340576, 27239, 239128, 2023, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `ek_jam_ops` VALUES (1, 1, 744, '2023-01-01', '2025-03-21 15:59:54', 'Bagian Pemeliharaan', '2025-03-27 13:55:01', 'Bagian Pemeliharaan');
+INSERT INTO `ek_jam_ops` VALUES (2, 2, 739, '2023-01-01', '2025-03-21 15:59:54', 'Bagian Pemeliharaan', NULL, '');
+INSERT INTO `ek_jam_ops` VALUES (3, 3, 744, '2023-01-01', '2025-03-21 15:59:54', 'Bagian Pemeliharaan', NULL, '');
 
 -- ----------------------------
 -- Table structure for ek_kecamatan
@@ -3929,55 +3459,6 @@ INSERT INTO `ek_kecamatan` VALUES (22, 'Prajekan', 0, '0000-00-00 00:00:00', '',
 INSERT INTO `ek_kecamatan` VALUES (23, 'Cermee', 0, '0000-00-00 00:00:00', '', NULL, '');
 
 -- ----------------------------
--- Table structure for ek_kej_pen
--- ----------------------------
-DROP TABLE IF EXISTS `ek_kej_pen`;
-CREATE TABLE `ek_kej_pen`  (
-  `id_kej_pen` int NOT NULL AUTO_INCREMENT,
-  `kejadian` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
-  `keterangan` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
-  `tahun_kej_pen` year NULL DEFAULT NULL,
-  `status` int NULL DEFAULT 1,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_kej_pen`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_kej_pen
--- ----------------------------
-INSERT INTO `ek_kej_pen` VALUES (1, 'Rekonsiliasi Piutang Per 31 Desember 2024, Penyesuaian Aset Tetap dan Penyusutan dan Migrasi Sisa Piutang dari Aplikasi SIP ke aplikasi Cetet.\r\n', 'Berdasarkan Berita Acara Nomor 06/BA/430.12/2025 tanggal 10 Januari 2025	\r\n', 2024, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kej_pen` VALUES (2, 'Pendapatan Penggantian Subsidi Selisih Tarif melalui APBD dan PAPBD Tahun 2024', 'Keputusan Bupati Bondowoso Nomor 188.45/178/430.4.2/2024 tanggal 07 Maret 2024 diterima kas PDAM pada tanggal 16 April 2024 sebesar Rp 1.000.000.000,-', 2024, 1, '2025-05-12 22:19:17', 'Muhammad Deni Saputro', NULL, '');
-INSERT INTO `ek_kej_pen` VALUES (3, 'Permohonan Perhitungan Aktuaria Tahun 2022', 'Surat Nomor: 5.84/DP.04/XI/2022 perihal Estimasi Pendanaan Program Pensiun dari DAPENMA PAMSI', 2024, 1, '2025-05-12 22:20:53', 'Muhammad Deni Saputro', '2025-05-12 22:26:37', 'Muhammad Deni Saputro');
-
--- ----------------------------
--- Table structure for ek_kerjasama
--- ----------------------------
-DROP TABLE IF EXISTS `ek_kerjasama`;
-CREATE TABLE `ek_kerjasama`  (
-  `id_kerjasama` int NOT NULL AUTO_INCREMENT,
-  `no_perjanjian` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `tentang_perjanjian` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
-  `tahun_perjanjian` year NULL DEFAULT NULL,
-  `status` int NULL DEFAULT 1,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_kerjasama`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_kerjasama
--- ----------------------------
-INSERT INTO `ek_kerjasama` VALUES (1, '660/183.1/430.9.6/2024 Tanggal 03 Juni 2024', 'PERJANJIAN KERJASAMA PENGANGKUTAN SAMPAH ANTARA PDAM BONDOWOSO DENGAN DINAS LINGKUNGAN HIDUP KABUPATEN BONDOWOSO', 2024, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kerjasama` VALUES (2, '008/02/430.12/2024 Tanggal 21 Januari 2024', 'PERJANJIAN SEWA MENYEWA RUANG ATM ANTARA PDAM BONDOWOSO DENGAN BANK JATIM CABANG BONDOWOSO', 2024, 1, '2025-05-12 21:32:22', 'Bagian Umum & Administrasi', NULL, '');
-INSERT INTO `ek_kerjasama` VALUES (3, '03/SPK/10/2024 Tanggal 21 Oktober 2024', 'PERJANJIAN  KESEPAKATAN PEKERJAAN PEMASANGAN JARINGAN DAN SAMBUNGAN RUMAH (SR) BARU PERUMAHAN \"PELITA RIVER VALLEY\" BONDOWOSO', 2024, 1, '2025-05-12 21:33:49', 'Bagian Umum & Administrasi', NULL, '');
-INSERT INTO `ek_kerjasama` VALUES (4, '008/01/430.12/2024 Tanggal 20 April 2024', 'PERJANJIAN PENERIMAAN PEMBAYARAN TAGIHAN REKENING PDAM SECARA ONLINE DENGAN PT.POS INDONESIA', 2024, 1, '2025-05-12 21:34:59', 'Bagian Umum & Administrasi', '2025-05-12 21:48:42', 'Bagian Umum & Administrasi');
-
--- ----------------------------
 -- Table structure for ek_kualitas_air
 -- ----------------------------
 DROP TABLE IF EXISTS `ek_kualitas_air`;
@@ -3996,7 +3477,7 @@ CREATE TABLE `ek_kualitas_air`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_ek_ka`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 123 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ek_kualitas_air
@@ -4019,15 +3500,15 @@ INSERT INTO `ek_kualitas_air` VALUES (16, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. 
 INSERT INTO `ek_kualitas_air` VALUES (17, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-10-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (18, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-11-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (19, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-12-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (20, 'MIKROBIOLOGI', 0, 0, 0, 0, 0, 'AMDK Bondowoso', '2023-04-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (21, 'MIKROBIOLOGI', 11, 0, 11, 11, 0, 'AMDK Bondowoso', '2023-05-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
+INSERT INTO `ek_kualitas_air` VALUES (20, 'MIKROBIOLOGI', 10, 0, 10, 10, 0, 'AMDK Bondowoso', '2023-04-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
+INSERT INTO `ek_kualitas_air` VALUES (21, 'MIKROBIOLOGI', 10, 0, 10, 10, 0, 'AMDK Bondowoso', '2023-05-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (22, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'AMDK Bondowoso', '2023-06-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (23, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'AMDK Bondowoso', '2023-07-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (24, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'AMDK Bondowoso', '2023-08-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (25, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'AMDK Bondowoso', '2023-09-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (26, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'AMDK Bondowoso', '2023-10-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (27, 'MIKROBIOLOGI', 13, 0, 13, 13, 0, 'AMDK Bondowoso', '2023-11-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (28, 'MIKROBIOLOGI', 13, 0, 13, 13, 0, 'AMDK Bondowoso', '2023-12-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
+INSERT INTO `ek_kualitas_air` VALUES (27, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'AMDK Bondowoso', '2023-11-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
+INSERT INTO `ek_kualitas_air` VALUES (28, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'AMDK Bondowoso', '2023-12-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (29, 'SISA CHLOR', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-02-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (30, 'SISA CHLOR', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-03-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (31, 'SISA CHLOR', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-04-01', '2025-03-26 08:16:28', 'Administrator', NULL, '');
@@ -4053,152 +3534,14 @@ INSERT INTO `ek_kualitas_air` VALUES (50, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'L
 INSERT INTO `ek_kualitas_air` VALUES (51, 'KIMIA WAJIB', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-02-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (52, 'KIMIA WAJIB', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-03-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (53, 'KIMIA WAJIB', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-04-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (54, 'KIMIA WAJIB', 11, 0, 11, 11, 0, 'Lab. Kes. Bondowoso', '2023-05-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
+INSERT INTO `ek_kualitas_air` VALUES (54, 'KIMIA WAJIB', 10, 0, 10, 10, 0, 'Lab. Kes. Bondowoso', '2023-05-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (55, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-06-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (56, 'KIMIA WAJIB', 14, 0, 14, 14, 0, 'Lab. Kes. Bondowoso', '2023-07-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
+INSERT INTO `ek_kualitas_air` VALUES (56, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-07-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (57, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-08-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (58, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-09-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (59, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-10-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (60, 'KIMIA WAJIB', 13, 0, 13, 13, 0, 'Lab. Kes. Bondowoso', '2023-11-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
+INSERT INTO `ek_kualitas_air` VALUES (60, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-11-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (61, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-12-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (63, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-01-01', '2025-03-26 07:42:12', 'Administrator', '2025-03-26 10:33:10', 'Bagian Pemeliharaan');
-INSERT INTO `ek_kualitas_air` VALUES (64, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-02-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (65, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-03-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (66, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-04-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (67, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-05-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (68, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-06-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (69, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-07-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (70, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-08-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (71, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (72, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (73, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (74, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (75, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (76, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (77, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (78, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (79, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (80, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (81, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (82, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (83, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (84, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (85, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (86, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (87, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (88, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (89, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (90, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (91, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (92, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (93, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (94, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (95, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (96, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (97, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (98, 'SISA CHLOR', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (99, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (100, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (101, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (102, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (103, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (104, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (105, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (106, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (107, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (108, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (109, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (110, 'KIMIA TAMBAHAN', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (111, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (112, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (113, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (114, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-04-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (115, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-05-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (116, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-06-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (117, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-07-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (118, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-08-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (119, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (120, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (121, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (122, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
-
--- ----------------------------
--- Table structure for ek_modal_pemda
--- ----------------------------
-DROP TABLE IF EXISTS `ek_modal_pemda`;
-CREATE TABLE `ek_modal_pemda`  (
-  `id_modal_pemda` int NOT NULL AUTO_INCREMENT,
-  `jenis_asset` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
-  `id_kec` int NOT NULL,
-  `rupiah` bigint NULL DEFAULT NULL,
-  `sumber_dana` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `unit_pemberi` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `keterangan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `tahun_data` year NULL DEFAULT NULL,
-  `status` int NULL DEFAULT 1,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_modal_pemda`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_modal_pemda
--- ----------------------------
-INSERT INTO `ek_modal_pemda` VALUES (1, 'Penyediaan Tanah Audit BPKP Perwakilan Jember /  No.LAP-1996/PW.13A.5/1989 Tanggal 27 Oktober 1989\r\n', 12, 51941500, 'APBD Kab', 'Pemerintah Kab.Bondowoso\r\n', 'Baik & Dimanfaatkan\r\n', 1989, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (2, 'Asset Eks P2AB Departemen Pekerjaan Umum / Berita Acara Serah Terima No : 05/BA/W.13/97', 12, 5580874605, 'APBD Kab', 'Pemerintah Kab.Bondowoso\r\n', 'Baik & Dimanfaatkan\r\n', 1997, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (3, 'Instalasi Pengolahan Air Wringin,Maesan dan BNA / Berita Acara Serah Terima No. 050/18/430,21/2002', 12, 980091000, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2002, 1, '2025-05-12 23:23:57', 'Muhammad Deni Saputro', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (4, 'Bantuan Dana 7 Unit Chlorinasi Surat Perintah / Membayar Uang (SPMU)BVR no.36 tgl.5 Sept 2002', 12, 369600000, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2002, 1, '2025-05-12 23:25:55', 'Muhammad Deni Saputro', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (5, NULL, 12, NULL, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2007, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (6, NULL, 12, NULL, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2008, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (7, NULL, 12, NULL, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2009, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (8, NULL, 12, NULL, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2011, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (9, NULL, 12, NULL, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2011, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (10, NULL, 12, NULL, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2011, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (11, NULL, 12, NULL, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2012, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (12, NULL, 12, NULL, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2014, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (13, NULL, 12, NULL, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2015, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (14, NULL, 12, NULL, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2015, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (15, NULL, 12, NULL, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2015, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (16, NULL, 12, NULL, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2016, 1, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_modal_pemda` VALUES (17, NULL, 12, NULL, 'APBD Kab', 'Pemerintah Kab.Bondowoso', 'Baik & Dimanfaatkan', 2016, 1, '0000-00-00 00:00:00', '', NULL, '');
-
--- ----------------------------
--- Table structure for ek_pendapatan
--- ----------------------------
-DROP TABLE IF EXISTS `ek_pendapatan`;
-CREATE TABLE `ek_pendapatan`  (
-  `id_pendapatan` int NOT NULL AUTO_INCREMENT,
-  `id_kel_tarif` int NOT NULL DEFAULT 0,
-  `rek_air` int NULL DEFAULT NULL,
-  `volume` int NULL DEFAULT NULL,
-  `jas_pem` bigint NULL DEFAULT NULL,
-  `by_admin` bigint NULL DEFAULT NULL,
-  `harga_air` bigint NULL DEFAULT NULL,
-  `tahun_data` year NULL DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_pendapatan`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_pendapatan
--- ----------------------------
-INSERT INTO `ek_pendapatan` VALUES (1, 1, 51, 18799, 1102500, 9072000, 32237270, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pendapatan` VALUES (2, 2, 316, 74890, 6643000, 54662400, 195141380, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pendapatan` VALUES (3, 3, 3009, 515358, 84644000, 840812700, 2101157990, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pendapatan` VALUES (4, 4, 14115, 2001371, 275521750, 2909378400, 10289274030, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pendapatan` VALUES (5, 5, 505, 90804, 10788750, 120369500, 520029770, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pendapatan` VALUES (6, 6, 182, 52317, 3855250, 41554200, 345478370, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pendapatan` VALUES (7, 7, 112, 41199, 2346750, 27906900, 282740560, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pendapatan` VALUES (8, 8, 133, 37892, 2796500, 32762200, 259990120, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pendapatan` VALUES (9, 9, 449, 62172, 9353750, 109419000, 484505430, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pendapatan` VALUES (10, 10, 65, 15084, 1366750, 15987400, 133589710, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pendapatan` VALUES (11, 11, 1, 24794, 21000, 262800, 177534000, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_pendapatan` VALUES (12, 12, NULL, NULL, NULL, NULL, 71118500, 2024, '2025-05-08 13:37:53', 'Bagian Hubungan Langganan', NULL, '');
 
 -- ----------------------------
 -- Table structure for ek_pengaduan
@@ -4521,7 +3864,7 @@ CREATE TABLE `ek_sb_mag`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_sb_mag`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ek_sb_mag
@@ -4536,31 +3879,30 @@ INSERT INTO `ek_sb_mag` VALUES (7, 7, 'SB Poncogati', 1, NULL, '2020-01-01', '20
 INSERT INTO `ek_sb_mag` VALUES (8, 7, 'SB EDC', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
 INSERT INTO `ek_sb_mag` VALUES (9, 7, 'SB Ground', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
 INSERT INTO `ek_sb_mag` VALUES (10, 7, 'SB Wijaya Kusuma', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (11, 7, 'SB City Plaza', 1, '', '2024-08-01', '2025-03-27 09:39:56', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (12, 9, 'MA Sumber Wringin', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (13, 10, 'MA Tanah Wulan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (14, 11, 'SB Tegal Ampel II', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (15, 11, 'SB Tegal Ampel I', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (16, 11, 'SB Locare', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (17, 11, 'SB Karang Anyar', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (18, 12, 'SB Tapen', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (19, 12, 'Sumber Mangli', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (20, 21, 'MAG Mangli', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (21, 21, 'SB Besuk', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (22, 13, 'SB Prajekan 1', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (23, 13, 'SB Prajekan 2', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (24, 14, 'MA Sumber Balen', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (25, 14, 'SB Pakisan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (26, 15, 'IPA Petung', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (27, 15, 'SB Wringin', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (28, 22, 'SB Wonokusumo', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (29, 22, 'MAG Bedihan', 0, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (30, 16, 'SB Curahdami', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (31, 16, 'SB Penambangan', 0, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (32, 17, 'SB Tamanan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (33, 18, 'SB Kajar Tenggarang', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (34, 19, 'SB Taman Krocok', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
-INSERT INTO `ek_sb_mag` VALUES (35, 20, 'MAG. Bedihan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (11, 9, 'MA Sumber Wringin', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (12, 10, 'MA Tanah Wulan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (13, 11, 'SB Tegal Ampel II', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (14, 11, 'SB Tegal Ampel I', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (15, 11, 'SB Locare', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (16, 11, 'SB Karang Anyar', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (17, 12, 'SB Tapen', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (18, 12, 'Sumber Mangli', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (19, 21, 'MAG Mangli', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (20, 21, 'SB Besuk', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (21, 13, 'SB Prajekan 1', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (22, 13, 'SB Prajekan 2', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (23, 14, 'MA Sumber Balen', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (24, 14, 'SB Pakisan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (25, 15, 'IPA Petung', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (26, 15, 'SB Wringin', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (27, 22, 'SB Wonokusumo', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (28, 22, 'MAG Bedihan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (29, 16, 'SB Curahdami', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (30, 17, 'SB Tamanan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (31, 18, 'SB Kajar Tenggarang', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (32, 19, 'SB Taman Krocok', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (33, 20, 'MAG. Bedihan', 1, NULL, '2020-01-01', '2025-03-21 14:18:41', 'Administrator', NULL, '');
+INSERT INTO `ek_sb_mag` VALUES (34, 7, 'SB City Plaza', 1, '', '2024-08-01', '2025-03-27 09:39:56', 'Bagian Pemeliharaan', NULL, '');
 
 -- ----------------------------
 -- Table structure for ek_sisa_piutang
@@ -4833,7 +4175,7 @@ CREATE TABLE `ek_tekanan_air`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_ek_tka`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ek_tekanan_air
@@ -4855,19 +4197,6 @@ INSERT INTO `ek_tekanan_air` VALUES (14, 20, 1191, 7, 7, 1191, 2023, '2025-03-21
 INSERT INTO `ek_tekanan_air` VALUES (15, 22, 1490, 8, 8, 1490, 2023, '2025-03-21 09:46:47', 'Bagian Pemeliharaan', NULL, '');
 INSERT INTO `ek_tekanan_air` VALUES (16, 7, 5656, 56, 56, 5656, 2024, '2025-04-28 08:55:44', 'Bagian Pemeliharaan', NULL, '');
 INSERT INTO `ek_tekanan_air` VALUES (17, 9, 1268, 13, 12, 1170, 2024, '2025-04-28 08:58:01', 'Bagian Pemeliharaan', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (18, 10, 1276, 24, 24, 1276, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (19, 11, 1613, 26, 26, 1613, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (20, 12, 1097, 28, 28, 1097, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (21, 13, 1046, 13, 11, 885, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (22, 14, 800, 28, 28, 800, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (23, 15, 968, 20, 20, 968, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (24, 16, 1255, 26, 26, 1255, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (25, 17, 281, 12, 12, 281, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (26, 18, 579, 14, 14, 579, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (27, 19, 508, 4, 4, 508, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (28, 21, 111, 2, 2, 111, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (29, 20, 1085, 24, 24, 1085, 2024, '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_tekanan_air` VALUES (30, 22, 1395, 20, 18, 1256, 2024, '0000-00-00 00:00:00', '', NULL, '');
 
 -- ----------------------------
 -- Table structure for ek_tera_meter

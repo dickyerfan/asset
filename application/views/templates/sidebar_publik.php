@@ -92,6 +92,18 @@
                                 <p>Lap Arus Kas</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('keuangan/modal_pemda') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Penyertaan Modal</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('keuangan/kejadian_penting') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kejadian Penting</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -156,6 +168,12 @@
                                 <p>Efektifitas Penagihan</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('langganan/pendapatan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pendapatan & Tarif</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -198,6 +216,14 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
                                     Data Uji Kualitas
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('pelihara/kapasitas_produksi') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Kapasitas Produksi
                                 </p>
                             </a>
                         </li>

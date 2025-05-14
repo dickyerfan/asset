@@ -298,7 +298,8 @@ class Model_pelihara extends CI_Model
             SUM(CASE WHEN parameter = 'KIMIA WAJIB' THEN jumlah_sample_eks ELSE 0 END) AS kimia_wajib_eks,
             SUM(CASE WHEN parameter = 'KIMIA TAMBAHAN' THEN jumlah_sample_eks ELSE 0 END) AS kimia_tambahan_eks,
             SUM(CASE WHEN parameter = 'FISIK' THEN jumlah_terambil ELSE 0 END) AS jumlah_terambil,
-            SUM(CASE WHEN parameter = 'FISIK' THEN jumlah_sample_eks ELSE 0 END) AS jumlah_terambil_eks
+            SUM(CASE WHEN parameter = 'FISIK' THEN jumlah_sample_eks ELSE 0 END) AS jumlah_terambil_eks,
+            SUM(CASE WHEN parameter = 'FISIK' THEN jumlah_sample_oke_ya ELSE 0 END) AS jumlah_syarat,
             
         ");
         $this->db->from("ek_kualitas_air");
@@ -309,8 +310,36 @@ class Model_pelihara extends CI_Model
         return $this->db->get()->result_array();
     }
 
-
-
-
     // akhir kualitas air
+
+    // kapasitas produksi
+
+    public function get_kapasitas_produksi($tahun)
+    {
+        $this->db->select('*');
+        $this->db->from('ek_kapasitas_prod');
+        $this->db->join('bagian_upk', 'ek_kapasitas_prod.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->where('YEAR(ek_kapasitas_prod.tahun_kp)', $tahun);
+        $this->db->order_by('bagian_upk.id_bagian');
+        return $this->db->get()->result();
+    }
+
+    public function input_kp($table, $data)
+    {
+        if (!empty($data)) {
+            $this->db->insert($table, $data);
+        }
+    }
+
+    public function get_kapasitas_by_id($id)
+    {
+        return $this->db->get_where('ek_kapasitas_prod', ['id_ek_kp' => $id])->row();
+    }
+
+    public function update_kapasitas($id, $data)
+    {
+        $this->db->where('id_ek_kp', $id);
+        return $this->db->update('ek_kapasitas_prod', $data);
+    }
+    // akhir kapasitas produksi
 }

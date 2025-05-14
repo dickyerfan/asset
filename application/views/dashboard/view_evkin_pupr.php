@@ -155,7 +155,334 @@
                         </tfoot>
                     </table>
                 </div>
-
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm" style="font-size: 12px;">
+                        <thead class="text-center">
+                            <tr>
+                                <th rowspan="2">INDIKATOR KINERJA & RUMUS</th>
+                                <th rowspan="2">BOBOT</th>
+                                <th rowspan="2">STANDAR</th>
+                                <th rowspan="2">NILAI</th>
+                                <th colspan="5">PENILAIAN</th>
+                                <th rowspan="2">N</th>
+                                <th rowspan="2">B</th>
+                                <th rowspan="2">H</th>
+                            </tr>
+                            <tr>
+                                <th>Perhitungan</th>
+                                <th colspan="4">=</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="12" class="font-weight-bold">II. ASPEK PELAYANAN</td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">1. CAKUPAN PELAYANAN TEKNIS</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">Jumlah penduduk terlayani dalam wilayah pelayanan
+                                    <br>
+                                    <br>
+                                    <i>Jumlah Penduduk Terlayani / Jumlah Penduduk wilayah pelayanan x 100%</i>
+                                </td>
+                                <td class="text-center align-middle">0,05</td>
+                                <td class="text-center">> 80 %<br>60 % - 80 %<br>40 % - 60%<br>20 % - 40 %<br>
+                                    < 20 %</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td class="text-center align-middle font-weight-bold" colspan="4"><?= number_format($total_jiwa_terlayani2, 0, ',', '.'); ?> / <?= number_format($total_wil_layan, 0, ',', '.'); ?> X 100 % = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_cak_teknis, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_cak_teknis; ?></td>
+                                <td class="text-center align-middle">0,05</td>
+                                <td class="text-center align-middle"><?= number_format($hasil_cak_teknis, 2, ',', '.'); ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">2. PERTUMBUHAN PELANGGAN (% PERTHN)</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">Persentase kenaikan jumlah pelanggan dibanding pelanggan tahun lalu
+                                    <br>
+                                    <br>
+                                    <i>Jumlah Pelanggan th ini - Pelanggan th lalu / Pelanggan Tahun Lalu x 100%</i>
+                                </td>
+                                <td class="text-center align-middle">0,05</td>
+                                <td class="text-center">> 10%<br>8 - 10<br>6 - 8<br>4 - 6<br>
+                                    < 4</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($jumlah_pelanggan, 0, ',', '.'); ?> / <?= number_format($jumlah_pelanggan_tahun_lalu, 0, ',', '.'); ?> x 100 % = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_pelanggan, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_pelanggan; ?></td>
+                                <td class="text-center align-middle">0,05</td>
+                                <td class="text-center align-middle"><?= number_format($hasil_pelanggan, 2, ',', '.'); ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">3. TINGKAT PENYELESAIAN ADUAN</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">Jumlah Keluhan yang telah diselesaikan<br><br>
+                                    <a>Jumlah Keluhan Selesai / Jumlah Keluhan x 100%</a>
+                                </td>
+                                <td class="text-center align-middle">0,025</td>
+                                <td class="text-center">> 80 %<br>60 % - 80 %<br>40 % - 60%<br>20 % - 40 %<br>
+                                    < 20 %</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($jumlah_keluhan_selesai, 0, ',', '.'); ?> / <?= number_format($jumlah_keluhan, 0, ',', '.'); ?> x 100 % = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_pengaduan, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_pengaduan; ?></td>
+                                <td class="text-center align-middle">0,025</td>
+                                <td class="text-center align-middle"><?= number_format($hasil_pengaduan, 2, ',', '.'); ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">4. KUALITAS AIR PELANGGAN</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">Jumlah uji kualitas air yang memenuhi syarat<br><br>
+                                    <a>Jumlah Uji Kualitas Yg Memenuhi Syarat / Jumlah Yang Diuji x 100%</a>
+                                </td>
+                                <td class="text-center align-middle">0,075</td>
+                                <td class="text-center">> 80 %<br>60 % - 80 %<br>40 % - 60%<br>20 % - 40 %<br>
+                                    < 20 %</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($total_jumlah_syarat, 0, ',', '.'); ?> / <?= number_format($total_jumlah_terambil, 0, ',', '.'); ?> x 100 % = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_kualitas, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_kualitas; ?></td>
+                                <td class="text-center align-middle">0,075</td>
+                                <td class="text-center align-middle"><?= number_format($hasil_kualitas, 2, ',', '.'); ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">5. KONSUMSI AIR DOMESTIK</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">Rata-rata pemakaian air yang memenuhi syarat<br><br>
+                                    <a>(Jumlah Air Yang Terjual Domestik / Jumlah Pelanggan Domestik)/12</a>
+                                </td>
+                                <td class="text-center align-middle">0,05</td>
+                                <td class="text-center">> 30 M3<br>25 M3 - 30 M3<br>20 M3 - 25 M3<br>15 M3 - 20 M3<br>
+                                    < 15 M3</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($jumlah_air_terjual, 0, ',', '.'); ?> / <?= number_format($jumlah_pelanggan_dom, 0, ',', '.'); ?> / 12 = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_air_dom, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_air_dom; ?></td>
+                                <td class="text-center align-middle">0,05</td>
+                                <td class="text-center align-middle"><?= number_format($hasil_air_dom, 2, ',', '.'); ?></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="11" class="text-right">TOTAL</th>
+                                <th class="text-center font-weight-bold"><?= number_format($total_hasil_pelayanan, 2, ',', '.'); ?></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm" style="font-size: 12px;">
+                        <thead class="text-center">
+                            <tr>
+                                <th rowspan="2">INDIKATOR KINERJA & RUMUS</th>
+                                <th rowspan="2">BOBOT</th>
+                                <th rowspan="2">STANDAR</th>
+                                <th rowspan="2">NILAI</th>
+                                <th colspan="5">PENILAIAN</th>
+                                <th rowspan="2">N</th>
+                                <th rowspan="2">B</th>
+                                <th rowspan="2">H</th>
+                            </tr>
+                            <tr>
+                                <th>Perhitungan</th>
+                                <th colspan="4">=</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="12" class="font-weight-bold">III. ASPEK OPERASI</td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">1. EFISIENSI PRODUKSI</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">Prosentase realisasi produksi atas kapasitas terpasang
+                                    <br>
+                                    <br>
+                                    <i>Realisasi Produksi / Kapasitas Terpasang x 100%</i>
+                                </td>
+                                <td class="text-center align-middle">0,07</td>
+                                <td class="text-center">> 90 %<br>80 % - 90 %<br>70 % - 80%<br>60 % - 70 %<br>
+                                    < 60 %</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td class="text-center align-middle font-weight-bold" colspan="4"><?= number_format($total_volume_produksi, 0, ',', '.'); ?> / <?= number_format($total_terpasang, 0, ',', '.'); ?> X 100 % = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_kap_prod, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_kap_prod; ?></td>
+                                <td class="text-center align-middle">0,07</td>
+                                <td class="text-center align-middle"><?= number_format($hasil_kap_prod, 2, ',', '.'); ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">2. TINGKAT KEHILANGAN AIR</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">Jumlah M3 air yang terjual dibandingkan jumlah M3 air yang distribusikan
+                                    <br>
+                                    <br>
+                                    <i>Distribusi Air - Air Terekening / Distribusi Air x 100%</i>
+                                </td>
+                                <td class="text-center align-middle">0,07</td>
+                                <td class="text-center">> 25 %<br>25 % - 30 %<br>30 % - 35 %<br>35 % - 40 %<br>
+                                    < 40 %</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold">(<?= number_format($volume_produksi, 0, ',', '.'); ?> - <?= number_format($total_vol, 0, ',', '.'); ?>) / <?= number_format($volume_produksi, 0, ',', '.'); ?> x 100 % = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_nrw, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_nrw; ?></td>
+                                <td class="text-center align-middle">0,07</td>
+                                <td class="text-center align-middle"><?= number_format($hasil_nrw, 2, ',', '.'); ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">3. JAM OPERASI LAYANAN (KONTINUITAS PELAYANAN AIR PERHARI)</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">Rata - rata waktu disrtibusi air ke pelanggan per hari<br><br>
+                                    <a>Waktu Distribusi Air Ke Pelanggan 1 th / 365 hari</a>
+                                </td>
+                                <td class="text-center align-middle">0,08</td>
+                                <td class="text-center">> 21-24 Jam<br>18-21 Jam<br>15-18 Jam<br>12-15 Jam<br>
+                                    < 12 Jam</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($jam_ops_setahun, 2, ',', '.'); ?> / 365 = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_jam_ops, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_pengaduan; ?></td>
+                                <td class="text-center align-middle">0,08</td>
+                                <td class="text-center align-middle"><?= number_format($hasil_pengaduan, 2, ',', '.'); ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">4. TEKANAN AIR SAMBUNGAN PELANGGAN</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">Jumlah pelanggan yang dilayani dengan tekanan lebih 7 bar dibandingkan dg seluruh pelangggan<br><br>
+                                    <a>Jumlah Pelanggan dilayani dg tekanan > 0,7 bar / Jumlah Pelanggan x 100%</a>
+                                </td>
+                                <td class="text-center align-middle">0,065</td>
+                                <td class="text-center">> 80 %<br>60 % - 80 %<br>40 % - 60 %<br>20 % - 40 %<br>
+                                    < 20 %</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($jumlah_pelanggan_dilayani, 0, ',', '.'); ?> / <?= number_format($total_pelanggan, 0, ',', '.'); ?> x 100 % = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_tekanan_air, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_tekanan_air; ?></td>
+                                <td class="text-center align-middle">0,065</td>
+                                <td class="text-center align-middle"><?= number_format($hasil_tekanan_air, 2, ',', '.'); ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">5. PENGGANTIAN METER AIR</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">Jumlah meter air yang diganti setahun dibandingkan jumlah pelanggan yang ada <br><br>
+                                    <a>Jumlah Meter Yg diganti th ybs / Jumlah Pelanggan x 100%</a>
+                                </td>
+                                <td class="text-center align-middle">0,65</td>
+                                <td class="text-center">> 20 %<br>15 % - 20 %<br>10 % - 15 %<br>5 % - 10 %<br>
+                                    < 5 %</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($total_semua_meter, 0, ',', '.'); ?> / <?= number_format($total_pelanggan, 0, ',', '.'); ?> * 100% = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_ganti_meter, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_ganti_meter; ?></td>
+                                <td class="text-center align-middle">0,65</td>
+                                <td class="text-center align-middle"><?= number_format($hasil_ganti_meter, 2, ',', '.'); ?></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="11" class="text-right">TOTAL</th>
+                                <th class="text-center font-weight-bold"><?= number_format($total_hasil_operasional, 2, ',', '.'); ?></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm" style="font-size: 12px;">
+                        <thead class="text-center">
+                            <tr>
+                                <th rowspan="2">INDIKATOR KINERJA & RUMUS</th>
+                                <th rowspan="2">BOBOT</th>
+                                <th rowspan="2">STANDAR</th>
+                                <th rowspan="2">NILAI</th>
+                                <th colspan="5">PENILAIAN</th>
+                                <th rowspan="2">N</th>
+                                <th rowspan="2">B</th>
+                                <th rowspan="2">H</th>
+                            </tr>
+                            <tr>
+                                <th>Perhitungan</th>
+                                <th colspan="4">=</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="12" class="font-weight-bold">IV. ASPEK SUMBER DAYA MANUSIA</td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">1. RASIO JUMLAH PEGAWAI DIBANDINGKAN DENGAN 1000 PELANGGAN</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">Jumlah Pegawai untuk melayani 1000 pelanggan
+                                    <br>
+                                    <br>
+                                    <i>Jumlah Pegawai / Jumlah Pelanggan x 100%</i>
+                                </td>
+                                <td class="text-center align-middle">0,07</td>
+                                <td class="text-center">
+                                    < 7 Orang<br>7 - 8 Orang<br>9 - 10 Orang<br>11 - 12 Orang<br>
+                                        > 12 Orang
+                                </td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td class="text-center align-middle font-weight-bold" colspan="4"><?= number_format($total_volume_produksi, 0, ',', '.'); ?> / <?= number_format($total_terpasang, 0, ',', '.'); ?> X 100 % = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_kap_prod, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_kap_prod; ?></td>
+                                <td class="text-center align-middle">0,07</td>
+                                <td class="text-center align-middle"><?= number_format($hasil_kap_prod, 2, ',', '.'); ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">2. RASIO DIKLAT PEGAWAI</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4">Jumlah pegawai yang mengikuti diklat dibandingkan dgn jumlah seluruh pegawai
+                                    <br>
+                                    <br>
+                                    <i>Jumlah Pegawai Yang Ikut Diklat / Jumlah Pegawai x 100%</i>
+                                </td>
+                                <td class="text-center align-middle">0,04</td>
+                                <td class="text-center">> 80 %<br>60 % - 80 %<br>40 % - 60 %<br>20 % - 40 %<br>
+                                    < 20 %</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold">(<?= number_format($volume_produksi, 0, ',', '.'); ?> - <?= number_format($total_vol, 0, ',', '.'); ?>) / <?= number_format($volume_produksi, 0, ',', '.'); ?> x 100 % = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_nrw, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_nrw; ?></td>
+                                <td class="text-center align-middle">0,04</td>
+                                <td class="text-center align-middle"><?= number_format($hasil_nrw, 2, ',', '.'); ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="pl-3 font-weight-bold">3. RASIO BIAYA DIKLAT DENGAN BIAYA PEGAWAI</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-4"><br><br>
+                                    <a>Biaya Diklat / Biaya Pegawai</a>
+                                </td>
+                                <td class="text-center align-middle">0,04</td>
+                                <td class="text-center">> 10 %<br>7.5 % - 10 %<br>5 % - 7.5 %<br>2.5 % - 5 %<br>
+                                    < 2.5 %</td>
+                                <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($jam_ops_setahun, 2, ',', '.'); ?> / 0 = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_jam_ops, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_pengaduan; ?></td>
+                                <td class="text-center align-middle">0,04</td>
+                                <td class="text-center align-middle"><?= number_format($hasil_pengaduan, 2, ',', '.'); ?></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="11" class="text-right">TOTAL</th>
+                                <th class="text-center font-weight-bold"><?= number_format($total_hasil_operasional, 2, ',', '.'); ?></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

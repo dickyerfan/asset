@@ -75,7 +75,7 @@
                             <?php
                             $no = 1;
                             $total_fisika = $total_mikro = $total_sisa = $total_kimia_wajib = $total_kimia_tambahan = $total_jumlah_terambil = 0;
-                            $total_fisika_eks = $total_mikro_eks = $total_sisa_eks = $total_kimia_wajib_eks = $total_kimia_tambahan_eks = $total_jumlah_terambil_eks = 0;
+                            $total_fisika_eks = $total_mikro_eks = $total_sisa_eks = $total_kimia_wajib_eks = $total_kimia_tambahan_eks = $total_jumlah_terambil_eks = $total_jumlah_syarat = 0;
 
                             $bulan_list = [
                                 "January", "February", "March", "April", "May", "June",
@@ -101,6 +101,7 @@
                                 $kimia_tambahan_eks = isset($data_sample[$bulan]) ? $data_sample[$bulan]['kimia_tambahan_eks'] : 0;
                                 $jumlah_terambil = isset($data_sample[$bulan]) ? $data_sample[$bulan]['jumlah_terambil'] : 0;
                                 $jumlah_terambil_eks = isset($data_sample[$bulan]) ? $data_sample[$bulan]['jumlah_terambil_eks'] : 0;
+                                $jumlah_syarat = isset($data_sample[$bulan]) ? $data_sample[$bulan]['jumlah_syarat'] : 0;
 
                                 // Menjumlahkan total per kategori
                                 $total_fisika += $fisika;
@@ -115,6 +116,7 @@
                                 $total_kimia_tambahan_eks += $kimia_tambahan_eks;
                                 $total_jumlah_terambil += $jumlah_terambil;
                                 $total_jumlah_terambil_eks += $jumlah_terambil_eks;
+                                $total_jumlah_syarat += $jumlah_syarat;
                             ?>
                                 <tr class="text-center">
                                     <td><?= $no++; ?></td>

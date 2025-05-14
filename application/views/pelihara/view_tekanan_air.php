@@ -47,7 +47,7 @@
                                 <th>Jumlah Di cek</th>
                                 <th>Yang diatas 0,7</th>
                                 <th>Persentase</th>
-                                <th>Jumlah SR diatas 70</th>
+                                <th>Jumlah SR diatas 0,7</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -93,11 +93,11 @@
                         <tfoot>
                             <tr class="bg-light">
                                 <th colspan="2" class="text-center">Jumlah</th>
-                                <th class="text-center"><?= $total_sr; ?></th>
-                                <th class="text-center"><?= $total_cek; ?></th>
-                                <th class="text-center"><?= $total_07; ?></th>
+                                <th class="text-center"><?= number_format($total_sr, 0, ',', '.'); ?></th>
+                                <th class="text-center"><?= number_format($total_cek, 0, ',', '.'); ?></th>
+                                <th class="text-center"><?= number_format($total_07, 0, ',', '.'); ?></th>
                                 <th class="text-center"></th>
-                                <th class="text-center"><?= $total_sr_70; ?></th>
+                                <th class="text-center"><?= number_format($total_sr_70, 0, ',', '.'); ?></th>
                                 <th></th>
                             </tr>
                         </tfoot>

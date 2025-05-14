@@ -99,6 +99,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('langganan/pendapatan') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-calculator"></i>
+                        <p>
+                            Pendapatan & Tarif
+                        </p>
+                    </a>
+                </li>
                 <!-- <li class="nav-item">
                     <a href="<?= base_url('backup') ?>" class="nav-link">
                         <i class="nav-icon fas fa-database"></i>
