@@ -12,7 +12,7 @@
                                 <?php
                                 $currentYear = date('Y');
                                 $selectedYear = isset($_GET['tahun']) ? $_GET['tahun'] : $currentYear; // Memeriksa apakah ada tahun yang dipilih
-                                for ($year = 1989; $year <= $currentYear; $year++) {
+                                for ($year = 2023; $year <= $currentYear; $year++) {
                                     $selected = ($year == $selectedYear) ? 'selected' : ''; // Menandai tahun yang dipilih
                                     echo "<option value='$year' $selected>$year</option>";
                                 }
@@ -38,14 +38,14 @@
                     <table class="table table-bordered table-sm" style="font-size: 12px;">
                         <thead class="text-center">
                             <tr>
-                                <th rowspan="2">INDIKATOR KINERJA & RUMUS</th>
-                                <th rowspan="2">BOBOT</th>
-                                <th rowspan="2">STANDAR</th>
-                                <th rowspan="2">NILAI</th>
+                                <th rowspan="2" class="align-middle">INDIKATOR KINERJA & RUMUS</th>
+                                <th rowspan="2" class="align-middle">BOBOT</th>
+                                <th rowspan="2" class="align-middle">STANDAR</th>
+                                <th rowspan="2" class="align-middle">NILAI</th>
                                 <th colspan="5">PENILAIAN</th>
-                                <th rowspan="2">N</th>
-                                <th rowspan="2">B</th>
-                                <th rowspan="2">H</th>
+                                <th rowspan="2" class="align-middle">N</th>
+                                <th rowspan="2" class="align-middle">B</th>
+                                <th rowspan="2" class="align-middle">H</th>
                             </tr>
                             <tr>
                                 <th>Perhitungan</th>
@@ -432,11 +432,11 @@
                                         > 12 Orang
                                 </td>
                                 <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
-                                <td class="text-center align-middle font-weight-bold" colspan="4"><?= number_format($total_volume_produksi, 0, ',', '.'); ?> / <?= number_format($total_terpasang, 0, ',', '.'); ?> X 100 % = </td>
-                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_kap_prod, 2, ',', '.'); ?></td>
-                                <td class="text-center align-middle"><?= $hasil_perhitungan_kap_prod; ?></td>
+                                <td class="text-center align-middle font-weight-bold" colspan="4"><?= number_format($jumlah_pegawai, 0, ',', '.'); ?> / <?= number_format($jumlah_pelanggan_tahun_ini, 0, ',', '.'); ?> X 100 % = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_pegawai, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_pegawai; ?></td>
                                 <td class="text-center align-middle">0,07</td>
-                                <td class="text-center align-middle"><?= number_format($hasil_kap_prod, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= number_format($hasil_pegawai, 2, ',', '.'); ?></td>
                             </tr>
                             <tr>
                                 <td colspan="12" class="pl-3 font-weight-bold">2. RASIO DIKLAT PEGAWAI</td>
@@ -451,11 +451,11 @@
                                 <td class="text-center">> 80 %<br>60 % - 80 %<br>40 % - 60 %<br>20 % - 40 %<br>
                                     < 20 %</td>
                                 <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
-                                <td colspan="4" class="text-center align-middle font-weight-bold">(<?= number_format($volume_produksi, 0, ',', '.'); ?> - <?= number_format($total_vol, 0, ',', '.'); ?>) / <?= number_format($volume_produksi, 0, ',', '.'); ?> x 100 % = </td>
-                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_nrw, 2, ',', '.'); ?></td>
-                                <td class="text-center align-middle"><?= $hasil_perhitungan_nrw; ?></td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($jumlah_diklat, 0, ',', '.'); ?> / <?= number_format($jumlah_pegawai, 0, ',', '.'); ?> x 100 = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_diklat, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_diklat; ?></td>
                                 <td class="text-center align-middle">0,04</td>
-                                <td class="text-center align-middle"><?= number_format($hasil_nrw, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= number_format($hasil_diklat, 2, ',', '.'); ?></td>
                             </tr>
                             <tr>
                                 <td colspan="12" class="pl-3 font-weight-bold">3. RASIO BIAYA DIKLAT DENGAN BIAYA PEGAWAI</td>
@@ -468,17 +468,17 @@
                                 <td class="text-center">> 10 %<br>7.5 % - 10 %<br>5 % - 7.5 %<br>2.5 % - 5 %<br>
                                     < 2.5 %</td>
                                 <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
-                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($jam_ops_setahun, 2, ',', '.'); ?> / 0 = </td>
-                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_jam_ops, 2, ',', '.'); ?></td>
-                                <td class="text-center align-middle"><?= $hasil_perhitungan_pengaduan; ?></td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($biaya_diklat, 2, ',', '.'); ?> / <?= number_format($biaya_pegawai, 2, ',', '.'); ?> = </td>
+                                <td class="text-center align-middle font-weight-bold"><?= number_format($persen_biaya_diklat, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= $hasil_perhitungan_biaya_diklat; ?></td>
                                 <td class="text-center align-middle">0,04</td>
-                                <td class="text-center align-middle"><?= number_format($hasil_pengaduan, 2, ',', '.'); ?></td>
+                                <td class="text-center align-middle"><?= number_format($hasil_biaya_diklat, 2, ',', '.'); ?></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th colspan="11" class="text-right">TOTAL</th>
-                                <th class="text-center font-weight-bold"><?= number_format($total_hasil_operasional, 2, ',', '.'); ?></th>
+                                <th class="text-center font-weight-bold"><?= number_format($total_hasil_sdm, 2, ',', '.'); ?></th>
                             </tr>
                         </tfoot>
                     </table>

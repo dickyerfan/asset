@@ -5,8 +5,8 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <a href="<?= base_url('keuangan/modal_pemda') ?>"><button class="neumorphic-button">Tahun ini</button></a>
-                    <form id="form_tahun" action="<?= base_url('keuangan/modal_pemda'); ?>" method="get">
+                    <a href="<?= base_url('keuangan/modal_ybds') ?>"><button class="neumorphic-button">Tahun ini</button></a>
+                    <form id="form_tahun" action="<?= base_url('keuangan/modal_ybds'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <select id="tahun" name="tahun" class="form-control" style="margin-left: 15px;">
                                 <?php
@@ -22,11 +22,14 @@
                     </form>
                     <?php if ($this->session->userdata('bagian') == 'Keuangan') { ?>
                         <div class="navbar-nav ms-2">
-                            <a href="<?= base_url('keuangan/modal_pemda/input_modal_pemda') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Penyertaan Pemda</button></a>
+                            <a href="<?= base_url('keuangan/modal_ybds/input_modal_ybds') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Modal YBDS</button></a>
+                        </div>
+                        <div class="navbar-nav ms-2">
+                            <a href="<?= base_url('keuangan/modal_ybds/input_keluar_modal_ybds') ?>"><button class="float-end neumorphic-button"><i class="fas fa-minus"></i> Input Keluar Modal YBDS</button></a>
                         </div>
                     <?php } ?>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('keuangan/modal_pemda/cetak_modal_pemda') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak PDF</button></a>
+                        <a href="<?= base_url('keuangan/modal_ybds/cetak_modal_ybds') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak PDF</button></a>
 
                     </div>
                 </nav>
@@ -56,7 +59,7 @@
                             <?php
                             $no = 1;
                             $total_rupiah = 0;
-                            foreach ($modal_pemda as $row) :
+                            foreach ($modal_ybds as $row) :
                                 $total_rupiah += $row->rupiah;
                             ?>
                                 <tr>
@@ -71,7 +74,7 @@
                                     <td>
                                         <?php if ($this->session->userdata('bagian') == 'Keuangan' or $this->session->userdata('bagian') == 'Administrator') { ?>
                                             <div class="text-center">
-                                                <a href="<?= base_url('keuangan/modal_pemda/edit_modal_pemda/' . $row->id_modal_pemda) ?>"><i class="fas fa-edit"></i></a>
+                                                <a href="<?= base_url('keuangan/modal_ybds/edit_modal_ybds/' . $row->id_modal_ybds) ?>"><i class="fas fa-edit"></i></a>
                                             </div>
                                         <?php } ?>
                                     </td>

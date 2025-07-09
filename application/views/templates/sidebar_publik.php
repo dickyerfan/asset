@@ -99,9 +99,27 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="<?= base_url('keuangan/hibah') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Modal Hibah</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('keuangan/modal_ybds') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Modal YBDS</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="<?= base_url('keuangan/kejadian_penting') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kejadian Penting</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('keuangan/aspek_ops') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Aspek Ops & Adm</p>
                             </a>
                         </li>
                     </ul>
@@ -125,6 +143,14 @@
                             <a href="<?= base_url('umum/kerjasama') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kerjasama</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('umum/pegawai') ?>" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>
+                                    Data Pegawai
+                                </p>
                             </a>
                         </li>
                     </ul>
@@ -227,6 +253,100 @@
                                 </p>
                             </a>
                         </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-pencil-alt"></i>
+                        <p>
+                            Perencanaan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('rencana/data_teknis') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Data Teknis</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('rencana/kelola_spam') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pengelolaan SPAM</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('rencana/dok_rpam') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Dok. RPAM</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('rencana/dok_pam') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Dok. PAM</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('rencana/sedia_dana') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Ketersediaan Dana
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-exclamation-triangle"></i>
+                        <p>
+                            Evaluasi UPK
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('spi/hasil_evaluasi') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Hasil Evaluasi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('spi/aspek_teknik') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Aspek Teknik</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('spi/aspek_admin') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Aspek Administrasi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('spi/aspek_koordinasi') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Aspek Koordinasi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('spi/tindak_lanjut') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Tindak Lanjut
+                                </p>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a href="<?= base_url('spi/pengaturan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Pengaturan
+                                </p>
+                            </a>
+                        </li> -->
                     </ul>
                 </li>
                 <!-- <li class="nav-item">

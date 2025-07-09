@@ -92,6 +92,7 @@ class Evkin_pupr extends CI_Controller
         // jumlah pelanggan
         $pelanggan = $this->Model_evkin->hitung_pelanggan($tahun);
         $data['jumlah_pelanggan'] = $pelanggan['jumlah_pelanggan'];
+
         $data['jumlah_pelanggan_tahun_lalu'] = $pelanggan['jumlah_pelanggan_tahun_lalu'];
         $data['persen_pelanggan'] = $pelanggan['persen_pelanggan'];
         $data['hasil_perhitungan_pelanggan'] = $pelanggan['hasil_perhitungan_pelanggan'];
@@ -153,6 +154,31 @@ class Evkin_pupr extends CI_Controller
 
         $data['total_hasil_operasional'] = $data['hasil_kap_prod'] + $data['hasil_tekanan_air'] + $data['hasil_ganti_meter'] + $data['hasil_nrw'] + $data['hasil_jam_ops'];
         // akhir aspek operasional
+
+        // aspek sdm
+
+        $jumlah_pegawai = $this->Model_evkin->hitung_jumlah_pegawai($tahun);
+        $data['jumlah_pegawai'] = $jumlah_pegawai['jumlah_pegawai'];
+        $data['jumlah_pelanggan_tahun_ini'] = $pelanggan['jumlah_pelanggan_tahun_ini'];
+        $data['persen_pegawai'] = $jumlah_pegawai['persen_pegawai'];
+        $data['hasil_pegawai'] = $jumlah_pegawai['hasil_pegawai'];
+        $data['hasil_perhitungan_pegawai'] = $jumlah_pegawai['hasil_perhitungan_pegawai'];
+
+        $jumlah_diklat = $this->Model_evkin->hitung_diklat_pegawai($tahun);
+        $data['jumlah_diklat'] = $jumlah_diklat['jumlah_diklat'];
+        $data['jumlah_pegawai'] = $jumlah_diklat['jumlah_pegawai'];
+        $data['persen_diklat'] = $jumlah_diklat['persen_diklat'];
+        $data['hasil_diklat'] = $jumlah_diklat['hasil_diklat'];
+        $data['hasil_perhitungan_diklat'] = $jumlah_diklat['hasil_perhitungan_diklat'];
+        $data['biaya_diklat'] = $jumlah_diklat['biaya_diklat'];
+        $data['biaya_pegawai'] = $jumlah_diklat['biaya_pegawai'];
+        $data['persen_biaya_diklat'] = $jumlah_diklat['persen_biaya_diklat'];
+        $data['hasil_perhitungan_biaya_diklat'] = $jumlah_diklat['hasil_perhitungan_biaya_diklat'];
+        $data['hasil_biaya_diklat'] = $jumlah_diklat['hasil_biaya_diklat'];
+        $data['total_hasil_sdm'] = $data['hasil_pegawai'] + $data['hasil_diklat'] + $data['hasil_biaya_diklat'];
+
+
+        // akhir aspek sdm
 
         if ($this->session->userdata('bagian') == 'Publik') {
             $this->load->view('templates/header', $data);

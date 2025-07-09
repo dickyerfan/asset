@@ -96,17 +96,19 @@ class Efek_tagih extends CI_Controller
         }
         $data['total_rp'] = $total_keseluruhan['JUMLAH']['rp'];
 
-
         // hitung drd
-        $ppa_input = $this->Model_labarugi->get_ppa_input($tahun);
-        $data['ppa_input'] = $ppa_input;
-
+        $pendapatan = $this->Model_langgan->get_pendapatan($tahun);
+        $total_harga_air = 0;
         $total_pa_tahun_ini = 0;
-
-        if (!empty($ppa_input)) {
-            foreach ($ppa_input as $row) {
-                $total_pa_tahun_ini += $row->jumlah_pa_tahun_ini;
+        $pendapatan_air_lainnya = 0;
+        foreach ($pendapatan as $row) {
+            if ($row->id_kel_tarif != '12' && !is_null($row->id_kel_tarif)) {
+                $total_harga_air += $row->harga_air;
+            } else {
+                $pendapatan_air_lainnya += $row->harga_air;
             }
+            $tagihan = $row->by_admin + $row->jas_pem + $row->harga_air;
+            $total_pa_tahun_ini += $tagihan;
         }
 
         // hitung sisa piutang
@@ -123,7 +125,6 @@ class Efek_tagih extends CI_Controller
             }
         }
         $total = array_sum($data_piu);
-
 
         $data['total_pa_tahun_ini'] = $total_pa_tahun_ini;
         $data['sisa_rek'] = $total;

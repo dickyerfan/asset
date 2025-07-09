@@ -66,6 +66,23 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('umum/pegawai') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Data Pegawai
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('keuangan/aspek_ops') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-calculator"></i>
+                        <p>
+                            Aspek Ops & Adm
+                        </p>
+                    </a>
+                </li>
+
                 <!-- <li class="nav-item">
                     <a href="<?= base_url('backup') ?>" class="nav-link">
                         <i class="nav-icon fas fa-database"></i>

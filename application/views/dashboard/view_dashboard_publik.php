@@ -12,7 +12,7 @@
                                 <?php
                                 $currentYear = date('Y');
                                 $selectedYear = isset($_GET['tahun']) ? $_GET['tahun'] : $currentYear; // Memeriksa apakah ada tahun yang dipilih
-                                for ($year = 1989; $year <= $currentYear; $year++) {
+                                for ($year = 2023; $year <= $currentYear; $year++) {
                                     $selected = ($year == $selectedYear) ? 'selected' : ''; // Menandai tahun yang dipilih
                                     echo "<option value='$year' $selected>$year</option>";
                                 }
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <!-- Kiri: KemenPUPR -->
+                    <!-- Atas: KemenPUPR -->
                     <div class="col-md-8">
                         <h5 class="text-center"><?= strtoupper($title); ?></h5>
 
@@ -88,7 +88,7 @@
 
                     </div>
 
-                    <!-- Kanan: Kemendagri -->
+                    <!-- Bawah: Kemendagri -->
 
                 </div>
                 <div class="row justify-content-center">
@@ -109,21 +109,21 @@
                                     <td class="group-label align-middle">> 75</td>
                                     <td class="group-label align-middle">BAIK SEKALI</td>
                                     <td class="text-left">KEUANGAN</td>
-                                    <td>= (41 / 60) x 45</td>
+                                    <td>= (<?= number_format($total_nilai_keuangan_ini, 0); ?> / 60) x 45</td>
                                     <td class="text-center font-weight-bold"><?= number_format($total_keuangan_kepmen, 2); ?></td>
                                 </tr>
                                 <tr class="table-category text-center">
                                     <td class="group-label align-middle">> 60 - 75</td>
                                     <td class="group-label align-middle">BAIK</td>
                                     <td class="text-left">OPERASIONAL</td>
-                                    <td>= (27 / 47) x 40</td>
+                                    <td>= (<?= number_format($total_nilai_ops_ini, 0); ?> / 47) x 40</td>
                                     <td class="text-center font-weight-bold"><?= number_format($total_operasional_kepmen, 2); ?></td>
                                 </tr>
                                 <tr class="table-category text-center">
                                     <td class="group-label align-middle">> 45 - 60</td>
                                     <td class="group-label align-middle">CUKUP</td>
                                     <td class="text-left">ADMINISTRASI</td>
-                                    <td>= (33 / 36) x 15</td>
+                                    <td>= (<?= number_format($total_nilai_adm_ini, 0); ?> / 36) x 15</td>
                                     <td class="text-center font-weight-bold"><?= number_format($total_administrasi_kepmen, 2); ?></td>
 
                                 <tr class="table-category text-center">

@@ -98,6 +98,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('keuangan/aspek_ops') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-calculator"></i>
+                        <p>
+                            Aspek Ops & Adm
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item" data-toggle="modal" data-target="#logoutModal">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>

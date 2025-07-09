@@ -8,6 +8,9 @@ class Dashboard_publik extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Model_evkin');
+        $this->load->model('Model_evkin_dagri');
+        $this->load->model('Model_evkin_dagri_ops');
+        $this->load->model('Model_evkin_dagri_adm');
         $this->load->library('form_validation');
         if (!$this->session->userdata('nama_pengguna')) {
             $this->session->set_flashdata(
@@ -64,11 +67,18 @@ class Dashboard_publik extends CI_Controller
 
         $data['total_hasil_operasional'] = $total_kap_prod + $total_tekanan_air + $total_ganti_meter + $total_pendapatan + $total_jam_ops;
 
-        if ($tahun == 2024) {
-            $data['total_hasil_sdm'] = 0.55;
-        } else {
-            $data['total_hasil_sdm'] = 0;
-        }
+        // if ($tahun == 2024) {
+        //     $data['total_hasil_sdm'] = 0.52;
+        // } else {
+        //     $data['total_hasil_sdm'] = 0;
+        // }
+
+        $jumlah_pegawai = $this->Model_evkin->hitung_jumlah_pegawai($tahun);
+        $data['hasil_pegawai'] = $jumlah_pegawai['hasil_pegawai'];
+        $jumlah_diklat = $this->Model_evkin->hitung_diklat_pegawai($tahun);
+        $data['hasil_diklat'] = $jumlah_diklat['hasil_diklat'];
+        $data['hasil_biaya_diklat'] = $jumlah_diklat['hasil_biaya_diklat'];
+        $data['total_hasil_sdm'] = $data['hasil_pegawai'] + $data['hasil_diklat'] + $data['hasil_biaya_diklat'];
 
         $data['total'] = $data['total_hasil_keuangan'] + $data['total_hasil_pelayanan'] + $data['total_hasil_operasional'] + $data['total_hasil_sdm'];
 
@@ -83,18 +93,26 @@ class Dashboard_publik extends CI_Controller
         } elseif ($total_pupr == 0) {
             $data['kategori_pupr'] = 'NO DATA';
         }
+
         // Kepmendagri
-        if ($tahun == 2024) {
-            $data['total_keuangan_kepmen'] = 30.75;
-            $data['total_operasional_kepmen'] = 22.98;
-            $data['total_administrasi_kepmen'] = 13.75;
-            $data['total_kepmen'] = 67.48;
-        } else {
-            $data['total_kepmen'] = 0;
-            $data['total_keuangan_kepmen'] = 0;
-            $data['total_operasional_kepmen'] = 0;
-            $data['total_administrasi_kepmen'] = 0;
-        }
+        $total_nilai_keuangan_ini = $this->Model_evkin_dagri->hitung_nilai_keuangan($tahun)['tahun_ini']['total_hasil_keuangan_ini'];
+        $nilai_kinerja_keuangan_ini = $this->Model_evkin_dagri->hitung_nilai_keuangan($tahun)['tahun_ini']['nilai_kinerja_keuangan_ini'];
+
+        $total_nilai_adm_ini = $this->Model_evkin_dagri_adm->hitung_aspek_adm($tahun)['tahun_ini']['total_nilai'];
+        $nilai_kinerja_adm_ini = $this->Model_evkin_dagri_adm->hitung_aspek_adm($tahun)['tahun_ini']['nilai_kinerja'];
+
+        $total_nilai_ops_ini = $this->Model_evkin_dagri_ops->hitung_aspek_ops($tahun)['tahun_ini']['total_aspek_ops'];
+        $nilai_kinerja_ops_ini = $this->Model_evkin_dagri_ops->hitung_aspek_ops($tahun)['tahun_ini']['nilai_kinerja_aspek_ops'];
+
+        $data['total_nilai_keuangan_ini'] = $total_nilai_keuangan_ini;
+        $data['total_nilai_adm_ini'] = $total_nilai_adm_ini;
+        $data['total_nilai_ops_ini'] = $total_nilai_ops_ini;
+
+        $data['total_keuangan_kepmen'] = $nilai_kinerja_keuangan_ini;
+        $data['total_operasional_kepmen'] = $nilai_kinerja_ops_ini;
+        $data['total_administrasi_kepmen'] = $nilai_kinerja_adm_ini;
+        $data['total_kepmen'] = $nilai_kinerja_keuangan_ini + $nilai_kinerja_ops_ini + $nilai_kinerja_adm_ini;
+
         $total_kepmen = $data['total_kepmen'];
         if ($total_kepmen > 75) {
             $data['kategori_kepmen'] = 'BAIK SEKALI';
@@ -104,9 +122,9 @@ class Dashboard_publik extends CI_Controller
             $data['kategori_kepmen'] = 'CUKUP';
         } elseif ($total_kepmen >= 30 && $total_kepmen <= 45) {
             $data['kategori_kepmen'] = 'KURANG';
-        } elseif ($total_kepmen > 0 && $total_kepmen <= 30) {
+        } elseif ($total_kepmen > 10 && $total_kepmen <= 30) {
             $data['kategori_kepmen'] = 'TIDAK BAIK';
-        } elseif ($total_kepmen == 0) {
+        } elseif ($total_kepmen < 10) {
             $data['kategori_kepmen'] = 'NO DATA';
         }
 
