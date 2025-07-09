@@ -50,6 +50,54 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('rencana/data_teknis') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-bullseye"></i>
+                        <p>
+                            Data Teknis
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('rencana/kelola_spam') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-street-view"></i>
+                        <p>
+                            Pengelolaan SPAM
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('rencana/dok_rpam') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-flask"></i>
+                        <p>
+                            Dok. RPAM
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('rencana/dok_pam') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-cube"></i>
+                        <p>
+                            Dok. PAM
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('rencana/sedia_dana') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-dollar-sign"></i>
+                        <p>
+                            Ketersediaan Dana
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('keuangan/aspek_ops') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-calculator"></i>
+                        <p>
+                            Aspek Ops & Adm
+                        </p>
+                    </a>
+                </li>
                 <!-- <li class="nav-item">
                     <a href="<?= base_url('backup') ?>" class="nav-link">
                         <i class="nav-icon fas fa-database"></i>

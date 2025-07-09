@@ -5,8 +5,8 @@
         <div class="card">
             <div class="card-header card-outline card-primary">
                 <nav class="navbar ">
-                    <a href="<?= base_url('keuangan/modal_pemda') ?>"><button class="neumorphic-button">Tahun ini</button></a>
-                    <form id="form_tahun" action="<?= base_url('keuangan/modal_pemda'); ?>" method="get">
+                    <a href="<?= base_url('keuangan/hibah') ?>"><button class="neumorphic-button">Tahun ini</button></a>
+                    <form id="form_tahun" action="<?= base_url('keuangan/hibah'); ?>" method="get">
                         <div style="display: flex; align-items: center;">
                             <select id="tahun" name="tahun" class="form-control" style="margin-left: 15px;">
                                 <?php
@@ -22,11 +22,11 @@
                     </form>
                     <?php if ($this->session->userdata('bagian') == 'Keuangan') { ?>
                         <div class="navbar-nav ms-2">
-                            <a href="<?= base_url('keuangan/modal_pemda/input_modal_pemda') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Penyertaan Pemda</button></a>
+                            <a href="<?= base_url('keuangan/hibah/input_hibah') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Hibah</button></a>
                         </div>
                     <?php } ?>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('keuangan/modal_pemda/cetak_modal_pemda') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak PDF</button></a>
+                        <a href="<?= base_url('keuangan/hibah/cetak_hibah') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak PDF</button></a>
 
                     </div>
                 </nav>
@@ -42,7 +42,7 @@
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
-                                <th>Jenis Asset</th>
+                                <th>Uraian</th>
                                 <th>Lokasi</th>
                                 <th>Tahun</th>
                                 <th>Nilai (Rp)</th>
@@ -56,12 +56,12 @@
                             <?php
                             $no = 1;
                             $total_rupiah = 0;
-                            foreach ($modal_pemda as $row) :
+                            foreach ($hibah as $row) :
                                 $total_rupiah += $row->rupiah;
                             ?>
                                 <tr>
                                     <td class="text-center"><?= $no++; ?></td>
-                                    <td><?= $row->jenis_asset; ?></td>
+                                    <td><?= nl2br(htmlspecialchars($row->uraian)); ?></td>
                                     <td><?= $row->nama_kec; ?></td>
                                     <td class="text-center"><?= $row->tahun_data; ?></td>
                                     <td class="text-right"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>
@@ -71,7 +71,7 @@
                                     <td>
                                         <?php if ($this->session->userdata('bagian') == 'Keuangan' or $this->session->userdata('bagian') == 'Administrator') { ?>
                                             <div class="text-center">
-                                                <a href="<?= base_url('keuangan/modal_pemda/edit_modal_pemda/' . $row->id_modal_pemda) ?>"><i class="fas fa-edit"></i></a>
+                                                <a href="<?= base_url('keuangan/hibah/edit_hibah/' . $row->id_hibah) ?>"><i class="fas fa-edit"></i></a>
                                             </div>
                                         <?php } ?>
                                     </td>
@@ -82,7 +82,7 @@
                             <tr>
                                 <th colspan="4" class="text-center">Jumlah</th>
                                 <th class="text-right"><?= number_format($total_rupiah, 0, ',', '.'); ?></th>
-                                <th colspan="5"></th>
+                                <th colspan="4"></th>
                             </tr>
                         </tfoot>
                     </table>

@@ -231,18 +231,18 @@
                                 <p>Neraca</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="<?= base_url('lap_keuangan/lr_saketap'); ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>LR SAK ETAP</p>
                             </a>
-                        </li>
-                        <!-- <li class="nav-item">
+                        </li> -->
+                        <li class="nav-item">
                             <a href="<?= base_url('lap_keuangan/lr_sak_ep'); ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>LR SAK EP</p>
                             </a>
-                        </li> -->
+                        </li>
                         <li class="nav-item">
                             <a href="<?= base_url('lap_keuangan/perubahan_ekuitas'); ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -377,9 +377,33 @@
                     </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="<?= base_url('keuangan/hibah') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Modal Hibah</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('keuangan/modal_ybds') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Modal YBDS</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
                             <a href="<?= base_url('keuangan/kejadian_penting') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kejadian Penting</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('keuangan/aspek_ops') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Aspek Ops & Adm</p>
                             </a>
                         </li>
                     </ul>
@@ -403,6 +427,14 @@
                             <a href="<?= base_url('umum/kerjasama') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kerjasama</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('umum/pegawai') ?>" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>
+                                    Data Pegawai
+                                </p>
                             </a>
                         </li>
                     </ul>
