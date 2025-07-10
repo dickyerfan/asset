@@ -31,7 +31,7 @@
                         <button type="submit" class="neumorphic-button">Tampilkan</button>
                     </form>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('spi/hasil_evaluasi/cetak_hibah') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak PDF</button></a>
+                        <a href="<?= base_url('spi/hasil_evaluasi/cetak_evaluasi_total') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak PDF</button></a>
                     </div>
                 </nav>
             </div>

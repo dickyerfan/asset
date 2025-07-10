@@ -77,6 +77,13 @@ class Hasil_evaluasi extends CI_Controller
 
         $data['nama_bulan_terpilih'] = $nama_bulan[$bulan_filter];
 
+        // Simpan bulan & tahun terpilih ke session
+        $this->session->set_userdata('rekap_filter', [
+            'bulan' => $bulan_filter,
+            'tahun' => $tahun_filter
+        ]);
+
+
         if ($this->session->userdata('bagian') == 'Publik') {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
@@ -90,6 +97,54 @@ class Hasil_evaluasi extends CI_Controller
             $this->load->view('spi/view_hasil_evaluasi', $data);
             $this->load->view('templates/footer');
         }
+    }
+
+    public function cetak_evaluasi_total()
+    {
+        $data['title'] = 'Hasil Penilaian Evaluasi Kinerja UPK ';
+        $filter = $this->session->userdata('rekap_filter');
+        $bulan_filter = $filter['bulan'];
+        $tahun_filter = $filter['tahun'];
+
+        if ($bulan_filter === null || $bulan_filter === '') {
+            $bulan_sekarang = (int)date('m');
+            if ($bulan_sekarang === 1) {
+                $bulan_filter = 12;
+                $tahun_filter = (int)date('Y') - 1;
+            } else {
+                $bulan_filter = $bulan_sekarang - 1;
+                $tahun_filter = (int)date('Y');
+            }
+        } else {
+            $bulan_filter = (int)$bulan_filter;
+        }
+
+        if ($tahun_filter === null || $tahun_filter === '') {
+            $tahun_filter = (int)date('Y');
+        } else {
+            $tahun_filter = (int)$tahun_filter;
+        }
+
+        $data['rekap'] = $this->Model_evaluasi_upk->get_skor_total_per_upk($bulan_filter, $tahun_filter);
+        $data['bulan_selected'] = $bulan_filter;
+        $data['tahun_selected'] = $tahun_filter;
+
+        $data['filter'] = [
+            'bulan' => $bulan_filter,
+            'tahun' => $tahun_filter
+        ];
+
+        $nama_bulan = array(
+            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
+            5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
+            9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        );
+
+        $data['nama_bulan_terpilih'] = $nama_bulan[$bulan_filter];
+
+        $this->pdf->setPaper('folio', 'portrait');
+        $this->pdf->filename = "hasil_evaluasi_kinerja_upk.pdf";
+        $this->pdf->generate('spi/cetak_evaluasi_total_pdf', $data);
     }
 
     public function detail($id_upk, $bulan, $tahun)

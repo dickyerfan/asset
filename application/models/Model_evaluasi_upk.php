@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Model_evaluasi_upk extends CI_Model
 {
-
+    // teknis
     public function get_teknis($id_upk, $bulan, $tahun)
     {
         $this->db->select('eu_teknis.*, bagian_upk.nama_bagian, bagian_upk.id_bagian');
@@ -70,7 +70,9 @@ class Model_evaluasi_upk extends CI_Model
         }
     }
 
+    // akhir teknis
 
+    // admin
     public function get_admin($id_upk, $bulan, $tahun)
     {
         $this->db->select('eu_admin.*, bagian_upk.nama_bagian');
@@ -134,7 +136,9 @@ class Model_evaluasi_upk extends CI_Model
             ]);
         }
     }
+    // akhir admin
 
+    // koordinasi
     public function get_koordinasi($id_upk, $bulan, $tahun)
     {
         $this->db->select('eu_koordinasi.*, bagian_upk.nama_bagian');
@@ -205,6 +209,7 @@ class Model_evaluasi_upk extends CI_Model
             ]);
         }
     }
+    // akhir koordinasi
 
     public function get_unit_list()
     {
@@ -343,6 +348,37 @@ class Model_evaluasi_upk extends CI_Model
         $process_query_results($query_koordinasi, $skor_data_per_upk, 'total_skor_koordinasi');
 
         return array_values($skor_data_per_upk);
+    }
+
+    // public function get_created_at($table, $id_upk, $bulan, $tahun)
+    // {
+    //     $this->db->select('created_at');
+    //     $this->db->from($table);
+    //     $this->db->where('id_upk', $id_upk);
+    //     $this->db->where('bulan', $bulan);
+    //     $this->db->where('tahun', $tahun);
+    //     $this->db->order_by('created_at', 'ASC');
+    //     $this->db->limit(1);
+    //     $query = $this->db->get();
+
+    //     if ($query->num_rows() > 0) {
+    //         return $query->row()->created_at;
+    //     }
+
+    //     return null;
+    // }
+
+    public function get_created_at($table, $id_upk, $bulan, $tahun)
+    {
+        return $this->db->select('created_at')
+            ->from($table)
+            ->where('id_upk', $id_upk)
+            ->where('bulan', $bulan)
+            ->where('tahun', $tahun)
+            ->order_by('created_at', 'ASC') // bisa pakai DESC juga
+            ->limit(1)
+            ->get()
+            ->row('created_at');
     }
 
 

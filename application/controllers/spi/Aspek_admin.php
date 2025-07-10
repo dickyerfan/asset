@@ -197,6 +197,23 @@ class Aspek_admin extends CI_Controller
         $bulan = $this->input->get('bulan');
         $tahun = $this->input->get('tahun');
 
+        $created_at = $this->Model_evaluasi_upk->get_created_at('eu_teknis', $id_upk, $bulan, $tahun);
+
+        if ($created_at) {
+            $created_month = (int)date('m', strtotime($created_at));
+            $created_year  = (int)date('Y', strtotime($created_at));
+
+            $current_month = (int)date('m');
+            $current_year  = (int)date('Y');
+
+            // Cek apakah created_at sudah beda bulan/tahun dari bulan sekarang
+            if ($created_month !== $current_month || $created_year !== $current_year) {
+                $this->session->set_flashdata('info', '<div class="alert alert-danger">Data ini tidak dapat diedit karena periode input sudah berakhir.</div>');
+                redirect('spi/aspek_teknik');
+                return;
+            }
+        }
+
         $data['title'] = 'Form Edit Aspek Administrasi';
         $data['unit_list'] = $this->Model_evaluasi_upk->get_unit_list();
         $data['id_upk'] = $id_upk;
