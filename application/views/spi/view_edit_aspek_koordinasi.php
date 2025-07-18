@@ -1,6 +1,7 @@
 <section class="content">
     <div class="container-fluid">
         <?= $this->session->flashdata('info'); ?>
+        <?= $this->session->unset_userdata('info'); ?>
         <div class="card">
             <div class="card-header card-outline card-primary shadow">
                 <a class="fw-bold text-dark" style="text-decoration:none ;"><?= strtoupper($title) ?></a>

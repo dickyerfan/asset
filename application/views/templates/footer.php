@@ -324,6 +324,38 @@
         });
     });
 </script>
+<script>
+    $('.tombolHapus').on('click', function(e) {
+        e.preventDefault();
+
+        const href = $(this).attr('href');
+        const user = $(this).data('user');
+
+        if (user !== 'Administrator') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Akses Ditolak',
+                text: 'Anda tidak memiliki izin untuk menghapus file ini.'
+            });
+            return; // keluar dari fungsi
+        }
+
+        Swal.fire({
+            title: 'Yakin mau Di Hapus?',
+            text: 'Jika yakin tekan Hapus',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.location.href = href;
+            }
+        });
+    });
+</script>
+
 <!-- <script>
     $(function() {
         // Get context with jQuery - using jQuery's .get() method.

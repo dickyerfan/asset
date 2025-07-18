@@ -533,6 +533,65 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-exclamation-triangle"></i>
+                        <p>
+                            Evaluasi UPK
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('spi/hasil_evaluasi') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Hasil Evaluasi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('spi/aspek_teknik') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Aspek Teknik</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('spi/aspek_admin') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Aspek Administrasi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('spi/aspek_koordinasi') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Aspek Koordinasi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('spi/tindak_lanjut') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Tindak Lanjut
+                                </p>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a href="<?= base_url('spi/pengaturan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Pengaturan
+                                </p>
+                            </a>
+                        </li> -->
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('arsip') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-archive"></i>
+                        <p>
+                            Ruang Arsip
+                        </p>
+                    </a>
+                </li>
                 <?php if ($this->session->userdata('bagian') == 'Administrator') : ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">

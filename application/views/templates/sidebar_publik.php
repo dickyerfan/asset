@@ -349,6 +349,14 @@
                         </li> -->
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('arsip') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-archive"></i>
+                        <p>
+                            Ruang Arsip
+                        </p>
+                    </a>
+                </li>
                 <!-- <li class="nav-item">
                     <a href="<?= base_url('backup') ?>" class="nav-link">
                         <i class="nav-icon fas fa-database"></i>

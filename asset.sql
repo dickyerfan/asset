@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : lokalan
+ Source Server         : DIE ArtS
  Source Server Type    : MySQL
- Source Server Version : 100432 (10.4.32-MariaDB)
+ Source Server Version : 100418 (10.4.18-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : asset
 
  Target Server Type    : MySQL
- Target Server Version : 100432 (10.4.32-MariaDB)
+ Target Server Version : 100418 (10.4.18-MariaDB)
  File Encoding         : 65001
 
- Date: 09/07/2025 10:40:23
+ Date: 17/07/2025 14:04:11
 */
 
 SET NAMES utf8mb4;
@@ -175,6 +175,67 @@ INSERT INTO `amortisasi` VALUES (25, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'N
 INSERT INTO `amortisasi` VALUES (26, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Legalitas Asset', '2024-05-31', NULL, '', '', 14273000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:25:59', 0);
 INSERT INTO `amortisasi` VALUES (27, 'Kantor Pusat', 523, 508, 393, 30, NULL, 'Biaya Rabatan  Pengamanan Pipa Sukosari akibat Pelebaran Jalan', '2024-05-31', NULL, '', '', 9710000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:27:07', 0);
 INSERT INTO `amortisasi` VALUES (28, 'Kantor Pusat', 526, 510, 393, 30, NULL, 'Perpanjangan merk Ijen Water', '2024-12-02', NULL, '', '', 3430000, 1, 5, 20.00, 'Administrator', '2024-12-25 09:29:44', 0);
+
+-- ----------------------------
+-- Table structure for arsip
+-- ----------------------------
+DROP TABLE IF EXISTS `arsip`;
+CREATE TABLE `arsip`  (
+  `id_arsip` int NOT NULL AUTO_INCREMENT,
+  `id_folder` tinyint NOT NULL,
+  `jenis` enum('Surat Keputusan','Peraturan','Berkas Kerja','Dokumen') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tahun` char(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `nama_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `nama_dokumen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tentang` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tgl_dokumen` date NOT NULL,
+  `tgl_upload` date NOT NULL,
+  `created_at` datetime NULL DEFAULT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `modified_at` datetime NULL DEFAULT NULL,
+  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_arsip`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of arsip
+-- ----------------------------
+INSERT INTO `arsip` VALUES (2, 1, 'Surat Keputusan', '1999', 'Kepmendagri_47_th_99.pdf', 'Kepmendagri no 47 Tahun 1999', 'Pedoman Penilaian Kinerja Perusahaan Daerah Air Minum', '2023-05-11', '2023-05-11', '2023-05-11 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (4, 2, 'Peraturan', '1993', 'Perda_No_2_Tahun_93_tentang_Pendirian_Pdam.pdf', 'Perda No 2 Tahun 1993', 'Pendirian Perusahaan  Daerah Air Minum Kabupaten Bondowoso Tingkat II Bondowoso', '1993-04-21', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (5, 1, 'Surat Keputusan', '1996', 'SK_Direktur_NO_22_2_Tahun_96_Tentang_Struktur.pdf', 'SK Direktur No 22.2 Tahun 1996 ', 'Struktur  Organisasi, Uraian Tugas  dan Tata Kerja Perusahaan Daerah Air Minum Kabupaten Daerah Tingkat II Bondowoso', '1996-04-01', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (6, 1, 'Surat Keputusan', '2017', 'SK_Bupati_No_188_45_Tahun_2017_Tentang_Tarif_Air.pdf', 'SK Bupati No 188.45/830/430.4.2/2017', 'Tarif Air Minum Pada Perusahaan Daerah Air Minum Kabupaten Bondowoso Tahun 2017', '2017-11-29', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (7, 1, 'Surat Keputusan', '2022', 'SK_Bupati_No_188_45_Tahun_2022_Tentang_Tarif_Air.pdf', 'SK Bupati No 188.45/262/430.4.2/2022', 'Tarif Air Minum Pada Perusahaan Daerah Air Minum Kabupaten Bondowoso Tahun 2022', '2022-02-24', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (8, 1, 'Surat Keputusan', '2021', 'SK_Direktur_No_188_tahun_2021_tentang_Hak_Minim.pdf', 'SK Direktur No 188/33.3/430.12/2021 ', 'Perubahan Penetapan Pemberlakuan Hak Minim (10)M3', '2021-11-01', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (9, 1, 'Peraturan', '2015', 'Perda_no_3_tahun_2015_ttg_Penyertaan_Modal.pdf', 'Perda No 3 Tahun 2015', 'Penyertaan Modal Pemerintah Daerah Kepada Perusahaan Daerah Air Minum Kabupaten Bondowoso', '2015-11-30', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (10, 1, 'Surat Keputusan', '2021', 'SK_Direktur_No_188_Tahun_2021_Tentang_Pedoman_Pengadaan_barang_jasa.pdf', 'SK Direktur No 188/01.4.2/430.12/2021 ', 'Pedoman Pelaksanaan Pengadaan Barang/Jasa  pada Perusahaan Daerah Air Minum Kabupaten Bondowoso', '2021-01-11', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (11, 1, 'Peraturan', '2019', 'PERBUP_Perubahan_kedua_atas_Peraturan_Bupati_No_57_TAHUN_2013.pdf', 'PerBup No 8 Tahun 2019', 'Perubahan Kedua atas Peraturan Bupati Bondowoso No 57 tahun Tahun 2013 Tentang Petunjuk Pelaksanaan Peraturan Daerah Kabupaten Daerah Tingkat II Bondowoso No 2 Tahun 1993 Tentang Pendirian Perusahaan Daerah Air Minum Kabupaten Daerah Tingkat II Bondowoso', '2019-01-18', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (12, 1, 'Peraturan', '2011', 'Perda_No_6_Tahun_2011_ttg_perubahan_pendirian_pdam.pdf', 'Perda No 6 Tahun 2011', 'Perubahan Atas  Peraturan Daerah Kabupaten Daerah Tingkat II Bondowoso No 2  Tahun 1993  Tentang Pendirian Perusahaan Daerah Air Minum  Kabupaten  Daerah Tingkat II Bondowoso', '2011-08-01', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (17, 1, 'Peraturan', '2018', 'Permendagri_Nomor_37_Tahun_2018.pdf', 'Permendagri No 37 Tahun 2018', 'Pengangkatan dan Pemberhentian Anggota Dewan Pengawas atau  Anggota Komisaris dan Anggota Direksi Badan Usaha Milik Daerah', '2018-05-07', '2023-05-16', '2023-05-16 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (20, 1, 'Peraturan', '2017', 'PERMENDAGRI_Nomor_11_Tahun_2017.pdf', 'Permendagri No 11 Tahun 2017', 'Pedoman Evaluasi Rancangan Peraturan Daerah Tentang\r\nPertanggungjawaban Pelaksanaan Anggaran Pendapatan Dan\r\nBelanja Daerah Dan Rancangan Peraturan Kepala Daerah\r\nTentang Penjabaran Pertanggungjawaban Pelaksanaan\r\nAnggaran Pendapatan Dan Belanja Daerah', '2017-02-22', '2023-05-16', '2023-05-16 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (21, 1, 'Dokumen', '2015', 'SAK_ETAP_CONTENTS.pdf', 'Pedoman SAK ETAP', 'Pedoman Standar Akuntansi Keuangan Untuk Entitas Tanpa Akuntabilitas Publik', '2015-01-01', '2023-06-21', '2023-06-21 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (22, 1, 'Peraturan', '2006', 'permendagri_23_2006.pdf', 'Permendagri no 23 tahun 2006', 'Pedoman Teknis Dan Tata Cara Pengaturan Tarif Air Minum Pada Perusahaan Daerah Air Minum', '2006-07-03', '2023-06-23', '2023-06-23 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (23, 1, 'Surat Keputusan', '2024', 'KEPUTUSAN_BUPATI_PENETAPAN_PENYERTAAN_MODAL_2024.pdf', 'SK Bupati Bondowoso No 188.45/341/430.4.2/2024', 'Penetapan Penyertaan Modal Pdam Yang Berasal Dari Bagian Laba Pdam Kab Bondowoso Dan Penyertaan Modal Daerah Kepada Pdam Kab Bondowoso Per 31 Maret 2024', '2024-05-06', '2025-07-14', '2025-07-14 00:00:00', 'Administrator', '2025-07-15 10:46:33', 'Satuan Pengawasan Internal');
+
+-- ----------------------------
+-- Table structure for arsip_folder
+-- ----------------------------
+DROP TABLE IF EXISTS `arsip_folder`;
+CREATE TABLE `arsip_folder`  (
+  `id_folder` int NOT NULL AUTO_INCREMENT,
+  `nama_folder` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` datetime NOT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `modified_at` datetime NULL DEFAULT NULL,
+  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_folder`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of arsip_folder
+-- ----------------------------
+INSERT INTO `arsip_folder` VALUES (1, 'Lain-lain', '2025-07-15 12:32:04', 'Administrator', NULL, '');
+INSERT INTO `arsip_folder` VALUES (2, 'Subsidi', '2025-07-15 12:45:12', 'Administrator', '2025-07-16 13:08:36', 'Administrator');
+INSERT INTO `arsip_folder` VALUES (3, 'PhPD', '2025-07-16 13:24:52', 'Administrator', NULL, '');
 
 -- ----------------------------
 -- Table structure for atdp_input
@@ -5691,7 +5752,7 @@ CREATE TABLE `eu_indikator`  (
   PRIMARY KEY (`id_indikator`) USING BTREE,
   INDEX `id_aspek`(`id_aspek` ASC) USING BTREE,
   CONSTRAINT `eu_indikator_ibfk_1` FOREIGN KEY (`id_aspek`) REFERENCES `eu_aspek` (`id_aspek`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of eu_indikator
@@ -5813,7 +5874,7 @@ CREATE TABLE `eu_opsi`  (
   PRIMARY KEY (`id_opsi`) USING BTREE,
   INDEX `id_indikator`(`id_indikator` ASC) USING BTREE,
   CONSTRAINT `eu_opsi_ibfk_1` FOREIGN KEY (`id_indikator`) REFERENCES `eu_indikator` (`id_indikator`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of eu_opsi
