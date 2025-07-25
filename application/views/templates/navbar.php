@@ -15,9 +15,9 @@
             <a class="nav-link">
                 <?php
                 if ($this->session->userdata('bagian') == 'Administrator' || $this->session->userdata('bagian') == 'Keuangan' || $this->session->userdata('bagian') == 'Auditor') {
-                    echo '<h5 class="font-weight-bold">Asset,Penyusutan & Evkin</h5>';
+                    echo '<h5 class="font-weight-bold">Asset,Lap Keuangan,Evkin & Ruang Arsip</h5>';
                 } else {
-                    echo '<h5 class="font-weight-bold">Evaluasi Kinerja</h5>';
+                    echo '<h5 class="font-weight-bold">Evaluasi Kinerja & UPK</h5>';
                 }
                 ?>
             </a>

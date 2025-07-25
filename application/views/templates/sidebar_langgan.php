@@ -101,7 +101,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="<?= base_url('langganan/pendapatan') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-calculator"></i>
+                        <i class="nav-icon fas fa-dollar-sign"></i>
                         <p>
                             Pendapatan & Tarif
                         </p>
@@ -109,9 +109,17 @@
                 </li>
                 <li class="nav-item">
                     <a href="<?= base_url('keuangan/aspek_ops') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-calculator"></i>
+                        <i class="nav-icon fas fa-eye"></i>
                         <p>
                             Aspek Ops & Adm
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('arsip') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-archive"></i>
+                        <p>
+                            Ruang Arsip
                         </p>
                     </a>
                 </li>

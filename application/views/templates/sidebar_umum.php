@@ -36,6 +36,15 @@
                     <a href="<?= base_url('dashboard_umum') ?>" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
+                            Dashboard
+                            <!-- <span class="right badge badge-danger">New</span> -->
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('evkin_pupr') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
                             KemenPUPR
                             <!-- <span class="right badge badge-danger">New</span> -->
                         </p>
@@ -75,6 +84,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="<?= base_url('umum/data_umum') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Data Umum
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="<?= base_url('keuangan/aspek_ops') ?>" class="nav-link">
                         <i class="nav-icon fas fa-calculator"></i>
                         <p>
@@ -82,7 +99,14 @@
                         </p>
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="<?= base_url('arsip') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-archive"></i>
+                        <p>
+                            Ruang Arsip
+                        </p>
+                    </a>
+                </li>
                 <!-- <li class="nav-item">
                     <a href="<?= base_url('backup') ?>" class="nav-link">
                         <i class="nav-icon fas fa-database"></i>

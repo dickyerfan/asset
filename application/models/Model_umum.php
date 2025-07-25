@@ -46,8 +46,48 @@ class Model_umum extends CI_Model
         $this->db->order_by('nama_kec', 'ASC');
         return $this->db->get()->result();
     }
-
     // akhir kerjasama
+
+    // data umum
+    // public function get_data_umum($tahun)
+    // {
+    //     $this->db->select('*');
+    //     $this->db->from('ek_data_umum');
+    //     $this->db->where('tahun', $tahun);
+    //     return $this->db->get()->result();
+    // }
+    public function get_data_umum($tahun, $uraian = null)
+    {
+        $this->db->select('*');
+        $this->db->from('ek_data_umum');
+        $this->db->where('tahun', $tahun);
+
+        if ($uraian !== null) {
+            $this->db->where('uraian', $uraian); // filter kalau ada uraian
+        }
+
+        return $this->db->get()->result();
+    }
+
+    public function input_data_umum($table, $data)
+    {
+        if (!empty($data)) {
+            $this->db->insert($table, $data);
+        }
+    }
+
+    public function get_id_data_umum($id_data_umum)
+    {
+        return $this->db->get_where('ek_data_umum', ['id_data_umum' => $id_data_umum])->row();
+    }
+
+    public function update_data_umum($id_data_umum, $data)
+    {
+        $this->db->where('id_data_umum', $id_data_umum);
+        return $this->db->update('ek_data_umum', $data);
+    }
+
+    // akhir data umum
 
     // data karyawan
     public function get_all_karyawan($tahun)

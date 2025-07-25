@@ -120,7 +120,10 @@
                         </form>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('arsip/tambah') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Upload File</button></a>
+                        <a href="<?= base_url('arsip/tambah') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Upload File Baru</button></a>
+                    </div>
+                    <div class="navbar-nav ms-2">
+                        <a href="<?= base_url('arsip/sort_folder') ?>"><button class="neumorphic-button"><i class="fas fa-folder-open"></i> Sort Folder</button> </a>
                     </div>
                 </nav>
             </div>
@@ -140,17 +143,17 @@
                         <?php endif; ?>
                     </div>
                 </div>
-                <div class="table-responsive" style="font-size: 0.7rem;">
+                <div class="table-responsive" style="font-size: 0.75rem;">
                     <table id="contoh" class="table table-hover table-striped table-bordered table-sm" width="100%" cellspacing="0">
                         <thead>
                             <tr class="bg-secondary">
                                 <th class="text-center">No</th>
                                 <th class="text-center" width="6%">Action</th>
                                 <th class="text-center">Jenis</th>
+                                <th class="text-center">Tahun</th>
                                 <th class="text-center">Folder</th>
                                 <th class="text-center">Nama Dokumen</th>
                                 <th class="text-center">Tentang</th>
-                                <th class="text-center">Tahun</th>
                                 <th class="text-center">Ptgs Upload</th>
                                 <th class="text-center">Tgl Upload</th>
                                 <th class="text-center">Ptgs Update</th>
@@ -174,10 +177,10 @@
                                         <a href="<?= base_url('arsip/baca/') ?><?= $row->id_arsip; ?>" target="_blank"><i class="fas fa-book-open" style="text-decoration:none; color:orange;" data-bs-toggle="tooltip" title="Klik untuk Baca Data"></i> </a>
                                     </td>
                                     <td><?= $row->jenis; ?></td>
+                                    <td class="text-center"><?= $row->tahun; ?></td>
                                     <td><?= $row->nama_folder; ?></td>
                                     <td><?= $row->nama_dokumen; ?></td>
                                     <td><?= $row->tentang; ?></td>
-                                    <td class="text-center"><?= $row->tahun; ?></td>
                                     <td><?= $row->created_by; ?></td>
                                     <td><?= date('d-m-Y ', strtotime($row->created_at)); ?></td>
                                     <td class="text-center">

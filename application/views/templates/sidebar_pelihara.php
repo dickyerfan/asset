@@ -33,7 +33,16 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="<?= base_url('dashboard_pelihara') ?>" class="nav-link">
+                    <a href="<?= base_url('dashboard_langgan') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                            <!-- <span class="right badge badge-danger">New</span> -->
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('evkin_pupr') ?>" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             KemenPUPR
@@ -103,6 +112,14 @@
                         <i class="nav-icon fas fa-calculator"></i>
                         <p>
                             Aspek Ops & Adm
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('arsip') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-archive"></i>
+                        <p>
+                            Ruang Arsip
                         </p>
                     </a>
                 </li>

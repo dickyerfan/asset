@@ -5,9 +5,9 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta name="description" content="Aplikasi Asset & Penyusutan PDAM Bondowoso" />
+	<meta name="description" content="Aplikasi Kinerja & Asset PDAM Bondowoso" />
 	<meta name="author" content="DIE Art'S Production" />
-	<title>Asset | <?= $title ?></title>
+	<title>Kinerja | <?= $title ?></title>
 
 	<link href="<?= base_url() ?>assets/img/pdam_biru.png" rel="icon">
 

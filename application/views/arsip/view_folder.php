@@ -22,7 +22,7 @@
                         <h5 class="font-weight-bold"><?= strtoupper($title); ?></h5>
                     </div>
                 </div>
-                <div class="table-responsive" style="font-size: 0.7rem;">
+                <div class="table-responsive" style="font-size: 0.9rem;">
                     <table id="contoh" class="table table-hover table-striped table-bordered table-sm" width="100%" cellspacing="0">
                         <thead>
                             <tr class="bg-secondary">

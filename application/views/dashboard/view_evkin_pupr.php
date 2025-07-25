@@ -363,7 +363,7 @@
                                 <td class="text-center">> 80 %<br>60 % - 80 %<br>40 % - 60 %<br>20 % - 40 %<br>
                                     < 20 %</td>
                                 <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
-                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($jumlah_pelanggan_dilayani, 0, ',', '.'); ?> / <?= number_format($total_pelanggan, 0, ',', '.'); ?> x 100 % = </td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($jumlah_pelanggan_dilayani, 0, ',', '.'); ?> / <?= number_format($total_pelanggan_ops, 0, ',', '.'); ?> x 100 % = </td>
                                 <td class="text-center align-middle font-weight-bold"><?= number_format($persen_tekanan_air, 2, ',', '.'); ?></td>
                                 <td class="text-center align-middle"><?= $hasil_perhitungan_tekanan_air; ?></td>
                                 <td class="text-center align-middle">0,065</td>
@@ -380,7 +380,7 @@
                                 <td class="text-center">> 20 %<br>15 % - 20 %<br>10 % - 15 %<br>5 % - 10 %<br>
                                     < 5 %</td>
                                 <td class="text-center">5 <br>4 <br>3 <br>2 <br>1</td>
-                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($total_semua_meter, 0, ',', '.'); ?> / <?= number_format($total_pelanggan, 0, ',', '.'); ?> * 100% = </td>
+                                <td colspan="4" class="text-center align-middle font-weight-bold"><?= number_format($total_semua_meter, 0, ',', '.'); ?> / <?= number_format($total_pelanggan_gm, 0, ',', '.'); ?> * 100% = </td>
                                 <td class="text-center align-middle font-weight-bold"><?= number_format($persen_ganti_meter, 2, ',', '.'); ?></td>
                                 <td class="text-center align-middle"><?= $hasil_perhitungan_ganti_meter; ?></td>
                                 <td class="text-center align-middle">0,65</td>

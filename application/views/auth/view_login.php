@@ -5,9 +5,9 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Aplikasi Asset & Penyusutan PDAM Bondowoso" />
+    <meta name="description" content="Aplikasi Kinerja & Asset PDAM Bondowoso" />
     <meta name="author" content="DIE Art'S Production" />
-    <title>Asset | <?= $title ?></title>
+    <title>Kinerja | <?= $title ?></title>
 
     <link href="<?= base_url() ?>assets/img/pdam_biru.png" rel="icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -22,7 +22,7 @@
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
                 <img src="<?= base_url('assets/img/pdam_biru.png') ?>" alt="" style="width:25% ;">
-                <h3 class=" text-primary mt-2 mb-2 font-weight-bold">Aplikasi Asset & Penyusutan</h3>
+                <h3 class=" text-primary mt-2 mb-2 font-weight-bold">Aplikasi Kinerja & Asset </h3>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Silakan Login untuk masuk Aplikasi</p>

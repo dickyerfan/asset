@@ -24,7 +24,7 @@
                         <a href="<?= base_url('dashboard_publik/cetak_evkin_pupr') ?>"><button class="float-end neumorphic-button"> Permendagri 47 Th 1999</button></a>
                     </div> -->
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('dashboard_publik/cetak_evkin_pupr') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Dokumen</button></a>
+                        <!-- <a href="<?= base_url('dashboard_publik/cetak_evkin_pupr') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak Dokumen</button></a> -->
                     </div>
                 </nav>
             </div>

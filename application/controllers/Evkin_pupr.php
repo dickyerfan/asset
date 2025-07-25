@@ -122,7 +122,7 @@ class Evkin_pupr extends CI_Controller
         // tekanan air
         $tekanan_air = $this->Model_evkin->hitung_tekanan_air($tahun);
         $data['jumlah_pelanggan_dilayani'] = $tekanan_air['jumlah_pelanggan_dilayani'];
-        $data['total_pelanggan'] = $tekanan_air['total_pelanggan'];
+        $data['total_pelanggan_ops'] = $tekanan_air['total_pelanggan'];
         $data['persen_tekanan_air'] = $tekanan_air['persen_tekanan_air'];
         $data['hasil_tekanan_air'] = $tekanan_air['hasil_tekanan_air'];
         $data['hasil_perhitungan_tekanan_air'] = $tekanan_air['hasil_perhitungan_tekanan_air'];
@@ -130,7 +130,7 @@ class Evkin_pupr extends CI_Controller
         // ganti meter
         $ganti_meter = $this->Model_evkin->hitung_ganti_meter($tahun);
         $data['total_semua_meter'] = $ganti_meter['total_semua_meter'];
-        $data['total_pelanggan'] = $ganti_meter['total_pelanggan'];
+        $data['total_pelanggan_gm'] = $ganti_meter['total_pelanggan'];
         $data['persen_ganti_meter'] = $ganti_meter['persen_ganti_meter'];
         $data['hasil_ganti_meter'] = $ganti_meter['hasil_ganti_meter'];
         $data['hasil_perhitungan_ganti_meter'] = $ganti_meter['hasil_perhitungan_ganti_meter'];

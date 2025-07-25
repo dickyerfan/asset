@@ -548,6 +548,7 @@ class Model_evkin extends CI_Model
 
         $total_tahun_ini = 0;
         $semua_pelanggan_tahun_ini = 0;
+        $total_plg_tahun_ini = 0;
         foreach ($data_pelanggan_tahun_ini as $data) {
             $baris_total =
                 ($data->n_aktif_dom ?? 0) + ($data->rt_dom ?? 0) + ($data->niaga_dom ?? 0) + ($data->sl_kom_dom ?? 0) + ($data->unit_kom_dom ?? 0) + ($data->sl_hu_dom ?? 0) + ($data->n_aktif_n_dom ?? 0) + ($data->sosial_n_dom ?? 0) + ($data->niaga_n_dom ?? 0) + ($data->ind_n_dom ?? 0) + ($data->inst_n_dom ?? 0) + ($data->k2_n_dom ?? 0) + ($data->lain_n_dom ?? 0);
@@ -557,9 +558,12 @@ class Model_evkin extends CI_Model
 
             $total_tahun_ini += $total_aktif;
             $semua_pelanggan_tahun_ini += $baris_total;
+            $total_plg_tahun_ini += $total_aktif;
         }
 
         $total_tahun_lalu = 0;
+        $semua_pelanggan_tahun_lalu = 0;
+        $total_plg_tahun_lalu = 0;
         foreach ($data_pelanggan_tahun_lalu as $data) {
             $baris_total =
                 ($data->n_aktif_dom ?? 0) + ($data->rt_dom ?? 0) + ($data->niaga_dom ?? 0) + ($data->sl_kom_dom ?? 0) + ($data->unit_kom_dom ?? 0) + ($data->sl_hu_dom ?? 0) + ($data->n_aktif_n_dom ?? 0) + ($data->sosial_n_dom ?? 0) + ($data->niaga_n_dom ?? 0) + ($data->ind_n_dom ?? 0) + ($data->inst_n_dom ?? 0) + ($data->k2_n_dom ?? 0) + ($data->lain_n_dom ?? 0);
@@ -568,10 +572,14 @@ class Model_evkin extends CI_Model
                 ($data->rt_dom ?? 0) + ($data->niaga_dom ?? 0) + ($data->sl_kom_dom ?? 0) + ($data->unit_kom_dom ?? 0) + ($data->sl_hu_dom ?? 0) + ($data->sosial_n_dom ?? 0) + ($data->niaga_n_dom ?? 0) + ($data->ind_n_dom ?? 0) + ($data->inst_n_dom ?? 0) + ($data->k2_n_dom ?? 0) + ($data->lain_n_dom ?? 0);
 
             $total_tahun_lalu += $total_aktif;
+            $semua_pelanggan_tahun_lalu += $baris_total;
+            $total_plg_tahun_lalu += $total_aktif;
         }
 
-        $total_tahun_ini = $total_tahun_ini ?? 0;
-        $total_tahun_lalu = $total_tahun_lalu ?? 0;
+        $total_tahun_ini = $semua_pelanggan_tahun_ini ?? 0;
+        // $total_pelanggan_tahun_ini = $total_pelanggan_tahun_ini ?? 0;
+        $total_tahun_lalu = $semua_pelanggan_tahun_lalu ?? 0;
+        // $total_pelanggan_tahun_lalu = $total_pelanggan_tahun_lalu ?? 0;
 
         $persen_pelanggan = ($total_tahun_lalu > 0)
             ? (($total_tahun_ini - $total_tahun_lalu) / $total_tahun_lalu) * 100
@@ -597,7 +605,9 @@ class Model_evkin extends CI_Model
         return [
             'jumlah_pelanggan' => $jumlah_pelanggan,
             'jumlah_pelanggan_tahun_ini' => $semua_pelanggan_tahun_ini,
-            'jumlah_pelanggan_tahun_lalu' => $total_tahun_lalu,
+            'jumlah_pelanggan_tahun_lalu' => $semua_pelanggan_tahun_lalu,
+            'jumlah_pelanggan_ops_tahun_ini' => $total_plg_tahun_ini,
+            'jumlah_pelanggan_ops_tahun_lalu' => $total_plg_tahun_lalu,
             'persen_pelanggan' => $persen_pelanggan,
             'hasil_perhitungan_pelanggan' => $hasil_perhitungan_pelanggan,
             'hasil_pelanggan' => $hasil_pelanggan,
@@ -769,7 +779,7 @@ class Model_evkin extends CI_Model
         }
 
         $pelanggan = $this->hitung_pelanggan($tahun);
-        $total_pelanggan = $pelanggan['total_pelanggan_tahun_ini'];
+        $total_pelanggan = $pelanggan['jumlah_pelanggan_ops_tahun_ini'];
 
         $persen_tekanan_air = ($total_pelanggan ?? 0) > 0 ? ($total_sr_70 / $total_pelanggan) * 100 : 0;
 
@@ -843,7 +853,7 @@ class Model_evkin extends CI_Model
 
         $total_semua_meter = $total_semua_tm + $total_semua_gm;
         $pelanggan = $this->hitung_pelanggan($tahun);
-        $total_pelanggan = $pelanggan['total_pelanggan_tahun_ini'];
+        $total_pelanggan = $pelanggan['jumlah_pelanggan_ops_tahun_ini'];
 
         $persen_ganti_meter = ($total_pelanggan ?? 0) > 0 ? ($total_semua_meter / $total_pelanggan) * 100 : 0;
 
@@ -1012,14 +1022,17 @@ class Model_evkin extends CI_Model
     public function hitung_jumlah_pegawai($tahun)
     {
         $bobot_pegawai = 0.07;
-        // $jumlah_pegawai = $this->Model_umum->get_jumlah_pegawai($tahun);
-        if ($tahun == 2025) {
-            $jumlah_pegawai = 0;
-        } elseif ($tahun == 2024) {
-            $jumlah_pegawai = 163;
-        } else {
-            $jumlah_pegawai = $this->Model_umum->get_jumlah_pegawai($tahun);
-        }
+        $data = $this->Model_umum->get_data_umum($tahun, 'Jumlah Pegawai');
+        $jumlah_pegawai = isset($data[0]) ? (int)$data[0]->jumlah : 0;
+
+        // if ($tahun == 2025) {
+        //     $jumlah_pegawai = 0;
+        // } elseif ($tahun == 2024) {
+        //     $jumlah_pegawai = 163;
+        // } else {
+        //     $jumlah_pegawai = $this->Model_umum->get_jumlah_pegawai($tahun);
+        // }
+
         $pelanggan = $this->hitung_pelanggan($tahun);
         $jumlah_pelanggan_tahun_ini = $pelanggan['jumlah_pelanggan_tahun_ini'];
 
@@ -1054,22 +1067,33 @@ class Model_evkin extends CI_Model
     public function hitung_diklat_pegawai($tahun)
     {
         $bobot_diklat = 0.04;
-        if ($tahun == 2025) {
-            $jumlah_diklat = 0;
-            $jumlah_pegawai = 0;
-            $biaya_diklat = 0;
-            $biaya_pegawai = 0;
-        } elseif ($tahun == 2024) {
-            $jumlah_diklat = 163;
-            $jumlah_pegawai = 163;
-            $biaya_diklat = 112100400;
-            $biaya_pegawai =  10081291961;
-        } else {
-            $jumlah_diklat = 162;
-            $jumlah_pegawai = 162;
-            $biaya_diklat = 113090800;
-            $biaya_pegawai =  10248847850;
-        }
+        $data = $this->Model_umum->get_data_umum($tahun, 'Jumlah Pegawai');
+        $jumlah_pegawai = isset($data[0]) ? (int)$data[0]->jumlah : 0;
+        $data_jml_diklat = $this->Model_umum->get_data_umum($tahun, 'Jumlah Pegawai Ikut Diklat');
+        $jumlah_diklat = isset($data_jml_diklat[0]) ? (int)$data_jml_diklat[0]->jumlah : 0;
+
+        $data_by_diklat = $this->Model_umum->get_data_umum($tahun, 'Biaya Diklat');
+        $biaya_diklat = isset($data_by_diklat[0]) ? (int)$data_by_diklat[0]->jumlah : 0;
+
+        $data_by_pegawai = $this->Model_umum->get_data_umum($tahun, 'Biaya Pegawai');
+        $biaya_pegawai = isset($data_by_pegawai[0]) ? (int)$data_by_pegawai[0]->jumlah : 0;
+
+        // if ($tahun == 2025) {
+        //     $jumlah_diklat = 0;
+        //     $jumlah_pegawai = 0;
+        //     $biaya_diklat = 0;
+        //     $biaya_pegawai = 0;
+        // } elseif ($tahun == 2024) {
+        //     $jumlah_diklat = 163;
+        //     $jumlah_pegawai = 163;
+        //     $biaya_diklat = 112100400;
+        //     $biaya_pegawai =  10081291961;
+        // } else {
+        //     $jumlah_diklat = 162;
+        //     $jumlah_pegawai = 162;
+        //     $biaya_diklat = 113090800;
+        //     $biaya_pegawai =  10248847850;
+        // }
 
         $persen_diklat = ($jumlah_diklat > 0) ? $jumlah_diklat / $jumlah_pegawai * 100 : 0;
         $hasil_perhitungan_diklat = 0;

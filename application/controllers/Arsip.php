@@ -627,4 +627,152 @@ class Arsip extends CI_Controller
             redirect('arsip/folder');
         }
     }
+
+    // arsip berdasarkan folder
+    public function sort_folder()
+    {
+        $data['title'] = 'Arsip Berdasarkan Folder dan Jenis';
+
+        // Ambil semua folder
+        $folders = $this->db->get('arsip_folder')->result();
+
+        // Ambil semua jenis
+        $jenis_list = $this->db->distinct()->select('jenis')->get('arsip')->result();
+
+        // Gabungkan berdasarkan folder > jenis > list arsip
+        $arsip_nested = [];
+
+        foreach ($folders as $folder) {
+            foreach ($jenis_list as $jenis) {
+                $arsip = $this->db->select('arsip.*, arsip_folder.nama_folder')
+                    ->from('arsip')
+                    ->join('arsip_folder', 'arsip.id_folder = arsip_folder.id_folder')
+                    ->where('arsip.id_folder', $folder->id_folder)
+                    ->where('arsip.jenis', $jenis->jenis)
+                    ->order_by('created_at', 'desc')
+                    ->get()
+                    ->result();
+
+                if ($arsip) {
+                    $arsip_nested[$folder->nama_folder][$jenis->jenis] = $arsip;
+                }
+            }
+        }
+
+        $data['arsip_nested'] = $arsip_nested;
+
+        if ($this->session->userdata('bagian') == 'Publik') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_publik');
+            $this->load->view('arsip/view_sort_folder', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Langgan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_langgan');
+            $this->load->view('arsip/view_sort_folder', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Umum') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_umum');
+            $this->load->view('arsip/view_sort_folder', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Pemeliharaan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_pelihara');
+            $this->load->view('arsip/view_sort_folder', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Perencanaan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_rencana');
+            $this->load->view('arsip/view_sort_folder', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'Keuangan') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('arsip/view_sort_folder', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('arsip/view_sort_folder', $data);
+            $this->load->view('templates/footer');
+        }
+    }
+
+
+    // public function sort_folder()
+    // {
+    //     $data['title'] = 'Arsip Berdasarkan Folder';
+
+    //     // Ambil semua folder
+    //     $folders = $this->db->get('arsip_folder')->result();
+
+    //     // Ambil semua arsip, dikelompokkan per folder
+    //     $arsip_by_folder = [];
+    //     foreach ($folders as $folder) {
+    //         $arsip = $this->db->select('arsip.*, arsip_folder.nama_folder')
+    //             ->from('arsip')
+    //             ->join('arsip_folder', 'arsip.id_folder = arsip_folder.id_folder')
+    //             ->where('arsip.id_folder', $folder->id_folder)
+    //             ->order_by('jenis', 'asc') // jika ingin urut berdasarkan jenis
+    //             ->get()
+    //             ->result();
+
+    //         if ($arsip) {
+    //             $arsip_by_folder[$folder->nama_folder] = $arsip;
+    //         }
+    //     }
+    //     $data['arsip_by_folder'] = $arsip_by_folder;
+
+    //     if ($this->session->userdata('bagian') == 'Publik') {
+    //         $this->load->view('templates/header', $data);
+    //         $this->load->view('templates/navbar');
+    //         $this->load->view('templates/sidebar_publik');
+    //         $this->load->view('arsip/view_sort_folder', $data);
+    //         $this->load->view('templates/footer');
+    //     } elseif ($this->session->userdata('bagian') == 'Langgan') {
+    //         $this->load->view('templates/header', $data);
+    //         $this->load->view('templates/navbar');
+    //         $this->load->view('templates/sidebar_langgan');
+    //         $this->load->view('arsip/view_sort_folder', $data);
+    //         $this->load->view('templates/footer');
+    //     } elseif ($this->session->userdata('bagian') == 'Umum') {
+    //         $this->load->view('templates/header', $data);
+    //         $this->load->view('templates/navbar');
+    //         $this->load->view('templates/sidebar_umum');
+    //         $this->load->view('arsip/view_sort_folder', $data);
+    //         $this->load->view('templates/footer');
+    //     } elseif ($this->session->userdata('bagian') == 'Pemeliharaan') {
+    //         $this->load->view('templates/header', $data);
+    //         $this->load->view('templates/navbar');
+    //         $this->load->view('templates/sidebar_pelihara');
+    //         $this->load->view('arsip/view_sort_folder', $data);
+    //         $this->load->view('templates/footer');
+    //     } elseif ($this->session->userdata('bagian') == 'Perencanaan') {
+    //         $this->load->view('templates/header', $data);
+    //         $this->load->view('templates/navbar');
+    //         $this->load->view('templates/sidebar_rencana');
+    //         $this->load->view('arsip/view_sort_folder', $data);
+    //         $this->load->view('templates/footer');
+    //     } elseif ($this->session->userdata('bagian') == 'Keuangan') {
+    //         $this->load->view('templates/header', $data);
+    //         $this->load->view('templates/navbar');
+    //         $this->load->view('templates/sidebar');
+    //         $this->load->view('arsip/view_sort_folder', $data);
+    //         $this->load->view('templates/footer');
+    //     } else {
+    //         $this->load->view('templates/header', $data);
+    //         $this->load->view('templates/navbar');
+    //         $this->load->view('templates/sidebar');
+    //         $this->load->view('arsip/view_sort_folder', $data);
+    //         $this->load->view('templates/footer');
+    //     }
+    // }
 }
