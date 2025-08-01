@@ -89,7 +89,36 @@
                                         <td class="text-center"><?= $data_upk['total_skor_koordinasi']; ?></td>
                                         <td class="text-center"><?= $data_upk['grand_total_skor']; ?></td>
                                         <td class="text-center"><?= $hasil; ?></td>
-                                        <td class="text-center"><a href="<?= base_url('spi/hasil_evaluasi/detail/' . $data_upk['id_upk'] . '/' . $bulan_selected . '/' . $tahun_selected) ?>"><i class="fas fa-info-circle"></a></td>
+                                        <?php
+                                        $session_bagian = $this->session->userdata('bagian');
+                                        $session_user = $this->session->userdata('nama_lengkap');
+                                        $data_user = $data_upk['nama_bagian'];
+                                        ?>
+
+                                        <td class="text-center">
+                                            <?php if ($session_bagian != 'UPK' || $session_user == $data_user) : ?>
+                                                <a href="<?= base_url('spi/hasil_evaluasi/detail/' . $data_upk['id_upk'] . '/' . $bulan_selected . '/' . $tahun_selected) ?>">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                            <?php else : ?>
+                                                <i class="fas fa-info-circle text-muted" style="cursor: not-allowed;" title="Hanya dapat melihat data milik sendiri"></i>
+                                            <?php endif; ?>
+                                        </td>
+
+
+                                        <!-- <?php if ($this->session->userdata('bagian') != 'UPK') : ?>
+                                            <td class="text-center">
+                                                <a href="<?= base_url('spi/hasil_evaluasi/detail/' . $data_upk['id_upk'] . '/' . $bulan_selected . '/' . $tahun_selected) ?>">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                            </td>
+                                        <?php else : ?>
+                                            <td class="text-center">
+                                                <i class="fas fa-info-circle text-muted" style="cursor: not-allowed;"></i>
+                                            </td>
+                                        <?php endif; ?> -->
+
+                                        <!-- <td class="text-center"><a href="<?= base_url('spi/hasil_evaluasi/detail/' . $data_upk['id_upk'] . '/' . $bulan_selected . '/' . $tahun_selected) ?>"><i class="fas fa-info-circle"></a></td> -->
                                     </tr>
                                 <?php endforeach;
                             else : ?>

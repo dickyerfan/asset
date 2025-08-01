@@ -519,6 +519,39 @@
                     </li>
                 <?php endif; ?>
                 <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-medkit"></i>
+                        <p>
+                            Manajemen Risiko
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('risiko/profil_risiko') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Profil Risiko</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('risiko/matrik_risiko') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Matrik Risiko</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('risiko/pengaturan') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pengaturan</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
                     <a href="<?= base_url('arsip') ?>" class="nav-link">
                         <i class="nav-icon fas fa-archive"></i>
                         <p>

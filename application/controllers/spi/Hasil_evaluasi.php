@@ -20,7 +20,7 @@ class Hasil_evaluasi extends CI_Controller
             redirect('auth');
         }
         $bagian = $this->session->userdata('bagian');
-        if ($bagian != 'Publik' && $bagian != 'Administrator') {
+        if ($bagian != 'Publik' && $bagian != 'Administrator' && $bagian != 'UPK') {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -94,6 +94,12 @@ class Hasil_evaluasi extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
+            $this->load->view('spi/view_hasil_evaluasi', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'UPK') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_upk');
             $this->load->view('spi/view_hasil_evaluasi', $data);
             $this->load->view('templates/footer');
         }
@@ -220,6 +226,12 @@ class Hasil_evaluasi extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
+            $this->load->view('spi/view_detail_evaluasi', $data);
+            $this->load->view('templates/footer');
+        } elseif ($this->session->userdata('bagian') == 'UPK') {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar_upk');
             $this->load->view('spi/view_detail_evaluasi', $data);
             $this->load->view('templates/footer');
         }

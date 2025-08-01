@@ -207,16 +207,76 @@
 
 <script>
     $(function() {
-        $("#contoh").DataTable({
-            "responsive": false,
+        $("#tabel_matrik").DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "pageLength": 5,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#tabel_matrik_wrapper .col-md-6:eq(0)');
+
+        $("#tabel_tingkat").DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "pageLength": 5,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#tabel_tingkat_wrapper .col-md-6:eq(0)');
+
+        $("#tabel_kategori").DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "pageLength": 5,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#tabel_kategori_wrapper .col-md-6:eq(0)');
+
+        $("#tabel_bagian").DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "pageLength": 5,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#tabel_bagian_wrapper .col-md-6:eq(0)');
+
+        $("#tabel_pemilik").DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "pageLength": 5,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#tabel_pemilik_wrapper .col-md-6:eq(0)');
+
+        // Inisialisasi DataTable untuk id 'contoh' agar file lain tetap berfungsi
+        $('#contoh').DataTable({
+            "responsive": true,
             "lengthChange": true,
             "autoWidth": false,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        }).buttons().container().appendTo('#contoh_wrapper .col-md-6:eq(0)');
+        $('#contoh2').DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#contoh2_wrapper .col-md-6:eq(0)');
+        $('#contoh3').DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#contoh3_wrapper .col-md-6:eq(0)');
+        $('#contoh4').DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#contoh4_wrapper .col-md-6:eq(0)');
+
         $('#example2').DataTable({
             "paging": true,
             "lengthChange": true,
-            "searching": false,
+            "searching": true,
             "ordering": true,
             "info": true,
             "autoWidth": false,

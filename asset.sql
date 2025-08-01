@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : DIE ArtS
+ Source Server         : kinerja
  Source Server Type    : MySQL
- Source Server Version : 100418 (10.4.18-MariaDB)
- Source Host           : localhost:3306
+ Source Server Version : 100622 (10.6.22-MariaDB-0ubuntu0.22.04.1)
+ Source Host           : 192.168.55.6:3306
  Source Schema         : asset
 
  Target Server Type    : MySQL
- Target Server Version : 100418 (10.4.18-MariaDB)
+ Target Server Version : 100622 (10.6.22-MariaDB-0ubuntu0.22.04.1)
  File Encoding         : 65001
 
- Date: 17/07/2025 14:04:11
+ Date: 01/08/2025 10:19:21
 */
 
 SET NAMES utf8mb4;
@@ -195,26 +195,26 @@ CREATE TABLE `arsip`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_arsip`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of arsip
 -- ----------------------------
-INSERT INTO `arsip` VALUES (2, 1, 'Surat Keputusan', '1999', 'Kepmendagri_47_th_99.pdf', 'Kepmendagri no 47 Tahun 1999', 'Pedoman Penilaian Kinerja Perusahaan Daerah Air Minum', '2023-05-11', '2023-05-11', '2023-05-11 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `arsip` VALUES (4, 2, 'Peraturan', '1993', 'Perda_No_2_Tahun_93_tentang_Pendirian_Pdam.pdf', 'Perda No 2 Tahun 1993', 'Pendirian Perusahaan  Daerah Air Minum Kabupaten Bondowoso Tingkat II Bondowoso', '1993-04-21', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (2, 6, 'Surat Keputusan', '1999', 'Kepmendagri_47_th_99.pdf', 'Kepmendagri no 47 Tahun 1999', 'Pedoman Penilaian Kinerja Perusahaan Daerah Air Minum', '2023-05-11', '2023-05-11', '2023-05-11 00:00:00', 'Administrator', '2025-07-24 10:35:07', 'Administrator');
+INSERT INTO `arsip` VALUES (4, 1, 'Peraturan', '1993', 'Perda_No_2_Tahun_93_tentang_Pendirian_Pdam.pdf', 'Perda No 2 Tahun 1993', 'Pendirian Perusahaan  Daerah Air Minum Kabupaten Bondowoso Tingkat II Bondowoso', '1993-04-21', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '2025-07-24 10:35:23', 'Administrator');
 INSERT INTO `arsip` VALUES (5, 1, 'Surat Keputusan', '1996', 'SK_Direktur_NO_22_2_Tahun_96_Tentang_Struktur.pdf', 'SK Direktur No 22.2 Tahun 1996 ', 'Struktur  Organisasi, Uraian Tugas  dan Tata Kerja Perusahaan Daerah Air Minum Kabupaten Daerah Tingkat II Bondowoso', '1996-04-01', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `arsip` VALUES (6, 1, 'Surat Keputusan', '2017', 'SK_Bupati_No_188_45_Tahun_2017_Tentang_Tarif_Air.pdf', 'SK Bupati No 188.45/830/430.4.2/2017', 'Tarif Air Minum Pada Perusahaan Daerah Air Minum Kabupaten Bondowoso Tahun 2017', '2017-11-29', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `arsip` VALUES (7, 1, 'Surat Keputusan', '2022', 'SK_Bupati_No_188_45_Tahun_2022_Tentang_Tarif_Air.pdf', 'SK Bupati No 188.45/262/430.4.2/2022', 'Tarif Air Minum Pada Perusahaan Daerah Air Minum Kabupaten Bondowoso Tahun 2022', '2022-02-24', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `arsip` VALUES (8, 1, 'Surat Keputusan', '2021', 'SK_Direktur_No_188_tahun_2021_tentang_Hak_Minim.pdf', 'SK Direktur No 188/33.3/430.12/2021 ', 'Perubahan Penetapan Pemberlakuan Hak Minim (10)M3', '2021-11-01', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `arsip` VALUES (9, 1, 'Peraturan', '2015', 'Perda_no_3_tahun_2015_ttg_Penyertaan_Modal.pdf', 'Perda No 3 Tahun 2015', 'Penyertaan Modal Pemerintah Daerah Kepada Perusahaan Daerah Air Minum Kabupaten Bondowoso', '2015-11-30', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (6, 4, 'Surat Keputusan', '2017', 'SK_Bupati_No_188_45_Tahun_2017_Tentang_Tarif_Air.pdf', 'SK Bupati No 188.45/830/430.4.2/2017', 'Tarif Air Minum Pada Perusahaan Daerah Air Minum Kabupaten Bondowoso Tahun 2017', '2017-11-29', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '2025-07-24 10:35:41', 'Administrator');
+INSERT INTO `arsip` VALUES (7, 4, 'Surat Keputusan', '2022', 'SK_Bupati_No_188_45_Tahun_2022_Tentang_Tarif_Air.pdf', 'SK Bupati No 188.45/262/430.4.2/2022', 'Tarif Air Minum Pada Perusahaan Daerah Air Minum Kabupaten Bondowoso Tahun 2022', '2022-02-24', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '2025-07-24 10:35:52', 'Administrator');
+INSERT INTO `arsip` VALUES (8, 4, 'Surat Keputusan', '2021', 'SK_Direktur_No_188_tahun_2021_tentang_Hak_Minim.pdf', 'SK Direktur No 188/33.3/430.12/2021 ', 'Perubahan Penetapan Pemberlakuan Hak Minim (10)M3', '2021-11-01', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '2025-07-24 10:36:01', 'Administrator');
+INSERT INTO `arsip` VALUES (9, 5, 'Peraturan', '2015', 'Perda_no_3_tahun_2015_ttg_Penyertaan_Modal.pdf', 'Perda No 3 Tahun 2015', 'Penyertaan Modal Pemerintah Daerah Kepada Perusahaan Daerah Air Minum Kabupaten Bondowoso', '2015-11-30', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '2025-07-24 10:36:13', 'Administrator');
 INSERT INTO `arsip` VALUES (10, 1, 'Surat Keputusan', '2021', 'SK_Direktur_No_188_Tahun_2021_Tentang_Pedoman_Pengadaan_barang_jasa.pdf', 'SK Direktur No 188/01.4.2/430.12/2021 ', 'Pedoman Pelaksanaan Pengadaan Barang/Jasa  pada Perusahaan Daerah Air Minum Kabupaten Bondowoso', '2021-01-11', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `arsip` VALUES (11, 1, 'Peraturan', '2019', 'PERBUP_Perubahan_kedua_atas_Peraturan_Bupati_No_57_TAHUN_2013.pdf', 'PerBup No 8 Tahun 2019', 'Perubahan Kedua atas Peraturan Bupati Bondowoso No 57 tahun Tahun 2013 Tentang Petunjuk Pelaksanaan Peraturan Daerah Kabupaten Daerah Tingkat II Bondowoso No 2 Tahun 1993 Tentang Pendirian Perusahaan Daerah Air Minum Kabupaten Daerah Tingkat II Bondowoso', '2019-01-18', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `arsip` VALUES (12, 1, 'Peraturan', '2011', 'Perda_No_6_Tahun_2011_ttg_perubahan_pendirian_pdam.pdf', 'Perda No 6 Tahun 2011', 'Perubahan Atas  Peraturan Daerah Kabupaten Daerah Tingkat II Bondowoso No 2  Tahun 1993  Tentang Pendirian Perusahaan Daerah Air Minum  Kabupaten  Daerah Tingkat II Bondowoso', '2011-08-01', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `arsip` VALUES (17, 1, 'Peraturan', '2018', 'Permendagri_Nomor_37_Tahun_2018.pdf', 'Permendagri No 37 Tahun 2018', 'Pengangkatan dan Pemberhentian Anggota Dewan Pengawas atau  Anggota Komisaris dan Anggota Direksi Badan Usaha Milik Daerah', '2018-05-07', '2023-05-16', '2023-05-16 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `arsip` VALUES (20, 1, 'Peraturan', '2017', 'PERMENDAGRI_Nomor_11_Tahun_2017.pdf', 'Permendagri No 11 Tahun 2017', 'Pedoman Evaluasi Rancangan Peraturan Daerah Tentang\r\nPertanggungjawaban Pelaksanaan Anggaran Pendapatan Dan\r\nBelanja Daerah Dan Rancangan Peraturan Kepala Daerah\r\nTentang Penjabaran Pertanggungjawaban Pelaksanaan\r\nAnggaran Pendapatan Dan Belanja Daerah', '2017-02-22', '2023-05-16', '2023-05-16 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `arsip` VALUES (21, 1, 'Dokumen', '2015', 'SAK_ETAP_CONTENTS.pdf', 'Pedoman SAK ETAP', 'Pedoman Standar Akuntansi Keuangan Untuk Entitas Tanpa Akuntabilitas Publik', '2015-01-01', '2023-06-21', '2023-06-21 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `arsip` VALUES (22, 1, 'Peraturan', '2006', 'permendagri_23_2006.pdf', 'Permendagri no 23 tahun 2006', 'Pedoman Teknis Dan Tata Cara Pengaturan Tarif Air Minum Pada Perusahaan Daerah Air Minum', '2006-07-03', '2023-06-23', '2023-06-23 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `arsip` VALUES (23, 1, 'Surat Keputusan', '2024', 'KEPUTUSAN_BUPATI_PENETAPAN_PENYERTAAN_MODAL_2024.pdf', 'SK Bupati Bondowoso No 188.45/341/430.4.2/2024', 'Penetapan Penyertaan Modal Pdam Yang Berasal Dari Bagian Laba Pdam Kab Bondowoso Dan Penyertaan Modal Daerah Kepada Pdam Kab Bondowoso Per 31 Maret 2024', '2024-05-06', '2025-07-14', '2025-07-14 00:00:00', 'Administrator', '2025-07-15 10:46:33', 'Satuan Pengawasan Internal');
+INSERT INTO `arsip` VALUES (22, 4, 'Peraturan', '2006', 'permendagri_23_2006.pdf', 'Permendagri no 23 tahun 2006', 'Pedoman Teknis Dan Tata Cara Pengaturan Tarif Air Minum Pada Perusahaan Daerah Air Minum', '2006-07-03', '2023-06-23', '2023-06-23 00:00:00', 'Administrator', '2025-07-24 10:37:13', 'Administrator');
+INSERT INTO `arsip` VALUES (23, 5, 'Surat Keputusan', '2024', 'KEPUTUSAN_BUPATI_PENETAPAN_PENYERTAAN_MODAL_2024.pdf', 'SK Bupati Bondowoso No 188.45/341/430.4.2/2024', 'Penetapan Penyertaan Modal Pdam Yang Berasal Dari Bagian Laba Pdam Kab Bondowoso Dan Penyertaan Modal Daerah Kepada Pdam Kab Bondowoso Per 31 Maret 2024', '2024-05-06', '2025-07-14', '2025-07-14 00:00:00', 'Administrator', '2025-07-24 10:37:34', 'Administrator');
 
 -- ----------------------------
 -- Table structure for arsip_folder
@@ -228,7 +228,7 @@ CREATE TABLE `arsip_folder`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_folder`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of arsip_folder
@@ -236,6 +236,9 @@ CREATE TABLE `arsip_folder`  (
 INSERT INTO `arsip_folder` VALUES (1, 'Lain-lain', '2025-07-15 12:32:04', 'Administrator', NULL, '');
 INSERT INTO `arsip_folder` VALUES (2, 'Subsidi', '2025-07-15 12:45:12', 'Administrator', '2025-07-16 13:08:36', 'Administrator');
 INSERT INTO `arsip_folder` VALUES (3, 'PhPD', '2025-07-16 13:24:52', 'Administrator', NULL, '');
+INSERT INTO `arsip_folder` VALUES (4, 'Tarif', '2025-07-24 10:32:55', 'Administrator', NULL, '');
+INSERT INTO `arsip_folder` VALUES (5, 'Penyertaan Modal', '2025-07-24 10:33:04', 'Administrator', NULL, '');
+INSERT INTO `arsip_folder` VALUES (6, 'Evaluasi SPAM', '2025-07-24 10:33:15', 'Administrator', NULL, '');
 
 -- ----------------------------
 -- Table structure for atdp_input
@@ -3306,6 +3309,35 @@ INSERT INTO `ek_data_penduduk` VALUES (46, 22, 'YA', 'YA', 25644, 10668, 25644, 
 INSERT INTO `ek_data_penduduk` VALUES (47, 23, 'TIDAK', 'TIDAK', 46353, 18778, 0, 0, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
 
 -- ----------------------------
+-- Table structure for ek_data_umum
+-- ----------------------------
+DROP TABLE IF EXISTS `ek_data_umum`;
+CREATE TABLE `ek_data_umum`  (
+  `id_data_umum` int NOT NULL AUTO_INCREMENT,
+  `uraian` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `jumlah` bigint NULL DEFAULT NULL,
+  `tahun` year NULL DEFAULT NULL,
+  `status` tinyint(1) NULL DEFAULT 1,
+  `created_at` datetime NOT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `modified_at` datetime NULL DEFAULT NULL,
+  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_data_umum`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of ek_data_umum
+-- ----------------------------
+INSERT INTO `ek_data_umum` VALUES (1, 'Jumlah Pegawai', 162, 2023, 1, '2025-07-24 14:33:22', 'Bagian Umum & Administrasi', NULL, '');
+INSERT INTO `ek_data_umum` VALUES (2, 'Jumlah Pegawai Ikut Diklat', 112, 2023, 1, '2025-07-24 14:56:55', 'Bagian Umum & Administrasi', NULL, '');
+INSERT INTO `ek_data_umum` VALUES (3, 'Biaya Diklat', 113090800, 2023, 1, '2025-07-24 14:58:29', 'Bagian Umum & Administrasi', NULL, '');
+INSERT INTO `ek_data_umum` VALUES (4, 'Biaya Pegawai', 10248847850, 2023, 1, '2025-07-24 14:59:12', 'Bagian Umum & Administrasi', NULL, '');
+INSERT INTO `ek_data_umum` VALUES (5, 'Jumlah Pegawai', 163, 2024, 1, '2025-07-24 15:18:04', 'Bagian Umum & Administrasi', NULL, '');
+INSERT INTO `ek_data_umum` VALUES (6, 'Jumlah Pegawai Ikut Diklat', 154, 2024, 1, '2025-07-24 15:18:17', 'Bagian Umum & Administrasi', '2025-07-24 15:30:11', 'Bagian Umum & Administrasi');
+INSERT INTO `ek_data_umum` VALUES (7, 'Biaya Diklat', 127283401, 2024, 1, '2025-07-24 15:18:55', 'Bagian Umum & Administrasi', '2025-07-24 15:34:14', 'Bagian Umum & Administrasi');
+INSERT INTO `ek_data_umum` VALUES (8, 'Biaya Pegawai', 9568185345, 2024, 1, '2025-07-24 15:19:08', 'Bagian Umum & Administrasi', NULL, '');
+
+-- ----------------------------
 -- Table structure for ek_efek_tagih
 -- ----------------------------
 DROP TABLE IF EXISTS `ek_efek_tagih`;
@@ -5558,7 +5590,7 @@ CREATE TABLE `eu_admin`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_teknis`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 151 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 201 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of eu_admin
@@ -5713,6 +5745,56 @@ INSERT INTO `eu_admin` VALUES (147, 22, 6, 2025, 'Pendapatan (DRD)', 'Lengkap & 
 INSERT INTO `eu_admin` VALUES (148, 22, 6, 2025, 'Pelanggan Direkeningkan', 'Lengkap & Sesuai', 3, '2025-07-08 13:45:15', 'Satuan Pengawasan Internal', NULL, '');
 INSERT INTO `eu_admin` VALUES (149, 22, 6, 2025, 'Efisiensi Penagihan', 'Sebagian', 2, '2025-07-08 13:45:15', 'Satuan Pengawasan Internal', NULL, '');
 INSERT INTO `eu_admin` VALUES (150, 22, 6, 2025, 'Umur Bacaan', 'Lengkap & Sesuai', 3, '2025-07-08 13:45:15', 'Satuan Pengawasan Internal', NULL, '');
+INSERT INTO `eu_admin` VALUES (151, 21, 7, 2025, 'Jumlah SR Baru', 'Lengkap & Sesuai', 3, '2025-08-01 09:11:52', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (152, 21, 7, 2025, 'Jumlah Penutupan', 'Sebagian', 2, '2025-08-01 09:11:52', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (153, 21, 7, 2025, 'Jumlah Pembukaan', 'Sebagian', 2, '2025-08-01 09:11:52', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (154, 21, 7, 2025, 'Jumlah Pencabutan', 'Lengkap & Sesuai', 3, '2025-08-01 09:11:52', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (155, 21, 7, 2025, 'Jumlah Tera Meter', 'Lengkap & Sesuai', 3, '2025-08-01 09:11:52', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (156, 21, 7, 2025, 'Jumlah PGWM', 'Lengkap & Sesuai', 3, '2025-08-01 09:11:52', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (157, 21, 7, 2025, 'Pendapatan (DRD)', 'Lengkap & Sesuai', 3, '2025-08-01 09:11:52', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (158, 21, 7, 2025, 'Pelanggan Direkeningkan', 'Sebagian', 2, '2025-08-01 09:11:52', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (159, 21, 7, 2025, 'Efisiensi Penagihan', 'Lengkap & Sesuai', 3, '2025-08-01 09:11:52', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (160, 21, 7, 2025, 'Umur Bacaan', 'Lengkap & Sesuai', 3, '2025-08-01 09:11:52', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (161, 19, 7, 2025, 'Jumlah SR Baru', 'Lengkap & Sesuai', 3, '2025-08-01 09:16:57', 'Satuan Pengawas Intern', '2025-08-01 09:53:42', 'Satuan Pengawas Intern');
+INSERT INTO `eu_admin` VALUES (162, 19, 7, 2025, 'Jumlah Penutupan', 'Lengkap & Sesuai', 3, '2025-08-01 09:16:57', 'Satuan Pengawas Intern', '2025-08-01 09:53:42', 'Satuan Pengawas Intern');
+INSERT INTO `eu_admin` VALUES (163, 19, 7, 2025, 'Jumlah Pembukaan', 'Lengkap & Sesuai', 3, '2025-08-01 09:16:57', 'Satuan Pengawas Intern', '2025-08-01 09:53:42', 'Satuan Pengawas Intern');
+INSERT INTO `eu_admin` VALUES (164, 19, 7, 2025, 'Jumlah Pencabutan', 'Sebagian', 2, '2025-08-01 09:16:57', 'Satuan Pengawas Intern', '2025-08-01 09:53:42', 'Satuan Pengawas Intern');
+INSERT INTO `eu_admin` VALUES (165, 19, 7, 2025, 'Jumlah Tera Meter', 'Lengkap & Sesuai', 3, '2025-08-01 09:16:57', 'Satuan Pengawas Intern', '2025-08-01 09:53:42', 'Satuan Pengawas Intern');
+INSERT INTO `eu_admin` VALUES (166, 19, 7, 2025, 'Jumlah PGWM', 'Lengkap & Sesuai', 3, '2025-08-01 09:16:57', 'Satuan Pengawas Intern', '2025-08-01 09:53:42', 'Satuan Pengawas Intern');
+INSERT INTO `eu_admin` VALUES (167, 19, 7, 2025, 'Pendapatan (DRD)', 'Lengkap & Sesuai', 3, '2025-08-01 09:16:57', 'Satuan Pengawas Intern', '2025-08-01 09:53:42', 'Satuan Pengawas Intern');
+INSERT INTO `eu_admin` VALUES (168, 19, 7, 2025, 'Pelanggan Direkeningkan', 'Lengkap & Sesuai', 3, '2025-08-01 09:16:57', 'Satuan Pengawas Intern', '2025-08-01 09:53:42', 'Satuan Pengawas Intern');
+INSERT INTO `eu_admin` VALUES (169, 19, 7, 2025, 'Efisiensi Penagihan', 'Sebagian', 2, '2025-08-01 09:16:57', 'Satuan Pengawas Intern', '2025-08-01 09:53:42', 'Satuan Pengawas Intern');
+INSERT INTO `eu_admin` VALUES (170, 19, 7, 2025, 'Umur Bacaan', 'Sebagian', 2, '2025-08-01 09:16:57', 'Satuan Pengawas Intern', '2025-08-01 09:53:42', 'Satuan Pengawas Intern');
+INSERT INTO `eu_admin` VALUES (171, 12, 7, 2025, 'Jumlah SR Baru', 'Lengkap & Sesuai', 3, '2025-08-01 09:45:25', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (172, 12, 7, 2025, 'Jumlah Penutupan', 'Sebagian', 2, '2025-08-01 09:45:25', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (173, 12, 7, 2025, 'Jumlah Pembukaan', 'Sebagian', 2, '2025-08-01 09:45:25', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (174, 12, 7, 2025, 'Jumlah Pencabutan', 'Lengkap & Sesuai', 3, '2025-08-01 09:45:25', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (175, 12, 7, 2025, 'Jumlah Tera Meter', 'Lengkap & Sesuai', 3, '2025-08-01 09:45:25', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (176, 12, 7, 2025, 'Jumlah PGWM', 'Lengkap & Sesuai', 3, '2025-08-01 09:45:25', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (177, 12, 7, 2025, 'Pendapatan (DRD)', 'Lengkap & Sesuai', 3, '2025-08-01 09:45:25', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (178, 12, 7, 2025, 'Pelanggan Direkeningkan', 'Lengkap & Sesuai', 3, '2025-08-01 09:45:25', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (179, 12, 7, 2025, 'Efisiensi Penagihan', 'Lengkap & Sesuai', 3, '2025-08-01 09:45:25', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (180, 12, 7, 2025, 'Umur Bacaan', 'Lengkap & Sesuai', 3, '2025-08-01 09:45:25', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (181, 10, 7, 2025, 'Jumlah SR Baru', 'Lengkap & Sesuai', 3, '2025-08-01 09:59:29', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (182, 10, 7, 2025, 'Jumlah Penutupan', 'Sebagian', 2, '2025-08-01 09:59:29', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (183, 10, 7, 2025, 'Jumlah Pembukaan', 'Sebagian', 2, '2025-08-01 09:59:29', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (184, 10, 7, 2025, 'Jumlah Pencabutan', 'Lengkap & Sesuai', 3, '2025-08-01 09:59:29', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (185, 10, 7, 2025, 'Jumlah Tera Meter', 'Lengkap & Sesuai', 3, '2025-08-01 09:59:29', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (186, 10, 7, 2025, 'Jumlah PGWM', 'Lengkap & Sesuai', 3, '2025-08-01 09:59:29', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (187, 10, 7, 2025, 'Pendapatan (DRD)', 'Lengkap & Sesuai', 3, '2025-08-01 09:59:29', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (188, 10, 7, 2025, 'Pelanggan Direkeningkan', 'Lengkap & Sesuai', 3, '2025-08-01 09:59:29', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (189, 10, 7, 2025, 'Efisiensi Penagihan', 'Lengkap & Sesuai', 3, '2025-08-01 09:59:29', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (190, 10, 7, 2025, 'Umur Bacaan', 'Lengkap & Sesuai', 3, '2025-08-01 09:59:29', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (191, 11, 7, 2025, 'Jumlah SR Baru', 'Lengkap & Sesuai', 3, '2025-08-01 10:12:38', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (192, 11, 7, 2025, 'Jumlah Penutupan', 'Sebagian', 2, '2025-08-01 10:12:38', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (193, 11, 7, 2025, 'Jumlah Pembukaan', 'Sebagian', 2, '2025-08-01 10:12:38', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (194, 11, 7, 2025, 'Jumlah Pencabutan', 'Lengkap & Sesuai', 3, '2025-08-01 10:12:38', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (195, 11, 7, 2025, 'Jumlah Tera Meter', 'Lengkap & Sesuai', 3, '2025-08-01 10:12:38', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (196, 11, 7, 2025, 'Jumlah PGWM', 'Lengkap & Sesuai', 3, '2025-08-01 10:12:38', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (197, 11, 7, 2025, 'Pendapatan (DRD)', 'Lengkap & Sesuai', 3, '2025-08-01 10:12:38', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (198, 11, 7, 2025, 'Pelanggan Direkeningkan', 'Lengkap & Sesuai', 3, '2025-08-01 10:12:38', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (199, 11, 7, 2025, 'Efisiensi Penagihan', 'Lengkap & Sesuai', 3, '2025-08-01 10:12:38', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `eu_admin` VALUES (200, 11, 7, 2025, 'Umur Bacaan', 'Lengkap & Sesuai', 3, '2025-08-01 10:12:38', 'Satuan Pengawas Intern', NULL, '');
 
 -- ----------------------------
 -- Table structure for eu_aspek
@@ -7021,6 +7103,246 @@ INSERT INTO `mh_input` VALUES (11, 'Pemasangan pipa PVC dia 50mm, HU 1 unit Di P
 INSERT INTO `mh_input` VALUES (12, 'Pengadaan dan pemasangan pipa 1.572 m Di Tlogosari(th2008)', 98610600, 2024, '2025-02-20 15:21:40', 'Administrator', NULL, '');
 
 -- ----------------------------
+-- Table structure for mr_analisa_risiko
+-- ----------------------------
+DROP TABLE IF EXISTS `mr_analisa_risiko`;
+CREATE TABLE `mr_analisa_risiko`  (
+  `id_analisa` int NOT NULL AUTO_INCREMENT,
+  `id_risiko` int NOT NULL,
+  `kendali_uraian` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `desain` enum('Ada','Tidak','') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `efektifitas` enum('Tidak','Kurang','Efektif','') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `probabilitas` tinyint(1) NULL DEFAULT NULL,
+  `dampak` tinyint(1) NULL DEFAULT NULL,
+  `tingkat_risiko` tinyint NULL DEFAULT NULL,
+  `peringkat_risiko` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `pemilik_risiko` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `modified_at` datetime NULL DEFAULT NULL,
+  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_analisa`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of mr_analisa_risiko
+-- ----------------------------
+INSERT INTO `mr_analisa_risiko` VALUES (1, 5, 'Belum Ada pengendalian', 'Ada', 'Tidak', 3, 3, 14, 'Moderat', 'Kepala UPK', '0000-00-00 00:00:00', '', '2025-07-31 15:46:04', 'Satuan Pengawas Intern');
+
+-- ----------------------------
+-- Table structure for mr_kategori_risiko
+-- ----------------------------
+DROP TABLE IF EXISTS `mr_kategori_risiko`;
+CREATE TABLE `mr_kategori_risiko`  (
+  `id_kr` int NOT NULL AUTO_INCREMENT,
+  `kategori_kr` int NOT NULL,
+  `nama_kr` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tipe_kr` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `status_kr` tinyint(1) NULL DEFAULT 1,
+  `created_at` datetime NOT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `modified_at` datetime NULL DEFAULT NULL,
+  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_kr`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of mr_kategori_risiko
+-- ----------------------------
+INSERT INTO `mr_kategori_risiko` VALUES (1, 1, 'Risiko Strategis', 'RS', 1, '2025-07-28 10:43:30', 'Administrator', NULL, '');
+INSERT INTO `mr_kategori_risiko` VALUES (2, 2, 'Risiko Kebijakan', 'RKJ', 1, '2025-07-28 10:43:30', 'Administrator', NULL, '');
+INSERT INTO `mr_kategori_risiko` VALUES (3, 3, 'Risiko Kepatuhan', 'RKP', 1, '2025-07-28 10:43:30', 'Administrator', NULL, '');
+INSERT INTO `mr_kategori_risiko` VALUES (4, 4, 'Risiko Legal', 'RL', 1, '2025-07-28 10:43:30', 'Administrator', NULL, '');
+INSERT INTO `mr_kategori_risiko` VALUES (5, 5, 'Risiko Fraud/Korupsi', 'RF', 1, '2025-07-28 10:43:30', 'Administrator', NULL, '');
+INSERT INTO `mr_kategori_risiko` VALUES (6, 6, 'Risiko Reputasi', 'RR', 1, '2025-07-28 10:43:30', 'Administrator', NULL, '');
+INSERT INTO `mr_kategori_risiko` VALUES (7, 7, 'Risiko Operasional', 'RO', 1, '2025-07-28 10:43:30', 'Administrator', NULL, '');
+INSERT INTO `mr_kategori_risiko` VALUES (8, 8, 'Risiko Keuangan', 'RKU', 1, '2025-07-28 10:43:30', 'Administrator', NULL, '');
+INSERT INTO `mr_kategori_risiko` VALUES (9, 9, 'Risiko SDM', 'RSD', 1, '2025-07-28 10:43:30', 'Administrator', NULL, '');
+INSERT INTO `mr_kategori_risiko` VALUES (10, 10, 'Risiko Keselamatan Kerja', 'RKK', 1, '2025-07-28 10:43:30', 'Administrator', NULL, '');
+INSERT INTO `mr_kategori_risiko` VALUES (11, 11, 'Risiko Aset', 'RA', 1, '2025-07-28 10:43:30', 'Administrator', NULL, '');
+INSERT INTO `mr_kategori_risiko` VALUES (12, 12, 'Risiko Kinerja', 'RKI', 1, '2025-07-28 10:43:30', 'Administrator', '2025-07-28 11:13:38', 'Administrator');
+
+-- ----------------------------
+-- Table structure for mr_matrik_risiko
+-- ----------------------------
+DROP TABLE IF EXISTS `mr_matrik_risiko`;
+CREATE TABLE `mr_matrik_risiko`  (
+  `id_mr` int NOT NULL AUTO_INCREMENT,
+  `probabilitas` int NOT NULL,
+  `dampak` int NOT NULL,
+  `skor` int NOT NULL DEFAULT 1,
+  `level_risiko` int NOT NULL,
+  `nama_level` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `modified_at` datetime NULL DEFAULT NULL,
+  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_mr`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of mr_matrik_risiko
+-- ----------------------------
+INSERT INTO `mr_matrik_risiko` VALUES (1, 1, 1, 1, 1, 'Sangat Rendah', '2025-07-26 21:46:04', 'Administrator', '2025-07-26 22:05:02', 'Administrator');
+INSERT INTO `mr_matrik_risiko` VALUES (2, 1, 2, 3, 1, 'Sangat Rendah', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (3, 1, 3, 5, 1, 'Sangat Rendah', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (4, 1, 4, 8, 1, 'Rendah', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (5, 1, 5, 20, 5, 'Sangat Tinggi', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (6, 2, 1, 2, 1, 'Sangat Rendah', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (7, 2, 2, 7, 2, 'Rendah', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (8, 2, 3, 11, 2, 'Rendah', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (9, 2, 4, 13, 3, 'Moderat', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (10, 2, 5, 21, 5, 'Sangat Tinggi', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (11, 3, 1, 4, 1, 'Sangat Rendah', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (12, 3, 2, 10, 2, 'Rendah', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (13, 3, 3, 14, 3, 'Moderat', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (14, 3, 4, 17, 4, 'Tinggi', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (15, 3, 5, 22, 5, 'Sangat Tinggi', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (16, 4, 1, 6, 2, 'Rendah', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (17, 4, 2, 12, 3, 'Moderat', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (18, 4, 3, 16, 4, 'Tinggi', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (19, 4, 4, 19, 4, 'Tinggi', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (20, 4, 5, 24, 5, 'Sangat Tinggi', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (21, 5, 1, 9, 2, 'Rendah', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (22, 5, 2, 15, 3, 'Moderat', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (23, 5, 3, 18, 4, 'Tinggi', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (24, 5, 4, 23, 5, 'Sangat Tinggi', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+INSERT INTO `mr_matrik_risiko` VALUES (25, 5, 5, 25, 5, 'Sangat Tinggi', '2025-07-26 22:35:25', 'Administrator', NULL, '');
+
+-- ----------------------------
+-- Table structure for mr_monitoring_risiko
+-- ----------------------------
+DROP TABLE IF EXISTS `mr_monitoring_risiko`;
+CREATE TABLE `mr_monitoring_risiko`  (
+  `id_monitoring` int NOT NULL AUTO_INCREMENT,
+  `id_risiko` int NOT NULL,
+  `rtp` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `jadwal` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `hasil` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `prob_setelah` tinyint NULL DEFAULT NULL,
+  `dampak_setelah` tinyint NULL DEFAULT NULL,
+  `tingkat_setelah` tinyint NULL DEFAULT NULL,
+  `peringkat_setelah` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `modified_at` datetime NULL DEFAULT NULL,
+  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_monitoring`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of mr_monitoring_risiko
+-- ----------------------------
+INSERT INTO `mr_monitoring_risiko` VALUES (1, 5, 'Melakukan pengawasan melekat ke bagian teknik', 'Pekan 2', 'Pekerjaan perbaikan pipa tepat waktu', '-', 1, 1, 1, 'Sangat Rendah', '0000-00-00 00:00:00', '', '2025-08-01 08:40:51', 'Satuan Pengawas Intern');
+
+-- ----------------------------
+-- Table structure for mr_pemilik_risiko
+-- ----------------------------
+DROP TABLE IF EXISTS `mr_pemilik_risiko`;
+CREATE TABLE `mr_pemilik_risiko`  (
+  `id_pemilik` int NOT NULL AUTO_INCREMENT,
+  `nama_pemilik` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `status_pemilik` tinyint(1) NULL DEFAULT 1,
+  `created_at` datetime NOT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `modified_at` datetime NULL DEFAULT NULL,
+  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_pemilik`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of mr_pemilik_risiko
+-- ----------------------------
+INSERT INTO `mr_pemilik_risiko` VALUES (1, 'Kepala UPK', 1, '0000-00-00 00:00:00', '', NULL, '');
+INSERT INTO `mr_pemilik_risiko` VALUES (2, 'Kabag Langganan', 1, '2025-07-31 13:26:38', 'Satuan Pengawas Intern', '2025-07-31 14:20:59', 'Satuan Pengawas Intern');
+INSERT INTO `mr_pemilik_risiko` VALUES (3, 'Kabag Umum ', 1, '2025-07-31 14:26:34', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `mr_pemilik_risiko` VALUES (4, 'Kabag Keuangan', 1, '2025-07-31 15:31:14', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `mr_pemilik_risiko` VALUES (5, 'Kabag Pemeliharaan', 1, '2025-07-31 15:31:33', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `mr_pemilik_risiko` VALUES (6, 'Kabag Perencanaan', 1, '2025-07-31 15:31:42', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `mr_pemilik_risiko` VALUES (7, 'Pelaksana Teknik', 1, '2025-07-31 15:32:04', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `mr_pemilik_risiko` VALUES (8, 'Pelaksana Administrasi', 1, '2025-07-31 15:32:20', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `mr_pemilik_risiko` VALUES (9, 'Staf Teknik', 1, '2025-07-31 15:32:28', 'Satuan Pengawas Intern', NULL, '');
+INSERT INTO `mr_pemilik_risiko` VALUES (10, 'Staf Administrasi', 1, '2025-07-31 15:32:38', 'Satuan Pengawas Intern', NULL, '');
+
+-- ----------------------------
+-- Table structure for mr_penanganan_risiko
+-- ----------------------------
+DROP TABLE IF EXISTS `mr_penanganan_risiko`;
+CREATE TABLE `mr_penanganan_risiko`  (
+  `id_penanganan` int NOT NULL AUTO_INCREMENT,
+  `id_risiko` int NOT NULL,
+  `uraian` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `jadwal` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `hasil` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `pj_tl` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `modified_at` datetime NULL DEFAULT NULL,
+  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_penanganan`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of mr_penanganan_risiko
+-- ----------------------------
+INSERT INTO `mr_penanganan_risiko` VALUES (1, 5, 'Meningkatkan lagi kinerja bagian Teknik', 'Pekan 1', 'Pekerjaan perbaikan pipa tepat waktu', 'Kabag Pemeliharaan', '0000-00-00 00:00:00', '', '2025-08-01 08:26:32', 'Satuan Pengawas Intern');
+
+-- ----------------------------
+-- Table structure for mr_profil_risiko
+-- ----------------------------
+DROP TABLE IF EXISTS `mr_profil_risiko`;
+CREATE TABLE `mr_profil_risiko`  (
+  `id_risiko` int NOT NULL AUTO_INCREMENT,
+  `id_upk` int NOT NULL,
+  `tahun` int NOT NULL,
+  `kegiatan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tujuan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `kode_risiko` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `pernyataan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `sebab` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `kategori` enum('C','UC') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `dampak` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `created_at` datetime NOT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `modified_at` datetime NULL DEFAULT NULL,
+  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_risiko`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of mr_profil_risiko
+-- ----------------------------
+INSERT INTO `mr_profil_risiko` VALUES (5, 8, 2025, 'Memonitor perbaikan kebocoran pipa', 'memastikan pekerjaan perbaikan pipa bisa selesai dengan baik setelah SPK di terbitkan', 'RO.25.7.8.2', 'pekerjaan perbaikan pipa terlambat ', 'Tingkat kesulitan  pekerjaan perbaikan pipa (misal di jalan raya) ', 'C', 'Pelayanan air kepada Pelanggan terganggu ', '2025-07-29 09:22:32', 'Administrator', '2025-07-29 11:18:47', 'Administrator');
+
+-- ----------------------------
+-- Table structure for mr_tingkat_risiko
+-- ----------------------------
+DROP TABLE IF EXISTS `mr_tingkat_risiko`;
+CREATE TABLE `mr_tingkat_risiko`  (
+  `id_tr` int NOT NULL AUTO_INCREMENT,
+  `level_tr` int NOT NULL,
+  `nama_tr` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `skor_min` int NOT NULL DEFAULT 1,
+  `skor_max` int NOT NULL,
+  `status_tr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `modified_at` datetime NULL DEFAULT NULL,
+  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_tr`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of mr_tingkat_risiko
+-- ----------------------------
+INSERT INTO `mr_tingkat_risiko` VALUES (1, 1, 'Sangat Rendah', 1, 5, 'Risiko Dapat Diterima', '2025-07-26 22:18:30', 'Administrator', '2025-07-26 22:24:15', 'Administrator');
+INSERT INTO `mr_tingkat_risiko` VALUES (2, 2, 'Rendah', 6, 11, 'Risiko Dapat Diterima', '2025-07-26 22:31:23', 'Administrator', NULL, '');
+INSERT INTO `mr_tingkat_risiko` VALUES (3, 3, 'Moderat', 12, 15, 'Risiko Tidak Dapat Diterima/Penanganan selanjutnya', '2025-07-26 22:32:27', 'Administrator', NULL, '');
+INSERT INTO `mr_tingkat_risiko` VALUES (4, 4, 'Tinggi', 16, 19, 'Risiko Tidak Dapat Diterima/Penanganan selanjutnya', '2025-07-26 22:33:10', 'Administrator', NULL, '');
+INSERT INTO `mr_tingkat_risiko` VALUES (5, 5, 'Sangat Tinggi', 20, 25, 'Risiko Tidak Dapat Diterima/Penanganan Prioritas', '2025-07-26 22:33:47', 'Administrator', NULL, '');
+
+-- ----------------------------
 -- Table structure for neraca
 -- ----------------------------
 DROP TABLE IF EXISTS `neraca`;
@@ -7156,16 +7478,16 @@ INSERT INTO `neraca` VALUES (110, 2024, 'Ekuitas', 'Laba Rugi Tahun Berjalan', 2
 DROP TABLE IF EXISTS `no_per`;
 CREATE TABLE `no_per`  (
   `id` int NOT NULL AUTO_INCREMENT,
-  `kode` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `name` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `parent_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `grand_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `jenis_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `kode` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `name` varchar(120) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `parent_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `grand_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `jenis_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `kelompok` int NULL DEFAULT NULL,
   `golongan` int NULL DEFAULT NULL,
   `lap_id` int NULL DEFAULT NULL,
-  `klp` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `cab_id` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `klp` varchar(11) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `cab_id` varchar(11) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `kat_id` int NULL DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
   `created_at` datetime NOT NULL,
@@ -7174,7 +7496,7 @@ CREATE TABLE `no_per`  (
   `modified_by` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `kodex`(`kode` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4269 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4269 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of no_per
@@ -11826,7 +12148,7 @@ CREATE TABLE `user`  (
   `tgl_update` datetime NULL DEFAULT NULL,
   `petugas_update` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
@@ -11836,7 +12158,7 @@ INSERT INTO `user` VALUES (2, 'dicky', 'Dicky Erfan Septiono', 'Administrator', 
 INSERT INTO `user` VALUES (18, 'cunta', 'Somaya Dewantari', 'Keuangan', '$2y$10$LHvVYekSqy8EJ402tHNFo.jShQERw5H6.tAHjrGRMriAvUNy84HDO', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (19, 'linda', 'Linda Anggraita', 'Umum', '$2y$10$8ylJ7GP5dKSmQlrw5NKfNesoiYjxLQenGoehGaaExWRUeLro3fwBe', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (20, 'auditor', 'Auditor', 'Auditor', '$2y$10$KdQMdsBbSiE9gbfsWw/FUuaqHEzohahyjfJbiPdJjlz53sglVrbr6', 'Pengguna', 1, '2024-11-15 15:44:19', 'Administrator');
-INSERT INTO `user` VALUES (21, 'spi', 'Satuan Pengawasan Internal', 'Publik', '$2y$10$JsPhwWAFLryoEvwZ.cI/KehglXFk4AubPSB0UXg8TekA2iKT0tCoy', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (21, 'spi', 'Satuan Pengawas Intern', 'Publik', '$2y$10$JsPhwWAFLryoEvwZ.cI/KehglXFk4AubPSB0UXg8TekA2iKT0tCoy', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (22, 'langgan', 'Bagian Hubungan Langganan', 'Langgan', '$2y$10$5NYFZDfMRFvvNKIHLq.8yuok6EBbZNSDRcmHTVaRGyh5c7U.3PHGK', 'Pengguna', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (23, 'deni', 'Muhammad Deni Saputro', 'Keuangan', '$2y$10$J9HjgwPou7t1dC3k1x2zHu6J//5DG7yU57fxnmOITw3qnNGoxnpLW', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (24, 'lilik', 'Lilik Yuli Andayani', 'Keuangan', '$2y$10$uc..LmDquwTsMfhL0xXC3eKX7vY7NcQN29/GSVXzGFZlQdKF6u/Rm', 'Admin', 1, '2024-11-15 10:07:17', 'Administrator');
@@ -11844,6 +12166,21 @@ INSERT INTO `user` VALUES (25, 'dian', 'Ahmad Wahyu Dian', 'Keuangan', '$2y$10$a
 INSERT INTO `user` VALUES (26, 'umum', 'Bagian Umum & Administrasi', 'Umum', '$2y$10$JB8KmAEumUGqQ5sbSgs14uFuw0K108nl1GmqdguAMi5WRvOeXczOi', 'Pengguna', 1, '2025-02-21 14:34:49', 'Administrator');
 INSERT INTO `user` VALUES (27, 'perencanaan', 'Bagian Perencanaan', 'Perencanaan', '$2y$10$52Zqk9YnqaH9L4OyfQQUY.AYztAhgkx8ipB3GKfQRTibWg2JUWZ1i', 'Pengguna', 1, '2025-02-21 14:34:55', 'Administrator');
 INSERT INTO `user` VALUES (28, 'pemeliharaan', 'Bagian Pemeliharaan', 'Pemeliharaan', '$2y$10$XVAryTgKsoICqlgrMuY3WOeLeUgtRuXOEnZ4vMOfKrRjdusp5xpnu', 'Pengguna', 1, '2025-02-21 14:34:59', 'Administrator');
+INSERT INTO `user` VALUES (29, 'sukosari1', 'Sukosari 1', 'UPK', '$2y$10$vV0cvsqSppj.SuAKOEwIHuspBfXOCEhfQBehmmMhVFbf49t9JtbgO', 'Pengguna', 1, '2025-07-25 14:14:24', 'Administrator');
+INSERT INTO `user` VALUES (30, 'maesan', 'Maesan', 'UPK', '$2y$10$QuvVLqdSMf5oVIJFoQeaROA5W5lqJBKTPWS148fybgzEobG36qCS2', 'Pengguna', 1, '2025-07-25 14:47:41', 'Administrator');
+INSERT INTO `user` VALUES (31, 'tegalampel', 'Tegalampel', 'UPK', '$2y$10$mCelf11KsjWGj7n0gOcuUOCvffn/lXv5BbTEMsJ30GyIJEB8CHGaS', 'Pengguna', 1, '2025-08-01 08:46:33', 'Administrator');
+INSERT INTO `user` VALUES (32, 'tapen', 'Tapen', 'UPK', '$2y$10$l8BDMhYTgcT2T5vrNhxWmu7I/uojpChVK17fu8rvLlSsGycwArI4O', 'Pengguna', 1, '2025-08-01 08:47:26', 'Administrator');
+INSERT INTO `user` VALUES (33, 'prajekan', 'Prajekan', 'UPK', '$2y$10$zIexPu1.OtjqvGQqiK1JTuyTEp8uFvtdbg4PWZdn9QMiWV8cRaHTy', 'Pengguna', 1, '2025-08-01 08:47:42', 'Administrator');
+INSERT INTO `user` VALUES (34, 'tlogosari', 'Tlogosari', 'UPK', '$2y$10$qkUpCsTAeKASl7oCyCCUCO99nlDu4rU5wJfZGLzhtVk8SG1v6d5SK', 'Pengguna', 1, '2025-08-01 08:48:01', 'Administrator');
+INSERT INTO `user` VALUES (35, 'wringin', 'Wringin', 'UPK', '$2y$10$Etpdb/r51sHAd4nlGbqcouDRDRaoDFrZ8qUk3GAjcvmFhLrVFe7JC', 'Pengguna', 1, '2025-08-01 08:48:37', 'Administrator');
+INSERT INTO `user` VALUES (36, 'curahdami', 'Curahdami', 'UPK', '$2y$10$S0B47pdrzz3HGsmVcTZiB.fo/w3deBFgbBX/yL7ED0ccCDfqnRg2m', 'Pengguna', 1, '2025-08-01 08:49:15', 'Administrator');
+INSERT INTO `user` VALUES (37, 'tamanan', 'Tamanan', 'UPK', '$2y$10$Y/4qGISGQ7.S0x87USLJ9OjSn4MXmViTmtj2C0Gk7c2ICta5HGBFO', 'Pengguna', 1, '2025-08-01 08:49:32', 'Administrator');
+INSERT INTO `user` VALUES (38, 'tenggarang', 'Tenggarang', 'UPK', '$2y$10$g204wa7VCPcoVzF4GXWEOuYRaRLI.JAzuH1tQbjU42cV5ECcB2FK.', 'Pengguna', 1, '2025-08-01 08:49:45', 'Administrator');
+INSERT INTO `user` VALUES (39, 'tamankrocok', 'Tamankrocok', 'UPK', '$2y$10$NTr.5ZimRqBzJKR.IenUt.8eawZ6ojxUHGbSs4VI4gkXLS4413BH.', 'Pengguna', 1, '2025-08-01 08:50:22', 'Administrator');
+INSERT INTO `user` VALUES (40, 'wonosari', 'Wonosari', 'UPK', '$2y$10$hgFzrMNGXJ2Gj/jMiILoFeLTQNNzrVTJx4BzTA4r53yWSpgrJB7Xq', 'Pengguna', 1, '2025-08-01 08:50:46', 'Administrator');
+INSERT INTO `user` VALUES (41, 'klabang', 'Klabang', 'UPK', '$2y$10$vhmyv45gXER5IQwxiPOhf.QEbu3GqNcANLguqLgLu97dujXNfFQMK', 'Pengguna', 1, '2025-08-01 08:51:00', 'Administrator');
+INSERT INTO `user` VALUES (42, 'sukosari2', 'Sukosari 2', 'UPK', '$2y$10$a9aUdMHFYONsEfyJiZcf4.vwsiEFssjzqkG/n6KeQuJwTNCKaT1cC', 'Pengguna', 1, '2025-08-01 08:51:19', 'Administrator');
+INSERT INTO `user` VALUES (43, 'bondowoso', 'Bondowoso', 'UPK', '$2y$10$BK0OWgqZpkZD/1MbUCauIOZlp1EU3UbMLAVg35HOjWAGQeWSLqGI6', 'Pengguna', 1, '2025-08-01 08:51:41', 'Administrator');
 
 -- ----------------------------
 -- Table structure for utsr_input

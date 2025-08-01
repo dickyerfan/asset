@@ -49,6 +49,30 @@ class Password extends CI_Controller
                 $this->load->view('templates/sidebar_umum');
                 $this->load->view('setting/view_gantiPassword', $data);
                 $this->load->view('templates/footer');
+            } else if ($this->session->userdata('bagian') == 'Langgan') {
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar');
+                $this->load->view('templates/sidebar_langgan');
+                $this->load->view('setting/view_gantiPassword', $data);
+                $this->load->view('templates/footer');
+            } else if ($this->session->userdata('bagian') == 'Perencanaan') {
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar');
+                $this->load->view('templates/sidebar_rencana');
+                $this->load->view('setting/view_gantiPassword', $data);
+                $this->load->view('templates/footer');
+            } else if ($this->session->userdata('bagian') == 'Pemeliharaan') {
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar');
+                $this->load->view('templates/sidebar_pelihara');
+                $this->load->view('setting/view_gantiPassword', $data);
+                $this->load->view('templates/footer');
+            } else if ($this->session->userdata('bagian') == 'UPK') {
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar');
+                $this->load->view('templates/sidebar_upk');
+                $this->load->view('setting/view_gantiPassword', $data);
+                $this->load->view('templates/footer');
             }
         } else {
             $cek_pass = $this->db->get_where('user', ['nama_pengguna' => $this->session->userdata('nama_pengguna')])->row();
