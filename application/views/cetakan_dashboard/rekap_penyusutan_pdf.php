@@ -211,8 +211,42 @@
                 <th style="text-align: right;"><?= number_format($total_inventaris_non_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
                 <th style="text-align: right;"><?= number_format($total_inventaris_non_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
             </tr>
-            <tr class="text-center bg-light">
-                <th style="text-align: left;">Total</th>
+            <?php
+            // Buat daftar semua kategori NON-AMDK
+            $kategori_non_amdk = [
+                $total_tanah_non_amdk,
+                $total_bangunan_non_amdk,
+                $total_sumber_non_amdk,
+                $total_pompa_non_amdk,
+                $total_olah_air_non_amdk,
+                $total_trans_dist_non_amdk,
+                $total_peralatan_non_amdk,
+                $total_kendaraan_non_amdk,
+                $total_inventaris_non_amdk,
+            ];
+
+            // Siapkan array total otomatis
+            $totals_non_amdk = [
+                'total_nilai_buku'        => 0,
+                'total_penambahan'        => 0,
+                'total_pengurangan'       => 0,
+                'total_rupiah'            => 0,
+                'total_akm_thn_lalu'      => 0,
+                'total_nilai_buku_lalu'   => 0,
+                'total_penyusutan'        => 0,
+                'total_akm_thn_ini'       => 0,
+                'total_nilai_buku_final'  => 0,
+            ];
+
+            // Loop otomatis penjumlahan
+            foreach ($kategori_non_amdk as $row) {
+                foreach ($totals_non_amdk as $key => $val) {
+                    $totals_non_amdk[$key] += $row[$key];
+                }
+            }
+            ?>
+            <tr class="text-center bg-light font-weight-bold">
+                <th class="text-left">Total</th>
                 <th style="text-align: right;"><?= number_format($totals_non_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
                 <th style="text-align: right;"><?= number_format($totals_non_amdk['total_penambahan'], 0, ',', '.'); ?></th>
                 <th style="text-align: right;"><?= number_format($totals_non_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
@@ -358,8 +392,42 @@
                 <th style="text-align: right;"><?= number_format($total_inventaris_amdk['total_akm_thn_ini'], 0, ',', '.'); ?></th>
                 <th style="text-align: right;"><?= number_format($total_inventaris_amdk['total_nilai_buku_final'], 0, ',', '.'); ?></th>
             </tr>
-            <tr class="text-center bg-light">
-                <th style="text-align: left;">Total</th>
+            <?php
+            // Buat daftar semua kategori NON-AMDK
+            $kategori_amdk = [
+                $total_tanah_amdk,
+                $total_bangunan_amdk,
+                $total_sumber_amdk,
+                $total_pompa_amdk,
+                $total_olah_air_amdk,
+                $total_trans_dist_amdk,
+                $total_peralatan_amdk,
+                $total_kendaraan_amdk,
+                $total_inventaris_amdk,
+            ];
+
+            // Siapkan array total otomatis
+            $totals_amdk = [
+                'total_nilai_buku'        => 0,
+                'total_penambahan'        => 0,
+                'total_pengurangan'       => 0,
+                'total_rupiah'            => 0,
+                'total_akm_thn_lalu'      => 0,
+                'total_nilai_buku_lalu'   => 0,
+                'total_penyusutan'        => 0,
+                'total_akm_thn_ini'       => 0,
+                'total_nilai_buku_final'  => 0,
+            ];
+
+            // Loop otomatis penjumlahan
+            foreach ($kategori_amdk as $row) {
+                foreach ($totals_amdk as $key => $val) {
+                    $totals_amdk[$key] += $row[$key];
+                }
+            }
+            ?>
+            <tr class="text-center bg-light font-weight-bold">
+                <th class="text-left">Total</th>
                 <th style="text-align: right;"><?= number_format($totals_amdk['total_nilai_buku'], 0, ',', '.'); ?></th>
                 <th style="text-align: right;"><?= number_format($totals_amdk['total_penambahan'], 0, ',', '.'); ?></th>
                 <th style="text-align: right;"><?= number_format($totals_amdk['total_pengurangan'], 0, ',', '.'); ?></th>
@@ -511,17 +579,51 @@
                 <th style="text-align: right;"><?= number_format($total_inventaris['total_akm_thn_ini'], 0, ',', '.'); ?></th>
                 <th style="text-align: right;"><?= number_format($total_inventaris['total_nilai_buku_final'], 0, ',', '.'); ?></th>
             </tr>
-            <tr class="text-center bg-light">
-                <th style="text-align: left;">Total</th>
-                <th style="text-align: right;"><?= number_format($totals['total_nilai_buku'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_penambahan'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_pengurangan'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_rupiah'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_penyusutan'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_akm_thn_ini'], 0, ',', '.'); ?></th>
-                <th style="text-align: right;"><?= number_format($totals['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            <?php
+            $kategori = [
+                $total_tanah,
+                $total_bangunan,
+                $total_sumber,
+                $total_pompa,
+                $total_olah_air,
+                $total_trans_dist,
+                $total_peralatan,
+                $total_kendaraan,
+                $total_inventaris
+            ];
+
+            $grand = [
+                'total_nilai_buku'      => 0,
+                'total_penambahan'      => 0,
+                'total_pengurangan'     => 0,
+                'total_rupiah'          => 0,
+                'total_akm_thn_lalu'    => 0,
+                'total_nilai_buku_lalu' => 0,
+                'total_penyusutan'      => 0,
+                'total_akm_thn_ini'     => 0,
+                'total_nilai_buku_final' => 0
+            ];
+
+            foreach ($kategori as $k) {
+                foreach ($grand as $key => $val) {
+                    if (isset($k[$key])) {
+                        $grand[$key] += $k[$key];
+                    }
+                }
+            }
+            ?>
+
+            <tr class="text-center bg-light font-weight-bold">
+                <th class="text-left">Total</th>
+                <th style="text-align: right;"><?= number_format($grand['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_nilai_buku_final'], 0, ',', '.'); ?></th>
             </tr>
         </tbody>
     </table>

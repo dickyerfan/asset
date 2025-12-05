@@ -171,6 +171,7 @@ class Penyusutan extends CI_Controller
         $this->pdf->generate('cetakan/tanah_pdf', $data);
     }
 
+    // Bangunan
     public function bangunan()
     {
         $get_tahun = $this->input->get('tahun');
@@ -247,10 +248,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_kantor_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bagian_total(2671, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_kantor($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bagian(2671, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -329,10 +330,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) && empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_lab_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bagian_total(2674, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_lab($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bagian(2674, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -411,10 +412,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_alat_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bagian_total(2676, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_alat($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bagian(2676, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -493,10 +494,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bengkel_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bagian_total(2678, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bengkel($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bagian(2678, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -575,10 +576,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_inst_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bagian_total(2680, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_inst($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_bangunan->get_bangunan_bagian(2680, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -632,7 +633,7 @@ class Penyusutan extends CI_Controller
         $this->pdf->generate('cetakan/bangunan_inst_pdf', $data);
     }
 
-
+    // sumber
     public function sumber()
     {
         $get_tahun = $this->input->get('tahun');
@@ -708,10 +709,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_bangunan_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_bagian_total(1569, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_bangunan($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_bagian(1569, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -792,10 +793,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_reservoir_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_bagian_total(1571, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_reservoir($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_bagian(1571, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -877,10 +878,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_sumur_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_bagian_total(1576, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_sumur($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_bagian(1576, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -962,10 +963,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_pipa_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_bagian_total(1577, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_pipa($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_bagian(1577, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -1047,10 +1048,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_inst_lain_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_bagian_total(1579, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_inst_lain($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_sumber->get_sumber_bagian(1579, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -1104,6 +1105,7 @@ class Penyusutan extends CI_Controller
         $this->pdf->generate('cetakan/sumber_inst_lain_pdf', $data);
     }
 
+    // pompa
     public function pompa()
     {
         $get_tahun = $this->input->get('tahun');
@@ -1178,10 +1180,11 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_bangunan_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_bagian_total(1907, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_bangunan($tahun, $upk_bagian);
+            // $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_bangunan($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_bagian(1907, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -1263,10 +1266,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_listrik_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_bagian_total(1909, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_listrik($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_bagian(1909, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -1348,10 +1351,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_alat_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_bagian_total(1912, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_alat($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_bagian(1912, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -1433,10 +1436,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_inst_lain_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_bagian_total(1915, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_inst_lain($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_pompa->get_pompa_bagian(1915, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -1490,6 +1493,7 @@ class Penyusutan extends CI_Controller
         $this->pdf->generate('cetakan/pompa_inst_lain_pdf', $data);
     }
 
+    // pengolahan
     public function olah_air()
     {
         $get_tahun = $this->input->get('tahun');
@@ -1564,10 +1568,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_bangunan_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_bagian_total(2104, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_bangunan($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_bagian(2104, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -1649,10 +1653,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_alat_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_bagian_total(2107, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_alat($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_bagian(2107, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -1734,10 +1738,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_reservoir_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_bagian_total(2112, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_reservoir($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_bagian(2112, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -1819,10 +1823,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_inst_lain_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_bagian_total(2115, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_inst_lain($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_olah_air->get_olah_air_bagian(2115, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -1876,6 +1880,7 @@ class Penyusutan extends CI_Controller
         $this->pdf->generate('cetakan/olah_air_inst_lain_pdf', $data);
     }
 
+    // trandis
     public function trans_dist()
     {
         $get_tahun = $this->input->get('tahun');
@@ -1950,10 +1955,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bangunan_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian_total(2255, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bangunan($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian(2255, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -2035,10 +2040,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_reservoir_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian_total(2258, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_reservoir($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian(2558, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -2120,10 +2125,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pipa_trans_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian_total(2261, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pipa_trans($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian(2261, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -2205,10 +2210,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_meter_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian_total(2263, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_meter($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian(2263, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -2290,10 +2295,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_ledeng_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian_total(2264, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_ledeng($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian(2264, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -2375,10 +2380,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pemadam_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian_total(2548, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_pemadam($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian(2548, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -2460,10 +2465,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_jembatan_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian_total(2550, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_jembatan($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian(2550, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -2545,10 +2550,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_inst_lain_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian_total(2552, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_inst_lain($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_trans_dist->get_trans_dist_bagian(2552, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -2602,6 +2607,7 @@ class Penyusutan extends CI_Controller
         $this->pdf->generate('cetakan/trans_dist_inst_lain_pdf', $data);
     }
 
+    // peralatan
     public function peralatan()
     {
         $get_tahun = $this->input->get('tahun');
@@ -2677,10 +2683,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_laboratorium_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bagian_total(2793, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_laboratorium($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bagian(2793, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -2762,10 +2768,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_gudang_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bagian_total(2789, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_gudang($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bagian(2789, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -2847,10 +2853,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bengkel_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bagian_total(2798, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bengkel($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bagian(2798, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -2932,10 +2938,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_lainnya_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bagian_total(4251, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_lainnya($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bagian(4251, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -3017,10 +3023,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_telekomunikasi_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bagian_total(2795, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_telekomunikasi($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_peralatan->get_peralatan_bagian(2795, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -3074,7 +3080,7 @@ class Penyusutan extends CI_Controller
         $this->pdf->generate('cetakan/peralatan_telekomunikasi_pdf', $data);
     }
 
-
+    // kendaraan
     public function kendaraan()
     {
         $get_tahun = $this->input->get('tahun');
@@ -3150,10 +3156,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_penumpang_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_bagian_total(2850, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_penumpang($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_bagian(2850, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -3235,10 +3241,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_angkut_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_bagian_total(2852, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_angkut($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_bagian(2852, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -3320,10 +3326,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_tangki_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_bagian_total(2854, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_tangki($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_bagian(2854, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -3405,10 +3411,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_roda_dua_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_bagian_total(2855, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_roda_dua($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_kendaraan->get_kendaraan_bagian(2855, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -3462,6 +3468,7 @@ class Penyusutan extends CI_Controller
         $this->pdf->generate('cetakan/kendaraan_roda_dua_pdf', $data);
     }
 
+    // inventaris
     public function inventaris()
     {
         $get_tahun = $this->input->get('tahun');
@@ -3537,10 +3544,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_meubelair_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_bagian_total(2844, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_meubelair($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_bagian(2844, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -3621,10 +3628,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_mesin_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_bagian_total(2846, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_mesin($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_bagian(2846, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';
@@ -3705,10 +3712,10 @@ class Penyusutan extends CI_Controller
 
         if (empty($get_tahun) || empty($upk_bagian)) {
             // Jika tidak ada filter, ambil semua data
-            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_rupa_total($tahun);
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_bagian_total(2848, $tahun);
         } else {
             // Jika ada filter, ambil data berdasarkan filter
-            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_rupa($tahun, $upk_bagian);
+            $penyusutan_data = $this->Model_penyusutan_inventaris->get_inventaris_bagian(2848, $tahun, $upk_bagian);
         }
 
         $data['title'] = 'Perhitungan Penyusutan Fiskal ';

@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : lokal_amdk
+ Source Server         : DIE ArtS
  Source Server Type    : MySQL
  Source Server Version : 100418 (10.4.18-MariaDB)
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 100418 (10.4.18-MariaDB)
  File Encoding         : 65001
 
- Date: 05/12/2025 10:49:11
+ Date: 17/07/2025 14:04:11
 */
 
 SET NAMES utf8mb4;
@@ -191,7 +191,7 @@ CREATE TABLE `arsip`  (
   `tgl_dokumen` date NOT NULL,
   `tgl_upload` date NOT NULL,
   `created_at` datetime NULL DEFAULT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_arsip`) USING BTREE
@@ -200,21 +200,21 @@ CREATE TABLE `arsip`  (
 -- ----------------------------
 -- Records of arsip
 -- ----------------------------
-INSERT INTO `arsip` VALUES (2, 6, 'Surat Keputusan', '1999', 'Kepmendagri_47_th_99.pdf', 'Kepmendagri no 47 Tahun 1999', 'Pedoman Penilaian Kinerja Perusahaan Daerah Air Minum', '2023-05-11', '2023-05-11', '2023-05-11 00:00:00', 'Administrator', '2025-07-24 07:36:44', 'Administrator');
-INSERT INTO `arsip` VALUES (4, 1, 'Peraturan', '1993', 'Perda_No_2_Tahun_93_tentang_Pendirian_Pdam.pdf', 'Perda No 2 Tahun 1993', 'Pendirian Perusahaan  Daerah Air Minum Kabupaten Bondowoso Tingkat II Bondowoso', '1993-04-21', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '2025-07-24 07:34:07', 'Administrator');
+INSERT INTO `arsip` VALUES (2, 1, 'Surat Keputusan', '1999', 'Kepmendagri_47_th_99.pdf', 'Kepmendagri no 47 Tahun 1999', 'Pedoman Penilaian Kinerja Perusahaan Daerah Air Minum', '2023-05-11', '2023-05-11', '2023-05-11 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (4, 2, 'Peraturan', '1993', 'Perda_No_2_Tahun_93_tentang_Pendirian_Pdam.pdf', 'Perda No 2 Tahun 1993', 'Pendirian Perusahaan  Daerah Air Minum Kabupaten Bondowoso Tingkat II Bondowoso', '1993-04-21', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `arsip` VALUES (5, 1, 'Surat Keputusan', '1996', 'SK_Direktur_NO_22_2_Tahun_96_Tentang_Struktur.pdf', 'SK Direktur No 22.2 Tahun 1996 ', 'Struktur  Organisasi, Uraian Tugas  dan Tata Kerja Perusahaan Daerah Air Minum Kabupaten Daerah Tingkat II Bondowoso', '1996-04-01', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `arsip` VALUES (6, 4, 'Surat Keputusan', '2017', 'SK_Bupati_No_188_45_Tahun_2017_Tentang_Tarif_Air.pdf', 'SK Bupati No 188.45/830/430.4.2/2017', 'Tarif Air Minum Pada Perusahaan Daerah Air Minum Kabupaten Bondowoso Tahun 2017', '2017-11-29', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '2025-07-24 07:33:26', 'Administrator');
-INSERT INTO `arsip` VALUES (7, 4, 'Surat Keputusan', '2022', 'SK_Bupati_No_188_45_Tahun_2022_Tentang_Tarif_Air.pdf', 'SK Bupati No 188.45/262/430.4.2/2022', 'Tarif Air Minum Pada Perusahaan Daerah Air Minum Kabupaten Bondowoso Tahun 2022', '2022-02-24', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '2025-07-24 07:33:45', 'Administrator');
-INSERT INTO `arsip` VALUES (8, 4, 'Surat Keputusan', '2021', 'SK_Direktur_No_188_tahun_2021_tentang_Hak_Minim.pdf', 'SK Direktur No 188/33.3/430.12/2021 ', 'Perubahan Penetapan Pemberlakuan Hak Minim (10)M3', '2021-11-01', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '2025-07-24 07:33:51', 'Administrator');
-INSERT INTO `arsip` VALUES (9, 5, 'Peraturan', '2015', 'Perda_no_3_tahun_2015_ttg_Penyertaan_Modal.pdf', 'Perda No 3 Tahun 2015', 'Penyertaan Modal Pemerintah Daerah Kepada Perusahaan Daerah Air Minum Kabupaten Bondowoso', '2015-11-30', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '2025-07-24 07:37:12', 'Administrator');
+INSERT INTO `arsip` VALUES (6, 1, 'Surat Keputusan', '2017', 'SK_Bupati_No_188_45_Tahun_2017_Tentang_Tarif_Air.pdf', 'SK Bupati No 188.45/830/430.4.2/2017', 'Tarif Air Minum Pada Perusahaan Daerah Air Minum Kabupaten Bondowoso Tahun 2017', '2017-11-29', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (7, 1, 'Surat Keputusan', '2022', 'SK_Bupati_No_188_45_Tahun_2022_Tentang_Tarif_Air.pdf', 'SK Bupati No 188.45/262/430.4.2/2022', 'Tarif Air Minum Pada Perusahaan Daerah Air Minum Kabupaten Bondowoso Tahun 2022', '2022-02-24', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (8, 1, 'Surat Keputusan', '2021', 'SK_Direktur_No_188_tahun_2021_tentang_Hak_Minim.pdf', 'SK Direktur No 188/33.3/430.12/2021 ', 'Perubahan Penetapan Pemberlakuan Hak Minim (10)M3', '2021-11-01', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (9, 1, 'Peraturan', '2015', 'Perda_no_3_tahun_2015_ttg_Penyertaan_Modal.pdf', 'Perda No 3 Tahun 2015', 'Penyertaan Modal Pemerintah Daerah Kepada Perusahaan Daerah Air Minum Kabupaten Bondowoso', '2015-11-30', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `arsip` VALUES (10, 1, 'Surat Keputusan', '2021', 'SK_Direktur_No_188_Tahun_2021_Tentang_Pedoman_Pengadaan_barang_jasa.pdf', 'SK Direktur No 188/01.4.2/430.12/2021 ', 'Pedoman Pelaksanaan Pengadaan Barang/Jasa  pada Perusahaan Daerah Air Minum Kabupaten Bondowoso', '2021-01-11', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `arsip` VALUES (11, 1, 'Peraturan', '2019', 'PERBUP_Perubahan_kedua_atas_Peraturan_Bupati_No_57_TAHUN_2013.pdf', 'PerBup No 8 Tahun 2019', 'Perubahan Kedua atas Peraturan Bupati Bondowoso No 57 tahun Tahun 2013 Tentang Petunjuk Pelaksanaan Peraturan Daerah Kabupaten Daerah Tingkat II Bondowoso No 2 Tahun 1993 Tentang Pendirian Perusahaan Daerah Air Minum Kabupaten Daerah Tingkat II Bondowoso', '2019-01-18', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `arsip` VALUES (12, 1, 'Peraturan', '2011', 'Perda_No_6_Tahun_2011_ttg_perubahan_pendirian_pdam.pdf', 'Perda No 6 Tahun 2011', 'Perubahan Atas  Peraturan Daerah Kabupaten Daerah Tingkat II Bondowoso No 2  Tahun 1993  Tentang Pendirian Perusahaan Daerah Air Minum  Kabupaten  Daerah Tingkat II Bondowoso', '2011-08-01', '2023-05-15', '2023-05-15 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `arsip` VALUES (17, 1, 'Peraturan', '2018', 'Permendagri_Nomor_37_Tahun_2018.pdf', 'Permendagri No 37 Tahun 2018', 'Pengangkatan dan Pemberhentian Anggota Dewan Pengawas atau  Anggota Komisaris dan Anggota Direksi Badan Usaha Milik Daerah', '2018-05-07', '2023-05-16', '2023-05-16 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `arsip` VALUES (20, 1, 'Peraturan', '2017', 'PERMENDAGRI_Nomor_11_Tahun_2017.pdf', 'Permendagri No 11 Tahun 2017', 'Pedoman Evaluasi Rancangan Peraturan Daerah Tentang\r\nPertanggungjawaban Pelaksanaan Anggaran Pendapatan Dan\r\nBelanja Daerah Dan Rancangan Peraturan Kepala Daerah\r\nTentang Penjabaran Pertanggungjawaban Pelaksanaan\r\nAnggaran Pendapatan Dan Belanja Daerah', '2017-02-22', '2023-05-16', '2023-05-16 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
 INSERT INTO `arsip` VALUES (21, 1, 'Dokumen', '2015', 'SAK_ETAP_CONTENTS.pdf', 'Pedoman SAK ETAP', 'Pedoman Standar Akuntansi Keuangan Untuk Entitas Tanpa Akuntabilitas Publik', '2015-01-01', '2023-06-21', '2023-06-21 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
-INSERT INTO `arsip` VALUES (22, 4, 'Peraturan', '2006', 'permendagri_23_2006.pdf', 'Permendagri no 23 tahun 2006', 'Pedoman Teknis Dan Tata Cara Pengaturan Tarif Air Minum Pada Perusahaan Daerah Air Minum', '2006-07-03', '2023-06-23', '2023-06-23 00:00:00', 'Administrator', '2025-07-24 07:37:53', 'Administrator');
-INSERT INTO `arsip` VALUES (23, 5, 'Surat Keputusan', '2024', 'KEPUTUSAN_BUPATI_PENETAPAN_PENYERTAAN_MODAL_2024.pdf', 'SK Bupati Bondowoso No 188.45/341/430.4.2/2024', 'Penetapan Penyertaan Modal Pdam Yang Berasal Dari Bagian Laba Pdam Kab Bondowoso Dan Penyertaan Modal Daerah Kepada Pdam Kab Bondowoso Per 31 Maret 2024', '2024-05-06', '2025-07-14', '2025-07-14 00:00:00', 'Administrator', '2025-07-24 07:35:29', 'Administrator');
+INSERT INTO `arsip` VALUES (22, 1, 'Peraturan', '2006', 'permendagri_23_2006.pdf', 'Permendagri no 23 tahun 2006', 'Pedoman Teknis Dan Tata Cara Pengaturan Tarif Air Minum Pada Perusahaan Daerah Air Minum', '2006-07-03', '2023-06-23', '2023-06-23 00:00:00', 'Administrator', '0000-00-00 00:00:00', '');
+INSERT INTO `arsip` VALUES (23, 1, 'Surat Keputusan', '2024', 'KEPUTUSAN_BUPATI_PENETAPAN_PENYERTAAN_MODAL_2024.pdf', 'SK Bupati Bondowoso No 188.45/341/430.4.2/2024', 'Penetapan Penyertaan Modal Pdam Yang Berasal Dari Bagian Laba Pdam Kab Bondowoso Dan Penyertaan Modal Daerah Kepada Pdam Kab Bondowoso Per 31 Maret 2024', '2024-05-06', '2025-07-14', '2025-07-14 00:00:00', 'Administrator', '2025-07-15 10:46:33', 'Satuan Pengawasan Internal');
 
 -- ----------------------------
 -- Table structure for arsip_folder
@@ -228,7 +228,7 @@ CREATE TABLE `arsip_folder`  (
   `modified_at` datetime NULL DEFAULT NULL,
   `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_folder`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of arsip_folder
@@ -236,9 +236,6 @@ CREATE TABLE `arsip_folder`  (
 INSERT INTO `arsip_folder` VALUES (1, 'Lain-lain', '2025-07-15 12:32:04', 'Administrator', NULL, '');
 INSERT INTO `arsip_folder` VALUES (2, 'Subsidi', '2025-07-15 12:45:12', 'Administrator', '2025-07-16 13:08:36', 'Administrator');
 INSERT INTO `arsip_folder` VALUES (3, 'PhPD', '2025-07-16 13:24:52', 'Administrator', NULL, '');
-INSERT INTO `arsip_folder` VALUES (4, 'Tarif', '2025-07-24 07:33:12', 'Administrator', NULL, '');
-INSERT INTO `arsip_folder` VALUES (5, 'Penyertaan Modal', '2025-07-24 07:35:19', 'Administrator', NULL, '');
-INSERT INTO `arsip_folder` VALUES (6, 'Evaluasi SPAM', '2025-07-24 07:36:29', 'Administrator', NULL, '');
 
 -- ----------------------------
 -- Table structure for atdp_input
@@ -898,7 +895,7 @@ INSERT INTO `daftar_asset` VALUES (384, 11, 1985, 1909, 222, 0, 34, 0, 'Pemas.Da
 INSERT INTO `daftar_asset` VALUES (385, 11, 1985, 1909, 222, 0, 34, 0, 'Pemasangan PLN di UPK Tegalampel', '2016-10-31', NULL, '', '', 107482100, 1, 16, 12.50, 'Administrator', '2024-11-21 13:25:21', 0);
 INSERT INTO `daftar_asset` VALUES (386, 12, 1987, 1909, 222, 0, 34, 0, 'Pemasangan daya PLN 40 KVA', '1991-01-01', NULL, '', '', 6862000, 1, 8, 25.00, 'Administrator', '2024-11-21 13:28:48', 0);
 INSERT INTO `daftar_asset` VALUES (387, 12, 1987, 1909, 222, 0, 34, 0, 'Pemasangan mesin & listrik', '1991-01-01', NULL, '', '', 32615008, 1, 8, 25.00, 'Administrator', '2024-11-21 13:29:47', 0);
-INSERT INTO `daftar_asset` VALUES (388, 12, 1987, 1909, 222, 0, 34, 0, 'Pemasangan daya karangsengon Tapen', '2009-04-30', NULL, '', '', 31205500, 1, 16, 12.50, 'Administrator', '2024-11-21 13:30:35', 0);
+INSERT INTO `daftar_asset` VALUES (388, 12, 1987, 1909, 222, 0, 34, 0, 'Pemasangan daya karangsengon Tapen', '2008-04-30', NULL, '', '', 31205500, 1, 16, 12.50, 'Administrator', '2024-11-21 13:30:35', 0);
 INSERT INTO `daftar_asset` VALUES (389, 13, 1989, 1909, 222, 0, 34, 0, 'Pemasangan Peralatan ME', '1996-01-01', NULL, '', '', 14937752, 1, 8, 25.00, 'Administrator', '2024-11-21 13:34:10', 0);
 INSERT INTO `daftar_asset` VALUES (390, 13, 1989, 1909, 222, 0, 34, 0, 'Pemasangan mesin dan listrik', '1996-01-01', NULL, '', '', 32615008, 1, 8, 25.00, 'Administrator', '2024-11-21 13:34:55', 0);
 INSERT INTO `daftar_asset` VALUES (391, 13, 1989, 1909, 222, 0, 34, 0, 'Pemasangan daya PLN 10 KVA', '1996-01-01', NULL, '', '', 1705000, 1, 8, 25.00, 'Administrator', '2024-11-21 13:35:47', 0);
@@ -3309,35 +3306,6 @@ INSERT INTO `ek_data_penduduk` VALUES (46, 22, 'YA', 'YA', 25644, 10668, 25644, 
 INSERT INTO `ek_data_penduduk` VALUES (47, 23, 'TIDAK', 'TIDAK', 46353, 18778, 0, 0, 2024, '2025-04-17 14:07:50', 'Administrator', NULL, '');
 
 -- ----------------------------
--- Table structure for ek_data_umum
--- ----------------------------
-DROP TABLE IF EXISTS `ek_data_umum`;
-CREATE TABLE `ek_data_umum`  (
-  `id_data_umum` int NOT NULL AUTO_INCREMENT,
-  `uraian` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `jumlah` bigint NULL DEFAULT NULL,
-  `tahun` year NULL DEFAULT NULL,
-  `status` tinyint(1) NULL DEFAULT 1,
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `modified_at` datetime NULL DEFAULT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_data_umum`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ek_data_umum
--- ----------------------------
-INSERT INTO `ek_data_umum` VALUES (1, 'Jumlah Pegawai', 162, 2023, 1, '2025-07-24 14:33:22', 'Bagian Umum & Administrasi', NULL, '');
-INSERT INTO `ek_data_umum` VALUES (2, 'Jumlah Pegawai Ikut Diklat', 112, 2023, 1, '2025-07-24 14:56:55', 'Bagian Umum & Administrasi', NULL, '');
-INSERT INTO `ek_data_umum` VALUES (3, 'Biaya Diklat', 113090800, 2023, 1, '2025-07-24 14:58:29', 'Bagian Umum & Administrasi', NULL, '');
-INSERT INTO `ek_data_umum` VALUES (4, 'Biaya Pegawai', 10248847850, 2023, 1, '2025-07-24 14:59:12', 'Bagian Umum & Administrasi', NULL, '');
-INSERT INTO `ek_data_umum` VALUES (5, 'Jumlah Pegawai', 163, 2024, 1, '2025-07-24 15:18:04', 'Bagian Umum & Administrasi', NULL, '');
-INSERT INTO `ek_data_umum` VALUES (6, 'Jumlah Pegawai Ikut Diklat', 154, 2024, 1, '2025-07-24 15:18:17', 'Bagian Umum & Administrasi', '2025-07-24 15:30:11', 'Bagian Umum & Administrasi');
-INSERT INTO `ek_data_umum` VALUES (7, 'Biaya Diklat', 127283401, 2024, 1, '2025-07-24 15:18:55', 'Bagian Umum & Administrasi', '2025-07-24 15:34:14', 'Bagian Umum & Administrasi');
-INSERT INTO `ek_data_umum` VALUES (8, 'Biaya Pegawai', 9568185345, 2024, 1, '2025-07-24 15:19:08', 'Bagian Umum & Administrasi', NULL, '');
-
--- ----------------------------
 -- Table structure for ek_efek_tagih
 -- ----------------------------
 DROP TABLE IF EXISTS `ek_efek_tagih`;
@@ -4374,17 +4342,17 @@ INSERT INTO `ek_kualitas_air` VALUES (59, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab.
 INSERT INTO `ek_kualitas_air` VALUES (60, 'KIMIA WAJIB', 13, 0, 13, 13, 0, 'Lab. Kes. Bondowoso', '2023-11-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (61, 'KIMIA WAJIB', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2023-12-01', '2025-03-26 08:41:43', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (63, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-01-01', '2025-03-26 07:42:12', 'Administrator', '2025-03-26 10:33:10', 'Bagian Pemeliharaan');
-INSERT INTO `ek_kualitas_air` VALUES (64, 'FISIK', 12, 0, 13, 12, 0, 'Lab. Kes. Bondowoso', '2024-02-01', '2025-03-26 07:42:12', 'Administrator', '2025-07-24 13:36:14', 'Bagian Pemeliharaan');
+INSERT INTO `ek_kualitas_air` VALUES (64, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-02-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (65, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-03-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (66, 'FISIK', 12, 0, 13, 12, 0, 'Lab. Kes. Bondowoso', '2024-04-01', '2025-03-26 07:42:12', 'Administrator', '2025-07-24 13:36:30', 'Bagian Pemeliharaan');
-INSERT INTO `ek_kualitas_air` VALUES (67, 'FISIK', 12, 0, 14, 12, 0, 'Lab. Kes. Bondowoso', '2024-05-01', '2025-03-26 07:42:12', 'Administrator', '2025-07-24 13:36:37', 'Bagian Pemeliharaan');
-INSERT INTO `ek_kualitas_air` VALUES (68, 'FISIK', 12, 0, 14, 12, 0, 'Lab. Kes. Bondowoso', '2024-06-01', '2025-03-26 07:42:12', 'Administrator', '2025-07-24 13:36:42', 'Bagian Pemeliharaan');
-INSERT INTO `ek_kualitas_air` VALUES (69, 'FISIK', 12, 0, 12, 10, 0, 'Lab. Kes. Bondowoso', '2024-07-01', '2025-03-26 07:42:12', 'Administrator', '2025-07-24 13:38:14', 'Bagian Pemeliharaan');
+INSERT INTO `ek_kualitas_air` VALUES (66, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-04-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
+INSERT INTO `ek_kualitas_air` VALUES (67, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-05-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
+INSERT INTO `ek_kualitas_air` VALUES (68, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-06-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
+INSERT INTO `ek_kualitas_air` VALUES (69, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-07-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (70, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-08-01', '2025-03-26 07:42:12', 'Administrator', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (71, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-09-01', '0000-00-00 00:00:00', '', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (72, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-10-01', '0000-00-00 00:00:00', '', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (73, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-11-01', '0000-00-00 00:00:00', '', NULL, '');
-INSERT INTO `ek_kualitas_air` VALUES (74, 'FISIK', 12, 0, 14, 10, 0, 'Lab. Kes. Bondowoso', '2024-12-01', '0000-00-00 00:00:00', '', '2025-07-24 13:38:02', 'Bagian Pemeliharaan');
+INSERT INTO `ek_kualitas_air` VALUES (74, 'FISIK', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-12-01', '0000-00-00 00:00:00', '', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (75, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-01-01', '0000-00-00 00:00:00', '', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (76, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-02-01', '0000-00-00 00:00:00', '', NULL, '');
 INSERT INTO `ek_kualitas_air` VALUES (77, 'MIKROBIOLOGI', 12, 0, 12, 12, 0, 'Lab. Kes. Bondowoso', '2024-03-01', '0000-00-00 00:00:00', '', NULL, '');
@@ -11868,7 +11836,7 @@ INSERT INTO `user` VALUES (2, 'dicky', 'Dicky Erfan Septiono', 'Administrator', 
 INSERT INTO `user` VALUES (18, 'cunta', 'Somaya Dewantari', 'Keuangan', '$2y$10$LHvVYekSqy8EJ402tHNFo.jShQERw5H6.tAHjrGRMriAvUNy84HDO', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (19, 'linda', 'Linda Anggraita', 'Umum', '$2y$10$8ylJ7GP5dKSmQlrw5NKfNesoiYjxLQenGoehGaaExWRUeLro3fwBe', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (20, 'auditor', 'Auditor', 'Auditor', '$2y$10$KdQMdsBbSiE9gbfsWw/FUuaqHEzohahyjfJbiPdJjlz53sglVrbr6', 'Pengguna', 1, '2024-11-15 15:44:19', 'Administrator');
-INSERT INTO `user` VALUES (21, 'spi', 'Satuan Pengawas Intern', 'Publik', '$2y$10$JsPhwWAFLryoEvwZ.cI/KehglXFk4AubPSB0UXg8TekA2iKT0tCoy', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
+INSERT INTO `user` VALUES (21, 'spi', 'Satuan Pengawasan Internal', 'Publik', '$2y$10$JsPhwWAFLryoEvwZ.cI/KehglXFk4AubPSB0UXg8TekA2iKT0tCoy', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (22, 'langgan', 'Bagian Hubungan Langganan', 'Langgan', '$2y$10$5NYFZDfMRFvvNKIHLq.8yuok6EBbZNSDRcmHTVaRGyh5c7U.3PHGK', 'Pengguna', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (23, 'deni', 'Muhammad Deni Saputro', 'Keuangan', '$2y$10$J9HjgwPou7t1dC3k1x2zHu6J//5DG7yU57fxnmOITw3qnNGoxnpLW', 'Admin', 1, '2024-11-15 15:44:19', 'Administrator');
 INSERT INTO `user` VALUES (24, 'lilik', 'Lilik Yuli Andayani', 'Keuangan', '$2y$10$uc..LmDquwTsMfhL0xXC3eKX7vY7NcQN29/GSVXzGFZlQdKF6u/Rm', 'Admin', 1, '2024-11-15 10:07:17', 'Administrator');

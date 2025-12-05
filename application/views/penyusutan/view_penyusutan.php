@@ -72,6 +72,84 @@
                         <tbody>
                             <?php
                             $no = 1;
+                            // inisialisasi accumulator
+                            $sum_nilai_buku        = 0;
+                            $sum_penambahan        = 0;
+                            $sum_pengurangan       = 0;
+                            $sum_rupiah            = 0;
+                            $sum_akm_thn_lalu      = 0;
+                            $sum_nilai_buku_lalu   = 0;
+                            $sum_penyusutan        = 0;
+                            $sum_akm_thn_ini       = 0;
+                            $sum_nilai_buku_final  = 0;
+
+                            foreach ($susut as $row) :
+                                // tambahkan ke accumulator (cast ke float untuk aman)
+                                $sum_nilai_buku       += (float) $row->nilai_buku;
+                                $sum_penambahan       += (float) $row->penambahan;
+                                $sum_pengurangan      += (float) $row->pengurangan;
+                                $sum_rupiah           += (float) $row->rupiah;
+                                $sum_akm_thn_lalu     += (float) $row->akm_thn_lalu;
+                                $sum_nilai_buku_lalu  += (float) $row->nilai_buku_lalu;
+                                $sum_penyusutan       += (float) $row->penambahan_penyusutan; // field penyusutan di row
+                                $sum_akm_thn_ini      += (float) $row->akm_thn_ini;
+                                $sum_nilai_buku_final += (float) $row->nilai_buku_final;
+                            ?>
+                                <tr>
+                                    <td class="text-center"><?= $no++; ?></td>
+                                    <td>
+                                        <?php
+                                        $nama_asset = $row->nama_asset;
+                                        if (strlen($nama_asset) > 55) {
+                                            $nama_asset = substr($nama_asset, 0, 55) . '...';
+                                        }
+                                        ?>
+                                        <?php if ($row->kode_sr == 1) : ?>
+                                            <?= $nama_asset; ?> <?= $row->jumlah; ?> di <?= $row->nama_bagian; ?>
+                                        <?php else : ?>
+                                            <?= $nama_asset; ?>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($row->status == 2) {
+                                            echo  date('d-m-Y', strtotime($row->tanggal_persediaan));
+                                        } else {
+                                            echo date('d-m-Y', strtotime($row->tanggal));
+                                        }  ?>
+                                    </td>
+                                    <td class="text-center"><?= $row->umur; ?></td>
+                                    <td class="text-center"><?= $row->persen_susut; ?></td>
+                                    <td class="text-right"><?= number_format($row->nilai_buku, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->penambahan, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->pengurangan, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->akm_thn_lalu, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->nilai_buku_lalu, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->penambahan_penyusutan, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->akm_thn_ini, 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?= number_format($row->nilai_buku_final, 0, ',', '.'); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+
+                        <tfoot>
+                            <tr class="text-center bg-light">
+                                <th colspan="5" class="text-right">Total</th>
+                                <th class="text-right"><?= number_format($sum_nilai_buku, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($sum_penambahan, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($sum_pengurangan, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($sum_rupiah, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($sum_akm_thn_lalu, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($sum_nilai_buku_lalu, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($sum_penyusutan, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($sum_akm_thn_ini, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($sum_nilai_buku_final, 0, ',', '.'); ?></th>
+                            </tr>
+                        </tfoot>
+
+                        <!-- <tbody>
+                            <?php
+                            $no = 1;
                             $total_rupiah = 0;
                             foreach ($susut as $row) :
                                 // $total_rupiah = $row->total_rupiah;
@@ -108,13 +186,12 @@
                                     <td class="text-right"><?= number_format($row->akm_thn_lalu, 0, ',', '.'); ?></td>
                                     <td class="text-right"><?= number_format($row->nilai_buku_lalu, 0, ',', '.'); ?></td>
                                     <td class="text-right"><?= number_format($row->penambahan_penyusutan, 0, ',', '.'); ?></td>
-                                    <!-- <td class="text-right">-</td> -->
                                     <td class="text-right"><?= number_format($row->akm_thn_ini, 0, ',', '.'); ?></td>
                                     <td class="text-right"><?= number_format($row->nilai_buku_final, 0, ',', '.'); ?></td>
                                 </tr>
                             <?php endforeach; ?>
-                        </tbody>
-                        <tfoot>
+                        </tbody> -->
+                        <!-- <tfoot>
                             <tr class="text-center bg-light">
                                 <th colspan="5" class="text-right">Total</th>
                                 <th class="text-right"><?= number_format($totals['total_nilai_buku'], 0, ',', '.'); ?></th>
@@ -127,7 +204,7 @@
                                 <th class="text-right"><?= number_format($totals['total_akm_thn_ini'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($totals['total_nilai_buku_final'], 0, ',', '.'); ?></th>
                             </tr>
-                        </tfoot>
+                        </tfoot> -->
                     </table>
                 </div>
             </div>
