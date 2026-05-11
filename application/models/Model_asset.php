@@ -29,11 +29,28 @@ class Model_asset extends CI_Model
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
-        $this->db->where('YEAR(tanggal)', $tahun);
+        // $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->where('daftar_asset.tanggal >=', $tahun . '-01-01');
+        $this->db->where('daftar_asset.tanggal <=', $tahun . '-12-31');
         $this->db->where('daftar_asset.status', 1);
-        $this->db->group_by('daftar_asset.id_no_per');
-        $this->db->order_by('daftar_asset.id_no_per');
-        $this->db->order_by('daftar_asset.tanggal');
+        // $this->db->group_by('daftar_asset.id_no_per');
+        // $this->db->order_by('daftar_asset.id_no_per');
+        $this->db->order_by('daftar_asset.id_asset', 'DESC');
+        return $this->db->get()->result();
+    }
+    public function get_all_tahun_kurang($tahun)
+    {
+        $this->db->select(
+            '*,
+        (SELECT SUM(rupiah) FROM daftar_asset WHERE YEAR(daftar_asset.tanggal_persediaan) = "' . $tahun . '" AND daftar_asset.status = 2  ) AS total_rupiah'
+        );
+        $this->db->from('daftar_asset');
+        $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
+        $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
+        $this->db->where('daftar_asset.tanggal_persediaan >=', $tahun . '-01-01');
+        $this->db->where('daftar_asset.tanggal_persediaan <=', $tahun . '-12-31');
+        $this->db->where('daftar_asset.status', 2);
+        $this->db->order_by('daftar_asset.id_asset', 'DESC');
         return $this->db->get()->result();
     }
 
@@ -97,12 +114,12 @@ class Model_asset extends CI_Model
     {
         $this->db->select(
             '*,
-        (SELECT SUM(rupiah) FROM daftar_asset WHERE YEAR(daftar_asset.tanggal_persediaan) = "' . $tahun . '" AND daftar_asset.status = 2) AS total_rupiah'
+        (SELECT SUM(rupiah) FROM daftar_asset WHERE YEAR(daftar_asset.tanggal) = "' . $tahun . '" AND daftar_asset.status = 2) AS total_rupiah'
         );
         $this->db->from('daftar_asset');
         $this->db->join('bagian_upk', 'daftar_asset.id_bagian = bagian_upk.id_bagian', 'left');
         $this->db->join('no_per', 'daftar_asset.id_no_per = no_per.id', 'left');
-        $this->db->where('YEAR(tanggal_persediaan)', $tahun);
+        $this->db->where('YEAR(tanggal)', $tahun);
         $this->db->where('daftar_asset.status', 2);
         $this->db->order_by('daftar_asset.id_no_per');
         $this->db->order_by('daftar_asset.tanggal');

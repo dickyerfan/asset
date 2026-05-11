@@ -52,7 +52,7 @@
 
                         ?>
                         <h5><?= strtoupper($title) . ' TAHUN ' . $tahun_lap; ?></h5>
-                        <h5>Bulan : <?= $bulan_lap; ?></h5>
+                        <!-- <h5>Bulan : <?= $bulan_lap; ?></h5> -->
                     </div>
                 </div>
                 <!-- <div>

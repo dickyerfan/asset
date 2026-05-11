@@ -89,7 +89,16 @@
                         <tbody>
                             <?php
                             $no = 1;
-                            $total_rupiah = 0;
+                            // inisialisasi total
+                            $total_nilai_buku            = 0;
+                            $total_penambahan            = 0;
+                            $total_pengurangan           = 0;
+                            $total_rupiah                = 0;
+                            $total_akm_thn_lalu           = 0;
+                            $total_nilai_buku_lalu        = 0;
+                            $total_penyusutan             = 0;
+                            $total_akm_thn_ini            = 0;
+                            $total_nilai_buku_final       = 0;
                             foreach ($susut as $row) :
                                 // $total_rupiah = $row->total_rupiah;
                             ?>
@@ -164,9 +173,35 @@
                                             </script>
                                         <?php endif; ?>
                                     </td> -->
+                                    <!-- <?php
+                                            $total_nilai_buku      += $row->nilai_buku;
+                                            $total_penambahan      += $row->penambahan;
+                                            $total_pengurangan     += $row->pengurangan;
+                                            $total_rupiah          += $row->rupiah;
+                                            $total_akm_thn_lalu     += $row->akm_thn_lalu;
+                                            $total_nilai_buku_lalu  += $row->nilai_buku_lalu;
+                                            $total_penyusutan       += $row->penambahan_penyusutan;
+                                            $total_akm_thn_ini      += $row->akm_thn_ini;
+                                            $total_nilai_buku_final += $row->nilai_buku_final;
+                                            ?> -->
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
+                        <!-- <tfoot>
+                            <tr class="text-center bg-light">
+                                <th colspan="5" class="text-right">Total</th>
+                                <th class="text-right"><?= number_format($total_nilai_buku, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_penambahan, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_pengurangan, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_rupiah, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_akm_thn_lalu, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_nilai_buku_lalu, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_penyusutan, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_akm_thn_ini, 0, ',', '.'); ?></th>
+                                <th class="text-right"><?= number_format($total_nilai_buku_final, 0, ',', '.'); ?></th>
+                            </tr>
+                        </tfoot> -->
+
                         <tfoot>
                             <tr class="text-center bg-light">
                                 <th colspan="5" class="text-right">Total</th>
@@ -179,7 +214,6 @@
                                 <th class="text-right"><?= number_format($totals['total_penyusutan'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($totals['total_akm_thn_ini'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?= number_format($totals['total_nilai_buku_final'], 0, ',', '.'); ?></th>
-                                <!-- <th></th> -->
                             </tr>
                         </tfoot>
                     </table>

@@ -88,7 +88,16 @@
                         <tbody>
                             <?php
                             $no = 1;
-                            $total_rupiah = 0;
+                            // inisialisasi total
+                            $total_nilai_buku            = 0;
+                            $total_penambahan            = 0;
+                            $total_pengurangan           = 0;
+                            $total_rupiah                = 0;
+                            $total_akm_thn_lalu           = 0;
+                            $total_nilai_buku_lalu        = 0;
+                            $total_penyusutan             = 0;
+                            $total_akm_thn_ini            = 0;
+                            $total_nilai_buku_final       = 0;
                             foreach ($susut as $row) :
                                 // $total_rupiah = $row->total_rupiah;
                             ?>

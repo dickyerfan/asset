@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table id="contoh2" class="table table-bordered table-striped table-hover">
+                    <table id="contoh22" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr class="text-center">
                                 <th>Nama Asset</th>
@@ -237,7 +237,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table id="contoh2" class="table table-bordered table-striped table-hover">
+                    <table id="contoh22" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr class="text-center">
                                 <th>Nama Asset</th>
@@ -418,7 +418,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table id="contoh2" class="table table-bordered table-striped table-hover">
+                    <table id="contoh22" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr class="text-center">
                                 <th>Nama Asset</th>

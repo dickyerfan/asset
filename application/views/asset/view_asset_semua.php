@@ -35,11 +35,11 @@
                                 <th>Nama Asset</th>
                                 <th>Lokasi</th>
                                 <th>Tanggal</th>
-                                <th>No Bkt Gdg</th>
-                                <th>No Bkt Vch</th>
+                                <!-- <th>No Bkt Gdg</th>
+                                <th>No Bkt Vch</th> -->
                                 <th>Rupiah</th>
-                                <th>Tgl Update</th>
-                                <th>Ptgs Update</th>
+                                <!-- <th>Tgl Update</th> -->
+                                <!-- <th>Ptgs Update</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -52,7 +52,7 @@
                                 <tr>
                                     <td class="text-center"><?= $no++; ?></td>
                                     <td><?= $row->kode; ?></td>
-                                    <td>
+                                    <!-- <td>
                                         <?php
                                         // Memotong nama_asset jika lebih dari 60 karakter
                                         $nama_asset = $row->nama_asset;
@@ -65,7 +65,8 @@
                                         <?php else : ?>
                                             <?= $nama_asset; ?>
                                         <?php endif; ?>
-                                    </td>
+                                    </td> -->
+                                    <td><?= $row->nama_asset; ?></td>
                                     <td>
                                         <?php if ($row->id_bagian == 2) : ?>
                                             <?= 'Kantor Pusat'; ?>
@@ -74,11 +75,11 @@
                                         <?php endif; ?>
                                     </td>
                                     <td class="text-center"><?= date('d-m-Y', strtotime($row->tanggal)); ?></td>
-                                    <td><?= $row->no_bukti_gd; ?></td>
-                                    <td><?= $row->no_bukti_vch; ?></td>
+                                    <!-- <td><?= $row->no_bukti_gd; ?></td>
+                                    <td><?= $row->no_bukti_vch; ?></td> -->
                                     <td class="text-right"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?= $row->tanggal_input; ?></td>
-                                    <td class="text-right"><?= $row->input_asset; ?></td>
+                                    <!-- <td class="text-right"><?= $row->tanggal_input; ?></td> -->
+                                    <!-- <td class="text-right"><?= $row->input_asset; ?></td> -->
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -87,13 +88,13 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
-                                <th></th>
+                                <!-- <th></th>
+                                <th></th> -->
                                 <th></th>
                                 <th>Jumlah</th>
                                 <th class="text-right"><?= number_format($total_rupiah, 0, ',', '.'); ?></th>
-                                <th></th>
-                                <th></th>
+                                <!-- <th></th> -->
+                                <!-- <th></th> -->
                             </tr>
                         </tfoot>
                     </table>

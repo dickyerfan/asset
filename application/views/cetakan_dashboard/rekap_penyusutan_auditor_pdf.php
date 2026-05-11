@@ -1195,7 +1195,52 @@
                 <th style="text-align: right;"><?= number_format($total_inventaris['total_nilai_buku_final'], 0, ',', '.'); ?></th>
             </tr>
         </tbody>
+        <?php
+        $kategori_totals = [
+            $total_tanah,
+            $total_bangunan,
+            $total_sumber,
+            $total_pompa,
+            $total_olah_air,
+            $total_trans_dist,
+            $total_peralatan,
+            $total_kendaraan,
+            $total_inventaris,
+        ];
+
+        $grand = [
+            'total_nilai_buku'        => 0,
+            'total_penambahan'        => 0,
+            'total_pengurangan'       => 0,
+            'total_rupiah'            => 0,
+            'total_akm_thn_lalu'      => 0,
+            'total_nilai_buku_lalu'   => 0,
+            'total_penyusutan'        => 0,
+            'total_akm_thn_ini'       => 0,
+            'total_nilai_buku_final'  => 0,
+        ];
+
+        foreach ($kategori_totals as $kt) {
+            foreach ($grand as $key => $val) {
+                $grand[$key] += $kt[$key] ?? 0;
+            }
+        }
+        ?>
         <tfoot>
+            <tr style="background-color: lightgray;">
+                <th class="text-left">Total</th>
+                <th style="text-align: right;"><?= number_format($grand['total_nilai_buku'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_penambahan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_pengurangan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_rupiah'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_akm_thn_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_nilai_buku_lalu'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_penyusutan'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_akm_thn_ini'], 0, ',', '.'); ?></th>
+                <th style="text-align: right;"><?= number_format($grand['total_nilai_buku_final'], 0, ',', '.'); ?></th>
+            </tr>
+        </tfoot>
+        <!-- <tfoot>
             <tr style="background-color: lightgray;">
                 <th style="text-align: left;">Total</th>
                 <th style="text-align: right;"><?= number_format($totals['total_nilai_buku'], 0, ',', '.'); ?></th>
@@ -1208,7 +1253,7 @@
                 <th style="text-align: right;"><?= number_format($totals['total_akm_thn_ini'], 0, ',', '.'); ?></th>
                 <th style="text-align: right;"><?= number_format($totals['total_nilai_buku_final'], 0, ',', '.'); ?></th>
             </tr>
-        </tfoot>
+        </tfoot> -->
     </table>
 
     <script src="<?= base_url() ?>assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

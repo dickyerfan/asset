@@ -52,13 +52,25 @@ class Dashboard_asset extends CI_Controller
     public function index()
     {
         $get_tahun = $this->input->get('tahun');
-        $tahun = substr($get_tahun, 0, 4);
+        // $tahun = substr($get_tahun, 0, 4);
 
-        if (empty($get_tahun)) {
-            $tahun = date('Y');
-        } else {
-            $this->session->set_userdata('tahun_session_rekap', $get_tahun);
+        // if (empty($get_tahun)) {
+        //     $tahun = date('Y');
+        // } else {
+        //     $this->session->set_userdata('tahun_session_rekap', $tahun);
+        // }
+
+        // PRIORITAS 1: GET
+        if (!empty($get_tahun)) {
+            $tahun = substr($get_tahun, 0, 4);
+            $this->session->set_userdata('tahun_session_rekap', $tahun);
         }
+        // PRIORITAS 2: DEFAULT (tanpa GET)
+        else {
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_rekap');
+        }
+
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'Rekap Perhitungan Penyusutan Fiskal';
@@ -165,10 +177,14 @@ class Dashboard_asset extends CI_Controller
         $tahun = $this->session->userdata('tahun_session_rekap');
 
         // Hapus session jika tidak ada tahun atau tahun tidak valid
-        if (empty($tahun)) {
-            $this->session->unset_userdata('tahun_session_rekap');
+        // if (empty($tahun)) {
+        //     $this->session->unset_userdata('tahun_session_rekap');
+        //     $tahun = date('Y');
+        // }
+        if (empty($tahun) || !is_numeric($tahun)) {
             $tahun = date('Y');
         }
+
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'Rekap Perhitungan Penyusutan Fiskal';
@@ -272,13 +288,15 @@ class Dashboard_asset extends CI_Controller
     public function rekap_detail()
     {
         $get_tahun = $this->input->get('tahun');
-        $tahun = substr($get_tahun, 0, 4);
 
-        if (empty($get_tahun)) {
-            $tahun = date('Y');
+        if (!empty($get_tahun)) {
+            $tahun = substr($get_tahun, 0, 4);
+            $this->session->set_userdata('tahun_session_rekap_detail', $tahun);
         } else {
-            $this->session->set_userdata('tahun_session_rekap_detail', $get_tahun);
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_rekap_detail');
         }
+
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'Rekap Detail Penyusutan Asset';
@@ -333,9 +351,7 @@ class Dashboard_asset extends CI_Controller
     {
         $tahun = $this->session->userdata('tahun_session_rekap_detail');
 
-        // Hapus session jika tidak ada tahun atau tahun tidak valid
-        if (empty($tahun)) {
-            $this->session->unset_userdata('tahun_session_rekap_detail');
+        if (empty($tahun) || !is_numeric($tahun)) {
             $tahun = date('Y');
         }
         $data['tahun_lap'] = $tahun;
@@ -390,9 +406,7 @@ class Dashboard_asset extends CI_Controller
     {
         $tahun = $this->session->userdata('tahun_session_rekap_detail');
 
-        // Hapus session jika tidak ada tahun atau tahun tidak valid
-        if (empty($tahun)) {
-            $this->session->unset_userdata('tahun_session_rekap_detail');
+        if (empty($tahun) || !is_numeric($tahun)) {
             $tahun = date('Y');
         }
         $data['tahun_lap'] = $tahun;
@@ -447,12 +461,13 @@ class Dashboard_asset extends CI_Controller
     public function rekap_perkiraan()
     {
         $get_tahun = $this->input->get('tahun');
-        $tahun = substr($get_tahun, 0, 4);
 
-        if (empty($get_tahun)) {
-            $tahun = date('Y');
+        if (!empty($get_tahun)) {
+            $tahun = substr($get_tahun, 0, 4);
+            $this->session->set_userdata('tahun_session_rekap_perkiraan', $tahun);
         } else {
-            $this->session->set_userdata('tahun_session_rekap_perkiraan', $get_tahun);
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_rekap_perkiraan');
         }
         $data['tahun_lap'] = $tahun;
 
@@ -508,9 +523,7 @@ class Dashboard_asset extends CI_Controller
     {
         $tahun = $this->session->userdata('tahun_session_rekap_perkiraan');
 
-        // Hapus session jika tidak ada tahun atau tahun tidak valid
-        if (empty($tahun)) {
-            $this->session->unset_userdata('tahun_session_rekap_perkiraan');
+        if (empty($tahun) || !is_numeric($tahun)) {
             $tahun = date('Y');
         }
         $data['tahun_lap'] = $tahun;
@@ -565,13 +578,15 @@ class Dashboard_asset extends CI_Controller
     public function rekap_upk()
     {
         $get_tahun = $this->input->get('tahun');
-        $tahun = substr($get_tahun, 0, 4);
 
-        if (empty($get_tahun)) {
-            $tahun = date('Y');
+        if (!empty($get_tahun)) {
+            $tahun = substr($get_tahun, 0, 4);
+            $this->session->set_userdata('tahun_session_rekap_upk', $tahun);
         } else {
-            $this->session->set_userdata('tahun_session_rekap_upk', $get_tahun);
+            $tahun = date('Y');
+            $this->session->unset_userdata('tahun_session_rekap_upk');
         }
+
         $data['tahun_lap'] = $tahun;
 
         $data['title'] = 'Rekap Detail Penyusutan Asset Per UPK';
@@ -626,9 +641,7 @@ class Dashboard_asset extends CI_Controller
     {
         $tahun = $this->session->userdata('tahun_session_rekap_upk');
 
-        // Hapus session jika tidak ada tahun atau tahun tidak valid
-        if (empty($tahun)) {
-            $this->session->unset_userdata('tahun_session_rekap_upk');
+        if (empty($tahun) || !is_numeric($tahun)) {
             $tahun = date('Y');
         }
         $data['tahun_lap'] = $tahun;

@@ -14,12 +14,12 @@
 					<div class="navbar-nav ms-2">
 						<a href="<?= base_url('asset/asset_tahun'); ?>"><button class=" neumorphic-button float-right"> Per Tahun</button></a>
 					</div>
-					<div class="navbar-nav ms-2">
+					<div class="navbar-nav ms-auto">
 						<?php if ($this->session->userdata('level') != 'Pengguna') : ?>
 							<a href="<?= base_url('asset/upload') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Asset</button></a>
 						<?php endif; ?>
 					</div>
-					<div class="navbar-nav ms-auto">
+					<div class="navbar-nav ms-2">
 						<a href="<?= base_url('asset/asset_semua'); ?>"><button class=" neumorphic-button float-right"><i class="fas fa-reply"></i> Kembali</button></a>
 					</div>
 				</nav>
@@ -54,7 +54,12 @@
 
 						?>
 						<h5><?= strtoupper($title) . ' TAHUN ' . $tahun_lap; ?></h5>
-						<h5>Bulan : <?= $bulan_lap; ?></h5>
+						<?php
+						if (empty($tanggal)) {
+						} else {
+							echo '<h5>Bulan : ' . $bulan_lap . '</h5>';
+						}
+						?>
 					</div>
 				</div>
 				<div class="table-responsive">
@@ -67,8 +72,8 @@
 								<th>Nama Asset</th>
 								<th>Lokasi</th>
 								<th>Tanggal</th>
-								<th>No Bkt Gdg</th>
-								<th>No Bkt Vch</th>
+								<!-- <th>No Bkt Gdg</th>
+								<th>No Bkt Vch</th> -->
 								<th>Rupiah</th>
 								<th>Ket</th>
 							</tr>
@@ -92,7 +97,7 @@
 										?>
 										<?= $nama_perkiraan; ?>
 									</td>
-									<td>
+									<!-- <td>
 										<?php
 										// Memotong nama_asset jika lebih dari 60 karakter
 										$nama_asset = $row->nama_asset;
@@ -105,7 +110,8 @@
 										<?php else : ?>
 											<?= $nama_asset; ?>
 										<?php endif; ?>
-									</td>
+									</td> -->
+									<td><?= $row->nama_asset; ?></td>
 									<td>
 										<?php if ($row->id_bagian == 2) : ?>
 											<?= 'Kantor Pusat'; ?>
@@ -114,12 +120,12 @@
 										<?php endif; ?>
 									</td>
 									<td class="text-center"><?= date('d-m-Y', strtotime($row->tanggal)); ?></td>
-									<td><?= $row->no_bukti_gd; ?></td>
-									<td><?= $row->no_bukti_vch; ?></td>
+									<!-- <td><?= $row->no_bukti_gd; ?></td>
+									<td><?= $row->no_bukti_vch; ?></td> -->
 									<td class="text-right"><?= number_format($row->rupiah, 0, ',', '.'); ?></td>
 									<td class="text-center">
 										<a href="<?= base_url(); ?>asset/edit/<?= $row->id_asset; ?>"><span class="badge badge-primary"><i class="fas fa-fw fa-edit"></i></span></a>
-										<a href="<?= base_url(); ?>asset/hapus/<?= $row->id_asset; ?>" class="badge badge-danger"><i class="fas fa-fw fa-trash"></i></a>
+										<!-- <a href="<?= base_url(); ?>asset/hapus/<?= $row->id_asset; ?>" class="badge badge-danger"><i class="fas fa-fw fa-trash"></i></a> -->
 									</td>
 								</tr>
 							<?php endforeach; ?>
@@ -130,8 +136,8 @@
 								<th></th>
 								<th></th>
 								<th></th>
-								<th></th>
-								<th></th>
+								<!-- <th></th>
+								<th></th> -->
 								<th></th>
 								<th>Jumlah</th>
 								<th class="text-right"><?= number_format($total_rupiah, 0, ',', '.'); ?></th>
