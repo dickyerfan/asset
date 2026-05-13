@@ -264,6 +264,8 @@ class Penjelasan extends CI_Controller
             $this->load->view('lap_keuangan/view_upload_pbt', $data);
             $this->load->view('templates/footer');
         } else {
+            $tahun = $this->input->post('tgl_pbt', true);
+            $nama_pbt = $this->input->post('nama_pbt', true);
             $input_pbt = $this->Model_lap_keuangan->input_pbt();
 
             if ($input_pbt) {
@@ -281,7 +283,7 @@ class Penjelasan extends CI_Controller
                 $this->session->set_flashdata(
                     'info',
                     '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Gagal!</strong> Data dengan nama dan tahun yang sama sudah ada.
+                <strong>Gagal!</strong> Data ' . htmlspecialchars($nama_pbt, ENT_QUOTES, 'UTF-8') . ' tahun ' . htmlspecialchars($tahun, ENT_QUOTES, 'UTF-8') . ' sudah ada.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                 </button>
             </div>'

@@ -483,15 +483,15 @@ class Model_evkin_dagri extends CI_Model
         $total_liabilitas_jangka_pendek_audited_lalu = $this->hitung_neraca($tahun)['tahun_lalu']['total_liabilitas_jangka_pendek_audited'];
         $total_liabilitas_jangka_pendek_audited_2_lalu = $this->hitung_neraca($tahun)['2tahun_lalu']['total_liabilitas_jangka_pendek_audited'];
 
-        $rasio_aktiva_lancar_ini = ($total_aset_lancar_audited_ini != 0)
+        $rasio_aktiva_lancar_ini = ($total_liabilitas_jangka_pendek_audited_ini != 0)
             ? ($total_aset_lancar_audited_ini / $total_liabilitas_jangka_pendek_audited_ini)
             : 0;
 
-        $rasio_aktiva_lancar_lalu = ($total_aset_lancar_audited_lalu != 0)
+        $rasio_aktiva_lancar_lalu = ($total_liabilitas_jangka_pendek_audited_lalu != 0)
             ? ($total_aset_lancar_audited_lalu / $total_liabilitas_jangka_pendek_audited_lalu)
             : 0;
 
-        $rasio_aktiva_lancar_2_lalu = ($total_aset_lancar_audited_2_lalu != 0)
+        $rasio_aktiva_lancar_2_lalu = ($total_liabilitas_jangka_pendek_audited_2_lalu != 0)
             ? ($total_aset_lancar_audited_2_lalu / $total_liabilitas_jangka_pendek_audited_2_lalu)
             : 0;
 
@@ -674,11 +674,11 @@ class Model_evkin_dagri extends CI_Model
         $total_hutang_lalu = $total_hutang['tahun_lalu']['total_hutang'];
 
 
-        $rasio_aktiva_ini = ($total_asset_ini != 0)
+        $rasio_aktiva_ini = ($total_hutang_ini != 0)
             ? ($total_asset_ini / $total_hutang_ini)
             : 0;
 
-        $rasio_aktiva_lalu = ($total_asset_lalu != 0)
+        $rasio_aktiva_lalu = ($total_hutang_lalu != 0)
             ? ($total_asset_lalu / $total_hutang_lalu)
             : 0;
 
@@ -737,11 +737,11 @@ class Model_evkin_dagri extends CI_Model
         $total_pendapatan_usaha_audited_ini = $total_pendapatan_usaha_audited['tahun_ini']['total_pendapatan_usaha_audited'];
         $total_pendapatan_usaha_audited_lalu = $total_pendapatan_usaha_audited['tahun_lalu']['total_pendapatan_usaha_audited'];
 
-        $rasio_beban_operasi_ini = ($total_beban_operasi_ini != 0)
+        $rasio_beban_operasi_ini = ($total_pendapatan_usaha_audited_ini != 0)
             ? ($total_beban_operasi_ini / $total_pendapatan_usaha_audited_ini)
             : 0;
 
-        $rasio_beban_operasi_lalu = ($total_beban_operasi_lalu != 0)
+        $rasio_beban_operasi_lalu = ($total_pendapatan_usaha_audited_lalu != 0)
             ? ($total_beban_operasi_lalu / $total_pendapatan_usaha_audited_lalu)
             : 0;
 
@@ -914,11 +914,11 @@ class Model_evkin_dagri extends CI_Model
         $total_penjualan_perhari_lalu = $total_pendapatan_usaha_audited_lalu / 365;
 
 
-        $jangka_waktu_tagih_ini = ($piutang_usaha_ini != 0)
+        $jangka_waktu_tagih_ini = ($total_penjualan_perhari_ini != 0)
             ? ($piutang_usaha_ini / $total_penjualan_perhari_ini)
             : 0;
 
-        $jangka_waktu_tagih_lalu = ($piutang_usaha_lalu != 0)
+        $jangka_waktu_tagih_lalu = ($total_penjualan_perhari_lalu != 0)
             ? ($piutang_usaha_lalu / $total_penjualan_perhari_lalu)
             : 0;
 

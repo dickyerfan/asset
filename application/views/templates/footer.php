@@ -207,6 +207,14 @@
 
 <script>
     $(function() {
+        $("#tabel_petugas_ttd").DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "pageLength": 10,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#tabel_petugas_ttd_wrapper .col-md-6:eq(0)');
+
         $("#tabel_matrik").DataTable({
             "responsive": true,
             "lengthChange": true,

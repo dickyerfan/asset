@@ -81,12 +81,14 @@ class Model_risiko extends CI_Model
     // Ambil data profil risiko
     public function getProfilRisiko($id_upk = null, $tahun = null)
     {
+        $this->db->select('mr_profil_risiko.*, bagian_upk.nama_bagian');
         $this->db->from('mr_profil_risiko');
+        $this->db->join('bagian_upk', 'bagian_upk.id_bagian = mr_profil_risiko.id_upk', 'left');
         if ($id_upk) {
-            $this->db->where('id_upk', $id_upk);
+            $this->db->where('mr_profil_risiko.id_upk', $id_upk);
         }
         if ($tahun) {
-            $this->db->where('tahun', $tahun);
+            $this->db->where('mr_profil_risiko.tahun', $tahun);
         }
         return $this->db->get()->result();
     }
@@ -244,5 +246,47 @@ class Model_risiko extends CI_Model
         $this->db->from('mr_pemilik_risiko');
         $this->db->where('status_pemilik', 1);
         return $this->db->get()->result();
+    }
+
+    public function getAllPetugasTtd()
+    {
+        $this->db->select('mr_petugas_ttd.*, bagian_upk.nama_bagian');
+        $this->db->from('mr_petugas_ttd');
+        $this->db->join('bagian_upk', 'bagian_upk.id_bagian = mr_petugas_ttd.id_bagian', 'left');
+        $this->db->order_by('mr_petugas_ttd.kode_ttd', 'ASC');
+        $this->db->order_by('bagian_upk.nama_bagian', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    public function getPetugasTtdById($id_ttd)
+    {
+        return $this->db->get_where('mr_petugas_ttd', ['id_ttd' => $id_ttd])->row();
+    }
+
+    public function insertPetugasTtd($data)
+    {
+        return $this->db->insert('mr_petugas_ttd', $data);
+    }
+
+    public function updatePetugasTtd($id_ttd, $data)
+    {
+        return $this->db->update('mr_petugas_ttd', $data, ['id_ttd' => $id_ttd]);
+    }
+
+    public function getPetugasTtd($kode_ttd, $id_bagian = null)
+    {
+        $this->db->select('*');
+        $this->db->from('mr_petugas_ttd');
+        $this->db->where('kode_ttd', $kode_ttd);
+        $this->db->where('status', 1);
+
+        if ($id_bagian === null) {
+            $this->db->where('id_bagian IS NULL', null, false);
+        } else {
+            $this->db->where('id_bagian', $id_bagian);
+        }
+
+        $this->db->order_by('id_ttd', 'DESC');
+        return $this->db->get()->row();
     }
 }

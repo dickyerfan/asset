@@ -22,17 +22,21 @@
                                 <small class="form-text text-danger pl-3"><?= form_error('tujuan'); ?></small>
                             </div>
                             <div class="form-group">
-                                <label>Kode Risiko</label>
-                                <select name="kode_risiko" class="form-control select2">
-                                    <option value="">-- Pilih Kode Risiko --</option>
+                                <label>Kode Risiko Saat Ini</label>
+                                <input type="text" class="form-control" value="<?= isset($profil) && !empty($profil->kode_risiko) ? $profil->kode_risiko : 'Belum ada kode risiko' ?>" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Kategori Risiko</label>
+                                <select name="kategori_risiko" class="form-control select2">
+                                    <option value="">-- Tidak Mengubah Kode Risiko --</option>
                                     <?php foreach ($kode_risiko as $kr) : ?>
                                         <?php $val = $kr->tipe_kr . '-' . $kr->kategori_kr; ?>
-                                        <option value="<?= $val ?>">
+                                        <option value="<?= $val ?>" <?= set_select('kategori_risiko', $val) ?>>
                                             <?= $kr->kategori_kr ?> - <?= $kr->nama_kr ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
-                                <small class=" form-text text-danger pl-3"><?= form_error('kode_risiko'); ?></small>
+                                <small class="form-text text-muted pl-3">Pilih kategori hanya jika ingin membuat/mengganti kode risiko.</small>
                             </div>
                             <div class="form-group">
                                 <label>Pernyataan</label>

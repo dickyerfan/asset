@@ -20,6 +20,49 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-1">
+                    <h6>Tabel Petugas TTD</h6>
+                    <a href="<?= base_url('risiko/pengaturan/input_ttd') ?>" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Input Petugas TTD</a>
+                </div>
+                <div class="table-responsive">
+                    <table id="tabel_petugas_ttd" class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr class="text-center">
+                                <th>No</th>
+                                <th>Kode TTD</th>
+                                <th>Jabatan</th>
+                                <th>Bagian / UPK</th>
+                                <th>Nama Petugas</th>
+                                <th>NIK</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $no = 1;
+                            if (isset($petugas_ttd) && count($petugas_ttd) > 0) : foreach ($petugas_ttd as $ttd) : ?>
+                                    <tr>
+                                        <td class="text-center"><?= $no++ ?></td>
+                                        <td><?= $ttd->kode_ttd ?></td>
+                                        <td><?= $ttd->jabatan_ttd ?></td>
+                                        <td><?= !empty($ttd->nama_bagian) ? $ttd->nama_bagian : '-' ?></td>
+                                        <td><?= $ttd->nama_petugas ?></td>
+                                        <td><?= !empty($ttd->nik) ? $ttd->nik : '-' ?></td>
+                                        <td class="text-center"><?= $ttd->status == 1 ? 'Aktif' : 'Tidak Aktif' ?></td>
+                                        <td class="text-center">
+                                            <a href="<?= base_url('risiko/pengaturan/edit_ttd/' . $ttd->id_ttd) ?>" class="btn btn-warning btn-sm">Edit</a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach;
+                            else : ?>
+                                <tr>
+                                    <td colspan="8" class="text-center">Data tidak tersedia</td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-1">
                     <h6>Tabel Matrik Risiko</h6>
                     <a href="<?= base_url('risiko/pengaturan/input_matrik') ?>" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Input matrik Risiko</a>
                 </div>

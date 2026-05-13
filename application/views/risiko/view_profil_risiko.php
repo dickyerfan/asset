@@ -43,7 +43,7 @@
                         <a href="<?= base_url('risiko/profil_risiko/input_risiko') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Risiko</button></a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a href="<?= base_url('risiko/profil_risiko/cetak_risiko') ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak PDF</button></a>
+                        <a href="<?= base_url('risiko/profil_risiko/cetak_risiko?id_upk=' . (isset($filter['id_upk']) ? $filter['id_upk'] : '') . '&tahun=' . (isset($filter['tahun']) ? $filter['tahun'] : date('Y'))) ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak PDF</button></a>
 
                     </div>
                 </nav>
@@ -75,7 +75,7 @@
                                             <tr>
                                                 <th class="text-start">Penanggung Jawab Risiko</th>
                                                 <td class="text-center">:</td>
-                                                <td class="text-start">Ka UPK <?= $nama_upk; ?></td>
+                                                <td class="text-start">Kabag/Ka UPK/Ketua <?= $nama_upk; ?></td>
                                             </tr>
                                             <tr>
                                                 <th class="text-start">Periode</th>
@@ -99,6 +99,7 @@
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
+                                <th>Bag/UPK</th>
                                 <th>Kegiatan</th>
                                 <th>Tujuan Keg.</th>
                                 <th>Kode Risiko</th>
@@ -114,6 +115,7 @@
                                 foreach ($profil_risiko as $row) : ?>
                                     <tr>
                                         <td class="text-center"><?= $no++ ?></td>
+                                        <td><?= !empty($row->nama_bagian) ? $row->nama_bagian : $row->id_upk ?></td>
                                         <td><?= $row->kegiatan ?></td>
                                         <td><?= $row->tujuan ?></td>
                                         <td><?= $row->kode_risiko ?></td>
@@ -132,7 +134,7 @@
                                 <?php endforeach;
                             else : ?>
                                 <tr>
-                                    <td colspan="9" class="text-center">Data belum ada / tidak tersedia</td>
+                                    <td colspan="10" class="text-center">Data belum ada / tidak tersedia</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
@@ -325,7 +327,7 @@
                                         </td>
                                         <td class="text-center">
                                             <?php $bagian = $this->session->userdata('bagian');
-                                            if (in_array($bagian, ['Administrator', 'Keuangan', 'Publik'])) : ?>
+                                            if (in_array($bagian, ['Administrator', 'Publik'])) : ?>
                                                 <a href="<?= base_url('risiko/profil_risiko/edit_monitoring/' . $row->id_monitoring) ?>" class="btn btn-warning btn-sm">Edit</a>
                                             <?php endif; ?>
                                         </td>

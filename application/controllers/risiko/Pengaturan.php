@@ -29,6 +29,7 @@ class Pengaturan extends CI_Controller
         $data['kategori'] = $this->Model_risiko->getAllKategori();
         $data['bagian'] = $this->Model_risiko->getAllBagian();
         $data['pemilik'] = $this->Model_risiko->getAllPemilik();
+        $data['petugas_ttd'] = $this->Model_risiko->getAllPetugasTtd();
         if ($this->session->userdata('bagian') == 'Administrator' || $this->session->userdata('bagian') == 'Keuangan') {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
@@ -496,6 +497,209 @@ class Pengaturan extends CI_Controller
                 );
                 redirect('risiko/pengaturan');
             }
+        }
+    }
+
+    public function input_ttd()
+    {
+        $data['title'] = 'Input Petugas TTD';
+        $data['bagian'] = $this->Model_risiko->getAllBagian();
+
+        $this->form_validation->set_rules('kode_ttd', 'Kode TTD', 'required');
+        $this->form_validation->set_rules('jabatan_ttd', 'Jabatan TTD', 'required');
+        $this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
+        $this->form_validation->set_rules('status', 'Status', 'required|integer');
+        $this->form_validation->set_message('required', '%s masih kosong');
+        $this->form_validation->set_message('integer', '%s harus berupa angka');
+
+        if ($this->form_validation->run() == FALSE) {
+            if ($this->session->userdata('bagian') == 'Administrator' || $this->session->userdata('bagian') == 'Keuangan') {
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar');
+                $this->load->view('templates/sidebar');
+                $this->load->view('risiko/view_input_petugas_ttd', $data);
+                $this->load->view('templates/footer');
+            } else if ($this->session->userdata('bagian') == 'Publik') {
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar');
+                $this->load->view('templates/sidebar_publik');
+                $this->load->view('risiko/view_input_petugas_ttd', $data);
+                $this->load->view('templates/footer');
+            }
+        } else {
+            $kode_ttd = $this->input->post('kode_ttd');
+            $id_bagian = $this->input->post('id_bagian');
+
+            if ($kode_ttd == 'pemilik_risiko' && empty($id_bagian)) {
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Perhatian!</strong> Bagian / UPK wajib dipilih untuk Pemilik Risiko.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>'
+                );
+                redirect('risiko/pengaturan/input_ttd');
+                return;
+            }
+
+            $input = [
+                'kode_ttd' => $kode_ttd,
+                'jabatan_ttd' => $this->input->post('jabatan_ttd'),
+                'id_bagian' => ($kode_ttd == 'pemilik_risiko') ? $id_bagian : null,
+                'nama_petugas' => $this->input->post('nama_petugas'),
+                'nik' => $this->input->post('nik'),
+                'status' => $this->input->post('status'),
+                'created_at' => date('Y-m-d H:i:s')
+            ];
+
+            $cek = $this->db->get_where('mr_petugas_ttd', [
+                'kode_ttd' => $input['kode_ttd'],
+                'id_bagian' => $input['id_bagian'],
+                'status' => 1
+            ])->row();
+
+            if ($input['status'] == 1 && $cek) {
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal!</strong> Petugas TTD aktif untuk posisi tersebut sudah ada.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>'
+                );
+                redirect('risiko/pengaturan/input_ttd');
+                return;
+            }
+
+            $this->Model_risiko->insertPetugasTtd($input);
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <strong>Sukses!</strong> Petugas TTD berhasil ditambahkan.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>'
+            );
+            redirect('risiko/pengaturan');
+        }
+    }
+
+    public function edit_ttd($id_ttd)
+    {
+        $data['title'] = 'Edit Petugas TTD';
+        $data['bagian'] = $this->Model_risiko->getAllBagian();
+        $data['ttd'] = $this->Model_risiko->getPetugasTtdById($id_ttd);
+
+        if (!$data['ttd']) {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Gagal!</strong> Data petugas TTD tidak ditemukan.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>'
+            );
+            redirect('risiko/pengaturan');
+            return;
+        }
+
+        $this->form_validation->set_rules('kode_ttd', 'Kode TTD', 'required');
+        $this->form_validation->set_rules('jabatan_ttd', 'Jabatan TTD', 'required');
+        $this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
+        $this->form_validation->set_rules('status', 'Status', 'required|integer');
+        $this->form_validation->set_message('required', '%s masih kosong');
+        $this->form_validation->set_message('integer', '%s harus berupa angka');
+
+        if ($this->form_validation->run() == FALSE) {
+            if ($this->session->userdata('bagian') == 'Administrator' || $this->session->userdata('bagian') == 'Keuangan') {
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar');
+                $this->load->view('templates/sidebar');
+                $this->load->view('risiko/view_edit_petugas_ttd', $data);
+                $this->load->view('templates/footer');
+            } else if ($this->session->userdata('bagian') == 'Publik') {
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar');
+                $this->load->view('templates/sidebar_publik');
+                $this->load->view('risiko/view_edit_petugas_ttd', $data);
+                $this->load->view('templates/footer');
+            }
+        } else {
+            $kode_ttd = $this->input->post('kode_ttd');
+            $id_bagian = $this->input->post('id_bagian');
+
+            if ($kode_ttd == 'pemilik_risiko' && empty($id_bagian)) {
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Perhatian!</strong> Bagian / UPK wajib dipilih untuk Pemilik Risiko.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>'
+                );
+                redirect('risiko/pengaturan/edit_ttd/' . $id_ttd);
+                return;
+            }
+
+            $input = [
+                'kode_ttd' => $kode_ttd,
+                'jabatan_ttd' => $this->input->post('jabatan_ttd'),
+                'id_bagian' => ($kode_ttd == 'pemilik_risiko') ? $id_bagian : null,
+                'nama_petugas' => $this->input->post('nama_petugas'),
+                'nik' => $this->input->post('nik'),
+                'status' => $this->input->post('status'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ];
+
+            $ttd_lama = $data['ttd'];
+            $is_same = ($input['kode_ttd'] == $ttd_lama->kode_ttd &&
+                $input['jabatan_ttd'] == $ttd_lama->jabatan_ttd &&
+                (string)$input['id_bagian'] == (string)$ttd_lama->id_bagian &&
+                $input['nama_petugas'] == $ttd_lama->nama_petugas &&
+                $input['nik'] == $ttd_lama->nik &&
+                $input['status'] == $ttd_lama->status);
+
+            if ($is_same) {
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Perhatian!</strong> Tidak ada perubahan data.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>'
+                );
+                redirect('risiko/pengaturan');
+                return;
+            }
+
+            if ($input['status'] == 1) {
+                $this->db->where('kode_ttd', $input['kode_ttd']);
+                if ($input['id_bagian'] === null) {
+                    $this->db->where('id_bagian IS NULL', null, false);
+                } else {
+                    $this->db->where('id_bagian', $input['id_bagian']);
+                }
+                $this->db->where('status', 1);
+                $this->db->where('id_ttd !=', $id_ttd);
+                $cek = $this->db->get('mr_petugas_ttd')->row();
+
+                if ($cek) {
+                    $this->session->set_flashdata(
+                        'info',
+                        '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Gagal!</strong> Petugas TTD aktif untuk posisi tersebut sudah ada.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>'
+                    );
+                    redirect('risiko/pengaturan/edit_ttd/' . $id_ttd);
+                    return;
+                }
+            }
+
+            $this->Model_risiko->updatePetugasTtd($id_ttd, $input);
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <strong>Sukses!</strong> Petugas TTD berhasil diupdate.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>'
+            );
+            redirect('risiko/pengaturan');
         }
     }
 }

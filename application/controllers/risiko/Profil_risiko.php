@@ -91,6 +91,53 @@ class Profil_risiko extends CI_Controller
         }
     }
 
+    public function cetak_risiko()
+    {
+        $id_upk = $this->input->get('id_upk');
+        $tahun = $this->input->get('tahun');
+
+        if ($tahun === null || $tahun === '') {
+            $tahun = (int)date('Y');
+        } else {
+            $tahun = (int)$tahun;
+        }
+
+        if (empty($id_upk)) {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Perhatian!</strong> Pilih UPK terlebih dahulu sebelum mencetak dokumen.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>'
+            );
+            redirect('risiko/profil_risiko?tahun=' . $tahun);
+            return;
+        }
+
+        $data['title'] = 'PROFIL RISIKO';
+        $data['title2'] = 'ANALISA RISIKO';
+        $data['title3'] = 'PENANGANAN RISIKO';
+        $data['title4'] = 'MONITORING RISIKO';
+        $data['unit_list'] = $this->Model_risiko->get_unit_list();
+        $data['tahun'] = $tahun;
+        $data['filter'] = [
+            'id_upk' => $id_upk,
+            'tahun' => $tahun
+        ];
+        $data['profil_risiko'] = $this->Model_risiko->getProfilRisiko($id_upk, $tahun);
+        $data['analisa_risiko'] = $this->Model_risiko->getAnalisaRisikoByProfil($id_upk, $tahun);
+        $data['penanganan_risiko'] = $this->Model_risiko->getPenangananRisikoByProfil($id_upk, $tahun);
+        $data['monitoring_risiko'] = $this->Model_risiko->getMonitoringRisikoByProfil($id_upk, $tahun);
+        $data['ttd_pemilik_risiko'] = $this->Model_risiko->getPetugasTtd('pemilik_risiko', $id_upk);
+        $data['ttd_ketua_satgas_mr'] = $this->Model_risiko->getPetugasTtd('ketua_satgas_mr');
+        $data['ttd_ketua_spi'] = $this->Model_risiko->getPetugasTtd('ketua_spi');
+        $data['ttd_direktur'] = $this->Model_risiko->getPetugasTtd('direktur');
+
+        $this->pdf->setPaper('folio', 'landscape');
+        $this->pdf->filename = "profil_risiko-{$id_upk}-{$tahun}.pdf";
+        $this->pdf->generate('risiko/cetak_profil_risiko_pdf', $data);
+    }
+
     public function input_risiko()
     {
         $data['title'] = 'Input Profil Risiko';
@@ -210,7 +257,6 @@ class Profil_risiko extends CI_Controller
 
         $this->form_validation->set_rules('kegiatan', 'Kegiatan', 'required');
         $this->form_validation->set_rules('tujuan', 'Tujuan', 'required');
-        $this->form_validation->set_rules('kode_risiko', 'Kode Risiko', 'required');
         $this->form_validation->set_rules('pernyataan', 'Pernyataan', 'required');
         $this->form_validation->set_rules('sebab', 'Sebab', 'required');
         $this->form_validation->set_rules('kategori', 'Kategori', 'required');
@@ -232,10 +278,58 @@ class Profil_risiko extends CI_Controller
                 $this->load->view('templates/footer');
             }
         } else {
-            $input = $this->input->post();
             $profil_lama = $this->Model_risiko->getProfilRisikoById($id_risiko);
-            $is_same = ($input['profil'] == $profil_lama->probabilitas &&
-                $input['kegiatan'] == $profil_lama->kegiatan &&
+            $kategori_risiko = $this->input->post('kategori_risiko');
+
+            if (empty($profil_lama->kode_risiko) && empty($kategori_risiko)) {
+                $this->session->set_flashdata(
+                    'info',
+                    '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Perhatian!</strong> Kategori risiko wajib dipilih karena kode risiko saat ini masih kosong.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>'
+                );
+                redirect('risiko/profil_risiko/edit/' . $id_risiko . '?tahun=' . $data['tahun']);
+                return;
+            }
+
+            $kode_risiko = $profil_lama->kode_risiko;
+            if (!empty($kategori_risiko)) {
+                list($tingkat, $kategori) = explode('-', $kategori_risiko);
+                $bagian = $profil_lama->id_upk;
+                $tahun = substr($data['tahun'], -2);
+
+                if (!empty($profil_lama->kode_risiko)) {
+                    $parts = explode('.', $profil_lama->kode_risiko);
+                    $nomor = isset($parts[4]) ? (int)$parts[4] : 1;
+                } else {
+                    $this->db->select('kode_risiko');
+                    $this->db->from('mr_profil_risiko');
+                    $this->db->like('kode_risiko', "{$tingkat}.");
+                    $this->db->order_by('kode_risiko', 'DESC');
+                    $this->db->limit(1);
+                    $last = $this->db->get()->row();
+                    if ($last) {
+                        $parts = explode('.', $last->kode_risiko);
+                        $nomor = isset($parts[4]) ? ((int)$parts[4] + 1) : 1;
+                    } else {
+                        $nomor = 1;
+                    }
+                }
+                $kode_risiko = "{$tingkat}.{$tahun}.{$kategori}.{$bagian}.{$nomor}";
+            }
+
+            $input = [
+                'kegiatan' => $this->input->post('kegiatan'),
+                'tujuan' => $this->input->post('tujuan'),
+                'kode_risiko' => $kode_risiko,
+                'pernyataan' => $this->input->post('pernyataan'),
+                'sebab' => $this->input->post('sebab'),
+                'kategori' => $this->input->post('kategori'),
+                'dampak' => $this->input->post('dampak')
+            ];
+
+            $is_same = ($input['kegiatan'] == $profil_lama->kegiatan &&
                 $input['tujuan'] == $profil_lama->tujuan &&
                 $input['kode_risiko'] == $profil_lama->kode_risiko &&
                 $input['pernyataan'] == $profil_lama->pernyataan &&
@@ -252,28 +346,6 @@ class Profil_risiko extends CI_Controller
                 );
                 redirect('risiko/profil_risiko');
             } else {
-                $tipe_kr = $this->input->post('kode_risiko');
-                list($tingkat, $kategori) = explode('-', $tipe_kr);
-                $bagian = $profil_lama->id_upk;
-                $tahun_full = $this->input->get('tahun');
-                if (!$tahun_full) {
-                    $tahun_full = date('Y');
-                }
-                $tahun = substr($tahun_full, -2);
-                // Ambil nomor urut terakhir berdasarkan tipe_kr (tingkat)
-                $this->db->select('kode_risiko');
-                $this->db->from('mr_profil_risiko');
-                $this->db->like('kode_risiko', "{$tingkat}.");
-                $this->db->order_by('kode_risiko', 'DESC');
-                $this->db->limit(1);
-                $last = $this->db->get()->row();
-                if ($last) {
-                    $parts = explode('.', $last->kode_risiko);
-                    $nomor = isset($parts[4]) ? ((int)$parts[4] + 1) : 1;
-                } else {
-                    $nomor = 1;
-                }
-                $input['kode_risiko'] = "{$tingkat}.{$tahun}.{$kategori}.{$bagian}.{$nomor}";
                 $input['modified_by'] = $this->session->userdata('nama_lengkap');
                 $input['modified_at'] = date('Y-m-d H:i:s');
                 $this->Model_risiko->updateProfilRisiko($id_risiko, $input);

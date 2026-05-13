@@ -262,8 +262,8 @@ class Model_lap_keuangan extends CI_Model
     {
         date_default_timezone_set('Asia/Jakarta');
 
-        $tahun = $this->input->post('tgl_pbt', true); // Tahun sudah dalam format YYYY
-        $nama_pbt = $this->input->post('nama_pbt', true);
+        $tahun = trim($this->input->post('tgl_pbt', true)); // Tahun sudah dalam format YYYY
+        $nama_pbt = trim($this->input->post('nama_pbt', true));
         $jumlah_pbt = $this->input->post('jumlah_pbt', true);
 
         // Cek apakah kombinasi tahun dan nama_pbt sudah ada di database
