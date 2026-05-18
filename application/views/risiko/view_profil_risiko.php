@@ -40,7 +40,9 @@
                         <button type="submit" class="neumorphic-button">Tampilkan</button>
                     </form>
                     <div class="navbar-nav ms-2">
-                        <a href="<?= base_url('risiko/profil_risiko/input_risiko') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Risiko</button></a>
+                        <?php if (isset($akses_input_risiko) && $akses_input_risiko) : ?>
+                            <a href="<?= base_url('risiko/profil_risiko/input_risiko') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Risiko</button></a>
+                        <?php endif; ?>
                     </div>
                     <div class="navbar-nav ms-auto">
                         <a href="<?= base_url('risiko/profil_risiko/cetak_risiko?id_upk=' . (isset($filter['id_upk']) ? $filter['id_upk'] : '') . '&tahun=' . (isset($filter['tahun']) ? $filter['tahun'] : date('Y'))) ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak PDF</button></a>
@@ -124,8 +126,7 @@
                                         <td class="text-center"><?= $row->kategori ?></td>
                                         <td><?= $row->dampak ?></td>
                                         <td class="text-center">
-                                            <?php $bagian = $this->session->userdata('bagian');
-                                            if (in_array($bagian, ['Administrator', 'Keuangan', 'Publik'])) : ?>
+                                            <?php if (isset($akses_edit_profil) && $akses_edit_profil) : ?>
                                                 <a href="<?= base_url('risiko/profil_risiko/edit/' . $row->id_risiko) ?>" class="btn btn-warning btn-sm">Edit</a>
                                             <?php endif; ?>
                                             <!-- <a href="<?= base_url('risiko/profil_risiko/delete/' . $row->id_risiko) ?>" class="btn btn-danger btn-sm tombolHapus">Hapus</a> -->
@@ -207,8 +208,7 @@
                                         </td>
                                         <td class="text-center"><?= $row->pemilik_risiko ?></td>
                                         <td class="text-center">
-                                            <?php $bagian = $this->session->userdata('bagian');
-                                            if (in_array($bagian, ['Administrator', 'Keuangan', 'Publik'])) : ?>
+                                            <?php if (isset($akses_edit_analisa) && $akses_edit_analisa) : ?>
                                                 <a href="<?= base_url('risiko/profil_risiko/edit_analisa/' . $row->id_analisa) ?>" class="btn btn-warning btn-sm">Edit</a>
                                             <?php endif; ?>
                                         </td>
@@ -255,8 +255,7 @@
                                         <td><?= $row->hasil ?></td>
                                         <td><?= $row->pj_tl ?></td>
                                         <td class="text-center">
-                                            <?php $bagian = $this->session->userdata('bagian');
-                                            if (in_array($bagian, ['Administrator', 'Keuangan', 'Publik'])) : ?>
+                                            <?php if (isset($akses_edit_penanganan) && $akses_edit_penanganan) : ?>
                                                 <a href="<?= base_url('risiko/profil_risiko/edit_penanganan/' . $row->id_penanganan) ?>" class="btn btn-warning btn-sm">Edit</a>
                                             <?php endif; ?>
                                         </td>
@@ -326,8 +325,7 @@
                                             <?= $row->peringkat_setelah ?>
                                         </td>
                                         <td class="text-center">
-                                            <?php $bagian = $this->session->userdata('bagian');
-                                            if (in_array($bagian, ['Administrator', 'Publik'])) : ?>
+                                            <?php if (isset($akses_edit_monitoring) && $akses_edit_monitoring) : ?>
                                                 <a href="<?= base_url('risiko/profil_risiko/edit_monitoring/' . $row->id_monitoring) ?>" class="btn btn-warning btn-sm">Edit</a>
                                             <?php endif; ?>
                                         </td>

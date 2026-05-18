@@ -19,6 +19,62 @@
                         <h5><?= strtoupper($title); ?> </h5>
                     </div>
                 </div>
+                <?php if ($this->session->userdata('bagian') == 'Administrator') : ?>
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <h6>Pengaturan Kunci Profil Risiko</h6>
+                    </div>
+                    <div class="table-responsive mb-3">
+                        <table id="tabel_pengaturan_kunci" class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>No</th>
+                                    <th>Jenis Pengaturan</th>
+                                    <th>Status</th>
+                                    <th>Terakhir Dikunci</th>
+                                    <th>Terakhir Dibuka</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                if (isset($pengaturan_kunci) && count($pengaturan_kunci) > 0) : foreach ($pengaturan_kunci as $kunci) : ?>
+                                        <tr>
+                                            <td class="text-center"><?= $no++ ?></td>
+                                            <td><?= $kunci->nama_kunci ?></td>
+                                            <td class="text-center">
+                                                <?php if ((int)$kunci->status_kunci === 1) : ?>
+                                                    <span class="badge badge-danger">Terkunci</span>
+                                                <?php else : ?>
+                                                    <span class="badge badge-success">Terbuka</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <?= !empty($kunci->locked_at) ? $kunci->locked_at : '-' ?>
+                                                <?= !empty($kunci->locked_by) ? '<br><small>oleh ' . $kunci->locked_by . '</small>' : '' ?>
+                                            </td>
+                                            <td>
+                                                <?= !empty($kunci->unlocked_at) ? $kunci->unlocked_at : '-' ?>
+                                                <?= !empty($kunci->unlocked_by) ? '<br><small>oleh ' . $kunci->unlocked_by . '</small>' : '' ?>
+                                            </td>
+                                            <td class="text-center">
+                                                <?php if ((int)$kunci->status_kunci === 1) : ?>
+                                                    <a href="<?= base_url('risiko/pengaturan/toggle_kunci/' . $kunci->kode_kunci) ?>" class="btn btn-success btn-sm" onclick="return confirm('Buka kunci <?= $kunci->nama_kunci ?>?')">Buka Kunci</a>
+                                                <?php else : ?>
+                                                    <a href="<?= base_url('risiko/pengaturan/toggle_kunci/' . $kunci->kode_kunci) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Kunci <?= $kunci->nama_kunci ?>?')">Kunci</a>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach;
+                                else : ?>
+                                    <tr>
+                                        <td colspan="6" class="text-center">Data pengaturan kunci tidak tersedia</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php endif; ?>
                 <div class="d-flex justify-content-between align-items-center mb-1">
                     <h6>Tabel Petugas TTD</h6>
                     <a href="<?= base_url('risiko/pengaturan/input_ttd') ?>" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Input Petugas TTD</a>

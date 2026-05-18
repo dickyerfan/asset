@@ -21,6 +21,38 @@ class Profil_risiko extends CI_Controller
         }
     }
 
+    private function canModifyRisiko($kode_kunci, $allowed_roles = ['Administrator', 'Keuangan', 'Publik'])
+    {
+        $bagian = $this->session->userdata('bagian');
+
+        if ($bagian == 'Administrator') {
+            return true;
+        }
+
+        if (!in_array($bagian, $allowed_roles)) {
+            return false;
+        }
+
+        return !$this->Model_risiko->isKunciAktif($kode_kunci);
+    }
+
+    private function redirectIfCannotModify($kode_kunci, $allowed_roles = ['Administrator', 'Keuangan', 'Publik'])
+    {
+        if ($this->canModifyRisiko($kode_kunci, $allowed_roles)) {
+            return false;
+        }
+
+        $this->session->set_flashdata(
+            'info',
+            '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Ditolak!</strong> Fitur ini sedang dikunci. Hanya Administrator yang dapat melakukan perubahan.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>'
+        );
+        redirect('risiko/profil_risiko');
+        return true;
+    }
+
     public function index()
     {
         $data['title'] = 'PROFIL RISIKO';
@@ -45,6 +77,11 @@ class Profil_risiko extends CI_Controller
         $data['analisa_risiko'] = $this->Model_risiko->getAnalisaRisikoByProfil($id_upk, $tahun);
         $data['penanganan_risiko'] = $this->Model_risiko->getPenangananRisikoByProfil($id_upk, $tahun);
         $data['monitoring_risiko'] = $this->Model_risiko->getMonitoringRisikoByProfil($id_upk, $tahun);
+        $data['akses_input_risiko'] = $this->canModifyRisiko('input_risiko');
+        $data['akses_edit_profil'] = $this->canModifyRisiko('profil_risiko');
+        $data['akses_edit_analisa'] = $this->canModifyRisiko('analisa_risiko');
+        $data['akses_edit_penanganan'] = $this->canModifyRisiko('penanganan_risiko');
+        $data['akses_edit_monitoring'] = $this->canModifyRisiko('monitoring_risiko', ['Administrator', 'Publik']);
 
         if ($this->session->userdata('bagian') == 'Administrator' || $this->session->userdata('bagian') == 'Keuangan') {
             $this->load->view('templates/header', $data);
@@ -140,6 +177,10 @@ class Profil_risiko extends CI_Controller
 
     public function input_risiko()
     {
+        if ($this->redirectIfCannotModify('input_risiko')) {
+            return;
+        }
+
         $data['title'] = 'Input Profil Risiko';
         $data['unit_list'] = $this->Model_risiko->get_unit_list();
 
@@ -249,6 +290,10 @@ class Profil_risiko extends CI_Controller
 
     public function edit($id_risiko)
     {
+        if ($this->redirectIfCannotModify('profil_risiko')) {
+            return;
+        }
+
         $data['title'] = 'Edit Profil Risiko';
         $data['tahun'] = $this->input->get('tahun') ? $this->input->get('tahun') : date('Y');
         $data['unit_list'] = $this->Model_risiko->get_unit_list();
@@ -363,6 +408,10 @@ class Profil_risiko extends CI_Controller
 
     public function edit_analisa($id_analisa)
     {
+        if ($this->redirectIfCannotModify('analisa_risiko')) {
+            return;
+        }
+
         $data['title'] = 'Edit Analisa Risiko';
         $data['tahun'] = $this->input->get('tahun') ? $this->input->get('tahun') : date('Y');
         $data['unit_list'] = $this->Model_risiko->get_unit_list();
@@ -435,6 +484,10 @@ class Profil_risiko extends CI_Controller
 
     public function edit_penanganan($id_penanganan)
     {
+        if ($this->redirectIfCannotModify('penanganan_risiko')) {
+            return;
+        }
+
         $data['title'] = 'Edit Penanganan Risiko';
         $data['tahun'] = $this->input->get('tahun') ? $this->input->get('tahun') : date('Y');
         $data['unit_list'] = $this->Model_risiko->get_unit_list();
@@ -495,6 +548,10 @@ class Profil_risiko extends CI_Controller
 
     public function edit_monitoring($id_monitoring)
     {
+        if ($this->redirectIfCannotModify('monitoring_risiko', ['Administrator', 'Publik'])) {
+            return;
+        }
+
         $data['title'] = 'Edit Monitoring Risiko';
         $data['tahun'] = $this->input->get('tahun') ? $this->input->get('tahun') : date('Y');
         $data['unit_list'] = $this->Model_risiko->get_unit_list();

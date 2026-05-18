@@ -289,4 +289,38 @@ class Model_risiko extends CI_Model
         $this->db->order_by('id_ttd', 'DESC');
         return $this->db->get()->row();
     }
+
+    public function getAllPengaturanKunci()
+    {
+        $this->db->order_by('id_kunci', 'ASC');
+        return $this->db->get('mr_pengaturan_kunci')->result();
+    }
+
+    public function getPengaturanKunciMap()
+    {
+        $result = [];
+        $kunci = $this->getAllPengaturanKunci();
+
+        foreach ($kunci as $row) {
+            $result[$row->kode_kunci] = $row;
+        }
+
+        return $result;
+    }
+
+    public function getPengaturanKunciByKode($kode_kunci)
+    {
+        return $this->db->get_where('mr_pengaturan_kunci', ['kode_kunci' => $kode_kunci])->row();
+    }
+
+    public function isKunciAktif($kode_kunci)
+    {
+        $kunci = $this->getPengaturanKunciByKode($kode_kunci);
+        return $kunci && (int)$kunci->status_kunci === 1;
+    }
+
+    public function updatePengaturanKunci($kode_kunci, $data)
+    {
+        return $this->db->update('mr_pengaturan_kunci', $data, ['kode_kunci' => $kode_kunci]);
+    }
 }

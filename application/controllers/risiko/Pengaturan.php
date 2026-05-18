@@ -30,6 +30,7 @@ class Pengaturan extends CI_Controller
         $data['bagian'] = $this->Model_risiko->getAllBagian();
         $data['pemilik'] = $this->Model_risiko->getAllPemilik();
         $data['petugas_ttd'] = $this->Model_risiko->getAllPetugasTtd();
+        $data['pengaturan_kunci'] = $this->Model_risiko->getAllPengaturanKunci();
         if ($this->session->userdata('bagian') == 'Administrator' || $this->session->userdata('bagian') == 'Keuangan') {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
@@ -43,6 +44,59 @@ class Pengaturan extends CI_Controller
             $this->load->view('risiko/view_pengaturan_risiko', $data);
             $this->load->view('templates/footer');
         }
+    }
+
+    public function toggle_kunci($kode_kunci)
+    {
+        if ($this->session->userdata('bagian') != 'Administrator') {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Ditolak!</strong> Pengaturan kunci hanya dapat diakses oleh Administrator.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>'
+            );
+            redirect('risiko/pengaturan');
+            return;
+        }
+
+        $kunci = $this->Model_risiko->getPengaturanKunciByKode($kode_kunci);
+        if (!$kunci) {
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Gagal!</strong> Pengaturan kunci tidak ditemukan.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>'
+            );
+            redirect('risiko/pengaturan');
+            return;
+        }
+
+        $status_baru = (int)$kunci->status_kunci === 1 ? 0 : 1;
+        $input = [
+            'status_kunci' => $status_baru,
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+
+        if ($status_baru === 1) {
+            $input['locked_by'] = $this->session->userdata('nama_lengkap');
+            $input['locked_at'] = date('Y-m-d H:i:s');
+        } else {
+            $input['unlocked_by'] = $this->session->userdata('nama_lengkap');
+            $input['unlocked_at'] = date('Y-m-d H:i:s');
+        }
+
+        $this->Model_risiko->updatePengaturanKunci($kode_kunci, $input);
+        $status_teks = $status_baru === 1 ? 'dikunci' : 'dibuka';
+        $this->session->set_flashdata(
+            'info',
+            '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>Sukses!</strong> ' . $kunci->nama_kunci . ' berhasil ' . $status_teks . '.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>'
+        );
+        redirect('risiko/pengaturan');
     }
 
     // Input matrik Risiko
