@@ -21,7 +21,7 @@ class Profil_risiko extends CI_Controller
         }
     }
 
-    private function canModifyRisiko($kode_kunci, $allowed_roles = ['Administrator', 'Keuangan', 'Publik'])
+    private function canModifyRisiko($kode_kunci, $allowed_roles = ['Administrator', 'Keuangan'])
     {
         $bagian = $this->session->userdata('bagian');
 
@@ -36,7 +36,7 @@ class Profil_risiko extends CI_Controller
         return !$this->Model_risiko->isKunciAktif($kode_kunci);
     }
 
-    private function redirectIfCannotModify($kode_kunci, $allowed_roles = ['Administrator', 'Keuangan', 'Publik'])
+    private function redirectIfCannotModify($kode_kunci, $allowed_roles = ['Administrator', 'Keuangan'])
     {
         if ($this->canModifyRisiko($kode_kunci, $allowed_roles)) {
             return false;
@@ -50,6 +50,23 @@ class Profil_risiko extends CI_Controller
             </div>'
         );
         redirect('risiko/profil_risiko');
+        return true;
+    }
+
+    private function canInputRisiko($kode_kunci = 'input_risiko', $allowed_roles = ['Administrator', 'Keuangan', 'UPK', 'Publik'])
+    {
+        $bagian = $this->session->userdata('bagian');
+
+        // Hanya role yang diizinkan
+        if (!in_array($bagian, $allowed_roles)) {
+            return false;
+        }
+
+        // Cek apakah sudah dikunci
+        if ($this->Model_risiko->isKunciAktif($kode_kunci)) {
+            return false;
+        }
+
         return true;
     }
 
@@ -77,7 +94,8 @@ class Profil_risiko extends CI_Controller
         $data['analisa_risiko'] = $this->Model_risiko->getAnalisaRisikoByProfil($id_upk, $tahun);
         $data['penanganan_risiko'] = $this->Model_risiko->getPenangananRisikoByProfil($id_upk, $tahun);
         $data['monitoring_risiko'] = $this->Model_risiko->getMonitoringRisikoByProfil($id_upk, $tahun);
-        $data['akses_input_risiko'] = $this->canModifyRisiko('input_risiko');
+        // $data['akses_input_risiko'] = $this->canModifyRisiko('input_risiko');
+        $data['akses_input_risiko'] = $this->canInputRisiko('input_risiko');
         $data['akses_edit_profil'] = $this->canModifyRisiko('profil_risiko');
         $data['akses_edit_analisa'] = $this->canModifyRisiko('analisa_risiko');
         $data['akses_edit_penanganan'] = $this->canModifyRisiko('penanganan_risiko');
@@ -177,9 +195,9 @@ class Profil_risiko extends CI_Controller
 
     public function input_risiko()
     {
-        if ($this->redirectIfCannotModify('input_risiko')) {
-            return;
-        }
+        // if ($this->redirectIfCannotModify('input_risiko')) {
+        //     return;
+        // }
 
         $data['title'] = 'Input Profil Risiko';
         $data['unit_list'] = $this->Model_risiko->get_unit_list();
@@ -620,5 +638,169 @@ class Profil_risiko extends CI_Controller
                 redirect('risiko/profil_risiko');
             }
         }
+    }
+
+
+    // public function upload_file($id_penanganan)
+    // {
+    //     $config['upload_path'] = './uploads/';
+    //     $config['allowed_types'] = 'jpg|jpeg|png|pdf';
+    //     $config['max_size'] = 3072; // max 3 MB
+    //     $config['file_name'] = time() . '_' . $_FILES['file_upload']['name'];
+
+    //     $this->load->library('upload', $config);
+
+    //     if ($this->upload->do_upload('file_upload')) {
+    //         $fileData = $this->upload->data();
+    //         // Gunakan kolom id_penanganan, sesuai tabel
+    //         $this->db->where('id_penanganan', $id_penanganan);
+    //         $this->db->update('mr_penanganan_risiko', ['file_upload' => $fileData['file_name']]);
+    //         $this->session->set_flashdata('success', 'File berhasil diupload.');
+    //     } else {
+    //         $this->session->set_flashdata('error', $this->upload->display_errors());
+    //     }
+
+    //     redirect('risiko/profil_risiko');
+    // }
+
+    public function upload_file($id_penanganan)
+    {
+        $file_type = $this->input->post('file_type'); // image atau document
+
+        // Ambil data row dari database
+        $row = $this->db->get_where('mr_penanganan_risiko', ['id_penanganan' => $id_penanganan])->row();
+
+        if (!$row) {
+            $this->session->set_flashdata('error', 'Data tidak ditemukan.');
+            redirect('risiko/profil_risiko');
+        }
+
+        // Cek apakah file untuk tipe ini sudah ada
+        if ($file_type == 'image' && !empty($row->file_image)) {
+            $this->session->set_flashdata('error', 'File gambar sudah ada. Tidak bisa upload lagi.');
+            redirect('risiko/profil_risiko');
+        }
+
+        if ($file_type == 'document' && !empty($row->file_document)) {
+            $this->session->set_flashdata('error', 'File dokumen sudah ada. Tidak bisa upload lagi.');
+            redirect('risiko/profil_risiko');
+        }
+
+        // Konfigurasi upload
+        $config['upload_path'] = './uploads/manris/';
+        $config['max_size'] = 2048; // 2 MB
+
+        if ($file_type == 'image') {
+            $config['allowed_types'] = 'jpg|jpeg|png';
+        } else {
+            $config['allowed_types'] = 'pdf';
+        }
+
+        $config['file_name'] = time() . '_' . $_FILES['file_upload']['name'];
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('file_upload')) {
+            // $this->session->set_flashdata('error', $this->upload->display_errors());
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal!</strong> Data Pendukung risiko ukuran file terlalu besar maksimal 2 mb atau tipe file salah (harus : jpg, jpeg, png, pdf).
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>'
+            );
+            redirect('risiko/profil_risiko');
+        }
+
+        $fileData = $this->upload->data();
+        $update_data = [];
+
+        if ($file_type == 'image') {
+            $update_data['file_image'] = $fileData['file_name'];
+        } else {
+            $update_data['file_document'] = $fileData['file_name'];
+        }
+
+        $this->db->where('id_penanganan', $id_penanganan);
+        $this->db->update('mr_penanganan_risiko', $update_data);
+
+        $this->session->set_flashdata(
+            'info',
+            '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>Sukses!</strong> Data Pendukung risiko berhasil diupdate.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>'
+        );
+        redirect('risiko/profil_risiko');
+    }
+
+    public function upload_file_spi($id_monitoring)
+    {
+        $file_type = $this->input->post('file_type'); // image atau document
+
+        // Ambil data row dari database
+        $row = $this->db->get_where('mr_monitoring_risiko', ['id_monitoring' => $id_monitoring])->row();
+
+        if (!$row) {
+            $this->session->set_flashdata('error', 'Data tidak ditemukan.');
+            redirect('risiko/profil_risiko');
+        }
+
+        // Cek apakah file untuk tipe ini sudah ada
+
+        if ($file_type == 'document' && !empty($row->file_document)) {
+
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal!</strong> File dokumen sudah ada. Tidak bisa upload lagi.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>'
+            );
+            redirect('risiko/profil_risiko');
+        }
+
+        // Konfigurasi upload
+        $config['upload_path'] = './uploads/spi/';
+        $config['max_size'] = 2048; // 2 MB
+
+        if ($file_type == 'document') {
+            $config['allowed_types'] = 'pdf';
+        }
+
+        $config['file_name'] = time() . '_' . $_FILES['file_upload']['name'];
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('file_upload')) {
+            // $this->session->set_flashdata('error', $this->upload->display_errors());
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal!</strong> Data Pendukung Monitoring risiko ukuran file terlalu besar maksimal 2 mb atau tipe file salah (harus : jpg, jpeg, png, pdf).
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>'
+            );
+            redirect('risiko/profil_risiko');
+        }
+
+        $fileData = $this->upload->data();
+        $update_data = [];
+
+        if ($file_type == 'document') {
+            $update_data['file_document'] = $fileData['file_name'];
+        }
+
+        $this->db->where('id_monitoring', $id_monitoring);
+        $this->db->update('mr_monitoring_risiko', $update_data);
+
+        $this->session->set_flashdata(
+            'info',
+            '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>Sukses!</strong> Data Pendukung Monitoring risiko berhasil diupdate.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>'
+        );
+        redirect('risiko/profil_risiko');
     }
 }

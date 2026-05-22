@@ -39,9 +39,18 @@
                         </div>
                         <button type="submit" class="neumorphic-button">Tampilkan</button>
                     </form>
-                    <div class="navbar-nav ms-2">
+                    <!-- <div class="navbar-nav ms-2">
                         <?php if (isset($akses_input_risiko) && $akses_input_risiko) : ?>
                             <a href="<?= base_url('risiko/profil_risiko/input_risiko') ?>"><button class="float-end neumorphic-button"><i class="fas fa-plus"></i> Input Risiko</button></a>
+                        <?php endif; ?>
+                    </div> -->
+                    <div class="navbar-nav ms-2">
+                        <?php if (!empty($akses_input_risiko)) : ?>
+                            <a href="<?= base_url('risiko/profil_risiko/input_risiko') ?>">
+                                <button class="float-end neumorphic-button">
+                                    <i class="fas fa-plus"></i> Input Risiko
+                                </button>
+                            </a>
                         <?php endif; ?>
                     </div>
                     <div class="navbar-nav ms-auto">
@@ -113,7 +122,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (isset($profil_risiko) && count($profil_risiko) > 0) : $no = 1;
+                            <?php
+                            $current_year = date('Y');
+                            if (isset($profil_risiko) && count($profil_risiko) > 0) : $no = 1;
                                 foreach ($profil_risiko as $row) : ?>
                                     <tr>
                                         <td class="text-center"><?= $no++ ?></td>
@@ -126,7 +137,7 @@
                                         <td class="text-center"><?= $row->kategori ?></td>
                                         <td><?= $row->dampak ?></td>
                                         <td class="text-center">
-                                            <?php if (isset($akses_edit_profil) && $akses_edit_profil) : ?>
+                                            <?php if (isset($akses_edit_profil) && $row->tahun == $current_year && $akses_edit_profil) : ?>
                                                 <a href="<?= base_url('risiko/profil_risiko/edit/' . $row->id_risiko) ?>" class="btn btn-warning btn-sm">Edit</a>
                                             <?php endif; ?>
                                             <!-- <a href="<?= base_url('risiko/profil_risiko/delete/' . $row->id_risiko) ?>" class="btn btn-danger btn-sm tombolHapus">Hapus</a> -->
@@ -177,7 +188,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (isset($analisa_risiko) && count($analisa_risiko) > 0) : $no = 1;
+                            <?php
+                            $current_year = date('Y');
+                            if (isset($analisa_risiko) && count($analisa_risiko) > 0) : $no = 1;
                                 foreach ($analisa_risiko as $row) :
                                     if ($row->peringkat_risiko == 'Sangat Tinggi') {
                                         $warna = '#FF0000'; // Merah
@@ -208,7 +221,7 @@
                                         </td>
                                         <td class="text-center"><?= $row->pemilik_risiko ?></td>
                                         <td class="text-center">
-                                            <?php if (isset($akses_edit_analisa) && $akses_edit_analisa) : ?>
+                                            <?php if (isset($akses_edit_analisa) && $row->tahun == $current_year && $akses_edit_analisa) : ?>
                                                 <a href="<?= base_url('risiko/profil_risiko/edit_analisa/' . $row->id_analisa) ?>" class="btn btn-warning btn-sm">Edit</a>
                                             <?php endif; ?>
                                         </td>
@@ -245,7 +258,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (isset($penanganan_risiko) && count($penanganan_risiko) > 0) : $no = 1;
+                            <?php
+                            $current_year = date('Y');
+                            if (isset($penanganan_risiko) && count($penanganan_risiko) > 0) : $no = 1;
                                 foreach ($penanganan_risiko as $row) : ?>
                                     <tr>
                                         <td class="text-center"><?= $no++ ?></td>
@@ -255,11 +270,84 @@
                                         <td><?= $row->hasil ?></td>
                                         <td><?= $row->pj_tl ?></td>
                                         <td class="text-center">
-                                            <?php if (isset($akses_edit_penanganan) && $akses_edit_penanganan) : ?>
-                                                <a href="<?= base_url('risiko/profil_risiko/edit_penanganan/' . $row->id_penanganan) ?>" class="btn btn-warning btn-sm">Edit</a>
+                                            <?php if (isset($akses_edit_penanganan) && $row->tahun == $current_year && $akses_edit_penanganan) : ?>
+                                                <a href="<?= base_url('risiko/profil_risiko/edit_penanganan/' . $row->id_penanganan) ?>" class="btn btn-warning btn-sm mb-1" style="width: 80px;">Edit</a>
+                                            <?php endif; ?>
+
+                                            <?php if (isset($akses_edit_penanganan) && $row->tahun == $current_year && $akses_edit_penanganan) : ?>
+                                                <button class="btn btn-primary btn-sm mb-1" style="width: 80px;" data-toggle="modal" data-target="#uploadModal<?= $row->id_penanganan ?>" <?= (!empty($row->file_image) && !empty($row->file_document)) ? 'disabled title="File sudah lengkap"' : '' ?>>
+                                                    Upload
+                                                </button>
+                                            <?php endif; ?>
+                                            <?php if (!empty($row->file_image) || !empty($row->file_document)) : ?>
+                                                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#detailModal<?= $row->id_penanganan ?>" style="width: 80px;">Detail</button>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
+                                    <!-- modal upload -->
+                                    <div id="uploadModal<?= $row->id_penanganan ?>" class="modal fade" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Upload File pendukung Penanganan Risiko</h5>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="<?= base_url('risiko/profil_risiko/upload_file/' . $row->id_penanganan) ?>" method="post" enctype="multipart/form-data">
+                                                        <div class="form-group">
+                                                            <label>Pilih Jenis File</label><br>
+                                                            <?php if (empty($row->file_image)) : ?>
+                                                                <input type="radio" name="file_type" value="image" required> Gambar (jpg, jpeg, png)<br>
+                                                            <?php endif; ?>
+                                                            <?php if (empty($row->file_document)) : ?>
+                                                                <input type="radio" name="file_type" value="document" required> Dokumen (pdf)
+                                                            <?php endif; ?>
+                                                        </div>
+                                                        <small class="text-danger">Ukuran file maksimal 2 MB</small>
+                                                        <br>
+                                                        <small class="text-danger">Masing2 hanya bisa upload 1 file saja</small>
+                                                        <div class="form-group">
+                                                            <label>Pilih File</label>
+                                                            <input type="file" name="file_upload" class="form-control" required>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary mt-3">Upload</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal Detail -->
+                                    <div id="detailModal<?= $row->id_penanganan ?>" class="modal fade" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-xl" role="document" style="max-width:1600px; width:100%;">
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="padding:1rem 2rem;">
+                                                    <h5 class="modal-title">Detail File Pendukung</h5>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-header" style="padding:0.5rem 2rem;">
+                                                    <h6 class="text-muted">Terakhir Diupdate: <?= $row->modified_at ?></h6>
+                                                    <h6 class="text-muted">Petugas Edit: <?= $row->modified_by ?></h6>
+                                                </div>
+                                                <div class="modal-body" style="padding:1rem 2rem;">
+                                                    <div class="row">
+                                                        <?php if (!empty($row->file_image)) : ?>
+                                                            <div class="col-md-5 text-center mb-3">
+                                                                <p><strong>Gambar:</strong></p>
+                                                                <img src="<?= base_url('uploads/manris/' . $row->file_image) ?>" class="img-fluid border" style="max-height:800px;">
+                                                            </div>
+                                                        <?php endif; ?>
+
+                                                        <?php if (!empty($row->file_document)) : ?>
+                                                            <div class="col-md-7 text-center mb-3">
+                                                                <p><strong>Dokumen (PDF):</strong></p>
+                                                                <iframe src="<?= base_url('uploads/manris/' . $row->file_document) ?>" width="100%" height="800px" class="border" style="border:1px solid #ccc;"></iframe>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <?php endforeach;
                             else : ?>
                                 <tr>
@@ -297,7 +385,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (isset($monitoring_risiko) && count($monitoring_risiko) > 0) : $no = 1;
+                            <?php
+                            $current_year = date('Y');
+                            if (isset($monitoring_risiko) && count($monitoring_risiko) > 0) : $no = 1;
                                 foreach ($monitoring_risiko as $row) :
                                     if ($row->peringkat_setelah == 'Sangat Tinggi') {
                                         $warna = '#FF0000'; // Merah
@@ -325,11 +415,74 @@
                                             <?= $row->peringkat_setelah ?>
                                         </td>
                                         <td class="text-center">
-                                            <?php if (isset($akses_edit_monitoring) && $akses_edit_monitoring) : ?>
-                                                <a href="<?= base_url('risiko/profil_risiko/edit_monitoring/' . $row->id_monitoring) ?>" class="btn btn-warning btn-sm">Edit</a>
+                                            <?php if (isset($akses_edit_monitoring) && $row->tahun == $current_year && $akses_edit_monitoring) : ?>
+                                                <a href="<?= base_url('risiko/profil_risiko/edit_monitoring/' . $row->id_monitoring) ?>" class="btn btn-warning btn-sm mb-1" style="width: 80px;">Edit</a>
+                                            <?php endif; ?>
+
+                                            <?php if (isset($akses_edit_monitoring) && $row->tahun == $current_year && $akses_edit_monitoring) : ?>
+                                                <button class="btn btn-primary btn-sm mb-1" style="width: 80px;" data-toggle="modal" data-target="#uploadModalSpi<?= $row->id_monitoring ?>" <?= (!empty($row->file_document)) ? 'disabled title="File sudah lengkap"' : '' ?>>
+                                                    Upload
+                                                </button>
+                                            <?php endif; ?>
+                                            <?php if (!empty($row->file_document)) : ?>
+                                                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#detailModalSpi<?= $row->id_monitoring ?>" style="width: 80px;">Detail</button>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
+                                    <!-- modal upload -->
+                                    <div id="uploadModalSpi<?= $row->id_monitoring ?>" class="modal fade" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Upload File Pendukung Monitoring Risiko</h5>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="<?= base_url('risiko/profil_risiko/upload_file_spi/' . $row->id_monitoring) ?>" method="post" enctype="multipart/form-data">
+                                                        <div class="form-group">
+                                                            <label>Pilih Jenis File</label><br>
+                                                            <?php if (empty($row->file_document)) : ?>
+                                                                <input type="radio" name="file_type" value="document" required> Dokumen (pdf)
+                                                            <?php endif; ?>
+                                                        </div>
+                                                        <small class="text-danger">Ukuran file maksimal 2 MB</small>
+                                                        <br>
+                                                        <small class="text-danger">hanya bisa upload 1 file saja</small>
+                                                        <div class="form-group">
+                                                            <label>Pilih File</label>
+                                                            <input type="file" name="file_upload" class="form-control" required>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary mt-3">Upload</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>x`
+                                    </div>
+                                    <!-- Modal Detail -->
+                                    <div id="detailModalSpi<?= $row->id_monitoring ?>" class="modal fade" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-xl" role="document" style="max-width:1300px; width:100%; ">
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="padding:1rem 2rem;">
+                                                    <h5 class="modal-title">Detail File Pendukung</h5>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-header" style="padding:0.5rem 2rem;">
+                                                    <h6 class="text-muted">Terakhir Diupdate: <?= $row->modified_at ?></h6>
+                                                    <h6 class="text-muted">Petugas Edit: <?= $row->modified_by ?></h6>
+                                                </div>
+                                                <div class="modal-body" style="padding:1rem 2rem;">
+                                                    <div class="row">
+                                                        <?php if (!empty($row->file_document)) : ?>
+                                                            <div class="col-md-12 text-center mb-3">
+                                                                <p><strong>Dokumen (PDF):</strong></p>
+                                                                <iframe src="<?= base_url('uploads/spi/' . $row->file_document) ?>" width="100%" height="800px" class="border" style="border:1px solid #ccc;"></iframe>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <?php endforeach;
                             else : ?>
                                 <tr>
