@@ -148,7 +148,7 @@ class Beban_pajak extends CI_Controller
                 'akun' => 'Pajak Kini',
                 'nilai_lr_sak_ep' => $total_bppt_tahun_ini,
                 'nilai_lr_sak_ep_audited' => $total_bppt_tahun_ini,
-                'posisi' => 11,
+                'posisi' => 13,
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'created_by' => $this->session->userdata('nama_lengkap')
@@ -309,7 +309,7 @@ class Beban_pajak extends CI_Controller
                 'akun' => 'Beban Pajak Ditangguhkan',
                 'nilai_lr_sak_ep' => $total_seluruh_bpd_tahun_ini,
                 'nilai_lr_sak_ep_audited' => $total_seluruh_bpd_tahun_ini,
-                'posisi' => 12,
+                'posisi' => 14,
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'created_by' => $this->session->userdata('nama_lengkap')

@@ -206,6 +206,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="<?= base_url('lap_keuangan/asset_tetap_baru') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Asset Tetap 2025></p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="<?= base_url('lap_keuangan/peny_piutang') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Perhitungan Piutang</p>
@@ -215,6 +221,12 @@
                             <a href="<?= base_url('lap_keuangan/peny_piutang/hitung_piutang') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Penyisihan Piutang</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('lap_keuangan/peny_piutang_baru') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Peny Piutang 2025></p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -257,6 +269,12 @@
                             <a href="<?= base_url('lap_keuangan/penghasilan_komp_lain') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Penghasilan Komp. Lain</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('lap_keuangan/keuntungan_kerugian_luar_biasa') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Keunt. (Kerugian) Luar Biasa</p>
                             </a>
                         </li>
                     </ul>

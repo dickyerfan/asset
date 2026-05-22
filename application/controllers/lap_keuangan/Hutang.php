@@ -398,18 +398,18 @@ class Hutang extends CI_Controller
     public function input_bymhd_neraca($tahun, $total_bymhd_tahun_ini)
     {
         date_default_timezone_set('Asia/Jakarta');
-        if ($total_bymhd_tahun_ini == 0) {
-            $this->session->set_flashdata(
-                'info',
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Gagal,</strong> Data Belum ada! Tidak dapat menambahkan data.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                      </div>'
-            );
-            redirect('lap_keuangan/hutang');
-            return;
-        }
+        // if ($total_bymhd_tahun_ini == 0) {
+        //     $this->session->set_flashdata(
+        //         'info',
+        //         '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        //                 <strong>Gagal,</strong> Data Belum ada! Tidak dapat menambahkan data.
+        //                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        //                 </button>
+        //               </div>'
+        //     );
+        //     redirect('lap_keuangan/hutang');
+        //     return;
+        // }
 
         // Cek apakah data sudah ada di database
         $this->db->where('tahun_neraca', $tahun);

@@ -851,5 +851,79 @@ class Model_labarugi extends CI_Model
         return $this->db->get()->result();
     }
 
-    // kode akhir untuk penghasilan komprehensif lainnya
+    // kode untuk keuntungan (kerugian) luar biasa
+    public function input_klb()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $tahun = $this->input->post('tgl_klb', true);
+        $jenis_klb = $this->input->post('jenis_klb', true);
+        $jumlah_klb = $this->input->post('jumlah_klb', true);
+
+        // Tentukan posisi berdasarkan jenis_klb
+        if ($jenis_klb == 'Keuntungan Luar biasa') {
+            $posisi = 11;
+        } elseif ($jenis_klb == 'Kerugian Luar biasa') {
+            $posisi = 12;
+        } else {
+            $posisi = 0; // fallback jika ada jenis lain atau kosong
+        }
+
+        // Cek apakah kombinasi tahun dan nama_klb sudah ada di database
+        $this->db->where('tahun_lr_sak_ep', $tahun);
+        $this->db->where('akun', $jenis_klb);
+        $query = $this->db->get('lr_sak_ep');
+
+        if ($query->num_rows() > 0) {
+            return false; // Data sudah ada, return false
+        }
+
+        // Data yang akan dimasukkan ke database
+        $data = [
+            'kategori' => 'Keuntungan (Kerugian) Luar Biasa',
+            'akun' => $jenis_klb,
+            'tahun_lr_sak_ep' => $tahun,
+            'nilai_lr_sak_ep' => $jumlah_klb,
+            'nilai_lr_sak_ep_audited' => $jumlah_klb,
+            'posisi' => $posisi,
+            'status' => 1,
+            'created_at' => date('Y-m-d H:i:s'),
+            'created_by' => $this->session->userdata('nama_lengkap')
+        ];
+
+        // Insert data ke tabel dan kembalikan statusnya
+        return $this->db->insert('lr_sak_ep', $data);
+    }
+
+    // public function get_klb_input($tahun)
+    // {
+    //     $tahun_lalu = $tahun - 1;
+    //     $this->db->select('
+    //     *, 
+    //     SUM(CASE WHEN YEAR(tahun_lr_sak_ep) = ' . $tahun . ' THEN lr_sak_ep.nilai_lr_sak_ep ELSE 0 END) as jumlah_klb_tahun_ini,
+    //     SUM(CASE WHEN YEAR(tahun_lr_sak_ep) = ' . $tahun_lalu . ' THEN lr_sak_ep.nilai_lr_sak_ep ELSE 0 END) as jumlah_klb_tahun_lalu
+    // ');
+    //     $this->db->from('lr_sak_ep');
+    //     $this->db->where('YEAR(tahun_lr_sak_ep) IN (' . $tahun . ', ' . $tahun_lalu . ')');
+    //     $this->db->where('kategori', 'Keuntungan (Kerugian) Luar Biasa');
+    //     $this->db->group_by('lr_sak_ep.akun');
+    //     return $this->db->get()->result();
+    // }
+
+    public function get_klb_input($tahun)
+    {
+        $tahun_lalu = $tahun - 1;
+
+        $this->db->select('
+        akun,
+        SUM(CASE WHEN tahun_lr_sak_ep = ' . $tahun . ' THEN nilai_lr_sak_ep ELSE 0 END) AS jumlah_klb_tahun_ini,
+        SUM(CASE WHEN tahun_lr_sak_ep = ' . $tahun_lalu . ' THEN nilai_lr_sak_ep ELSE 0 END) AS jumlah_klb_tahun_lalu
+    ');
+        $this->db->from('lr_sak_ep');
+        $this->db->where_in('tahun_lr_sak_ep', [$tahun, $tahun_lalu]);
+        $this->db->where('kategori', 'Keuntungan (Kerugian) Luar Biasa');
+        $this->db->group_by('akun');
+
+        return $this->db->get()->result();
+    }
+    // kode akhir untuk keuntungan (kerugian) luar biasa
 }

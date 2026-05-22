@@ -268,11 +268,11 @@
 
                             // Cek agar tidak terjadi pembagian dengan nol
                             if ($tarif_1_tahun_ini > 0) {
-                                $ppbt_bulat_tahun_ini = floor($ppbt_tahun_ini / 100) * 100;
+                                $ppbt_bulat_tahun_ini = floor($ppbt_tahun_ini / 1000) * 1000;
                             }
 
                             if ($tarif_1_tahun_lalu > 0) {
-                                $ppbt_bulat_tahun_lalu = floor($ppbt_tahun_lalu / 100) * 100;
+                                $ppbt_bulat_tahun_lalu = floor($ppbt_tahun_lalu / 1000) * 1000;
                             }
                             ?>
                             <th class="text-left">

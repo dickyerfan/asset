@@ -248,8 +248,8 @@ class Model_lap_keuangan extends CI_Model
             'akun' => 'Pajak Pertambahan Nilai Dimuka',
             'nilai_neraca' => $nilai_neraca,
             'nilai_neraca_audited' => $nilai_neraca,
-            'posisi' => 9,
-            'no_neraca' => '1.8',
+            'posisi' => 10,
+            'no_neraca' => '1.9',
             'status' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'created_by' => $this->session->userdata('nama_lengkap')
@@ -398,6 +398,7 @@ class Model_lap_keuangan extends CI_Model
         $this->db->select('*');
         $this->db->from('neraca');
         $this->db->where('tahun_neraca IN(' . $tahun . ', ' . $tahun_lalu . ')');
+        $this->db->order_by("FIELD(neraca.kategori, 'Aset Lancar', 'Aset Tidak Lancar', 'Liabilitas Jangka Pendek', 'Liabilitas Jangka Panjang', 'Ekuitas')", '', false);
         $this->db->order_by('neraca.posisi', 'ASC');
         // $this->db->order_by('neraca.no_neraca', 'ASC');
         return $this->db->get()->result();
@@ -1364,4 +1365,193 @@ class Model_lap_keuangan extends CI_Model
         $result = $query->row();
         return $result ? $result->nilai_neraca : 0;
     }
+
+    // kode untuk penyisihan piutang format baru
+    public function get_peny_piutang_baru($tahun)
+    {
+        $this->db->select('peny_piutang_baru.*, kel_tarif.kel_tarif, kel_tarif.kel_tarif_ket, kel_tarif.kode');
+        $this->db->from('peny_piutang_baru');
+        $this->db->join('kel_tarif', 'peny_piutang_baru.id_kel_tarif = kel_tarif.id_kel_tarif', 'left');
+        $this->db->where('peny_piutang_baru.tahun', $tahun);
+        $this->db->order_by('kel_tarif.id_kel_tarif', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    public function get_kel_tarif_map_piutang_baru()
+    {
+        $map = [];
+        foreach ($this->get_kel_tarif() as $row) {
+            $keys = [
+                $row->kel_tarif,
+                $row->kel_tarif_ket,
+                $row->kode,
+            ];
+
+            foreach ($keys as $key) {
+                $normalized = $this->normalize_peny_piutang_baru_key($key);
+                if ($normalized !== '') {
+                    $map[$normalized] = $row;
+                }
+            }
+        }
+
+        return $map;
+    }
+
+    public function save_peny_piutang_baru_import_row($tahun, $id_kel_tarif, $values)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+
+        $data = [
+            'tahun' => $tahun,
+            'id_kel_tarif' => $id_kel_tarif,
+            'piutang_1_3_bulan' => $values['piutang_1_3_bulan'],
+            'piutang_4_6_bulan' => $values['piutang_4_6_bulan'],
+            'piutang_6_12_bulan' => $values['piutang_6_12_bulan'],
+            'piutang_12_18_bulan' => $values['piutang_12_18_bulan'],
+            'piutang_18_24_bulan' => $values['piutang_18_24_bulan'],
+            'piutang_24_bulan_keatas' => $values['piutang_24_bulan_keatas'],
+        ];
+
+        $this->db->where('tahun', $tahun);
+        $this->db->where('id_kel_tarif', $id_kel_tarif);
+        $existing = $this->db->get('peny_piutang_baru')->row();
+
+        if ($existing) {
+            $data['modified_at'] = date('Y-m-d H:i:s');
+            $data['modified_by'] = $this->session->userdata('nama_lengkap');
+
+            $this->db->where('id_peny_piutang_baru', $existing->id_peny_piutang_baru);
+            return $this->db->update('peny_piutang_baru', $data);
+        }
+
+        $data['created_at'] = date('Y-m-d H:i:s');
+        $data['created_by'] = $this->session->userdata('nama_lengkap');
+        $data['modified_by'] = '';
+
+        return $this->db->insert('peny_piutang_baru', $data);
+    }
+
+    public function normalize_peny_piutang_baru_key($value)
+    {
+        $value = strtolower(trim((string) $value));
+        $value = preg_replace('/[^a-z0-9]+/', '', $value);
+        return $value;
+    }
+    // akhir kode untuk penyisihan piutang format baru
+
+    // kode untuk asset tetap format baru
+    public function get_asset_tetap_baru($tahun)
+    {
+        $this->db->select('*');
+        $this->db->from('asset_tetap_baru');
+        $this->db->where('tahun', $tahun);
+        $this->db->order_by('no_urut', 'ASC');
+        $this->db->order_by('id_asset_tetap_baru', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    public function save_asset_tetap_baru_import_row($tahun, $no_urut, $values)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+
+        $data = [
+            'tahun' => $tahun,
+            'no_urut' => $no_urut,
+            'nama_asset' => $values['nama_asset'],
+            'harga_perolehan' => $values['harga_perolehan'],
+            'akm_penyusutan' => $values['akm_penyusutan'],
+        ];
+
+        $this->db->where('tahun', $tahun);
+        $this->db->where('nama_asset', $values['nama_asset']);
+        $existing = $this->db->get('asset_tetap_baru')->row();
+
+        if ($existing) {
+            $data['modified_at'] = date('Y-m-d H:i:s');
+            $data['modified_by'] = $this->session->userdata('nama_lengkap');
+
+            $this->db->where('id_asset_tetap_baru', $existing->id_asset_tetap_baru);
+            return $this->db->update('asset_tetap_baru', $data);
+        }
+
+        $data['created_at'] = date('Y-m-d H:i:s');
+        $data['created_by'] = $this->session->userdata('nama_lengkap');
+        $data['modified_by'] = '';
+
+        return $this->db->insert('asset_tetap_baru', $data);
+    }
+
+    public function save_atdp_import_row($tahun, $values)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+
+        $data = [
+            'nama_atdp' => $values['nama_atdp'],
+            'jumlah_atdp' => $values['jumlah_atdp'],
+            'tgl_atdp' => $tahun,
+        ];
+
+        $this->db->where('tgl_atdp', $tahun);
+        $this->db->where('nama_atdp', $values['nama_atdp']);
+        $existing = $this->db->get('atdp_input')->row();
+
+        if ($existing) {
+            $data['modified_at'] = date('Y-m-d H:i:s');
+            $data['modified_by'] = $this->session->userdata('nama_lengkap');
+
+            $this->db->where('id_atdp', $existing->id_atdp);
+            return $this->db->update('atdp_input', $data);
+        }
+
+        $data['created_at'] = date('Y-m-d H:i:s');
+        $data['created_by'] = $this->session->userdata('nama_lengkap');
+        $data['modified_by'] = '';
+
+        return $this->db->insert('atdp_input', $data);
+    }
+
+    public function get_atb_input($tahun)
+    {
+        $this->db->select('*');
+        $this->db->from('atb_input');
+        $this->db->where('tahun', $tahun);
+        $this->db->order_by('no_urut', 'ASC');
+        $this->db->order_by('id_atb', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    public function save_atb_import_row($tahun, $no_urut, $values)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+
+        $data = [
+            'tahun' => $tahun,
+            'no_urut' => $no_urut,
+            'nama_atb' => $values['nama_atb'],
+            'tanggal_perolehan' => $values['tanggal_perolehan'],
+            'harga_perolehan' => $values['harga_perolehan'],
+            'akm_amortisasi' => $values['akm_amortisasi'],
+            'nilai_buku' => $values['nilai_buku'],
+        ];
+
+        $this->db->where('tahun', $tahun);
+        $this->db->where('nama_atb', $values['nama_atb']);
+        $existing = $this->db->get('atb_input')->row();
+
+        if ($existing) {
+            $data['modified_at'] = date('Y-m-d H:i:s');
+            $data['modified_by'] = $this->session->userdata('nama_lengkap');
+
+            $this->db->where('id_atb', $existing->id_atb);
+            return $this->db->update('atb_input', $data);
+        }
+
+        $data['created_at'] = date('Y-m-d H:i:s');
+        $data['created_by'] = $this->session->userdata('nama_lengkap');
+        $data['modified_by'] = '';
+
+        return $this->db->insert('atb_input', $data);
+    }
+    // akhir kode untuk asset tetap format baru
 }

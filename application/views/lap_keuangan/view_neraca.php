@@ -55,7 +55,7 @@
                             // **1. Simpan data tahun lalu & tahun sekarang dalam array terpisah**
                             foreach ($neraca as $row) {
                                 if ($row->tahun_neraca == $tahun_lalu) {
-                                    $data_tahun_lalu[$row->akun] = $row->nilai_neraca;
+                                    $data_tahun_lalu[$row->akun] = $row->nilai_neraca_audited ?? 0;
                                 }
                                 if ($row->tahun_neraca == $tahun_lap) {
                                     $data_tahun_sekarang[] = $row;

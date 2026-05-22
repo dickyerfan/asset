@@ -150,7 +150,7 @@ class Penghasilan_komp_lain extends CI_Controller
                 'akun' => 'Surplus Revaluasi Tanah/Aset Tidak Lancar',
                 'nilai_lr_sak_ep' => $total_seluruh_srt_tahun_ini,
                 'nilai_lr_sak_ep_audited' => $total_seluruh_srt_tahun_ini,
-                'posisi' => 13,
+                'posisi' => 15,
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'created_by' => $this->session->userdata('nama_lengkap')
@@ -254,7 +254,7 @@ class Penghasilan_komp_lain extends CI_Controller
                 'akun' => 'Pengukuran Kembali Atas Program Imbalan Pasti',
                 'nilai_lr_sak_ep' => $total_seluruh_pkapip_tahun_ini,
                 'nilai_lr_sak_ep_audited' => $total_seluruh_pkapip_tahun_ini,
-                'posisi' => 14,
+                'posisi' => 16,
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'created_by' => $this->session->userdata('nama_lengkap')
@@ -358,7 +358,7 @@ class Penghasilan_komp_lain extends CI_Controller
                 'akun' => 'Beban Pajak Penghasilan Terkait',
                 'nilai_lr_sak_ep' => $total_seluruh_bppt_tahun_ini,
                 'nilai_lr_sak_ep_audited' => $total_seluruh_bppt_tahun_ini,
-                'posisi' => 15,
+                'posisi' => 17,
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'created_by' => $this->session->userdata('nama_lengkap')
@@ -462,7 +462,7 @@ class Penghasilan_komp_lain extends CI_Controller
                 'akun' => 'Penghasilan Komprehensif Lain Tahun Berjalan',
                 'nilai_lr_sak_ep' => $total_seluruh_pkltb_tahun_ini,
                 'nilai_lr_sak_ep_audited' => $total_seluruh_pkltb_tahun_ini,
-                'posisi' => 16,
+                'posisi' => 18,
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'created_by' => $this->session->userdata('nama_lengkap')
