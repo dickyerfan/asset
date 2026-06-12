@@ -20,7 +20,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label for="nilai_neraca">Nilai Aset Tetap Dikerjasamakan:</label>
+                                    <label for="nilai_neraca">Hutang Usaha:</label>
                                     <input type="text" class="form-control" id="nilai_neraca" name="nilai_neraca" placeholder="Masukan Jumlah" value="<?= set_value('nilai_neraca'); ?>">
                                     <small class="form-text text-danger pl-3"><?= form_error('nilai_neraca'); ?></small>
                                 </div>

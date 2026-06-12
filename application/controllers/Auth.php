@@ -30,7 +30,7 @@ class Auth extends CI_Controller
           if ($bagian_upk) {
             $id_bagian_upk = $bagian_upk->id_bagian;
           }
-          if ($cek_nama_pengguna->bagian == 'Keuangan' || $cek_nama_pengguna->bagian == 'Administrator' || $cek_nama_pengguna->bagian == 'Auditor') {
+          if ($cek_nama_pengguna->bagian == 'Keuangan' || $cek_nama_pengguna->bagian == 'Administrator') {
             $data_session = [
               'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
               'nama_lengkap' => $cek_nama_pengguna->nama_lengkap,
@@ -47,7 +47,25 @@ class Auth extends CI_Controller
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>');
-            redirect('dashboard_asset');
+            redirect('risiko/dashboard');
+          } elseif ($cek_nama_pengguna->bagian == 'Auditor') {
+            $data_session = [
+              'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
+              'nama_lengkap' => $cek_nama_pengguna->nama_lengkap,
+              'password' => $cek_nama_pengguna->password,
+              'level' => $cek_nama_pengguna->level,
+              'bagian' => $cek_nama_pengguna->bagian,
+              'id_upk' => $cek_nama_pengguna->id,
+              'id_bagian' => $id_bagian_upk
+            ];
+            $this->session->set_userdata($data_session);
+            $this->session->set_flashdata('info', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Selamat,</strong> Anda Berhasil Login
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>');
+            redirect('risiko/dashboard');
           } elseif ($cek_nama_pengguna->bagian == 'Umum') {
             $data_session = [
               'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
@@ -155,7 +173,7 @@ class Auth extends CI_Controller
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>');
-            redirect('dashboard_publik');
+            redirect('spi/hasil_evaluasi');
           }
         } else { //jika password salah
           $this->session->set_flashdata('info', '<div class="alert alert-danger" role="alert">Login Gagal, Password Anda Salah.!</div>');
@@ -165,7 +183,7 @@ class Auth extends CI_Controller
         $this->session->set_flashdata('info', '<div class="alert alert-danger" role="alert">Login Gagal, nama_pengguna Anda Salah.!</div>');
         redirect('auth');
       }
-      redirect('dashboard_asset');
+      redirect('risiko/dashboard');
     }
   }
 

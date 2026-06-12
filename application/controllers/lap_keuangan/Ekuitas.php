@@ -77,7 +77,7 @@ class Ekuitas extends CI_Controller
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Penerimaan Belum Diterima';
+            $data['title'] = 'Upload Penyertaan Pemda Yang Dipisahkan';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -182,7 +182,7 @@ class Ekuitas extends CI_Controller
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Penerimaan Belum Diterima';
+            $data['title'] = 'Upload Penyertaan Pemerintah Yang Belum Ditetapkan Statusnya';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -287,7 +287,7 @@ class Ekuitas extends CI_Controller
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Penerimaan Belum Diterima';
+            $data['title'] = 'Upload Modal Hibah';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -392,7 +392,7 @@ class Ekuitas extends CI_Controller
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Penerimaan Belum Diterima';
+            $data['title'] = 'Upload Cadangan Umum';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -496,7 +496,7 @@ class Ekuitas extends CI_Controller
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Kewajiban Lain-lain';
+            $data['title'] = 'Upload Cadangan Bertujuan';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -539,7 +539,7 @@ class Ekuitas extends CI_Controller
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Kewajiban Lain-lain';
+            $data['title'] = 'Upload Pengukuran Kembali Imbalan Paska Kerja';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -583,7 +583,7 @@ class Ekuitas extends CI_Controller
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Penerimaan Belum Diterima';
+            $data['title'] = 'Upload Akm Kerugian Tahun Lalu';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');

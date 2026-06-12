@@ -18,6 +18,66 @@ class Model_risiko extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function getTahunRisiko()
+    {
+        $this->db->select('tahun');
+        $this->db->distinct();
+        $this->db->from('mr_profil_risiko');
+        $this->db->order_by('tahun', 'DESC');
+        return $this->db->get()->result();
+    }
+
+    public function getDashboardRisikoData($id_upk = null, $tahun = null)
+    {
+        $this->db->select([
+            'profil.id_risiko',
+            'profil.id_upk',
+            'profil.tahun',
+            'profil.kegiatan',
+            'profil.kode_risiko',
+            'profil.pernyataan',
+            'profil.kategori',
+            'bagian.nama_bagian',
+            'analisa.kendali_uraian',
+            'analisa.probabilitas',
+            'analisa.dampak AS dampak_analisa',
+            'analisa.tingkat_risiko',
+            'analisa.peringkat_risiko',
+            'analisa.pemilik_risiko',
+            'penanganan.uraian AS uraian_penanganan',
+            'penanganan.jadwal AS jadwal_penanganan',
+            'penanganan.hasil AS hasil_penanganan',
+            'penanganan.pj_tl',
+            'penanganan.file_image AS file_penanganan_image',
+            'penanganan.file_document AS file_penanganan_document',
+            'monitoring.rtp',
+            'monitoring.jadwal AS jadwal_monitoring',
+            'monitoring.hasil AS hasil_monitoring',
+            'monitoring.keterangan',
+            'monitoring.prob_setelah',
+            'monitoring.dampak_setelah',
+            'monitoring.tingkat_setelah',
+            'monitoring.peringkat_setelah',
+            'monitoring.file_document AS file_monitoring_document'
+        ]);
+        $this->db->from('mr_profil_risiko AS profil');
+        $this->db->join('bagian_upk AS bagian', 'bagian.id_bagian = profil.id_upk', 'left');
+        $this->db->join('mr_analisa_risiko AS analisa', 'analisa.id_risiko = profil.id_risiko', 'left');
+        $this->db->join('mr_penanganan_risiko AS penanganan', 'penanganan.id_risiko = profil.id_risiko', 'left');
+        $this->db->join('mr_monitoring_risiko AS monitoring', 'monitoring.id_risiko = profil.id_risiko', 'left');
+
+        if ($id_upk) {
+            $this->db->where('profil.id_upk', $id_upk);
+        }
+        if ($tahun) {
+            $this->db->where('profil.tahun', $tahun);
+        }
+
+        $this->db->order_by('analisa.tingkat_risiko', 'DESC');
+        $this->db->order_by('profil.kode_risiko', 'ASC');
+        return $this->db->get()->result();
+    }
+
     // Ambil data monitoring risiko berdasarkan id_risiko
     public function getMonitoringRisikoByProfil($id_upk = null, $tahun = null)
     {

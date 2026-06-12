@@ -48,6 +48,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="<?= base_url('risiko/dashboard') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
                             <a href="<?= base_url('risiko/profil_risiko?id_upk=' . $this->session->userdata('id_bagian') . '&tahun=' . date('Y')) ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Profil Risiko</p>

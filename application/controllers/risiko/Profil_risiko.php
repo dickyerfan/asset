@@ -101,7 +101,8 @@ class Profil_risiko extends CI_Controller
         $data['akses_edit_penanganan'] = $this->canModifyRisiko('penanganan_risiko');
         $data['akses_edit_monitoring'] = $this->canModifyRisiko('monitoring_risiko', ['Administrator', 'Publik']);
 
-        if ($this->session->userdata('bagian') == 'Administrator' || $this->session->userdata('bagian') == 'Keuangan') {
+        if ($this->session->userdata('bagian') == 'Administrator' || $this->session->userdata('bagian') == 'Keuangan' || $this->session->userdata('bagian') == 'Auditor') {
+            $this->load->view('templates/header', $data);
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');

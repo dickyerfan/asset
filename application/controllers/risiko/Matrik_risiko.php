@@ -34,7 +34,7 @@ class Matrik_risiko extends CI_Controller
         $data['matrik'] = $matrik;
         $data['tingkat_risiko'] = $this->db->order_by('level_tr', 'DESC')->get('mr_tingkat_risiko')->result();
 
-        if ($this->session->userdata('bagian') == 'Administrator' || $this->session->userdata('bagian') == 'Keuangan') {
+        if ($this->session->userdata('bagian') == 'Administrator' || $this->session->userdata('bagian') == 'Keuangan' || $this->session->userdata('bagian') == 'Auditor') {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');

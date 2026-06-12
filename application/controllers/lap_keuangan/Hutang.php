@@ -78,7 +78,7 @@ class Hutang extends CI_Controller
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Deposito';
+            $data['title'] = 'Upload Hutang Usaha';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -121,7 +121,7 @@ class Hutang extends CI_Controller
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Penerimaan Belum Diterima';
+            $data['title'] = 'Upload Hutang Non Usaha';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -211,7 +211,7 @@ class Hutang extends CI_Controller
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Penerimaaan Diterima Dimuka';
+            $data['title'] = 'Upload Uang Titipan SR';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -361,7 +361,7 @@ class Hutang extends CI_Controller
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Penerimaan Belum Diterima';
+            $data['title'] = 'Upload Biaya Yang Masih Harus dibayar';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -465,7 +465,7 @@ class Hutang extends CI_Controller
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Upload Penerimaan Belum Diterima';
+            $data['title'] = 'Upload Hutang Pajak';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');

@@ -53,9 +53,14 @@
                             </a>
                         <?php endif; ?>
                     </div>
+
                     <div class="navbar-nav ms-auto">
                         <a href="<?= base_url('risiko/profil_risiko/cetak_risiko?id_upk=' . (isset($filter['id_upk']) ? $filter['id_upk'] : '') . '&tahun=' . (isset($filter['tahun']) ? $filter['tahun'] : date('Y'))) ?>" target="_blank"><button class="float-end neumorphic-button"><i class="fas fa-print"></i> Cetak PDF</button></a>
-
+                    </div>
+                    <div class="navbar-nav ms-2">
+                        <?php if (isset($akses_input_risiko) && $akses_input_risiko) : ?>
+                            <a href="<?= base_url('risiko/dashboard') ?>"><button class="float-end neumorphic-button"><i class="fas fa-reply"></i> Kembali Dashboard</button></a>
+                        <?php endif; ?>
                     </div>
                 </nav>
             </div>
