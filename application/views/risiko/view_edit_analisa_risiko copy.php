@@ -12,12 +12,12 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label><i class="fas fa-pen mr-1"></i>Uraian Pengendalian</label>
+                                <label>Uraian Pengendalian</label>
                                 <input type="text" name="kendali_uraian" class="form-control" value="<?= isset($analisa) ? $analisa->kendali_uraian : '' ?>">
                                 <small class="form-text text-danger pl-3"><?= form_error('kendali_uraian'); ?></small>
                             </div>
                             <div class="form-group">
-                                <label><i class="fas fa-check-circle mr-1"></i>Desain</label>
+                                <label>Desain</label>
                                 <select name="desain" class="form-control">
                                     <option value="">-- Pilih --</option>
                                     <option value="Ada" <?= (isset($analisa) && $analisa->desain == 'Ada') ? 'selected' : '' ?>>Ada</option>
@@ -26,7 +26,7 @@
                                 <small class="form-text text-danger pl-3"><?= form_error('desain'); ?></small>
                             </div>
                             <div class="form-group">
-                                <label><i class="fas fa-chart-line mr-1"></i>Efektivitas</label>
+                                <label>Efektivitas</label>
                                 <select name="efektifitas" class="form-control">
                                     <option value="">-- Pilih --</option>
                                     <option value="Tidak" <?= (isset($analisa) && $analisa->efektifitas == 'Tidak') ? 'selected' : '' ?>>Tidak</option>
@@ -36,7 +36,7 @@
                                 <small class="form-text text-danger pl-3"><?= form_error('efektifitas'); ?></small>
                             </div>
                             <div class="form-group">
-                                <label><i class="fas fa-dice mr-1"></i>Probabilitas</label>
+                                <label>Probabilitas</label>
                                 <select name="probabilitas" class="form-control">
                                     <option value="">-- Pilih --</option>
                                     <option value="1" <?= (isset($analisa) && $analisa->probabilitas == '1') ? 'selected' : '' ?>>1</option>
@@ -48,7 +48,7 @@
                                 <small class="form-text text-danger pl-3"><?= form_error('probabilitas'); ?></small>
                             </div>
                             <div class="form-group">
-                                <label><i class="fas fa-exclamation-triangle mr-1"></i>Dampak</label>
+                                <label>Dampak</label>
                                 <select name="dampak" class="form-control">
                                     <option value="">-- Pilih --</option>
                                     <option value="1" <?= (isset($analisa) && $analisa->dampak == '1') ? 'selected' : '' ?>>1</option>
@@ -60,7 +60,7 @@
                                 <small class="form-text text-danger pl-3"><?= form_error('dampak'); ?></small>
                             </div>
                             <div class="form-group">
-                                <label><i class="fas fa-user-tie mr-1"></i>Pemilik Risiko</label>
+                                <label>Pemilik Risiko</label>
                                 <select name="pemilik_risiko" class="form-control">
                                     <option value="">-- Pilih --</option>
                                     <?php if (isset($pemilik_risiko) && is_array($pemilik_risiko)) : ?>
@@ -74,23 +74,23 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label><i class="fas fa-tasks mr-1"></i>Kegiatan</label>
+                                <label>Kegiatan</label>
                                 <textarea class="form-control" readonly><?= isset($profil_risiko) ? $profil_risiko->kegiatan : '' ?></textarea>
                             </div>
                             <div class="form-group">
-                                <label><i class="fas fa-bullseye mr-1"></i>Tujuan</label>
+                                <label>Tujuan</label>
                                 <textarea class="form-control" readonly><?= isset($profil_risiko) ? $profil_risiko->tujuan : '' ?></textarea>
                             </div>
                             <div class="form-group">
-                                <label><i class="fas fa-exclamation-circle mr-1"></i>Pernyataan/Risiko</label>
+                                <label>Pernyataan/Risiko</label>
                                 <textarea class="form-control" readonly><?= isset($profil_risiko) ? $profil_risiko->pernyataan : '' ?></textarea>
                             </div>
                             <div class="form-group">
-                                <label><i class="fas fa-cogs mr-1"></i>Sebab</label>
+                                <label>Sebab</label>
                                 <textarea class="form-control" readonly><?= isset($profil_risiko) ? $profil_risiko->sebab : '' ?></textarea>
                             </div>
                             <div class="form-group">
-                                <label><i class="fas fa-bolt mr-1"></i>Dampak</label>
+                                <label>Dampak</label>
                                 <textarea class="form-control" readonly><?= isset($profil_risiko) ? $profil_risiko->dampak : '' ?></textarea>
                             </div>
                             <!-- <div class="form-group">

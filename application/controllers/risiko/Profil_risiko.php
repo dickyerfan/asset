@@ -436,6 +436,7 @@ class Profil_risiko extends CI_Controller
         $data['unit_list'] = $this->Model_risiko->get_unit_list();
         $data['analisa'] = $this->Model_risiko->getAnalisaRisikoById($id_analisa);
         $data['pemilik_risiko'] = $this->Model_risiko->getAllPemilikRisiko();
+        $data['profil_risiko'] = $this->Model_risiko->getDataRisiko($id_analisa);
 
         $this->form_validation->set_rules('kendali_uraian', 'Uraian', 'required');
         $this->form_validation->set_rules('desain', 'Desain', 'required');
@@ -512,6 +513,7 @@ class Profil_risiko extends CI_Controller
         $data['unit_list'] = $this->Model_risiko->get_unit_list();
         $data['penanganan'] = $this->Model_risiko->getPenangananRisikoById($id_penanganan);
         $data['pemilik_risiko'] = $this->Model_risiko->getAllPemilikRisiko();
+        $data['profil_risiko'] = $this->Model_risiko->getDataRisikoPenanganan($id_penanganan);
 
         $this->form_validation->set_rules('uraian', 'Uraian', 'required');
         $this->form_validation->set_rules('jadwal', 'Jadwal', 'required');
@@ -575,6 +577,7 @@ class Profil_risiko extends CI_Controller
         $data['tahun'] = $this->input->get('tahun') ? $this->input->get('tahun') : date('Y');
         $data['unit_list'] = $this->Model_risiko->get_unit_list();
         $data['monitoring'] = $this->Model_risiko->getMonitoringRisikoById($id_monitoring);
+        $data['profil_risiko'] = $this->Model_risiko->getDataRisikoMonitoring($id_monitoring);
 
         $this->form_validation->set_rules('rtp', 'RTP', 'required');
         $this->form_validation->set_rules('jadwal', 'Jadwal', 'required');

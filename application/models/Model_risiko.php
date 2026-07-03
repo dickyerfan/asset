@@ -27,6 +27,33 @@ class Model_risiko extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function getDataRisiko($id_analisa)
+    {
+        $this->db->select('profil.*, analisa.*');
+        $this->db->from('mr_analisa_risiko AS profil');
+        $this->db->join('mr_profil_risiko AS analisa', 'analisa.id_risiko = profil.id_risiko', 'left');
+        $this->db->where('profil.id_analisa', $id_analisa);
+        return $this->db->get()->row();
+    }
+
+    public function getDataRisikoPenanganan($id_penanganan)
+    {
+        $this->db->select('profil.*, analisa.*');
+        $this->db->from('mr_penanganan_risiko AS profil');
+        $this->db->join('mr_profil_risiko AS analisa', 'analisa.id_risiko = profil.id_risiko', 'left');
+        $this->db->where('profil.id_penanganan', $id_penanganan);
+        return $this->db->get()->row();
+    }
+
+    public function getDataRisikoMonitoring($id_monitoring)
+    {
+        $this->db->select('profil.*, analisa.*');
+        $this->db->from('mr_monitoring_risiko AS profil');
+        $this->db->join('mr_profil_risiko AS analisa', 'analisa.id_risiko = profil.id_risiko', 'left');
+        $this->db->where('profil.id_monitoring', $id_monitoring);
+        return $this->db->get()->row();
+    }
+
     public function getDashboardRisikoData($id_upk = null, $tahun = null)
     {
         $this->db->select([
