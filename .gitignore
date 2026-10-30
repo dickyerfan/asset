@@ -29,3 +29,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 /tests/tests/
 /tests/results/
+
+# Backup database pre-migrasi (jangan di-commit)
+asset_backup_pre_manrisk.sql
