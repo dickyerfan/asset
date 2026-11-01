@@ -20,7 +20,7 @@ class Dashboard extends MY_Controller
 
     public function index()
     {
-        $tahun = $this->tahunAktif(2027);
+        $tahun = $this->tahunAktif(date('Y') + 1); // default tahun aktif, jika tidak ada filter
 
         $f = [];
         $id_upk = $this->angka('id_upk');

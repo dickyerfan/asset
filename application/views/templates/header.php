@@ -9,7 +9,7 @@
 	<meta name="author" content="DIE Art'S Production" />
 	<title>Kinerja | <?= $title ?></title>
 
-	<link href="<?= base_url() ?>assets/img/pdam_biru.png" rel="icon">
+	<link href="<?= base_url() ?>assets/img/logo_ijen_tirta.png" rel="icon">
 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/fontawesome-free/css/all.min.css">

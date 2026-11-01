@@ -147,7 +147,7 @@
                                             <td>
                                                 <?php
                                                 $nama_asset = $row->nama_asset;
-                                                if (strlen($nama_asset) > 55) {
+                                                if (strlen($nama_asset) > 150) {
                                                     $nama_asset = substr($nama_asset, 0, 55) . '...';
                                                 }
                                                 ?>

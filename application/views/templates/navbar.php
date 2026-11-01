@@ -15,9 +15,9 @@
             <a class="nav-link">
                 <?php
                 if ($this->session->userdata('bagian') == 'Administrator' || $this->session->userdata('bagian') == 'Keuangan' || $this->session->userdata('bagian') == 'Auditor') {
-                    echo '<h5 class="font-weight-bold">Evaluasi Kinerja & Manajemen Risiko</h5>';
+                    echo '<h5 class="font-weight-bold">Evaluasi Kinerja & MR</h5>';
                 } else {
-                    echo '<h5 class="font-weight-bold">Evaluasi Kinerja & Manajemen Risiko</h5>';
+                    echo '<h5 class="font-weight-bold">Evaluasi Kinerja & MR</h5>';
                 }
                 ?>
             </a>

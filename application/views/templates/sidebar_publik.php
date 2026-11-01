@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-light-primary elevation-4">
 
     <a href="#" class="brand-link" style="text-decoration: none;">
-        <img src="<?= base_url('assets') ?>/img/pdam_biru.png" alt="PDAM Logo" class="brand-image img-circle elevation-3">
-        <span class="brand-text font-weight-bold text-primary">PDAM BWS</span>
+        <img src="<?= base_url('assets') ?>/img/logo_ijen_tirta.png" alt="ijen Logo" class="brand-image img-circle elevation-3">
+        <span class="brand-text font-weight-bold text-primary">IJEN TIRTA</span>
     </a>
 
     <div class="sidebar">
@@ -365,7 +365,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-shield-alt"></i>
                         <p>
-                            Man. Risiko Baru
+                            Man. Risiko
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -418,7 +418,7 @@
                                 <li class="nav-item">
                                     <a href="<?= base_url('manrisk/monitoring') ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Pemantauan &amp; Peninjauan</p>
+                                        <p>Peninjauan</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -430,7 +430,7 @@
                                 <li class="nav-item">
                                     <a href="<?= base_url('manrisk/laporan') ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Pelaporan &amp; Pencatatan</p>
+                                        <p>Pelaporan</p>
                                     </a>
                                 </li>
                             </ul>
@@ -478,7 +478,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-medkit"></i>
                         <p>
@@ -518,7 +518,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a href="<?= base_url('arsip') ?>" class="nav-link">
                         <i class="nav-icon fas fa-archive"></i>
