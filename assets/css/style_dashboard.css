@@ -331,3 +331,19 @@
 }
 
 /* akhir setting datatable */
+
+/* ============================================================
+   Perbaikan garis tabel.
+   assets/select2/bootstrap.min.css (Bootstrap 5) dimuat paling akhir
+   setelah AdminLTE (Bootstrap 4), sehingga rule BS5:
+     .table-bordered > :not(caption) > * > * { border-width: 0 1px }
+   menimpa border sel BS4 dan membuat tabel (termasuk DataTable)
+   tampil tanpa garis baris/kolom. Kembalikan garisnya di sini.
+   ============================================================ */
+.table.table-bordered {
+	border-collapse: collapse !important;
+}
+
+.table.table-bordered > :not(caption) > * > * {
+	border: 1px solid #dee2e6 !important;
+}

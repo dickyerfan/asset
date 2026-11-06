@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 	<link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-	<link href="<?= base_url() ?>assets/css/style_dashboard.css" rel="stylesheet" />
+	<link href="<?= base_url() ?>assets/css/style_dashboard.css?v=<?= @filemtime(FCPATH . 'assets/css/style_dashboard.css') ?: '1' ?>" rel="stylesheet" />
 	<link rel="stylesheet" href="<?= base_url() ?>assets/select2/bootstrap.min.css" />
 	<link rel="stylesheet" href="<?= base_url() ?>assets/select2/select2.min.css" />
 	<link rel="stylesheet" href="<?= base_url() ?>assets/select2/select2-bootstrap-5-theme.min.css" />

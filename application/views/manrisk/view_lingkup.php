@@ -211,11 +211,13 @@
 
     <style>
         /*
-         * assets/select2/bootstrap.min.css (Bootstrap 5.1.3) dimuat paling akhir
-         * setelah AdminLTE (Bootstrap 4). Rule BS5
+         * Jaring pengaman: aturan global ada di assets/css/style_dashboard.css.
+         * Dipasang juga inline di sini supaya tidak terpengaruh cache browser
+         * (file CSS eksternal bisa tersaji versi lama).
+         *
+         * Penyebab: assets/select2/bootstrap.min.css (Bootstrap 5.1.3) dimuat
+         * setelah AdminLTE (Bootstrap 4) dan mematikan border sel:
          *   .table-bordered > :not(caption) > * > * { border-width: 0 1px }
-         * menimpa border sel dari BS4 sehingga garis baris/kolom tabel hilang.
-         * Kembalikan garis tabel khusus dua tabel di halaman ini.
          */
         #tabel_objektif_lingkup,
         #tabel_risiko_lingkup {
