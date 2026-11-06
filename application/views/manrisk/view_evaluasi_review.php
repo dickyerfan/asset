@@ -14,7 +14,7 @@ $statusLabel = $evaluasi->status_review === 'DITINJAU' ? 'Sudah ditinjau' : 'Men
         <div class="card card-outline card-warning">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0"><i class="fas fa-flag"></i> <?= strtoupper(html_escape($title)) ?></h5>
-                <a href="<?= base_url('manrisk/evaluasi?review=1') ?>" class="btn btn-sm btn-outline-secondary">
+                <a href="<?= base_url('manrisk/evaluasi?review=PERLU_REVIEW') ?>" class="btn btn-sm btn-outline-secondary">
                     <i class="fas fa-arrow-left"></i> Kembali
                 </a>
             </div>

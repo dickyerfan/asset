@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Daftar Risk Register modul manrisk.
  *
@@ -102,8 +103,7 @@ $badge = function ($level) use ($warnaLevel) {
 
                     <div class="form-group mr-2 mb-2">
                         <label for="f_q" class="mr-2">Cari</label>
-                        <input type="text" name="q" id="f_q" class="form-control" placeholder="kode / risiko / KPI"
-                               value="<?= html_escape(isset($filter['q']) ? $filter['q'] : '') ?>">
+                        <input type="text" name="q" id="f_q" class="form-control" placeholder="kode / risiko / KPI" value="<?= html_escape(isset($filter['q']) ? $filter['q'] : '') ?>">
                     </div>
 
                     <div class="form-group mr-2 mb-2">
@@ -221,9 +221,7 @@ $badge = function ($level) use ($warnaLevel) {
                                         <a href="<?= base_url('manrisk/register/form/' . $r->id_register) ?>" class="btn btn-sm btn-outline-secondary" title="Ubah">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="<?= base_url('manrisk/register/hapus/' . $r->id_register) ?>"
-                                           class="btn btn-sm btn-outline-danger" title="Nonaktifkan"
-                                           onclick="return confirm('Nonaktifkan risiko <?= html_escape($r->kode_risiko) ?>?\nData tidak dihapus, hanya ditandai NONAKTIF.');">
+                                        <a href="<?= base_url('manrisk/register/hapus/' . $r->id_register) ?>" class="btn btn-sm btn-outline-danger" title="Nonaktifkan" onclick="return confirm('Nonaktifkan risiko <?= html_escape($r->kode_risiko) ?>?\nData tidak dihapus, hanya ditandai NONAKTIF.');">
                                             <i class="fas fa-ban"></i>
                                         </a>
                                     <?php endif; ?>
@@ -243,7 +241,11 @@ $badge = function ($level) use ($warnaLevel) {
                     <div class="col-md-6">
                         <table class="table table-sm table-bordered mb-0">
                             <thead class="thead-light">
-                                <tr><th>Level</th><th>Skor L&times;D</th><th>Aksi</th></tr>
+                                <tr>
+                                    <th>Level</th>
+                                    <th>Skor L&times;D</th>
+                                    <th>Aksi</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($tingkat as $t) : ?>
@@ -261,17 +263,17 @@ $badge = function ($level) use ($warnaLevel) {
                         <p class="mb-1"><strong>UC = Uncontrolled</strong> — kontrol belum ada atau belum efektif.</p>
                         <p class="mb-1">
                             <span class="badge badge-danger">Ancaman</span>
-                            peristiwa yang merugikan &middot;
+                            peristiwa yang merugikan<br>
                             <span class="badge badge-success">Peluang</span>
                             peristiwa yang menguntungkan (ISO 6.4.2).
                         </p>
-                        <p class="text-muted mb-0">
+                        <!-- <p class="text-muted mb-0">
                             <small>
                                 Data 2025&ndash;2026 tersimpan pada modul legacy
                                 <a href="<?= base_url('risiko/profil_risiko') ?>">Profil Risiko</a>
                                 dan bersifat hanya-baca.
                             </small>
-                        </p>
+                        </p> -->
                     </div>
                 </div>
             </div>
@@ -282,20 +284,27 @@ $badge = function ($level) use ($warnaLevel) {
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    $('#tabel_register').DataTable({
-        responsive: true,
-        pageLength: 25,
-        order: [[0, 'asc']],
-        language: {
-            search: "Cari:",
-            lengthMenu: "Tampilkan _MENU_",
-            info: "Menampilkan _START_ - _END_ dari _TOTAL_",
-            infoEmpty: "Belum ada data",
-            infoFiltered: "(disaring dari _MAX_)",
-            zeroRecords: "Tidak ada data yang cocok",
-            paginate: {first: "Awal", last: "Akhir", next: "&raquo;", previous: "&laquo;"}
-        }
+    document.addEventListener('DOMContentLoaded', function() {
+        $('#tabel_register').DataTable({
+            responsive: true,
+            pageLength: 25,
+            order: [
+                [0, 'asc']
+            ],
+            language: {
+                search: "Cari:",
+                lengthMenu: "Tampilkan _MENU_",
+                info: "Menampilkan _START_ - _END_ dari _TOTAL_",
+                infoEmpty: "Belum ada data",
+                infoFiltered: "(disaring dari _MAX_)",
+                zeroRecords: "Tidak ada data yang cocok",
+                paginate: {
+                    first: "Awal",
+                    last: "Akhir",
+                    next: "&raquo;",
+                    previous: "&laquo;"
+                }
+            }
+        });
     });
-});
 </script>

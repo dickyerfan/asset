@@ -24,6 +24,9 @@ class MY_Controller extends CI_Controller
     /** Role yang boleh melihat seluruh unit. */
     protected $role_semua_unit = ['Administrator', 'Keuangan', 'Publik', 'Auditor'];
 
+    /** Cache pemetaan unit dari role bila session id_bagian kosong. */
+    private $unitDariBagian = null;
+
     /** Pemetaan role -> berkas sidebar. */
     protected $sidebar = [
         'Administrator'  => 'templates/sidebar',
@@ -74,7 +77,21 @@ class MY_Controller extends CI_Controller
             return null;
         }
         $id = $this->session->userdata('id_bagian');
-        return $id !== null && $id !== '' ? (int) $id : null;
+        if ($id !== null && $id !== '') {
+            return (int) $id;
+        }
+
+        // Sebagian akun lama tidak memiliki id_bagian karena nama_lengkap
+        // berbeda dengan nama_bagian (mis. "Bagian Pemeliharaan" vs
+        // "Pemeliharaan"). Petakan lewat role agar filter unit tetap bekerja.
+        if ($this->unitDariBagian === null) {
+            $bagian = $this->bagian();
+            $row = $bagian !== ''
+                ? $this->db->get_where('bagian_upk', ['nama_bagian' => $bagian])->row()
+                : null;
+            $this->unitDariBagian = $row ? (int) $row->id_bagian : 0;
+        }
+        return $this->unitDariBagian > 0 ? $this->unitDariBagian : null;
     }
 
     /** Nama berkas sidebar untuk role aktif. */

@@ -15,12 +15,24 @@ foreach ($baris as $b) {
         <?= $this->session->flashdata('info'); ?>
         <?= $this->session->unset_userdata('info'); ?>
 
+        <?php // Pesan simpan/sinkronisasi Monitoring (tanpa .alert agar tidak hilang otomatis). ?>
+        <?= $this->session->flashdata('info_monitoring'); ?>
+        <?= $this->session->unset_userdata('info_monitoring'); ?>
+
         <div class="row align-items-center mb-2">
             <div class="col-md-8">
                 <h4 class="mb-0"><?= strtoupper($title) ?> <?= $tahun ?></h4>
                 <small class="text-muted">
                     <?= count($baris) ?> risiko terpantau &middot;
                     <?= $ada ?> sudah memiliki catatan monitoring.
+                </small>
+                <small class="text-muted d-block">
+                    <i class="fas fa-edit"></i> <strong>Ubah</strong> = koreksi catatan terakhir &middot;
+                    <i class="fas fa-history"></i> <strong>angka</strong> = riwayat semua catatan (bisa diubah/dihapus)
+                </small>
+                <small class="text-muted d-block">
+                    <i class="fas fa-calculator"></i> Skor Lama terkunci; Skor Baru diisi <strong>L &times; D</strong>
+                    langsung di form Monitoring &mdash; centang <strong>Perbarui Analisa</strong> agar residual ikut berubah.
                 </small>
             </div>
             <div class="col-md-4 text-md-right">
@@ -86,11 +98,31 @@ foreach ($baris as $b) {
                                         <span class="text-muted">—</span>
                                     <?php endif; ?>
                                 </td>
-                                <td class="text-center"><?= count($b->riwayat) ?></td>
+                                <td class="text-center">
+                                    <?php if (count($b->riwayat)) : ?>
+                                        <a href="<?= base_url('manrisk/monitoring/form/' . $r->id_register) ?>#riwayat"
+                                           class="btn btn-sm btn-outline-secondary"
+                                           title="Lihat dan ubah semua catatan monitoring risiko ini">
+                                            <i class="fas fa-history"></i> <?= count($b->riwayat) ?>
+                                        </a>
+                                    <?php else : ?>
+                                        <span class="text-muted">0</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td class="text-center text-nowrap">
                                     <?php if ($boleh_tulis) : ?>
+                                        <?php if ($m) : ?>
+                                            <!-- Ubah catatan TERAKHIR langsung dari daftar.
+                                                 Catatan lama bisa diubah lewat tombol riwayat (kolom Jumlah Catatan). -->
+                                            <a href="<?= base_url('manrisk/monitoring/form/' . $r->id_register . '?id_monitoring=' . $m->id_monitoring) ?>"
+                                               class="btn btn-sm btn-outline-secondary"
+                                               title="Ubah catatan terakhir (TW<?= (int) $m->triwulan ?>)">
+                                                <i class="fas fa-edit"></i> Ubah
+                                            </a>
+                                        <?php endif; ?>
                                         <a href="<?= base_url('manrisk/monitoring/form/' . $r->id_register) ?>"
-                                           class="btn btn-sm btn-<?= $m ? 'outline-secondary' : 'primary' ?>">
+                                           class="btn btn-sm btn-<?= $m ? 'outline-primary' : 'primary' ?>"
+                                           title="<?= $m ? 'Tambah catatan monitoring baru' : 'Buat catatan monitoring pertama' ?>">
                                             <i class="fas fa-<?= $m ? 'plus' : 'edit' ?>"></i>
                                             <?= $m ? 'Tambah' : 'Catat' ?>
                                         </a>
@@ -120,6 +152,14 @@ foreach ($baris as $b) {
                             <td><small>Kontrol tidak efektif — wajib ditinjau ulang, skor dinaikkan, dan risiko dievaluasi lagi.</small></td></tr>
                     </tbody>
                 </table>
+                <p class="small text-muted mb-0 mt-2">
+                    <strong>Reassess (Perlu Tinjauan Ulang)</strong> adalah tanda <em>manual</em> dari catatan
+                    monitoring bahwa risiko perlu dinilai ulang. Nilainya berasal dari centang
+                    &ldquo;Perlu Tinjauan Ulang&rdquo; di form Monitoring — <strong>tidak dihitung otomatis</strong>
+                    dan tidak memicu apa pun sendiri. Bila <span class="badge badge-warning">YA</span>,
+                    tindak lanjutnya: perbarui <strong>Analisis</strong> (skor residual) lalu
+                    <strong>Evaluasi</strong> (keputusan baru).
+                </p>
             </div>
         </div>
 

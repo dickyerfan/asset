@@ -143,7 +143,7 @@
                 <span class="badge badge-warning ml-1"><?= isset($rekap['BELUM']) ? $rekap['BELUM'] : 0 ?> belum</span>
             </div>
             <div class="card-body table-responsive">
-                <table class="table table-sm table-bordered mb-0">
+                <table class="table table-sm table-bordered mb-0" id="tabel_objektif_lingkup">
                     <thead class="thead-light">
                         <tr>
                             <th>Indikator</th>
@@ -179,7 +179,7 @@
         <div class="card card-outline card-info">
             <div class="card-header"><strong>Risiko <?= $tahun ?> per Unit</strong></div>
             <div class="card-body table-responsive">
-                <table class="table table-sm table-bordered mb-0">
+                <table class="table table-sm table-bordered mb-0" id="tabel_risiko_lingkup">
                     <thead class="thead-light">
                         <tr>
                             <th>Kode</th>
@@ -209,6 +209,67 @@
             </div>
         </div>
 
-    </div>
+    <style>
+        /*
+         * assets/select2/bootstrap.min.css (Bootstrap 5.1.3) dimuat paling akhir
+         * setelah AdminLTE (Bootstrap 4). Rule BS5
+         *   .table-bordered > :not(caption) > * > * { border-width: 0 1px }
+         * menimpa border sel dari BS4 sehingga garis baris/kolom tabel hilang.
+         * Kembalikan garis tabel khusus dua tabel di halaman ini.
+         */
+        #tabel_objektif_lingkup,
+        #tabel_risiko_lingkup {
+            border-collapse: collapse !important;
+        }
+
+        #tabel_objektif_lingkup > :not(caption) > * > *,
+        #tabel_risiko_lingkup > :not(caption) > * > * {
+            border: 1px solid #dee2e6 !important;
+        }
+    </style>
+
+    <script>
+        // Script ini berada sebelum jQuery dimuat di footer, jadi tunggu DOM siap
+        // dulu dan pastikan jQuery + DataTables sudah tersedia.
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!window.jQuery || !jQuery.fn.DataTable) {
+                return;
+            }
+
+            function opsi() {
+                return {
+                    responsive: true,
+                    lengthChange: true,
+                    pageLength: 10,
+                    lengthMenu: [
+                        [10, 25, 50, -1],
+                        [10, 25, 50, "Semua"]
+                    ],
+                    autoWidth: false,
+                    order: [
+                        [0, 'asc']
+                    ],
+                    language: {
+                        search: "Cari:",
+                        lengthMenu: "Tampilkan _MENU_ baris",
+                        info: "Menampilkan _START_ - _END_ dari _TOTAL_ baris",
+                        infoEmpty: "Belum ada data",
+                        infoFiltered: "(disaring dari _MAX_ baris)",
+                        zeroRecords: "Tidak ada data yang cocok",
+                        paginate: {
+                            first: "Awal",
+                            last: "Akhir",
+                            next: "&raquo;",
+                            previous: "&laquo;"
+                        }
+                    }
+                };
+            }
+
+            jQuery('#tabel_objektif_lingkup').DataTable(opsi());
+            jQuery('#tabel_risiko_lingkup').DataTable(opsi());
+        });
+    </script>
+</div>
 </section>
 </div>

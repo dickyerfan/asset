@@ -49,11 +49,12 @@ class Model_mri_perlakuan extends CI_Model
 
     public function getListPerlakuan($tahun, $id_upk = null, $status_laksana = null)
     {
-        $this->db->select('p.*, r.kode_risiko, r.risiko, r.id_upk, r.tahun, r.sasaran_kpi, b.nama_bagian, e.keputusan, e.nilai_evaluasi, e.level_evaluasi');
+        $this->db->select('p.*, r.kode_risiko, r.risiko, r.id_upk, r.tahun, r.sasaran_kpi, b.nama_bagian, e.keputusan, e.nilai_evaluasi, e.level_evaluasi, pc.nama_pic');
         $this->db->from('mri_perlakuan p');
         $this->db->join('mri_register r', 'r.id_register = p.id_register', 'left');
         $this->db->join('mri_evaluasi e', 'e.id_register = p.id_register', 'left');
         $this->db->join('bagian_upk b', 'b.id_bagian = r.id_upk', 'left');
+        $this->db->join('mri_pic pc', 'pc.id_pic = p.id_pic', 'left');
         if ($tahun) {
             $this->db->where('r.tahun', $tahun);
         }
@@ -65,6 +66,39 @@ class Model_mri_perlakuan extends CI_Model
         }
         $this->db->order_by('p.jadwal_selesai', 'ASC');
         $this->db->order_by('p.id_perlakuan', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    /**
+     * Risiko yang SUDAH dievaluasi tetapi BELUM punya rencana perlakuan.
+     *
+     * Daftar Perlakuan hanya menampilkan baris mri_perlakuan, sehingga risiko
+     * yang baru dievaluasi (dan belum dibuatkan rencana) tidak terlihat.
+     * Method ini dipakai untuk menampilkan selisih tersebut secara eksplisit.
+     *
+     * @param int      $tahun
+     * @param int|null $id_upk batasi ke satu unit (untuk pengguna non-pusat)
+     * @return array baris: register + keputusan evaluasi terakhir
+     */
+    public function getRisikoTanpaPerlakuan($tahun, $id_upk = null)
+    {
+        $this->db->select(
+            'r.id_register, r.kode_risiko, r.risiko, r.id_upk, r.sasaran_kpi, b.nama_bagian,
+             e.keputusan, e.nilai_evaluasi, e.level_evaluasi, e.status_review, e.perlu_eskalasi'
+        );
+        $this->db->from('mri_register r');
+        $this->db->join('mri_evaluasi e', 'e.id_register = r.id_register');
+        $this->db->join('bagian_upk b', 'b.id_bagian = r.id_upk', 'left');
+        $this->db->where('r.tahun', (int) $tahun);
+        if ($id_upk) {
+            $this->db->where('r.id_upk', (int) $id_upk);
+        }
+        $this->db->where(
+            'NOT EXISTS (SELECT 1 FROM mri_perlakuan p WHERE p.id_register = r.id_register)',
+            null,
+            false
+        );
+        $this->db->order_by('r.kode_risiko', 'ASC');
         return $this->db->get()->result();
     }
 

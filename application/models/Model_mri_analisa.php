@@ -113,6 +113,42 @@ class Model_mri_analisa extends CI_Model
     }
 
     /**
+     * Perbarui HANYA residual (L, D, nilai, level).
+     *
+     * Dipakai sinkronisasi dari Monitoring: pengguna mencatat Skor Baru di
+     * sana, lalu residual resmi di Analisa ikut diperbarui tanpa menimpa
+     * inherent/kontrol/ringkasan. Tidak membuat baris baru bila belum ada.
+     *
+     * @return bool true bila baris analisa diperbarui
+     */
+    public function perbaruiResidual($id_register, $l, $d)
+    {
+        $l = max(1, min(5, (int) $l));
+        $d = max(1, min(5, (int) $d));
+        $nilai = $l * $d;
+
+        $existing = $this->getByRegister($id_register);
+        if (!$existing) {
+            return false;
+        }
+
+        // Hitung level SEBELUM menyentuh query builder: Model_mri_master memakai
+        // koneksi DB yang sama, sehingga where('id_analisa') yang masih menggantung
+        // bisa ikut terbawa ke query mri_tingkat_risiko.
+        $level = $this->level($nilai);
+
+        $this->db->where('id_analisa', $existing->id_analisa);
+        return $this->db->update('mri_analisa', [
+            'residual_l'     => $l,
+            'residual_d'     => $d,
+            'nilai_residual' => $nilai,
+            'level_residual' => $level,
+            'modified_at'    => date('Y-m-d H:i:s'),
+            'modified_by'    => $this->user(),
+        ]);
+    }
+
+    /**
      * Verifikasi seluruh baris mri_analisa terhadap dua invarian.
      * Dipakai sebagai pemeriksaan pascapenulisan, bukan hanya saat runtime.
      *

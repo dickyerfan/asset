@@ -77,6 +77,15 @@ class Model_mri_evaluasi extends CI_Model
             'modified_by'      => $this->user(),
         ];
 
+        // Band & status review dihitung pemanggil (controller) agar
+        // selaras dengan aksi mri_tingkat_risiko atas skor residual.
+        if (isset($d['keputusan_band'])) {
+            $row['keputusan_band'] = $d['keputusan_band'];
+        }
+        if (isset($d['status_review']) && in_array($d['status_review'], ['SESUAI', 'PERLU_REVIEW', 'DITINJAU'], true)) {
+            $row['status_review'] = $d['status_review'];
+        }
+
         $existing = $this->getByRegister($id_register);
         if ($existing) {
             $this->db->where('id_evaluasi', $existing->id_evaluasi);
@@ -123,7 +132,9 @@ class Model_mri_evaluasi extends CI_Model
 
         $this->db->insert('mri_riwayat_skor', [
             'id_register'     => $id_register,
-            'tahun'           => (int) date('Y'),
+            // Tahun wajib dari register risiko (2027+), bukan date('Y'):
+            // snapshot November 2026 untuk risiko 2027 salah catat sebagai 2026.
+            'tahun'           => $this->tahunRegister($id_register),
             'triwulan'        => isset($d['triwulan']) && $d['triwulan'] ? (int) $d['triwulan'] : 1,
             'nilai_inherent'  => $ni,
             'nilai_residual'  => $nr,
@@ -131,6 +142,16 @@ class Model_mri_evaluasi extends CI_Model
             'level_residual'  => $this->level($nr),
             'recorded_at'     => date('Y-m-d H:i:s'),
         ]);
+    }
+
+    /** Tahun risiko dari mri_register; fallback ke tahun berjalan bila tak ada. */
+    private function tahunRegister($id_register)
+    {
+        $th = $this->db->select('tahun')
+            ->where('id_register', $id_register)
+            ->get('mri_register')
+            ->row();
+        return $th ? (int) $th->tahun : (int) date('Y');
     }
 
     public function getRiwayatSkor($id_register)
@@ -166,5 +187,52 @@ class Model_mri_evaluasi extends CI_Model
         $this->db->where('e.perlu_eskalasi', 1);
         $this->db->order_by('a.nilai_residual', 'DESC');
         return $this->db->get()->result();
+    }
+
+    /**
+     * Tandai satu evaluasi sudah ditinjau Administrator/Auditor.
+     * Menutup antrean PERLU_REVIEW tanpa mengubah keputusan/apapun kolom lain.
+     */
+    public function tandaiDitinjau($id_evaluasi, $catatan, $oleh)
+    {
+        $row = [
+            'status_review'  => 'DITINJAU',
+            'catatan_review' => $catatan,
+            'reviewed_at'    => date('Y-m-d H:i:s'),
+            'reviewed_by'    => $oleh,
+            'modified_at'    => date('Y-m-d H:i:s'),
+            'modified_by'    => $oleh,
+        ];
+        $this->db->where('id_evaluasi', $id_evaluasi);
+        return $this->db->update('mri_evaluasi', $row);
+    }
+
+    /**
+     * Rekap jumlah evaluasi per status_review (SESUAI / PERLU_REVIEW / DITINJAU)
+     * untuk filter & kartu di daftar evaluasi.
+     * @return array ['SESUAI' => n, 'PERLU_REVIEW' => n, 'DITINJAU' => n]
+     */
+    public function rekapStatusReview($tahun)
+    {
+        $this->db->select('e.status_review, COUNT(*) AS jml', false);
+        $this->db->from('mri_evaluasi e');
+        $this->db->join('mri_register r', 'r.id_register = e.id_register', 'left');
+        $this->db->where('r.tahun', $tahun);
+        $this->db->group_by('e.status_review');
+        $out = ['SESUAI' => 0, 'PERLU_REVIEW' => 0, 'DITINJAU' => 0];
+        foreach ($this->db->get()->result() as $row) {
+            $out[$row->status_review] = (int) $row->jml;
+        }
+        return $out;
+    }
+
+    /**
+     * Aksi band (rekomendasi) untuk sebuah skor residual dari mri_tingkat_risiko.
+     * @return string|null Accept|Monitor|Treat|Escalate
+     */
+    public function aksiBandDariSkor($skor)
+    {
+        $t = $this->Model_mri_master->levelDariSkor($skor);
+        return $t ? $t->aksi : null;
     }
 }

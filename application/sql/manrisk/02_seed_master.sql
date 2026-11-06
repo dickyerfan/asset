@@ -283,4 +283,5 @@ VALUES
 (4,'penanganan_risiko','Edit Penanganan Risiko',0),
 (5,'monitoring_risiko','Edit Monitoring Risiko',0),
 (6,'objektif_risiko','Edit Objektif / Target RKAP',0),
-(7,'laporan_risiko','Edit Laporan Manajemen Risiko',0);
+(7,'laporan_risiko','Edit Laporan Manajemen Risiko',0),
+(8,'komunikasi_risiko','Edit Komunikasi & Konsultasi',0);

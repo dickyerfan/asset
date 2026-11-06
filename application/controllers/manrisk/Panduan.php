@@ -36,4 +36,52 @@ class Panduan extends MY_Controller
             'tahapan' => $this->Model_mri_dashboard->ringkasAlur($tahun),
         ]);
     }
+
+    /**
+     * Panduan pengisian langkah demi langkah, dari Sasaran/Objektif
+     * hingga Laporan + PDF (dokumen PANDUAN_PENGISIAN_MANAJEMEN_RISIKO.md).
+     *
+     * Halaman bacaan-saja; berisi konten dan progres ringkas dari database.
+     */
+    public function pengisian()
+    {
+        $tahun = $this->tahunAktif(2027);
+
+        // progres ringkas tiap tahap agar panduan terasa "hidup"
+        $alur = $this->Model_mri_dashboard->ringkasAlur($tahun);
+
+        $rekap = [
+            'objektif_total' => (int) $this->db->where('tahun', $tahun)->count_all_results('mri_objektif'),
+            'objektif_belum' => (int) $this->db->where('tahun', $tahun)
+                ->where('status_rekonsiliasi', 'BELUM')->count_all_results('mri_objektif'),
+            'lingkup_final'  => (int) $this->db->where('tahun', $tahun)
+                ->where('status', 'FINAL')->count_all_results('mri_lingkup'),
+            'lingkup_total'  => (int) $this->db->where('tahun', $tahun)->count_all_results('mri_lingkup'),
+            'risiko'         => (int) $this->db->where('tahun', $tahun)->count_all_results('mri_register'),
+            'evaluasi'       => (int) $this->db->from('mri_evaluasi e')
+                ->join('mri_register r', 'r.id_register = e.id_register')
+                ->where('r.tahun', $tahun)->count_all_results(),
+            'perlu_review'   => (int) $this->db->from('mri_evaluasi e')
+                ->join('mri_register r', 'r.id_register = e.id_register')
+                ->where('r.tahun', $tahun)
+                ->where('e.status_review', 'PERLU_REVIEW')->count_all_results(),
+            'perlakuan'      => (int) $this->db->from('mri_perlakuan p')
+                ->join('mri_register r', 'r.id_register = p.id_register')
+                ->where('r.tahun', $tahun)->count_all_results(),
+            'perlakuan_belum' => (int) $this->db->from('mri_perlakuan p')
+                ->join('mri_register r', 'r.id_register = p.id_register')
+                ->where('r.tahun', $tahun)
+                ->where('p.status_laksana', 'BELUM')->count_all_results(),
+            'monitoring'     => (int) $this->db->where('tahun', $tahun)->count_all_results('mri_monitoring'),
+            'laporan'        => (int) $this->db->where('tahun', $tahun)->count_all_results('mri_laporan'),
+        ];
+
+        $this->render('manrisk/view_panduan_pengisian', [
+            'title'   => 'PANDUAN PENGISIAN LANGKAH DEMI LANGKAH',
+            'tahun'   => $tahun,
+            'alur'    => $alur,
+            'rekap'   => $rekap,
+            'tingkat' => $this->Model_mri_master->getTingkat(),
+        ]);
+    }
 }

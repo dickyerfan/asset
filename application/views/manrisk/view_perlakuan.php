@@ -3,7 +3,9 @@
  * Daftar rencana perlakuan risiko (ISO 31000 Klausa 6.7).
  */
 $labelStatus = ['BELUM' => 'secondary', 'DALAM_PROSES' => 'warning', 'SELESAI' => 'success'];
+$warnaKeputusan = ['Accept' => 'secondary', 'Monitor' => 'info', 'Treat' => 'warning', 'Escalate' => 'danger'];
 $total = count($daftar);
+$tanpaRencana = isset($tanpa_rencana) ? $tanpa_rencana : [];
 ?>
 <section class="content">
     <div class="container-fluid">
@@ -78,6 +80,44 @@ $total = count($daftar);
                 </a>
             </div>
         </div>
+
+        <!-- ============== SELISIH: SUDAH DIEVALUASI, BELUM ADA RENCANA ==============
+             Tanpa panel ini, risiko yang baru dievaluasi tidak muncul di tabel
+             (tabel hanya berisi baris mri_perlakuan) sehingga jumlahnya terlihat
+             berbeda dengan halaman Evaluasi. -->
+        <?php if ($tanpaRencana) : ?>
+            <div class="border rounded bg-light p-3 mb-2">
+                <strong>
+                    <i class="fas fa-info-circle text-primary"></i>
+                    <?= count($tanpaRencana) ?> risiko sudah dievaluasi tetapi belum punya rencana perlakuan
+                </strong>
+                <div class="small text-muted">
+                    Tabel di bawah hanya menampilkan <strong><?= $total ?></strong> rencana yang sudah dibuat.
+                    Risiko berkeputusan <code>Accept</code>/<code>Monitor</code> tidak wajib punya rencana;
+                    <code>Treat</code>/<code>Escalate</code> wajib.
+                </div>
+                <div class="mt-2" style="max-height:170px;overflow:auto">
+                    <ul class="list-unstyled small mb-0">
+                        <?php foreach ($tanpaRencana as $t) : ?>
+                            <li class="mb-1">
+                                <a href="<?= base_url('manrisk/register/detail/' . $t->id_register) ?>">
+                                    <strong><?= html_escape($t->kode_risiko) ?></strong>
+                                </a>
+                                &mdash; <?= html_escape($t->risiko) ?>
+                                <span class="text-muted">&middot; <?= html_escape($t->nama_bagian ?: '-') ?></span>
+                                <span class="badge badge-<?= isset($warnaKeputusan[$t->keputusan]) ? $warnaKeputusan[$t->keputusan] : 'secondary' ?>">
+                                    <?= html_escape($t->keputusan) ?>
+                                </span>
+                                <a href="<?= base_url('manrisk/perlakuan/form/' . $t->id_register) ?>"
+                                   class="btn btn-sm btn-primary ml-1">
+                                    <i class="fas fa-plus"></i> Buat rencana
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+        <?php endif; ?>
 
         <!-- ============== TABEL ============== -->
         <div class="card card-outline card-primary">

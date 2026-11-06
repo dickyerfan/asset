@@ -10,6 +10,10 @@
  * mri_tingkat_risiko (lihat Model_mri_master::levelDariSkor()) sehingga
  * mengikuti tanpa perlu menyunting berkas ini.
  * Modul legacy memakai skala berbeda; keduanya tidak boleh dicampur.
+ *
+ * Tata letak: setiap baris grid selalu berjumlah 12 kolom dan kartu diberi
+ * h-100 agar tidak menyisakan ruang kosong di sisi kanan maupun di dalam
+ * kartu yang lebih pendek.
  */
 $d = $dashboard;
 $band = $d['tingkat'];
@@ -48,25 +52,129 @@ foreach ($d['tingkat'] as $t) {
 
 /**
  * Sel matriks 5x5 -> warna level dari perkalian L x D.
+ * levelDariSkor() mengembalikan objek baris (atau null), bukan nama level.
  */
-$warnaSel = function ($l, $c) use ($fungsiWarna) {
-    return $fungsiWarna($this->Model_mri_master->levelDariSkor($l * $c));
+$warnaSel = function ($l, $c) {
+    $level = $this->Model_mri_master->levelDariSkor($l * $c);
+    return $level ? $level->warna : '#9ca3af';
 };
+
+/* ---- Angka ringkas yang dipakai berulang di halaman ---- */
+$tanpaAnalisa   = (int) $d['tanpa_analisa'];
+$jumlahEskalasi = count($d['eskalasi']);
+$perlakuanTotal = array_sum($d['progres']);
+$perlakuanSelesai = isset($d['progres']['SELESAI']) ? (int) $d['progres']['SELESAI'] : 0;
+$monitoringTercatat = isset($d['monitoring']) ? (int) $d['monitoring'] : 0;
+$komunikasiTercatat = isset($komunikasi['total']) ? (int) $komunikasi['total'] : 0;
+$komunikasiSelesai = isset($komunikasi['selesai']) ? (int) $komunikasi['selesai'] : 0;
+$perluReview    = isset($rekap_review['PERLU_REVIEW']) ? (int) $rekap_review['PERLU_REVIEW'] : 0;
+
+$rekSelesai = (int) $d['rekonsiliasi']['SELESAI'];
+$rekBelum   = (int) $d['rekonsiliasi']['BELUM'];
+$rekTotal   = $rekSelesai + $rekBelum;
+$rekPersen  = $rekTotal > 0 ? round($rekSelesai / $rekTotal * 100, 1) : 0;
+
+/** Tinggi chart per unit mengikuti jumlah unit agar label tidak berdesakan. */
+$tinggiUnit = max(220, count($d['per_unit']) * 30);
 ?>
+<style>
+    /* Gaya lokal dashboard manrisk — tidak mengubah halaman lain. */
+    .mri-dash .card-header {
+        padding: .6rem 1rem;
+    }
+
+    .mri-dash .card-body {
+        padding: 1rem;
+    }
+
+    .mri-dash .mri-table-sm>thead>tr>th,
+    .mri-dash .mri-table-sm>tbody>tr>th,
+    .mri-dash .mri-table-sm>tbody>tr>td {
+        padding: .38rem .45rem;
+        vertical-align: middle;
+        font-size: .85rem;
+    }
+
+    .mri-dash .chart-box {
+        position: relative;
+        width: 100%;
+    }
+
+    .mri-dash .small-box .inner h3 {
+        font-size: 1.65rem;
+        margin-bottom: .1rem;
+    }
+
+    .mri-dash .small-box .inner p {
+        font-size: .8rem;
+        margin-bottom: 0;
+    }
+
+    .mri-dash .small-box-footer {
+        font-size: .78rem;
+        padding: .3rem 0;
+    }
+
+    .mri-dash .matrix-cell {
+        font-weight: 700;
+        line-height: 1.15;
+    }
+
+    .mri-dash .matrix-cell small {
+        font-weight: 400;
+        font-size: .68rem;
+        opacity: .85;
+    }
+
+    .mri-dash .alur-item {
+        flex: 1 1 0;
+        min-width: 170px;
+    }
+</style>
+
 <section class="content">
-    <div class="container-fluid">
+    <div class="container-fluid mri-dash">
 
         <?= $this->session->flashdata('info'); ?>
         <?= $this->session->unset_userdata('info'); ?>
 
-        <!-- ================= FILTER ================= -->
+        <!-- ================= JUDUL + FILTER ================= -->
         <div class="card card-outline card-primary">
             <div class="card-header">
-                <form method="get" action="<?= base_url('manrisk/dashboard') ?>" class="form-inline">
+                <div class="d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="mb-2 mb-md-0">
+                        <h5 class="mb-0 font-weight-bold">
+                            <i class="fas fa-shield-alt text-primary mr-1"></i>
+                            <?= strtoupper($title) ?> <?= $tahun ?>
+                        </h5>
+                        <?php if ($lingkup) : ?>
+                            <small class="text-muted">
+                                Lingkup: <strong><?= html_escape($lingkup->nama_lingkup) ?></strong>
+                                &middot; status <strong><?= html_escape($lingkup->status) ?></strong>
+                            </small>
+                        <?php else : ?>
+                            <small class="text-warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Belum ada lingkup/konteks yang ditetapkan untuk tahun ini.
+                            </small>
+                        <?php endif; ?>
+                    </div>
+                    <div class="mb-2 mb-md-0">
+                        <a href="<?= base_url('manrisk/panduan/pengisian') ?>" class="neumorphic-button">
+                            <i class="fas fa-clipboard-list"></i> Panduan Pengisian
+                        </a>
+                        <a href="<?= base_url('manrisk/panduan') ?>" class="neumorphic-button ml-1">
+                            <i class="fas fa-book"></i> Petunjuk Penggunaan
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body py-2">
+                <form method="get" action="<?= base_url('manrisk/dashboard') ?>" id="form_tahun" class="form-inline">
                     <?php if ($akses_semua) : ?>
-                        <div class="form-group mr-2 mb-2">
-                            <label for="id_upk" class="mr-2">Bagian / UPK</label>
-                            <select name="id_upk" id="id_upk" class="form-control">
+                        <div class="form-group mr-3 mb-2">
+                            <label for="id_upk" class="mr-2 mb-0">Bagian / UPK</label>
+                            <select name="id_upk" id="id_upk" class="form-control" onchange="document.getElementById('form_tahun').submit()">
                                 <option value="">Semua Bagian / UPK</option>
                                 <?php foreach ($unit_list as $unit) : ?>
                                     <option value="<?= $unit->id_bagian ?>" <?= isset($filter['id_upk']) && (string) $filter['id_upk'] === (string)$unit->id_bagian ? 'selected' : '' ?>>
@@ -77,9 +185,9 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
                         </div>
                     <?php endif; ?>
 
-                    <div class="form-group mr-2 mb-2">
-                        <label for="id_kategori" class="mr-2">Kategori</label>
-                        <select name="id_kategori" id="id_kategori" class="form-control">
+                    <div class="form-group mr-3 mb-2">
+                        <label for="id_kategori" class="mr-2 mb-0">Kategori</label>
+                        <select name="id_kategori" id="id_kategori" class="form-control" onchange="document.getElementById('form_tahun').submit()">
                             <option value="">Semua Kategori</option>
                             <?php foreach ($kategori_list as $k) : ?>
                                 <option value="<?= $k->id_kategori ?>" <?= isset($filter['id_kategori']) && (string) $filter['id_kategori'] === (string)$k->id_kategori ? 'selected' : '' ?>>
@@ -89,17 +197,17 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
                         </select>
                     </div>
 
-                    <div class="form-group mr-2 mb-2">
-                        <label for="tipe_risiko" class="mr-2">Tipe</label>
-                        <select name="tipe_risiko" id="tipe_risiko" class="form-control">
+                    <div class="form-group mr-3 mb-2">
+                        <label for="tipe_risiko" class="mr-2 mb-0">Tipe</label>
+                        <select name="tipe_risiko" id="tipe_risiko" class="form-control" onchange="document.getElementById('form_tahun').submit()">
                             <option value="">Semua</option>
                             <option value="Ancaman" <?= isset($filter['tipe_risiko']) && $filter['tipe_risiko'] === 'Ancaman' ? 'selected' : '' ?>>Ancaman</option>
                             <option value="Peluang" <?= isset($filter['tipe_risiko']) && $filter['tipe_risiko'] === 'Peluang' ? 'selected' : '' ?>>Peluang</option>
                         </select>
                     </div>
 
-                    <div class="form-group mr-2 mb-2">
-                        <label for="tahun" class="mr-2">Tahun</label>
+                    <div class="form-group mr-3 mb-2">
+                        <label for="tahun" class="mr-2 mb-0">Tahun</label>
                         <select name="tahun" id="tahun" class="form-control">
                             <?php foreach ($daftar_tahun as $t) : ?>
                                 <option value="<?= $t ?>" <?= (int) $tahun === $t ? 'selected' : '' ?>><?= $t ?></option>
@@ -107,8 +215,8 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
                         </select>
                     </div>
 
-                    <div class="form-group mr-2 mb-2">
-                        <label for="q" class="mr-2">Cari</label>
+                    <div class="form-group mr-3 mb-2">
+                        <label for="q" class="mr-2 mb-0">Cari</label>
                         <input type="text" name="q" id="q" class="form-control" placeholder="kode / risiko / KPI" value="<?= html_escape(isset($filter['q']) ? $filter['q'] : '') ?>">
                     </div>
 
@@ -118,66 +226,9 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
             </div>
         </div>
 
-        <div class="row justify-content-center mb-2">
-            <div class="col-lg-8 text-center">
-                <h2><?= strtoupper($title); ?> <?= $tahun; ?></h2>
-                <?php if ($lingkup) : ?>
-                    <p class="text-muted mb-0">
-                        Lingkup: <?= html_escape($lingkup->nama_lingkup) ?>
-                        &middot; status <strong><?= html_escape($lingkup->status) ?></strong>
-                    </p>
-                <?php else : ?>
-                    <p class="text-warning mb-0">Belum ada lingkup/konteks yang ditetapkan untuk tahun ini.</p>
-                <?php endif; ?>
-                <?php if ($d['tanpa_analisa'] > 0) : ?>
-                    <p class="text-danger mb-0">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <?= (int) $d['tanpa_analisa'] ?> risiko belum dianalisis (L x D belum diisi).
-                    </p>
-                <?php endif; ?>
-            </div>
-        </div>
-
-        <!-- ============ ALUR 8 TAHAP (materi 5.1) ============ -->
-        <div class="card card-outline card-info">
-            <div class="card-header">
-                <strong>Alur 8 Tahap &mdash; SNI ISO 31000:2018</strong>
-                <a href="<?= base_url('manrisk/panduan') ?>" class="float-right small">
-                    <i class="fas fa-book"></i> Petunjuk Penggunaan
-                </a>
-            </div>
-            <div class="card-body py-2">
-                <div class="d-flex flex-nowrap align-items-stretch overflow-auto pb-1">
-                    <?php foreach ($alur as $i => $t) : ?>
-                        <?php if ($i > 0) : ?>
-                            <span class="align-self-center text-muted mx-1 flex-shrink-0">
-                                <i class="fas fa-chevron-right small"></i>
-                            </span>
-                        <?php endif; ?>
-                        <a href="<?= base_url($t['rute']) ?>"
-                           class="flex-shrink-0 text-decoration-none small rounded border p-2"
-                           style="min-width:168px;<?= $t['terisi'] ? '' : 'opacity:.6;' ?>">
-                            <span class="badge <?= $t['terisi'] ? 'badge-success' : 'badge-secondary' ?>">
-                                <?= (int) $t['no'] ?>
-                            </span>
-                            <strong class="text-body"><?= html_escape($t['judul']) ?></strong>
-                            <div class="text-muted mt-1 mb-0">
-                                <?= (int) $t['jumlah'] ?> <?= html_escape($t['satuan']) ?>
-                            </div>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
-                <p class="small text-muted mt-1 mb-0">
-                    Tahap 1 dan 2 sama-sama dicatat pada halaman Lingkup &middot;
-                    KPI/KRI adalah bagian dari tahap 7 &middot;
-                    urutan tahap mengikuti Ringkasan MR &sect;5.1.
-                </p>
-            </div>
-        </div>
-
-        <!-- ================= KPI ================= -->
+        <!-- ================= KPI (6 kartu = 12 kolom) ================= -->
         <div class="row">
-            <div class="col-lg-3 col-6">
+            <div class="col-xl-2 col-md-4 col-6">
                 <div class="small-box bg-primary">
                     <div class="inner">
                         <h3><?= $total ?></h3>
@@ -185,12 +236,27 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
                     </div>
                     <div class="icon"><i class="fas fa-clipboard-list"></i></div>
                     <a href="<?= base_url('manrisk/register') ?>" class="small-box-footer">
-                        Buka Risk Register <i class="fas fa-arrow-circle-right"></i>
+                        Risk Register <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-6">
+            <div class="col-xl-2 col-md-4 col-6">
+                <a href="<?= base_url('manrisk/evaluasi?review=PERLU_REVIEW') ?>" class="d-block text-decoration-none">
+                    <div class="small-box" style="background:#6f42c1;color:#fff;">
+                        <div class="inner">
+                            <h3><?= $perluReview ?></h3>
+                            <p>Evaluasi Perlu Review</p>
+                        </div>
+                        <div class="icon"><i class="fas fa-flag"></i></div>
+                        <div class="small-box-footer" style="background:rgba(0,0,0,.15);color:#fff;">
+                            Antrean review <i class="fas fa-arrow-circle-right"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xl-2 col-md-4 col-6">
                 <div class="small-box bg-danger">
                     <div class="inner">
                         <h3><?= $skalaPuncak ?></h3>
@@ -203,10 +269,10 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
                 </div>
             </div>
 
-            <div class="col-lg-3 col-6">
+            <div class="col-xl-2 col-md-4 col-6">
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3><?= (int) $d['rekonsiliasi']['SELESAI'] ?>/<?= (int) $d['rekonsiliasi']['SELESAI'] + (int) $d['rekonsiliasi']['BELUM'] ?></h3>
+                        <h3><?= $rekSelesai ?>/<?= $rekTotal ?></h3>
                         <p>Objektif RKAP Rekonsiliasi</p>
                     </div>
                     <div class="icon"><i class="fas fa-bullseye"></i></div>
@@ -216,138 +282,175 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
                 </div>
             </div>
 
-            <div class="col-lg-3 col-6">
+            <div class="col-xl-2 col-md-4 col-6">
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3><?= (int) $d['kri']['Belum Diukur'] ?>/<?= array_sum($d['kri']) ?></h3>
-                        <p>KRI Belum Diukur</p>
+                        <h3><?= $perlakuanSelesai ?>/<?= $perlakuanTotal ?></h3>
+                        <p>Perlakuan Selesai</p>
                     </div>
-                    <div class="icon"><i class="fas fa-tachometer-alt"></i></div>
-                    <a href="<?= base_url('manrisk/kri') ?>" class="small-box-footer">
-                        Kelola KRI <i class="fas fa-arrow-circle-right"></i>
+                    <div class="icon"><i class="fas fa-tasks"></i></div>
+                    <a href="<?= base_url('manrisk/perlakuan') ?>" class="small-box-footer">
+                        Kelola Perlakuan <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-xl-2 col-md-4 col-6">
+                <div class="small-box <?= $tanpaAnalisa > 0 ? 'bg-danger' : 'bg-success' ?>">
+                    <div class="inner">
+                        <h3><?= $tanpaAnalisa ?></h3>
+                        <p><?= $tanpaAnalisa > 0 ? 'Risiko Belum Dianalisis' : 'Semua Risiko Dianalisis' ?></p>
+                    </div>
+                    <div class="icon"><i class="fas fa-search"></i></div>
+                    <a href="<?= base_url('manrisk/analisa') ?>" class="small-box-footer">
+                        Lengkapi Analisa <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
         </div>
 
+        <!-- ================= SEBARAN LEVEL (chart + tabel) ================= -->
         <div class="row">
-            <!-- ============ SEBARAN LEVEL ============ -->
-            <div class="col-lg-4">
-                <div class="card card-outline card-primary">
-                    <div class="card-header"><strong>Sebaran Level Risiko</strong></div>
+            <div class="col-12 mb-3">
+                <div class="card card-outline card-primary h-100 mb-0">
+                    <div class="card-header">
+                        <strong>Sebaran Level Risiko</strong>
+                        <span class="float-right small text-muted">Inherent &rarr; Residual</span>
+                    </div>
                     <div class="card-body">
-                        <canvas id="chartLevel" height="220"></canvas>
-
-                        <table class="table table-sm table-bordered mt-3 mb-0">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Level</th>
-                                    <th class="text-center">Rentang</th>
-                                    <th class="text-center">Inherent</th>
-                                    <th class="text-center">Residual</th>
-                                    <th class="text-center">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($d['tingkat'] as $t) :
-                                    $ih = isset($d['level_inherent'][$t->nama_tingkat]) ? (int) $d['level_inherent'][$t->nama_tingkat] : 0;
-                                    $rs = isset($d['level_residual'][$t->nama_tingkat]) ? (int) $d['level_residual'][$t->nama_tingkat] : 0;
-                                ?>
-                                    <tr>
-                                        <td>
-                                            <span class="badge" style="background-color:<?= $t->warna ?>;color:#fff">
-                                                <?= html_escape($t->nama_tingkat) ?>
-                                            </span>
-                                        </td>
-                                        <td class="text-center"><?= (int) $t->skor_min ?>-<?= (int) $t->skor_max ?></td>
-                                        <td class="text-center"><strong><?= $ih ?></strong></td>
-                                        <td class="text-center"><?= $rs ?></td>
-                                        <td class="text-center"><small><?= html_escape($t->aksi) ?></small></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                        <div class="row align-items-center">
+                            <div class="col-lg-7 mb-3 mb-lg-0">
+                                <div class="chart-box" style="height:250px">
+                                    <canvas id="chartLevel"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-bordered mri-table-sm mb-0">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Level</th>
+                                                <th class="text-center">Rentang</th>
+                                                <th class="text-center">Inherent</th>
+                                                <th class="text-center">Residual</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($d['tingkat'] as $t) :
+                                                $ih = isset($d['level_inherent'][$t->nama_tingkat]) ? (int) $d['level_inherent'][$t->nama_tingkat] : 0;
+                                                $rs = isset($d['level_residual'][$t->nama_tingkat]) ? (int) $d['level_residual'][$t->nama_tingkat] : 0;
+                                            ?>
+                                                <tr>
+                                                    <td>
+                                                        <span class="badge" style="background-color:<?= $t->warna ?>;color:#fff">
+                                                            <?= html_escape($t->nama_tingkat) ?>
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-center"><?= (int) $t->skor_min ?>-<?= (int) $t->skor_max ?></td>
+                                                    <td class="text-center"><strong><?= $ih ?></strong></td>
+                                                    <td class="text-center"><?= $rs ?></td>
+                                                    <td><small class="text-muted"><?= html_escape($t->aksi) ?></small></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <small class="text-muted d-block mt-2">
+                                    Skala: <?= html_escape($skalaTeks) ?>.
+                                </small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- ============ MATRIKS 5x5 ============ -->
-            <div class="col-lg-8">
-                <div class="card card-outline card-primary">
+        <!-- ================= MATRIKS 5x5 (inherent | residual) ================= -->
+        <div class="row">
+            <div class="col-12 mb-3">
+                <div class="card card-outline card-primary h-100 mb-0">
                     <div class="card-header">
-                        <strong>Matriks Risiko 5 &times; 5 (Likelihood &times; Dampak)</strong>
+                        <strong>Matriks Risiko 5 &times; 5</strong>
+                        <span class="float-right small text-muted">Likelihood &times; Dampak</span>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered text-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th rowspan="2" style="vertical-align:middle;background-color:#b6e8faff">LIKELIHOOD</th>
-                                        <th rowspan="2" style="vertical-align:middle;background-color:#f6e79dff">L</th>
-                                        <th colspan="5">DAMPAK / CONSEQUENCE</th>
-                                    </tr>
-                                    <tr style="background-color:#f6e79dff">
-                                        <th>1</th>
-                                        <th>2</th>
-                                        <th>3</th>
-                                        <th>4</th>
-                                        <th>5</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php for ($l = 5; $l >= 1; $l--) : ?>
-                                        <tr>
-                                            <th style="background-color:#b6e8faff"><?= ['1' => 'Sangat jarang', '2' => 'Jarang', '3' => 'Kadang', '4' => 'Sering', '5' => 'Hampir pasti'][$l] ?></th>
-                                            <th style="background-color:#f6e79dff"><?= $l ?></th>
-                                            <?php for ($c = 1; $c <= 5; $c++) :
-                                                $isi = isset($matriks[$l][$c]) ? (int) $matriks[$l][$c] : 0;
-                                            ?>
-                                                <td style="background-color:<?= $this->Model_mri_master->levelDariSkor($l * $c)->warna ?>;font-weight:bold">
-                                                    <?= $isi > 0 ? $isi : '&ndash;' ?>
-                                                    <small class="d-block" style="font-weight:normal"><?= $l * $c ?></small>
-                                                </td>
+                        <div class="row">
+                            <div class="col-lg-6 mb-3 mb-lg-0">
+                                <h6 class="text-center font-weight-bold">Inherent</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-sm text-center mri-table-sm mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" style="vertical-align:middle;background-color:#b6e8faff">LIKELIHOOD</th>
+                                                <th rowspan="2" style="vertical-align:middle;background-color:#f6e79dff">L</th>
+                                                <th colspan="5">DAMPAK</th>
+                                            </tr>
+                                            <tr style="background-color:#f6e79dff">
+                                                <th>1</th>
+                                                <th>2</th>
+                                                <th>3</th>
+                                                <th>4</th>
+                                                <th>5</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php for ($l = 5; $l >= 1; $l--) : ?>
+                                                <tr>
+                                                    <th style="background-color:#b6e8faff"><?= ['1' => 'Sangat jarang', '2' => 'Jarang', '3' => 'Kadang', '4' => 'Sering', '5' => 'Hampir pasti'][$l] ?></th>
+                                                    <th style="background-color:#f6e79dff"><?= $l ?></th>
+                                                    <?php for ($c = 1; $c <= 5; $c++) :
+                                                        $isi = isset($matriks[$l][$c]) ? (int) $matriks[$l][$c] : 0;
+                                                    ?>
+                                                        <td class="matrix-cell" style="background-color:<?= $warnaSel($l, $c) ?>">
+                                                            <?= $isi > 0 ? $isi : '&ndash;' ?>
+                                                            <small class="d-block"><?= $l * $c ?></small>
+                                                        </td>
+                                                    <?php endfor; ?>
+                                                </tr>
                                             <?php endfor; ?>
-                                        </tr>
-                                    <?php endfor; ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
-                        <hr>
-                        <strong>Matriks Residual (setelah kontrol &amp; perlakuan)</strong>
-                        <div class="table-responsive mt-2">
-                            <table class="table table-bordered text-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th rowspan="2" style="vertical-align:middle;background-color:#b6e8faff">LIKELIHOOD</th>
-                                        <th rowspan="2" style="vertical-align:middle;background-color:#f6e79dff">L</th>
-                                        <th colspan="5">DAMPAK / CONSEQUENCE</th>
-                                    </tr>
-                                    <tr style="background-color:#f6e79dff">
-                                        <th>1</th>
-                                        <th>2</th>
-                                        <th>3</th>
-                                        <th>4</th>
-                                        <th>5</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php for ($l = 5; $l >= 1; $l--) : ?>
-                                        <tr>
-                                            <th style="background-color:#b6e8faff"><?= ['1' => 'Sangat jarang', '2' => 'Jarang', '3' => 'Kadang', '4' => 'Sering', '5' => 'Hampir pasti'][$l] ?></th>
-                                            <th style="background-color:#f6e79dff"><?= $l ?></th>
-                                            <?php for ($c = 1; $c <= 5; $c++) :
-                                                $isi = isset($matriks_res[$l][$c]) ? (int) $matriks_res[$l][$c] : 0;
-                                            ?>
-                                                <td style="background-color:<?= $this->Model_mri_master->levelDariSkor($l * $c)->warna ?>;font-weight:bold">
-                                                    <?= $isi > 0 ? $isi : '&ndash;' ?>
-                                                    <small class="d-block" style="font-weight:normal"><?= $l * $c ?></small>
-                                                </td>
+                            <div class="col-lg-6">
+                                <h6 class="text-center font-weight-bold">Residual</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-sm text-center mri-table-sm mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" style="vertical-align:middle;background-color:#b6e8faff">LIKELIHOOD</th>
+                                                <th rowspan="2" style="vertical-align:middle;background-color:#f6e79dff">L</th>
+                                                <th colspan="5">DAMPAK</th>
+                                            </tr>
+                                            <tr style="background-color:#f6e79dff">
+                                                <th>1</th>
+                                                <th>2</th>
+                                                <th>3</th>
+                                                <th>4</th>
+                                                <th>5</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php for ($l = 5; $l >= 1; $l--) : ?>
+                                                <tr>
+                                                    <th style="background-color:#b6e8faff"><?= ['1' => 'Sangat jarang', '2' => 'Jarang', '3' => 'Kadang', '4' => 'Sering', '5' => 'Hampir pasti'][$l] ?></th>
+                                                    <th style="background-color:#f6e79dff"><?= $l ?></th>
+                                                    <?php for ($c = 1; $c <= 5; $c++) :
+                                                        $isi = isset($matriks_res[$l][$c]) ? (int) $matriks_res[$l][$c] : 0;
+                                                    ?>
+                                                        <td class="matrix-cell" style="background-color:<?= $warnaSel($l, $c) ?>">
+                                                            <?= $isi > 0 ? $isi : '&ndash;' ?>
+                                                            <small class="d-block"><?= $l * $c ?></small>
+                                                        </td>
+                                                    <?php endfor; ?>
+                                                </tr>
                                             <?php endfor; ?>
-                                        </tr>
-                                    <?php endfor; ?>
-                                </tbody>
-                            </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         <small class="text-muted d-block mt-2">
                             Angka besar = jumlah risiko; angka kecil = skor L &times; D. Warna mengikuti
@@ -358,116 +461,151 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
             </div>
         </div>
 
+        <!-- ================= RISIKO PER UNIT (chart + tabel) ================= -->
         <div class="row">
-            <!-- ============ PRIORITAS ============ -->
-            <div class="col-lg-7">
-                <div class="card card-outline card-primary">
-                    <div class="card-header"><strong>10 Risiko Prioritas (Residual Tertinggi)</strong></div>
-                    <div class="card-body table-responsive">
-                        <table class="table table-bordered table-hover" id="tabelPrioritas">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Kode</th>
-                                    <th>Risiko</th>
-                                    <th>Unit</th>
-                                    <th class="text-center">Inherent</th>
-                                    <th class="text-center">Residual</th>
-                                    <th class="text-center">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if (!$d['prioritas']) : ?>
+            <div class="col-12 mb-3">
+                <div class="card card-outline card-primary h-100 mb-0">
+                    <div class="card-header">
+                        <strong>Risiko per Unit</strong>
+                        <span class="float-right small text-muted">Jumlah risiko per bagian / UPK</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-5 mb-3 mb-lg-0">
+                                <div class="chart-box" style="height:<?= (int) $tinggiUnit ?>px">
+                                    <canvas id="chartUnit"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-bordered table-hover mri-table-sm mb-0">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Unit</th>
+                                                <th class="text-center">Total</th>
+                                                <?php foreach ($band as $t) : ?>
+                                                    <th class="text-center" title="<?= html_escape($t->nama_tingkat . ' ' . $t->skor_min . '-' . $t->skor_max) ?>">
+                                                        <?= html_escape($t->nama_tingkat) ?>
+                                                    </th>
+                                                <?php endforeach; ?>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!$d['per_unit']) : ?>
+                                                <tr>
+                                                    <td colspan="<?= 2 + count($band) ?>" class="text-center text-muted">Belum ada data unit.</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php foreach ($d['per_unit'] as $u) : ?>
+                                                <tr>
+                                                    <td><?= html_escape($u['nama']) ?></td>
+                                                    <td class="text-center"><strong><?= (int) $u['total'] ?></strong></td>
+                                                    <?php foreach ($band as $t) :
+                                                        $jml = isset($u['band'][$t->nama_tingkat]) ? (int) $u['band'][$t->nama_tingkat] : 0;
+                                                    ?>
+                                                        <td class="text-center">
+                                                            <?= $jml > 0
+                                                                ? '<span class="badge" style="background-color:' . $t->warna . ';color:#fff">' . $jml . '</span>'
+                                                                : '<span class="text-muted">&ndash;</span>' ?>
+                                                        </td>
+                                                    <?php endforeach; ?>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PRIORITAS + KATEGORI/TIPE ================= -->
+        <div class="row">
+            <div class="col-lg-7 mb-3">
+                <div class="card card-outline card-primary h-100 mb-0">
+                    <div class="card-header">
+                        <strong>10 Risiko Prioritas</strong>
+                        <span class="float-right small text-muted">Residual tertinggi</span>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover mri-table-sm mb-0">
+                                <thead class="thead-light">
                                     <tr>
-                                        <td colspan="6" class="text-center text-muted">Belum ada risiko yang dianalisis.</td>
+                                        <th>Kode</th>
+                                        <th>Risiko</th>
+                                        <th>Unit</th>
+                                        <th class="text-center">Inherent</th>
+                                        <th class="text-center">Residual</th>
+                                        <th>Aksi</th>
                                     </tr>
-                                <?php endif; ?>
-                                <?php foreach ($d['prioritas'] as $r) : ?>
-                                    <tr>
-                                        <td>
-                                            <a href="<?= base_url('manrisk/register/detail/' . $r->id_register) ?>">
-                                                <?= html_escape($r->kode_risiko) ?>
-                                            </a>
-                                        </td>
-                                        <td><?= html_escape($r->risiko) ?></td>
-                                        <td><?= html_escape($r->nama_bagian) ?></td>
-                                        <td class="text-center">
-                                            <span class="badge" style="background-color:<?= $fungsiWarna($r->level_inherent) ?>;color:#fff">
-                                                <?= (int) $r->nilai_inherent ?>
-                                            </span>
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="badge" style="background-color:<?= $fungsiWarna($r->level_residual) ?>;color:#fff">
-                                                <?= (int) $r->nilai_residual ?>
-                                            </span>
-                                        </td>
-                                        <td class="text-center"><small><?= html_escape($aksi[$r->level_residual]) ?></small></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php if (!$d['prioritas']) : ?>
+                                        <tr>
+                                            <td colspan="6" class="text-center text-muted py-3">Belum ada risiko yang dianalisis.</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php foreach ($d['prioritas'] as $r) : ?>
+                                        <tr>
+                                            <td>
+                                                <a href="<?= base_url('manrisk/register/detail/' . $r->id_register) ?>">
+                                                    <?= html_escape($r->kode_risiko) ?>
+                                                </a>
+                                            </td>
+                                            <td><?= html_escape($r->risiko) ?></td>
+                                            <td><small><?= html_escape($r->nama_bagian) ?></small></td>
+                                            <td class="text-center">
+                                                <span class="badge" style="background-color:<?= $fungsiWarna($r->level_inherent) ?>;color:#fff">
+                                                    <?= (int) $r->nilai_inherent ?>
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="badge" style="background-color:<?= $fungsiWarna($r->level_residual) ?>;color:#fff">
+                                                    <?= (int) $r->nilai_residual ?>
+                                                </span>
+                                            </td>
+                                            <td><small class="text-muted"><?= html_escape($aksi[$r->level_residual]) ?></small></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ============ PER UNIT + KATEGORI + TIPE ============ -->
-            <div class="col-lg-5">
-                <div class="card card-outline card-primary">
-                    <div class="card-header"><strong>Risiko per Unit</strong></div>
-                    <div class="card-body">
-                        <canvas id="chartUnit" height="200"></canvas>
-                        <table class="table table-sm table-bordered mt-3 mb-0">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Unit</th>
-                                    <th class="text-center">Total</th>
-                                    <?php foreach ($band as $t) : ?>
-                                        <th class="text-center"
-                                            title="<?= html_escape($t->nama_tingkat . ' ' . $t->skor_min . '-' . $t->skor_max) ?>">
-                                            <?= html_escape($t->nama_tingkat) ?>
-                                        </th>
-                                    <?php endforeach; ?>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($d['per_unit'] as $u) : ?>
-                                    <tr>
-                                        <td><?= html_escape($u['nama']) ?></td>
-                                        <td class="text-center"><?= (int) $u['total'] ?></td>
-                                        <?php foreach ($band as $t) :
-                                            $jml = isset($u['band'][$t->nama_tingkat]) ? (int) $u['band'][$t->nama_tingkat] : 0;
-                                        ?>
-                                            <td class="text-center">
-                                                <?= $jml > 0
-                                                    ? '<span class="badge" style="background-color:' . $t->warna . ';color:#fff">' . $jml . '</span>'
-                                                    : '-' ?>
-                                            </td>
-                                        <?php endforeach; ?>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+            <div class="col-lg-5 mb-3">
+                <div class="card card-outline card-primary h-100 mb-0">
+                    <div class="card-header">
+                        <strong>Kategori &amp; Tipe</strong>
                     </div>
-                </div>
-
-                <div class="card card-outline card-primary">
-                    <div class="card-header"><strong>Per Kategori &amp; Tipe</strong></div>
                     <div class="card-body">
-                        <table class="table table-sm table-bordered mb-3">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Kategori</th>
-                                    <th class="text-center">Jumlah</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($d['per_kategori'] as $k) : ?>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered mri-table-sm mb-3">
+                                <thead class="thead-light">
                                     <tr>
-                                        <td><small><?= html_escape($k['kode']) ?></small> — <?= html_escape($k['nama']) ?></td>
-                                        <td class="text-center"><?= (int) $k['total'] ?></td>
+                                        <th>Kategori</th>
+                                        <th class="text-center">Jumlah</th>
                                     </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php if (!$d['per_kategori']) : ?>
+                                        <tr>
+                                            <td colspan="2" class="text-center text-muted">Belum ada data kategori.</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php foreach ($d['per_kategori'] as $k) : ?>
+                                        <tr>
+                                            <td><small class="text-muted"><?= html_escape($k['kode']) ?></small> &mdash; <?= html_escape($k['nama']) ?></td>
+                                            <td class="text-center"><strong><?= (int) $k['total'] ?></strong></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
 
                         <div class="row text-center">
                             <div class="col-6">
@@ -488,60 +626,71 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
             </div>
         </div>
 
+        <!-- ================= STATUS PERLAKUAN + KEPUTUSAN + ESKALASI ================= -->
         <div class="row">
-            <!-- ============ PROGRES PERLAKUAN ============ -->
-            <div class="col-lg-4">
-                <div class="card card-outline card-primary">
-                    <div class="card-header"><strong>Progres Perlakuan Risiko</strong></div>
+            <div class="col-lg-8 mb-3">
+                <div class="card card-outline card-primary h-100 mb-0">
+                    <div class="card-header">
+                        <strong>Status Perlakuan &amp; Keputusan Evaluasi</strong>
+                    </div>
                     <div class="card-body">
-                        <canvas id="chartPerlakuan" height="180"></canvas>
-                        <table class="table table-sm table-bordered mt-3 mb-0">
-                            <tbody>
-                                <tr>
-                                    <td>Belum Mulai</td>
-                                    <td class="text-center"><strong><?= (int) $d['progres']['BELUM'] ?></strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Dalam Proses</td>
-                                    <td class="text-center"><strong><?= (int) $d['progres']['DALAM_PROSES'] ?></strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Selesai</td>
-                                    <td class="text-center"><strong><?= (int) $d['progres']['SELESAI'] ?></strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="row">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <h6 class="text-center font-weight-bold">Progres Perlakuan</h6>
+                                <div class="chart-box" style="height:180px">
+                                    <canvas id="chartPerlakuan"></canvas>
+                                </div>
+                                <table class="table table-sm table-bordered mri-table-sm mt-2 mb-0">
+                                    <tbody>
+                                        <tr>
+                                            <td>Belum Mulai</td>
+                                            <td class="text-center"><strong><?= (int) $d['progres']['BELUM'] ?></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dalam Proses</td>
+                                            <td class="text-center"><strong><?= (int) $d['progres']['DALAM_PROSES'] ?></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Selesai</td>
+                                            <td class="text-center"><strong><?= (int) $d['progres']['SELESAI'] ?></strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h6 class="text-center font-weight-bold">Keputusan Evaluasi</h6>
+                                <div class="chart-box" style="height:180px">
+                                    <canvas id="chartKeputusan"></canvas>
+                                </div>
+                                <table class="table table-sm table-bordered mri-table-sm mt-2 mb-0">
+                                    <tbody>
+                                        <?php foreach ($d['keputusan'] as $k => $v) : ?>
+                                            <tr>
+                                                <td><?= html_escape($k) ?></td>
+                                                <td class="text-center"><strong><?= (int) $v ?></strong></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ============ KEPUTUSAN EVALUASI ============ -->
-            <div class="col-lg-4">
-                <div class="card card-outline card-primary">
-                    <div class="card-header"><strong>Keputusan Evaluasi</strong></div>
-                    <div class="card-body">
-                        <canvas id="chartKeputusan" height="180"></canvas>
-                        <table class="table table-sm table-bordered mt-3 mb-0">
-                            <tbody>
-                                <?php foreach ($d['keputusan'] as $k => $v) : ?>
-                                    <tr>
-                                        <td><?= html_escape($k) ?></td>
-                                        <td class="text-center"><strong><?= (int) $v ?></strong></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+            <div class="col-lg-4 mb-3">
+                <div class="card card-outline card-danger h-100 mb-0">
+                    <div class="card-header">
+                        <strong>Risiko Perlu Eskalasi</strong>
+                        <span class="float-right badge badge-danger"><?= $jumlahEskalasi ?></span>
                     </div>
-                </div>
-            </div>
-
-            <!-- ============ ESKALASI ============ -->
-            <div class="col-lg-4">
-                <div class="card card-outline card-danger">
-                    <div class="card-header"><strong>Risiko Perlu Eskalasi</strong></div>
                     <div class="card-body">
                         <?php if (!$d['eskalasi']) : ?>
-                            <p class="text-muted mb-0">Tidak ada risiko yang ditandai perlu eskalasi.</p>
+                            <p class="text-muted mb-0">
+                                <i class="fas fa-check-circle text-success"></i>
+                                Tidak ada risiko yang ditandai perlu eskalasi.
+                            </p>
                         <?php else : ?>
                             <ul class="list-unstyled mb-0">
                                 <?php foreach ($d['eskalasi'] as $e) : ?>
@@ -559,22 +708,18 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
             </div>
         </div>
 
+        <!-- ================= REKONSILIASI + PERLAKUAN ================= -->
         <div class="row">
-            <!-- ============ EKSEKUTIF ============ -->
-            <div class="col-lg-6">
-                <div class="card card-outline card-primary">
-                    <div class="card-header"><strong>Rekonsiliasi Objektif RKAP <?= $tahun ?></strong></div>
+            <div class="col-lg-6 mb-3">
+                <div class="card card-outline card-primary h-100 mb-0">
+                    <div class="card-header">
+                        <strong>Rekonsiliasi Objektif RKAP <?= $tahun ?></strong>
+                    </div>
                     <div class="card-body">
-                        <?php
-                        $selesai = (int) $d['rekonsiliasi']['SELESAI'];
-                        $belum = (int) $d['rekonsiliasi']['BELUM'];
-                        $jml = $selesai + $belum;
-                        $ps = $jml > 0 ? round($selesai / $jml * 100, 1) : 0;
-                        ?>
                         <div class="progress mb-2" style="height: 22px;">
-                            <div class="progress-bar bg-success" style="width: <?= $ps ?>%"><?= $ps ?>% Selesai</div>
+                            <div class="progress-bar bg-success" style="width: <?= $rekPersen ?>%"><?= $rekPersen ?>% Selesai</div>
                         </div>
-                        <p class="mb-1"><strong><?= $selesai ?></strong> objektif sudah direkonsiliasi, <strong><?= $belum ?></strong> belum.</p>
+                        <p class="mb-1"><strong><?= $rekSelesai ?></strong> objektif sudah direkonsiliasi, <strong><?= $rekBelum ?></strong> belum.</p>
                         <p class="text-muted mb-0">
                             <small>
                                 Objektif ber-NULL tidak dianggap selesai. Buka
@@ -586,40 +731,97 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
                 </div>
             </div>
 
-            <div class="col-lg-6">
-                <div class="card card-outline card-primary">
-                    <div class="card-header"><strong>Key Risk Indicator</strong></div>
+            <div class="col-lg-6 mb-3">
+                <div class="card card-outline card-primary h-100 mb-0">
+                    <div class="card-header">
+                        <strong>Progres Perlakuan &amp; Monitoring</strong>
+                    </div>
                     <div class="card-body">
-                        <table class="table table-sm table-bordered mb-0">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Status</th>
-                                    <th class="text-center">Jumlah</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($kri_rekap as $st => $jml) : ?>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered mri-table-sm mb-0">
+                                <thead class="thead-light">
                                     <tr>
-                                        <td><?= html_escape($st) ?></td>
-                                        <td class="text-center"><strong><?= (int) $jml ?></strong></td>
+                                        <th>Status Perlakuan</th>
+                                        <th class="text-center">Jumlah</th>
                                     </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Belum dimulai</td>
+                                        <td class="text-center"><strong><?= isset($d['progres']['BELUM']) ? (int) $d['progres']['BELUM'] : 0 ?></strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dalam proses</td>
+                                        <td class="text-center"><strong><?= isset($d['progres']['DALAM_PROSES']) ? (int) $d['progres']['DALAM_PROSES'] : 0 ?></strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Selesai</td>
+                                        <td class="text-center"><strong><?= isset($d['progres']['SELESAI']) ? (int) $d['progres']['SELESAI'] : 0 ?></strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <small class="text-muted d-block mt-2">
-                            Tahun anggaran belum berjalan, sehingga seluruh KRI berstatus
-                            <em>Belum Diukur</em> — bukan "Tidak Tercapai".
+                            <i class="fas fa-clipboard-check"></i>
+                            <?= $monitoringTercatat ?> catatan monitoring tercatat tahun ini.
+                            <a href="<?= base_url('manrisk/monitoring') ?>">Buka Monitoring</a>
+                        </small>
+                        <small class="text-muted d-block mt-1">
+                            <i class="fas fa-comments"></i>
+                            <?= $komunikasiTercatat ?> sesi komunikasi tercatat
+                            (<?= $komunikasiSelesai ?> selesai).
+                            <a href="<?= base_url('manrisk/komunikasi') ?>">Buka Komunikasi</a>
                         </small>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- ================= ALUR 8 TAHAP (materi 5.1) ================= -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-outline card-info h-100 mb-0">
+                    <div class="card-header">
+                        <strong>Alur 8 Tahap &mdash; SNI ISO 31000:2018</strong>
+                    </div>
+                    <div class="card-body py-2">
+                        <div class="d-flex flex-nowrap align-items-stretch overflow-auto pb-1">
+                            <?php foreach ($alur as $i => $t) :
+                                $badgeStatus = $t['status'] === 'Selesai' ? 'badge-success'
+                                    : ($t['status'] === 'Sebagian' ? 'badge-warning' : 'badge-secondary');
+                            ?>
+                                <?php if ($i > 0) : ?>
+                                    <span class="align-self-center text-muted mx-1 flex-shrink-0">
+                                        <i class="fas fa-chevron-right small"></i>
+                                    </span>
+                                <?php endif; ?>
+                                <a href="<?= base_url($t['rute']) ?>" class="alur-item text-decoration-none small rounded border p-2" style="<?= $t['status'] === 'Belum' ? 'opacity:.6;' : '' ?>">
+                                    <span class="badge <?= $badgeStatus ?>">
+                                        <?= (int) $t['no'] ?>
+                                    </span>
+                                    <strong class="text-body"><?= html_escape($t['judul']) ?></strong>
+                                    <div class="mt-1 mb-0">
+                                        <span class="badge badge-light border"><?= (int) $t['x'] ?>/<?= (int) $t['y'] ?></span>
+                                        <small class="text-muted"><?= (int) $t['persen'] ?>%</small>
+                                    </div>
+                                    <div class="progress progress-xs mt-1 mb-0" style="height:4px">
+                                        <div class="progress-bar <?= $t['status'] === 'Selesai' ? 'bg-success' : ($t['status'] === 'Sebagian' ? 'bg-warning' : 'bg-secondary') ?>" style="width:<?= (int) $t['persen'] ?>%"></div>
+                                    </div>
+                                    <small class="text-muted d-block mt-1"><?= html_escape($t['status']) ?></small>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         'use strict';
 
         var level = <?= json_encode(array_map(function ($t) {
@@ -632,6 +834,7 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
                             return isset($d['level_residual'][$t->nama_tingkat]) ? (int) $d['level_residual'][$t->nama_tingkat] : 0;
                         }, $d['tingkat'])) ?>;
 
+        /* ---- Sebaran level: inherent vs residual ---- */
         new Chart(document.getElementById('chartLevel'), {
             type: 'bar',
             data: {
@@ -650,24 +853,36 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 legend: {
                     position: 'bottom'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
                 },
                 scales: {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
-                            precision: 0
+                            precision: 0,
+                            suggestedMax: 5
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            display: false
                         }
                     }]
                 }
             }
         });
 
+        /* ---- Risiko per unit: batang horizontal agar nama unit terbaca ---- */
         var unitNama = <?= json_encode(array_column($d['per_unit'], 'nama')) ?>;
         var unitTotal = <?= json_encode(array_map('intval', array_column($d['per_unit'], 'total'))) ?>;
         new Chart(document.getElementById('chartUnit'), {
-            type: 'bar',
+            type: 'horizontalBar',
             data: {
                 labels: unitNama,
                 datasets: [{
@@ -678,20 +893,27 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 legend: {
                     display: false
                 },
                 scales: {
-                    yAxes: [{
+                    xAxes: [{
                         ticks: {
                             beginAtZero: true,
                             precision: 0
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            display: false
                         }
                     }]
                 }
             }
         });
 
+        /* ---- Progres perlakuan ---- */
         new Chart(document.getElementById('chartPerlakuan'), {
             type: 'doughnut',
             data: {
@@ -703,12 +925,15 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
+                cutoutPercentage: 62,
                 legend: {
                     position: 'bottom'
                 }
             }
         });
 
+        /* ---- Keputusan evaluasi ---- */
         new Chart(document.getElementById('chartKeputusan'), {
             type: 'doughnut',
             data: {
@@ -720,6 +945,8 @@ $warnaSel = function ($l, $c) use ($fungsiWarna) {
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
+                cutoutPercentage: 62,
                 legend: {
                     position: 'bottom'
                 }

@@ -1,7 +1,27 @@
 <?php
+
 /**
  * Daftar objektif RKAP + rekonsiliasi keterkaitan risiko.
+ *
+ * $boleh_tulis dikirim controller: true bila pengguna Admin, atau bila kunci
+ * objektif_risiko di menu Pengaturan sedang terbuka (0). Jadi saat kunci
+ * dibuka, UPK kembali dapat menambah/mengubah objektif unitnya.
  */
+if (!isset($boleh_tulis)) {
+    $boleh_tulis = false;
+}
+
+// Tombol Hapus hanya untuk dicky dengan bagian Administrator.
+// Login menyimpan nama pengguna pada key 'nama_pengguna' (lihat Auth.php).
+$isDickyAdmin = false;
+if (isset($this->session) && method_exists($this->session, 'userdata')) {
+    $username = strtolower(trim((string) $this->session->userdata('nama_pengguna')));
+    $bagian = trim((string) $this->session->userdata('bagian'));
+    if ($username === 'dicky' && $bagian === 'Administrator') {
+        $isDickyAdmin = true;
+    }
+}
+
 $selesai = isset($rekap['SELESAI']) ? $rekap['SELESAI'] : 0;
 $belum   = isset($rekap['BELUM']) ? $rekap['BELUM'] : 0;
 $total   = $selesai + $belum;
@@ -16,25 +36,37 @@ $persen  = $total ? round($selesai * 100 / $total) : 0;
         <div class="row">
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
-                    <div class="inner"><h3><?= $total ?></h3><p>Total Objektif</p></div>
+                    <div class="inner">
+                        <h3><?= $total ?></h3>
+                        <p>Total Objektif</p>
+                    </div>
                     <div class="icon"><i class="fas fa-bullseye"></i></div>
                 </div>
             </div>
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-success">
-                    <div class="inner"><h3><?= $selesai ?></h3><p>Sudah Direkonsiliasi</p></div>
+                    <div class="inner">
+                        <h3><?= $selesai ?></h3>
+                        <p>Sudah Direkonsiliasi</p>
+                    </div>
                     <div class="icon"><i class="fas fa-check-double"></i></div>
                 </div>
             </div>
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-warning">
-                    <div class="inner"><h3><?= $belum ?></h3><p>Belum Direkonsiliasi</p></div>
+                    <div class="inner">
+                        <h3><?= $belum ?></h3>
+                        <p>Belum Direkonsiliasi</p>
+                    </div>
                     <div class="icon"><i class="fas fa-hourglass-half"></i></div>
                 </div>
             </div>
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-danger">
-                    <div class="inner"><h3><?= $persen ?>%</h3><p>Progres Rekonsiliasi</p></div>
+                    <div class="inner">
+                        <h3><?= $persen ?>%</h3>
+                        <p>Progres Rekonsiliasi</p>
+                    </div>
                     <div class="icon"><i class="fas fa-chart-line"></i></div>
                 </div>
             </div>
@@ -61,7 +93,7 @@ $persen  = $total ? round($selesai * 100 / $total) : 0;
             <div class="col-md-8">
                 <h4 class="mb-0"><?= strtoupper($title) ?> <?= $tahun ?></h4>
                 <small class="text-muted">
-                    Objektif adalah acuan <em>"kenapa risiko ini penting"</em> (ISO 31000 Klausa 6.3 — sasaran organisasi).
+                    Objektif adalah acuan <em>"kenapa risiko ini penting"</em> (sebagai sasaran Perumdam).
                 </small>
             </div>
             <div class="col-md-4 text-md-right">
@@ -69,6 +101,10 @@ $persen  = $total ? round($selesai * 100 / $total) : 0;
                     <a href="<?= base_url('manrisk/objektif/tambah') ?>" class="btn btn-primary btn-sm">
                         <i class="fas fa-plus-circle"></i> Tambah Objektif
                     </a>
+                <?php else : ?>
+                    <button class="btn btn-secondary btn-sm" disabled>
+                        <i class="fas fa-lock"></i> Edit Dinonaktifkan
+                    </button>
                 <?php endif; ?>
                 <a href="<?= base_url('manrisk/lingkup') ?>" class="btn btn-outline-secondary btn-sm">
                     <i class="fas fa-expand-arrows-alt"></i> Lingkup
@@ -78,6 +114,21 @@ $persen  = $total ? round($selesai * 100 / $total) : 0;
                 </a>
             </div>
         </div>
+
+        <?php if (!$boleh_tulis) : ?>
+            <div class="row mb-2">
+                <div class="col-12">
+                    <div class="border rounded p-3" style="border-color:#ffc107 !important;background:#fff8e1">
+                        <strong><i class="fas fa-lock"></i> Objektif RKAP sedang dikunci.</strong>
+                        <p class="mb-0 mt-1 small">
+                            Penambahan dan perubahan dinonaktifkan. Buka kunci
+                            <strong>Edit Objektif / Target RKAP</strong> di menu
+                            <a href="<?= base_url('manrisk/pengaturan') ?>">Pengaturan</a> agar UPK dapat mengisi lagi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
 
         <div class="card card-outline card-primary">
             <div class="card-body table-responsive">
@@ -97,7 +148,9 @@ $persen  = $total ? round($selesai * 100 / $total) : 0;
                     </thead>
                     <tbody>
                         <?php if (!$daftar) : ?>
-                            <tr><td colspan="9" class="text-center text-muted py-4">Tidak ada objektif sesuai filter.</td></tr>
+                            <tr>
+                                <td colspan="9" class="text-center text-muted py-4">Tidak ada objektif sesuai filter.</td>
+                            </tr>
                         <?php endif; ?>
                         <?php foreach ($daftar as $o) : ?>
                             <tr>
@@ -118,21 +171,29 @@ $persen  = $total ? round($selesai * 100 / $total) : 0;
                                     <?php if ($o->catatan_rekonsiliasi) : ?>
                                         <br><small class="text-muted"><?= html_escape($o->catatan_rekonsiliasi) ?></small>
                                     <?php endif; ?>
-                                </td>
-                                <?php if ($boleh_tulis) : ?>
+                                </td><?php if ($boleh_tulis) :
+                                            // UPK hanya boleh mengubah objektif milik unitnya;
+                                            // objektif tingkat organisasi (id_upk NULL) tetap Admin.
+                                            $unitSaya = (int) ($filter['id_upk'] ?? 0);
+                                            $bolehUbahBaris = !empty($akses_semua)
+                                                || (int) $o->id_bagian === $unitSaya
+                                                || ($o->id_upk !== null
+                                                    && (int) $o->id_upk === $unitSaya);
+                                        ?>
                                     <td class="text-center">
                                         <div class="mb-1">
-                                            <a href="<?= base_url('manrisk/objektif/ubah/' . (int) $o->id_objektif) ?>"
-                                               class="btn btn-sm btn-outline-secondary">
-                                                <i class="fas fa-pen"></i> Ubah
-                                            </a>
+                                            <?php if ($bolehUbahBaris) : ?>
+                                                <a href="<?= base_url('manrisk/objektif/ubah/' . (int) $o->id_objektif) ?>" class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-pen"></i> Ubah
+                                                </a>
+                                            <?php endif; ?>
+                                            <?php if ($isDickyAdmin) : ?>
+                                                <a href="<?= base_url('manrisk/objektif/hapus/' . (int) $o->id_objektif) ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Yakin menghapus objektif ini? Data tidak bisa dipulihkan.');">
+                                                    <i class="fas fa-trash"></i> Hapus
+                                                </a>
+                                            <?php endif; ?>
                                         </div>
-                                        <button type="button" class="btn btn-sm btn-outline-primary"
-                                                data-toggle="modal" data-target="#modalRekonsiliasi"
-                                                data-id="<?= (int) $o->id_objektif ?>"
-                                                data-indikator="<?= html_escape($o->indikator) ?>"
-                                                data-status="<?= html_escape($o->status_rekonsiliasi) ?>"
-                                                data-nilai="<?= $o->nilai_rkap !== null ? html_escape($o->nilai_rkap) : '' ?>">
+                                        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#modalRekonsiliasi" data-id="<?= (int) $o->id_objektif ?>" data-indikator="<?= html_escape($o->indikator) ?>" data-status="<?= html_escape($o->status_rekonsiliasi) ?>" data-nilai="<?= $o->nilai_rkap !== null ? html_escape($o->nilai_rkap) : '' ?>">
                                             <i class="fas fa-check"></i> Rekonsiliasi
                                         </button>
                                     </td>
@@ -148,71 +209,81 @@ $persen  = $total ? round($selesai * 100 / $total) : 0;
 </section>
 
 <?php if ($boleh_tulis) : ?>
-<!-- ============== MODAL REKONSILIASI ============== -->
-<div class="modal fade" id="modalRekonsiliasi" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <?= form_open('manrisk/objektif/rekonsiliasi/0', 'id="form-rekon"') ?>
-            <input type="hidden" name="id_objektif" id="rekon_id" value="">
-            <div class="modal-header">
-                <h5 class="modal-title">Rekonsiliasi Objektif</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <p class="mb-3"><strong id="rekon_indikator"></strong></p>
-                <div class="form-group">
-                    <label for="rekon_status">Status Rekonsiliasi <span class="text-danger">*</span></label>
-                    <select name="status_rekonsiliasi" id="rekon_status" class="form-control" required>
-                        <option value="BELUM">BELUM</option>
-                        <option value="SELESAI">SELESAI</option>
-                    </select>
-                    <small class="text-muted">
-                        <em>SELESAI</em> = angka RKAP sudah dikonfirmasi. <em>BELUM</em> = masih menunggu
-                        konfirmasi / terdapat selisih antar sumber.
-                    </small>
+    <!-- ============== MODAL REKONSILIASI ============== -->
+    <div class="modal fade" id="modalRekonsiliasi" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <?= form_open('manrisk/objektif/rekonsiliasi/0', 'id="form-rekon"') ?>
+                <input type="hidden" name="id_objektif" id="rekon_id" value="">
+                <div class="modal-header">
+                    <h5 class="modal-title">Rekonsiliasi Objektif</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                 </div>
-                <div class="form-group">
-                    <label for="nilai_realisasi">Nilai Realisasi / RKAP Terbaru <span class="text-danger">*</span></label>
-                    <input type="text" name="nilai_realisasi" id="nilai_realisasi" class="form-control" required>
+                <div class="modal-body">
+                    <p class="mb-3"><strong id="rekon_indikator"></strong></p>
+                    <div class="form-group">
+                        <label for="rekon_status">Status Rekonsiliasi <span class="text-danger">*</span></label>
+                        <select name="status_rekonsiliasi" id="rekon_status" class="form-control" required>
+                            <option value="BELUM">BELUM</option>
+                            <option value="SELESAI">SELESAI</option>
+                        </select>
+                        <small class="text-muted">
+                            <em>SELESAI</em> = angka RKAP sudah dikonfirmasi. <em>BELUM</em> = masih menunggu
+                            konfirmasi / terdapat selisih antar sumber.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="nilai_realisasi">Nilai Realisasi / RKAP Terbaru <span class="text-danger">*</span></label>
+                        <input type="text" name="nilai_realisasi" id="nilai_realisasi" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-0">
+                        <label for="alasan_rekonsiliasi">Alasan / Catatan</label>
+                        <textarea name="alasan_rekonsiliasi" id="alasan_rekonsiliasi" rows="3" class="form-control" placeholder="Dasar penyesuaian angka atau konfirmasi keterkaitan risiko"></textarea>
+                    </div>
                 </div>
-                <div class="form-group mb-0">
-                    <label for="alasan_rekonsiliasi">Alasan / Catatan</label>
-                    <textarea name="alasan_rekonsiliasi" id="alasan_rekonsiliasi" rows="3" class="form-control"
-                              placeholder="Dasar penyesuaian angka atau konfirmasi keterkaitan risiko"></textarea>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
                 </div>
+                <?= form_close() ?>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
-            </div>
-            <?= form_close() ?>
         </div>
     </div>
-</div>
 <?php endif; ?>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    $('#tabel_objektif').DataTable({
-        responsive: true, pageLength: 25, order: [[0, 'asc']],
-        language: {
-            search: "Cari:", lengthMenu: "Tampilkan _MENU_",
-            info: "Menampilkan _START_ - _END_ dari _TOTAL_",
-            infoEmpty: "Belum ada data", infoFiltered: "(disaring dari _MAX_)",
-            zeroRecords: "Tidak ada data yang cocok",
-            paginate: {first: "Awal", last: "Akhir", next: "&raquo;", previous: "&laquo;"}
-        }
-    });
+    document.addEventListener('DOMContentLoaded', function() {
+        $('#tabel_objektif').DataTable({
+            responsive: true,
+            pageLength: 25,
+            order: [
+                [0, 'asc']
+            ],
+            language: {
+                search: "Cari:",
+                lengthMenu: "Tampilkan _MENU_",
+                info: "Menampilkan _START_ - _END_ dari _TOTAL_",
+                infoEmpty: "Belum ada data",
+                infoFiltered: "(disaring dari _MAX_)",
+                zeroRecords: "Tidak ada data yang cocok",
+                paginate: {
+                    first: "Awal",
+                    last: "Akhir",
+                    next: "&raquo;",
+                    previous: "&laquo;"
+                }
+            }
+        });
 
-    $('#modalRekonsiliasi').on('show.bs.modal', function (e) {
-        var b = $(e.relatedTarget);
-        var id = b.attr('data-id');
-        $('#rekon_id').val(id);
-        $('#rekon_indikator').text(b.attr('data-indikator'));
-        $('#rekon_status').val(b.attr('data-status') || 'BELUM');
-        $('#nilai_realisasi').val(b.attr('data-nilai'));
-        $('#form-rekon').attr('action', '<?= base_url('manrisk/objektif/rekonsiliasi/') ?>' + id);
+        $('#modalRekonsiliasi').on('show.bs.modal', function(e) {
+            var b = $(e.relatedTarget);
+            var id = b.attr('data-id');
+            $('#rekon_id').val(id);
+            $('#rekon_indikator').text(b.attr('data-indikator'));
+            $('#rekon_status').val(b.attr('data-status') || 'BELUM');
+            $('#nilai_realisasi').val(b.attr('data-nilai'));
+            $('#form-rekon').attr('action', '<?= base_url('manrisk/objektif/rekonsiliasi/') ?>' + id);
+        });
     });
-});
 </script>

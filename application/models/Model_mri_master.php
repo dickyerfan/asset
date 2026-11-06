@@ -42,6 +42,44 @@ class Model_mri_master extends CI_Model
         return $this->db->get_where('mri_proses', ['kode_proses' => $kode])->row();
     }
 
+    public function simpanProses($id, $data)
+    {
+        $data['modified_at'] = date('Y-m-d H:i:s');
+        $data['modified_by'] = $this->user();
+        if ($id) {
+            $this->db->where('id_proses', (int) $id);
+            return $this->db->update('mri_proses', $data);
+        }
+        $data['created_at'] = date('Y-m-d H:i:s');
+        $data['created_by'] = $this->user();
+        return $this->db->insert('mri_proses', $data);
+    }
+
+    /** kode_proses UNIQUE — cek sebelum simpan. */
+    public function kodeProsesDipakai($kode, $kecuali_id = null)
+    {
+        $this->db->where('kode_proses', $kode);
+        if ($kecuali_id) {
+            $this->db->where('id_proses !=', (int) $kecuali_id);
+        }
+        return $this->db->count_all_results('mri_proses') > 0;
+    }
+
+    /** Berapa kali proses ini dipakai objektif / pemetaan risiko proses. */
+    public function jumlahPemakaianProses($id_proses)
+    {
+        return [
+            'objektif' => (int) $this->db->where('id_proses', (int) $id_proses)->count_all_results('mri_objektif'),
+            'risiko'   => (int) $this->db->where('id_proses', (int) $id_proses)->count_all_results('mri_risiko_proses'),
+        ];
+    }
+
+    public function hapusProses($id)
+    {
+        $this->db->where('id_proses', (int) $id);
+        return $this->db->delete('mri_proses');
+    }
+
     // ---------------- mri_kategori_risiko (14 kategori QRMO) ----------------
 
     public function getKategori($aktif_saja = true)
@@ -64,12 +102,37 @@ class Model_mri_master extends CI_Model
         $data['modified_at'] = date('Y-m-d H:i:s');
         $data['modified_by'] = $this->user();
         if ($id) {
-            $this->db->where('id_kategori', $id);
+            $this->db->where('id_kategori', (int) $id);
             return $this->db->update('mri_kategori_risiko', $data);
         }
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['created_by'] = $this->user();
         return $this->db->insert('mri_kategori_risiko', $data);
+    }
+
+    /** kode_kat UNIQUE — cek sebelum simpan. */
+    public function kodeKategoriDipakai($kode, $kecuali_id = null)
+    {
+        $this->db->where('kode_kat', $kode);
+        if ($kecuali_id) {
+            $this->db->where('id_kategori !=', (int) $kecuali_id);
+        }
+        return $this->db->count_all_results('mri_kategori_risiko') > 0;
+    }
+
+    /** Berapa kali kategori ini dipakai register / risk appetite. */
+    public function jumlahPemakaianKategori($id_kategori)
+    {
+        return [
+            'register' => (int) $this->db->where('id_kategori', (int) $id_kategori)->count_all_results('mri_register'),
+            'appetite' => (int) $this->db->where('id_kategori', (int) $id_kategori)->count_all_results('mri_appetite'),
+        ];
+    }
+
+    public function hapusKategori($id)
+    {
+        $this->db->where('id_kategori', (int) $id);
+        return $this->db->delete('mri_kategori_risiko');
     }
 
     // ---------------- mri_tingkat_risiko (skala level, dapat diubah) ----------------
@@ -109,8 +172,47 @@ class Model_mri_master extends CI_Model
     {
         $data['modified_at'] = date('Y-m-d H:i:s');
         $data['modified_by'] = $this->user();
-        $this->db->where('id_tingkat', $id);
-        return $this->db->update('mri_tingkat_risiko', $data);
+        if ($id) {
+            $this->db->where('id_tingkat', (int) $id);
+            return $this->db->update('mri_tingkat_risiko', $data);
+        }
+        $data['created_at'] = date('Y-m-d H:i:s');
+        $data['created_by'] = $this->user();
+        return $this->db->insert('mri_tingkat_risiko', $data);
+    }
+
+    /**
+     * Apakah rentang skor baru tumpang tindih dengan level lain?
+     * Skor L x D harus jatuh di tepat satu level; tumpang tindih membuat
+     * levelDariSkor() tidak deterministik.
+     */
+    public function rentangSkorBentrok($skor_min, $skor_max, $kecuali_id = null)
+    {
+        $this->db->where('skor_min <=', (int) $skor_max);
+        $this->db->where('skor_max >=', (int) $skor_min);
+        if ($kecuali_id) {
+            $this->db->where('id_tingkat !=', (int) $kecuali_id);
+        }
+        return $this->db->count_all_results('mri_tingkat_risiko') > 0;
+    }
+
+    /** Berapa analisa/riwayat skor yang masih memakai nama level ini. */
+    public function jumlahPemakaianTingkat($nama_tingkat)
+    {
+        return (int) $this->db
+            ->where('level_inherent', $nama_tingkat)
+            ->or_where('level_residual', $nama_tingkat)
+            ->count_all_results('mri_analisa')
+            + (int) $this->db
+                ->where('level_inherent', $nama_tingkat)
+                ->or_where('level_residual', $nama_tingkat)
+                ->count_all_results('mri_riwayat_skor');
+    }
+
+    public function hapusTingkat($id)
+    {
+        $this->db->where('id_tingkat', (int) $id);
+        return $this->db->delete('mri_tingkat_risiko');
     }
 
     /**
@@ -136,11 +238,11 @@ class Model_mri_master extends CI_Model
      *
      * Catatan pemetaan:
      *  - Tahap 1 (Komunikasi & Konsultasi) berjalan menyilang di seluruh
-     *    tahap dan selama ini dicatat pada halaman Lingkup (kolom
-     *    tanggal_konsultasi, peserta, q_*, hasil_konsultasi, pic_konsultasi),
-     *    sehingga tahap 1 dan 2 berbagi satu rute.
-     *  - KPI/KRI bukan tahap tersendiri pada materi; ia milik tahap 7
-     *    (Pemantauan & Peninjauan) tetapi mempunyai rute sendiri di aplikasi.
+     *    tahap dan dicatat pada halaman Komunikasi (mri_komunikasi). Kolom
+     *    konsultasi pada halaman Lingkup tetap dipertahankan sebagai
+     *    ringkasan dokumen, bukan pengganti catatan sesi.
+     *  - KPI/KRI bukan tahap tersendiri dan tidak dipakai pada alur ini;
+     *    tahap 7 (Pemantauan & Peninjauan) langsung diikuti tahap 8 (Pelaporan).
      *
      * @return array<int, array> setiap entri: no, judul, rute, halaman, catatan
      */
@@ -149,14 +251,14 @@ class Model_mri_master extends CI_Model
         return [
             [
                 'no'      => 1,
-                'judul'   => 'Komunikasi & Konsultasi',
-                'rute'    => 'manrisk/lingkup',
-                'halaman' => 'Lingkup',
-                'catatan' => 'Dicatat pada halaman Lingkup (tanggal konsultasi, peserta, hasil_konsultasi).',
+                'judul'   => 'Komunikasi',
+                'rute'    => 'manrisk/komunikasi',
+                'halaman' => 'Komunikasi & Konsultasi',
+                'catatan' => 'Sesi komunikasi: dengarkan, selaraskan, uji & konfirmasi; 4 pertanyaan kunci; hasil & tindak lanjut.',
             ],
             [
                 'no'      => 2,
-                'judul'   => 'Lingkup, Konteks & Kriteria',
+                'judul'   => 'Lingkup & Konteks',
                 'rute'    => 'manrisk/lingkup',
                 'halaman' => 'Lingkup',
                 'catatan' => 'Konteks internal/eksternal, kriteria_acuan, objek & batas evaluasi.',
@@ -191,14 +293,14 @@ class Model_mri_master extends CI_Model
             ],
             [
                 'no'      => 7,
-                'judul'   => 'Pemantauan & Peninjauan',
+                'judul'   => 'Peninjauan',
                 'rute'    => 'manrisk/monitoring',
                 'halaman' => 'Monitoring',
-                'catatan' => 'Catatan per triwulan, efektivitas kontrol, kebutuhan reassess. KPI/KRI di manrisk/kri.',
+                'catatan' => 'Catatan per triwulan, efektivitas kontrol, kebutuhan reassess.',
             ],
             [
                 'no'      => 8,
-                'judul'   => 'Pelaporan & Pencatatan',
+                'judul'   => 'Pelaporan',
                 'rute'    => 'manrisk/laporan',
                 'halaman' => 'Laporan',
                 'catatan' => 'Laporan operasional, manajemen, Dewan Pengawas, dan tahunan.',

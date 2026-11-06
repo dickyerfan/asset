@@ -47,7 +47,7 @@ class Auth extends CI_Controller
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>');
-            redirect('risiko/dashboard');
+            redirect('manrisk/dashboard');
           } elseif ($cek_nama_pengguna->bagian == 'Auditor') {
             $data_session = [
               'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
@@ -65,7 +65,7 @@ class Auth extends CI_Controller
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>');
-            redirect('risiko/dashboard');
+            redirect('manrisk/dashboard');
           } elseif ($cek_nama_pengguna->bagian == 'Umum') {
             $data_session = [
               'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
@@ -83,7 +83,7 @@ class Auth extends CI_Controller
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>');
-            redirect('dashboard_umum');
+            redirect('manrisk/dashboard');
           } elseif ($cek_nama_pengguna->bagian == 'Langgan') {
             $data_session = [
               'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
@@ -101,7 +101,7 @@ class Auth extends CI_Controller
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>');
-            redirect('dashboard_langgan');
+            redirect('manrisk/dashboard');
           } elseif ($cek_nama_pengguna->bagian == 'Perencanaan') {
             $data_session = [
               'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
@@ -119,7 +119,7 @@ class Auth extends CI_Controller
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>');
-            redirect('dashboard_rencana');
+            redirect('manrisk/dashboard');
           } elseif ($cek_nama_pengguna->bagian == 'Pemeliharaan') {
             $data_session = [
               'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
@@ -137,7 +137,7 @@ class Auth extends CI_Controller
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>');
-            redirect('dashboard_pelihara');
+            redirect('manrisk/dashboard');
           } elseif ($cek_nama_pengguna->bagian == 'UPK') {
             $data_session = [
               'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
@@ -183,7 +183,7 @@ class Auth extends CI_Controller
         $this->session->set_flashdata('info', '<div class="alert alert-danger" role="alert">Login Gagal, nama_pengguna Anda Salah.!</div>');
         redirect('auth');
       }
-      redirect('risiko/dashboard');
+      redirect('manrisk/dashboard');
     }
   }
 

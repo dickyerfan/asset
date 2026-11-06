@@ -133,6 +133,18 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
+                                    <a href="<?= base_url('manrisk/objektif') ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Obyektif/Sasaran</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('manrisk/komunikasi') ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Komunikasi</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="<?= base_url('manrisk/lingkup') ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Lingkup &amp; Konteks </p>
@@ -163,15 +175,15 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?= base_url('manrisk/monitoring') ?>" class="nav-link">
+                                    <a href="<?= base_url('manrisk/assessment') ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Peninjauan</p>
+                                        <p>Risk Assessment</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?= base_url('manrisk/kri') ?>" class="nav-link">
+                                    <a href="<?= base_url('manrisk/monitoring') ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>KPI / KRI</p>
+                                        <p>Peninjauan</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -180,27 +192,33 @@
                                         <p>Pelaporan</p>
                                     </a>
                                 </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-chart-bar"></i>
-                                <p>
-                                    Analisis &amp; RKAP
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="<?= base_url('manrisk/matrik') ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Matriks Risiko</p>
                                     </a>
                                 </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-book nav-icon"></i>
+                                <p>
+                                    Panduan
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="<?= base_url('manrisk/objektif') ?>" class="nav-link">
+                                    <a href="<?= base_url('manrisk/panduan/pengisian') ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Objektif &amp; RKAP</p>
+                                        <p>Panduan Pengisian</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('manrisk/panduan') ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Petunjuk Penggunaan</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -209,19 +227,49 @@
                                         <p>Impor Risk Register</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('manrisk/pengaturan') ?>" class="nav-link">
+                                        <i class="fas fa-cog nav-icon"></i>
+                                        <p>Pengaturan</p>
+                                    </a>
+                                </li>
+                                <!-- <li class="nav-item">
+                                    <a href="<?= base_url('manrisk/pengaturan/pic') ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>PIC</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('manrisk/pengaturan/ttd') ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Petugas TTD</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('manrisk/pengaturan/owner') ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Risk Owner</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('manrisk/pengaturan/proses') ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Proses</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('manrisk/pengaturan/kategori') ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Kategori</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('manrisk/pengaturan/tingkat') ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Skala Level</p>
+                                    </a>
+                                </li> -->
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('manrisk/panduan') ?>" class="nav-link">
-                                <i class="fas fa-book nav-icon"></i>
-                                <p>Petunjuk Penggunaan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('manrisk/pengaturan') ?>" class="nav-link">
-                                <i class="fas fa-cog nav-icon"></i>
-                                <p>Pengaturan</p>
-                            </a>
                         </li>
                     </ul>
                 </li>

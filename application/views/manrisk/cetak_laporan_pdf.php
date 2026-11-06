@@ -67,7 +67,6 @@ $bagian = [
     'Rekap Inherent &amp; Residual' => $laporan->rekap_inherent_residual,
     'Catatan Peta Risiko'        => $laporan->catatan_peta_risiko,
     'Rekap Peluang'              => $laporan->rekap_peluang,
-    'Hasil KRI'                  => $laporan->hasil_kri,
     'Evaluasi &amp; Tindak Lanjut'  => $laporan->evaluasi_tindak_lanjut,
     'Kesimpulan'                 => $laporan->kesimpulan,
     'Rencana Tindak Lanjut'      => $laporan->rencana_tindak_lanjut,
@@ -109,28 +108,65 @@ foreach ($bagian as $judul => $isi) :
     </tbody>
 </table>
 
-<h5>Lampiran &mdash; Key Risk Indicator (KRI)</h5>
+<h5>Lampiran &mdash; Register &amp; Analisis Risiko</h5>
 <table class="data">
     <thead>
         <tr>
             <th style="width:28px">No</th>
-            <th>KRI</th>
-            <th style="width:65px">Target</th>
-            <th style="width:65px">Aktual</th>
-            <th style="width:85px">Status</th>
+            <th style="width:72px">Kode</th>
+            <th>Risiko</th>
+            <th style="width:78px">Unit</th>
+            <th style="width:48px">Inherent</th>
+            <th style="width:48px">Residual</th>
+            <th style="width:60px">Level</th>
+            <th style="width:62px">Keputusan</th>
         </tr>
     </thead>
     <tbody>
-        <?php if (empty($data['kri'])) : ?>
-            <tr><td colspan="5" class="text-center">Belum ada KRI.</td></tr>
+        <?php if (empty($data['daftar'])) : ?>
+            <tr><td colspan="8" class="text-center">Belum ada risiko.</td></tr>
         <?php endif; ?>
-        <?php foreach ($data['kri'] as $i => $k) : ?>
+        <?php foreach ($data['daftar'] as $i => $r) : ?>
             <tr>
                 <td class="text-center"><?= $i + 1 ?></td>
-                <td><?= html_escape($k->nama_kri) ?></td>
-                <td class="text-center"><?= $k->target !== null ? html_escape($k->target) : '-' ?></td>
-                <td class="text-center"><?= $k->nilai_aktual !== null ? html_escape($k->nilai_aktual) : '-' ?></td>
-                <td><?= html_escape($k->status_kri) ?></td>
+                <td><?= html_escape($r->kode_risiko) ?></td>
+                <td><?= html_escape($r->risiko) ?></td>
+                <td><?= html_escape($r->nama_bagian ?: '-') ?></td>
+                <td class="text-center"><?= $r->nilai_inherent !== null ? (int) $r->nilai_inherent : '-' ?></td>
+                <td class="text-center"><?= $r->nilai_residual !== null ? (int) $r->nilai_residual : '-' ?></td>
+                <td><?= html_escape($r->level_residual ?: '-') ?></td>
+                <td><?= html_escape($r->keputusan ?: '-') ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<h5>Lampiran &mdash; Perlakuan Risiko</h5>
+<table class="data">
+    <thead>
+        <tr>
+            <th style="width:28px">No</th>
+            <th style="width:72px">Kode</th>
+            <th style="width:55px">Strategi</th>
+            <th>Uraian Tindakan</th>
+            <th style="width:80px">PIC</th>
+            <th style="width:65px">Jadwal</th>
+            <th style="width:65px">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if (empty($data['perlakuan'])) : ?>
+            <tr><td colspan="7" class="text-center">Belum ada rencana perlakuan.</td></tr>
+        <?php endif; ?>
+        <?php foreach ($data['perlakuan'] as $i => $p) : ?>
+            <tr>
+                <td class="text-center"><?= $i + 1 ?></td>
+                <td><?= html_escape($p->kode_risiko) ?></td>
+                <td><?= html_escape($p->strategi) ?></td>
+                <td><?= html_escape($p->uraian_tindakan ?: '-') ?></td>
+                <td><?= html_escape($p->nama_pic ?: '-') ?></td>
+                <td class="text-center"><?= html_escape($p->jadwal_selesai ?: '-') ?></td>
+                <td><?= html_escape($p->status_laksana) ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>

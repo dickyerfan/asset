@@ -130,10 +130,10 @@ CREATE TABLE `mri_petugas_ttd` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- =====================================================================
--- BAGIAN B · TAHAP 1-3 · LINGKUP, KONTEKS, KRITERIA, OBJEKTIF (4 tabel)
+-- BAGIAN B · TAHAP 1-3 · LINGKUP, KONTEKS, KRITERIA, OBJEKTIF (5 tabel)
 -- =====================================================================
 
--- B1 · ISO 6.2 Komunikasi & Konsultasi + ISO 6.3 Lingkup, Konteks, Kriteria
+-- B1 · ISO 6.3 Lingkup, Konteks, Kriteria
 DROP TABLE IF EXISTS `mri_lingkup`;
 CREATE TABLE `mri_lingkup` (
   `id_lingkup` int(11) NOT NULL AUTO_INCREMENT,
@@ -162,6 +162,70 @@ CREATE TABLE `mri_lingkup` (
   PRIMARY KEY (`id_lingkup`),
   KEY `idx_lingkup_tahun` (`tahun`,`triwulan`),
   KEY `idx_lingkup_upk` (`id_upk`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+-- B1a · ISO 6.2 Komunikasi & Konsultasi — catatan sesi tersendiri
+--       Dipisahkan dari mri_lingkup agar satu lingkup dapat memiliki
+--       beberapa sesi komunikasi (rapat, FGD, wawancara, sosialisasi).
+--       Lima kolom hasil_* mengikuti lima hasil yang diharapkan pada
+--       materi QRMO slide 31.
+DROP TABLE IF EXISTS `mri_komunikasi`;
+CREATE TABLE `mri_komunikasi` (
+  `id_komunikasi` int(11) NOT NULL AUTO_INCREMENT,
+  `tahun` int(4) NOT NULL,
+  `triwulan` int(1) NOT NULL DEFAULT 1,
+  `id_upk` int(11) DEFAULT NULL,
+  `id_lingkup` int(11) DEFAULT NULL,
+  `id_register` int(11) DEFAULT NULL,
+  `tanggal` date NOT NULL,
+  `metode` enum('Rapat','FGD','Wawancara','Sosialisasi','Konsultasi Tertulis','Lainnya') NOT NULL DEFAULT 'Rapat',
+  `topik` varchar(200) NOT NULL,
+  `pihak_terlibat` text DEFAULT NULL,
+  `pic_komunikasi` varchar(100) DEFAULT NULL,
+  `catatan_dengar` text DEFAULT NULL,
+  `catatan_selaras` text DEFAULT NULL,
+  `catatan_konfirmasi` text DEFAULT NULL,
+  `q_sasaran` text DEFAULT NULL,
+  `q_risiko` text DEFAULT NULL,
+  `q_kontrol` text DEFAULT NULL,
+  `q_tindakan` text DEFAULT NULL,
+  `hasil_pemahaman` int(1) NOT NULL DEFAULT 0,
+  `hasil_prioritas` int(1) NOT NULL DEFAULT 0,
+  `hasil_validasi` int(1) NOT NULL DEFAULT 0,
+  `hasil_kesepakatan` int(1) NOT NULL DEFAULT 0,
+  `hasil_tindak_lanjut` int(1) NOT NULL DEFAULT 0,
+  `ringkasan_hasil` text DEFAULT NULL,
+  `tindak_lanjut` text DEFAULT NULL,
+  `pic_tindak_lanjut` varchar(100) DEFAULT NULL,
+  `target_selesai` date DEFAULT NULL,
+  `status_tindak_lanjut` enum('BELUM','PROSES','SELESAI') NOT NULL DEFAULT 'BELUM',
+  `status` enum('DRAFT','SELESAI') NOT NULL DEFAULT 'DRAFT',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_by` varchar(100) NOT NULL DEFAULT 'seed',
+  `modified_at` datetime DEFAULT NULL,
+  `modified_by` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_komunikasi`),
+  KEY `idx_kom_tahun` (`tahun`,`triwulan`),
+  KEY `idx_kom_upk` (`id_upk`),
+  KEY `idx_kom_lingkup` (`id_lingkup`),
+  KEY `idx_kom_register` (`id_register`),
+  KEY `idx_kom_tanggal` (`tanggal`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+-- B1b · Foto pendukung sesi komunikasi (dokumentasi rapat/kegiatan)
+--       Satu sesi boleh memiliki lebih dari satu foto. Berkas fisik disimpan
+--       di assets/uploads/manrisk/komunikasi/.
+DROP TABLE IF EXISTS `mri_komunikasi_foto`;
+CREATE TABLE `mri_komunikasi_foto` (
+  `id_foto` int(11) NOT NULL AUTO_INCREMENT,
+  `id_komunikasi` int(11) NOT NULL,
+  `nama_file` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_by` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_foto`),
+  KEY `idx_komfoto_komunikasi` (`id_komunikasi`),
+  CONSTRAINT `fk_komfoto_komunikasi` FOREIGN KEY (`id_komunikasi`)
+    REFERENCES `mri_komunikasi` (`id_komunikasi`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- B2 · Objektif/Target RKAP — TAHAP 3, titik awal identifikasi risiko
@@ -458,46 +522,17 @@ CREATE TABLE `mri_riwayat_skor` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- =====================================================================
--- BAGIAN D · KRI & PELAPORAN (2 tabel)
+-- BAGIAN D · PELAPORAN (1 tabel)
 -- =====================================================================
 
--- D1 · Key Risk Indicator — slide 60
-DROP TABLE IF EXISTS `mri_kri`;
-CREATE TABLE `mri_kri` (
-  `id_kri` int(11) NOT NULL AUTO_INCREMENT,
-  `id_register` int(11) DEFAULT NULL,
-  `id_lingkup` int(11) DEFAULT NULL,
-  `id_upk` int(11) DEFAULT NULL,
-  `tahun` int(4) NOT NULL,
-  `triwulan` int(1) NOT NULL,
-  `nama_kri` varchar(200) NOT NULL,
-  `target` decimal(18,4) DEFAULT NULL,
-  `frekuensi` varchar(50) DEFAULT NULL,
-  `satuan` varchar(50) DEFAULT NULL,
-  `nilai_aktual` decimal(18,4) DEFAULT NULL,
-  `status_kri` enum('Belum Diukur','Tercapai','Tidak Tercapai','Perlu Perhatian') NOT NULL DEFAULT 'Belum Diukur',
-  `keterangan` text DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `created_by` varchar(100) NOT NULL DEFAULT 'seed',
-  `modified_at` datetime DEFAULT NULL,
-  `modified_by` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_kri`),
-  KEY `idx_kri_register` (`id_register`),
-  KEY `idx_kri_lingkup` (`id_lingkup`),
-  KEY `idx_kri_upk` (`id_upk`),
-  KEY `idx_kri_periode` (`tahun`,`triwulan`),
-  CONSTRAINT `fk_kri_register` FOREIGN KEY (`id_register`)
-    REFERENCES `mri_register` (`id_register`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
-
--- D2 · Laporan Manajemen Risiko — ISO 6.7 (struktur BAB I-V)
+-- D1 · Laporan Manajemen Risiko — ISO 6.7 (struktur BAB I-V)
 DROP TABLE IF EXISTS `mri_laporan`;
 CREATE TABLE `mri_laporan` (
   `id_laporan` int(11) NOT NULL AUTO_INCREMENT,
   `tahun` int(4) NOT NULL,
   `triwulan` int(1) NOT NULL,
   `jenis_laporan` enum('Operasional','Manajemen','Dewan Pengawas','Tahunan') NOT NULL DEFAULT 'Operasional',
-  `id_upk` int(11) DEFAULT NULL,
+  `id_upk` int(11) NOT NULL DEFAULT 0,
   `id_lingkup` int(11) DEFAULT NULL,
   `ringkasan_eksekutif` text DEFAULT NULL,
   `latar_belakang` text DEFAULT NULL,
@@ -506,7 +541,6 @@ CREATE TABLE `mri_laporan` (
   `rekap_inherent_residual` text DEFAULT NULL,
   `catatan_peta_risiko` text DEFAULT NULL,
   `rekap_peluang` text DEFAULT NULL,
-  `hasil_kri` text DEFAULT NULL,
   `evaluasi_tindak_lanjut` text DEFAULT NULL,
   `kesimpulan` text DEFAULT NULL,
   `rencana_tindak_lanjut` text DEFAULT NULL,
@@ -520,7 +554,7 @@ CREATE TABLE `mri_laporan` (
   `modified_at` datetime DEFAULT NULL,
   `modified_by` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_laporan`),
-  UNIQUE KEY `uq_laporan` (`tahun`,`triwulan`,`jenis_laporan`),
+  UNIQUE KEY `uq_laporan` (`tahun`,`triwulan`,`jenis_laporan`,`id_upk`),
   KEY `idx_laporan_upk` (`id_upk`),
   KEY `idx_laporan_lingkup` (`id_lingkup`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;

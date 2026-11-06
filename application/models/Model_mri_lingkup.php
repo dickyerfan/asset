@@ -95,10 +95,24 @@ class Model_mri_lingkup extends CI_Model
     /**
      * Ringkasan rekonsiliasi: jumlah SELESAI / BELUM per tahun.
      */
-    public function rekapRekonsiliasi($tahun)
+    public function rekapRekonsiliasi($tahun, $id_bagian = null, $id_upk = null)
     {
         $this->db->select('status_rekonsiliasi, COUNT(*) AS jml');
         $this->db->where('tahun', $tahun);
+        if ($id_bagian !== null || $id_upk !== null) {
+            $this->db->group_start();
+            if ($id_bagian !== null) {
+                $this->db->where('id_bagian', (int) $id_bagian);
+            }
+            if ($id_upk !== null) {
+                if ($id_bagian !== null) {
+                    $this->db->or_where('id_upk', (int) $id_upk);
+                } else {
+                    $this->db->where('id_upk', (int) $id_upk);
+                }
+            }
+            $this->db->group_end();
+        }
         $this->db->group_by('status_rekonsiliasi');
         $hasil = ['SELESAI' => 0, 'BELUM' => 0];
         foreach ($this->db->get('mri_objektif')->result() as $r) {
@@ -181,5 +195,11 @@ class Model_mri_lingkup extends CI_Model
         $this->db->where('id_objektif', $id_objektif);
         $this->db->order_by('id_revisi', 'DESC');
         return $this->db->get('mri_objektif_revisi')->result();
+    }
+
+    public function hapusObjektif($id_objektif)
+    {
+        $this->db->where('id_objektif', $id_objektif);
+        return $this->db->delete('mri_objektif');
     }
 }

@@ -3,6 +3,7 @@
  * Formulir laporan manajemen risiko.
  *
  * Bagian-bagian laporan mengikuti struktur §10.1 dokumentasi MR.
+ * Sebagian besar bagian dapat diisi otomatis dari data proses.
  */
 $l = $laporan;
 $isEdit = $l !== null;
@@ -22,7 +23,6 @@ $bagian = [
     'rekap_inherent_residual' => ['Rekap Inherent & Residual', 3],
     'catatan_peta_risiko'   => ['Catatan Peta Risiko', 3],
     'rekap_peluang'         => ['Rekap Peluang', 2],
-    'hasil_kri'             => ['Hasil KRI', 3],
     'evaluasi_tindak_lanjut' => ['Evaluasi & Tindak Lanjut', 3],
     'kesimpulan'            => ['Kesimpulan', 3],
     'rencana_tindak_lanjut' => ['Rencana Tindak Lanjut', 3],
@@ -31,6 +31,9 @@ $bagian = [
 ?>
 <section class="content">
     <div class="container-fluid">
+
+        <?= $this->session->flashdata('info_laporan'); ?>
+        <?= $this->session->unset_userdata('info_laporan'); ?>
 
         <div class="card card-outline card-primary">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -43,7 +46,9 @@ $bagian = [
             <?= form_open('manrisk/laporan/form' . ($isEdit ? '/' . $l->id_laporan : '')) ?>
 
             <?php if (validation_errors()) : ?>
-                <div class="card-body pb-0"><div class="alert alert-danger mb-0"><?= validation_errors() ?></div></div>
+                <div class="card-body pb-0">
+                    <div class="border border-danger rounded bg-white p-2 mb-0"><?= validation_errors() ?></div>
+                </div>
             <?php endif; ?>
 
             <div class="card-body">
@@ -53,7 +58,7 @@ $bagian = [
                         <label for="jenis_laporan">Jenis Laporan <span class="text-danger">*</span></label>
                         <select name="jenis_laporan" id="jenis_laporan" class="form-control" required>
                             <?php foreach ($jenis as $j) : ?>
-                                <option value="<?= $j ?>" <?= $val('jenis_laporan', 'Operasional') === $j ? 'selected' : '' ?>><?= $j ?></option>
+                                <option value="<?= html_escape($j) ?>" <?= $val('jenis_laporan', 'Operasional') === $j ? 'selected' : '' ?>><?= html_escape($j) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -73,7 +78,7 @@ $bagian = [
                     <div class="form-group col-md-3">
                         <label for="id_upk">Unit</label>
                         <select name="id_upk" id="id_upk" class="form-control">
-                            <option value="">— seluruh organisasi —</option>
+                            <option value="" <?= (string) $val('id_upk', '0') === '0' ? 'selected' : '' ?>>— seluruh organisasi —</option>
                             <?php foreach ($unit_list as $u) : ?>
                                 <option value="<?= $u->id_bagian ?>" <?= (string) $val('id_upk') === (string) $u->id_bagian ? 'selected' : '' ?>>
                                     <?= html_escape($u->nama_bagian) ?>
@@ -90,6 +95,13 @@ $bagian = [
                     </div>
                 </div>
 
+                <div class="border border-info rounded bg-white p-2 mb-3 small">
+                    <i class="fas fa-magic text-info"></i>
+                    Sebagian besar bagian di bawah dapat diisi otomatis dari data Register sampai Monitoring.
+                    Gunakan tombol <strong>Susun Ulang dari Data</strong> untuk menyusun seluruh isi,
+                    atau <strong>Isi dari Data</strong> untuk hanya mengisi bagian yang masih kosong.
+                </div>
+
                 <?php foreach ($bagian as $k => $info) : ?>
                     <div class="form-group">
                         <label for="<?= $k ?>"><?= html_escape($info[0]) ?></label>
@@ -98,8 +110,8 @@ $bagian = [
                 <?php endforeach; ?>
 
                 <?php if ($isEdit && $l->disahkan_oleh) : ?>
-                    <div class="alert alert-success mb-0">
-                        <i class="fas fa-stamp"></i>
+                    <div class="border border-success rounded bg-white p-2 mb-0">
+                        <i class="fas fa-stamp text-success"></i>
                         Disahkan oleh <strong><?= html_escape($l->disahkan_oleh) ?></strong>
                         pada <?= html_escape($l->tanggal_sahkan) ?>.
                     </div>
@@ -109,6 +121,18 @@ $bagian = [
 
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                <?php if ($isEdit) : ?>
+                    <button type="submit" formaction="<?= base_url('manrisk/laporan/otomatis') ?>"
+                            class="btn btn-info" formnovalidate
+                            onclick="return confirm('Susun ulang SELURUH isi laporan dari data? Teks yang sudah Anda tulis akan diganti.');">
+                        <i class="fas fa-magic"></i> Susun Ulang dari Data
+                    </button>
+                    <button type="submit" formaction="<?= base_url('manrisk/laporan/isi_dari_data/' . $l->id_laporan) ?>"
+                            class="btn btn-outline-info" formnovalidate
+                            onclick="return confirm('Isi bagian yang masih kosong dari data aplikasi? Teks yang sudah ada tidak akan diubah.');">
+                        <i class="fas fa-fill-drip"></i> Isi dari Data
+                    </button>
+                <?php endif; ?>
                 <a href="<?= base_url('manrisk/laporan') ?>" class="btn btn-outline-secondary">
                     <i class="fas fa-times"></i> Batal
                 </a>

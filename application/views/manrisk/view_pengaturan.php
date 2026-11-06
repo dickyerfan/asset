@@ -35,6 +35,62 @@
             </div>
         <?php endif; ?>
 
+        <!-- ============== DATA PETUGAS ============== -->
+        <div class="card card-outline card-secondary">
+            <div class="card-header"><strong><i class="fas fa-users-cog"></i> Data Petugas</strong></div>
+            <div class="card-body">
+                <p class="small text-muted mb-3">
+                    Master orang yang dipakai modul: PIC pelaksana tindakan, penandatangan laporan,
+                    dan pemilik risiko. Ketiganya dapat ditambah, diubah, dan dihapus.
+                </p>
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <a href="<?= base_url('manrisk/pengaturan/pic') ?>" class="btn btn-block btn-outline-primary">
+                            <i class="fas fa-user-check"></i> PIC
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a href="<?= base_url('manrisk/pengaturan/ttd') ?>" class="btn btn-block btn-outline-primary">
+                            <i class="fas fa-signature"></i> Petugas TTD
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a href="<?= base_url('manrisk/pengaturan/owner') ?>" class="btn btn-block btn-outline-primary">
+                            <i class="fas fa-user-tie"></i> Risk Owner
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============== MASTER RISIKO ============== -->
+        <div class="card card-outline card-secondary">
+            <div class="card-header"><strong><i class="fas fa-database"></i> Master Risiko</strong></div>
+            <div class="card-body">
+                <p class="small text-muted mb-3">
+                    Konteks organisasi, taksonomi, dan skala penilaian risiko yang dipakai di seluruh
+                    modul. Kamu dapat menambah, mengubah, dan menghapusnya.
+                </p>
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <a href="<?= base_url('manrisk/pengaturan/proses') ?>" class="btn btn-block btn-outline-info">
+                            <i class="fas fa-sitemap"></i> Proses
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a href="<?= base_url('manrisk/pengaturan/kategori') ?>" class="btn btn-block btn-outline-info">
+                            <i class="fas fa-tags"></i> Kategori
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a href="<?= base_url('manrisk/pengaturan/tingkat') ?>" class="btn btn-block btn-outline-info">
+                            <i class="fas fa-layer-group"></i> Skala Level
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ============== KUNCI TRANSAKSI ============== -->
         <div class="card card-outline card-primary">
             <div class="card-header"><strong><i class="fas fa-lock"></i> Kunci Transaksi</strong></div>

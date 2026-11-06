@@ -22,9 +22,11 @@ class Objektif extends MY_Controller
     public function index()
     {
         $tahun = $this->tahunAktif(2027);
+        // Unit aktif: null untuk Admin/role lintas unit, id unit untuk UPK/unit lain.
+        $unitSaya = $this->aksesSemuaUnit() ? null : $this->unitPaksa();
         $f = ['tahun' => $tahun];
-        if (!$this->aksesSemuaUnit()) {
-            $f['id_upk'] = $this->unitPaksa();
+        if ($unitSaya !== null) {
+            $f['id_upk'] = $unitSaya;
         }
 
         $daftar = $this->Model_mri_lingkup->getObjektif(
@@ -33,10 +35,18 @@ class Objektif extends MY_Controller
             $this->teks('status_rekonsiliasi') !== '' ? $this->teks('status_rekonsiliasi') : null
         );
         if (!$this->aksesSemuaUnit()) {
-            $paks = $this->unitPaksa();
-            $daftar = array_values(array_filter($daftar, function ($o) use ($paks) {
-                return (int) $o->id_upk === (int) $paks || $o->id_upk === null;
-            }));
+            if ($unitSaya === null) {
+                // Akun tidak terhubung ke unit: jangan tampilkan data unit lain.
+                $daftar = [];
+            } else {
+                $paks = (int) $unitSaya;
+                // UPK/unit lain hanya melihat objektif milik unitnya sendiri.
+                // Kepemilikan dibaca dari id_bagian (unit pada form) atau id_upk.
+                $daftar = array_values(array_filter($daftar, function ($o) use ($paks) {
+                    return (int) $o->id_bagian === $paks
+                        || ($o->id_upk !== null && (int) $o->id_upk === $paks);
+                }));
+            }
         }
 
         // jumlah risiko terikat per objektif
@@ -47,7 +57,21 @@ class Objektif extends MY_Controller
             $terikat[(int) $row->id_objektif] = (int) $row->jml;
         }
 
-        $rekap = $this->Model_mri_lingkup->rekapRekonsiliasi($tahun);
+        // Kartu rekap mengikuti unit yang sama dengan tabel (bukan angka seluruh organisasi).
+        $rekap = $this->Model_mri_lingkup->rekapRekonsiliasi($tahun, $unitSaya, $unitSaya);
+
+        // Admin selalu boleh mengubah. Role lain (UPK/Staf) hanya boleh saat
+        // kunci objektif_risiko di menu Pengaturan berstatus terbuka (0).
+        $isAdmin = false;
+        if (isset($this->session) && method_exists($this->session, 'userdata')) {
+            $bagian = $this->session->userdata('bagian');
+            $level  = $this->session->userdata('level');
+            if ($bagian === 'Administrator' || $level === 'Admin' || $level === 'Administrator') {
+                $isAdmin = true;
+            }
+        }
+        $boleh_tulis = $isAdmin
+            || $this->Model_mri_pengaturan->bolehUbah('objektif_risiko');
 
         $this->render('manrisk/view_objektif', [
             'title'       => 'OBJEKTIF RKAP',
@@ -58,7 +82,7 @@ class Objektif extends MY_Controller
             'rekap'       => $rekap,
             'lingkup_list' => $this->Model_mri_lingkup->getLingkup($tahun),
             'akses_semua' => $this->aksesSemuaUnit(),
-            'boleh_tulis' => $this->Model_mri_pengaturan->bolehUbah('objektif_risiko'),
+            'boleh_tulis' => $boleh_tulis,
         ]);
     }
 
@@ -75,12 +99,12 @@ class Objektif extends MY_Controller
             redirect($this->tujuan);
             return;
         }
-        if (!$this->aksesSemuaUnit() && $o->id_upk !== null && (int) $o->id_upk !== (int) $this->unitPaksa()) {
+        if (!$this->unitBoleh($o)) {
             $this->pesan('Objektif berada di luar unit Anda.', 'warning');
             redirect($this->tujuan);
             return;
         }
-        if (!$this->Model_mri_pengaturan->bolehUbah('objektif_risiko')) {
+        if (!$this->bolehAdmin() && !$this->Model_mri_pengaturan->bolehUbah('objektif_risiko')) {
             $this->pesan('Objektif RKAP sedang dikunci.', 'warning');
             redirect($this->tujuan);
             return;
@@ -108,19 +132,47 @@ class Objektif extends MY_Controller
         redirect($this->tujuan);
     }
 
+    /**
+     * @return bool true bila tambah boleh dibuka.
+     * Admin selalu boleh; role lain mengikuti status kunci objektif_risiko.
+     */
+    public function bolehTambah()
+    {
+        if ($this->bolehAdmin()) {
+            return true;
+        }
+        if ($this->unitPaksa() === null) {
+            $this->pesan('Akun Anda belum terhubung ke unit. Hubungi Administrator.', 'warning');
+            redirect($this->tujuan);
+            return false;
+        }
+        return $this->kunciTerbuka();
+    }
+
     /** Form tambah objektif baru (GET). */
     public function tambah()
     {
-        if (!$this->kunciTerbuka()) {
+        if (!$this->bolehTambah()) {
+            $this->pesan('Objektif RKAP sedang dikunci. Hanya admin yang dapat mengubah.', 'warning');
             return;
         }
         $this->renderForm(null);
     }
 
+    /** @return bool true bila ubah boleh dibuka (Admin selalu boleh). */
+    public function bolehUbah()
+    {
+        if ($this->bolehAdmin()) {
+            return true;
+        }
+        return $this->kunciTerbuka();
+    }
+
     /** Form ubah objektif (GET). */
     public function ubah($id = null)
     {
-        if (!$this->kunciTerbuka()) {
+        if (!$this->bolehUbah()) {
+            $this->pesan('Objektif RKAP sedang dikunci. Hanya admin yang dapat mengubah.', 'warning');
             return;
         }
 
@@ -142,6 +194,8 @@ class Objektif extends MY_Controller
     /**
      * Simpan objektif: tambah baru bila id_objektif kosong, ubah bila terisi.
      * Perubahan nilai RKAP dicatat ke mri_objektif_revisi sebagai jejak audit.
+     * Admin selalu boleh menyimpan; role lain hanya saat kunci terbuka dan
+     * terbatas pada unitnya sendiri (dijaga oleh unitBoleh() dan id_upk).
      */
     public function simpan()
     {
@@ -149,7 +203,7 @@ class Objektif extends MY_Controller
             redirect($this->tujuan);
             return;
         }
-        if (!$this->kunciTerbuka()) {
+        if (!$this->bolehTambah()) {
             return;
         }
 
@@ -161,12 +215,12 @@ class Objektif extends MY_Controller
             $lama = $this->Model_mri_lingkup->getObjektifById($id);
             if (!$lama) {
                 $this->pesan('Objektif tidak ditemukan.', 'warning');
-                redirect($this->tujuan);
+                redirect($tujuan);
                 return;
             }
             if (!$this->unitBoleh($lama)) {
                 $this->pesan('Objektif berada di luar unit Anda.', 'warning');
-                redirect($this->tujuan);
+                redirect($tujuan);
                 return;
             }
         }
@@ -199,7 +253,10 @@ class Objektif extends MY_Controller
             'baseline_2026'        => $baseline,
             'satuan'               => $this->teks('satuan') ?: null,
             'sumber_nilai'         => $this->teks('sumber_nilai') ?: null,
-            'id_bagian'            => $this->angka('id_bagian'),
+            // UPK tidak boleh mengatribusikan objektif ke unit lain.
+            'id_bagian'            => $this->aksesSemuaUnit()
+                ? $this->angka('id_bagian')
+                : $this->unitPaksa(),
             'id_proses'            => $this->angka('id_proses'),
             'id_lingkup'           => $this->angka('id_lingkup'),
             'status_rekonsiliasi'  => in_array($status, ['BELUM', 'SELESAI'], true) ? $status : 'BELUM',
@@ -226,7 +283,66 @@ class Objektif extends MY_Controller
                 : 'Gagal menyimpan objektif.',
             $ok ? 'success' : 'danger'
         );
+        redirect($tujuan);
+    }
+
+    /**
+     * Hapus objektif (hanya untuk user dicky dengan role Administrator).
+     * Menghapus row dari mri_objektif.
+     */
+    public function hapus($id = null)
+    {
+        // Tombol Hapus berupa tautan (GET), jadi tidak boleh mensyaratkan POST.
+        // Cukup pastikan ID yang dikirim berupa angka.
+        if (!ctype_digit((string) $id)) {
+            $this->pesan('ID objektif tidak valid.', 'warning');
+            redirect($this->tujuan);
+            return;
+        }
+
+        // Hanya izinkan jika user = dicky dan role Administrator.
+        // Login menyimpan nama pengguna pada key 'nama_pengguna' (Auth.php).
+        $isDickyAdmin = false;
+        if (isset($this->session) && method_exists($this->session, 'userdata')) {
+            $username = strtolower(trim((string) $this->session->userdata('nama_pengguna')));
+            $bagian = trim((string) $this->session->userdata('bagian'));
+            if ($username === 'dicky' && $bagian === 'Administrator') {
+                $isDickyAdmin = true;
+            }
+        }
+
+        if (!$isDickyAdmin) {
+            $this->pesan('Akses ditolak. Hanya user dicky dengan role Administrator yang dapat menghapus objektif.', 'warning');
+            redirect($this->tujuan);
+            return;
+        }
+
+        $o = $this->Model_mri_lingkup->getObjektifById($id);
+        if (!$o) {
+            $this->pesan('Objektif tidak ditemukan.', 'warning');
+            redirect($this->tujuan);
+            return;
+        }
+
+        $this->Model_mri_lingkup->hapusObjektif($id);
+        $this->pesan('Objektif <strong>' . html_escape($o->indikator) . '</strong> berhasil dihapus.', 'success');
         redirect($this->tujuan);
+    }
+
+    /**
+     * Hanya Admin yang dapat mengubah/RKAP/rekonsiliasi objektif RKAP.
+     * Role lain (UPK, Staf, dan selain Administrator) tetap read-only saat kunci aktif.
+     */
+    private function bolehAdmin()
+    {
+        if (isset($this->session) && method_exists($this->session, 'userdata')) {
+            $bagian = $this->session->userdata('bagian');
+            $level  = $this->session->userdata('level');
+            if ($bagian === 'Administrator' || $level === 'Admin' || $level === 'Administrator') {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Render form tambah / ubah objektif. */
@@ -234,14 +350,21 @@ class Objektif extends MY_Controller
     {
         $tahun = $o ? (int) $o->tahun : $this->tahunAktif(2027);
 
+        // UPK hanya melihat unitnya sendiri pada pilihan Unit / Bagian.
+        $unitList = $this->db->from('bagian_upk');
+        if (!$this->aksesSemuaUnit()) {
+            $unitList->where('id_bagian', (int) $this->unitPaksa());
+        }
+        $unitList = $unitList->order_by('id_bagian', 'ASC')->get()->result();
+
         $this->render('manrisk/view_objektif_tambah', [
             'title'        => $o ? 'UBAH OBJEKTF RKAP' : 'TAMBAH OBJEKTF RKAP',
             'objektif'     => $o,
             'tahun'        => $tahun,
-            'unit_list'    => $this->db->from('bagian_upk')->order_by('id_bagian', 'ASC')->get()->result(),
+            'unit_list'    => $unitList,
             'proses_list'  => $this->db->from('mri_proses')->order_by('kode_proses', 'ASC')->get()->result(),
             'lingkup_list' => $this->Model_mri_lingkup->getLingkup($tahun),
-            'boleh_tulis'  => true,
+            'boleh_tulis'  => $this->bolehTambah(),
         ]);
     }
 
@@ -262,7 +385,14 @@ class Objektif extends MY_Controller
         if ($this->aksesSemuaUnit()) {
             return true;
         }
-        return $o->id_upk === null || (int) $o->id_upk === (int) $this->unitPaksa();
+        $paks = $this->unitPaksa();
+        if ($paks === null) {
+            return false;
+        }
+        $paks = (int) $paks;
+        // Cocokkan unit lewat id_bagian (kolom Unit/Bagian pada form) atau id_upk.
+        return (int) $o->id_bagian === $paks
+            || ($o->id_upk !== null && (int) $o->id_upk === $paks);
     }
 
     /**

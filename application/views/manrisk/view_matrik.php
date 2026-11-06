@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matriks risiko 5 x 5 — inherent dan residual.
  *
@@ -96,8 +97,8 @@ $render = function ($judul, $sel, $kelas) use ($barisLabel, $kolomLabel, $skorWa
                 <h4 class="mb-0"><?= strtoupper($title) ?> <?= $tahun ?></h4>
                 <small class="text-muted">
                     Dihitung dari <code>mri_analisa</code> — bukan dari data legacy.
-                    Matriks legacy 2025&ndash;2026 dapat dilihat pada
-                    <a href="<?= base_url('risiko/matrik_risiko') ?>">modul lama</a>.
+                    <!-- Matriks legacy 2025&ndash;2026 dapat dilihat pada
+                    <a href="<?= base_url('risiko/matrik_risiko') ?>">modul lama</a>. -->
                 </small>
             </div>
             <div class="col-md-4 text-md-right">
@@ -124,7 +125,11 @@ $render = function ($judul, $sel, $kelas) use ($barisLabel, $kolomLabel, $skorWa
                     <div class="col-md-7">
                         <table class="table table-sm table-bordered mb-0">
                             <thead class="thead-light">
-                                <tr><th>Level</th><th>Skor L&times;D</th><th>Aksi</th></tr>
+                                <tr>
+                                    <th>Level</th>
+                                    <th>Skor L&times;D</th>
+                                    <th>Aksi</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($tingkat as $t) : ?>

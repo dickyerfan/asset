@@ -14,8 +14,9 @@ class Dashboard extends MY_Controller
         $this->load->model('Model_mri_dashboard');
         $this->load->model('Model_mri_register');
         $this->load->model('Model_mri_lingkup');
-        $this->load->model('Model_mri_kri');
         $this->load->model('Model_mri_master');
+        $this->load->model('Model_mri_evaluasi');
+        $this->load->model('Model_mri_komunikasi');
     }
 
     public function index()
@@ -54,10 +55,11 @@ class Dashboard extends MY_Controller
             'lingkup'     => $this->Model_mri_lingkup->getLingkupAktif($tahun),
             'akses_semua' => $this->aksesSemuaUnit(),
             'daftar_tahun' => $this->daftarTahun(),
-            'kri_rekap'   => $this->Model_mri_kri->rekapStatus($tahun),
             'matriks'       => $this->Model_mri_dashboard->matriks($tahun, $f),
             'matriks_res'   => $this->Model_mri_dashboard->matriksResidual($tahun, $f),
             'alur'          => $this->Model_mri_dashboard->ringkasAlur($tahun),
+            'rekap_review'  => $this->Model_mri_evaluasi->rekapStatusReview($tahun),
+            'komunikasi'    => $this->Model_mri_komunikasi->rekap($tahun, isset($f['id_upk']) ? $f['id_upk'] : null),
         ];
 
         $this->render('manrisk/view_dashboard', $data);

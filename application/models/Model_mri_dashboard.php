@@ -106,11 +106,14 @@ class Model_mri_dashboard extends CI_Model
             }
         }
 
-        // progres perlakuan & status kri
+        // progres perlakuan
         $this->db->select('p.status_laksana, COUNT(*) AS jml', false);
         $this->db->from('mri_perlakuan p');
         $this->db->join('mri_register r', 'r.id_register = p.id_register', 'left');
         $this->db->where('r.tahun', $tahun);
+        if (!empty($f['id_upk'])) {
+            $this->db->where('r.id_upk', $f['id_upk']);
+        }
         $this->db->group_by('p.status_laksana');
         $progres = ['BELUM' => 0, 'DALAM_PROSES' => 0, 'SELESAI' => 0];
         foreach ($this->db->get()->result() as $r) {
@@ -122,6 +125,9 @@ class Model_mri_dashboard extends CI_Model
         $this->db->from('mri_evaluasi e');
         $this->db->join('mri_register r', 'r.id_register = e.id_register', 'left');
         $this->db->where('r.tahun', $tahun);
+        if (!empty($f['id_upk'])) {
+            $this->db->where('r.id_upk', $f['id_upk']);
+        }
         $this->db->group_by('e.keputusan');
         $keputusan = ['Accept' => 0, 'Monitor' => 0, 'Treat' => 0, 'Escalate' => 0];
         foreach ($this->db->get()->result() as $r) {
@@ -137,14 +143,14 @@ class Model_mri_dashboard extends CI_Model
             $rekonsiliasi[$r->status_rekonsiliasi] = (int) $r->jml;
         }
 
-        // KRI
-        $this->db->select('status_kri, COUNT(*) AS jml', false);
-        $this->db->where('tahun', $tahun);
-        $this->db->group_by('status_kri');
-        $kri = ['Belum Diukur' => 0, 'Tercapai' => 0, 'Tidak Tercapai' => 0, 'Perlu Perhatian' => 0];
-        foreach ($this->db->get('mri_kri')->result() as $r) {
-            $kri[$r->status_kri] = (int) $r->jml;
+        // monitoring tahun ini
+        $this->db->from('mri_monitoring m');
+        $this->db->join('mri_register r', 'r.id_register = m.id_register');
+        $this->db->where('r.tahun', $tahun);
+        if (!empty($f['id_upk'])) {
+            $this->db->where('r.id_upk', $f['id_upk']);
         }
+        $monitoring = (int) $this->db->count_all_results();
 
         // daftar risiko prioritas: skor residual tertinggi
         $prioritas = [];
@@ -159,12 +165,16 @@ class Model_mri_dashboard extends CI_Model
         $prioritas = array_slice($prioritas, 0, 10);
 
         // eskalasi
-        $eskalasi = $this->db
+        $this->db
             ->select('r.kode_risiko, r.risiko, r.sasaran_kpi, e.eskalasi_ke, a.nilai_residual, a.level_residual')
             ->join('mri_register r', 'r.id_register = e.id_register', 'left')
             ->join('mri_analisa a', 'a.id_register = e.id_register', 'left')
             ->where('r.tahun', $tahun)
-            ->where('e.perlu_eskalasi', 1)
+            ->where('e.perlu_eskalasi', 1);
+        if (!empty($f['id_upk'])) {
+            $this->db->where('r.id_upk', $f['id_upk']);
+        }
+        $eskalasi = $this->db
             ->order_by('a.nilai_residual', 'DESC')
             ->get('mri_evaluasi e')
             ->result();
@@ -189,7 +199,7 @@ class Model_mri_dashboard extends CI_Model
             'progres'        => $progres,
             'keputusan'      => $keputusan,
             'rekonsiliasi'   => $rekonsiliasi,
-            'kri'            => $kri,
+            'monitoring'     => $monitoring,
             'prioritas'      => $prioritas,
             'eskalasi'       => $eskalasi,
             'daftar'         => $daftar,
@@ -281,67 +291,108 @@ class Model_mri_dashboard extends CI_Model
     public function ringkasAlur($tahun)
     {
         $tahun = (int) $tahun;
-        $jumlah = [];
 
-        // 1 — dokumen lingkup yang sudah mencatat konsultasi
+        // penyebut bersama: total risiko tahun ini
         $this->db->where('tahun', $tahun);
-        $this->db->where('tanggal_konsultasi IS NOT NULL', null, false);
-        $jumlah[1] = (int) $this->db->count_all_results('mri_lingkup');
+        $totalRisiko = (int) $this->db->count_all_results('mri_register');
 
-        // 2 — dokumen lingkup, konteks & kriteria
-        $this->db->where('tahun', $tahun);
-        $jumlah[2] = (int) $this->db->count_all_results('mri_lingkup');
+        $x = []; // numerator (yang sudah terpenuhi)
+        $y = []; // penyebut (target tahap)
 
-        // 3 — risiko teridentifikasi
+        // 1 — sesi komunikasi yang sudah tuntas (ISO 6.2)
+        if ($this->db->table_exists('mri_komunikasi')) {
+            $this->db->where('tahun', $tahun);
+            $this->db->where('status', 'SELESAI');
+            $x[1] = (int) $this->db->count_all_results('mri_komunikasi');
+            $this->db->where('tahun', $tahun);
+            $y[1] = max(1, (int) $this->db->count_all_results('mri_komunikasi'));
+        } else {
+            $x[1] = 0;
+            $y[1] = 1;
+        }
+
+        // 2 — lingkup berstatus FINAL
         $this->db->where('tahun', $tahun);
-        $jumlah[3] = (int) $this->db->count_all_results('mri_register');
+        $this->db->where('status', 'FINAL');
+        $x[2] = (int) $this->db->count_all_results('mri_lingkup');
+        $this->db->where('tahun', $tahun);
+        $y[2] = max(1, (int) $this->db->count_all_results('mri_lingkup'));
+
+        // 3 — risiko teridentifikasi (target = minimal satu risiko tercatat)
+        $x[3] = $totalRisiko;
+        $y[3] = max(1, $totalRisiko);
 
         // 4 — risiko yang sudah mempunyai skor inherent
         $this->db->from('mri_analisa a');
         $this->db->join('mri_register r', 'r.id_register = a.id_register');
         $this->db->where('r.tahun', $tahun);
         $this->db->where('a.nilai_inherent IS NOT NULL', null, false);
-        $jumlah[4] = (int) $this->db->count_all_results();
+        $x[4] = (int) $this->db->count_all_results();
+        $y[4] = max(1, $totalRisiko);
 
         // 5 — risiko yang sudah diberi keputusan evaluasi
         $this->db->from('mri_evaluasi e');
         $this->db->join('mri_register r', 'r.id_register = e.id_register');
         $this->db->where('r.tahun', $tahun);
-        $jumlah[5] = (int) $this->db->count_all_results();
+        $x[5] = (int) $this->db->count_all_results();
+        $y[5] = max(1, $totalRisiko);
 
-        // 6 — rencana perlakuan yang tersusun
+        // 6 — rencana perlakuan tersusun (terhadap risiko yang sudah dievaluasi)
         $this->db->from('mri_perlakuan p');
         $this->db->join('mri_register r', 'r.id_register = p.id_register');
         $this->db->where('r.tahun', $tahun);
-        $jumlah[6] = (int) $this->db->count_all_results();
+        $x[6] = (int) $this->db->count_all_results();
+        $this->db->from('mri_evaluasi e');
+        $this->db->join('mri_register r', 'r.id_register = e.id_register');
+        $this->db->where('r.tahun', $tahun);
+        $y[6] = max(1, (int) $this->db->count_all_results());
 
-        // 7 — catatan monitoring yang tercatat
+        // 7 — risiko yang punya minimal satu catatan monitoring
+        $this->db->select('COUNT(DISTINCT m.id_register) AS jml', false);
         $this->db->from('mri_monitoring m');
         $this->db->join('mri_register r', 'r.id_register = m.id_register');
         $this->db->where('r.tahun', $tahun);
-        $jumlah[7] = (int) $this->db->count_all_results();
+        $x[7] = (int) $this->db->get()->row()->jml;
+        $y[7] = max(1, $totalRisiko);
 
-        // 8 — laporan yang sudah dibuat
+        // 8 — jenis laporan tersedia (dari 4 jenis baku)
         $this->db->where('tahun', $tahun);
-        $jumlah[8] = (int) $this->db->count_all_results('mri_laporan');
+        $x[8] = (int) $this->db->count_all_results('mri_laporan');
+        $y[8] = 4;
 
         $satuan = [
-            1 => 'dok. konsultasi',
+            1 => 'sesi selesai',
             2 => 'dok. lingkup',
             3 => 'risiko',
             4 => 'risiko dianalisa',
             5 => 'risiko dievaluasi',
             6 => 'rencana',
-            7 => 'catatan',
+            7 => 'risiko dimonitor',
             8 => 'laporan',
         ];
 
         $out = [];
         foreach ($this->Model_mri_master->tahapan() as $t) {
             $n = (int) $t['no'];
-            $t['jumlah']  = isset($jumlah[$n]) ? $jumlah[$n] : 0;
+            $num = isset($x[$n]) ? (int) $x[$n] : 0;
+            $den = isset($y[$n]) ? (int) $y[$n] : 0;
+            $pct = $den > 0 ? min(100, round(($num / $den) * 100)) : 0;
+
+            if ($num <= 0) {
+                $status = 'Belum';
+            } elseif ($pct >= 100) {
+                $status = 'Selesai';
+            } else {
+                $status = 'Sebagian';
+            }
+
+            $t['jumlah']  = $num;   // kompatibilitas tampilan lama
             $t['satuan']  = $satuan[$n];
-            $t['terisi']  = $t['jumlah'] > 0;
+            $t['terisi']  = $num > 0;
+            $t['x']       = $num;
+            $t['y']       = $den;
+            $t['persen']  = $pct;
+            $t['status']  = $status;
             $out[] = $t;
         }
         return $out;

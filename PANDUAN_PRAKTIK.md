@@ -54,16 +54,20 @@ Dua berkas ini sudah terkonfigurasi benar — cukup diperiksa, **tidak perlu diu
 2. **New** → nama database `asset` → Create
 3. Tab **Import** → pilih `C:\xampp\htdocs\asset\asset.sql` → Go
    *(ini tabel aplikasi lama + Man. Risiko Lama)*
-4. Import **urut** keenam berkas ini (klik Import lagi untuk tiap berkas, **urutangan wajib**):
+4. Import **urut** kelima berkas ini (klik Import lagi untuk tiap berkas, **urutan wajib**):
 
    | Urut | Berkas | Isi |
    |---|---|---|
-   | 1 | `application/sql/manrisk/01_schema.sql` | 22 tabel kosong `mri_*` |
+   | 1 | `application/sql/manrisk/01_schema.sql` | 23 tabel kosong `mri_*` (termasuk Komunikasi) |
    | 2 | `02_seed_master.sql` | master: proses, kategori, skala, risk owner, PIC, kunci |
    | 3 | `03_seed_objektif_2027.sql` | 1 lingkup + 28 objektif RKAP 2027 |
    | 4 | `04_seed_register_2027.sql` | 21 risiko + analisa/evaluasi/perlakuan |
-   | 5 | `05_seed_kri_2027.sql` | 6 KRI |
-   | 6 | `06_skala_3_level.sql` | skala evaluasi 3 level (Rendah/Sedang/Tinggi) |
+   | 5 | `06_skala_3_level.sql` | skala evaluasi 3 level (Rendah/Sedang/Tinggi) |
+
+> **Database lama yang masih memiliki modul KRI:** jalankan sekali
+> `application/sql/manrisk/10_drop_kri.sql` untuk menghapus tabel `mri_kri`
+> dan kolom `hasil_kri`. Backup data KRI sebelum dihapus tersedia di
+> `application/sql/manrisk/backup/mri_kri_2026-11-03.sql`.
 
 ### Jalur 2 — Pakai keadaan sekarang (tidak usah ngapa-ngapain)
 
@@ -75,12 +79,12 @@ Langsung ke **Bagian B**.
 ```sql
 -- jalankan di phpMyAdmin → SQL
 DROP TABLE IF EXISTS mri_akibat, mri_analisa, mri_appetite, mri_evaluasi,
-  mri_kategori_risiko, mri_kri, mri_kunci, mri_laporan, mri_lingkup,
+  mri_kategori_risiko, mri_kunci, mri_laporan, mri_lingkup,
   mri_monitoring, mri_objektif, mri_objektif_revisi, mri_perlakuan,
   mri_petugas_ttd, mri_pic, mri_proses, mri_register, mri_risiko_objektif,
   mri_risiko_proses, mri_risk_owner, mri_riwayat_skor, mri_tingkat_risiko;
 ```
-lalu import ulang `01` … `06` sesuai tabel di atas.
+lalu import ulang `01`, `02`, `03`, `04`, `06` sesuai tabel di atas.
 
 ## A4 · Masuk ke aplikasi
 
@@ -135,8 +139,7 @@ Panduan ini **hanya** membahas **Man. Risiko Baru**.
 | `mri_evaluasi` | **21** | semua sudah diberi keputusan |
 | `mri_perlakuan` | **21** | semua sudah ada rencana treatment |
 | `mri_monitoring` | **0** | **KOSONG** — latihan bebas di sini |
-| `mri_laporan` | **0** | **KOSONG** — latihan bebas di sini |
-| `mri_kri` | **6** | 6 KRI tercatat |
+| `mri_laporan` | **0** | awalnya kosong — laporan latihan akan bertambah di sini |
 | `mri_objektif` | **28** | 28 target RKAP 2027 |
 | `mri_risiko_objektif` | **24** | 24 pasangan risiko ↔ objektif |
 
@@ -144,7 +147,7 @@ Panduan ini **hanya** membahas **Man. Risiko Baru**.
 
 ## B3 · Data ini dari mana?
 
-Semua baris di atas dihasilkan oleh file seed (`03`, `04`, `05`), penulis kolom
+Semua baris di atas dihasilkan oleh file seed (`03`, `04`), penulis kolom
 `created_by` = `seed`. **Ini contoh, bukan data operasional Anda.**
 
 Cara cepat membedakan — lihat kolom `created_by`:
@@ -180,22 +183,23 @@ Sidebar → Man. Risiko Baru
 │
 ├── Dashboard MR                     manrisk/dashboard
 ├── Proses Man. Risiko               ← ALUR 8 TAHAP, kerjakan berurutan
-│   ├── 1-2  Lingkup & Konteks       manrisk/lingkup
+│   ├── 0    Obyektif/Sasaran        manrisk/objektif
+│   ├── 1    Komunikasi & Konsultasi manrisk/komunikasi
+│   ├── 2    Lingkup & Konteks       manrisk/lingkup
 │   ├── 3    Identifikasi Risiko     manrisk/register
 │   ├── 4    Analisis Risiko         manrisk/analisa
 │   ├── 5    Evaluasi Risiko         manrisk/evaluasi
 │   ├── 6    Perlakuan Risiko        manrisk/perlakuan
+│   ├── 6B   Risk Assessment         manrisk/assessment
 │   ├── 7    Pemantauan & Peninjauan manrisk/monitoring
-│   ├── 7b   KPI / KRI               manrisk/kri
-│   └── 8    Pelaporan & Pencatatan  manrisk/laporan
+│   ├── 8    Pelaporan & Pencatatan  manrisk/laporan
+│   └── Matriks Risiko               manrisk/matrik
 │
-├── Analisis & RKAP
-│   ├── Matriks Risiko               manrisk/matrik
-│   ├── Objektif & RKAP              manrisk/objektif
-│   └── Impor Risk Register          manrisk/import
-│
-├── Petunjuk Penggunaan              manrisk/panduan  (referensi teori)
-└── Pengaturan                       manrisk/pengaturan (kunci transaksi)
+└── Panduan
+    ├── Panduan Pengisian            manrisk/panduan/pengisian
+    ├── Petunjuk Penggunaan          manrisk/panduan  (referensi teori)
+    ├── Impor Risk Register          manrisk/import
+    └── Pengaturan                   manrisk/pengaturan (kunci transaksi)
 ```
 
 Buka **Dashboard MR** dulu — kartu **"Alur 8 Tahap"** menampilkan hitungan
@@ -212,7 +216,48 @@ otomatis per tahap. Angkanya akan bertambah saat Anda mengisi data.
 
 ---
 
-## TAHAP 1 & 2 — Lingkup, Konteks & Kriteria
+## TAHAP 1 — Komunikasi & Konsultasi
+**URL:** `http://localhost/asset/manrisk/komunikasi`
+**Tombol:** **+ Tambah Sesi** (kanan atas)
+
+Satu sesi = satu catatan komunikasi dengan pihak relevan. Isi contoh:
+
+| Field | Isi contoh |
+|---|---|
+| Tahun / Triwulan | `2027` / `TW1` |
+| Tanggal | pilih tanggal hari ini |
+| Metode | `Rapat` |
+| Unit | *(kosongkan untuk seluruh organisasi)* |
+| **Topik / Agenda** ★ | **`[LATIHAN] Konsultasi sasaran penurunan NRW TW1 2027`** |
+| PIC / Fasilitator | `Administrator` |
+| Pihak yang Dilibatkan | `Direksi`<br>`Produksi & Distribusi`<br>`Keuangan`<br>`SPI / Assurance` |
+
+**Foto pendukung (opsional):** pada bagian **Foto Pendukung**, pilih satu atau
+beberapa foto dokumentasi rapat (JPG/PNG, maksimal 4 MB per foto). Foto tampil
+di halaman detail sesi; buka detail lewat tombol **mata** di daftar.
+
+Isi tiga langkah, misalnya:
+
+| Langkah | Isi contoh |
+|---|---|
+| Dengarkan | `Tim NRW menyampaikan kebocoran banyak terjadi di zona lama; SPI mencatat keluhan pelanggan meningkat.` |
+| Selaraskan | `Disepakati sasaran tahun ini adalah penurunan NRW; prioritas pada zona dengan kebocoran tertinggi.` |
+| Uji & Konfirmasi | `Data kebocoran dicek dengan catatan DMA; asumsi "pipa tua" dikonfirmasi tim distribusi.` |
+
+Jawab empat pertanyaan kunci (sasaran, risiko, kontrol, tindakan), lalu centang
+lima hasil yang benar-benar diperoleh. Tutup dengan ringkasan, tindak lanjut,
+PIC, target selesai, dan ubah **Status Sesi → `SELESAI`**.
+
+**Simpan** → baris `[LATIHAN]` muncul di daftar, dan angka **tahap 1** di
+Dashboard bertambah.
+
+> **Yang dipelajari:** komunikasi menyamakan pemahaman sebelum risiko dinilai —
+bukan sekadar notulen rapat. Lima hasil yang dicentang menjadi bukti bahwa
+asumsi sudah dikonfirmasi bersama.
+
+---
+
+## TAHAP 2 — Lingkup, Konteks & Kriteria
 **URL:** `http://localhost/asset/manrisk/lingkup`
 **Tombol:** **+ Tambah Lingkup** (kanan atas)
 
@@ -242,7 +287,11 @@ Isi form seperti ini:
 | Hasil Konsultasi | `Disepakati 21 risiko utama, prioritas pada NRW dan penagihan.` |
 
 **Simpan** → kembali ke daftar, **baris baru `[LATIHAN]` harus muncul di bawah**
-baris `seed`. Tahap 1 dan 2 dihitung dari dokumen yang sama.
+baris `seed`. Tahap 2 dihitung dari dokumen lingkup; tahap 1 dari sesi komunikasi.
+
+> **Catatan:** kolom Tanggal/Peserta/4 Pertanyaan/Hasil Konsultasi di form ini
+> adalah ringkasan dokumen. Detail tiap sesi dicatat di menu **Komunikasi &
+> Konsultasi** (Tahap 1).
 
 > **Yang dipelajari:** Lingkup = *konteks* (ISO 6.1/6.2). Tanpa ini, risiko di
 > tahap berikutnya tidak punya dasar "untuk siapa / untuk periode apa".
@@ -263,7 +312,7 @@ baris `seed`. Tahap 1 dan 2 dihitung dari dokumen yang sama.
 | **Tahun** ★ | `2027` |
 | TW Awal | `1` |
 | **Unit / Bagian** ★ | `Keuangan` |
-| **Kategori** ★ | `Operational` |
+| **Kategori** ★ | `OPE — Operational` (kode + nama; penjelasan singkat & contoh muncul otomatis di bawah dropdown) |
 | Lingkup / Unit Kerja | pilih dokumen lingkup `[LATIHAN]` (atau yang seed) |
 | **Tipe Risiko** ★ | `Ancaman` (ada juga `Peluang`) |
 | Status Kendali | `UC` (belum terkendali) |
@@ -271,15 +320,29 @@ baris `seed`. Tahap 1 dan 2 dihitung dari dokumen yang sama.
 | **Rumusan Risiko** ★ | `[LATIHAN] Gangguan pasokan listrik menyebabkan pompa berhenti sehingga suplai air terhambat` |
 | **Peristiwa Risiko** ★ | `Pemadaman listrik terjadi lebih dari 2 jam pada jam sibuk` |
 | **Penyebab / Sumber** ★ | `Gangguan jaringan PLN dan tidak adanya genset cadangan yang terawat` |
-| **Sasaran / KPI RKAP** ★ | `Volume Air Terjual (m³)` |
+| **Sasaran / KPI RKAP** ★ | pilih dari dropdown Objektif RKAP → `Volume Air` (teks terisi otomatis, boleh disunting; ada opsi *tulis sendiri*) |
 | Sumber Risiko Tambahan | `Riwayat pemadaman 3x bulan lalu` |
-| Indikator Emerging | *(kosong)* |
-| Asumsi & Bias | `Asumsi genset siap pakai ternyata belum diuji` |
+| Indikator Emerging | *(kosong)* — sinyal awal yang **belum** jadi risiko, mis. `Rencana perubahan tarif 2028` |
+| Asumsi & Bias | `Asumsi genset siap pakai ternyata belum diuji` (asumsi) · `proyeksi pendapatan terlalu optimistis` (bias) |
 | Kegiatan / Proses | `Produksi & Sumber Air` |
 | **Daftar Akibat** | tambah 1 baris: `Suplai air ke pelanggan terhambat` |
 | Proses Terkait (Risk Universe) | ☑ **Produksi & Sumber Air** |
 | **Objektif RKAP Terkait** | ☑ **Volume Air** *(ini kaitan risiko ↔ objektif)* |
 | Catatan | `[LATIHAN] data uji coba` |
+
+**Arti kode risiko** (`IJT-SEG-NN`):
+
+| Bagian | Arti |
+|---|---|
+| `IJT` | **Ijen Tirta** — penanda organisasi, selalu tetap |
+| `SEG` | Segmen/tema risiko (3–4 huruf, mis. `OPR`, `KEU`, `GOV`, `HR`, `IT`, `K3`, `EXT`, `PEL`, `REG`, `AMDK`) |
+| `NN` | Nomor urut 2 digit **per segmen** |
+
+Segmen **bukan turunan Kategori** — pilih sesuai tema isi risiko (mis. `IJT-GOV-*`
+bisa berisi kategori Strategic sekaligus Fraud). Kode dipakai sebagai ID risiko di
+analisis, evaluasi, perlakuan, monitoring, dan laporan, serta **wajib unik**,
+tetapi **tidak memengaruhi perhitungan skor/level**. Segmen baru yang Anda ketik
+akan tersimpan permanen sebagai pilihan dropdown berikutnya.
 
 **Simpan** → baris `IJT-OPR-99` muncul di daftar.
 
@@ -339,20 +402,33 @@ di daftar analisa terisi.
 **Tombol:** pada baris `IJT-OPR-99` klik **+ Evaluasi**
 (rute: `manrisk/evaluasi/form/{id}`)
 
-**4 field wajib:**
+**Field penting:**
 
 | Field | Isi contoh |
 |---|---|
-| **Nilai Evaluasi** ★ | `6` (isi sesuai residual; rentang 1–25) |
-| **Keputusan** ★ | `Treat` — pilihan: `Accept` · `Monitor` · `Treat` · `Escalate` |
+| **Nilai Evaluasi** | terisi otomatis dari skor residual — **tidak bisa diubah** |
+| **Keputusan** ★ | `Treat` (contoh override band) — pilihan: `Accept` · `Monitor` · `Treat` · `Escalate` |
 | **Triwulan** ★ | `1` |
 | Tanggal | tanggal hari ini |
-| Kriteria Rujukan | `mri_tingkat_risiko + mri_appetite` (sudah terisi bawaan) |
+| Kriteria Rujukan | `Residual 6 (Rendah)` — diisi otomatis |
 | **Alasan / Dasar Penilaian** ★ | `Skor residual 6 masuk band Rendah, namun suplai air adalah layanan inti sehingga diputuskan untuk ditangani.` |
 | ☑ Perlu eskalasi | centang bila perlu → muncul field **Eskalasi ke** |
 | Eskalasi ke | `Direksi` |
 
 **Simpan** → badge keputusan tampil di daftar.
+
+**Arti keputusan (jangan asal pilih):**
+
+| Keputusan | Kapan dipilih | Akibatnya |
+|---|---|---|
+| **Accept** | Skor ≤ appetite, dampak kecil. *Contoh: skor 6, appetite 10.* | Tidak wajib perlakuan; pemantauan rutin. |
+| **Monitor** | Masih dalam appetite tapi mendekati batas. *Contoh: skor 12, appetite 15.* | Dicatat di Monitoring tiap TW. |
+| **Treat** | Melebihi appetite / level Tinggi. *Contoh: skor 18, appetite 15.* | **Wajib** rencana di menu Perlakuan (PIC, jadwal, anggaran). |
+| **Escalate** | Melewati batas eskalasi / lintas unit. *Contoh: skor 22, batas 15.* | Centang **Perlu Eskalasi** + isi **Eskalasi ke** → muncul di dashboard. |
+
+> Di bagian atas form kini ada ringkasan risiko (kode, uraian, unit, kategori, peristiwa,
+> penyebab, sasaran/KPI) supaya tidak salah risiko — judul halaman hanya memuat kode.
+> Band hanya saran otomatis; memilih beda dari band → **Perlu Review**, alasan wajib diisi.
 
 > **Yang dipelajari:** Analisis *menghitung*, Evaluasi *memutuskan*.
 > Hasil angka di tahap 4 barulah dibandingkan dengan kriteria/risk appetite.
@@ -390,6 +466,34 @@ di daftar analisa terisi.
 
 ---
 
+## TAHAP 6B — Risk Assessment (rekap halaman 37 CRMO)
+**URL:** `http://localhost/asset/manrisk/assessment`
+
+Halaman **hanya-baca** yang merangkum Identifikasi → Analisis → Evaluasi →
+Perlakuan dalam satu tabel, mengikuti contoh *Risk Assessment* CRMO Perpamsi
+halaman 37. Tidak ada input di sini; ubah data lewat menu tahapannya.
+
+| Kolom | Diambil dari |
+|---|---|
+| No. ID Risiko | Register (`kode_risiko`) |
+| Sasaran / KPI | Register + objektif yang dicentang |
+| Risiko, Sumber, Penyebab | Register |
+| Dampak | daftar akibat pada Register |
+| Rencana Pengendalian & Penanganan | kontrol (Analisis) + uraian tindakan (Perlakuan) |
+| Deskripsi Biaya Mitigasi | anggaran perlakuan |
+| PIC | master PIC pada Perlakuan |
+| K, D, Nilai, Tingkat | Analisis (inherent) |
+| Keputusan | Evaluasi (Accept/Monitor/Treat/Escalate) |
+
+Tersedia filter **Unit**, **Tingkat**, **Tahun**, dan **Cari**, serta tombol
+**Cetak / PDF** dan **Ekspor Excel (CSV)**. Akun UPK otomatis hanya melihat
+risiko unitnya sendiri.
+
+> **Yang dipelajari:** tabel ini adalah bentuk akhir yang dinilai — pastikan
+> tidak ada kolom kosong sebelum laporan dibuat.
+
+---
+
 ## TAHAP 7 — Pemantauan & Peninjauan
 **URL:** `http://localhost/asset/manrisk/monitoring`
 **Tombol:** **+ Tambah Monitoring** → `manrisk/monitoring/form`
@@ -406,10 +510,11 @@ di daftar analisa terisi.
 | **Hasil Monitoring** ★ | `[LATIHAN] Genset diuji 2 kali, masih ada 1 kali gagal start pada percobaan pertama.` |
 | Status Tindakan | `Berjalan` |
 | Kontrol Masih Efektif | `Belum` |
-| Arah Perubahan Skor | `Turun` |
-| ☑ Perlu reassess | centang → muncul **Skor Lama / Skor Baru / Sebab** |
-| Skor Lama | `6` |
-| Skor Baru | `9` |
+| Skor Lama | **otomatis & terkunci**: `6` |
+| Skor Baru | isi **L × D** di Monitoring, mis. `3 × 3 = 9` |
+| Arah Perubahan | **otomatis**: `Naik` |
+| ☑ Perbarui Analisa juga | otomatis tercentang saat skor berbeda → residual Analisa ikut menjadi `9` |
+| ☑ Perlu reassess | centang bila risiko harus dinilai ulang |
 | Sebab Perubahan | `Tambahan beban baru di jaringan` |
 
 **Simpan** → **Dashboard MR** angka tahap 7 naik dari `0` jadi `1`.
@@ -419,47 +524,30 @@ di daftar analisa terisi.
 
 ---
 
-## TAHAP 7b — KPI / KRI
-**URL:** `http://localhost/asset/manrisk/kri`
-**Tombol:** **+ Tambah KRI** → `manrisk/kri/form`
-
-| Field | Isi contoh |
-|---|---|
-| **Nama KRI** ★ | `[LATIHAN] Gagal Start Genset per Bulan` |
-| Tahun | `2027` |
-| Triwulan | `1` |
-| Target | `0` |
-| Satuan | `kali` |
-| Frekuensi Pengukuran | `Bulanan` |
-| Unit | `Keuangan` |
-| Risiko Terkait | `IJT-OPR-99` |
-| Keterangan | `[LATIHAN]` |
-
-Setelah KRI dibuat, di daftar ada tombol **Catat** (`manrisk/kri/catat/{id}`)
-untuk mencatat nilai aktual per triwulan.
-
-> **Yang dipelajari:** KRI = *sensor* dini. KPI mengukur **sasaran**, KRI
-> mengukur **risiko**. Keduanya milik tahap 7.
-
----
-
 ## TAHAP 8 — Pelaporan & Pencatatan
 **URL:** `http://localhost/asset/manrisk/laporan`
-**Tombol:** **+ Tambah Laporan** → `manrisk/laporan/form`
 
-> 💡 Tabel ini juga **KOSONG (0 baris)** — aman untuk latihan.
+> 💡 Laporan yang sudah ada bisa berupa DRAFT atau FINAL. Laporan **FINAL**
+> tidak ditimpa oleh *Susun Laporan Otomatis*.
+> Sesuai materi CRMO Perpamsi, setelah Monitoring (tahap 7) langsung Pelaporan.
+> Tidak ada tahap KRI.
+
+Pilih **Tahun**, **Triwulan**, **Jenis Laporan**, dan **Unit**, lalu klik
+**Susun Laporan Otomatis**. Seluruh bagian laporan langsung terisi dari data
+Register sampai Monitoring.
 
 | Field | Isi contoh |
 |---|---|
-| **Jenis Laporan** ★ | `Laporan Triwulan` |
 | Tahun | `2027` |
 | Triwulan | `1` |
-| Unit | `Keuangan` |
-| Status | `Draf` |
+| **Jenis Laporan** ★ | `Operasional` |
+| Cakupan | `Keuangan` (atau *seluruh organisasi*) |
 
-**Simpan** → setelah laporan ada, tersedia aksi **Sahkan** (`laporan/sahkan/{id}`).
+**Susun** → draf laporan terbuka dengan seluruh bagian terisi. Tinjau, ubah bila
+perlu, lalu **Simpan**. Setelah yakin, klik aksi **Sahkan** (`laporan/sahkan/{id}`)
+agar status menjadi FINAL, kemudian **PDF**.
 
-**SELESAI.** Buka `manrisk/dashboard` → semua 8 kartu tahap kini bertanda
+**SELESAI.** Buka `manrisk/dashboard` → seluruh tahap proses (1–8) kini bertanda
 terisi (hijau), karena Anda sudah melewati semuanya.
 
 ---
@@ -499,10 +587,10 @@ Saat ini **semua = 0**.
 
 | Kode kunci | Mengunci halaman |
 |---|---|
-| `input_risiko` | Lingkup, Register, KRI, Impor |
+| `input_risiko` | Lingkup, Register, Impor |
 | `analisa_risiko` | Analisis, Evaluasi |
 | `penanganan_risiko` | Perlakuan |
-| `monitoring_risiko` | Monitoring, catat KRI |
+| `monitoring_risiko` | Monitoring |
 | `objektif_risiko` | Objektif & RKAP |
 | `laporan_risiko` | Laporan |
 | `profil_risiko` | warisan Man. Risiko Lama |
@@ -546,10 +634,9 @@ DELETE FROM mri_objektif WHERE indikator LIKE '[LATIHAN]%';
 -- 3. dokumen lingkup latihan
 DELETE FROM mri_lingkup WHERE nama_lingkup LIKE '[LATIHAN]%';
 
--- 4. KRI / monitoring / laporan latihan
-DELETE FROM mri_kri         WHERE nama_kri   LIKE '[LATIHAN]%';
+-- 4. monitoring / laporan latihan
 DELETE FROM mri_monitoring  WHERE hasil_monitoring LIKE '[LATIHAN]%';
-DELETE FROM mri_laporan     WHERE jenis_laporan    LIKE '[LATIHAN]%';
+DELETE FROM mri_laporan     WHERE ringkasan_eksekutif LIKE '[LATIHAN]%';
 
 -- 5. jejak audit revisi objektif (kalau sempat tercatat)
 DELETE FROM mri_objektif_revisi WHERE id_objektif NOT IN (SELECT id_objektif FROM mri_objektif);
@@ -562,8 +649,7 @@ SELECT 'lingkup' t, COUNT(*) c FROM mri_lingkup
 UNION ALL SELECT 'register',  COUNT(*) FROM mri_register
 UNION ALL SELECT 'objektif',  COUNT(*) FROM mri_objektif
 UNION ALL SELECT 'monitoring',COUNT(*) FROM mri_monitoring
-UNION ALL SELECT 'laporan',   COUNT(*) FROM mri_laporan
-UNION ALL SELECT 'kri',       COUNT(*) FROM mri_kri;
+UNION ALL SELECT 'laporan',   COUNT(*) FROM mri_laporan;
 ```
 | Tabel | Balik ke |
 |---|---|
@@ -572,10 +658,9 @@ UNION ALL SELECT 'kri',       COUNT(*) FROM mri_kri;
 | objektif | 28 |
 | monitoring | 0 |
 | laporan | 0 |
-| kri | 6 |
 
 > **Cara paling ringan:** pulihkan file cadangan F1 lewat `backup/restore`
-> (Admin) atau import ulang `03`, `04`, `05` + hapus baris `[LATIHAN]`.
+> (Admin) atau import ulang `03`, `04` + hapus baris `[LATIHAN]`.
 
 ---
 
@@ -587,7 +672,7 @@ UNION ALL SELECT 'kri',       COUNT(*) FROM mri_kri;
 | Langsung ke halaman login terus | Sesi habis | Login ulang |
 | Tombol **Tambah/Ubah tidak ada** | Kunci aktif | `manrisk/pengaturan` → pastikan status = **0** |
 | Pesan *"tidak memiliki hak akses"* | Level `Pengguna` di halaman Admin | Login pakak akun `admin` |
-| Halaman lain tampil tapi manrisk kosong | Tabel `mri_*` belum ada | Import `application/sql/manrisk/01_schema.sql` … `06` |
+| Halaman lain tampil tapi manrisk kosong | Tabel `mri_*` belum ada | Import `application/sql/manrisk/01_schema.sql` … `11` |
 | Kode risiko *"sudah dipakai"* | Duplikat | Ubah **Urut** (mis. `98`) atau kode manual |
 | Angka `500.000` jadi `500` | Salah format | Pakai `500000` atau `500.000.000` (ribuan) — sudah ditangani otomatis |
 | Sidebar menu risiko tidak muncul | Belum login / cookie mati | Login ulang, aktifkan cookie |
@@ -602,14 +687,14 @@ UNION ALL SELECT 'kri',       COUNT(*) FROM mri_kri;
 - [ ] **F1** — Cadangan dibuat
 - [ ] **B1** — Paham bedanya *Man. Risiko Baru* vs *Man. Risiko Lama*
 - [ ] **B4** — Komitmen: hanya menambah data `[LATIHAN]`, tidak mengubah `seed`
-- [ ] **D-Tahap 1-2** — Dokumen lingkup `[LATIHAN]` tersimpan
+- [ ] **D-Tahap 1** — Sesi komunikasi `[LATIHAN]` berstatus `SELESAI` tersimpan
+- [ ] **D-Tahap 2** — Dokumen lingkup `[LATIHAN]` tersimpan
 - [ ] **D-Tahap 3** — Risiko `IJT-OPR-99` tersimpan & terikat ke objektif **Volume Air**
 - [ ] **D-Tahap 4** — Skor inherent 16 (Tinggi), residual 6 (Rendah) terhitung otomatis
 - [ ] **D-Tahap 5** — Keputusan `Treat` tersimpan
 - [ ] **D-Tahap 6** — Strategi `REDUCE` + jadwal + anggaran tersimpan
 - [ ] **D-Tahap 7** — Monitoring TW 1 tersimpan, angka tahap 7 di dashboard naik
-- [ ] **D-Tahap 7b** — 1 KRI `[LATIHAN]` tersimpan
-- [ ] **D-Tahap 8** — 1 laporan tersimpan, seluruh 8 tahap hijau di dashboard
+- [ ] **D-Tahap 8** — 1 laporan tersusun otomatis, seluruh tahap hijau di dashboard
 - [ ] **E1** — Objektif ditambah lalu dihapus (tahu bedanya dengan risiko)
 - [ ] **E4** — Pernah mengunci + membuka 1 kunci
 - [ ] **F2** — Data latihan dibersihkan, hitungan kembali seperti awal
@@ -626,7 +711,6 @@ http://localhost/asset/manrisk/analisa
 http://localhost/asset/manrisk/evaluasi
 http://localhost/asset/manrisk/perlakuan
 http://localhost/asset/manrisk/monitoring
-http://localhost/asset/manrisk/kri
 http://localhost/asset/manrisk/laporan
 http://localhost/asset/manrisk/matrik
 http://localhost/asset/manrisk/objektif

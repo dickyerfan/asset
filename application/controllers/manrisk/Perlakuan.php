@@ -54,16 +54,25 @@ class Perlakuan extends MY_Controller
             $rekap[$row->status_laksana] = (int) $row->jml;
         }
 
+        // Risiko yang sudah dievaluasi tetapi belum punya rencana perlakuan.
+        // Daftar di bawah hanya memuat baris mri_perlakuan, jadi tanpa panel ini
+        // risiko baru (mis. hasil evaluasi hari ini) tampak "hilang".
+        $tanpaRencana = $this->Model_mri_perlakuan->getRisikoTanpaPerlakuan(
+            $tahun,
+            isset($f['id_upk']) ? $f['id_upk'] : null
+        );
+
         $this->render('manrisk/view_perlakuan', [
-            'title'       => 'PERLAKUAN RISIKO',
-            'tahun'       => $tahun,
-            'filter'      => $f + ['status_laksana' => $status],
-            'daftar'      => $daftar,
-            'rekap'       => $rekap,
-            'strategi'    => $this->Model_mri_perlakuan::LABEL_STRATEGI,
-            'unit_list'   => $this->db->from('bagian_upk')->order_by('id_bagian', 'ASC')->get()->result(),
-            'akses_semua' => $this->aksesSemuaUnit(),
-            'boleh_tulis' => $this->Model_mri_pengaturan->bolehUbah('penanganan_risiko'),
+            'title'         => 'PERLAKUAN RISIKO',
+            'tahun'         => $tahun,
+            'filter'        => $f + ['status_laksana' => $status],
+            'daftar'        => $daftar,
+            'tanpa_rencana' => $tanpaRencana,
+            'rekap'         => $rekap,
+            'strategi'      => $this->Model_mri_perlakuan::LABEL_STRATEGI,
+            'unit_list'     => $this->db->from('bagian_upk')->order_by('id_bagian', 'ASC')->get()->result(),
+            'akses_semua'   => $this->aksesSemuaUnit(),
+            'boleh_tulis'   => $this->Model_mri_pengaturan->bolehUbah('penanganan_risiko'),
         ]);
     }
 
@@ -83,7 +92,7 @@ class Perlakuan extends MY_Controller
         }
         if (!$this->Model_mri_pengaturan->bolehUbah('penanganan_risiko')) {
             $this->pesan('Perlakuan risiko sedang dikunci. Buka kunci pada Pengaturan terlebih dahulu.', 'warning');
-            redirect('manrisk/register/detail/' . $r->id_register);
+            redirect($this->tujuan);
             return;
         }
 
@@ -117,7 +126,9 @@ class Perlakuan extends MY_Controller
             $this->Model_mri_perlakuan->simpan($r->id_register, $d);
 
             $this->pesan('Rencana perlakuan <strong>' . html_escape($r->kode_risiko) . '</strong> disimpan.');
-            redirect('manrisk/register/detail/' . $r->id_register);
+            // Setelah simpan, kembali ke daftar Perlakuan (bukan detail Register)
+            // agar hasilnya langsung terlihat pada tabel rencana perlakuan.
+            redirect('manrisk/perlakuan?tahun=' . (int) $r->tahun);
             return;
         }
 
