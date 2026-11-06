@@ -33,16 +33,15 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="<?= base_url('dashboard_publik') ?>" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
-                            <!-- <span class="right badge badge-danger">New</span> -->
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-globe"></i>
                         <p>
@@ -56,7 +55,6 @@
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     KemenPUPR
-                                    <!-- <span class="right badge badge-danger">New</span> -->
                                 </p>
                             </a>
                         </li>
@@ -65,7 +63,6 @@
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Permendagri 47 th 99
-                                    <!-- <span class="right badge badge-danger">New</span> -->
                                 </p>
                             </a>
                         </li>
@@ -309,8 +306,8 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-exclamation-triangle"></i>
                         <p>
@@ -351,16 +348,16 @@
                                 </p>
                             </a>
                         </li>
-                        <!-- <li class="nav-item">
+                        <li class="nav-item">
                             <a href="<?= base_url('spi/pengaturan') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
                                     Pengaturan
                                 </p>
                             </a>
-                        </li> -->
+                        </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-shield-alt"></i>

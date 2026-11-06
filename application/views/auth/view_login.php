@@ -723,13 +723,7 @@
             <p class="tagline">Platform terintegrasi untuk mengelola kinerja UPK, Manajemen Risiko, dan arsip perusahaan dalam satu tempat.</p>
 
             <div class="module-list">
-                <div class="module-item">
-                    <span class="module-icon"><i class="fas fa-chart-line"></i></span>
-                    <div>
-                        <h3>Kinerja</h3>
-                        <p>Mengukur capaian kinerja Perumdam/UPK secara terukur dan berkelanjutan.</p>
-                    </div>
-                </div>
+
                 <div class="module-item">
                     <span class="module-icon"><i class="fas fa-shield-alt"></i></span>
                     <div>
@@ -742,6 +736,13 @@
                     <div>
                         <h3>Ruang Arsip</h3>
                         <p>Menyimpan dan mengelola dokumen/Arsip secara terpusat dan aman.</p>
+                    </div>
+                </div>
+                <div class="module-item">
+                    <span class="module-icon"><i class="fas fa-chart-line"></i></span>
+                    <div>
+                        <h3>Kinerja</h3>
+                        <p>Mengukur capaian kinerja Perumdam/UPK secara terukur dan berkelanjutan.</p>
                     </div>
                 </div>
                 <div class="module-item">

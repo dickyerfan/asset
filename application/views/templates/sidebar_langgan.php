@@ -33,12 +33,11 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="<?= base_url('dashboard_langgan') ?>" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
-                            <!-- <span class="right badge badge-danger">New</span> -->
                         </p>
                     </a>
                 </li>
@@ -47,7 +46,6 @@
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             KemenPUPR
-                            <!-- <span class="right badge badge-danger">New</span> -->
                         </p>
                     </a>
                 </li>
@@ -56,66 +54,65 @@
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Permendagri 47 th 99
-                            <!-- <span class="right badge badge-danger">New</span> -->
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a href="<?= base_url('langganan/cak_layanan') ?>" class="nav-link">
                         <i class="nav-icon fas fa-globe"></i>
                         <p>
                             Cakupan Layanan
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a href="<?= base_url('langganan/data_pengaduan') ?>" class="nav-link">
                         <i class="nav-icon fas fa-bullhorn"></i>
                         <p>
                             Data Pengaduan
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a href="<?= base_url('langganan/tambah_sr') ?>" class="nav-link">
                         <i class="nav-icon fas fa-plus"></i>
                         <p>
                             Penambahan SR
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a href="<?= base_url('langganan/rincian_pendapatan') ?>" class="nav-link">
                         <i class="nav-icon fas fa-donate"></i>
                         <p>
                             Rincian Pend. Kec
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a href="<?= base_url('langganan/efek_tagih') ?>" class="nav-link">
                         <i class="nav-icon fas fa-calculator"></i>
                         <p>
                             Efektifitas Penagihan
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a href="<?= base_url('langganan/pendapatan') ?>" class="nav-link">
                         <i class="nav-icon fas fa-dollar-sign"></i>
                         <p>
                             Pendapatan & Tarif
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a href="<?= base_url('keuangan/aspek_ops') ?>" class="nav-link">
                         <i class="nav-icon fas fa-eye"></i>
                         <p>
                             Aspek Ops & Adm
                         </p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-shield-alt"></i>

@@ -155,7 +155,7 @@ class Auth extends CI_Controller
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>');
-            redirect('spi/hasil_evaluasi');
+            redirect('manrisk/dashboard');
           } else {
             $data_session = [
               'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
@@ -173,7 +173,7 @@ class Auth extends CI_Controller
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>');
-            redirect('spi/hasil_evaluasi');
+            redirect('manrisk/dashboard');
           }
         } else { //jika password salah
           $this->session->set_flashdata('info', '<div class="alert alert-danger" role="alert">Login Gagal, Password Anda Salah.!</div>');
