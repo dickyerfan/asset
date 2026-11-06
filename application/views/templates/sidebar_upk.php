@@ -145,6 +145,18 @@
                                         <p>Panduan Pengisian</p>
                                     </a>
                                 </li>
+                                <!-- <li class="nav-item">
+                                    <a href="<?= base_url('manrisk/checklist') ?>" class="nav-link">
+                                        <i class="fas fa-clipboard-list nav-icon"></i>
+                                        <p>Checklist &amp; Target</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('manrisk/status') ?>" class="nav-link">
+                                        <i class="fas fa-users nav-icon"></i>
+                                        <p>Status per UPK</p>
+                                    </a>
+                                </li> -->
                                 <li class="nav-item">
                                     <a href="<?= base_url('manrisk/panduan') ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>

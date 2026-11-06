@@ -137,7 +137,7 @@ class Analisa extends MY_Controller
 
             $this->pesan('Analisa <strong>' . html_escape($r->kode_risiko) . '</strong> disimpan. '
                 . 'Kendali ditetapkan <strong>' . $status . '</strong>.');
-            redirect('manrisk/register/detail/' . $r->id_register);
+            redirect('manrisk/analisa');
             return;
         }
 

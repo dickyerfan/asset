@@ -121,7 +121,43 @@ class Model_mri_evaluasi extends CI_Model
         $ni = (int) $il * (int) $idl;
         $nr = (int) $rl * (int) $rd;
 
-        // lewati jika identik dengan snapshot terakhir
+        $tahun    = $this->tahunRegister($id_register);
+        $triwulan = isset($d['triwulan']) && $d['triwulan'] ? (int) $d['triwulan'] : 1;
+
+        // Satu periode (register + tahun + triwulan) hanya boleh punya satu
+        // snapshot. Saat evaluasi diubah pada periode yang sama, perbarui
+        // baris yang sudah ada — jangan INSERT (menyebabkan error 1062 pada
+        // uq_riwayat_register_periode).
+        $periode = $this->db->get_where('mri_riwayat_skor', [
+            'id_register' => $id_register,
+            'tahun'       => $tahun,
+            'triwulan'    => $triwulan,
+        ])->row();
+
+        if ($periode) {
+            if ((int) $periode->nilai_inherent === $ni && (int) $periode->nilai_residual === $nr) {
+                return;
+            }
+
+            // Hitung level SEBELUM memasang where pada query builder: level()
+            // memakai $this->db yang sama, sehingga where yang belum dieksekusi
+            // bisa ikut terbawa ke query mri_tingkat_risiko.
+            $levelInherent = $this->level($ni);
+            $levelResidual = $this->level($nr);
+
+            $this->db->where('id_riwayat', $periode->id_riwayat);
+            $this->db->update('mri_riwayat_skor', [
+                'nilai_inherent' => $ni,
+                'nilai_residual' => $nr,
+                'level_inherent' => $levelInherent,
+                'level_residual' => $levelResidual,
+                'recorded_at'    => date('Y-m-d H:i:s'),
+            ]);
+            return;
+        }
+
+        // Periode baru: lewati jika identik dengan snapshot terakhir agar
+        // riwayat tidak bertambah tanpa perubahan skor.
         $terakhir = $this->db->where('id_register', $id_register)
             ->order_by('id_riwayat', 'DESC')
             ->get('mri_riwayat_skor')
@@ -134,8 +170,8 @@ class Model_mri_evaluasi extends CI_Model
             'id_register'     => $id_register,
             // Tahun wajib dari register risiko (2027+), bukan date('Y'):
             // snapshot November 2026 untuk risiko 2027 salah catat sebagai 2026.
-            'tahun'           => $this->tahunRegister($id_register),
-            'triwulan'        => isset($d['triwulan']) && $d['triwulan'] ? (int) $d['triwulan'] : 1,
+            'tahun'           => $tahun,
+            'triwulan'        => $triwulan,
             'nilai_inherent'  => $ni,
             'nilai_residual'  => $nr,
             'level_inherent'  => $this->level($ni),

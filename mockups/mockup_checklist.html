@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
+<link rel="stylesheet" href="../assets/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="../assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="../assets/css/style_dashboard.css">
+<link rel="stylesheet" href="../assets/select2/bootstrap.min.css">
+<style>
+body{background:#f4f6f9;font-family:"Segoe UI",Arial,sans-serif;padding:18px 22px}
+.mri-page h4{font-weight:700}
+.stat{border-radius:8px;background:#fff;border:1px solid #e3e6ea;padding:12px 14px;height:100%}
+.stat .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;color:#6c757d}
+.stat .val{font-size:1.5rem;font-weight:700;line-height:1.1}
+.stat .sub{font-size:.72rem;color:#6c757d}
+.stepline{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;overflow:auto}
+.stepline .pill{border:1px solid #dee2e6;border-radius:6px;padding:6px 9px;min-width:118px;background:#fff;font-size:.75rem}
+.tahap-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;cursor:pointer}
+.tahap-head .judul{font-weight:700;margin:0}
+.progress{height:6px;background:#e9ecef}
+.item-check{width:18px;height:18px;margin-top:2px}
+.table-sm td,.table-sm th{vertical-align:middle}
+.mini{font-size:.72rem}
+.tag-target{background:#eef5ff;border:1px dashed #8ab6e6;border-radius:5px;padding:2px 7px;font-size:.72rem;white-space:nowrap}
+.accordion .card{box-shadow:none}
+.legend span.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}
+</style>
+</head>
+<body class="mri-page">
+
+<div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+  <div>
+    <h4 class="mb-0"><i class="fas fa-clipboard-list text-primary mr-1"></i> CHECKLIST &amp; TARGET MANAJEMEN RISIKO</h4>
+    <small class="text-muted">Dipakai untuk semua tahun — template item tetap, target &amp; centang disimpan per tahun.</small>
+  </div>
+  <div class="mt-2 mt-md-0">
+    <select class="form-control form-control-sm d-inline-block" style="width:110px">
+      <option>2027</option><option>2028</option><option>2029</option>
+    </select>
+    <select class="form-control form-control-sm d-inline-block" style="width:190px">
+      <option>Semua Bagian / UPK</option><option>UPK Bondowoso</option>
+    </select>
+    <button class="btn btn-primary btn-sm"><i class="fas fa-save"></i> Simpan Target</button>
+    <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-print"></i> Cetak</button>
+  </div>
+</div>
+
+<!-- ====== RINGKASAN ====== -->
+<div class="row mb-3">
+  <div class="col-6 col-md-3 mb-2"><div class="stat">
+    <div class="lbl">Item selesai</div><div class="val text-success">21 <small class="text-muted" style="font-size:.8rem">/ 34</small></div>
+    <div class="progress mt-2"><div class="progress-bar bg-success" style="width:62%"></div></div>
+    <div class="sub mt-1">62% dari seluruh checklist</div>
+  </div></div>
+  <div class="col-6 col-md-3 mb-2"><div class="stat">
+    <div class="lbl">Tahap selesai</div><div class="val text-primary">4 <small class="text-muted" style="font-size:.8rem">/ 8</small></div>
+    <div class="sub mt-2">Tahap 1–4 selesai, tahap 5 berjalan</div>
+  </div></div>
+  <div class="col-6 col-md-3 mb-2"><div class="stat">
+    <div class="lbl">Target terdekat</div><div class="val" style="font-size:1.1rem">Evaluasi Risiko</div>
+    <div class="sub mt-1"><i class="far fa-calendar-alt"></i> 20 Des 2026 &middot; <span class="badge badge-warning">12 hari lagi</span></div>
+  </div></div>
+  <div class="col-6 col-md-3 mb-2"><div class="stat">
+    <div class="lbl">Status keseluruhan</div><div class="val" style="font-size:1.1rem"><span class="badge badge-warning">DALAM PROSES</span></div>
+    <div class="sub mt-1">Periode 2027 &middot; target final 31 Des 2026</div>
+  </div></div>
+</div>
+
+<!-- ====== TARGET TAHUNAN ====== -->
+<div class="card card-outline card-primary">
+  <div class="card-header py-2 d-flex justify-content-between align-items-center">
+    <strong><i class="fas fa-bullseye text-primary"></i> Target Tahunan per Tahap</strong>
+    <small class="text-muted">Diisi sekali per tahun, otomatis dipakai di halaman Status per UPK.</small>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-sm table-bordered mb-0">
+        <thead class="thead-light">
+          <tr>
+            <th style="width:42px" class="text-center">#</th>
+            <th>Tahap</th>
+            <th style="width:150px">Target Mulai</th>
+            <th style="width:150px">Target Selesai</th>
+            <th style="width:170px">PIC / Penanggung Jawab</th>
+            <th style="width:150px" class="text-center">Progres</th>
+            <th style="width:110px" class="text-center">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">1</td><td>Komunikasi &amp; Konsultasi</td>
+            <td><input type="date" class="form-control form-control-sm" value="2026-10-01"></td>
+            <td><input type="date" class="form-control form-control-sm" value="2026-10-31"></td>
+            <td><input type="text" class="form-control form-control-sm" value="Sekretaris MR"></td>
+            <td class="text-center"><span class="badge badge-light border">3/3</span> <small class="text-success">100%</small>
+              <div class="progress mt-1"><div class="progress-bar bg-success" style="width:100%"></div></div></td>
+            <td class="text-center"><span class="badge badge-success">SELESAI</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">2</td><td>Lingkup &amp; Konteks</td>
+            <td><input type="date" class="form-control form-control-sm" value="2026-10-01"></td>
+            <td><input type="date" class="form-control form-control-sm" value="2026-11-15"></td>
+            <td><input type="text" class="form-control form-control-sm" value="Kepala UPK"></td>
+            <td class="text-center"><span class="badge badge-light border">4/4</span> <small class="text-success">100%</small>
+              <div class="progress mt-1"><div class="progress-bar bg-success" style="width:100%"></div></div></td>
+            <td class="text-center"><span class="badge badge-success">SELESAI</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">3</td><td>Identifikasi Risiko</td>
+            <td><input type="date" class="form-control form-control-sm" value="2026-11-01"></td>
+            <td><input type="date" class="form-control form-control-sm" value="2026-11-30"></td>
+            <td><input type="text" class="form-control form-control-sm" value="Risk Owner"></td>
+            <td class="text-center"><span class="badge badge-light border">21/21</span> <small class="text-success">100%</small>
+              <div class="progress mt-1"><div class="progress-bar bg-success" style="width:100%"></div></div></td>
+            <td class="text-center"><span class="badge badge-success">SELESAI</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">4</td><td>Analisis Risiko</td>
+            <td><input type="date" class="form-control form-control-sm" value="2026-11-15"></td>
+            <td><input type="date" class="form-control form-control-sm" value="2026-12-10"></td>
+            <td><input type="text" class="form-control form-control-sm" value="Risk Owner"></td>
+            <td class="text-center"><span class="badge badge-light border">18/21</span> <small class="text-warning">86%</small>
+              <div class="progress mt-1"><div class="progress-bar bg-warning" style="width:86%"></div></div></td>
+            <td class="text-center"><span class="badge badge-warning">SEBAGIAN</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">5</td><td>Evaluasi Risiko</td>
+            <td><input type="date" class="form-control form-control-sm" value="2026-12-01"></td>
+            <td><input type="date" class="form-control form-control-sm" value="2026-12-20"></td>
+            <td><input type="text" class="form-control form-control-sm" value="Komite Risiko"></td>
+            <td class="text-center"><span class="badge badge-light border">6/21</span> <small class="text-muted">29%</small>
+              <div class="progress mt-1"><div class="progress-bar bg-info" style="width:29%"></div></div></td>
+            <td class="text-center"><span class="badge badge-info">BERJALAN</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">6</td><td>Perlakuan Risiko</td>
+            <td><input type="date" class="form-control form-control-sm" value="2026-12-10"></td>
+            <td><input type="date" class="form-control form-control-sm" value="2026-12-31"></td>
+            <td><input type="text" class="form-control form-control-sm" value="PIC Unit"></td>
+            <td class="text-center"><span class="badge badge-light border">2/12</span> <small class="text-muted">17%</small>
+              <div class="progress mt-1"><div class="progress-bar bg-secondary" style="width:17%"></div></div></td>
+            <td class="text-center"><span class="badge badge-secondary">BELUM</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer py-2">
+    <small class="text-muted"><i class="fas fa-info-circle"></i> Tahap 7 (Peninjauan) &amp; 8 (Pelaporan) targetnya di tahun berjalan 2027 — tetap ditampilkan agar rencana satu siklus penuh terlihat.</small>
+  </div>
+</div>
+
+<!-- ====== CHECKLIST DETAIL ====== -->
+<div class="card card-outline card-info">
+  <div class="card-header py-2">
+    <strong><i class="fas fa-check-square text-info"></i> Checklist per Tahap</strong>
+    <span class="badge badge-light border ml-2">Tahun 2027</span>
+    <span class="badge badge-light border ml-1">Semua UPK</span>
+  </div>
+  <div class="card-body">
+    <div class="accordion" id="accChecklist">
+
+      <!-- Tahap 4 (contoh terbuka) -->
+      <div class="card border mb-2">
+        <div class="card-header py-2 bg-white">
+          <div class="tahap-head" data-toggle="collapse" data-target="#t4">
+            <span class="badge badge-primary">4</span>
+            <p class="judul mb-0">Analisis Risiko</p>
+            <span class="badge badge-warning">SEBAGIAN 18/21</span>
+            <span class="tag-target"><i class="far fa-calendar-check"></i> Target: 10 Des 2026</span>
+            <span class="ml-auto small text-muted"><i class="fas fa-chevron-up"></i></span>
+          </div>
+        </div>
+        <div id="t4" class="collapse show">
+          <div class="card-body p-0">
+            <table class="table table-sm table-bordered mb-0">
+              <thead class="thead-light">
+                <tr>
+                  <th style="width:40px" class="text-center"><i class="fas fa-check"></i></th>
+                  <th>Item Checklist</th>
+                  <th style="width:120px" class="text-center">Cek Otomatis</th>
+                  <th style="width:140px">Target Item</th>
+                  <th style="width:110px" class="text-center">Menu</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center"><input type="checkbox" class="item-check" checked></td>
+                  <td><strong>Skor inherent terisi (L &times; D)</strong><div class="mini text-muted">Semua risiko punya likelihood &amp; dampak sebelum kontrol.</div></td>
+                  <td class="text-center"><span class="badge badge-success">21/21</span></td>
+                  <td><input type="date" class="form-control form-control-sm" value="2026-11-30"></td>
+                  <td class="text-center"><a class="btn btn-xs btn-outline-primary btn-sm py-0" href="#"><i class="fas fa-arrow-right"></i></a></td>
+                </tr>
+                <tr>
+                  <td class="text-center"><input type="checkbox" class="item-check" checked></td>
+                  <td><strong>Skor residual terisi (L &times; D)</strong><div class="mini text-muted">Setelah kontrol yang ada, bukan target pasca-mitigasi.</div></td>
+                  <td class="text-center"><span class="badge badge-success">21/21</span></td>
+                  <td><input type="date" class="form-control form-control-sm" value="2026-11-30"></td>
+                  <td class="text-center"><a class="btn btn-outline-primary btn-sm py-0" href="#"><i class="fas fa-arrow-right"></i></a></td>
+                </tr>
+                <tr>
+                  <td class="text-center"><input type="checkbox" class="item-check"></td>
+                  <td><strong>Risk Owner terisi untuk setiap risiko</strong><div class="mini text-muted">Pihak yang berwenang &amp; akuntabel, bukan pelaksana.</div></td>
+                  <td class="text-center"><span class="badge badge-warning">18/21</span></td>
+                  <td><input type="date" class="form-control form-control-sm" value="2026-12-05"></td>
+                  <td class="text-center"><a class="btn btn-outline-primary btn-sm py-0" href="#"><i class="fas fa-arrow-right"></i></a></td>
+                </tr>
+                <tr>
+                  <td class="text-center"><input type="checkbox" class="item-check"></td>
+                  <td><strong>Residual &le; inherent (logika kontrol)</strong><div class="mini text-muted">Jika residual lebih tinggi, periksa kembali penilaian kontrol.</div></td>
+                  <td class="text-center"><span class="badge badge-warning">19/21</span></td>
+                  <td><input type="date" class="form-control form-control-sm" value="2026-12-10"></td>
+                  <td class="text-center"><a class="btn btn-outline-primary btn-sm py-0" href="#"><i class="fas fa-arrow-right"></i></a></td>
+                </tr>
+                <tr>
+                  <td class="text-center"><input type="checkbox" class="item-check" checked></td>
+                  <td><strong>Ringkasan analisis diisi</strong><div class="mini text-muted">Simpulan singkat kondisi risiko &amp; kontrolnya.</div></td>
+                  <td class="text-center"><span class="badge badge-success">21/21</span></td>
+                  <td><input type="date" class="form-control form-control-sm" value="2026-11-30"></td>
+                  <td class="text-center"><a class="btn btn-outline-primary btn-sm py-0" href="#"><i class="fas fa-arrow-right"></i></a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tahap 5 (contoh tertutup) -->
+      <div class="card border mb-2">
+        <div class="card-header py-2 bg-white">
+          <div class="tahap-head" data-toggle="collapse" data-target="#t5">
+            <span class="badge badge-primary">5</span>
+            <p class="judul mb-0">Evaluasi Risiko</p>
+            <span class="badge badge-info">BERJALAN 6/21</span>
+            <span class="tag-target"><i class="far fa-calendar-check"></i> Target: 20 Des 2026</span>
+            <span class="ml-auto small text-muted"><i class="fas fa-chevron-down"></i></span>
+          </div>
+        </div>
+        <div id="t5" class="collapse">
+          <div class="card-body p-0">
+            <table class="table table-sm table-bordered mb-0">
+              <tbody>
+                <tr><td class="text-center" style="width:40px"><input type="checkbox" class="item-check"></td>
+                  <td>Keputusan evaluasi terisi (Accept/Monitor/Treat/Escalate)</td>
+                  <td class="text-center" style="width:120px"><span class="badge badge-warning">6/21</span></td>
+                  <td style="width:140px"><input type="date" class="form-control form-control-sm" value="2026-12-15"></td>
+                  <td class="text-center" style="width:70px"><a class="btn btn-outline-primary btn-sm py-0" href="#"><i class="fas fa-arrow-right"></i></a></td></tr>
+                <tr><td class="text-center"><input type="checkbox" class="item-check"></td>
+                  <td>Alasan keputusan wajib diisi</td>
+                  <td class="text-center"><span class="badge badge-warning">6/21</span></td>
+                  <td><input type="date" class="form-control form-control-sm" value="2026-12-15"></td>
+                  <td class="text-center"><a class="btn btn-outline-primary btn-sm py-0" href="#"><i class="fas fa-arrow-right"></i></a></td></tr>
+                <tr><td class="text-center"><input type="checkbox" class="item-check"></td>
+                  <td>Override band sudah ditinjau Admin/Auditor</td>
+                  <td class="text-center"><span class="badge badge-secondary">—</span></td>
+                  <td><input type="date" class="form-control form-control-sm" value="2026-12-20"></td>
+                  <td class="text-center"><a class="btn btn-outline-primary btn-sm py-0" href="#"><i class="fas fa-arrow-right"></i></a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-chevron-down"></i> Tampilkan 6 tahap lainnya</button>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer py-2 d-flex justify-content-between flex-wrap">
+    <small class="text-muted"><i class="fas fa-lightbulb"></i> Kolom <strong>Cek Otomatis</strong> dihitung dari data; centang manual hanya untuk butir yang tidak bisa dinilai sistem.</small>
+    <div class="legend small text-muted">
+      <span class="dot" style="background:#28a745"></span>Selesai
+      <span class="dot ml-2" style="background:#ffc107"></span>Sebagian
+      <span class="dot ml-2" style="background:#6c757d"></span>Belum
+    </div>
+  </div>
+</div>
+
+<script src="../assets/plugins/jquery/jquery.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

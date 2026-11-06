@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
+<link rel="stylesheet" href="../assets/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="../assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="../assets/css/style_dashboard.css">
+<link rel="stylesheet" href="../assets/select2/bootstrap.min.css">
+<style>
+body{background:#f4f6f9;font-family:"Segoe UI",Arial,sans-serif;padding:18px 22px}
+.stat{border-radius:8px;background:#fff;border:1px solid #e3e6ea;padding:12px 16px;height:100%}
+.stat .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;color:#6c757d}
+.stat .val{font-size:1.6rem;font-weight:700;line-height:1.1}
+.stat .sub{font-size:.72rem;color:#6c757d}
+.matrix th,.matrix td{vertical-align:middle;white-space:nowrap}
+.matrix thead th{font-size:.72rem;text-align:center;background:#f4f6f9}
+.matrix thead th.unit{text-align:left}
+.matrix tbody td{font-size:.78rem}
+.matrix tbody tr:hover{background:#f8fbff}
+.matrix td.unit{font-weight:600;position:sticky;left:0;background:#fff;z-index:2}
+.matrix tbody tr:hover td.unit{background:#f8fbff}
+.cell-prog{min-width:74px}
+.cell-prog .progress{height:4px;margin-top:3px;background:#e9ecef}
+.cell-prog .num{font-weight:600}
+.cell-prog .pct{font-size:.68rem;color:#6c757d}
+.total{font-weight:700}
+.legend span.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}
+.avatar{width:26px;height:26px;border-radius:50%;background:#e8f0fb;color:#2266aa;display:inline-flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;margin-right:6px}
+</style>
+</head>
+<body>
+
+<div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+  <div>
+    <h4 class="mb-0 font-weight-bold"><i class="fas fa-users text-primary mr-1"></i> STATUS MANAJEMEN RISIKO PER UPK</h4>
+    <small class="text-muted">Matriks 8 tahap per unit — klik satu unit untuk melihat checklist detailnya.</small>
+  </div>
+  <div class="mt-2 mt-md-0">
+    <select class="form-control form-control-sm d-inline-block" style="width:110px">
+      <option>2027</option><option>2028</option><option>2029</option>
+    </select>
+    <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-file-excel"></i> Ekspor</button>
+    <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-print"></i> Cetak</button>
+  </div>
+</div>
+
+<!-- ringkasan -->
+<div class="row mb-3">
+  <div class="col-6 col-md-3 mb-2"><div class="stat">
+    <div class="lbl">Unit selesai</div><div class="val text-success">2</div>
+    <div class="sub">≥ 90% item terpenuhi</div>
+  </div></div>
+  <div class="col-6 col-md-3 mb-2"><div class="stat">
+    <div class="lbl">Dalam proses</div><div class="val text-warning">3</div>
+    <div class="sub">10% – 89% item terpenuhi</div>
+  </div></div>
+  <div class="col-6 col-md-3 mb-2"><div class="stat">
+    <div class="lbl">Belum mulai</div><div class="val text-secondary">2</div>
+    <div class="sub">&lt; 10% item terpenuhi</div>
+  </div></div>
+  <div class="col-6 col-md-3 mb-2"><div class="stat">
+    <div class="lbl">Rata-rata progres</div><div class="val text-primary">54%</div>
+    <div class="progress mt-2"><div class="progress-bar bg-primary" style="width:54%"></div></div>
+  </div></div>
+</div>
+
+<!-- filter -->
+<div class="card card-outline card-primary mb-3">
+  <div class="card-body py-2">
+    <div class="form-inline flex-wrap">
+      <label class="mr-2 mb-2">Cari unit</label>
+      <input type="text" class="form-control form-control-sm mr-4 mb-2" placeholder="nama UPK / bagian" style="width:230px">
+      <label class="mr-2 mb-2">Status</label>
+      <select class="form-control form-control-sm mr-4 mb-2" style="width:170px">
+        <option>Semua status</option><option>Selesai</option><option>Dalam proses</option><option>Belum mulai</option>
+      </select>
+      <label class="mr-2 mb-2">Tampilkan tahap</label>
+      <select class="form-control form-control-sm mb-2" style="width:190px">
+        <option>Semua tahap (1–8)</option><option>Perencanaan (1–6)</option><option>Pelaksanaan (7–8)</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- matriks -->
+<div class="card card-outline card-info">
+  <div class="card-header py-2 d-flex justify-content-between align-items-center flex-wrap">
+    <strong><i class="fas fa-table text-info"></i> Matriks Tahap per Unit — Tahun 2027</strong>
+    <small class="text-muted">Angka = item selesai / total item tahap. Warna = status tahap.</small>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-sm table-bordered mb-0 matrix">
+        <thead>
+          <tr>
+            <th class="unit" style="min-width:200px">Unit / Bagian</th>
+            <th>1<div class="font-weight-normal" style="font-size:.65rem;color:#6c757d">Komunikasi</div></th>
+            <th>2<div class="font-weight-normal" style="font-size:.65rem;color:#6c757d">Lingkup</div></th>
+            <th>3<div class="font-weight-normal" style="font-size:.65rem;color:#6c757d">Identifikasi</div></th>
+            <th>4<div class="font-weight-normal" style="font-size:.65rem;color:#6c757d">Analisis</div></th>
+            <th>5<div class="font-weight-normal" style="font-size:.65rem;color:#6c757d">Evaluasi</div></th>
+            <th>6<div class="font-weight-normal" style="font-size:.65rem;color:#6c757d">Perlakuan</div></th>
+            <th>7<div class="font-weight-normal" style="font-size:.65rem;color:#6c757d">Peninjauan</div></th>
+            <th>8<div class="font-weight-normal" style="font-size:.65rem;color:#6c757d">Pelaporan</div></th>
+            <th style="min-width:86px">Total</th>
+            <th style="min-width:70px">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="unit"><span class="avatar">BD</span>UPK Bondowoso</td>
+            <td><div class="cell-prog"><span class="num text-success">3/3</span> <span class="pct">100%</span><div class="progress"><div class="progress-bar bg-success" style="width:100%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-success">4/4</span> <span class="pct">100%</span><div class="progress"><div class="progress-bar bg-success" style="width:100%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-success">21/21</span> <span class="pct">100%</span><div class="progress"><div class="progress-bar bg-success" style="width:100%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-warning">18/21</span> <span class="pct">86%</span><div class="progress"><div class="progress-bar bg-warning" style="width:86%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-info">6/21</span> <span class="pct">29%</span><div class="progress"><div class="progress-bar bg-info" style="width:29%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">2/12</span> <span class="pct">17%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:17%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">—/21</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/4</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td class="total"><span class="badge badge-warning">62%</span></td>
+            <td><a href="#" class="btn btn-sm btn-outline-primary py-0"><i class="fas fa-search"></i></a></td>
+          </tr>
+          <tr>
+            <td class="unit"><span class="avatar">TJ</span>UPK Tamanan</td>
+            <td><div class="cell-prog"><span class="num text-success">3/3</span> <span class="pct">100%</span><div class="progress"><div class="progress-bar bg-success" style="width:100%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-success">4/4</span> <span class="pct">100%</span><div class="progress"><div class="progress-bar bg-success" style="width:100%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-success">17/17</span> <span class="pct">100%</span><div class="progress"><div class="progress-bar bg-success" style="width:100%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-success">17/17</span> <span class="pct">100%</span><div class="progress"><div class="progress-bar bg-success" style="width:100%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-success">17/17</span> <span class="pct">100%</span><div class="progress"><div class="progress-bar bg-success" style="width:100%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-success">9/9</span> <span class="pct">100%</span><div class="progress"><div class="progress-bar bg-success" style="width:100%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-warning">9/17</span> <span class="pct">53%</span><div class="progress"><div class="progress-bar bg-warning" style="width:53%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-info">2/4</span> <span class="pct">50%</span><div class="progress"><div class="progress-bar bg-info" style="width:50%"></div></div></div></td>
+            <td class="total"><span class="badge badge-success">91%</span></td>
+            <td><a href="#" class="btn btn-sm btn-outline-primary py-0"><i class="fas fa-search"></i></a></td>
+          </tr>
+          <tr>
+            <td class="unit"><span class="avatar">PR</span>UPK Prajekan</td>
+            <td><div class="cell-prog"><span class="num text-success">1/1</span> <span class="pct">100%</span><div class="progress"><div class="progress-bar bg-success" style="width:100%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-success">1/1</span> <span class="pct">100%</span><div class="progress"><div class="progress-bar bg-success" style="width:100%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-success">8/8</span> <span class="pct">100%</span><div class="progress"><div class="progress-bar bg-success" style="width:100%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-warning">5/8</span> <span class="pct">63%</span><div class="progress"><div class="progress-bar bg-warning" style="width:63%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/8</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/8</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">—/8</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/4</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td class="total"><span class="badge badge-warning">48%</span></td>
+            <td><a href="#" class="btn btn-sm btn-outline-primary py-0"><i class="fas fa-search"></i></a></td>
+          </tr>
+          <tr>
+            <td class="unit"><span class="avatar">GR</span>UPK Grujugan</td>
+            <td><div class="cell-prog"><span class="num text-success">2/2</span> <span class="pct">100%</span><div class="progress"><div class="progress-bar bg-success" style="width:100%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-warning">3/4</span> <span class="pct">75%</span><div class="progress"><div class="progress-bar bg-warning" style="width:75%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-warning">6/12</span> <span class="pct">50%</span><div class="progress"><div class="progress-bar bg-warning" style="width:50%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-info">3/12</span> <span class="pct">25%</span><div class="progress"><div class="progress-bar bg-info" style="width:25%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/12</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/12</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">—/12</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/4</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td class="total"><span class="badge badge-warning">35%</span></td>
+            <td><a href="#" class="btn btn-sm btn-outline-primary py-0"><i class="fas fa-search"></i></a></td>
+          </tr>
+          <tr>
+            <td class="unit"><span class="avatar">WT</span>UPK Wonosari</td>
+            <td><div class="cell-prog"><span class="num text-warning">1/2</span> <span class="pct">50%</span><div class="progress"><div class="progress-bar bg-warning" style="width:50%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/2</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/9</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/9</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/9</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/9</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">—/9</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/4</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td class="total"><span class="badge badge-secondary">8%</span></td>
+            <td><a href="#" class="btn btn-sm btn-outline-primary py-0"><i class="fas fa-search"></i></a></td>
+          </tr>
+          <tr>
+            <td class="unit"><span class="avatar">SM</span>UPK Sumbermalang</td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/0</span> <span class="pct">—</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/0</span> <span class="pct">—</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/0</span> <span class="pct">—</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/0</span> <span class="pct">—</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/0</span> <span class="pct">—</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/0</span> <span class="pct">—</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">—/0</span> <span class="pct">—</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td><div class="cell-prog"><span class="num text-secondary">0/4</span> <span class="pct">0%</span><div class="progress"><div class="progress-bar bg-secondary" style="width:0%"></div></div></div></td>
+            <td class="total"><span class="badge badge-secondary">0%</span></td>
+            <td><a href="#" class="btn btn-sm btn-outline-primary py-0"><i class="fas fa-search"></i></a></td>
+          </tr>
+        </tbody>
+        <tfoot class="thead-light">
+          <tr>
+            <th class="unit">Total / Rata-rata</th>
+            <th class="text-center">7/8</th>
+            <th class="text-center">8/9</th>
+            <th class="text-center">52/67</th>
+            <th class="text-center">43/67</th>
+            <th class="text-center">23/67</th>
+            <th class="text-center">11/50</th>
+            <th class="text-center">9/67</th>
+            <th class="text-center">2/20</th>
+            <th class="text-center"><span class="badge badge-warning">54%</span></th>
+            <th></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer py-2 d-flex justify-content-between flex-wrap align-items-center">
+    <div class="legend small text-muted">
+      <span class="dot" style="background:#28a745"></span>Selesai (100%)
+      <span class="dot ml-2" style="background:#17a2b8"></span>Berjalan (&lt;50%)
+      <span class="dot ml-2" style="background:#ffc107"></span>Sebagian (50–99%)
+      <span class="dot ml-2" style="background:#6c757d"></span>Belum (0%)
+    </div>
+    <small class="text-muted"><i class="fas fa-mouse-pointer"></i> Klik ikon <i class="fas fa-search"></i> untuk checklist detail unit.</small>
+  </div>
+</div>
+
+<!-- detail unit (contoh panel) -->
+<div class="card card-outline card-secondary">
+  <div class="card-header py-2">
+    <strong><i class="fas fa-user-check text-secondary"></i> Detail Unit — UPK Bondowoso</strong>
+    <span class="badge badge-warning ml-2">62%</span>
+    <a href="#" class="btn btn-sm btn-outline-primary float-right py-0"><i class="fas fa-clipboard-list"></i> Buka Checklist</a>
+  </div>
+  <div class="card-body py-3">
+    <div class="row">
+      <div class="col-md-3 mb-2"><small class="text-muted d-block">Target selesai tahun</small><strong>31 Des 2026</strong></div>
+      <div class="col-md-3 mb-2"><small class="text-muted d-block">Risiko terdaftar</small><strong>21 risiko</strong></div>
+      <div class="col-md-3 mb-2"><small class="text-muted d-block">Sudah dievaluasi</small><strong>6 risiko</strong></div>
+      <div class="col-md-3 mb-2"><small class="text-muted d-block">Rencana perlakuan</small><strong>2 rencana</strong></div>
+    </div>
+    <div class="progress" style="height:8px"><div class="progress-bar bg-warning" style="width:62%"></div></div>
+    <small class="text-muted d-block mt-1">21 dari 34 item checklist terpenuhi.</small>
+  </div>
+</div>
+
+<script src="../assets/plugins/jquery/jquery.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
